@@ -183,5 +183,9 @@
     [super dealloc];
 }
 
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender
+{
+	return YES;
+}
 
 @end
