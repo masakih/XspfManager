@@ -24,6 +24,14 @@
 										   inManagedObjectContext:[appDelegate managedObjectContext]];
 	if(!obj) return 1;
 	
+	id info = [NSEntityDescription insertNewObjectForEntityForName:@"Info"
+											inManagedObjectContext:[appDelegate managedObjectContext]];
+	if(!obj) {
+		[[appDelegate managedObjectContext] deleteObject:obj];
+		return 2;
+	}
+	
+	[obj setValue:info forKey:@"information"];
 	[obj setValue:url forKey:@"url"];
 	[obj setValue:[NSDate dateWithTimeIntervalSinceNow:0.0] forKey:@"registerDate"];
 	[obj setValue:[NSDate dateWithTimeIntervalSinceNow:0.0] forKey:@"lastUpdateDate"];
@@ -90,6 +98,81 @@
 	[self doesNotRecognizeSelector:_cmd];
 }
 
+
+
+#pragma mark#### NSTokenField Delegate ####
+- (NSArray *)tokenField:(NSTokenField *)tokenField
+completionsForSubstring:(NSString *)substring
+		   indexOfToken:(NSInteger)tokenIndex
+	indexOfSelectedItem:(NSInteger *)selectedIndex
+{
+	NSLog(@"Enter %@", NSStringFromSelector(_cmd));
+	
+	NSManagedObjectContext *moc = [appDelegate managedObjectContext];
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name BEGINSWITH[cd] %@", substring];
+	NSEntityDescription *entry = [NSEntityDescription entityForName:@"VoiceActor"
+											 inManagedObjectContext:moc];
+	NSFetchRequest *fetch = [[[NSFetchRequest alloc] init] autorelease];
+	[fetch setEntity:entry];
+	[fetch setPredicate:predicate];
+	
+	NSError *error = nil;
+	NSArray *objects = [moc executeFetchRequest:fetch error:&error];
+	if(!objects) {
+		if(error) {
+			NSLog(@"fail fetch reason -> %@", error);
+		}
+	}
+	
+	NSMutableArray *result = [NSMutableArray array];
+	for(id obj in objects) {
+		[result addObject:[obj valueForKey:@"name"]];
+	}
+	
+	return result;
+}
+
+- (void)registerVoiceActor:(NSTokenField *)tokenField
+{
+	NSLog(@"Enter %@", NSStringFromSelector(_cmd));
+	
+	id array = [tokenField objectValue];
+	if(![array isKindOfClass:[NSArray class]]) return;
+	
+	NSManagedObjectContext *moc = [appDelegate managedObjectContext];
+	NSEntityDescription *entry = [NSEntityDescription entityForName:@"VoiceActor"
+											 inManagedObjectContext:moc];
+	NSFetchRequest *fetch = [[[NSFetchRequest alloc] init] autorelease];
+	[fetch setEntity:entry];
+	
+	for(id token in array) {
+		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name LIKE[cd] %@", token];
+		[fetch setPredicate:predicate];
+		
+		NSError *error = nil;
+		NSUInteger count = [moc countForFetchRequest:fetch error:&error];
+		if(error) {
+			NSLog(@"fail fetch reason -> %@", error);
+			continue;
+		}
+		if(count == 0) {
+			id obj = [NSEntityDescription insertNewObjectForEntityForName:@"VoiceActor" inManagedObjectContext:moc];
+			[obj setValue:token forKey:@"name"];
+		}
+	}
+}
+- (BOOL)control:(id)control textShouldEndEditing:(NSText *)fieldEditor
+{
+	NSLog(@"Enter %@", NSStringFromSelector(_cmd));
+	if([control tag] == 2000) {
+		[self registerVoiceActor:control];
+	}
+	
+	return YES;
+}
+
+
+#pragma mark#### Test ####
 - (IBAction)test01:(id)sender
 {
 	NSLog(@"ManagedContext - >%@", [appDelegate managedObjectContext]);
