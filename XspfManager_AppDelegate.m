@@ -8,6 +8,8 @@
 
 #import "XspfManager_AppDelegate.h"
 
+#import "XspfManager.h"
+
 @implementation XspfManager_AppDelegate
 
 
@@ -98,16 +100,6 @@
 
 
 /**
-    Returns the NSUndoManager for the application.  In this case, the manager
-    returned is that of the managed object context for the application.
- */
- 
-- (NSUndoManager *)windowWillReturnUndoManager:(NSWindow *)window {
-    return [[self managedObjectContext] undoManager];
-}
-
-
-/**
     Performs the save action for the application, which is to send the save:
     message to the application's managed object context.  Any encountered errors
     are presented to the user.
@@ -186,6 +178,11 @@
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender
 {
 	return YES;
+}
+
+- (void)awakeFromnib
+{
+	[[XspfManager alloc] init];
 }
 
 @end

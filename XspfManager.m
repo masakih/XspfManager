@@ -12,12 +12,74 @@
 
 
 @implementation XspfManager
+static XspfManager *sharedInstance = nil;
 
++ (XspfManager *)sharedInstance
+{
+    @synchronized(self) {
+        if (sharedInstance == nil) {
+            [[self alloc] init]; // assignment not done here
+        }
+    }
+    return sharedInstance;
+}
+
++ (id)allocWithZone:(NSZone *)zone
+{
+    @synchronized(self) {
+        if (sharedInstance == nil) {
+            sharedInstance = [super allocWithZone:zone];
+            return sharedInstance;  // assignment and return on first allocation
+        }
+    }
+    return nil; //on subsequent allocation attempts return nil
+}
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    return self;
+}
+
+- (id)retain
+{
+    return self;
+}
+
+- (unsigned)retainCount
+{
+    return UINT_MAX;  //denotes an object that cannot be released
+}
+
+- (void)release
+{
+    //do nothing
+}
+
+- (id)autorelease
+{
+    return self;
+}
+
+
+- (id)init
+{
+	[super initWithWindowNibName:@"MainWindow"];
+	channel = [[HMChannel alloc] initWithWorkerNum:1];
+	
+	return self;
+}
 - (void)awakeFromNib
 {
-	channel = [[HMChannel alloc] initWithWorkerNum:1];
-	[self buildFamilyNameFromFile];
+	if(appDelegate && [self window]) {
+		[self buildFamilyNameFromFile];
+		[self showWindow:self];
+	}
 }
+- (NSManagedObjectContext *)managedObjectContext
+{
+	return [appDelegate managedObjectContext];
+}
+
 
 - (NSInteger)registerWithURL:(NSURL *)url
 {
@@ -53,7 +115,7 @@
 	[panel beginSheetForDirectory:nil
 							 file:nil
 							types:[NSArray arrayWithObjects:@"xspf", @"com.masakih.xspf", nil]
-				   modalForWindow:window
+				   modalForWindow:[self window]
 					modalDelegate:self
 				   didEndSelector:@selector(endOpenPanel:::)
 					  contextInfo:NULL];
@@ -71,7 +133,7 @@
 	[progressBar setUsesThreadedAnimation:YES];
 	
 	[NSApp beginSheet:progressPanel
-	   modalForWindow:window
+	   modalForWindow:[self window]
 		modalDelegate:nil
 	   didEndSelector:Nil
 		  contextInfo:NULL];
@@ -198,6 +260,15 @@
 		[moc deleteObject:obj];
 	}
 	[moc unlock];
+}
+#pragma mark#### NSWidnow Delegate ####
+/**
+ Returns the NSUndoManager for the application.  In this case, the manager
+ returned is that of the managed object context for the application.
+ */
+
+- (NSUndoManager *)windowWillReturnUndoManager:(NSWindow *)window {
+    return [[appDelegate managedObjectContext] undoManager];
 }
 
 #pragma mark#### NSTokenField Delegate ####
