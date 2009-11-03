@@ -156,7 +156,7 @@
 	NSString *entityName;
 	NSArray *contents;
 	entityName = @"FamilyName";
-	if([self isEmptyEntityName:entityName] || YES /***** TEST *****/) {
+	if([self isEmptyEntityName:entityName]) {
 		contents = [self arrayFromLFSeparatedFile:entityName];
 				
 		id attribute;
@@ -177,6 +177,28 @@
 	
 }
 
+- (void)truncateFamilyName
+{
+	NSManagedObjectContext *moc = [appDelegate managedObjectContext];
+	NSFetchRequest *fetch = [[[NSFetchRequest alloc] init] autorelease];
+	NSEntityDescription *entry = [NSEntityDescription entityForName:@"FamilyName"
+											 inManagedObjectContext:moc];
+	[fetch setEntity:entry];
+	
+	NSError *error = nil;
+	NSArray *objects = [moc executeFetchRequest:fetch error:&error];
+	if(!objects) {
+		if(error) {
+			NSLog(@"fail fetch reason -> %@", error);
+		}
+	}
+	
+	[moc lock];
+	for(id obj in objects) {
+		[moc deleteObject:obj];
+	}
+	[moc unlock];
+}
 
 #pragma mark#### NSTokenField Delegate ####
 #if 1
@@ -342,6 +364,7 @@ completionsForSubstring:(NSString *)substring
 #pragma mark#### Test ####
 - (IBAction)test01:(id)sender
 {
+	[self truncateFamilyName];
 	[self buildFamilyNameFromFile];
 }
 - (IBAction)test02:(id)sender
