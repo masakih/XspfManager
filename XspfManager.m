@@ -16,6 +16,7 @@
 - (void)awakeFromNib
 {
 	channel = [[HMChannel alloc] initWithWorkerNum:1];
+	[self buildFamilyNameFromFile];
 }
 
 - (NSInteger)registerWithURL:(NSURL *)url
@@ -99,8 +100,156 @@
 }
 
 
+#pragma mark#### load familynames ####
+- (NSArray *)arrayFromLFSeparatedFile:(NSString *)name
+{
+	NSString *path;
+	
+//	path = [[appDelegate applicationSupportFolder] stringByAppendingPathComponent:name];
+//	path = [path stringByAppendingPathExtension:@"txt"];
+//	if(!path) {
+		path = [[NSBundle mainBundle] pathForResource:name ofType:@"txt"];
+//	}
+	
+	NSError *error = nil;
+	NSString *content = [NSString stringWithContentsOfFile:path
+												  encoding:NSUTF8StringEncoding
+													 error:&error];
+	if(error) {
+		NSLog(@"path => %@", path);
+		NSLog(@"%@", [error localizedDescription]);
+		return NO;
+	}
+	
+	return [content componentsSeparatedByString:@"\x0a"];
+}
+
+- (NSArray *)arrayFromTabSeparatedString:(NSString *)string
+{
+	return [string componentsSeparatedByString:@"\t"];
+}
+- (BOOL)isEmptyEntityName:(NSString *)name
+{
+	NSManagedObjectContext *moc = [appDelegate managedObjectContext];
+	NSError *error = nil;
+	NSFetchRequest *fetch;
+	NSInteger num;
+	
+	fetch = [[NSFetchRequest alloc] init];
+	[fetch setEntity:[NSEntityDescription entityForName:name
+								 inManagedObjectContext:moc]];
+	num = [moc countForFetchRequest:fetch
+							  error:&error];
+	[fetch release];
+	fetch = nil;
+	if(error) {
+		NSLog(@"%@", [error localizedDescription]);
+		return NO;
+	}
+	
+	return num == 0;
+}
+- (void) buildFamilyNameFromFile
+{
+	NSManagedObjectContext *moc = [appDelegate managedObjectContext];
+	
+	NSString *entityName;
+	NSArray *contents;
+	entityName = @"FamilyName";
+	if([self isEmptyEntityName:entityName] || YES /***** TEST *****/) {
+		contents = [self arrayFromLFSeparatedFile:entityName];
+				
+		id attribute;
+		for(attribute in contents) {
+			NSArray *attr = [self arrayFromTabSeparatedString:attribute];
+			if([attr count] < 2) continue;
+			
+			id obj = [NSEntityDescription insertNewObjectForEntityForName:entityName
+												   inManagedObjectContext:moc];
+			[obj setValue:[attr objectAtIndex:0] forKey:@"roman"];
+			[obj setValue:[attr objectAtIndex:1] forKey:@"japanese"];
+			
+			if([attr count] > 2) {
+				[obj setValue:[attr objectAtIndex:2] forKey:@"yomigana"];
+			}
+		}
+	}
+	
+}
+
 
 #pragma mark#### NSTokenField Delegate ####
+#if 1
+- (NSArray *)tokenField:(NSTokenField *)tokenField
+completionsForSubstring:(NSString *)substring
+		   indexOfToken:(NSInteger)tokenIndex
+	indexOfSelectedItem:(NSInteger *)selectedIndex
+{
+	NSManagedObjectContext *moc = [appDelegate managedObjectContext];
+	NSFetchRequest *fetch = [[[NSFetchRequest alloc] init] autorelease];
+	
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:
+							  @"roman BEGINSWITH[cd] %@"
+							  @"OR japanese BEGINSWITH[cd] %@"
+							  @"OR yomigana BEGINSWITH[cd] %@", substring,substring,substring];
+	NSEntityDescription *entry = [NSEntityDescription entityForName:@"FamilyName"
+											 inManagedObjectContext:moc];
+	
+	[fetch setEntity:entry];
+	[fetch setPredicate:predicate];
+	
+	NSError *error = nil;
+	NSArray *objects = [moc executeFetchRequest:fetch error:&error];
+	if(!objects) {
+		if(error) {
+			NSLog(@"fail fetch reason -> %@", error);
+		}
+	}
+	
+	NSString *entryName = @"";
+	switch([tokenField tag]) {
+		case 2000:
+			entryName = @"VoiceActor";
+			break;
+		case 2001:
+			entryName = @"Product";
+			break;
+	}
+	
+	if([objects count] > 0) {
+		NSMutableString *string = [NSMutableString string];
+		NSMutableArray *names = [NSMutableArray array];
+		for(id e in objects) {
+			if([string length]) {
+				[string appendString:@" OR "];
+			}
+			[string appendFormat:@"name BEGINSWITH[cd] %%@ "];
+			[names addObject:[e valueForKey:@"japanese"]];
+		}
+		predicate = [NSPredicate predicateWithFormat:string argumentArray:names];
+	} else {
+		predicate = [NSPredicate predicateWithFormat:@"name BEGINSWITH[cd] %@", substring];
+	}
+	entry = [NSEntityDescription entityForName:entryName inManagedObjectContext:moc];
+	[fetch setEntity:entry];
+	[fetch setPredicate:predicate];
+	
+	error = nil;
+	objects = [moc executeFetchRequest:fetch error:&error];
+	if(!objects) {
+		if(error) {
+			NSLog(@"fail fetch reason -> %@", error);
+		}
+	}
+	
+	NSMutableArray *result = [NSMutableArray arrayWithObject:substring];
+	for(id obj in objects) {
+		[result addObject:[obj valueForKey:@"name"]];
+	}
+	
+	return result;
+}
+#else
 - (NSArray *)tokenField:(NSTokenField *)tokenField
 completionsForSubstring:(NSString *)substring
 		   indexOfToken:(NSInteger)tokenIndex
@@ -108,9 +257,19 @@ completionsForSubstring:(NSString *)substring
 {
 	NSLog(@"Enter %@", NSStringFromSelector(_cmd));
 	
+	NSString *entryName = @"";
+	switch([tokenField tag]) {
+		case 2000:
+			entryName = @"VoiceActor";
+			break;
+		case 2001:
+			entryName = @"Product";
+			break;
+	}
+	
 	NSManagedObjectContext *moc = [appDelegate managedObjectContext];
 	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name BEGINSWITH[cd] %@", substring];
-	NSEntityDescription *entry = [NSEntityDescription entityForName:@"VoiceActor"
+	NSEntityDescription *entry = [NSEntityDescription entityForName:entryName
 											 inManagedObjectContext:moc];
 	NSFetchRequest *fetch = [[[NSFetchRequest alloc] init] autorelease];
 	[fetch setEntity:entry];
@@ -131,16 +290,25 @@ completionsForSubstring:(NSString *)substring
 	
 	return result;
 }
+#endif
 
 - (void)registerVoiceActor:(NSTokenField *)tokenField
 {
-	NSLog(@"Enter %@", NSStringFromSelector(_cmd));
-	
 	id array = [tokenField objectValue];
 	if(![array isKindOfClass:[NSArray class]]) return;
 	
+	NSString *entryName = @"";
+	switch([tokenField tag]) {
+		case 2000:
+			entryName = @"VoiceActor";
+			break;
+		case 2001:
+			entryName = @"Product";
+			break;
+	}
+	
 	NSManagedObjectContext *moc = [appDelegate managedObjectContext];
-	NSEntityDescription *entry = [NSEntityDescription entityForName:@"VoiceActor"
+	NSEntityDescription *entry = [NSEntityDescription entityForName:entryName
 											 inManagedObjectContext:moc];
 	NSFetchRequest *fetch = [[[NSFetchRequest alloc] init] autorelease];
 	[fetch setEntity:entry];
@@ -156,15 +324,14 @@ completionsForSubstring:(NSString *)substring
 			continue;
 		}
 		if(count == 0) {
-			id obj = [NSEntityDescription insertNewObjectForEntityForName:@"VoiceActor" inManagedObjectContext:moc];
+			id obj = [NSEntityDescription insertNewObjectForEntityForName:entryName inManagedObjectContext:moc];
 			[obj setValue:token forKey:@"name"];
 		}
 	}
 }
 - (BOOL)control:(id)control textShouldEndEditing:(NSText *)fieldEditor
 {
-	NSLog(@"Enter %@", NSStringFromSelector(_cmd));
-	if([control tag] == 2000) {
+	if([control tag] == 2000 || [control tag] == 2001) {
 		[self registerVoiceActor:control];
 	}
 	
@@ -175,7 +342,7 @@ completionsForSubstring:(NSString *)substring
 #pragma mark#### Test ####
 - (IBAction)test01:(id)sender
 {
-	NSLog(@"ManagedContext - >%@", [appDelegate managedObjectContext]);
+	[self buildFamilyNameFromFile];
 }
 - (IBAction)test02:(id)sender
 {
