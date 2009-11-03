@@ -11,9 +11,9 @@
 #import "HMChannel.h"
 
 
-@interface XspfManager : NSObject
+@interface XspfManager : NSWindowController
 {
-	IBOutlet NSWindow *window;
+//	IBOutlet NSWindow *window;
 	IBOutlet NSArrayController *controller;
 	IBOutlet id	appDelegate;
 	
