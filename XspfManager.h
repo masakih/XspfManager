@@ -10,8 +10,10 @@
 
 #import "HMChannel.h"
 
+#import "XspfMCollectionView.h"
 
-@interface XspfManager : NSWindowController
+
+@interface XspfManager : NSWindowController <XspfMCollectionView_Delegate>
 {
 //	IBOutlet NSWindow *window;
 	IBOutlet NSArrayController *controller;
@@ -24,6 +26,7 @@
 	HMChannel *channel;
 }
 
+- (IBAction)openXspf:(id)sender;
 - (IBAction)add:(id)sender;
 
 - (IBAction)test01:(id)sender;
