@@ -89,7 +89,7 @@ static XspfManager *sharedInstance = nil;
 	
 	id info = [NSEntityDescription insertNewObjectForEntityForName:@"Info"
 											inManagedObjectContext:[appDelegate managedObjectContext]];
-	if(!obj) {
+	if(!info) {
 		[[appDelegate managedObjectContext] deleteObject:obj];
 		return 2;
 	}
@@ -102,6 +102,8 @@ static XspfManager *sharedInstance = nil;
 	XspfMMovieLoadRequest *request = [XspfMMovieLoadRequest requestWithObject:obj url:url];
 	[channel putRequest:request];
 	
+	[controller setSelectedObjects:[NSArray arrayWithObject:obj]];
+	
 	return noErr;
 } 
 
@@ -111,6 +113,7 @@ static XspfManager *sharedInstance = nil;
 	
 	[panel setAllowedFileTypes:[NSArray arrayWithObjects:@"xspf", @"com.masakih.xspf", nil]];
 	[panel setAllowsMultipleSelection:YES];
+	[panel setDelegate:self];
 	
 	[panel beginSheetForDirectory:nil
 							 file:nil
@@ -123,9 +126,9 @@ static XspfManager *sharedInstance = nil;
 
 - (void)endOpenPanel:(NSOpenPanel *)panel :(NSInteger)returnCode :(void *)context
 {
-	if(returnCode == NSCancelButton) return;
-	
 	[panel orderOut:nil];
+	
+	if(returnCode == NSCancelButton) return;
 	
 	NSArray *URLs = [panel URLs];
 	if([URLs count] == 0) return;
@@ -269,6 +272,28 @@ static XspfManager *sharedInstance = nil;
 
 - (NSUndoManager *)windowWillReturnUndoManager:(NSWindow *)window {
     return [[appDelegate managedObjectContext] undoManager];
+}
+
+#pragma mark#### NSOpenPanel Delegate ####
+- (BOOL)panel:(id)sender shouldShowFilename:(NSString *)filename
+{
+	NSManagedObjectContext *moc = [appDelegate managedObjectContext];
+	NSError *error = nil;
+	NSFetchRequest *fetch;
+	NSInteger num;
+	NSURL *url = [NSURL fileURLWithPath:filename];
+	
+	fetch = [[[NSFetchRequest alloc] init] autorelease];
+	[fetch setEntity:[NSEntityDescription entityForName:@"Xspf" inManagedObjectContext:moc]];
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"urlString LIKE %@", [url absoluteString]];
+	[fetch setPredicate:predicate];
+	num = [moc countForFetchRequest:fetch error:&error];
+	if(error) {
+		NSLog(@"%@", [error localizedDescription]);
+		return NO;
+	}
+	
+	return num == 0;
 }
 
 #pragma mark#### NSTokenField Delegate ####
