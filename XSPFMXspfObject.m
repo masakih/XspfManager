@@ -16,18 +16,22 @@
 @dynamic urlString;
 @dynamic lastUpdateDate;
 @dynamic lastPlayDate;
+@dynamic movieNum;
 
 @synthesize url;
 @synthesize thumbnail;
+
+@synthesize title;
+@synthesize filePath;
 
 - (NSURL *)url
 {
 	[self willAccessValueForKey:@"url"];
 	NSURL *url = [self primitiveValueForKey:@"url"];
 	[self didAccessValueForKey:@"url"];
-	if (url == nil) {
+	if(url == nil) {
 		NSString *urlString = [self valueForKey:@"urlString"];
-		if (urlString != nil) {
+		if(urlString != nil) {
 			url = [NSURL URLWithString:urlString];
 			[self setValue:url forKey:@"url"];
 		}
@@ -47,9 +51,9 @@
 	[self willAccessValueForKey:@"thumbnail"];
 	NSImage *thumbnail = [self primitiveValueForKey:@"thumbnail"];
 	[self didAccessValueForKey:@"thumbnail"];
-	if (thumbnail == nil) {
+	if(thumbnail == nil) {
 		NSData *thumbnailData = [self valueForKey:@"thumbnailData"];
-		if (thumbnailData != nil) {
+		if(thumbnailData != nil) {
 			thumbnail = [[[NSImage alloc] initWithData:thumbnailData] autorelease];
 			[self setValue:thumbnail forKey:@"thumbnail"];
 		}
@@ -67,11 +71,28 @@
 
 - (NSString *)title
 {
-	NSString *path = [self.url path];
-	path = [path lastPathComponent];
-	path = [path stringByDeletingPathExtension];
+	if(title == nil) {
+		NSString *aTitle = [self.url path];
+		aTitle = [aTitle lastPathComponent];
+		aTitle = [aTitle stringByDeletingPathExtension];
+		if(aTitle) {
+			[title release];
+			title = [aTitle copy];
+		}
+	}
 	
-	return path;
+	return title;
 }
-
+- (NSString *)filePath
+{
+	if(filePath == nil) {
+		NSString *path = [self.url path];
+		if(path) {
+			[filePath release];
+			filePath = [path copy];
+		}
+	}
+	
+	return filePath;
+}
 @end

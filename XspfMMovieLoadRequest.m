@@ -197,7 +197,10 @@ static NSImage *thumbnailWithComponent(XspfQTComponent *component)
 {
 	id item = componentForURL(self.url);
 	if(!item) return;
+	if([item childrenCount] == 0) return;
 	
+	id trackList = [item childAtIndex:0];
+	[self.object setValue:[NSNumber numberWithInt:[trackList childrenCount]] forKey:@"movieNum"];
 	[self.object setValue:thumbnailWithComponent(item) forKey:@"thumbnail"];
 }
 -(void)terminate
