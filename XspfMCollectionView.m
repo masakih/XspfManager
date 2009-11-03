@@ -20,7 +20,7 @@
 }
 - (void)keyDown:(NSEvent *)theEvent
 {
-	if([theEvent isARepeat]) return;
+	if([theEvent isARepeat]) return [super keyDown:theEvent];
 	
 #define kRETURN_KEY	36
 #define kENTER_KEY	52
