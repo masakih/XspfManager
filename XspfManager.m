@@ -102,11 +102,18 @@ static XspfManager *sharedInstance = nil;
 	XspfMMovieLoadRequest *request = [XspfMMovieLoadRequest requestWithObject:obj url:url];
 	[channel putRequest:request];
 	
-	[controller setSelectedObjects:[NSArray arrayWithObject:obj]];
+	[controller performSelector:@selector(setSelectedObjects:) withObject:[NSArray arrayWithObject:obj] afterDelay:0.0];
 	
 	return noErr;
 } 
-
+- (IBAction)openXspf:(id)sender
+{
+	id obj = [controller valueForKeyPath:@"selection.filePath"];
+	if([obj isKindOfClass:[NSString class]]) {
+		NSWorkspace *ws  = [NSWorkspace sharedWorkspace];
+		[ws openFile:obj withApplication:@"XspfQT"];
+	}
+}
 - (IBAction)add:(id)sender
 {
 	NSOpenPanel *panel = [NSOpenPanel openPanel];
@@ -456,6 +463,11 @@ completionsForSubstring:(NSString *)substring
 	return YES;
 }
 
+#pragma mark#### XspfMCollectionView Delegate ####
+- (void)enterAction:(XspfMCollectionView *)view
+{
+	[self openXspf:view];
+}
 
 #pragma mark#### Test ####
 - (IBAction)test01:(id)sender
@@ -465,7 +477,11 @@ completionsForSubstring:(NSString *)substring
 }
 - (IBAction)test02:(id)sender
 {
-	NSLog(@"Array controller -> %@", [controller arrangedObjects]);
+	NSResponder *responder = [[self window] firstResponder];
+	while(responder) {
+		NSLog(@"Responder -> %@", responder);
+		responder = [responder nextResponder];
+	}
 }
 - (IBAction)test03:(id)sender
 {

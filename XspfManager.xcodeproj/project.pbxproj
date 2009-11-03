@@ -13,6 +13,8 @@
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		F43E62A110A0692500BF88DA /* XspfMCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E62A010A0692500BF88DA /* XspfMCollectionView.m */; };
+		F43E62BD10A0710E00BF88DA /* XspfMImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E62BC10A0710E00BF88DA /* XspfMImageView.m */; };
 		F47C00B7109D479100F5991C /* XspfManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C00B6109D479100F5991C /* XspfManager.m */; };
 		F47C00FE109D51CC00F5991C /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F47C00FD109D51CC00F5991C /* QTKit.framework */; };
 		F47C023A109D603D00F5991C /* XSPFMXspfObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C0239109D603D00F5991C /* XSPFMXspfObject.m */; };
@@ -63,6 +65,10 @@
 		77C8280C06725ACE000B614F /* XspfManager_AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfManager_AppDelegate.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* XspfManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XspfManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F43E629F10A0692500BF88DA /* XspfMCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMCollectionView.h; sourceTree = "<group>"; };
+		F43E62A010A0692500BF88DA /* XspfMCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMCollectionView.m; sourceTree = "<group>"; };
+		F43E62BB10A0710E00BF88DA /* XspfMImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMImageView.h; sourceTree = "<group>"; };
+		F43E62BC10A0710E00BF88DA /* XspfMImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMImageView.m; sourceTree = "<group>"; };
 		F47C00B5109D479100F5991C /* XspfManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfManager.h; sourceTree = "<group>"; };
 		F47C00B6109D479100F5991C /* XspfManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfManager.m; sourceTree = "<group>"; };
 		F47C00FD109D51CC00F5991C /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = /System/Library/Frameworks/QTKit.framework; sourceTree = "<absolute>"; };
@@ -131,6 +137,10 @@
 				77C8280C06725ACE000B614F /* XspfManager_AppDelegate.m */,
 				F47C00B5109D479100F5991C /* XspfManager.h */,
 				F47C00B6109D479100F5991C /* XspfManager.m */,
+				F43E629F10A0692500BF88DA /* XspfMCollectionView.h */,
+				F43E62A010A0692500BF88DA /* XspfMCollectionView.m */,
+				F43E62BB10A0710E00BF88DA /* XspfMImageView.h */,
+				F43E62BC10A0710E00BF88DA /* XspfMImageView.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -360,6 +370,8 @@
 				F47C06F6109F02DF00F5991C /* NSWorkspace-Extensions.m in Sources */,
 				F47C0719109F1DDD00F5991C /* XSPFMInfomationObject.m in Sources */,
 				F47C074E109FAF1F00F5991C /* VoiceActors.xcdatamodel in Sources */,
+				F43E62A110A0692500BF88DA /* XspfMCollectionView.m in Sources */,
+				F43E62BD10A0710E00BF88DA /* XspfMImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
