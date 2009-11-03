@@ -32,6 +32,8 @@
 		F47C06F5109F02DF00F5991C /* NSURL-XspfQT-Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C06F0109F02DE00F5991C /* NSURL-XspfQT-Extensions.m */; };
 		F47C06F6109F02DF00F5991C /* NSWorkspace-Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C06F2109F02DE00F5991C /* NSWorkspace-Extensions.m */; };
 		F47C0719109F1DDD00F5991C /* XSPFMInfomationObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C0718109F1DDD00F5991C /* XSPFMInfomationObject.m */; };
+		F47C074E109FAF1F00F5991C /* VoiceActors.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = F47C074D109FAF1F00F5991C /* VoiceActors.xcdatamodel */; };
+		F47C0750109FAFB000F5991C /* FamilyName.txt in Resources */ = {isa = PBXBuildFile; fileRef = F47C074F109FAFB000F5991C /* FamilyName.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -98,6 +100,9 @@
 		F47C06F2109F02DE00F5991C /* NSWorkspace-Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSWorkspace-Extensions.m"; sourceTree = "<group>"; };
 		F47C0717109F1DDD00F5991C /* XSPFMInfomationObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XSPFMInfomationObject.h; sourceTree = "<group>"; };
 		F47C0718109F1DDD00F5991C /* XSPFMInfomationObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XSPFMInfomationObject.m; sourceTree = "<group>"; };
+		F47C074D109FAF1F00F5991C /* VoiceActors.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = VoiceActors.xcdatamodel; sourceTree = "<group>"; };
+		F47C074F109FAFB000F5991C /* FamilyName.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FamilyName.txt; sourceTree = "<group>"; };
+		F47C0752109FBE9B00F5991C /* fixFamilyNames.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = fixFamilyNames.sh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +163,9 @@
 		29B97314FDCFA39411CA2CEA /* XspfManager */ = {
 			isa = PBXGroup;
 			children = (
+				F47C074F109FAFB000F5991C /* FamilyName.txt */,
+				F47C0752109FBE9B00F5991C /* fixFamilyNames.sh */,
+				F47C074D109FAF1F00F5991C /* VoiceActors.xcdatamodel */,
 				F47C06D8109F029E00F5991C /* HMExtensions */,
 				F47C06D7109F027500F5991C /* HMXSPFcomponent */,
 				F47C04F4109DC18C00F5991C /* WorkerThread */,
@@ -313,6 +321,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F47C0750109FAFB000F5991C /* FamilyName.txt in Resources */,
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				2F7446990DB6B7EA00F9684A /* MainMenu.xib in Resources */,
 			);
@@ -346,6 +355,7 @@
 				F47C06F5109F02DF00F5991C /* NSURL-XspfQT-Extensions.m in Sources */,
 				F47C06F6109F02DF00F5991C /* NSWorkspace-Extensions.m in Sources */,
 				F47C0719109F1DDD00F5991C /* XSPFMInfomationObject.m in Sources */,
+				F47C074E109FAF1F00F5991C /* VoiceActors.xcdatamodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,6 +14,8 @@
 {
 }
 
+@property (retain) NSArray *products;
+@property (retain) NSString * productsList;
 @property (retain) NSArray *voiceActors;
 @property (retain) NSString * voiceActorsList;
 @property (retain) XSPFMXspfObject * xspf;
