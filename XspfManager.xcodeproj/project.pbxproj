@@ -34,7 +34,7 @@
 		F47C06F5109F02DF00F5991C /* NSURL-XspfQT-Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C06F0109F02DE00F5991C /* NSURL-XspfQT-Extensions.m */; };
 		F47C06F6109F02DF00F5991C /* NSWorkspace-Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C06F2109F02DE00F5991C /* NSWorkspace-Extensions.m */; };
 		F47C0719109F1DDD00F5991C /* XSPFMInfomationObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C0718109F1DDD00F5991C /* XSPFMInfomationObject.m */; };
-		F47C074E109FAF1F00F5991C /* VoiceActors.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = F47C074D109FAF1F00F5991C /* VoiceActors.xcdatamodel */; };
+		F47C074E109FAF1F00F5991C /* CompleteData.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = F47C074D109FAF1F00F5991C /* CompleteData.xcdatamodel */; };
 		F47C0750109FAFB000F5991C /* FamilyName.txt in Resources */ = {isa = PBXBuildFile; fileRef = F47C074F109FAFB000F5991C /* FamilyName.txt */; };
 		F47C096610A049DD00F5991C /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F47C096410A049DD00F5991C /* MainWindow.xib */; };
 /* End PBXBuildFile section */
@@ -107,7 +107,7 @@
 		F47C06F2109F02DE00F5991C /* NSWorkspace-Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSWorkspace-Extensions.m"; sourceTree = "<group>"; };
 		F47C0717109F1DDD00F5991C /* XSPFMInfomationObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XSPFMInfomationObject.h; sourceTree = "<group>"; };
 		F47C0718109F1DDD00F5991C /* XSPFMInfomationObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XSPFMInfomationObject.m; sourceTree = "<group>"; };
-		F47C074D109FAF1F00F5991C /* VoiceActors.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = VoiceActors.xcdatamodel; sourceTree = "<group>"; };
+		F47C074D109FAF1F00F5991C /* CompleteData.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = CompleteData.xcdatamodel; sourceTree = "<group>"; };
 		F47C074F109FAFB000F5991C /* FamilyName.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FamilyName.txt; sourceTree = "<group>"; };
 		F47C0752109FBE9B00F5991C /* fixFamilyNames.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = fixFamilyNames.sh; sourceTree = "<group>"; };
 		F47C096510A049DD00F5991C /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainWindow.xib; sourceTree = "<group>"; };
@@ -185,7 +185,6 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
-				F47C096410A049DD00F5991C /* MainWindow.xib */,
 			);
 			name = XspfManager;
 			sourceTree = "<group>";
@@ -202,6 +201,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F47C096410A049DD00F5991C /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				2F7446970DB6B7EA00F9684A /* MainMenu.xib */,
@@ -223,7 +223,7 @@
 			children = (
 				F47C074F109FAFB000F5991C /* FamilyName.txt */,
 				F47C0752109FBE9B00F5991C /* fixFamilyNames.sh */,
-				F47C074D109FAF1F00F5991C /* VoiceActors.xcdatamodel */,
+				F47C074D109FAF1F00F5991C /* CompleteData.xcdatamodel */,
 				770B37EC0679A11B001EADE2 /* XspfManager_DataModel.xcdatamodel */,
 			);
 			name = Models;
@@ -369,7 +369,7 @@
 				F47C06F5109F02DF00F5991C /* NSURL-XspfQT-Extensions.m in Sources */,
 				F47C06F6109F02DF00F5991C /* NSWorkspace-Extensions.m in Sources */,
 				F47C0719109F1DDD00F5991C /* XSPFMInfomationObject.m in Sources */,
-				F47C074E109FAF1F00F5991C /* VoiceActors.xcdatamodel in Sources */,
+				F47C074E109FAF1F00F5991C /* CompleteData.xcdatamodel in Sources */,
 				F43E62A110A0692500BF88DA /* XspfMCollectionView.m in Sources */,
 				F43E62BD10A0710E00BF88DA /* XspfMImageView.m in Sources */,
 			);
