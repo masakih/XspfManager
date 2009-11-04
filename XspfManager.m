@@ -81,31 +81,7 @@ static XspfManager *sharedInstance = nil;
 }
 
 
-- (NSInteger)registerWithURL:(NSURL *)url
-{
-	id obj = [NSEntityDescription insertNewObjectForEntityForName:@"Xspf"
-										   inManagedObjectContext:[appDelegate managedObjectContext]];
-	if(!obj) return 1;
-	
-	id info = [NSEntityDescription insertNewObjectForEntityForName:@"Info"
-											inManagedObjectContext:[appDelegate managedObjectContext]];
-	if(!info) {
-		[[appDelegate managedObjectContext] deleteObject:obj];
-		return 2;
-	}
-	
-	[obj setValue:info forKey:@"information"];
-	[obj setValue:url forKey:@"url"];
-	[obj setValue:[NSDate dateWithTimeIntervalSinceNow:0.0] forKey:@"registerDate"];
-	[obj setValue:[NSDate dateWithTimeIntervalSinceNow:0.0] forKey:@"lastUpdateDate"];
-		
-	XspfMMovieLoadRequest *request = [XspfMMovieLoadRequest requestWithObject:obj url:url];
-	[channel putRequest:request];
-	
-	[controller performSelector:@selector(setSelectedObjects:) withObject:[NSArray arrayWithObject:obj] afterDelay:0.0];
-	
-	return noErr;
-} 
+#pragma mark#### Actions ####
 - (IBAction)openXspf:(id)sender
 {
 	id obj = [controller valueForKeyPath:@"selection.filePath"];
@@ -131,6 +107,32 @@ static XspfManager *sharedInstance = nil;
 					  contextInfo:NULL];
 }
 
+
+- (NSInteger)registerWithURL:(NSURL *)url
+{
+	id obj = [NSEntityDescription insertNewObjectForEntityForName:@"Xspf"
+										   inManagedObjectContext:[appDelegate managedObjectContext]];
+	if(!obj) return 1;
+	
+	id info = [NSEntityDescription insertNewObjectForEntityForName:@"Info"
+											inManagedObjectContext:[appDelegate managedObjectContext]];
+	if(!info) {
+		[[appDelegate managedObjectContext] deleteObject:obj];
+		return 2;
+	}
+	
+	[obj setValue:info forKey:@"information"];
+	[obj setValue:url forKey:@"url"];
+	[obj setValue:[NSDate dateWithTimeIntervalSinceNow:0.0] forKey:@"registerDate"];
+	[obj setValue:[NSDate dateWithTimeIntervalSinceNow:0.0] forKey:@"lastUpdateDate"];
+	
+	XspfMMovieLoadRequest *request = [XspfMMovieLoadRequest requestWithObject:obj url:url];
+	[channel putRequest:request];
+	
+	[controller performSelector:@selector(setSelectedObjects:) withObject:[NSArray arrayWithObject:obj] afterDelay:0.0];
+	
+	return noErr;
+} 
 - (void)endOpenPanel:(NSOpenPanel *)panel :(NSInteger)returnCode :(void *)context
 {
 	[panel orderOut:nil];
@@ -177,11 +179,14 @@ static XspfManager *sharedInstance = nil;
 {
 	NSString *path;
 	
-//	path = [[appDelegate applicationSupportFolder] stringByAppendingPathComponent:name];
-//	path = [path stringByAppendingPathExtension:@"txt"];
-//	if(!path) {
+	path = [[appDelegate applicationSupportFolder] stringByAppendingPathComponent:name];
+	path = [path stringByAppendingPathExtension:@"txt"];
+	
+	NSFileManager *fm = [NSFileManager defaultManager];
+	BOOL isDir = NO;
+	if(![fm fileExistsAtPath:path isDirectory:&isDir] || isDir) {
 		path = [[NSBundle mainBundle] pathForResource:name ofType:@"txt"];
-//	}
+	}
 	
 	NSError *error = nil;
 	NSString *content = [NSString stringWithContentsOfFile:path
