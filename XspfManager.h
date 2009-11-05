@@ -23,6 +23,8 @@
 	IBOutlet NSTextField *progressMessage;
 	IBOutlet NSProgressIndicator *progressBar;
 	
+	NSInteger selectedSegmentTag;
+	
 	HMChannel *channel;
 }
 

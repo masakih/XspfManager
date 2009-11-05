@@ -80,14 +80,54 @@ static XspfManager *sharedInstance = nil;
 	return [appDelegate managedObjectContext];
 }
 
+- (NSInteger)selectedSegmentTag
+{
+	return selectedSegmentTag;
+}
+- (void)setSelectedSegmentTag:(NSInteger)newTag
+{
+	if(selectedSegmentTag == newTag) return;
+	selectedSegmentTag = newTag;
+	
+	NSString *key = nil;
+	BOOL ascending = YES;
+	switch(selectedSegmentTag) {
+		case 0:
+			key = @"title";
+			break;
+		case 1:
+			key = @"registerDate";
+			ascending = NO;
+			break;
+		case 2:
+			key = @"lastPlayDate";
+			ascending = NO;
+			break;
+		case 3:
+			key = @"lastUpdateDate";
+			ascending = NO;
+			break;
+	}
+	if(!key) return;
+	
+	NSSortDescriptor *desc = [[[NSSortDescriptor alloc] initWithKey:key ascending:ascending] autorelease];
+	
+	NSMutableArray *array = [[controller sortDescriptors] mutableCopy];
+	[array insertObject:desc atIndex:0];
+	[controller setSortDescriptors:array];
+	[controller rearrangeObjects];
+}
+
 
 #pragma mark#### Actions ####
 - (IBAction)openXspf:(id)sender
 {
-	id obj = [controller valueForKeyPath:@"selection.filePath"];
-	if([obj isKindOfClass:[NSString class]]) {
+	id rep = [controller valueForKeyPath:@"selection.self"];
+	id filePath = [rep valueForKey:@"filePath"];
+	if([filePath isKindOfClass:[NSString class]]) {
 		NSWorkspace *ws  = [NSWorkspace sharedWorkspace];
-		[ws openFile:obj withApplication:@"XspfQT"];
+		[ws openFile:filePath withApplication:@"XspfQT"];
+		[rep setValue:[NSDate dateWithTimeIntervalSinceNow:0.0] forKey:@"lastPlayDate"];
 	}
 }
 - (IBAction)add:(id)sender
@@ -236,9 +276,9 @@ static XspfManager *sharedInstance = nil;
 	if([self isEmptyEntityName:entityName]) {
 		contents = [self arrayFromLFSeparatedFile:entityName];
 				
-		id attribute;
-		for(attribute in contents) {
-			NSArray *attr = [self arrayFromTabSeparatedString:attribute];
+		id key;
+		for(key in contents) {
+			NSArray *attr = [self arrayFromTabSeparatedString:key];
 			if([attr count] < 2) continue;
 			
 			id obj = [NSEntityDescription insertNewObjectForEntityForName:entityName
