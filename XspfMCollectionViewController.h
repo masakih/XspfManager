@@ -11,7 +11,9 @@
 #import "XspfMCollectionView.h"
 #import "XspfManager.h"
 
-@interface XspfMCollectionViewController : NSViewController <XspfMCollectionView_Delegate>
+#import "XspfMViewController.h"
+
+@interface XspfMCollectionViewController : XspfMViewController <XspfMCollectionView_Delegate>
 {
 	IBOutlet NSCollectionView *collectionView;
 	XspfManager *xspfManager;
