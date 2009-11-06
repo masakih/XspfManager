@@ -11,6 +11,7 @@
 
 @interface XspfMViewController : NSViewController
 {
+	IBOutlet NSResponder *initialFirstResponder;
 }
 
 // if you overwrite this method, you MUST call super's one.
