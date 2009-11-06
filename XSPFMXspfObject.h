@@ -22,8 +22,8 @@
 @property (retain) NSDate * lastPlayDate;
 @property (retain) NSNumber *movieNum;
 
-@property (retain) NSURL *url;
-@property (retain) NSImage *thumbnail;
+//@property (retain) NSURL *url;
+//@property (retain) NSImage *thumbnail;
 
 @property (retain, readonly) NSString *title;
 @property (retain, readonly) NSString *filePath;
