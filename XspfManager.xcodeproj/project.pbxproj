@@ -39,6 +39,7 @@
 		F47C074E109FAF1F00F5991C /* CompleteData.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = F47C074D109FAF1F00F5991C /* CompleteData.xcdatamodel */; };
 		F47C0750109FAFB000F5991C /* FamilyName.txt in Resources */ = {isa = PBXBuildFile; fileRef = F47C074F109FAFB000F5991C /* FamilyName.txt */; };
 		F47C096610A049DD00F5991C /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F47C096410A049DD00F5991C /* MainWindow.xib */; };
+		F49BCF9510A45178007136CE /* XspfMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BCF9410A45178007136CE /* XspfMViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -116,6 +117,8 @@
 		F47C074F109FAFB000F5991C /* FamilyName.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FamilyName.txt; sourceTree = "<group>"; };
 		F47C0752109FBE9B00F5991C /* fixFamilyNames.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = fixFamilyNames.sh; sourceTree = "<group>"; };
 		F47C096510A049DD00F5991C /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		F49BCF9310A45175007136CE /* XspfMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMViewController.h; sourceTree = "<group>"; };
+		F49BCF9410A45178007136CE /* XspfMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +151,8 @@
 				F43E62BC10A0710E00BF88DA /* XspfMImageView.m */,
 				F43E653210A3167700BF88DA /* XspfMCollectionViewController.h */,
 				F43E653310A3167700BF88DA /* XspfMCollectionViewController.m */,
+				F49BCF9310A45175007136CE /* XspfMViewController.h */,
+				F49BCF9410A45178007136CE /* XspfMViewController.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -382,6 +387,7 @@
 				F43E62A110A0692500BF88DA /* XspfMCollectionView.m in Sources */,
 				F43E62BD10A0710E00BF88DA /* XspfMImageView.m in Sources */,
 				F43E653410A3167700BF88DA /* XspfMCollectionViewController.m in Sources */,
+				F49BCF9510A45178007136CE /* XspfMViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
