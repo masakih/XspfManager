@@ -8,12 +8,11 @@
 
 #import <Cocoa/Cocoa.h>
 
+#import "XspfManager_AppDelegate.h"
 #import "HMChannel.h"
 
-#import "XspfMCollectionView.h"
 
-
-@interface XspfManager : NSWindowController <XspfMCollectionView_Delegate>
+@interface XspfManager : NSWindowController
 {
 //	IBOutlet NSWindow *window;
 	IBOutlet NSArrayController *controller;
@@ -22,6 +21,9 @@
 	IBOutlet NSWindow *progressPanel;
 	IBOutlet NSTextField *progressMessage;
 	IBOutlet NSProgressIndicator *progressBar;
+	IBOutlet NSView *listView;
+	
+	NSViewController *listViewController;
 	
 	NSInteger selectedSegmentTag;
 	
@@ -29,13 +31,17 @@
 }
 
 - (IBAction)openXspf:(id)sender;
+
 - (IBAction)add:(id)sender;
 
 - (IBAction)test01:(id)sender;
 - (IBAction)test02:(id)sender;
 - (IBAction)test03:(id)sender;
 
+- (NSArrayController *)arrayController;
+
 - (void)addItem:(id)item;
 - (void)removeItem:(id)item;
 
 @end
+

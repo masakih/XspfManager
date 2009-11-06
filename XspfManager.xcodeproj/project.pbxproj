@@ -15,6 +15,8 @@
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		F43E62A110A0692500BF88DA /* XspfMCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E62A010A0692500BF88DA /* XspfMCollectionView.m */; };
 		F43E62BD10A0710E00BF88DA /* XspfMImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E62BC10A0710E00BF88DA /* XspfMImageView.m */; };
+		F43E652E10A315D000BF88DA /* CollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F43E652C10A315D000BF88DA /* CollectionView.xib */; };
+		F43E653410A3167700BF88DA /* XspfMCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E653310A3167700BF88DA /* XspfMCollectionViewController.m */; };
 		F47C00B7109D479100F5991C /* XspfManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C00B6109D479100F5991C /* XspfManager.m */; };
 		F47C00FE109D51CC00F5991C /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F47C00FD109D51CC00F5991C /* QTKit.framework */; };
 		F47C023A109D603D00F5991C /* XSPFMXspfObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C0239109D603D00F5991C /* XSPFMXspfObject.m */; };
@@ -69,6 +71,9 @@
 		F43E62A010A0692500BF88DA /* XspfMCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMCollectionView.m; sourceTree = "<group>"; };
 		F43E62BB10A0710E00BF88DA /* XspfMImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMImageView.h; sourceTree = "<group>"; };
 		F43E62BC10A0710E00BF88DA /* XspfMImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMImageView.m; sourceTree = "<group>"; };
+		F43E652D10A315D000BF88DA /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/CollectionView.xib; sourceTree = "<group>"; };
+		F43E653210A3167700BF88DA /* XspfMCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMCollectionViewController.h; sourceTree = "<group>"; };
+		F43E653310A3167700BF88DA /* XspfMCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMCollectionViewController.m; sourceTree = "<group>"; };
 		F47C00B5109D479100F5991C /* XspfManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfManager.h; sourceTree = "<group>"; };
 		F47C00B6109D479100F5991C /* XspfManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfManager.m; sourceTree = "<group>"; };
 		F47C00FD109D51CC00F5991C /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = /System/Library/Frameworks/QTKit.framework; sourceTree = "<absolute>"; };
@@ -141,6 +146,8 @@
 				F43E62A010A0692500BF88DA /* XspfMCollectionView.m */,
 				F43E62BB10A0710E00BF88DA /* XspfMImageView.h */,
 				F43E62BC10A0710E00BF88DA /* XspfMImageView.m */,
+				F43E653210A3167700BF88DA /* XspfMCollectionViewController.h */,
+				F43E653310A3167700BF88DA /* XspfMCollectionViewController.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -205,6 +212,7 @@
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				2F7446970DB6B7EA00F9684A /* MainMenu.xib */,
+				F43E652C10A315D000BF88DA /* CollectionView.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -338,6 +346,7 @@
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				2F7446990DB6B7EA00F9684A /* MainMenu.xib in Resources */,
 				F47C096610A049DD00F5991C /* MainWindow.xib in Resources */,
+				F43E652E10A315D000BF88DA /* CollectionView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,6 +381,7 @@
 				F47C074E109FAF1F00F5991C /* CompleteData.xcdatamodel in Sources */,
 				F43E62A110A0692500BF88DA /* XspfMCollectionView.m in Sources */,
 				F43E62BD10A0710E00BF88DA /* XspfMImageView.m in Sources */,
+				F43E653410A3167700BF88DA /* XspfMCollectionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,6 +402,14 @@
 				2F7446980DB6B7EA00F9684A /* English */,
 			);
 			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		F43E652C10A315D000BF88DA /* CollectionView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F43E652D10A315D000BF88DA /* English */,
+			);
+			name = CollectionView.xib;
 			sourceTree = "<group>";
 		};
 		F47C096410A049DD00F5991C /* MainWindow.xib */ = {

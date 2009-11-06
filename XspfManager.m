@@ -10,6 +10,11 @@
 
 #import "XspfMMovieLoadRequest.h"
 
+#import "XspfMCollectionViewController.h"
+
+@interface XspfManager(HMPrivate)
+- (void)buildFamilyNameFromFile;
+@end
 
 @implementation XspfManager
 static XspfManager *sharedInstance = nil;
@@ -72,6 +77,13 @@ static XspfManager *sharedInstance = nil;
 {
 	if(appDelegate && [self window]) {
 		[self buildFamilyNameFromFile];
+		
+		listViewController = [[XspfMCollectionViewController alloc] init];
+		
+		[listViewController setRepresentedObject:controller];
+		[listView addSubview:[listViewController view]];
+		[[listViewController view] setFrame:[listView bounds]];
+		
 		[self showWindow:self];
 	}
 }
@@ -79,6 +91,11 @@ static XspfManager *sharedInstance = nil;
 {
 	return [appDelegate managedObjectContext];
 }
+- (NSArrayController *)arrayController
+{
+	return controller;
+}
+
 
 - (NSInteger)selectedSegmentTag
 {
@@ -337,8 +354,8 @@ static XspfManager *sharedInstance = nil;
 	
 	fetch = [[[NSFetchRequest alloc] init] autorelease];
 	[fetch setEntity:[NSEntityDescription entityForName:@"Xspf" inManagedObjectContext:moc]];
-	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"urlString LIKE %@", [url absoluteString]];
-	[fetch setPredicate:predicate];
+	NSPredicate *aPredicate = [NSPredicate predicateWithFormat:@"urlString LIKE %@", [url absoluteString]];
+	[fetch setPredicate:aPredicate];
 	num = [moc countForFetchRequest:fetch error:&error];
 	if(error) {
 		NSLog(@"%@", [error localizedDescription]);
@@ -358,7 +375,7 @@ completionsForSubstring:(NSString *)substring
 	NSManagedObjectContext *moc = [appDelegate managedObjectContext];
 	NSFetchRequest *fetch = [[[NSFetchRequest alloc] init] autorelease];
 	
-	NSPredicate *predicate = [NSPredicate predicateWithFormat:
+	NSPredicate *aPredicate = [NSPredicate predicateWithFormat:
 							  @"roman BEGINSWITH[cd] %@"
 							  @"OR japanese BEGINSWITH[cd] %@"
 							  @"OR yomigana BEGINSWITH[cd] %@", substring,substring,substring];
@@ -366,7 +383,7 @@ completionsForSubstring:(NSString *)substring
 											 inManagedObjectContext:moc];
 	
 	[fetch setEntity:entry];
-	[fetch setPredicate:predicate];
+	[fetch setPredicate:aPredicate];
 	
 	NSError *error = nil;
 	NSArray *objects = [moc executeFetchRequest:fetch error:&error];
@@ -396,13 +413,13 @@ completionsForSubstring:(NSString *)substring
 			[string appendFormat:@"name BEGINSWITH[cd] %%@ "];
 			[names addObject:[e valueForKey:@"japanese"]];
 		}
-		predicate = [NSPredicate predicateWithFormat:string argumentArray:names];
+		aPredicate = [NSPredicate predicateWithFormat:string argumentArray:names];
 	} else {
-		predicate = [NSPredicate predicateWithFormat:@"name BEGINSWITH[cd] %@", substring];
+		aPredicate = [NSPredicate predicateWithFormat:@"name BEGINSWITH[cd] %@", substring];
 	}
 	entry = [NSEntityDescription entityForName:entryName inManagedObjectContext:moc];
 	[fetch setEntity:entry];
-	[fetch setPredicate:predicate];
+	[fetch setPredicate:aPredicate];
 	
 	error = nil;
 	objects = [moc executeFetchRequest:fetch error:&error];
@@ -484,8 +501,8 @@ completionsForSubstring:(NSString *)substring
 	[fetch setEntity:entry];
 	
 	for(id token in array) {
-		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name LIKE[cd] %@", token];
-		[fetch setPredicate:predicate];
+		NSPredicate *aPredicate = [NSPredicate predicateWithFormat:@"name LIKE[cd] %@", token];
+		[fetch setPredicate:aPredicate];
 		
 		NSError *error = nil;
 		NSUInteger count = [moc countForFetchRequest:fetch error:&error];
@@ -506,12 +523,6 @@ completionsForSubstring:(NSString *)substring
 	}
 	
 	return YES;
-}
-
-#pragma mark#### XspfMCollectionView Delegate ####
-- (void)enterAction:(XspfMCollectionView *)view
-{
-	[self openXspf:view];
 }
 
 #pragma mark#### Test ####

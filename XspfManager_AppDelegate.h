@@ -17,6 +17,8 @@
     NSManagedObjectContext *managedObjectContext;
 }
 
+- (NSString *)applicationSupportFolder;
+
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator;
 - (NSManagedObjectModel *)managedObjectModel;
 - (NSManagedObjectContext *)managedObjectContext;
