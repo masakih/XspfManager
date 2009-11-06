@@ -12,9 +12,7 @@
 
 @implementation XSPFMInfomationObject 
 
-@synthesize products;
 @dynamic productsList;
-@synthesize voiceActors;
 @dynamic voiceActorsList;
 @dynamic xspf;
 

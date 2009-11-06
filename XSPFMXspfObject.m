@@ -18,9 +18,6 @@
 @dynamic lastPlayDate;
 @dynamic movieNum;
 
-@synthesize url;
-@synthesize thumbnail;
-
 @synthesize title;
 @synthesize filePath;
 
