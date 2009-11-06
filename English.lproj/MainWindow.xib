@@ -26,7 +26,7 @@
 			<object class="NSCustomObject" id="691655381">
 				<string key="NSClassName">NSApplication</string>
 			</object>
-			<object class="NSArrayController" id="665502780">
+			<object class="NSArrayController" id="405619518">
 				<object class="NSMutableArray" key="NSDeclaredKeys">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="NSMutableString">
@@ -418,18 +418,18 @@
 								<int key="NSSegmentStyle">6</int>
 							</object>
 						</object>
-						<object class="NSButton" id="105653714">
+						<object class="NSButton" id="444268717">
 							<reference key="NSNextResponder" ref="72950107"/>
 							<int key="NSvFlags">292</int>
 							<string key="NSFrame">{{14, 131}, {23, 23}}</string>
 							<reference key="NSSuperview" ref="72950107"/>
 							<bool key="NSEnabled">YES</bool>
-							<object class="NSButtonCell" key="NSCell" id="796160486">
+							<object class="NSButtonCell" key="NSCell" id="468207364">
 								<int key="NSCellFlags">-2080244224</int>
 								<int key="NSCellFlags2">134217728</int>
 								<string key="NSContents"/>
 								<reference key="NSSupport" ref="168253491"/>
-								<reference key="NSControlView" ref="105653714"/>
+								<reference key="NSControlView" ref="444268717"/>
 								<int key="NSButtonFlags">114049279</int>
 								<int key="NSButtonFlags2">134</int>
 								<object class="NSCustomResource" key="NSNormalImage">
@@ -442,18 +442,18 @@
 								<int key="NSPeriodicInterval">75</int>
 							</object>
 						</object>
-						<object class="NSButton" id="42726132">
+						<object class="NSButton" id="422388093">
 							<reference key="NSNextResponder" ref="72950107"/>
 							<int key="NSvFlags">292</int>
 							<string key="NSFrame">{{36, 131}, {23, 23}}</string>
 							<reference key="NSSuperview" ref="72950107"/>
 							<bool key="NSEnabled">YES</bool>
-							<object class="NSButtonCell" key="NSCell" id="609526648">
+							<object class="NSButtonCell" key="NSCell" id="254708072">
 								<int key="NSCellFlags">67239424</int>
 								<int key="NSCellFlags2">134217728</int>
 								<string key="NSContents"/>
 								<reference key="NSSupport" ref="168253491"/>
-								<reference key="NSControlView" ref="42726132"/>
+								<reference key="NSControlView" ref="422388093"/>
 								<int key="NSButtonFlags">114049279</int>
 								<int key="NSButtonFlags2">134</int>
 								<object class="NSCustomResource" key="NSNormalImage">
@@ -616,10 +616,10 @@
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">managedObjectContext: managedObjectContext</string>
-						<reference key="source" ref="665502780"/>
+						<reference key="source" ref="405619518"/>
 						<reference key="destination" ref="771522425"/>
 						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="665502780"/>
+							<reference key="NSSource" ref="405619518"/>
 							<reference key="NSDestination" ref="771522425"/>
 							<string key="NSLabel">managedObjectContext: managedObjectContext</string>
 							<string key="NSBinding">managedObjectContext</string>
@@ -632,8 +632,8 @@
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
 						<string key="label">remove:</string>
-						<reference key="source" ref="665502780"/>
-						<reference key="destination" ref="42726132"/>
+						<reference key="source" ref="405619518"/>
+						<reference key="destination" ref="422388093"/>
 					</object>
 					<int key="connectionID">654</int>
 				</object>
@@ -641,18 +641,18 @@
 					<object class="IBActionConnection" key="connection">
 						<string key="label">add:</string>
 						<reference key="source" ref="771522425"/>
-						<reference key="destination" ref="105653714"/>
+						<reference key="destination" ref="444268717"/>
 					</object>
 					<int key="connectionID">655</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">enabled: canRemove</string>
-						<reference key="source" ref="42726132"/>
-						<reference key="destination" ref="665502780"/>
+						<reference key="source" ref="422388093"/>
+						<reference key="destination" ref="405619518"/>
 						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="42726132"/>
-							<reference key="NSDestination" ref="665502780"/>
+							<reference key="NSSource" ref="422388093"/>
+							<reference key="NSDestination" ref="405619518"/>
 							<string key="NSLabel">enabled: canRemove</string>
 							<string key="NSBinding">enabled</string>
 							<string key="NSKeyPath">canRemove</string>
@@ -665,10 +665,10 @@
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">value: selection.information.products</string>
 						<reference key="source" ref="1004232247"/>
-						<reference key="destination" ref="665502780"/>
+						<reference key="destination" ref="405619518"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="1004232247"/>
-							<reference key="NSDestination" ref="665502780"/>
+							<reference key="NSDestination" ref="405619518"/>
 							<string key="NSLabel">value: selection.information.products</string>
 							<string key="NSBinding">value</string>
 							<string key="NSKeyPath">selection.information.products</string>
@@ -681,10 +681,10 @@
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">value: selection.filePath</string>
 						<reference key="source" ref="1061203943"/>
-						<reference key="destination" ref="665502780"/>
+						<reference key="destination" ref="405619518"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="1061203943"/>
-							<reference key="NSDestination" ref="665502780"/>
+							<reference key="NSDestination" ref="405619518"/>
 							<string key="NSLabel">value: selection.filePath</string>
 							<string key="NSBinding">value</string>
 							<string key="NSKeyPath">selection.filePath</string>
@@ -697,10 +697,10 @@
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">value: selection.information.voiceActors</string>
 						<reference key="source" ref="1053039959"/>
-						<reference key="destination" ref="665502780"/>
+						<reference key="destination" ref="405619518"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="1053039959"/>
-							<reference key="NSDestination" ref="665502780"/>
+							<reference key="NSDestination" ref="405619518"/>
 							<string key="NSLabel">value: selection.information.voiceActors</string>
 							<string key="NSBinding">value</string>
 							<string key="NSKeyPath">selection.information.voiceActors</string>
@@ -737,7 +737,7 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">controller</string>
 						<reference key="source" ref="771522425"/>
-						<reference key="destination" ref="665502780"/>
+						<reference key="destination" ref="405619518"/>
 					</object>
 					<int key="connectionID">668</int>
 				</object>
@@ -745,10 +745,10 @@
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">predicate: filterPredicate</string>
 						<reference key="source" ref="512383395"/>
-						<reference key="destination" ref="665502780"/>
-						<object class="NSNibBindingConnector" key="connector" id="879027666">
+						<reference key="destination" ref="405619518"/>
+						<object class="NSNibBindingConnector" key="connector" id="169945136">
 							<reference key="NSSource" ref="512383395"/>
-							<reference key="NSDestination" ref="665502780"/>
+							<reference key="NSDestination" ref="405619518"/>
 							<string key="NSLabel">predicate: filterPredicate</string>
 							<string key="NSBinding">predicate</string>
 							<string key="NSKeyPath">filterPredicate</string>
@@ -774,10 +774,10 @@
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">predicate2: filterPredicate</string>
 						<reference key="source" ref="512383395"/>
-						<reference key="destination" ref="665502780"/>
-						<object class="NSNibBindingConnector" key="connector" id="136136409">
+						<reference key="destination" ref="405619518"/>
+						<object class="NSNibBindingConnector" key="connector" id="262679107">
 							<reference key="NSSource" ref="512383395"/>
-							<reference key="NSDestination" ref="665502780"/>
+							<reference key="NSDestination" ref="405619518"/>
 							<string key="NSLabel">predicate2: filterPredicate</string>
 							<string key="NSBinding">predicate2</string>
 							<string key="NSKeyPath">filterPredicate</string>
@@ -794,7 +794,7 @@
 									<string>information.voiceActorsList contains[cd] $value</string>
 								</object>
 							</object>
-							<reference key="NSPreviousConnector" ref="879027666"/>
+							<reference key="NSPreviousConnector" ref="169945136"/>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
@@ -804,10 +804,10 @@
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">predicate3: filterPredicate</string>
 						<reference key="source" ref="512383395"/>
-						<reference key="destination" ref="665502780"/>
-						<object class="NSNibBindingConnector" key="connector" id="264741700">
+						<reference key="destination" ref="405619518"/>
+						<object class="NSNibBindingConnector" key="connector" id="63603031">
 							<reference key="NSSource" ref="512383395"/>
-							<reference key="NSDestination" ref="665502780"/>
+							<reference key="NSDestination" ref="405619518"/>
 							<string key="NSLabel">predicate3: filterPredicate</string>
 							<string key="NSBinding">predicate3</string>
 							<string key="NSKeyPath">filterPredicate</string>
@@ -824,7 +824,7 @@
 									<string>information.productsList contains[cd] $value</string>
 								</object>
 							</object>
-							<reference key="NSPreviousConnector" ref="136136409"/>
+							<reference key="NSPreviousConnector" ref="262679107"/>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
@@ -834,10 +834,10 @@
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">predicate4: filterPredicate</string>
 						<reference key="source" ref="512383395"/>
-						<reference key="destination" ref="665502780"/>
+						<reference key="destination" ref="405619518"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="512383395"/>
-							<reference key="NSDestination" ref="665502780"/>
+							<reference key="NSDestination" ref="405619518"/>
 							<string key="NSLabel">predicate4: filterPredicate</string>
 							<string key="NSBinding">predicate4</string>
 							<string key="NSKeyPath">filterPredicate</string>
@@ -854,11 +854,35 @@
 									<string>title contains[cd] $value</string>
 								</object>
 							</object>
-							<reference key="NSPreviousConnector" ref="264741700"/>
+							<reference key="NSPreviousConnector" ref="63603031"/>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
 					<int key="connectionID">683</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">nextKeyView</string>
+						<reference key="source" ref="1053039959"/>
+						<reference key="destination" ref="1004232247"/>
+					</object>
+					<int key="connectionID">684</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">nextKeyView</string>
+						<reference key="source" ref="1004232247"/>
+						<reference key="destination" ref="512383395"/>
+					</object>
+					<int key="connectionID">685</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">nextKeyView</string>
+						<reference key="source" ref="512383395"/>
+						<reference key="destination" ref="1053039959"/>
+					</object>
+					<int key="connectionID">688</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -914,8 +938,8 @@
 							<reference ref="721699342"/>
 							<reference ref="512383395"/>
 							<reference ref="1061203943"/>
-							<reference ref="105653714"/>
-							<reference ref="42726132"/>
+							<reference ref="444268717"/>
+							<reference ref="422388093"/>
 							<reference ref="1053039959"/>
 							<reference ref="852216275"/>
 							<reference ref="1021393895"/>
@@ -1136,35 +1160,35 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">646</int>
-						<reference key="object" ref="105653714"/>
+						<reference key="object" ref="444268717"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="796160486"/>
+							<reference ref="468207364"/>
 						</object>
 						<reference key="parent" ref="72950107"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">647</int>
-						<reference key="object" ref="796160486"/>
-						<reference key="parent" ref="105653714"/>
+						<reference key="object" ref="468207364"/>
+						<reference key="parent" ref="444268717"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">648</int>
-						<reference key="object" ref="42726132"/>
+						<reference key="object" ref="422388093"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="609526648"/>
+							<reference ref="254708072"/>
 						</object>
 						<reference key="parent" ref="72950107"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">649</int>
-						<reference key="object" ref="609526648"/>
-						<reference key="parent" ref="42726132"/>
+						<reference key="object" ref="254708072"/>
+						<reference key="parent" ref="422388093"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">650</int>
-						<reference key="object" ref="665502780"/>
+						<reference key="object" ref="405619518"/>
 						<reference key="parent" ref="0"/>
 					</object>
 				</object>
@@ -1306,7 +1330,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">683</int>
+			<int key="maxID">688</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

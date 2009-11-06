@@ -40,6 +40,10 @@
 	
 	[self setNextResponder:nextResponder];
 	[object setNextResponder:self];
+	
+	if(initialFirstResponder && [object window]) {
+		[[object window] makeFirstResponder:initialFirstResponder];
+	}
 }
 
 @end
