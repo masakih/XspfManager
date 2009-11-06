@@ -34,9 +34,6 @@
 		[super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 		return;
 	}
-//	id new = [change objectForKey:NSKeyValueChangeNewKey];
-//	id old = [change objectForKey:NSKeyValueChangeOldKey];
-//	if([new isEqual:old]) return;
 	
 	id nextResponder = [object nextResponder];
 	if([self isEqual:nextResponder]) return;
