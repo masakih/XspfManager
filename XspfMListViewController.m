@@ -18,4 +18,9 @@
 	return self;
 }
 
+- (void)awakeFromNib
+{
+	[tableView setDoubleAction:@selector(openXspf:)];
+}
+
 @end
