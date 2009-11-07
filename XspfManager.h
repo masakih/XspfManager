@@ -31,9 +31,7 @@ typedef enum {
 	NSViewController *listViewController;
 	XspfMViewType currentListViewType;
 	NSMutableDictionary *viewControllers;
-	
-	NSInteger selectedSegmentTag;
-	
+		
 	HMChannel *channel;
 }
 

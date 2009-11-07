@@ -21,7 +21,7 @@
 #pragma mark#### XspfMCollectionView Delegate ####
 - (void)enterAction:(XspfMCollectionView *)view
 {
-	[xspfManager openXspf:view];
+	[xspfManager openXspf:self];
 }
 
 #pragma mark#### Test ####
