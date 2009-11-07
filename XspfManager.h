@@ -45,8 +45,5 @@ typedef enum {
 
 - (NSArrayController *)arrayController;
 
-- (void)addItem:(id)item;
-- (void)removeItem:(id)item;
-
 @end
 
