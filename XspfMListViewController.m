@@ -11,4 +11,11 @@
 
 @implementation XspfMListViewController
 
+- (id)init
+{
+	[super initWithNibName:@"ListView" bundle:nil];
+	
+	return self;
+}
+
 @end
