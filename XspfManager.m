@@ -11,9 +11,12 @@
 #import "XspfMMovieLoadRequest.h"
 
 #import "XspfMCollectionViewController.h"
+#import "XspfMListViewController.h"
 
 @interface XspfManager(HMPrivate)
 - (void)buildFamilyNameFromFile;
+- (void)changeViewType:(XspfMViewType)newType;
+- (void)setCurrentListViewType:(XspfMViewType)newType;
 @end
 
 @implementation XspfManager
@@ -71,6 +74,8 @@ static XspfManager *sharedInstance = nil;
 	[super initWithWindowNibName:@"MainWindow"];
 	channel = [[HMChannel alloc] initWithWorkerNum:1];
 	
+	viewControllers = [[NSMutableDictionary alloc] init];
+	
 	return self;
 }
 - (void)awakeFromNib
@@ -78,15 +83,13 @@ static XspfManager *sharedInstance = nil;
 	if(appDelegate && [self window]) {
 		[self buildFamilyNameFromFile];
 		
-		listViewController = [[XspfMCollectionViewController alloc] init];
-		
-		[listViewController setRepresentedObject:controller];
-		[listView addSubview:[listViewController view]];
-		[[listViewController view] setFrame:[listView bounds]];
+		[self setCurrentListViewType:typeCollectionView];
 		
 		[self showWindow:self];
 	}
 }
+
+#pragma mark#### KVC ####
 - (NSManagedObjectContext *)managedObjectContext
 {
 	return [appDelegate managedObjectContext];
@@ -96,6 +99,17 @@ static XspfManager *sharedInstance = nil;
 	return controller;
 }
 
+- (XspfMViewType)currentListViewType
+{
+	return currentListViewType;
+}
+- (void)setCurrentListViewType:(XspfMViewType)newType
+{
+	if(currentListViewType == newType) return;
+	
+//	currentListViewType = newType;
+	[self changeViewType:newType];
+}
 
 - (NSInteger)selectedSegmentTag
 {
@@ -218,7 +232,38 @@ static XspfManager *sharedInstance = nil;
 	[NSApp endSheet:progressPanel];
 }
 	
-
+#pragma mark#### Other methods ####
+- (void)changeViewType:(XspfMViewType)viewType
+{
+	if(currentListViewType == viewType) return;
+	currentListViewType = viewType;
+	
+	NSString *className = nil;
+	switch(currentListViewType) {
+		case typeCollectionView:
+			className = @"XspfMCollectionViewController";
+			break;
+		case typeTableView:
+			className = @"XspfMListViewController";
+			break;
+	}
+	if(!className) return;
+	
+	NSViewController *targetContorller = [viewControllers objectForKey:className];
+	if(!targetContorller) {
+		targetContorller = [[[NSClassFromString(className) alloc] init] autorelease];
+		if(!targetContorller) return;
+		[viewControllers setObject:targetContorller forKey:className];
+	}
+	
+	[[listViewController view] removeFromSuperview];
+	[listViewController setRepresentedObject:nil];
+	listViewController = targetContorller;
+	[listViewController setRepresentedObject:controller];
+	[listView addSubview:[listViewController view]];
+	[[listViewController view] setFrame:[listView bounds]];
+}
+	
 - (void)addItem:(id)item
 {
 	
