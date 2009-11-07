@@ -12,18 +12,25 @@
 #import "HMChannel.h"
 
 
+typedef enum {
+	typeCollectionView = 1,
+	typeTableView,
+} XspfMViewType;
+
 @interface XspfManager : NSWindowController
 {
-//	IBOutlet NSWindow *window;
 	IBOutlet NSArrayController *controller;
 	IBOutlet id	appDelegate;
 	
 	IBOutlet NSWindow *progressPanel;
 	IBOutlet NSTextField *progressMessage;
 	IBOutlet NSProgressIndicator *progressBar;
-	IBOutlet NSView *listView;
 	
+	
+	IBOutlet NSView *listView;
 	NSViewController *listViewController;
+	XspfMViewType currentListViewType;
+	NSMutableDictionary *viewControllers;
 	
 	NSInteger selectedSegmentTag;
 	

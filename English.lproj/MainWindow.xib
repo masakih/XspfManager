@@ -367,7 +367,7 @@
 								<int key="NSCellFlags">67239424</int>
 								<int key="NSCellFlags2">272629760</int>
 								<string key="NSContents">Multiline Label</string>
-								<object class="NSFont" key="NSSupport">
+								<object class="NSFont" key="NSSupport" id="34336860">
 									<string key="NSName">LucidaGrande</string>
 									<double key="NSSize">1.300000e+01</double>
 									<int key="NSfFlags">16</int>
@@ -464,6 +464,37 @@
 								<string key="NSKeyEquivalent"/>
 								<int key="NSPeriodicDelay">400</int>
 								<int key="NSPeriodicInterval">75</int>
+							</object>
+						</object>
+						<object class="NSSegmentedControl" id="364686469">
+							<reference key="NSNextResponder" ref="72950107"/>
+							<int key="NSvFlags">264</int>
+							<string key="NSFrame">{{270, 636}, {206, 24}}</string>
+							<reference key="NSSuperview" ref="72950107"/>
+							<bool key="NSEnabled">YES</bool>
+							<object class="NSSegmentedCell" key="NSCell" id="902023067">
+								<int key="NSCellFlags">67239424</int>
+								<int key="NSCellFlags2">0</int>
+								<reference key="NSSupport" ref="34336860"/>
+								<reference key="NSControlView" ref="364686469"/>
+								<object class="NSMutableArray" key="NSSegmentImages">
+									<bool key="EncodedWithXMLCoder">YES</bool>
+									<object class="NSSegmentItem">
+										<double key="NSSegmentItemWidth">1.000000e+02</double>
+										<string key="NSSegmentItemLabel">CollectionView</string>
+										<int key="NSSegmentItemTag">1</int>
+										<int key="NSSegmentItemImageScaling">0</int>
+									</object>
+									<object class="NSSegmentItem">
+										<double key="NSSegmentItemWidth">9.900000e+01</double>
+										<string key="NSSegmentItemLabel">TableView</string>
+										<int key="NSSegmentItemTag">2</int>
+										<bool key="NSSegmentItemSelected">YES</bool>
+										<int key="NSSegmentItemImageScaling">0</int>
+									</object>
+								</object>
+								<int key="NSSelectedSegment">1</int>
+								<int key="NSSegmentStyle">1</int>
 							</object>
 						</object>
 					</object>
@@ -884,6 +915,22 @@
 					</object>
 					<int key="connectionID">688</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">selectedTag: currentListViewType</string>
+						<reference key="source" ref="364686469"/>
+						<reference key="destination" ref="771522425"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="364686469"/>
+							<reference key="NSDestination" ref="771522425"/>
+							<string key="NSLabel">selectedTag: currentListViewType</string>
+							<string key="NSBinding">selectedTag</string>
+							<string key="NSKeyPath">currentListViewType</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">691</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -944,6 +991,7 @@
 							<reference ref="852216275"/>
 							<reference ref="1021393895"/>
 							<reference ref="19631665"/>
+							<reference ref="364686469"/>
 						</object>
 						<reference key="parent" ref="485099885"/>
 					</object>
@@ -1191,6 +1239,20 @@
 						<reference key="object" ref="405619518"/>
 						<reference key="parent" ref="0"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">689</int>
+						<reference key="object" ref="364686469"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="902023067"/>
+						</object>
+						<reference key="parent" ref="72950107"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">690</int>
+						<reference key="object" ref="902023067"/>
+						<reference key="parent" ref="364686469"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -1251,6 +1313,10 @@
 					<string>648.IBPluginDependency</string>
 					<string>649.IBPluginDependency</string>
 					<string>650.IBPluginDependency</string>
+					<string>689.IBPluginDependency</string>
+					<string>689.IBSegmentedControlTracker.RoundRobinState</string>
+					<string>689.IBSegmentedControlTracker.WasGrowing</string>
+					<string>690.IBPluginDependency</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1308,6 +1374,10 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<reference ref="9"/>
+					<reference ref="8"/>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="unlocalizedProperties">
@@ -1330,7 +1400,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">688</int>
+			<int key="maxID">691</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

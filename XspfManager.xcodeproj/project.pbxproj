@@ -204,7 +204,6 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
-				F49BD00E10A47780007136CE /* ListView.xib */,
 			);
 			name = XspfManager;
 			sourceTree = "<group>";
@@ -226,6 +225,7 @@
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				2F7446970DB6B7EA00F9684A /* MainMenu.xib */,
 				F43E652C10A315D000BF88DA /* CollectionView.xib */,
+				F49BD00E10A47780007136CE /* ListView.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
