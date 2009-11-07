@@ -40,6 +40,8 @@
 		F47C0750109FAFB000F5991C /* FamilyName.txt in Resources */ = {isa = PBXBuildFile; fileRef = F47C074F109FAFB000F5991C /* FamilyName.txt */; };
 		F47C096610A049DD00F5991C /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F47C096410A049DD00F5991C /* MainWindow.xib */; };
 		F49BCF9510A45178007136CE /* XspfMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BCF9410A45178007136CE /* XspfMViewController.m */; };
+		F49BD01010A47781007136CE /* ListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F49BD00E10A47780007136CE /* ListView.xib */; };
+		F49BD01310A477BF007136CE /* XspfMListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BD01210A477BF007136CE /* XspfMListViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -119,6 +121,9 @@
 		F47C096510A049DD00F5991C /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		F49BCF9310A45175007136CE /* XspfMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMViewController.h; sourceTree = "<group>"; };
 		F49BCF9410A45178007136CE /* XspfMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMViewController.m; sourceTree = "<group>"; };
+		F49BD00F10A47780007136CE /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/ListView.xib; sourceTree = "<group>"; };
+		F49BD01110A477BF007136CE /* XspfMListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMListViewController.h; sourceTree = "<group>"; };
+		F49BD01210A477BF007136CE /* XspfMListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMListViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +156,8 @@
 				F43E62BC10A0710E00BF88DA /* XspfMImageView.m */,
 				F43E653210A3167700BF88DA /* XspfMCollectionViewController.h */,
 				F43E653310A3167700BF88DA /* XspfMCollectionViewController.m */,
+				F49BD01110A477BF007136CE /* XspfMListViewController.h */,
+				F49BD01210A477BF007136CE /* XspfMListViewController.m */,
 				F49BCF9310A45175007136CE /* XspfMViewController.h */,
 				F49BCF9410A45178007136CE /* XspfMViewController.m */,
 			);
@@ -197,6 +204,7 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				F49BD00E10A47780007136CE /* ListView.xib */,
 			);
 			name = XspfManager;
 			sourceTree = "<group>";
@@ -352,6 +360,7 @@
 				2F7446990DB6B7EA00F9684A /* MainMenu.xib in Resources */,
 				F47C096610A049DD00F5991C /* MainWindow.xib in Resources */,
 				F43E652E10A315D000BF88DA /* CollectionView.xib in Resources */,
+				F49BD01010A47781007136CE /* ListView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,6 +397,7 @@
 				F43E62BD10A0710E00BF88DA /* XspfMImageView.m in Sources */,
 				F43E653410A3167700BF88DA /* XspfMCollectionViewController.m in Sources */,
 				F49BCF9510A45178007136CE /* XspfMViewController.m in Sources */,
+				F49BD01310A477BF007136CE /* XspfMListViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,6 +434,14 @@
 				F47C096510A049DD00F5991C /* English */,
 			);
 			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		F49BD00E10A47780007136CE /* ListView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F49BD00F10A47780007136CE /* English */,
+			);
+			name = ListView.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
