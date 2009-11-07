@@ -214,12 +214,11 @@ static XspfManager *sharedInstance = nil;
 		targetContorller = [[[NSClassFromString(className) alloc] init] autorelease];
 		if(!targetContorller) return;
 		[viewControllers setObject:targetContorller forKey:className];
+		[targetContorller setRepresentedObject:controller];
 	}
 	
 	[[listViewController view] removeFromSuperview];
-	[listViewController setRepresentedObject:nil];
 	listViewController = targetContorller;
-	[listViewController setRepresentedObject:controller];
 	[listView addSubview:[listViewController view]];
 	[[listViewController view] setFrame:[listView bounds]];
 }
