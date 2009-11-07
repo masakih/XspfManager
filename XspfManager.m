@@ -107,48 +107,8 @@ static XspfManager *sharedInstance = nil;
 {
 	if(currentListViewType == newType) return;
 	
-//	currentListViewType = newType;
 	[self changeViewType:newType];
 }
-
-- (NSInteger)selectedSegmentTag
-{
-	return selectedSegmentTag;
-}
-- (void)setSelectedSegmentTag:(NSInteger)newTag
-{
-	if(selectedSegmentTag == newTag) return;
-	selectedSegmentTag = newTag;
-	
-	NSString *key = nil;
-	BOOL ascending = YES;
-	switch(selectedSegmentTag) {
-		case 0:
-			key = @"title";
-			break;
-		case 1:
-			key = @"registerDate";
-			ascending = NO;
-			break;
-		case 2:
-			key = @"lastPlayDate";
-			ascending = NO;
-			break;
-		case 3:
-			key = @"lastUpdateDate";
-			ascending = NO;
-			break;
-	}
-	if(!key) return;
-	
-	NSSortDescriptor *desc = [[[NSSortDescriptor alloc] initWithKey:key ascending:ascending] autorelease];
-	
-	NSMutableArray *array = [[controller sortDescriptors] mutableCopy];
-	[array insertObject:desc atIndex:0];
-	[controller setSortDescriptors:array];
-	[controller rearrangeObjects];
-}
-
 
 #pragma mark#### Actions ####
 - (IBAction)openXspf:(id)sender
@@ -262,17 +222,6 @@ static XspfManager *sharedInstance = nil;
 	[listViewController setRepresentedObject:controller];
 	[listView addSubview:[listViewController view]];
 	[[listViewController view] setFrame:[listView bounds]];
-}
-	
-- (void)addItem:(id)item
-{
-	
-}
-	
-	
-- (void)removeItem:(id)item
-{
-	[self doesNotRecognizeSelector:_cmd];
 }
 
 
