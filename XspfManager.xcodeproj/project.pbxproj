@@ -42,7 +42,7 @@
 		F49BCF9510A45178007136CE /* XspfMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BCF9410A45178007136CE /* XspfMViewController.m */; };
 		F49BD01010A47781007136CE /* ListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F49BD00E10A47780007136CE /* ListView.xib */; };
 		F49BD01310A477BF007136CE /* XspfMListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BD01210A477BF007136CE /* XspfMListViewController.m */; };
-		F49BD36910A66EC6007136CE /* XspfList.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BD36810A66EC6007136CE /* XspfList.m */; };
+		F49BD36910A66EC6007136CE /* XspfMXspfListObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BD36810A66EC6007136CE /* XspfMXspfListObject.m */; };
 		F4CE4CD310A6A13E004AC4FA /* LibraryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CE4CD110A6A13E004AC4FA /* LibraryView.xib */; };
 /* End PBXBuildFile section */
 
@@ -126,8 +126,8 @@
 		F49BD00F10A47780007136CE /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/ListView.xib; sourceTree = "<group>"; };
 		F49BD01110A477BF007136CE /* XspfMListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMListViewController.h; sourceTree = "<group>"; };
 		F49BD01210A477BF007136CE /* XspfMListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMListViewController.m; sourceTree = "<group>"; };
-		F49BD36710A66EC6007136CE /* XspfList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfList.h; sourceTree = "<group>"; };
-		F49BD36810A66EC6007136CE /* XspfList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfList.m; sourceTree = "<group>"; };
+		F49BD36710A66EC6007136CE /* XspfMXspfListObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMXspfListObject.h; sourceTree = "<group>"; };
+		F49BD36810A66EC6007136CE /* XspfMXspfListObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMXspfListObject.m; sourceTree = "<group>"; };
 		F4CE4CD210A6A13E004AC4FA /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/LibraryView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -147,8 +147,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				F49BD36710A66EC6007136CE /* XspfList.h */,
-				F49BD36810A66EC6007136CE /* XspfList.m */,
+				F49BD36710A66EC6007136CE /* XspfMXspfListObject.h */,
+				F49BD36810A66EC6007136CE /* XspfMXspfListObject.m */,
 				F47C0717109F1DDD00F5991C /* XSPFMInfomationObject.h */,
 				F47C0718109F1DDD00F5991C /* XSPFMInfomationObject.m */,
 				F47C0238109D603D00F5991C /* XSPFMXspfObject.h */,
@@ -407,7 +407,7 @@
 				F43E653410A3167700BF88DA /* XspfMCollectionViewController.m in Sources */,
 				F49BCF9510A45178007136CE /* XspfMViewController.m in Sources */,
 				F49BD01310A477BF007136CE /* XspfMListViewController.m in Sources */,
-				F49BD36910A66EC6007136CE /* XspfList.m in Sources */,
+				F49BD36910A66EC6007136CE /* XspfMXspfListObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
