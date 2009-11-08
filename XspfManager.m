@@ -21,7 +21,7 @@
 
 @implementation XspfManager
 
-@dynamic xspfList;
+//@dynamic xspfList;
 
 static XspfManager *sharedInstance = nil;
 
@@ -114,25 +114,25 @@ static XspfManager *sharedInstance = nil;
 	[self changeViewType:newType];
 }
 
-- (void)setXspfList:(id)newList
-{
-	[xspfList release];
-	xspfList = [newList retain];
-}
-- (id)xspfList
-{
-	return xspfList;
-}
-- (void)setListPredicate:(NSPredicate *)newPredicate
-{
-	[listPredicate release];
-	listPredicate = [newPredicate retain];
-}
-- (NSPredicate *)listPredicate
-{
-	return listPredicate;
-}
-
+//- (void)setXspfList:(id)newList
+//{
+//	[xspfList release];
+//	xspfList = [newList retain];
+//}
+//- (id)xspfList
+//{
+//	return xspfList;
+//}
+//- (void)setListPredicate:(NSPredicate *)newPredicate
+//{
+//	[listPredicate release];
+//	listPredicate = [newPredicate retain];
+//}
+//- (NSPredicate *)listPredicate
+//{
+//	return listPredicate;
+//}
+//
 - (NSArray *)sortDescriptors
 {
 	id desc = [[NSSortDescriptor alloc] initWithKey:@"order" ascending:YES];
@@ -258,6 +258,11 @@ static XspfManager *sharedInstance = nil;
 
 - (void)setupLists
 {
+	libraryViewController = [[NSViewController alloc] initWithNibName:@"LibraryView" bundle:nil];
+	[libraryViewController setRepresentedObject:listController];
+	[libraryView addSubview:[libraryViewController view]];
+	[[libraryViewController view] setFrame:[libraryView bounds]];
+	
 	NSManagedObjectContext *moc = [appDelegate managedObjectContext];
 	NSError *error = nil;
 	NSFetchRequest *fetch;
@@ -283,18 +288,6 @@ static XspfManager *sharedInstance = nil;
 	[obj setValue:prediccate forKey:@"predicate"];
 	[obj setValue:NSLocalizedString(@"Favorites", @"Favorites") forKey:@"name"];
 	[obj setValue:[NSNumber numberWithInt:1] forKey:@"order"];
-}
-- (void)tableViewSelectionDidChange:(NSNotification *)notification
-{
-	NSTableView *table = [notification object];
-	
-	if([table numberOfSelectedRows] > 1) return;
-	
-	id obj = [listController valueForKeyPath:@"selection.xspfs"];
-	self.xspfList = obj;
-	
-	obj = [listController valueForKeyPath:@"selection.predicate"];
-	[self setListPredicate:obj];
 }
 
 

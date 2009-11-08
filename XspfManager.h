@@ -32,14 +32,17 @@ typedef enum {
 	XspfMViewType currentListViewType;
 	NSMutableDictionary *viewControllers;
 	
+	IBOutlet NSView *libraryView;
+	NSViewController *libraryViewController;
+	
 	IBOutlet NSArrayController *listController;
-	id xspfList;
-	NSPredicate *listPredicate;
+//	id xspfList;
+//	NSPredicate *listPredicate;
 	
 	HMChannel *channel;
 }
 
-@property (retain) id xspfList;
+//@property (retain) id xspfList;
 
 - (IBAction)openXspf:(id)sender;
 
