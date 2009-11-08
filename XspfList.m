@@ -36,25 +36,4 @@
 	[self setValue:[NSKeyedArchiver archivedDataWithRootObject:aPredicate] forKey:@"predicateData"];
 }
 
-- (id)xspfs
-{
-	NSManagedObjectContext *moc = [self managedObjectContext];
-	NSPredicate *predicate = [self predicate];
-	NSError *error = nil;
-	NSFetchRequest *fetch;
-	
-	fetch = [[[NSFetchRequest alloc] init] autorelease];
-	[fetch setEntity:[NSEntityDescription entityForName:@"Xspf" inManagedObjectContext:moc]];
-	[fetch setPredicate:predicate];
-	
-	id objects = [moc executeFetchRequest:fetch error:&error];
-	if(!objects) {
-		if(error) {
-			NSLog(@"fail fetch reason -> %@", error);
-		}
-	}
-	
-	return objects;
-}
-
 @end
