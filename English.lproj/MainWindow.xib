@@ -493,7 +493,7 @@
 							</object>
 							<bool key="NSEditable">YES</bool>
 						</object>
-						<object class="NSCustomView" id="793111299">
+						<object class="NSCustomView" id="837638463">
 							<reference key="NSNextResponder" ref="72950107"/>
 							<int key="NSvFlags">256</int>
 							<string key="NSFrame">{{20, 156}, {192, 430}}</string>
@@ -555,11 +555,13 @@
 				<string key="NSScreenRect">{{0, 0}, {1280, 832}}</string>
 				<string key="NSMaxSize">{3.40282e+38, 3.40282e+38}</string>
 			</object>
-			<object class="NSArrayController" id="345323185">
+			<object class="NSArrayController" id="216054103">
 				<object class="NSMutableArray" key="NSDeclaredKeys">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>name</string>
 					<string>xspfs</string>
+					<string>prediccate</string>
+					<string>predicate</string>
 				</object>
 				<bool key="NSEditable">YES</bool>
 				<bool key="NSAutomaticallyPreparesContent">YES</bool>
@@ -939,10 +941,10 @@
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">managedObjectContext: managedObjectContext</string>
-						<reference key="source" ref="345323185"/>
+						<reference key="source" ref="216054103"/>
 						<reference key="destination" ref="771522425"/>
 						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="345323185"/>
+							<reference key="NSSource" ref="216054103"/>
 							<reference key="NSDestination" ref="771522425"/>
 							<string key="NSLabel">managedObjectContext: managedObjectContext</string>
 							<string key="NSBinding">managedObjectContext</string>
@@ -956,17 +958,17 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">listController</string>
 						<reference key="source" ref="771522425"/>
-						<reference key="destination" ref="345323185"/>
+						<reference key="destination" ref="216054103"/>
 					</object>
 					<int key="connectionID">731</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">sortDescriptors: sortDescriptors</string>
-						<reference key="source" ref="345323185"/>
+						<reference key="source" ref="216054103"/>
 						<reference key="destination" ref="771522425"/>
 						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="345323185"/>
+							<reference key="NSSource" ref="216054103"/>
 							<reference key="NSDestination" ref="771522425"/>
 							<string key="NSLabel">sortDescriptors: sortDescriptors</string>
 							<string key="NSBinding">sortDescriptors</string>
@@ -980,29 +982,41 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">libraryView</string>
 						<reference key="source" ref="771522425"/>
-						<reference key="destination" ref="793111299"/>
+						<reference key="destination" ref="837638463"/>
 					</object>
 					<int key="connectionID">747</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">contentArray: selection.xspfs</string>
+						<string key="label">managedObjectContext: managedObjectContext</string>
 						<reference key="source" ref="405619518"/>
-						<reference key="destination" ref="345323185"/>
+						<reference key="destination" ref="771522425"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="405619518"/>
-							<reference key="NSDestination" ref="345323185"/>
-							<string key="NSLabel">contentArray: selection.xspfs</string>
-							<string key="NSBinding">contentArray</string>
-							<string key="NSKeyPath">selection.xspfs</string>
-							<object class="NSDictionary" key="NSOptions">
-								<string key="NS.key.0">NSDeletesObjectsOnRemove</string>
-								<integer value="1" key="NS.object.0"/>
-							</object>
+							<reference key="NSDestination" ref="771522425"/>
+							<string key="NSLabel">managedObjectContext: managedObjectContext</string>
+							<string key="NSBinding">managedObjectContext</string>
+							<string key="NSKeyPath">managedObjectContext</string>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">748</int>
+					<int key="connectionID">749</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">filterPredicate: selection.predicate</string>
+						<reference key="source" ref="405619518"/>
+						<reference key="destination" ref="216054103"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="405619518"/>
+							<reference key="NSDestination" ref="216054103"/>
+							<string key="NSLabel">filterPredicate: selection.predicate</string>
+							<string key="NSBinding">filterPredicate</string>
+							<string key="NSKeyPath">selection.predicate</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">751</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1065,7 +1079,7 @@
 							<reference ref="444268717"/>
 							<reference ref="422388093"/>
 							<reference ref="1061203943"/>
-							<reference ref="793111299"/>
+							<reference ref="837638463"/>
 						</object>
 						<reference key="parent" ref="485099885"/>
 					</object>
@@ -1330,13 +1344,13 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">723</int>
-						<reference key="object" ref="345323185"/>
+						<reference key="object" ref="216054103"/>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">XspfLists</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">746</int>
-						<reference key="object" ref="793111299"/>
+						<reference key="object" ref="837638463"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 						</object>
@@ -1489,7 +1503,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">748</int>
+			<int key="maxID">751</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
