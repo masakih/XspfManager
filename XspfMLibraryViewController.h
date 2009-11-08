@@ -12,7 +12,7 @@
 
 @interface XspfMLibraryViewController : XspfMViewController
 {
-
+	IBOutlet NSTableView *tableView;
 }
 
 @end
