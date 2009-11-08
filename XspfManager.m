@@ -20,6 +20,9 @@
 @end
 
 @implementation XspfManager
+
+@dynamic xspfList;
+
 static XspfManager *sharedInstance = nil;
 
 + (XspfManager *)sharedInstance
@@ -81,6 +84,7 @@ static XspfManager *sharedInstance = nil;
 - (void)awakeFromNib
 {
 	if(appDelegate && [self window]) {
+		[self setupLists];
 		[self buildFamilyNameFromFile];
 		
 		[self setCurrentListViewType:typeCollectionView];
@@ -108,6 +112,31 @@ static XspfManager *sharedInstance = nil;
 	if(currentListViewType == newType) return;
 	
 	[self changeViewType:newType];
+}
+
+- (void)setXspfList:(id)newList
+{
+	[xspfList release];
+	xspfList = [newList retain];
+}
+- (id)xspfList
+{
+	return xspfList;
+}
+- (void)setListPredicate:(NSPredicate *)newPredicate
+{
+	[listPredicate release];
+	listPredicate = [newPredicate retain];
+}
+- (NSPredicate *)listPredicate
+{
+	return listPredicate;
+}
+
+- (NSArray *)sortDescriptors
+{
+	id desc = [[NSSortDescriptor alloc] initWithKey:@"order" ascending:YES];
+	return [NSArray arrayWithObject:[desc autorelease]];
 }
 
 #pragma mark#### Actions ####
@@ -224,6 +253,48 @@ static XspfManager *sharedInstance = nil;
 	listViewController = targetContorller;
 	[listView addSubview:[listViewController view]];
 	[[listViewController view] setFrame:[listView bounds]];
+}
+
+
+- (void)setupLists
+{
+	NSManagedObjectContext *moc = [appDelegate managedObjectContext];
+	NSError *error = nil;
+	NSFetchRequest *fetch;
+	NSInteger num;
+	
+	fetch = [[NSFetchRequest alloc] init];
+	[fetch setEntity:[NSEntityDescription entityForName:@"XspfList"
+								 inManagedObjectContext:moc]];
+	num = [moc countForFetchRequest:fetch
+							  error:&error];
+	if(num != 0) return;
+	
+	id obj = [NSEntityDescription insertNewObjectForEntityForName:@"XspfList"
+										   inManagedObjectContext:moc];
+	NSPredicate *prediccate = [NSPredicate predicateWithFormat:@"urlString <> %@", @""];
+	[obj setValue:prediccate forKey:@"predicate"];
+	[obj setValue:NSLocalizedString(@"Library", @"Library") forKey:@"name"];
+	[obj setValue:[NSNumber numberWithInt:0] forKey:@"order"];
+	
+	obj = [NSEntityDescription insertNewObjectForEntityForName:@"XspfList"
+										   inManagedObjectContext:moc];
+	prediccate = [NSPredicate predicateWithFormat:@"favorites = %@", [NSNumber numberWithBool:YES]];
+	[obj setValue:prediccate forKey:@"predicate"];
+	[obj setValue:NSLocalizedString(@"Favorites", @"Favorites") forKey:@"name"];
+	[obj setValue:[NSNumber numberWithInt:1] forKey:@"order"];
+}
+- (void)tableViewSelectionDidChange:(NSNotification *)notification
+{
+	NSTableView *table = [notification object];
+	
+	if([table numberOfSelectedRows] > 1) return;
+	
+	id obj = [listController valueForKeyPath:@"selection.xspfs"];
+	self.xspfList = obj;
+	
+	obj = [listController valueForKeyPath:@"selection.predicate"];
+	[self setListPredicate:obj];
 }
 
 
