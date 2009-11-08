@@ -18,9 +18,10 @@
 @property (retain) NSDate * registerDate;
 @property (retain) NSData * thumbnailData;
 @property (retain) NSString * urlString;
-@property (retain) NSDate * lastUpdateDate;
+@property (retain) NSDate * modificationDate;
 @property (retain) NSDate * lastPlayDate;
 @property (retain) NSNumber *movieNum;
+@property (retain) NSDate * creationDate;
 
 //@property (retain) NSURL *url;
 //@property (retain) NSImage *thumbnail;
@@ -29,5 +30,3 @@
 @property (retain, readonly) NSString *filePath;
 
 @end
-
-

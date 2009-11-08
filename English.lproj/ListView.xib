@@ -37,6 +37,7 @@
 					<string>lastUpdateDate</string>
 					<string>movieNum</string>
 					<string>rating</string>
+					<string>modificationDate</string>
 				</object>
 				<bool key="NSEditable">YES</bool>
 				<object class="_NSManagedProxy" key="_NSManagedProxy"/>
@@ -201,7 +202,7 @@
 														<bool key="EncodedWithXMLCoder">YES</bool>
 														<string>%m/%d/%y</string>
 														<integer value="2" id="10"/>
-														<integer value="1040"/>
+														<integer value="1040" id="222976632"/>
 														<integer value="0" id="8"/>
 													</object>
 												</object>
@@ -248,7 +249,7 @@
 														<bool key="EncodedWithXMLCoder">YES</bool>
 														<string>%m/%d/%y</string>
 														<reference ref="10"/>
-														<integer value="1040"/>
+														<reference ref="222976632"/>
 														<reference ref="8"/>
 													</object>
 												</object>
@@ -295,7 +296,7 @@
 														<bool key="EncodedWithXMLCoder">YES</bool>
 														<string>%m/%d/%y</string>
 														<reference ref="10"/>
-														<integer value="1040"/>
+														<reference ref="222976632"/>
 														<reference ref="8"/>
 													</object>
 												</object>
@@ -341,7 +342,7 @@
 													<object class="NSMutableArray" key="dict.values">
 														<bool key="EncodedWithXMLCoder">YES</bool>
 														<integer value="1" id="9"/>
-														<integer value="1040"/>
+														<reference ref="222976632"/>
 														<reference ref="9"/>
 														<string>#,##0</string>
 													</object>
@@ -619,22 +620,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: arrangedObjects.lastUpdateDate</string>
-						<reference key="source" ref="82651688"/>
-						<reference key="destination" ref="764475921"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="82651688"/>
-							<reference key="NSDestination" ref="764475921"/>
-							<string key="NSLabel">value: arrangedObjects.lastUpdateDate</string>
-							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">arrangedObjects.lastUpdateDate</string>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">772</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
 						<string key="label">value: arrangedObjects.movieNum</string>
 						<reference key="source" ref="99295673"/>
 						<reference key="destination" ref="764475921"/>
@@ -670,7 +655,7 @@
 							<string key="NSKeyPath">arrangedObjects.rating</string>
 							<object class="NSDictionary" key="NSOptions">
 								<string key="NS.key.0">NSConditionallySetsEnabled</string>
-								<integer value="0" key="NS.object.0"/>
+								<reference key="NS.object.0" ref="8"/>
 							</object>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
@@ -693,6 +678,26 @@
 						</object>
 					</object>
 					<int key="connectionID">782</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: arrangedObjects.modificationDate</string>
+						<reference key="source" ref="82651688"/>
+						<reference key="destination" ref="764475921"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="82651688"/>
+							<reference key="NSDestination" ref="764475921"/>
+							<string key="NSLabel">value: arrangedObjects.modificationDate</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">arrangedObjects.modificationDate</string>
+							<object class="NSDictionary" key="NSOptions">
+								<string key="NS.key.0">NSConditionallySetsEditable</string>
+								<integer value="1" key="NS.object.0"/>
+							</object>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">783</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -976,7 +981,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">782</int>
+			<int key="maxID">783</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
