@@ -35,6 +35,9 @@ typedef enum {
 	IBOutlet NSView *libraryView;
 	NSViewController *libraryViewController;
 	
+	IBOutlet NSView *detailView;
+	NSViewController *detailViewController;
+	
 	IBOutlet NSArrayController *listController;
 //	id xspfList;
 //	NSPredicate *listPredicate;

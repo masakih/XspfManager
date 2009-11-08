@@ -45,6 +45,8 @@
 		F49BD36910A66EC6007136CE /* XspfMXspfListObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BD36810A66EC6007136CE /* XspfMXspfListObject.m */; };
 		F4CE4CD310A6A13E004AC4FA /* LibraryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CE4CD110A6A13E004AC4FA /* LibraryView.xib */; };
 		F4CE4D0510A6A7A9004AC4FA /* XspfMLibraryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CE4D0410A6A7A9004AC4FA /* XspfMLibraryViewController.m */; };
+		F4CE4E8010A706A8004AC4FA /* DetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CE4E7E10A706A8004AC4FA /* DetailView.xib */; };
+		F4CE4F1310A71084004AC4FA /* XspfMDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CE4F1210A71084004AC4FA /* XspfMDetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -132,6 +134,9 @@
 		F4CE4CD210A6A13E004AC4FA /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/LibraryView.xib; sourceTree = "<group>"; };
 		F4CE4D0310A6A7A9004AC4FA /* XspfMLibraryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMLibraryViewController.h; sourceTree = "<group>"; };
 		F4CE4D0410A6A7A9004AC4FA /* XspfMLibraryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMLibraryViewController.m; sourceTree = "<group>"; };
+		F4CE4E7F10A706A8004AC4FA /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/DetailView.xib; sourceTree = "<group>"; };
+		F4CE4F1110A71084004AC4FA /* XspfMDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMDetailViewController.h; sourceTree = "<group>"; };
+		F4CE4F1210A71084004AC4FA /* XspfMDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMDetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +173,8 @@
 				F43E653310A3167700BF88DA /* XspfMCollectionViewController.m */,
 				F49BD01110A477BF007136CE /* XspfMListViewController.h */,
 				F49BD01210A477BF007136CE /* XspfMListViewController.m */,
+				F4CE4F1110A71084004AC4FA /* XspfMDetailViewController.h */,
+				F4CE4F1210A71084004AC4FA /* XspfMDetailViewController.m */,
 				F49BCF9310A45175007136CE /* XspfMViewController.h */,
 				F49BCF9410A45178007136CE /* XspfMViewController.m */,
 				F4CE4D0310A6A7A9004AC4FA /* XspfMLibraryViewController.h */,
@@ -216,6 +223,7 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				F4CE4E7E10A706A8004AC4FA /* DetailView.xib */,
 			);
 			name = XspfManager;
 			sourceTree = "<group>";
@@ -375,6 +383,7 @@
 				F43E652E10A315D000BF88DA /* CollectionView.xib in Resources */,
 				F49BD01010A47781007136CE /* ListView.xib in Resources */,
 				F4CE4CD310A6A13E004AC4FA /* LibraryView.xib in Resources */,
+				F4CE4E8010A706A8004AC4FA /* DetailView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,6 +423,7 @@
 				F49BD01310A477BF007136CE /* XspfMListViewController.m in Sources */,
 				F49BD36910A66EC6007136CE /* XspfMXspfListObject.m in Sources */,
 				F4CE4D0510A6A7A9004AC4FA /* XspfMLibraryViewController.m in Sources */,
+				F4CE4F1310A71084004AC4FA /* XspfMDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,6 +476,14 @@
 				F4CE4CD210A6A13E004AC4FA /* English */,
 			);
 			name = LibraryView.xib;
+			sourceTree = "<group>";
+		};
+		F4CE4E7E10A706A8004AC4FA /* DetailView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F4CE4E7F10A706A8004AC4FA /* English */,
+			);
+			name = DetailView.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
