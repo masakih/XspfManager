@@ -14,9 +14,10 @@
 @dynamic registerDate;
 @dynamic thumbnailData;
 @dynamic urlString;
-@dynamic lastUpdateDate;
+@dynamic modificationDate;
 @dynamic lastPlayDate;
 @dynamic movieNum;
+@dynamic creationDate;
 
 @synthesize title;
 @synthesize filePath;
