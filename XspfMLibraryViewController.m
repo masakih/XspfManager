@@ -37,7 +37,7 @@
 
 - (void)setupXspfList
 {
-	NSManagedObjectContext *moc = [[NSApp delegate] managedObjectContext];
+	NSManagedObjectContext *moc = [self managedObjectContext];
 	NSError *error = nil;
 	NSFetchRequest *fetch;
 	NSInteger num;
