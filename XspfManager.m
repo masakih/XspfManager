@@ -87,21 +87,20 @@ static XspfManager *sharedInstance = nil;
 - (void)awakeFromNib
 {
 	static BOOL didSetupOnMainMenu = NO;
-	static BOOL didSetupOnMainWindow = NO;
 	
 	if(appDelegate && !didSetupOnMainMenu) {
 		didSetupOnMainMenu = YES;
-		
+		[self window];
 	}
-	if(listView && !didSetupOnMainWindow) {
-		didSetupOnMainWindow = YES;
-		[self setupXspfLists];
-		[self setupDetailView];
-		[self setCurrentListViewType:typeCollectionView];
-	}
-	[self showWindow:self];
 }
-
+- (void)windowDidLoad
+{
+	[self setupXspfLists];
+	[self setupDetailView];
+	[self setCurrentListViewType:typeCollectionView];
+	
+	[self performSelector:@selector(showWindow:) withObject:nil afterDelay:0.0];
+}
 #pragma mark#### KVC ####
 - (NSManagedObjectContext *)managedObjectContext
 {

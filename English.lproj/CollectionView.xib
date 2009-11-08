@@ -8,8 +8,8 @@
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="471"/>
 			<integer value="421"/>
+			<integer value="471"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -88,7 +88,7 @@
 								<bytes key="NSWhite">MC42NjY2NjY2OQA</bytes>
 							</object>
 						</object>
-						<int key="NScvFlags">6</int>
+						<int key="NScvFlags">4</int>
 					</object>
 					<object class="NSScroller" id="751228704">
 						<reference key="NSNextResponder" ref="703664969"/>
@@ -697,7 +697,7 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<integer value="1"/>
+					<integer value="1" id="9"/>
 					<string>{{315, 182}, {636, 467}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -711,7 +711,7 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>{{58, 311}, {206, 228}}</string>
 					<integer value="0"/>
-					<integer value="1"/>
+					<reference ref="9"/>
 					<string>XspfMImageView</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -838,6 +838,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>appDelegate</string>
 							<string>controller</string>
+							<string>detailView</string>
 							<string>libraryView</string>
 							<string>listController</string>
 							<string>listView</string>
@@ -849,6 +850,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>id</string>
 							<string>NSArrayController</string>
+							<string>NSView</string>
 							<string>NSView</string>
 							<string>NSArrayController</string>
 							<string>NSView</string>
