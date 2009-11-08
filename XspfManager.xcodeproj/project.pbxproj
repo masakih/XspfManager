@@ -43,6 +43,7 @@
 		F49BD01010A47781007136CE /* ListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F49BD00E10A47780007136CE /* ListView.xib */; };
 		F49BD01310A477BF007136CE /* XspfMListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BD01210A477BF007136CE /* XspfMListViewController.m */; };
 		F49BD36910A66EC6007136CE /* XspfList.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BD36810A66EC6007136CE /* XspfList.m */; };
+		F4CE4CD310A6A13E004AC4FA /* LibraryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CE4CD110A6A13E004AC4FA /* LibraryView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -127,6 +128,7 @@
 		F49BD01210A477BF007136CE /* XspfMListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMListViewController.m; sourceTree = "<group>"; };
 		F49BD36710A66EC6007136CE /* XspfList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfList.h; sourceTree = "<group>"; };
 		F49BD36810A66EC6007136CE /* XspfList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfList.m; sourceTree = "<group>"; };
+		F4CE4CD210A6A13E004AC4FA /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/LibraryView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,10 +227,11 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				F47C096410A049DD00F5991C /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				2F7446970DB6B7EA00F9684A /* MainMenu.xib */,
+				F47C096410A049DD00F5991C /* MainWindow.xib */,
+				F4CE4CD110A6A13E004AC4FA /* LibraryView.xib */,
 				F43E652C10A315D000BF88DA /* CollectionView.xib */,
 				F49BD00E10A47780007136CE /* ListView.xib */,
 			);
@@ -366,6 +369,7 @@
 				F47C096610A049DD00F5991C /* MainWindow.xib in Resources */,
 				F43E652E10A315D000BF88DA /* CollectionView.xib in Resources */,
 				F49BD01010A47781007136CE /* ListView.xib in Resources */,
+				F4CE4CD310A6A13E004AC4FA /* LibraryView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,6 +452,14 @@
 				F49BD00F10A47780007136CE /* English */,
 			);
 			name = ListView.xib;
+			sourceTree = "<group>";
+		};
+		F4CE4CD110A6A13E004AC4FA /* LibraryView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F4CE4CD210A6A13E004AC4FA /* English */,
+			);
+			name = LibraryView.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
