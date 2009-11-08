@@ -26,7 +26,7 @@
 			<object class="NSCustomObject" id="691655381">
 				<string key="NSClassName">NSApplication</string>
 			</object>
-			<object class="NSArrayController" id="983526676">
+			<object class="NSArrayController" id="256590084">
 				<bool key="NSEditable">YES</bool>
 				<bool key="NSAutomaticallyPreparesContent">YES</bool>
 				<object class="_NSManagedProxy" key="_NSManagedProxy">
@@ -506,9 +506,9 @@
 							</object>
 							<bool key="NSEditable">YES</bool>
 						</object>
-						<object class="NSCustomView" id="196407105">
+						<object class="NSCustomView" id="539594398">
 							<reference key="NSNextResponder" ref="72950107"/>
-							<int key="NSvFlags">256</int>
+							<int key="NSvFlags">272</int>
 							<string key="NSFrame">{{20, 156}, {192, 430}}</string>
 							<reference key="NSSuperview" ref="72950107"/>
 							<string key="NSClassName">NSView</string>
@@ -568,7 +568,7 @@
 				<string key="NSScreenRect">{{0, 0}, {1280, 832}}</string>
 				<string key="NSMaxSize">{3.40282e+38, 3.40282e+38}</string>
 			</object>
-			<object class="NSArrayController" id="272755692">
+			<object class="NSArrayController" id="982170854">
 				<object class="NSMutableArray" key="NSDeclaredKeys">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>name</string>
@@ -954,10 +954,10 @@
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">managedObjectContext: managedObjectContext</string>
-						<reference key="source" ref="272755692"/>
+						<reference key="source" ref="982170854"/>
 						<reference key="destination" ref="771522425"/>
 						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="272755692"/>
+							<reference key="NSSource" ref="982170854"/>
 							<reference key="NSDestination" ref="771522425"/>
 							<string key="NSLabel">managedObjectContext: managedObjectContext</string>
 							<string key="NSBinding">managedObjectContext</string>
@@ -971,7 +971,7 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">listController</string>
 						<reference key="source" ref="771522425"/>
-						<reference key="destination" ref="272755692"/>
+						<reference key="destination" ref="982170854"/>
 					</object>
 					<int key="connectionID">731</int>
 				</object>
@@ -979,7 +979,7 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">libraryView</string>
 						<reference key="source" ref="771522425"/>
-						<reference key="destination" ref="196407105"/>
+						<reference key="destination" ref="539594398"/>
 					</object>
 					<int key="connectionID">747</int>
 				</object>
@@ -1002,10 +1002,10 @@
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">managedObjectContext: managedObjectContext</string>
-						<reference key="source" ref="983526676"/>
+						<reference key="source" ref="256590084"/>
 						<reference key="destination" ref="771522425"/>
 						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="983526676"/>
+							<reference key="NSSource" ref="256590084"/>
 							<reference key="NSDestination" ref="771522425"/>
 							<string key="NSLabel">managedObjectContext: managedObjectContext</string>
 							<string key="NSBinding">managedObjectContext</string>
@@ -1018,11 +1018,11 @@
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">filterPredicate: selection.predicate</string>
-						<reference key="source" ref="983526676"/>
-						<reference key="destination" ref="272755692"/>
+						<reference key="source" ref="256590084"/>
+						<reference key="destination" ref="982170854"/>
 						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="983526676"/>
-							<reference key="NSDestination" ref="272755692"/>
+							<reference key="NSSource" ref="256590084"/>
+							<reference key="NSDestination" ref="982170854"/>
 							<string key="NSLabel">filterPredicate: selection.predicate</string>
 							<string key="NSBinding">filterPredicate</string>
 							<string key="NSKeyPath">selection.predicate</string>
@@ -1035,10 +1035,10 @@
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">contentArray: arrangedObjects</string>
 						<reference key="source" ref="405619518"/>
-						<reference key="destination" ref="983526676"/>
+						<reference key="destination" ref="256590084"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="405619518"/>
-							<reference key="NSDestination" ref="983526676"/>
+							<reference key="NSDestination" ref="256590084"/>
 							<string key="NSLabel">contentArray: arrangedObjects</string>
 							<string key="NSBinding">contentArray</string>
 							<string key="NSKeyPath">arrangedObjects</string>
@@ -1108,7 +1108,7 @@
 							<reference ref="444268717"/>
 							<reference ref="422388093"/>
 							<reference ref="1061203943"/>
-							<reference ref="196407105"/>
+							<reference ref="539594398"/>
 						</object>
 						<reference key="parent" ref="485099885"/>
 					</object>
@@ -1373,13 +1373,13 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">723</int>
-						<reference key="object" ref="272755692"/>
+						<reference key="object" ref="982170854"/>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">XspfLists</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">746</int>
-						<reference key="object" ref="196407105"/>
+						<reference key="object" ref="539594398"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 						</object>
@@ -1387,7 +1387,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">752</int>
-						<reference key="object" ref="983526676"/>
+						<reference key="object" ref="256590084"/>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Array Controller</string>
 					</object>

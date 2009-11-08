@@ -15,6 +15,7 @@
 #import "XspfMListViewController.h"
 
 @interface XspfManager(HMPrivate)
+- (void)setupXspfLists;
 - (void)buildFamilyNameFromFile;
 - (void)changeViewType:(XspfMViewType)newType;
 - (void)setCurrentListViewType:(XspfMViewType)newType;
@@ -85,7 +86,7 @@ static XspfManager *sharedInstance = nil;
 - (void)awakeFromNib
 {
 	if(appDelegate && [self window]) {
-		[self setupLists];
+		[self setupXspfLists];
 		[self buildFamilyNameFromFile];
 		
 		[self setCurrentListViewType:typeCollectionView];
@@ -232,38 +233,12 @@ static XspfManager *sharedInstance = nil;
 }
 
 
-- (void)setupLists
+- (void)setupXspfLists
 {
 	libraryViewController = [[XspfMLibraryViewController alloc] init];
 	[libraryViewController setRepresentedObject:listController];
 	[libraryView addSubview:[libraryViewController view]];
 	[[libraryViewController view] setFrame:[libraryView bounds]];
-	
-	NSManagedObjectContext *moc = [appDelegate managedObjectContext];
-	NSError *error = nil;
-	NSFetchRequest *fetch;
-	NSInteger num;
-	
-	fetch = [[NSFetchRequest alloc] init];
-	[fetch setEntity:[NSEntityDescription entityForName:@"XspfList"
-								 inManagedObjectContext:moc]];
-	num = [moc countForFetchRequest:fetch
-							  error:&error];
-	if(num != 0) return;
-	
-	id obj = [NSEntityDescription insertNewObjectForEntityForName:@"XspfList"
-										   inManagedObjectContext:moc];
-	NSPredicate *prediccate = [NSPredicate predicateWithFormat:@"urlString <> %@", @""];
-	[obj setValue:prediccate forKey:@"predicate"];
-	[obj setValue:NSLocalizedString(@"Library", @"Library") forKey:@"name"];
-	[obj setValue:[NSNumber numberWithInt:0] forKey:@"order"];
-	
-	obj = [NSEntityDescription insertNewObjectForEntityForName:@"XspfList"
-										   inManagedObjectContext:moc];
-	prediccate = [NSPredicate predicateWithFormat:@"favorites = %@", [NSNumber numberWithBool:YES]];
-	[obj setValue:prediccate forKey:@"predicate"];
-	[obj setValue:NSLocalizedString(@"Favorites", @"Favorites") forKey:@"name"];
-	[obj setValue:[NSNumber numberWithInt:1] forKey:@"order"];
 }
 
 
