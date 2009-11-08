@@ -157,13 +157,13 @@ static XspfManager *sharedInstance = nil;
 	[obj setValue:[NSDate dateWithTimeIntervalSinceNow:0.0] forKey:@"registerDate"];
 	
 	// will reset in XspfMMovieLoadRequest.
-	[obj setValue:[NSDate dateWithTimeIntervalSinceNow:0.0] forKey:@"modificationDate"];
-	[obj setValue:[NSDate dateWithTimeIntervalSinceNow:0.0] forKey:@"creationDate"];
+//	[obj setValue:[NSDate dateWithTimeIntervalSinceNow:0.0] forKey:@"modificationDate"];
+//	[obj setValue:[NSDate dateWithTimeIntervalSinceNow:0.0] forKey:@"creationDate"];
 	
 	XspfMMovieLoadRequest *request = [XspfMMovieLoadRequest requestWithObject:obj url:url];
 	[channel putRequest:request];
 	
-	[controller performSelector:@selector(setSelectedObjects:) withObject:[NSArray arrayWithObject:obj] afterDelay:0.0];
+//	[controller performSelector:@selector(setSelectedObjects:) withObject:[NSArray arrayWithObject:obj] afterDelay:0.0];
 	
 	return noErr;
 } 
