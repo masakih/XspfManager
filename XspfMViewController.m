@@ -46,4 +46,9 @@
 	}
 }
 
+- (NSManagedObjectContext *)managedObjectContext
+{
+	return [[NSApp delegate] managedObjectContext];
+}
+
 @end
