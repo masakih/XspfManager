@@ -1,15 +1,15 @@
 // 
-//  XspfList.m
+//  XspfMXspfListObject.m
 //  XspfManager
 //
 //  Created by Hori,Masaki on 09/11/08.
 //  Copyright 2009 masakih. All rights reserved.
 //
 
-#import "XspfList.h"
+#import "XspfMXspfListObject.h"
 
 
-@implementation XspfList 
+@implementation XspfMXspfListObject 
 
 @dynamic name;
 @dynamic predicateData;

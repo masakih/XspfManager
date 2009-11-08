@@ -1,5 +1,5 @@
 //
-//  XspfList.h
+//  XspfMXspfListObject.h
 //  XspfManager
 //
 //  Created by Hori,Masaki on 09/11/08.
@@ -9,7 +9,7 @@
 #import <CoreData/CoreData.h>
 
 
-@interface XspfList :  NSManagedObject  
+@interface XspfMXspfListObject :  NSManagedObject  
 {
 }
 
@@ -17,5 +17,3 @@
 @property (retain) NSData * predicateData;
 
 @end
-
-
