@@ -44,6 +44,7 @@
 		F49BD01310A477BF007136CE /* XspfMListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BD01210A477BF007136CE /* XspfMListViewController.m */; };
 		F49BD36910A66EC6007136CE /* XspfMXspfListObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BD36810A66EC6007136CE /* XspfMXspfListObject.m */; };
 		F4CE4CD310A6A13E004AC4FA /* LibraryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CE4CD110A6A13E004AC4FA /* LibraryView.xib */; };
+		F4CE4D0510A6A7A9004AC4FA /* XspfMLibraryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CE4D0410A6A7A9004AC4FA /* XspfMLibraryViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -129,6 +130,8 @@
 		F49BD36710A66EC6007136CE /* XspfMXspfListObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMXspfListObject.h; sourceTree = "<group>"; };
 		F49BD36810A66EC6007136CE /* XspfMXspfListObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMXspfListObject.m; sourceTree = "<group>"; };
 		F4CE4CD210A6A13E004AC4FA /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/LibraryView.xib; sourceTree = "<group>"; };
+		F4CE4D0310A6A7A9004AC4FA /* XspfMLibraryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMLibraryViewController.h; sourceTree = "<group>"; };
+		F4CE4D0410A6A7A9004AC4FA /* XspfMLibraryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMLibraryViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +170,8 @@
 				F49BD01210A477BF007136CE /* XspfMListViewController.m */,
 				F49BCF9310A45175007136CE /* XspfMViewController.h */,
 				F49BCF9410A45178007136CE /* XspfMViewController.m */,
+				F4CE4D0310A6A7A9004AC4FA /* XspfMLibraryViewController.h */,
+				F4CE4D0410A6A7A9004AC4FA /* XspfMLibraryViewController.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -408,6 +413,7 @@
 				F49BCF9510A45178007136CE /* XspfMViewController.m in Sources */,
 				F49BD01310A477BF007136CE /* XspfMListViewController.m in Sources */,
 				F49BD36910A66EC6007136CE /* XspfMXspfListObject.m in Sources */,
+				F4CE4D0510A6A7A9004AC4FA /* XspfMLibraryViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
