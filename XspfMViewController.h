@@ -14,6 +14,8 @@
 	IBOutlet NSResponder *initialFirstResponder;
 }
 
+- (NSManagedObjectContext *)managedObjectContext;
+
 // if you overwrite this method, you MUST call super's one.
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
 
