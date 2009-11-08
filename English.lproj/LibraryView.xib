@@ -84,7 +84,7 @@
 							<object class="NSButton" id="288827331">
 								<reference key="NSNextResponder" ref="657476282"/>
 								<int key="NSvFlags">258</int>
-								<string key="NSFrame">{{65, -1}, {127, 23}}</string>
+								<string key="NSFrame">{{65, -1}, {126, 23}}</string>
 								<reference key="NSSuperview" ref="657476282"/>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSButtonCell" key="NSCell" id="696413327">
@@ -117,7 +117,7 @@
 									<int key="NSButtonFlags2">162</int>
 									<object class="NSCustomResource" key="NSNormalImage">
 										<string key="NSClassName">NSImage</string>
-										<string key="NSResourceName">NSActionTemplate</string>
+										<string key="NSResourceName">NSSmartBadgeTemplate</string>
 									</object>
 									<string key="NSAlternateContents"/>
 									<string key="NSKeyEquivalent"/>
