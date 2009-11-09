@@ -34,17 +34,25 @@
 	if(!attrs) {
 		if(error) {
 			NSLog(@"Error at registering XSPF. %@", error);
+		} else {
+			NSLog(@"Error at registering XSPF.");
 		}
-		NSLog(@"Error at registering XSPF.");
 		return;
 	}
 	id attr = [attrs fileModificationDate];
+	NSDate *settingDate = nil;
 	if(attr) {
-		[self.object setValue:attr forKey:@"modificationDate"];
+		settingDate = [self.object valueForKey:@"modificationDate"];
+		if(NSOrderedSame != [settingDate compare:attr]) {
+			[self.object setValue:attr forKey:@"modificationDate"];
+		}
 	}
 	attr = [attrs fileCreationDate];
 	if(attr) {
-		[self.object setValue:attr forKey:@"creationDate"];
+		settingDate = [self.object valueForKey:@"creationDate"];
+		if(NSOrderedSame != [settingDate compare:attr]) {
+			[self.object setValue:attr forKey:@"creationDate"];
+		}
 	}
 }
 -(void)terminate
