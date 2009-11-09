@@ -8,6 +8,12 @@
 
 #import "XSPFMXspfObject.h"
 
+#import "XspfManager_AppDelegate.h"
+#import "XspfMCheckFileModifiedRequest.h"
+
+@interface XSPFMXspfObject(HMPrivate)
+- (NSURL *)url;
+@end
 
 @implementation XSPFMXspfObject 
 
@@ -22,20 +28,34 @@
 @synthesize title;
 @synthesize filePath;
 
+- (void)awakeFromFetch
+{
+	[super awakeFromFetch];
+	
+	NSData *thumbnailData = [self valueForKey:@"thumbnailData"];
+	if(thumbnailData != nil) {
+		NSImage *thumbnail = [[[NSImage alloc] initWithData:thumbnailData] autorelease];
+		[self setPrimitiveValue:thumbnail forKey:@"thumbnail"];
+	}
+	
+	NSString *urlString = [self valueForKey:@"urlString"];
+	if(urlString != nil) {
+		NSURL *url = [NSURL URLWithString:urlString];
+		[self setPrimitiveValue:url forKey:@"url"];
+	}
+	
+	id<HMChannel> channel = [[NSApp delegate] channel];
+	id<HMRequest> request = [XspfMCheckFileModifiedRequest requestWithObject:self url:[self url]];
+	[channel putRequest:request];
+}
+
 - (NSURL *)url
 {
 	[self willAccessValueForKey:@"url"];
 	NSURL *url = [self primitiveValueForKey:@"url"];
 	[self didAccessValueForKey:@"url"];
-	if(url == nil) {
-		NSString *urlString = [self valueForKey:@"urlString"];
-		if(urlString != nil) {
-			url = [NSURL URLWithString:urlString];
-			[self setValue:url forKey:@"url"];
-		}
-	}
 	return url;
-}
+} 
 - (void)setUrl:(NSURL *)aURL
 {
 	[self willChangeValueForKey:@"url"];
@@ -49,15 +69,8 @@
 	[self willAccessValueForKey:@"thumbnail"];
 	NSImage *thumbnail = [self primitiveValueForKey:@"thumbnail"];
 	[self didAccessValueForKey:@"thumbnail"];
-	if(thumbnail == nil) {
-		NSData *thumbnailData = [self valueForKey:@"thumbnailData"];
-		if(thumbnailData != nil) {
-			thumbnail = [[[NSImage alloc] initWithData:thumbnailData] autorelease];
-			[self setValue:thumbnail forKey:@"thumbnail"];
-		}
-	}
 	return thumbnail;
-}
+} 
 - (void)setThumbnail:(NSImage *)aThumbnail
 {
 	[self willChangeValueForKey:@"thumbnail"];
