@@ -8,6 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 
+#import "HMWorkerProtocols.h"
+
 @interface XspfManager_AppDelegate : NSObject 
 {
     IBOutlet NSWindow *window;
@@ -15,6 +17,8 @@
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
     NSManagedObjectModel *managedObjectModel;
     NSManagedObjectContext *managedObjectContext;
+	
+	id<HMChannel> channel;
 }
 
 - (NSString *)applicationSupportFolder;
@@ -24,5 +28,7 @@
 - (NSManagedObjectContext *)managedObjectContext;
 
 - (IBAction)saveAction:sender;
+
+- (id<HMChannel>)channel;
 
 @end

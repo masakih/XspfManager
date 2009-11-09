@@ -8,6 +8,7 @@
 
 #import "XspfManager_AppDelegate.h"
 
+#import "HMChannel.h"
 #import "XspfManager.h"
 
 @implementation XspfManager_AppDelegate
@@ -183,6 +184,15 @@
 - (void)awakeFromnib
 {
 	[[XspfManager alloc] init];
+}
+
+- (id<HMChannel>)channel
+{
+	if(!channel) {
+		channel = [[HMChannel alloc] initWithWorkerNum:2];
+	}
+	
+	return channel;
 }
 
 @end
