@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 #import "XspfManager_AppDelegate.h"
-#import "HMChannel.h"
+//#import "HMChannel.h"
 
 
 typedef enum {
@@ -43,7 +43,7 @@ typedef enum {
 //	id xspfList;
 //	NSPredicate *listPredicate;
 	
-	HMChannel *channel;
+//	HMChannel *channel;
 }
 
 //@property (retain) id xspfList;

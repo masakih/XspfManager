@@ -79,7 +79,7 @@ static XspfManager *sharedInstance = nil;
 - (id)init
 {
 	[super initWithWindowNibName:@"MainWindow"];
-	channel = [[HMChannel alloc] initWithWorkerNum:1];
+//	channel = [[HMChannel alloc] initWithWorkerNum:1];
 	
 	viewControllers = [[NSMutableDictionary alloc] init];
 		
@@ -176,6 +176,7 @@ static XspfManager *sharedInstance = nil;
 //	[obj setValue:[NSDate dateWithTimeIntervalSinceNow:0.0] forKey:@"modificationDate"];
 //	[obj setValue:[NSDate dateWithTimeIntervalSinceNow:0.0] forKey:@"creationDate"];
 	
+	id<HMChannel> channel = [appDelegate channel];
 	id<HMRequest> request = [XspfMCheckFileModifiedRequest requestWithObject:obj url:url];
 	[channel putRequest:request];
 	request = [XspfMMovieLoadRequest requestWithObject:obj url:url];
@@ -311,13 +312,9 @@ static XspfManager *sharedInstance = nil;
 }
 - (IBAction)test03:(id)sender
 {
-	NSFetchRequest *fetch = [[[NSFetchRequest alloc] init] autorelease];
 	
 	id moc = [appDelegate managedObjectContext];
 	
-	[fetch setEntity:[NSEntityDescription entityForName:@"Xspf" inManagedObjectContext:moc]];
-	
-	id objs = [moc executeFetchRequest:fetch error:NULL];
-	NSLog(@"Fetched -> %@", objs);
+	NSLog(@"Updated count -> %d", [[moc updatedObjects] count]);
 }
 @end
