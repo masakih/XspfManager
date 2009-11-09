@@ -23,7 +23,7 @@
 		NSData *predicateData = [self valueForKey:@"predicateData"];
 		if(predicateData != nil) {
 			predicate = [NSKeyedUnarchiver unarchiveObjectWithData:predicateData];
-			[self setValue:predicate forKey:@"predicate"];
+			[self setPrimitiveValue:predicate forKey:@"predicate"];
 		}
 	}
 	return predicate;
