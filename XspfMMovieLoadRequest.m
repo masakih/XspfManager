@@ -192,31 +192,31 @@ static NSImage *thumbnailWithComponent(XspfQTComponent *component)
 	return thumbnail;
 }
 
-- (void)setupFromFileAttribute
-{
-	NSError *error = nil;
-	
-	id attrs = [[NSFileManager defaultManager ] attributesOfItemAtPath:[self.url path] error:&error];
-	if(!attrs) {
-		if(error) {
-			NSLog(@"Error at registering XSPF. %@", error);
-		}
-		NSLog(@"Error at registering XSPF.");
-		return;
-	}
-	id attr = [attrs fileModificationDate];
-	if(attr) {
-		[self.object setValue:attr forKey:@"modificationDate"];
-	}
-	attr = [attrs fileCreationDate];
-	if(attr) {
-		[self.object setValue:attr forKey:@"creationDate"];
-	}
-}
+//- (void)setupFromFileAttribute
+//{
+//	NSError *error = nil;
+//	
+//	id attrs = [[NSFileManager defaultManager ] attributesOfItemAtPath:[self.url path] error:&error];
+//	if(!attrs) {
+//		if(error) {
+//			NSLog(@"Error at registering XSPF. %@", error);
+//		}
+//		NSLog(@"Error at registering XSPF.");
+//		return;
+//	}
+//	id attr = [attrs fileModificationDate];
+//	if(attr) {
+//		[self.object setValue:attr forKey:@"modificationDate"];
+//	}
+//	attr = [attrs fileCreationDate];
+//	if(attr) {
+//		[self.object setValue:attr forKey:@"creationDate"];
+//	}
+//}
 
 - (void)operate
 {
-	[self setupFromFileAttribute];
+//	[self setupFromFileAttribute];
 	
 	id item = componentForURL(self.url);
 	if(!item) return;
