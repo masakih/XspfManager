@@ -27,7 +27,7 @@ static NSString *const VoiceActorsDelimiter = @":::";
 		NSString *voiceActorsList = [self valueForKey:@"voiceActorsList"];
 		if (voiceActorsList) {
 			voiceActors = [voiceActorsList componentsSeparatedByString:VoiceActorsDelimiter];
-			[self setValue:voiceActors forKey:@"voiceActors"];
+			[self setPrimitiveValue:voiceActors forKey:@"voiceActors"];
 		}
 	}
 	return voiceActors;
@@ -48,7 +48,7 @@ static NSString *const VoiceActorsDelimiter = @":::";
 		NSString *productsList = [self valueForKey:@"productsList"];
 		if (productsList) {
 			products = [productsList componentsSeparatedByString:VoiceActorsDelimiter];
-			[self setValue:products forKey:@"products"];
+			[self setPrimitiveValue:products forKey:@"products"];
 		}
 	}
 	return products;
