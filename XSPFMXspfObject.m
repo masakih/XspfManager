@@ -10,6 +10,7 @@
 
 #import "XspfManager_AppDelegate.h"
 #import "XspfMCheckFileModifiedRequest.h"
+#import "XspfMMovieLoadRequest.h"
 
 @interface XSPFMXspfObject(HMPrivate)
 - (NSURL *)url;
@@ -73,12 +74,36 @@
 } 
 - (void)setThumbnail:(NSImage *)aThumbnail
 {
+	[self willAccessValueForKey:@"thumbnail"];
+	NSImage *thumbnail = [self primitiveValueForKey:@"thumbnail"];
+	[self didAccessValueForKey:@"thumbnail"];
+	if([aThumbnail isEqual:thumbnail]) return;
+	
 	[self willChangeValueForKey:@"thumbnail"];
 	[self setPrimitiveValue:aThumbnail forKey:@"thumbnail"];
 	[self didChangeValueForKey:@"thumbnail"];
 	[self setValue:[aThumbnail TIFFRepresentation] forKey:@"thumbnailData"];
 }
 
+- (void)setModificationDate:(NSDate *)newDate
+{
+	[self willAccessValueForKey:@"modificationDate"];
+	NSDate *oldDate = [self primitiveValueForKey:@"modificationDate"];
+	[self didAccessValueForKey:@"modificationDate"];
+	
+	// 更新日時に変更がありサムネイルが既に存在していれば、ファイル内容を確認し直す。
+	if(NSOrderedSame != [newDate compare:oldDate]) {
+		if(self.thumbnail) {
+			id<HMChannel> channel = [[NSApp delegate] channel];
+			id<HMRequest> request = [XspfMMovieLoadRequest requestWithObject:self url:[self url]];
+			[channel putRequest:request];
+		}
+	}
+	
+	[self willChangeValueForKey:@"modificationDate"];
+	[self setPrimitiveValue:newDate forKey:@"modificationDate"];
+	[self didChangeValueForKey:@"modificationDate"];
+}
 
 - (NSString *)title
 {
