@@ -9,6 +9,7 @@
 #import "XspfManager.h"
 
 #import "XspfMMovieLoadRequest.h"
+#import "XspfMCheckFileModifiedRequest.h"
 
 #import "XspfMLibraryViewController.h"
 #import "XspfMCollectionViewController.h"
@@ -81,7 +82,7 @@ static XspfManager *sharedInstance = nil;
 	channel = [[HMChannel alloc] initWithWorkerNum:1];
 	
 	viewControllers = [[NSMutableDictionary alloc] init];
-	
+		
 	return self;
 }
 - (void)awakeFromNib
@@ -97,9 +98,12 @@ static XspfManager *sharedInstance = nil;
 {
 	[self setupXspfLists];
 	[self setupDetailView];
-	[self setCurrentListViewType:typeCollectionView];
+	if(currentListViewType == typeNotSelected) {
+		[self setCurrentListViewType:typeCollectionView];
+	}
 	
-	[self performSelector:@selector(showWindow:) withObject:nil afterDelay:0.0];
+//	[self performSelector:@selector(showWindow:) withObject:nil afterDelay:0.0];
+	[self showWindow:nil];
 }
 #pragma mark#### KVC ####
 - (NSManagedObjectContext *)managedObjectContext
@@ -168,11 +172,13 @@ static XspfManager *sharedInstance = nil;
 	[obj setValue:url forKey:@"url"];
 	[obj setValue:[NSDate dateWithTimeIntervalSinceNow:0.0] forKey:@"registerDate"];
 	
-	// will reset in XspfMMovieLoadRequest.
+	// will set in XspfMMovieLoadRequest.
 //	[obj setValue:[NSDate dateWithTimeIntervalSinceNow:0.0] forKey:@"modificationDate"];
 //	[obj setValue:[NSDate dateWithTimeIntervalSinceNow:0.0] forKey:@"creationDate"];
 	
-	XspfMMovieLoadRequest *request = [XspfMMovieLoadRequest requestWithObject:obj url:url];
+	id<HMRequest> request = [XspfMCheckFileModifiedRequest requestWithObject:obj url:url];
+	[channel putRequest:request];
+	request = [XspfMMovieLoadRequest requestWithObject:obj url:url];
 	[channel putRequest:request];
 	
 //	[controller performSelector:@selector(setSelectedObjects:) withObject:[NSArray arrayWithObject:obj] afterDelay:0.0];

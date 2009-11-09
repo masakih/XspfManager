@@ -13,6 +13,7 @@
 
 
 typedef enum {
+	typeNotSelected = 0,
 	typeCollectionView = 1,
 	typeTableView,
 } XspfMViewType;
