@@ -48,6 +48,7 @@
 		F4CE4E8010A706A8004AC4FA /* DetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CE4E7E10A706A8004AC4FA /* DetailView.xib */; };
 		F4CE4F1310A71084004AC4FA /* XspfMDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CE4F1210A71084004AC4FA /* XspfMDetailViewController.m */; };
 		F4CE500210A85401004AC4FA /* XspfMCheckFileModifiedRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CE500110A85401004AC4FA /* XspfMCheckFileModifiedRequest.m */; };
+		F4CE51B210A99E4E004AC4FA /* XspfMCollectionViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CE51B110A99E4E004AC4FA /* XspfMCollectionViewItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -140,6 +141,8 @@
 		F4CE4F1210A71084004AC4FA /* XspfMDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMDetailViewController.m; sourceTree = "<group>"; };
 		F4CE500010A85401004AC4FA /* XspfMCheckFileModifiedRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMCheckFileModifiedRequest.h; sourceTree = "<group>"; };
 		F4CE500110A85401004AC4FA /* XspfMCheckFileModifiedRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMCheckFileModifiedRequest.m; sourceTree = "<group>"; };
+		F4CE51B010A99E4E004AC4FA /* XspfMCollectionViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMCollectionViewItem.h; sourceTree = "<group>"; };
+		F4CE51B110A99E4E004AC4FA /* XspfMCollectionViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMCollectionViewItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +185,8 @@
 				F49BCF9410A45178007136CE /* XspfMViewController.m */,
 				F4CE4D0310A6A7A9004AC4FA /* XspfMLibraryViewController.h */,
 				F4CE4D0410A6A7A9004AC4FA /* XspfMLibraryViewController.m */,
+				F4CE51B010A99E4E004AC4FA /* XspfMCollectionViewItem.h */,
+				F4CE51B110A99E4E004AC4FA /* XspfMCollectionViewItem.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -226,7 +231,6 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
-				F4CE4E7E10A706A8004AC4FA /* DetailView.xib */,
 			);
 			name = XspfManager;
 			sourceTree = "<group>";
@@ -250,6 +254,7 @@
 				F4CE4CD110A6A13E004AC4FA /* LibraryView.xib */,
 				F43E652C10A315D000BF88DA /* CollectionView.xib */,
 				F49BD00E10A47780007136CE /* ListView.xib */,
+				F4CE4E7E10A706A8004AC4FA /* DetailView.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -430,6 +435,7 @@
 				F4CE4D0510A6A7A9004AC4FA /* XspfMLibraryViewController.m in Sources */,
 				F4CE4F1310A71084004AC4FA /* XspfMDetailViewController.m in Sources */,
 				F4CE500210A85401004AC4FA /* XspfMCheckFileModifiedRequest.m in Sources */,
+				F4CE51B210A99E4E004AC4FA /* XspfMCollectionViewItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
