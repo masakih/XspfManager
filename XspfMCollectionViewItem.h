@@ -11,9 +11,6 @@
 
 @interface XspfMCollectionViewItem : NSCollectionViewItem
 {
-	IBOutlet NSBox *box;
-	IBOutlet NSImageView *thumbnail;
-	
 	// because [self conllectionView] is already nil at [self dealloc].
 	NSCollectionView *collectionViewHolder;	// not retained.
 }

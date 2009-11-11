@@ -33,9 +33,9 @@
 	id attrs = [[NSFileManager defaultManager ] attributesOfItemAtPath:[self.url path] error:&error];
 	if(!attrs) {
 		if(error) {
-			NSLog(@"Error at registering XSPF. %@", error);
+			NSLog(@"Error at checking XSPF. %@", error);
 		} else {
-			NSLog(@"Error at registering XSPF.");
+			NSLog(@"Error at checking XSPF.");
 		}
 		return;
 	}
