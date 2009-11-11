@@ -8,12 +8,15 @@
 
 #import "XspfMCollectionViewItem.h"
 
+#import "XspfMCollectionItemBox.h"
+
 
 @implementation XspfMCollectionViewItem
 
 - (id)copyWithZone:(NSZone *)zone
 {
 	id result = [super copyWithZone:zone];
+	
 	[result performSelector:@selector(setupBinding:) withObject:nil afterDelay:0.0];
 	
 	return result;
@@ -22,9 +25,7 @@
 - (void)dealloc
 {
 	[collectionViewHolder removeObserver:self forKeyPath:@"isFirstResponder"];
-	
-	[thumbnail unbind:@"enabled2"];
-	
+		
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 	[nc removeObserver:self];
 	
@@ -66,18 +67,31 @@
 	
 	[super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 }
-
+- (void)setView:(NSView *)view
+{
+	[super setView:view];
+	
+	if(view) {
+		id views = [view subviews];
+		for(id view in views) {
+			if([view isKindOfClass:[XspfMCollectionItemBox class]]) {
+				[view setCollectionViewItem:self];
+			}
+		}
+	}
+}
+	
 - (BOOL)isFirstResponder
 {
 	return [[self collectionView] isFirstResponder];
 }
 
-- (NSColor *)backgrounColor
+- (NSColor *)backgroundColor
 {
 	if(![self isSelected]) {
 		return [NSColor whiteColor];
 	}
-	if([[self collectionView] isFirstResponder] && [NSApp isActive]) {
+	if([self isFirstResponder] && [NSApp isActive]) {
 		return [NSColor colorWithCalibratedRed:65/255.0
 										 green:120/255.0
 										  blue:211/255.0
@@ -93,7 +107,7 @@
 
 - (NSColor *)textColor
 {
-	if([self isSelected] && [[self collectionView] isFirstResponder] && [NSApp isActive]) {
+	if([self isSelected] && [self isFirstResponder] && [NSApp isActive]) {
 		return [NSColor whiteColor];
 	}
 	return [NSColor blackColor];
@@ -101,8 +115,8 @@
 
 - (void)coodinateColors
 {
-	[box setFillColor:[self backgrounColor]];
-	[box setBorderColor:[self backgrounColor]];
+	[self willChangeValueForKey:@"backgroundColor"];
+	[self didChangeValueForKey:@"backgroundColor"];
 	
 	[self willChangeValueForKey:@"textColor"];
 	[self didChangeValueForKey:@"textColor"];
