@@ -13,6 +13,11 @@
 @synthesize object;
 @synthesize url;
 
+inline BOOL nilOrNSNull(id obj)
+{
+	return !obj || obj == [NSNull null];
+}
+
 + (id)requestWithObject:(id)anObject url:(NSURL *)anUrl;
 {
 	return [[[self alloc] initWithObject:anObject url:anUrl] autorelease];
@@ -43,14 +48,14 @@
 	NSDate *settingDate = nil;
 	if(attr) {
 		settingDate = [self.object valueForKey:@"modificationDate"];
-		if(NSOrderedSame != [settingDate compare:attr]) {
+		if(nilOrNSNull(settingDate) || NSOrderedSame != [settingDate compare:attr]) {
 			[self.object setValue:attr forKey:@"modificationDate"];
 		}
 	}
 	attr = [attrs fileCreationDate];
 	if(attr) {
 		settingDate = [self.object valueForKey:@"creationDate"];
-		if(NSOrderedSame != [settingDate compare:attr]) {
+		if(nilOrNSNull(settingDate) || NSOrderedSame != [settingDate compare:attr]) {
 			[self.object setValue:attr forKey:@"creationDate"];
 		}
 	}
