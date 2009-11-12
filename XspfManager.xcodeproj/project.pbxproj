@@ -164,34 +164,28 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				F49BD36710A66EC6007136CE /* XspfMXspfListObject.h */,
-				F49BD36810A66EC6007136CE /* XspfMXspfListObject.m */,
-				F47C0717109F1DDD00F5991C /* XSPFMInfomationObject.h */,
-				F47C0718109F1DDD00F5991C /* XSPFMInfomationObject.m */,
-				F47C0238109D603D00F5991C /* XSPFMXspfObject.h */,
-				F47C0239109D603D00F5991C /* XSPFMXspfObject.m */,
 				77C8280B06725ACE000B614F /* XspfManager_AppDelegate.h */,
 				77C8280C06725ACE000B614F /* XspfManager_AppDelegate.m */,
 				F47C00B5109D479100F5991C /* XspfManager.h */,
 				F47C00B6109D479100F5991C /* XspfManager.m */,
-				F43E629F10A0692500BF88DA /* XspfMCollectionView.h */,
-				F43E62A010A0692500BF88DA /* XspfMCollectionView.m */,
 				F43E62BB10A0710E00BF88DA /* XspfMImageView.h */,
 				F43E62BC10A0710E00BF88DA /* XspfMImageView.m */,
+				F43E629F10A0692500BF88DA /* XspfMCollectionView.h */,
+				F43E62A010A0692500BF88DA /* XspfMCollectionView.m */,
 				F4CE525310AAEBE8004AC4FA /* XspfMCollectionItemBox.h */,
 				F4CE525410AAEBE8004AC4FA /* XspfMCollectionItemBox.m */,
+				F4CE51B010A99E4E004AC4FA /* XspfMCollectionViewItem.h */,
+				F4CE51B110A99E4E004AC4FA /* XspfMCollectionViewItem.m */,
+				F49BCF9310A45175007136CE /* XspfMViewController.h */,
+				F49BCF9410A45178007136CE /* XspfMViewController.m */,
 				F43E653210A3167700BF88DA /* XspfMCollectionViewController.h */,
 				F43E653310A3167700BF88DA /* XspfMCollectionViewController.m */,
 				F49BD01110A477BF007136CE /* XspfMListViewController.h */,
 				F49BD01210A477BF007136CE /* XspfMListViewController.m */,
 				F4CE4F1110A71084004AC4FA /* XspfMDetailViewController.h */,
 				F4CE4F1210A71084004AC4FA /* XspfMDetailViewController.m */,
-				F49BCF9310A45175007136CE /* XspfMViewController.h */,
-				F49BCF9410A45178007136CE /* XspfMViewController.m */,
 				F4CE4D0310A6A7A9004AC4FA /* XspfMLibraryViewController.h */,
 				F4CE4D0410A6A7A9004AC4FA /* XspfMLibraryViewController.m */,
-				F4CE51B010A99E4E004AC4FA /* XspfMCollectionViewItem.h */,
-				F4CE51B110A99E4E004AC4FA /* XspfMCollectionViewItem.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -280,6 +274,12 @@
 				F47C0752109FBE9B00F5991C /* fixFamilyNames.sh */,
 				F47C074D109FAF1F00F5991C /* CompleteData.xcdatamodel */,
 				770B37EC0679A11B001EADE2 /* XspfManager_DataModel.xcdatamodel */,
+				F49BD36710A66EC6007136CE /* XspfMXspfListObject.h */,
+				F49BD36810A66EC6007136CE /* XspfMXspfListObject.m */,
+				F47C0717109F1DDD00F5991C /* XSPFMInfomationObject.h */,
+				F47C0718109F1DDD00F5991C /* XSPFMInfomationObject.m */,
+				F47C0238109D603D00F5991C /* XSPFMXspfObject.h */,
+				F47C0239109D603D00F5991C /* XSPFMXspfObject.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
