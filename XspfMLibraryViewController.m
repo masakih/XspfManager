@@ -25,15 +25,13 @@
 
 - (void)awakeFromNib
 {
-	[tableView setSortDescriptors:[self sortDescriptors]];
 	[[self representedObject] setSortDescriptors:[self sortDescriptors]];
 }
 - (NSArray *)sortDescriptors
 {
-		id desc = [[NSSortDescriptor alloc] initWithKey:@"order" ascending:YES];
-		return [NSArray arrayWithObject:[desc autorelease]];
+	id desc = [[NSSortDescriptor alloc] initWithKey:@"order" ascending:YES];
+	return [NSArray arrayWithObject:[desc autorelease]];
 }
-
 
 - (void)setupXspfList
 {
@@ -70,12 +68,5 @@
 	id selection = [[self representedObject] valueForKey:@"selection"];
 	NSLog(@"Selection -> %@(%@)", [selection valueForKey:@"name"], [selection valueForKey:@"predicate"]);
 }
-- (void)test02:(id)sender
-{
-	[tableView reloadData];
-}
-- (void)test03:(id)sender
-{
 
-}
 @end
