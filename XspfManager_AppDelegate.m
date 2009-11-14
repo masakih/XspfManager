@@ -13,7 +13,6 @@
 
 @implementation XspfManager_AppDelegate
 
-
 /**
     Returns the support folder for the application, used to store the Core Data
     store file.  This code uses a folder named "XspfManager" for
@@ -70,9 +69,18 @@
     }
     
     url = [NSURL fileURLWithPath: [applicationSupportFolder stringByAppendingPathComponent: @"XspfManager.qdb"]];
+	
     persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: [self managedObjectModel]];
-    if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:nil error:&error]){
+	if(!persistentStoreCoordinator) {
+		NSLog(@"Could not create store coordinator");
+		exit(-1);
+	}
+	
+	NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, nil];
+	
+    if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:options error:&error]){
         [[NSApplication sharedApplication] presentError:error];
+		NSLog(@"Error -> %@", [error localizedDescription]);
     }    
 
     return persistentStoreCoordinator;

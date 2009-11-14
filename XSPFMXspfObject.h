@@ -22,6 +22,7 @@
 @property (retain) NSDate * lastPlayDate;
 @property (retain) NSNumber *movieNum;
 @property (retain) NSDate * creationDate;
+@property (retain) NSData *alias;
 
 //@property (retain) NSURL *url;
 //@property (retain) NSImage *thumbnail;
