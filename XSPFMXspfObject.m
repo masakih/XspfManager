@@ -12,6 +12,8 @@
 #import "XspfMCheckFileModifiedRequest.h"
 #import "XspfMMovieLoadRequest.h"
 
+#import "NSPathUtilities-XspfQT-Extensions.h"
+
 @interface XSPFMXspfObject(HMPrivate)
 - (NSURL *)url;
 @end
@@ -25,6 +27,7 @@
 @dynamic lastPlayDate;
 @dynamic movieNum;
 @dynamic creationDate;
+@dynamic alias;
 
 @synthesize title;
 @synthesize filePath;
@@ -49,7 +52,37 @@
 	id<HMRequest> request = [XspfMCheckFileModifiedRequest requestWithObject:self url:[self url]];
 	[channel putRequest:request];
 }
+- (void)willSave
+{
+	[self willAccessValueForKey:@"alias"];
+	NSData *alias = [self primitiveValueForKey:@"alias"];
+	[self didAccessValueForKey:@"alias"];
+	if(!alias) {
+		alias = [[self.url path] aliasData];
+	}
+	if(alias) {
+		[self willChangeValueForKey:@"alias"];
+		[self setPrimitiveValue:alias forKey:@"alias"];
+		[self didChangeValueForKey:@"alias"];
+	}
+}
 
+- (NSData *)alias
+{
+	[self willAccessValueForKey:@"alias"];
+	NSData *alias = [self primitiveValueForKey:@"alias"];
+	[self didAccessValueForKey:@"alias"];
+	if(!alias) {
+		alias = [[self.url path] aliasData];
+	}
+	if(alias) {
+		[self willChangeValueForKey:@"alias"];
+		[self setPrimitiveValue:alias forKey:@"alias"];
+		[self didChangeValueForKey:@"alias"];
+	}
+	
+	return alias;
+}
 - (NSURL *)url
 {
 	[self willAccessValueForKey:@"url"];
