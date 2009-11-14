@@ -52,21 +52,14 @@
 	id<HMRequest> request = [XspfMCheckFileModifiedRequest requestWithObject:self url:[self url]];
 	[channel putRequest:request];
 }
-- (void)willSave
-{
-	[self willAccessValueForKey:@"alias"];
-	NSData *alias = [self primitiveValueForKey:@"alias"];
-	[self didAccessValueForKey:@"alias"];
-	if(!alias) {
-		alias = [[self.url path] aliasData];
-	}
-	if(alias) {
-		[self willChangeValueForKey:@"alias"];
-		[self setPrimitiveValue:alias forKey:@"alias"];
-		[self didChangeValueForKey:@"alias"];
-	}
-}
 
+- (void)setUrlString:(NSString *)string
+{
+	[self willChangeValueForKey:@"urlString"];
+	[self setPrimitiveValue:string forKey:@"urlString"];
+	[self didChangeValueForKey:@"urlString"];
+	self.alias = [[self.url path] aliasData];
+}
 - (NSData *)alias
 {
 	[self willAccessValueForKey:@"alias"];
