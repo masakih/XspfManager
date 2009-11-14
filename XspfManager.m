@@ -16,6 +16,8 @@
 #import "XspfMListViewController.h"
 #import "XspfMDetailViewController.h"
 
+#import "NSWorkspace-Extensions.h"
+
 @interface XspfManager(HMPrivate)
 - (void)setupXspfLists;
 - (void)setupDetailView;
@@ -130,12 +132,8 @@ static XspfManager *sharedInstance = nil;
 - (IBAction)openXspf:(id)sender
 {
 	id rep = [controller valueForKeyPath:@"selection.self"];
-	id filePath = [rep valueForKey:@"filePath"];
-	if([filePath isKindOfClass:[NSString class]]) {
-		NSWorkspace *ws  = [NSWorkspace sharedWorkspace];
-		[ws openFile:filePath withApplication:@"XspfQT"];
-		[rep setValue:[NSDate dateWithTimeIntervalSinceNow:0.0] forKey:@"lastPlayDate"];
-	}
+	[[NSWorkspace sharedWorkspace] openAlias:[rep valueForKey:@"alias"] withApplication:@"XspfQT"];
+	[rep setValue:[NSDate dateWithTimeIntervalSinceNow:0.0] forKey:@"lastPlayDate"];
 }
 - (IBAction)add:(id)sender
 {
