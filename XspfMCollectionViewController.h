@@ -16,6 +16,5 @@
 @interface XspfMCollectionViewController : XspfMViewController <XspfMCollectionView_Delegate>
 {
 	IBOutlet NSCollectionView *collectionView;
-	XspfManager *xspfManager;
 }
 @end
