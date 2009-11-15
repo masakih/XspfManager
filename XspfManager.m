@@ -131,9 +131,9 @@ static XspfManager *sharedInstance = nil;
 #pragma mark#### Actions ####
 - (IBAction)openXspf:(id)sender
 {
-	id rep = [controller valueForKeyPath:@"selection.self"];
-	[[NSWorkspace sharedWorkspace] openFile:[rep valueForKey:@"filePath"] withApplication:@"XspfQT"];
-	[rep setValue:[NSDate dateWithTimeIntervalSinceNow:0.0] forKey:@"lastPlayDate"];
+	XSPFMXspfObject *rep = [controller valueForKeyPath:@"selection.self"];
+	[[NSWorkspace sharedWorkspace] openFile:rep.filePath withApplication:@"XspfQT"];
+	rep.lastPlayDate = [NSDate dateWithTimeIntervalSinceNow:0.0];
 }
 - (IBAction)add:(id)sender
 {
@@ -155,8 +155,8 @@ static XspfManager *sharedInstance = nil;
 
 - (NSInteger)registerWithURL:(NSURL *)url
 {
-	id obj = [NSEntityDescription insertNewObjectForEntityForName:@"Xspf"
-										   inManagedObjectContext:[appDelegate managedObjectContext]];
+	XSPFMXspfObject *obj = [NSEntityDescription insertNewObjectForEntityForName:@"Xspf"
+														 inManagedObjectContext:[appDelegate managedObjectContext]];
 	if(!obj) return 1;
 	
 	id info = [NSEntityDescription insertNewObjectForEntityForName:@"Info"
@@ -167,8 +167,8 @@ static XspfManager *sharedInstance = nil;
 	}
 	
 	[obj setValue:info forKey:@"information"];
-	[obj setValue:url forKey:@"url"];
-	[obj setValue:[NSDate dateWithTimeIntervalSinceNow:0.0] forKey:@"registerDate"];
+	obj.url = url;
+	obj.registerDate = [NSDate dateWithTimeIntervalSinceNow:0.0];
 	
 	// will set in XspfMMovieLoadRequest.
 //	[obj setValue:[NSDate dateWithTimeIntervalSinceNow:0.0] forKey:@"modificationDate"];
