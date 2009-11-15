@@ -51,6 +51,14 @@
 	[channel putRequest:request];
 }
 
+- (void)awakeFromInsert
+{
+	id info = [NSEntityDescription insertNewObjectForEntityForName:@"Info"
+											inManagedObjectContext:[self managedObjectContext]];
+	
+	[self setValue:info forKey:@"information"];
+}
+
 - (void)setUrlString:(NSString *)string
 {
 	[self willChangeValueForKey:@"urlString"];
