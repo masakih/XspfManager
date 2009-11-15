@@ -9,15 +9,16 @@
 #import <Cocoa/Cocoa.h>
 
 #import "HMWorkerProtocols.h"
+#import "XSPFMXspfObject.h"
 
 @interface XspfMCheckFileModifiedRequest : NSObject <HMRequest>
 {
-	id object;
+	XSPFMXspfObject *object;
 	NSURL *url;
 }
-@property (retain) id object;
+@property (retain) XSPFMXspfObject *object;
 @property (retain) NSURL *url;
 
-+ (id)requestWithObject:(id)object url:(NSURL *)url;
-- (id)initWithObject:(id)object url:(NSURL *)url;
++ (id)requestWithObject:(XSPFMXspfObject *)object url:(NSURL *)url;
+- (id)initWithObject:(XSPFMXspfObject *)object url:(NSURL *)url;
 @end

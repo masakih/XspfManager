@@ -18,11 +18,11 @@ inline BOOL nilOrNSNull(id obj)
 	return !obj || obj == [NSNull null];
 }
 
-+ (id)requestWithObject:(id)anObject url:(NSURL *)anUrl;
++ (id)requestWithObject:(XSPFMXspfObject *)anObject url:(NSURL *)anUrl;
 {
 	return [[[self alloc] initWithObject:anObject url:anUrl] autorelease];
 }
-- (id)initWithObject:(id)anObject url:(NSURL *)anUrl
+- (id)initWithObject:(XSPFMXspfObject *)anObject url:(NSURL *)anUrl
 {
 	self = [super init];
 	self.object = anObject;
@@ -47,16 +47,16 @@ inline BOOL nilOrNSNull(id obj)
 	id attr = [attrs fileModificationDate];
 	NSDate *settingDate = nil;
 	if(attr) {
-		settingDate = [self.object valueForKey:@"modificationDate"];
+		settingDate = self.object.modificationDate;
 		if(nilOrNSNull(settingDate) || NSOrderedSame != [settingDate compare:attr]) {
-			[self.object setValue:attr forKey:@"modificationDate"];
+			self.object.modificationDate = attr;
 		}
 	}
 	attr = [attrs fileCreationDate];
 	if(attr) {
-		settingDate = [self.object valueForKey:@"creationDate"];
+		settingDate = self.object.creationDate;
 		if(nilOrNSNull(settingDate) || NSOrderedSame != [settingDate compare:attr]) {
-			[self.object setValue:attr forKey:@"creationDate"];
+			self.object.creationDate = attr;
 		}
 	}
 }
