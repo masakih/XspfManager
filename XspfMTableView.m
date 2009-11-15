@@ -22,8 +22,8 @@
 	switch(code) {
 		case kRETURN_KEY:
 		case kENTER_KEY:
-			if([self action]) {
-				[self sendAction:[self action] to:[self target]];
+			if([self doubleAction]) {
+				[self sendAction:[self doubleAction] to:[self target]];
 				return;
 			}
 			break;
