@@ -132,7 +132,7 @@
 - (NSString *)title
 {
 	if(title == nil) {
-		NSString *aTitle = [self.url path];
+		NSString *aTitle = self.filePath;
 		aTitle = [aTitle lastPathComponent];
 		aTitle = [aTitle stringByDeletingPathExtension];
 		if(aTitle) {
@@ -146,7 +146,7 @@
 - (NSString *)filePath
 {
 	if(filePath == nil) {
-		NSString *path = [self.url path];
+		NSString *path = [self.alias resolvedPath];
 		if(path) {
 			[filePath release];
 			filePath = [path copy];

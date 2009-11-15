@@ -132,7 +132,7 @@ static XspfManager *sharedInstance = nil;
 - (IBAction)openXspf:(id)sender
 {
 	id rep = [controller valueForKeyPath:@"selection.self"];
-	[[NSWorkspace sharedWorkspace] openAlias:[rep valueForKey:@"alias"] withApplication:@"XspfQT"];
+	[[NSWorkspace sharedWorkspace] openFile:[rep valueForKey:@"filePath"] withApplication:@"XspfQT"];
 	[rep setValue:[NSDate dateWithTimeIntervalSinceNow:0.0] forKey:@"lastPlayDate"];
 }
 - (IBAction)add:(id)sender
