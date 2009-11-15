@@ -16,7 +16,6 @@
 #import "XspfMListViewController.h"
 #import "XspfMDetailViewController.h"
 
-#import "NSWorkspace-Extensions.h"
 
 @interface XspfManager(HMPrivate)
 - (void)setupXspfLists;
@@ -26,8 +25,6 @@
 @end
 
 @implementation XspfManager
-
-//@dynamic xspfList;
 
 static XspfManager *sharedInstance = nil;
 
@@ -81,7 +78,6 @@ static XspfManager *sharedInstance = nil;
 - (id)init
 {
 	[super initWithWindowNibName:@"MainWindow"];
-//	channel = [[HMChannel alloc] initWithWorkerNum:1];
 	
 	viewControllers = [[NSMutableDictionary alloc] init];
 		
@@ -104,7 +100,6 @@ static XspfManager *sharedInstance = nil;
 		[self setCurrentListViewType:typeCollectionView];
 	}
 	
-//	[self performSelector:@selector(showWindow:) withObject:nil afterDelay:0.0];
 	[self showWindow:nil];
 }
 #pragma mark#### KVC ####
@@ -162,7 +157,7 @@ static XspfManager *sharedInstance = nil;
 	obj.url = url;
 	obj.registerDate = [NSDate dateWithTimeIntervalSinceNow:0.0];
 	
-	// will set in XspfMMovieLoadRequest.
+	// will set in XspfMCheckFileModifiedRequest.
 //	[obj setValue:[NSDate dateWithTimeIntervalSinceNow:0.0] forKey:@"modificationDate"];
 //	[obj setValue:[NSDate dateWithTimeIntervalSinceNow:0.0] forKey:@"creationDate"];
 	
@@ -226,7 +221,7 @@ static XspfManager *sharedInstance = nil;
 		[viewControllers setObject:targetContorller forKey:className];
 		[targetContorller setRepresentedObject:controller];
 	}
-	
+		
 	[[listViewController view] removeFromSuperview];
 	listViewController = targetContorller;
 	[listView addSubview:[listViewController view]];

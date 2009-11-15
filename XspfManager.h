@@ -9,7 +9,6 @@
 #import <Cocoa/Cocoa.h>
 
 #import "XspfManager_AppDelegate.h"
-//#import "HMChannel.h"
 
 
 typedef enum {
@@ -27,7 +26,6 @@ typedef enum {
 	IBOutlet NSTextField *progressMessage;
 	IBOutlet NSProgressIndicator *progressBar;
 	
-	
 	IBOutlet NSView *listView;
 	NSViewController *listViewController;
 	XspfMViewType currentListViewType;
@@ -40,10 +38,6 @@ typedef enum {
 	NSViewController *detailViewController;
 	
 	IBOutlet NSArrayController *listController;
-//	id xspfList;
-//	NSPredicate *listPredicate;
-	
-//	HMChannel *channel;
 }
 
 //@property (retain) id xspfList;
