@@ -159,14 +159,6 @@ static XspfManager *sharedInstance = nil;
 														 inManagedObjectContext:[appDelegate managedObjectContext]];
 	if(!obj) return 1;
 	
-	id info = [NSEntityDescription insertNewObjectForEntityForName:@"Info"
-											inManagedObjectContext:[appDelegate managedObjectContext]];
-	if(!info) {
-		[[appDelegate managedObjectContext] deleteObject:obj];
-		return 2;
-	}
-	
-	[obj setValue:info forKey:@"information"];
 	obj.url = url;
 	obj.registerDate = [NSDate dateWithTimeIntervalSinceNow:0.0];
 	
@@ -179,8 +171,6 @@ static XspfManager *sharedInstance = nil;
 	[channel putRequest:request];
 	request = [XspfMMovieLoadRequest requestWithObject:obj url:url];
 	[channel putRequest:request];
-	
-//	[controller performSelector:@selector(setSelectedObjects:) withObject:[NSArray arrayWithObject:obj] afterDelay:0.0];
 	
 	return noErr;
 } 
