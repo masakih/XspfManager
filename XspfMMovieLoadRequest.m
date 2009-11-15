@@ -50,11 +50,11 @@
 @synthesize object;
 @synthesize url;
 
-+ (id)requestWithObject:(id)anObject url:(NSURL *)anUrl;
++ (id)requestWithObject:(XSPFMXspfObject *)anObject url:(NSURL *)anUrl;
 {
 	return [[[self alloc] initWithObject:anObject url:anUrl] autorelease];
 }
-- (id)initWithObject:(id)anObject url:(NSURL *)anUrl
+- (id)initWithObject:(XSPFMXspfObject *)anObject url:(NSURL *)anUrl
 {
 	self = [super init];
 	self.object = anObject;
@@ -192,39 +192,16 @@ static NSImage *thumbnailWithComponent(XspfQTComponent *component)
 	return thumbnail;
 }
 
-//- (void)setupFromFileAttribute
-//{
-//	NSError *error = nil;
-//	
-//	id attrs = [[NSFileManager defaultManager ] attributesOfItemAtPath:[self.url path] error:&error];
-//	if(!attrs) {
-//		if(error) {
-//			NSLog(@"Error at registering XSPF. %@", error);
-//		}
-//		NSLog(@"Error at registering XSPF.");
-//		return;
-//	}
-//	id attr = [attrs fileModificationDate];
-//	if(attr) {
-//		[self.object setValue:attr forKey:@"modificationDate"];
-//	}
-//	attr = [attrs fileCreationDate];
-//	if(attr) {
-//		[self.object setValue:attr forKey:@"creationDate"];
-//	}
-//}
 
 - (void)operate
 {
-//	[self setupFromFileAttribute];
-	
 	id item = componentForURL(self.url);
 	if(!item) return;
 	if([item childrenCount] == 0) return;
 	
 	id trackList = [item childAtIndex:0];
-	[self.object setValue:[NSNumber numberWithInt:[trackList childrenCount]] forKey:@"movieNum"];
-	[self.object setValue:thumbnailWithComponent(item) forKey:@"thumbnail"];
+	self.object.movieNum = [NSNumber numberWithInt:[trackList childrenCount]];
+	self.object.thumbnail = thumbnailWithComponent(item);
 }
 -(void)terminate
 {
