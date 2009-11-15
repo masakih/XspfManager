@@ -29,27 +29,25 @@
 @dynamic creationDate;
 @dynamic alias;
 
-@synthesize title;
-@synthesize filePath;
 
 - (void)awakeFromFetch
 {
 	[super awakeFromFetch];
 	
-	NSData *thumbnailData = [self valueForKey:@"thumbnailData"];
+	NSData *thumbnailData = self.thumbnailData;
 	if(thumbnailData != nil) {
 		NSImage *thumbnail = [[[NSImage alloc] initWithData:thumbnailData] autorelease];
 		[self setPrimitiveValue:thumbnail forKey:@"thumbnail"];
 	}
 	
-	NSString *urlString = [self valueForKey:@"urlString"];
+	NSString *urlString = self.urlString;
 	if(urlString != nil) {
 		NSURL *url = [NSURL URLWithString:urlString];
 		[self setPrimitiveValue:url forKey:@"url"];
 	}
 	
 	id<HMChannel> channel = [[NSApp delegate] channel];
-	id<HMRequest> request = [XspfMCheckFileModifiedRequest requestWithObject:self url:[self url]];
+	id<HMRequest> request = [XspfMCheckFileModifiedRequest requestWithObject:self url:self.url];
 	[channel putRequest:request];
 }
 
@@ -108,7 +106,7 @@
 	[self willChangeValueForKey:@"thumbnail"];
 	[self setPrimitiveValue:aThumbnail forKey:@"thumbnail"];
 	[self didChangeValueForKey:@"thumbnail"];
-	[self setValue:[aThumbnail TIFFRepresentation] forKey:@"thumbnailData"];
+	self.thumbnailData = [aThumbnail TIFFRepresentation];
 }
 
 - (void)setModificationDate:(NSDate *)newDate
@@ -121,7 +119,7 @@
 	if(NSOrderedSame != [newDate compare:oldDate]) {
 		if(self.thumbnail) {
 			id<HMChannel> channel = [[NSApp delegate] channel];
-			id<HMRequest> request = [XspfMMovieLoadRequest requestWithObject:self url:[self url]];
+			id<HMRequest> request = [XspfMMovieLoadRequest requestWithObject:self url:self.url];
 			[channel putRequest:request];
 		}
 	}
