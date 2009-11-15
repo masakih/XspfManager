@@ -15,6 +15,8 @@
 
 @interface XspfMCollectionViewController : XspfMViewController <XspfMCollectionView_Delegate>
 {
+	IBOutlet NSScrollView *scrollView;
 	IBOutlet NSCollectionView *collectionView;
+	IBOutlet NSCollectionViewItem *collectionViewItem;
 }
 @end

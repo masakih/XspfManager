@@ -39,6 +39,8 @@
 		F47C0750109FAFB000F5991C /* FamilyName.txt in Resources */ = {isa = PBXBuildFile; fileRef = F47C074F109FAFB000F5991C /* FamilyName.txt */; };
 		F47C096610A049DD00F5991C /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F47C096410A049DD00F5991C /* MainWindow.xib */; };
 		F480CD6710AF8A4300AC365B /* XspfMTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F480CD6610AF8A4300AC365B /* XspfMTableView.m */; };
+		F480CEE510AFDAB400AC365B /* NSApplication.icns in Resources */ = {isa = PBXBuildFile; fileRef = F480CEE410AFDAB300AC365B /* NSApplication.icns */; };
+		F480CF9F10B03A0D00AC365B /* AccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F480CF9D10B03A0D00AC365B /* AccessoryView.xib */; };
 		F49BCF9510A45178007136CE /* XspfMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BCF9410A45178007136CE /* XspfMViewController.m */; };
 		F49BD01010A47781007136CE /* ListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F49BD00E10A47780007136CE /* ListView.xib */; };
 		F49BD01310A477BF007136CE /* XspfMListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BD01210A477BF007136CE /* XspfMListViewController.m */; };
@@ -128,6 +130,8 @@
 		F47C096510A049DD00F5991C /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		F480CD6510AF8A4300AC365B /* XspfMTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMTableView.h; sourceTree = "<group>"; };
 		F480CD6610AF8A4300AC365B /* XspfMTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMTableView.m; sourceTree = "<group>"; };
+		F480CEE410AFDAB300AC365B /* NSApplication.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = NSApplication.icns; sourceTree = "<group>"; };
+		F480CF9E10B03A0D00AC365B /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/AccessoryView.xib; sourceTree = "<group>"; };
 		F49BCF9310A45175007136CE /* XspfMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMViewController.h; sourceTree = "<group>"; };
 		F49BCF9410A45178007136CE /* XspfMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMViewController.m; sourceTree = "<group>"; };
 		F49BD00F10A47780007136CE /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/ListView.xib; sourceTree = "<group>"; };
@@ -223,6 +227,7 @@
 		29B97314FDCFA39411CA2CEA /* XspfManager */ = {
 			isa = PBXGroup;
 			children = (
+				F480CEE410AFDAB300AC365B /* NSApplication.icns */,
 				F47C06D7109F027500F5991C /* HMXSPFcomponent */,
 				F47C04F4109DC18C00F5991C /* WorkerThread */,
 				F47C02CC109D6BA200F5991C /* ValueTransformers */,
@@ -256,6 +261,7 @@
 				F43E652C10A315D000BF88DA /* CollectionView.xib */,
 				F49BD00E10A47780007136CE /* ListView.xib */,
 				F4CE4E7E10A706A8004AC4FA /* DetailView.xib */,
+				F480CF9D10B03A0D00AC365B /* AccessoryView.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -401,6 +407,8 @@
 				F49BD01010A47781007136CE /* ListView.xib in Resources */,
 				F4CE4CD310A6A13E004AC4FA /* LibraryView.xib in Resources */,
 				F4CE4E8010A706A8004AC4FA /* DetailView.xib in Resources */,
+				F480CEE510AFDAB400AC365B /* NSApplication.icns in Resources */,
+				F480CF9F10B03A0D00AC365B /* AccessoryView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -480,6 +488,14 @@
 				F47C096510A049DD00F5991C /* English */,
 			);
 			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		F480CF9D10B03A0D00AC365B /* AccessoryView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F480CF9E10B03A0D00AC365B /* English */,
+			);
+			name = AccessoryView.xib;
 			sourceTree = "<group>";
 		};
 		F49BD00E10A47780007136CE /* ListView.xib */ = {

@@ -488,7 +488,7 @@
 										<bytes key="NSWhite">MC41AA</bytes>
 									</object>
 								</object>
-								<double key="NSRowHeight">1.900000e+01</double>
+								<double key="NSRowHeight">1.800000e+01</double>
 								<int key="NSTvFlags">-692027392</int>
 								<int key="NSGridStyleMask">1</int>
 								<int key="NSColumnAutoresizingStyle">1</int>
@@ -549,7 +549,7 @@
 				<reference key="NSContentView" ref="758634043"/>
 				<reference key="NSHeaderClipView" ref="2516910"/>
 				<reference key="NSCornerView" ref="573135661"/>
-				<bytes key="NSScrollAmts">QSAAAEEgAABBqAAAQagAAA</bytes>
+				<bytes key="NSScrollAmts">QSAAAEEgAABBoAAAQaAAAA</bytes>
 			</object>
 		</object>
 		<object class="IBObjectContainer" key="IBDocument.Objects">

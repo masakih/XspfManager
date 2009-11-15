@@ -61,7 +61,7 @@
 								<string>NSStringPboardType</string>
 							</object>
 						</object>
-						<string key="NSFrame">{{264, 6}, {254, 101}}</string>
+						<string key="NSFrame">{{264, 8}, {254, 101}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<int key="NSTag">2000</int>
 						<bool key="NSEnabled">YES</bool>
@@ -109,7 +109,7 @@
 								<string>NSStringPboardType</string>
 							</object>
 						</object>
-						<string key="NSFrame">{{526, 6}, {161, 101}}</string>
+						<string key="NSFrame">{{526, 8}, {161, 101}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<int key="NSTag">2001</int>
 						<bool key="NSEnabled">YES</bool>
@@ -130,7 +130,7 @@
 					<object class="NSTextField" id="231591387">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{261, 115}, {83, 17}}</string>
+						<string key="NSFrame">{{261, 117}, {83, 17}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="958487020">
@@ -158,7 +158,7 @@
 					<object class="NSTextField" id="384625259">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">289</int>
-						<string key="NSFrame">{{529, 115}, {59, 17}}</string>
+						<string key="NSFrame">{{529, 117}, {59, 17}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="827227456">
@@ -186,7 +186,7 @@
 								<string>NeXT TIFF v4.0 pasteboard type</string>
 							</object>
 						</object>
-						<string key="NSFrame">{{0, 3}, {176, 132}}</string>
+						<string key="NSFrame">{{0, 5}, {176, 132}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSImageCell" key="NSCell" id="485960267">
@@ -202,7 +202,7 @@
 					<object class="NSButton" id="495405566">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{179, 4}, {79, 18}}</string>
+						<string key="NSFrame">{{179, 115}, {79, 18}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="766037919">
@@ -227,7 +227,7 @@
 						</object>
 					</object>
 				</object>
-				<string key="NSFrameSize">{687, 136}</string>
+				<string key="NSFrameSize">{687, 138}</string>
 				<reference key="NSSuperview"/>
 				<string key="NSClassName">NSView</string>
 			</object>
@@ -401,9 +401,9 @@
 							<reference ref="76143894"/>
 							<reference ref="231591387"/>
 							<reference ref="384625259"/>
-							<reference ref="495405566"/>
 							<reference ref="219089123"/>
 							<reference ref="53395835"/>
+							<reference ref="495405566"/>
 						</object>
 						<reference key="parent" ref="1002"/>
 					</object>
@@ -528,7 +528,7 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{214, 379}, {687, 136}}</string>
+					<string>{{214, 376}, {687, 138}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>{628, 654}</string>
 					<string>{{357, 416}, {480, 272}}</string>

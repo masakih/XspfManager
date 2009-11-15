@@ -18,6 +18,13 @@
 	return self;
 }
 
+- (void)awakeFromNib
+{
+	NSView *view = [collectionViewItem view];
+	
+	[scrollView setVerticalLineScroll:[view frame].size.height];
+}
+
 #pragma mark#### XspfMCollectionView Delegate ####
 - (void)enterAction:(XspfMCollectionView *)view
 {
