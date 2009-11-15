@@ -20,6 +20,7 @@
 @interface XspfManager(HMPrivate)
 - (void)setupXspfLists;
 - (void)setupDetailView;
+- (void)setupAccessorylView;
 - (void)changeViewType:(XspfMViewType)newType;
 - (void)setCurrentListViewType:(XspfMViewType)newType;
 @end
@@ -94,8 +95,11 @@ static XspfManager *sharedInstance = nil;
 }
 - (void)windowDidLoad
 {
+	[[self window] setContentBorderThickness:38 forEdge:NSMinYEdge];
+	
 	[self setupXspfLists];
 	[self setupDetailView];
+	[self setupAccessorylView];
 	if(currentListViewType == typeNotSelected) {
 		[self setCurrentListViewType:typeCollectionView];
 	}
@@ -179,14 +183,14 @@ static XspfManager *sharedInstance = nil;
 	if([URLs count] == 0) return;
 	
 	[progressBar setUsesThreadedAnimation:YES];
+	[progressBar startAnimation:self];
+	[progressMessage setStringValue:@"During register."];
 	
 	[NSApp beginSheet:progressPanel
 	   modalForWindow:[self window]
 		modalDelegate:nil
 	   didEndSelector:Nil
 		  contextInfo:NULL];
-	[progressBar startAnimation:self];
-	[progressMessage setStringValue:@"During register."];
 	
 	for(id URL in URLs) {
 		[self registerWithURL:URL];
@@ -247,7 +251,15 @@ static XspfManager *sharedInstance = nil;
 	[detailView addSubview:[detailViewController view]];
 	[[detailViewController view] setFrame:[detailView bounds]];
 }
-
+- (void)setupAccessorylView
+{
+	if(accessoryViewController) return;
+	
+	accessoryViewController = [[NSViewController alloc] initWithNibName:@"AccessoryView" bundle:nil];
+	[accessoryViewController setRepresentedObject:[appDelegate channel]];
+	[accessoryView addSubview:[accessoryViewController view]];
+	[[accessoryViewController view] setFrame:[accessoryView bounds]];
+}
 #pragma mark#### NSWidnow Delegate ####
 /**
  Returns the NSUndoManager for the application.  In this case, the manager

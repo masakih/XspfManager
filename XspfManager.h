@@ -37,6 +37,9 @@ typedef enum {
 	IBOutlet NSView *detailView;
 	NSViewController *detailViewController;
 	
+	IBOutlet NSView *accessoryView;
+	NSViewController *accessoryViewController;
+	
 	IBOutlet NSArrayController *listController;
 }
 
