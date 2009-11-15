@@ -38,17 +38,20 @@ enum {
         _request = [[_channel takeRequest] retain];
         [_requestLock unlockWithCondition:HMWorkerRequestOperating];
 		
-		NS_DURING
+		@try {
 			[_request operate];
-		NS_HANDLER
+			[_channel finishRequest:_request];
+		}
+		@catch(id localException) {
 			NSLog( @"An uncaught exception" );
 			NSLog( @"%@", localException );
-		NS_ENDHANDLER
-        
+		}
+		
         [_requestLock lock];
         [_request release];
         _request = nil;
         [_requestLock unlockWithCondition:MHWorkerRequestWaiting];
+		
         
         [pool release];
     }

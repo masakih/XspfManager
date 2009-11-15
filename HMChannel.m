@@ -35,7 +35,21 @@
     
     return self;
 }
+- (void)finishRequestOnMainThread:(id <HMRequest>)request
+{
+	[self willChangeValueForKey:@"requestNum"];
+	_requestNum--;
+	[self didChangeValueForKey:@"requestNum"];
+}
 
+- (oneway void)finishRequest:(id <HMRequest>)request
+{
+	[self performSelectorOnMainThread:@selector(finishRequestOnMainThread:) withObject:request waitUntilDone:NO];
+}
+- (NSInteger)requestNum
+{
+	return _requestNum;
+}
 #pragma mark -
 #pragma mark HMChannel Protocol
 -(void)putRequest:(id <HMRequest>)aRequest
@@ -47,6 +61,10 @@
             [localException raise];
         }
     NS_ENDHANDLER
+	
+	[self willChangeValueForKey:@"requestNum"];
+	_requestNum++;
+	[self didChangeValueForKey:@"requestNum"];
 }
 
 -(id <HMRequest>)takeRequest
