@@ -67,9 +67,11 @@ static QTMovie *loadFromMovieURL(NSURL *url)
 {
 	id loader = [[[XspfMMovieLoader alloc] init] autorelease];
 	
-	[loader performSelectorOnMainThread:@selector(loadOnMainThread:)
-							 withObject:url
-						  waitUntilDone:YES];
+//	[loader performSelectorOnMainThread:@selector(loadOnMainThread:)
+//							 withObject:url
+//						  waitUntilDone:YES];
+	[loader performSelector:@selector(loadOnMainThread:)
+							 withObject:url];
 	
 	return [loader loadedMovie];
 }
@@ -193,7 +195,7 @@ static NSImage *thumbnailWithComponent(XspfQTComponent *component)
 }
 
 
-- (void)operate
+- (void)fire
 {
 	id item = componentForURL(self.url);
 	if(!item) return;

@@ -13,6 +13,8 @@
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		F40B31DD10B4398E00896716 /* XspfMChannelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F40B31DC10B4398E00896716 /* XspfMChannelManager.m */; };
+		F40B331810B43E9900896716 /* XspfMMainThreadRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F40B331710B43E9900896716 /* XspfMMainThreadRequest.m */; };
 		F4343DEF10AD774A0090F57B /* NSAppleEventDescriptor-Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = F4343DE810AD774A0090F57B /* NSAppleEventDescriptor-Extensions.m */; };
 		F4343DF010AD774A0090F57B /* NSPathUtilities-XspfQT-Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = F4343DEA10AD774A0090F57B /* NSPathUtilities-XspfQT-Extensions.m */; };
 		F4343DF110AD774A0090F57B /* NSURL-XspfQT-Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = F4343DEC10AD774A0090F57B /* NSURL-XspfQT-Extensions.m */; };
@@ -80,6 +82,10 @@
 		77C8280C06725ACE000B614F /* XspfManager_AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfManager_AppDelegate.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* XspfManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XspfManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F40B31DB10B4398E00896716 /* XspfMChannelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMChannelManager.h; sourceTree = "<group>"; };
+		F40B31DC10B4398E00896716 /* XspfMChannelManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMChannelManager.m; sourceTree = "<group>"; };
+		F40B331610B43E9900896716 /* XspfMMainThreadRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMMainThreadRequest.h; sourceTree = "<group>"; };
+		F40B331710B43E9900896716 /* XspfMMainThreadRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMMainThreadRequest.m; sourceTree = "<group>"; };
 		F4343DE710AD774A0090F57B /* NSAppleEventDescriptor-Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAppleEventDescriptor-Extensions.h"; sourceTree = "<group>"; };
 		F4343DE810AD774A0090F57B /* NSAppleEventDescriptor-Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAppleEventDescriptor-Extensions.m"; sourceTree = "<group>"; };
 		F4343DE910AD774A0090F57B /* NSPathUtilities-XspfQT-Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSPathUtilities-XspfQT-Extensions.h"; sourceTree = "<group>"; };
@@ -319,8 +325,12 @@
 		F47C04F4109DC18C00F5991C /* WorkerThread */ = {
 			isa = PBXGroup;
 			children = (
+				F40B31DB10B4398E00896716 /* XspfMChannelManager.h */,
+				F40B31DC10B4398E00896716 /* XspfMChannelManager.m */,
 				F4CE500010A85401004AC4FA /* XspfMCheckFileModifiedRequest.h */,
 				F4CE500110A85401004AC4FA /* XspfMCheckFileModifiedRequest.m */,
+				F40B331610B43E9900896716 /* XspfMMainThreadRequest.h */,
+				F40B331710B43E9900896716 /* XspfMMainThreadRequest.m */,
 				F47C0506109DC29F00F5991C /* XspfMMovieLoadRequest.h */,
 				F47C0507109DC29F00F5991C /* XspfMMovieLoadRequest.m */,
 				F47C04F5109DC19C00F5991C /* HMChannel.h */,
@@ -452,6 +462,8 @@
 				F4343DF110AD774A0090F57B /* NSURL-XspfQT-Extensions.m in Sources */,
 				F4343DF210AD774A0090F57B /* NSWorkspace-Extensions.m in Sources */,
 				F480CD6710AF8A4300AC365B /* XspfMTableView.m in Sources */,
+				F40B31DD10B4398E00896716 /* XspfMChannelManager.m in Sources */,
+				F40B331810B43E9900896716 /* XspfMMainThreadRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

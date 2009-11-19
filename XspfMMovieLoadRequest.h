@@ -8,10 +8,10 @@
 
 #import <Cocoa/Cocoa.h>
 
-#import "HMWorkerProtocols.h"
+#import "XspfMMainThreadRequest.h"
 #import "XSPFMXspfObject.h"
 
-@interface XspfMMovieLoadRequest : NSObject <HMRequest>
+@interface XspfMMovieLoadRequest : XspfMMainThreadRequest
 {
 	XSPFMXspfObject *object;
 	NSURL *url;

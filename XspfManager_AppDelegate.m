@@ -8,7 +8,7 @@
 
 #import "XspfManager_AppDelegate.h"
 
-#import "HMChannel.h"
+#import "XspfMChannelManager.h"
 #import "XspfManager.h"
 
 @implementation XspfManager_AppDelegate
@@ -197,7 +197,7 @@
 - (id<HMChannel>)channel
 {
 	if(!channel) {
-		channel = [[HMChannel alloc] initWithWorkerNum:2];
+		channel = [[XspfMChannelManager alloc] init];
 	}
 	
 	return channel;
