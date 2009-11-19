@@ -20,11 +20,11 @@
     former cannot be found), the system's temporary directory.
  */
 
-- (NSString *)applicationSupportFolder {
-
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
-    NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : NSTemporaryDirectory();
-    return [basePath stringByAppendingPathComponent:@"XspfManager"];
+- (NSString *)applicationSupportFolder
+{
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
+	NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : NSTemporaryDirectory();
+	return [basePath stringByAppendingPathComponent:@"XspfManager"];
 }
 
 
@@ -33,14 +33,14 @@
     by merging all of the models found in the application bundle.
  */
  
-- (NSManagedObjectModel *)managedObjectModel {
-
-    if (managedObjectModel != nil) {
-        return managedObjectModel;
-    }
+- (NSManagedObjectModel *)managedObjectModel
+{
+	if(managedObjectModel != nil) {
+	return managedObjectModel;
+	}
 	
-    managedObjectModel = [[NSManagedObjectModel mergedModelFromBundles:nil] retain];    
-    return managedObjectModel;
+	managedObjectModel = [[NSManagedObjectModel mergedModelFromBundles:nil] retain];    
+	return managedObjectModel;
 }
 
 
@@ -51,26 +51,26 @@
     if necessary.)
  */
 
-- (NSPersistentStoreCoordinator *) persistentStoreCoordinator {
+- (NSPersistentStoreCoordinator *)persistentStoreCoordinator
+{
+	if(persistentStoreCoordinator != nil) {
+		return persistentStoreCoordinator;
+	}
 
-    if (persistentStoreCoordinator != nil) {
-        return persistentStoreCoordinator;
-    }
-
-    NSFileManager *fileManager;
-    NSString *applicationSupportFolder = nil;
-    NSURL *url;
-    NSError *error;
+	NSFileManager *fileManager;
+	NSString *applicationSupportFolder = nil;
+	NSURL *url;
+	NSError *error;
     
-    fileManager = [NSFileManager defaultManager];
-    applicationSupportFolder = [self applicationSupportFolder];
-    if ( ![fileManager fileExistsAtPath:applicationSupportFolder isDirectory:NULL] ) {
-        [fileManager createDirectoryAtPath:applicationSupportFolder attributes:nil];
-    }
-    
-    url = [NSURL fileURLWithPath: [applicationSupportFolder stringByAppendingPathComponent: @"XspfManager.qdb"]];
+	fileManager = [NSFileManager defaultManager];
+	applicationSupportFolder = [self applicationSupportFolder];
+	if(![fileManager fileExistsAtPath:applicationSupportFolder isDirectory:NULL]) {
+		[fileManager createDirectoryAtPath:applicationSupportFolder attributes:nil];
+	}
 	
-    persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: [self managedObjectModel]];
+	url = [NSURL fileURLWithPath: [applicationSupportFolder stringByAppendingPathComponent: @"XspfManager.qdb"]];
+	
+	persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: [self managedObjectModel]];
 	if(!persistentStoreCoordinator) {
 		NSLog(@"Could not create store coordinator");
 		exit(-1);
@@ -78,12 +78,12 @@
 	
 	NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, nil];
 	
-    if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:options error:&error]){
-        [[NSApplication sharedApplication] presentError:error];
+	if(![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:options error:&error]){
+		[[NSApplication sharedApplication] presentError:error];
 		NSLog(@"Error -> %@", [error localizedDescription]);
-    }    
-
-    return persistentStoreCoordinator;
+	}
+	
+	return persistentStoreCoordinator;
 }
 
 
@@ -92,19 +92,19 @@
     bound to the persistent store coordinator for the application.) 
  */
  
-- (NSManagedObjectContext *) managedObjectContext {
-
-    if (managedObjectContext != nil) {
-        return managedObjectContext;
-    }
-
-    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-    if (coordinator != nil) {
-        managedObjectContext = [[NSManagedObjectContext alloc] init];
-        [managedObjectContext setPersistentStoreCoordinator: coordinator];
-    }
-    
-    return managedObjectContext;
+- (NSManagedObjectContext *)managedObjectContext
+{
+	if(managedObjectContext != nil) {
+		return managedObjectContext;
+	}
+	
+	NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+	if(coordinator != nil) {
+		managedObjectContext = [[NSManagedObjectContext alloc] init];
+		[managedObjectContext setPersistentStoreCoordinator: coordinator];
+	}
+	
+	return managedObjectContext;
 }
 
 
@@ -114,12 +114,12 @@
     are presented to the user.
  */
  
-- (IBAction) saveAction:(id)sender {
-
-    NSError *error = nil;
-    if (![[self managedObjectContext] save:&error]) {
-        [[NSApplication sharedApplication] presentError:error];
-    }
+- (IBAction)saveAction:(id)sender
+{
+	NSError *error = nil;
+	if(![[self managedObjectContext] save:&error]) {
+		[[NSApplication sharedApplication] presentError:error];
+	}
 }
 
 
@@ -129,14 +129,14 @@
     before the application terminates.
  */
  
-- (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender {
-
-    NSError *error;
-    int reply = NSTerminateNow;
-    
-    if (managedObjectContext != nil) {
-        if ([managedObjectContext commitEditing]) {
-            if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
+- (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
+{
+	NSError *error;
+	int reply = NSTerminateNow;
+	
+	if(managedObjectContext != nil) {
+		if([managedObjectContext commitEditing]) {
+			if([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
 				
                 // This error handling simply presents error information in a panel with an 
                 // "Ok" button, which does not include any attempt at error recovery (meaning, 
@@ -147,28 +147,24 @@
                 // Typically, this process should be altered to include application-specific 
                 // recovery steps.  
 
-                BOOL errorResult = [[NSApplication sharedApplication] presentError:error];
+				BOOL errorResult = [[NSApplication sharedApplication] presentError:error];
 				
-                if (errorResult == YES) {
-                    reply = NSTerminateCancel;
-                } 
-
-                else {
+				if(errorResult == YES) {
+					reply = NSTerminateCancel;
+				} else {
 					
-                    int alertReturn = NSRunAlertPanel(nil, @"Could not save changes while quitting. Quit anyway?" , @"Quit anyway", @"Cancel", nil);
-                    if (alertReturn == NSAlertAlternateReturn) {
-                        reply = NSTerminateCancel;	
-                    }
-                }
-            }
-        } 
-        
-        else {
-            reply = NSTerminateCancel;
-        }
-    }
-    
-    return reply;
+					int alertReturn = NSRunAlertPanel(nil, @"Could not save changes while quitting. Quit anyway?" , @"Quit anyway", @"Cancel", nil);
+					if(alertReturn == NSAlertAlternateReturn) {
+						reply = NSTerminateCancel;	
+					}
+				}
+			}
+		} else {
+			reply = NSTerminateCancel;
+		}
+	}
+	
+	return reply;
 }
 
 
@@ -176,22 +172,17 @@
     Implementation of dealloc, to release the retained variables.
  */
  
-- (void) dealloc {
-
-    [managedObjectContext release], managedObjectContext = nil;
-    [persistentStoreCoordinator release], persistentStoreCoordinator = nil;
-    [managedObjectModel release], managedObjectModel = nil;
-    [super dealloc];
+- (void)dealloc
+{
+	[managedObjectContext release], managedObjectContext = nil;
+	[persistentStoreCoordinator release], persistentStoreCoordinator = nil;
+	[managedObjectModel release], managedObjectModel = nil;
+	[super dealloc];
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender
 {
 	return YES;
-}
-
-- (void)awakeFromnib
-{
-	[[XspfManager alloc] init];
 }
 
 - (id<HMChannel>)channel
@@ -204,3 +195,4 @@
 }
 
 @end
+
