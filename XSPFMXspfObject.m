@@ -7,10 +7,12 @@
 //
 
 #import "XSPFMXspfObject.h"
+#import "XspfMThumbnailData.h"
 
 #import "XspfManager_AppDelegate.h"
 #import "XspfMCheckFileModifiedRequest.h"
 #import "XspfMMovieLoadRequest.h"
+#import "XspfLoadThumbnailRequest.h"
 
 #import "NSPathUtilities-XspfQT-Extensions.h"
 
@@ -34,12 +36,6 @@
 {
 	[super awakeFromFetch];
 	
-	NSData *thumbnailData = self.thumbnailData;
-	if(thumbnailData != nil) {
-		NSImage *thumbnail = [[[NSImage alloc] initWithData:thumbnailData] autorelease];
-		[self setPrimitiveValue:thumbnail forKey:@"thumbnail"];
-	}
-	
 	NSString *urlString = self.urlString;
 	if(urlString != nil) {
 		NSURL *url = [NSURL URLWithString:urlString];
@@ -57,6 +53,10 @@
 											inManagedObjectContext:[self managedObjectContext]];
 	
 	[self setValue:info forKey:@"information"];
+	id thumbnailData = [NSEntityDescription insertNewObjectForEntityForName:@"ThumbnailData"
+													 inManagedObjectContext:[self managedObjectContext]];
+	
+	[self setValue:thumbnailData forKey:@"thumbnailData"];
 }
 
 - (void)setUrlString:(NSString *)string
@@ -102,6 +102,14 @@
 	[self willAccessValueForKey:@"thumbnail"];
 	NSImage *thumbnail = [self primitiveValueForKey:@"thumbnail"];
 	[self didAccessValueForKey:@"thumbnail"];
+	
+	if(!thumbnail && !didPutLoadRequest) {
+		didPutLoadRequest = YES;
+		id<HMChannel> channel = [[NSApp delegate] channel];
+		id<HMRequest> request = [XspfLoadThumbnailRequest requestWithObject:self];
+		[channel putRequest:request];
+	}
+	
 	return thumbnail;
 } 
 - (void)setThumbnail:(NSImage *)aThumbnail
@@ -114,7 +122,7 @@
 	[self willChangeValueForKey:@"thumbnail"];
 	[self setPrimitiveValue:aThumbnail forKey:@"thumbnail"];
 	[self didChangeValueForKey:@"thumbnail"];
-	self.thumbnailData = [aThumbnail TIFFRepresentation];
+	self.thumbnailData.data = [aThumbnail TIFFRepresentation];
 }
 
 - (void)setModificationDate:(NSDate *)newDate
