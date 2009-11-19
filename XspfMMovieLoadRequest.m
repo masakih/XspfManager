@@ -12,38 +12,6 @@
 #import "XspfQTComponent.h"
 #import "XspfQTValueTransformers.h"
 
-@interface XspfMMovieLoader : NSObject
-{
-	QTMovie *result;
-}
-- (QTMovie *)loadedMovie;
-- (void)loadOnMainThread:(id)array;
-@end
-
-@implementation XspfMMovieLoader
-- (void)loadOnMainThread:(id)url
-{
-	NSError *error = nil;
-	
-	NSDictionary *attrs = [NSDictionary dictionaryWithObjectsAndKeys:
-						   url, QTMovieURLAttribute,
-						   [NSNumber numberWithBool:NO], QTMovieOpenAsyncOKAttribute,
-						   nil];
-	result = [[QTMovie alloc] initWithAttributes:attrs error:&error];
-	if (result == nil) {
-        if (error != nil) {
-            NSLog(@"Couldn't load movie URL, error = %@", error);
-        }
-    }
-}
-- (QTMovie *)loadedMovie { return result; }
-- (void)dealoc
-{
-	[result release];
-	[super dealloc];
-}
-@end
-
 
 @implementation XspfMMovieLoadRequest
 
@@ -65,15 +33,20 @@
 
 static QTMovie *loadFromMovieURL(NSURL *url)
 {
-	id loader = [[[XspfMMovieLoader alloc] init] autorelease];
+	NSError *error = nil;
 	
-//	[loader performSelectorOnMainThread:@selector(loadOnMainThread:)
-//							 withObject:url
-//						  waitUntilDone:YES];
-	[loader performSelector:@selector(loadOnMainThread:)
-							 withObject:url];
+	NSDictionary *attrs = [NSDictionary dictionaryWithObjectsAndKeys:
+						   url, QTMovieURLAttribute,
+						   [NSNumber numberWithBool:NO], QTMovieOpenAsyncOKAttribute,
+						   nil];
+	QTMovie *result = [[QTMovie alloc] initWithAttributes:attrs error:&error];
+	if (result == nil) {
+		if (error != nil) {
+			NSLog(@"Couldn't load movie URL, error = %@", error);
+		}
+	}
 	
-	return [loader loadedMovie];
+	return result;
 }
 
 static XspfQTComponent *componentForURL(NSURL *url)
