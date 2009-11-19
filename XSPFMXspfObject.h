@@ -8,15 +8,18 @@
 
 #import <CoreData/CoreData.h>
 
+@class XspfMThumbnailData;
 
-@interface XSPFMXspfObject :  NSManagedObject  
+@interface XSPFMXspfObject :  NSManagedObject
 {
 	NSString *title;
 	NSString *filePath;
+	
+	BOOL didPutLoadRequest;
 }
 
 @property (retain) NSDate * registerDate;
-@property (retain) NSData * thumbnailData;
+@property (retain) XspfMThumbnailData * thumbnailData;
 @property (retain) NSString * urlString;
 @property (retain) NSDate * modificationDate;
 @property (retain) NSDate * lastPlayDate;
