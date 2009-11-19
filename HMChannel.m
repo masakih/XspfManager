@@ -27,7 +27,7 @@
 {
     self = [super init];
     if( self ) {
-        _queue = [[HMQueue alloc] initWithCapacity:128];
+        _queue = [[HMQueue alloc] initWithCapacity:1024 * 2];
         _workers  = [[NSMutableArray alloc] initWithCapacity:num];
         
         [self makeWokers:num];
