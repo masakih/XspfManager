@@ -30,6 +30,13 @@ inline BOOL nilOrNSNull(id obj)
 	
 	return self;
 }
+- (void)dealloc
+{
+	self.object = nil;
+	self.url = nil;
+	
+	[super dealloc];
+}
 
 - (void)operate
 {
