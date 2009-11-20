@@ -30,6 +30,13 @@
 	
 	return self;
 }
+- (void)delloc
+{
+	self.object = nil;
+	self.url = nil;
+	
+	[super dealloc];
+}
 
 static QTMovie *loadFromMovieURL(NSURL *url)
 {
