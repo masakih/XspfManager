@@ -21,7 +21,7 @@
 - (void)operate
 {
 	[self performSelectorOnMainThread:@selector(fireInMainThread:) withObject:nil waitUntilDone:YES];
-	[NSThread sleepForTimeInterval:1];
+	[NSThread sleepForTimeInterval:0.5];
 }
 -(void)terminate
 {

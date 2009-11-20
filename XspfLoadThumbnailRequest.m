@@ -24,6 +24,12 @@
 	self.object = obj;
 	return self;
 }
+- (void)dealloc
+{
+	self.object = nil;
+	
+	[super dealloc];
+}
 
 - (void)fire
 {
