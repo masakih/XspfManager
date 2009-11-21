@@ -150,7 +150,11 @@ static XspfManager *sharedInstance = nil;
 				   didEndSelector:@selector(endOpenPanel:::)
 					  contextInfo:NULL];
 }
-
+- (IBAction)remove:(id)sender
+{
+	XSPFMXspfObject *obj = [controller valueForKeyPath:@"selection.self"];
+	[[self managedObjectContext] deleteObject:obj];
+}
 
 - (NSInteger)registerWithURL:(NSURL *)url
 {
