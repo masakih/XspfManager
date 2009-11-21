@@ -48,6 +48,7 @@ typedef enum {
 - (IBAction)openXspf:(id)sender;
 
 - (IBAction)add:(id)sender;
+- (IBAction)remove:(id)sender;
 
 - (IBAction)test01:(id)sender;
 - (IBAction)test02:(id)sender;
