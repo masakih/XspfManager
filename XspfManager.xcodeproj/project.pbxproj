@@ -16,7 +16,11 @@
 		F40B331810B43E9900896716 /* XspfMMainThreadRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F40B331710B43E9900896716 /* XspfMMainThreadRequest.m */; };
 		F40B335A10B577FD00896716 /* XspfMThumbnailData.m in Sources */ = {isa = PBXBuildFile; fileRef = F40B335910B577FD00896716 /* XspfMThumbnailData.m */; };
 		F40B337910B57CF700896716 /* XspfLoadThumbnailRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F40B337810B57CF700896716 /* XspfLoadThumbnailRequest.m */; };
-		F40B33BA10B5836A00896716 /* XspfManager_DataModel.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = F40B33B910B5836A00896716 /* XspfManager_DataModel.xcdatamodel */; };
+		F40B342110B6BE2000896716 /* UKKQueue Readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = F40B341E10B6BE2000896716 /* UKKQueue Readme.txt */; };
+		F40B342210B6BE2000896716 /* UKKQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = F40B342010B6BE2000896716 /* UKKQueue.m */; };
+		F40B342810B6BE9B00896716 /* UKFileWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = F40B342710B6BE9B00896716 /* UKFileWatcher.m */; };
+		F40B342F10B6C09700896716 /* UKMainThreadProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = F40B342D10B6C09700896716 /* UKMainThreadProxy.m */; };
+		F40B350410B8637000896716 /* XspfManager_DataModel.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = F40B350310B8637000896716 /* XspfManager_DataModel.xcdatamodel */; };
 		F4343DEF10AD774A0090F57B /* NSAppleEventDescriptor-Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = F4343DE810AD774A0090F57B /* NSAppleEventDescriptor-Extensions.m */; };
 		F4343DF010AD774A0090F57B /* NSPathUtilities-XspfQT-Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = F4343DEA10AD774A0090F57B /* NSPathUtilities-XspfQT-Extensions.m */; };
 		F4343DF110AD774A0090F57B /* NSURL-XspfQT-Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = F4343DEC10AD774A0090F57B /* NSURL-XspfQT-Extensions.m */; };
@@ -91,7 +95,14 @@
 		F40B335910B577FD00896716 /* XspfMThumbnailData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMThumbnailData.m; sourceTree = "<group>"; };
 		F40B337710B57CF700896716 /* XspfLoadThumbnailRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfLoadThumbnailRequest.h; sourceTree = "<group>"; };
 		F40B337810B57CF700896716 /* XspfLoadThumbnailRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfLoadThumbnailRequest.m; sourceTree = "<group>"; };
-		F40B33B910B5836A00896716 /* XspfManager_DataModel.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = XspfManager_DataModel.xcdatamodel; sourceTree = "<group>"; };
+		F40B341E10B6BE2000896716 /* UKKQueue Readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "UKKQueue Readme.txt"; sourceTree = "<group>"; };
+		F40B341F10B6BE2000896716 /* UKKQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKKQueue.h; sourceTree = "<group>"; };
+		F40B342010B6BE2000896716 /* UKKQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKKQueue.m; sourceTree = "<group>"; };
+		F40B342610B6BE9B00896716 /* UKFileWatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKFileWatcher.h; sourceTree = "<group>"; };
+		F40B342710B6BE9B00896716 /* UKFileWatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKFileWatcher.m; sourceTree = "<group>"; };
+		F40B342D10B6C09700896716 /* UKMainThreadProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKMainThreadProxy.m; sourceTree = "<group>"; };
+		F40B342E10B6C09700896716 /* UKMainThreadProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKMainThreadProxy.h; sourceTree = "<group>"; };
+		F40B350310B8637000896716 /* XspfManager_DataModel.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = XspfManager_DataModel.xcdatamodel; sourceTree = "<group>"; };
 		F4343DE710AD774A0090F57B /* NSAppleEventDescriptor-Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAppleEventDescriptor-Extensions.h"; sourceTree = "<group>"; };
 		F4343DE810AD774A0090F57B /* NSAppleEventDescriptor-Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAppleEventDescriptor-Extensions.m"; sourceTree = "<group>"; };
 		F4343DE910AD774A0090F57B /* NSPathUtilities-XspfQT-Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSPathUtilities-XspfQT-Extensions.h"; sourceTree = "<group>"; };
@@ -240,6 +251,8 @@
 			isa = PBXGroup;
 			children = (
 				F480CEE410AFDAB300AC365B /* NSApplication.icns */,
+				F40B341D10B6BDEE00896716 /* UKKQueue */,
+				F4343DE610AD76F70090F57B /* HMExtensions */,
 				F47C06D7109F027500F5991C /* HMXSPFcomponent */,
 				F47C04F4109DC18C00F5991C /* WorkerThread */,
 				F47C02CC109D6BA200F5991C /* ValueTransformers */,
@@ -292,7 +305,7 @@
 			children = (
 				F47C074F109FAFB000F5991C /* FamilyName.txt */,
 				F47C0752109FBE9B00F5991C /* fixFamilyNames.sh */,
-				F40B33B910B5836A00896716 /* XspfManager_DataModel.xcdatamodel */,
+				F40B350310B8637000896716 /* XspfManager_DataModel.xcdatamodel */,
 				F49BD36710A66EC6007136CE /* XspfMXspfListObject.h */,
 				F49BD36810A66EC6007136CE /* XspfMXspfListObject.m */,
 				F47C0717109F1DDD00F5991C /* XSPFMInfomationObject.h */,
@@ -303,6 +316,21 @@
 				F40B335910B577FD00896716 /* XspfMThumbnailData.m */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		F40B341D10B6BDEE00896716 /* UKKQueue */ = {
+			isa = PBXGroup;
+			children = (
+				F40B341E10B6BE2000896716 /* UKKQueue Readme.txt */,
+				F40B342610B6BE9B00896716 /* UKFileWatcher.h */,
+				F40B342710B6BE9B00896716 /* UKFileWatcher.m */,
+				F40B341F10B6BE2000896716 /* UKKQueue.h */,
+				F40B342010B6BE2000896716 /* UKKQueue.m */,
+				F40B342E10B6C09700896716 /* UKMainThreadProxy.h */,
+				F40B342D10B6C09700896716 /* UKMainThreadProxy.m */,
+			);
+			name = UKKQueue;
+			path = extFiles/UKKQueue;
 			sourceTree = "<group>";
 		};
 		F4343DE610AD76F70090F57B /* HMExtensions */ = {
@@ -318,7 +346,7 @@
 				F4343DEE10AD774A0090F57B /* NSWorkspace-Extensions.m */,
 			);
 			name = HMExtensions;
-			path = extFiles/HMExtensions;
+			path = extFiles/HMXSPFcomponent/extFiles/HMExtensions;
 			sourceTree = "<group>";
 		};
 		F47C02CC109D6BA200F5991C /* ValueTransformers */ = {
@@ -357,7 +385,6 @@
 		F47C06D7109F027500F5991C /* HMXSPFcomponent */ = {
 			isa = PBXGroup;
 			children = (
-				F4343DE610AD76F70090F57B /* HMExtensions */,
 				F47C06D9109F02C800F5991C /* XspfQTComponent.h */,
 				F47C06DA109F02C800F5991C /* XspfQTComponent.m */,
 				F47C06DB109F02C800F5991C /* XspfQTContainerComponent.h */,
@@ -429,6 +456,7 @@
 				F4CE4E8010A706A8004AC4FA /* DetailView.xib in Resources */,
 				F480CEE510AFDAB400AC365B /* NSApplication.icns in Resources */,
 				F480CF9F10B03A0D00AC365B /* AccessoryView.xib in Resources */,
+				F40B342110B6BE2000896716 /* UKKQueue Readme.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -475,7 +503,10 @@
 				F40B331810B43E9900896716 /* XspfMMainThreadRequest.m in Sources */,
 				F40B335A10B577FD00896716 /* XspfMThumbnailData.m in Sources */,
 				F40B337910B57CF700896716 /* XspfLoadThumbnailRequest.m in Sources */,
-				F40B33BA10B5836A00896716 /* XspfManager_DataModel.xcdatamodel in Sources */,
+				F40B342210B6BE2000896716 /* UKKQueue.m in Sources */,
+				F40B342810B6BE9B00896716 /* UKFileWatcher.m in Sources */,
+				F40B342F10B6C09700896716 /* UKMainThreadProxy.m in Sources */,
+				F40B350410B8637000896716 /* XspfManager_DataModel.xcdatamodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
