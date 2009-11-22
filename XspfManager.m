@@ -99,9 +99,10 @@ static XspfManager *sharedInstance = nil;
 		
 		UKKQueue *queue = [UKKQueue sharedFileWatcher];
 		[queue setDelegate:self];
-//		[self registerToUKKQueue];
 		
 		[self window];
+		
+		[self performSelector:@selector(registerToUKKQueue) withObject:nil afterDelay:0.0];
 	}
 }
 - (void)windowDidLoad
@@ -315,27 +316,27 @@ static XspfManager *sharedInstance = nil;
 {
 	NSManagedObjectContext *moc = [[NSApp delegate] managedObjectContext];
 	NSError *error = nil;
-	NSFetchRequest *fetch;
-	if(!moc) {
-		NSLog(@"moc is nuil.");
-		exit(-1);
-	}
-	
-	fetch = [[[NSFetchRequest alloc] init] autorelease];
+	NSFetchRequest *fetch = [[[NSFetchRequest alloc] init] autorelease];
 	[fetch setEntity:[NSEntityDescription entityForName:@"Xspf" inManagedObjectContext:moc]];
 	
 	NSArray *array = [moc executeFetchRequest:fetch error:&error];
 	if(!array) {
 		if(error) {
-			NSLog(@"%@", [error localizedDescription]);
+			NSLog(@"could not fetch : %@", [error localizedDescription]);
 		}
 		NSLog(@"Could not fetch.");
 		return;
 	}
 	
+	NSFileManager *fm = [NSFileManager defaultManager];
 	UKKQueue *queue = [UKKQueue sharedFileWatcher];
 	for(XSPFMXspfObject *obj in array) {
-		[queue addPathToQueue:obj.filePath];
+		NSString *filePath = obj.filePath;
+		if([fm fileExistsAtPath:filePath]) {
+			[queue addPathToQueue:filePath];
+		} else {
+			obj.deleted = YES;
+		}
 	}
 }
 
