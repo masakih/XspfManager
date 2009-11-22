@@ -16,24 +16,21 @@
 @implementation XspfMMovieLoadRequest
 
 @synthesize object;
-@synthesize url;
 
-+ (id)requestWithObject:(XSPFMXspfObject *)anObject url:(NSURL *)anUrl;
++ (id)requestWithObject:(XSPFMXspfObject *)anObject
 {
-	return [[[self alloc] initWithObject:anObject url:anUrl] autorelease];
+	return [[[self alloc] initWithObject:anObject] autorelease];
 }
-- (id)initWithObject:(XSPFMXspfObject *)anObject url:(NSURL *)anUrl
+- (id)initWithObject:(XSPFMXspfObject *)anObject
 {
 	self = [super init];
 	self.object = anObject;
-	self.url = anUrl;
 	
 	return self;
 }
 - (void)delloc
 {
 	self.object = nil;
-	self.url = nil;
 	
 	[super dealloc];
 }
@@ -181,7 +178,7 @@ static NSImage *thumbnailWithComponent(XspfQTComponent *component)
 
 - (void)fire
 {
-	id item = componentForURL(self.url);
+	id item = componentForURL(self.object.url);
 	if(!item) return;
 	if([item childrenCount] == 0) return;
 	

@@ -17,7 +17,7 @@
 #import "XspfMDetailViewController.h"
 
 #import "UKKQueue.h"
-
+#import "NSPathUtilities-XspfQT-Extensions.h"
 
 @interface XspfManager(HMPrivate)
 - (void)setupXspfLists;
@@ -84,9 +84,10 @@ static XspfManager *sharedInstance = nil;
 	
 	viewControllers = [[NSMutableDictionary alloc] init];
 	
-	NSNotificationCenter *nc = [[NSWorkspace sharedWorkspace] notificationCenter];
+//	NSNotificationCenter *nc = [[NSWorkspace sharedWorkspace] notificationCenter];
 	UKKQueue *queue = [UKKQueue sharedFileWatcher];
-	[nc addObserver:self selector:@selector(ukkqueueFileModified:) name:nil object:queue];
+//	[nc addObserver:self selector:@selector(ukkqueueFileModified:) name:nil object:queue];
+	[queue setDelegate:self];
 		
 	return self;
 }
@@ -177,9 +178,9 @@ static XspfManager *sharedInstance = nil;
 //	[obj setValue:[NSDate dateWithTimeIntervalSinceNow:0.0] forKey:@"creationDate"];
 	
 	id<HMChannel> channel = [appDelegate channel];
-	id<HMRequest> request = [XspfMCheckFileModifiedRequest requestWithObject:obj url:url];
+	id<HMRequest> request = [XspfMCheckFileModifiedRequest requestWithObject:obj];
 	[channel putRequest:request];
-	request = [XspfMMovieLoadRequest requestWithObject:obj url:url];
+	request = [XspfMMovieLoadRequest requestWithObject:obj];
 	[channel putRequest:request];
 	
 	[[UKKQueue sharedFileWatcher] addPathToQueue:obj.filePath];
@@ -306,16 +307,14 @@ static XspfManager *sharedInstance = nil;
 }
 
 #pragma mark#### UKKQUEUE ####
-- (void)ukkqueueFileModified:(NSNotification *)notification
+//- (void)ukkqueueFileModified:(NSNotification *)notification
+-(void) watcher:(id<UKFileWatcher>)kq receivedNotification:(NSString*)notificationName forPath: (NSString*)filePath
 {
-	NSLog(@"UKKQueue notification. %@", notification);
+	NSLog(@"UKKQueue notification. %@", notificationName);
 	if(![NSThread isMainThread]) {
 		NSLog(@"there is not main thread.");
 	}
-	
-	NSString *notificationName = [notification name];
-	
-	NSString *filePath = [[notification userInfo] objectForKey:@"path"];
+		
 	NSString *fileURL = [[NSURL fileURLWithPath:filePath] absoluteString];
 	NSFetchRequest *fetch = [[[NSFetchRequest alloc] init] autorelease];
 	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"urlString = %@", fileURL];
@@ -356,21 +355,25 @@ static XspfManager *sharedInstance = nil;
 	}
 	
 	if([UKFileWatcherDeleteNotification isEqualToString:notificationName]) {
+		NSLog(@"File(%@) deleted", filePath);
 		[[UKKQueue sharedFileWatcher] removePathFromQueue:filePath];
 		obj.deleted = YES;
 		return;
 	}
 	
-	if(![resolvedPath isEqualToString:filePath]) {
-		NSLog(@"resolvedPath is not filePath. resolvedPath is %@. notification is %@. ", resolvedPath, notificationName);
+	if([UKFileWatcherRenameNotification isEqualToString:notificationName]) {
+		NSLog(@"File(%@) renamed", filePath);
+		obj.url = [NSURL fileURLWithPath:resolvedPath];
+		[[UKKQueue sharedFileWatcher] removePathFromQueue:filePath];
+		[[UKKQueue sharedFileWatcher] addPathToQueue:obj.filePath];
 		return;
 	}
 	
 	NSLog(@"checking file.");
 	id<HMChannel> channel = [appDelegate channel];
-	id<HMRequest> request = [XspfMCheckFileModifiedRequest requestWithObject:obj url:[NSURL fileURLWithPath:filePath]];
+	id<HMRequest> request = [XspfMCheckFileModifiedRequest requestWithObject:obj];
 	[channel putRequest:request];
-	request = [XspfMMovieLoadRequest requestWithObject:obj url:[NSURL fileURLWithPath:filePath]];
+	request = [XspfMMovieLoadRequest requestWithObject:obj];
 	[channel putRequest:request];
 }
 
