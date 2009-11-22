@@ -14,14 +14,18 @@
 {
 	[self doesNotRecognizeSelector:_cmd];
 }
+- (NSTimeInterval)sleepTime
+{
+	return 0.0;
+}
 - (void)fireInMainThread:(id)dummy
 {
 	[self fire];
 }
 - (void)operate
 {
+	[NSThread sleepForTimeInterval:[self sleepTime]];
 	[self performSelectorOnMainThread:@selector(fireInMainThread:) withObject:nil waitUntilDone:YES];
-	[NSThread sleepForTimeInterval:0.5];
 }
 -(void)terminate
 {
