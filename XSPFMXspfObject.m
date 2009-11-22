@@ -15,6 +15,7 @@
 #import "XspfLoadThumbnailRequest.h"
 
 #import "NSPathUtilities-XspfQT-Extensions.h"
+#import "NSURL-XspfQT-Extensions.h"
 
 @interface XSPFMXspfObject(HMPrivate)
 - (NSURL *)url;
@@ -39,11 +40,12 @@
 	NSString *urlString = self.urlString;
 	if(urlString != nil) {
 		NSURL *url = [NSURL URLWithString:urlString];
-		[self setPrimitiveValue:url forKey:@"url"];
+//		[self setPrimitiveValue:url forKey:@"url"];
+		self.url = url;
 	}
 	
 	id<HMChannel> channel = [[NSApp delegate] channel];
-	id<HMRequest> request = [XspfMCheckFileModifiedRequest requestWithObject:self url:self.url];
+	id<HMRequest> request = [XspfMCheckFileModifiedRequest requestWithObject:self];
 	[channel putRequest:request];
 }
 
@@ -51,16 +53,16 @@
 {
 	id info = [NSEntityDescription insertNewObjectForEntityForName:@"Info"
 											inManagedObjectContext:[self managedObjectContext]];
-	
 	[self setValue:info forKey:@"information"];
 	id thumbnailData = [NSEntityDescription insertNewObjectForEntityForName:@"ThumbnailData"
 													 inManagedObjectContext:[self managedObjectContext]];
-	
 	[self setValue:thumbnailData forKey:@"thumbnailData"];
 }
 
 - (void)setUrlString:(NSString *)string
 {
+	if([self.urlString isEqualToString:string]) return;
+	
 	[self willChangeValueForKey:@"urlString"];
 	[self setPrimitiveValue:string forKey:@"urlString"];
 	[self didChangeValueForKey:@"urlString"];
@@ -71,9 +73,10 @@
 	[self willAccessValueForKey:@"alias"];
 	NSData *alias = [self primitiveValueForKey:@"alias"];
 	[self didAccessValueForKey:@"alias"];
-	if(!alias) {
-		alias = [[self.url path] aliasData];
-	}
+	
+	if(alias) return alias;
+	
+	alias = [[self.url path] aliasData];
 	if(alias) {
 		[self willChangeValueForKey:@"alias"];
 		[self setPrimitiveValue:alias forKey:@"alias"];
@@ -81,6 +84,14 @@
 	}
 	
 	return alias;
+}
+- (void)setAlias:(NSData *)new
+{
+	if([self.alias isEqualToData:new]) return;
+	
+	[self willChangeValueForKey:@"alias"];
+	[self setPrimitiveValue:new forKey:@"alias"];
+	[self didChangeValueForKey:@"alias"];
 }
 - (NSURL *)url
 {
@@ -91,6 +102,8 @@
 } 
 - (void)setUrl:(NSURL *)aURL
 {
+	if([self.url isEqualUsingLocalhost:aURL])  return;
+	
 	[self willChangeValueForKey:@"url"];
 	[self setPrimitiveValue:aURL forKey:@"url"];
 	[self didChangeValueForKey:@"url"];
@@ -158,7 +171,7 @@
 	if(NSOrderedSame != [newDate compare:oldDate]) {
 		if(self.thumbnail) {
 			id<HMChannel> channel = [[NSApp delegate] channel];
-			id<HMRequest> request = [XspfMMovieLoadRequest requestWithObject:self url:self.url];
+			id<HMRequest> request = [XspfMMovieLoadRequest requestWithObject:self];
 			[channel putRequest:request];
 		}
 	}
@@ -184,14 +197,14 @@
 }
 - (NSString *)filePath
 {
-	if(filePath == nil) {
-		NSString *path = [self.alias resolvedPath];
-		if(path) {
-			[filePath release];
-			filePath = [path copy];
-		}
-	}
+//	if(filePath == nil) {
+//		NSString *path = [self.alias resolvedPath];
+//		if(path) {
+//			[filePath release];
+//			filePath = [path copy];
+//		}
+//	}
 	
-	return filePath;
+	return [self.alias resolvedPath];
 }
 @end

@@ -11,29 +11,26 @@
 
 @implementation XspfMCheckFileModifiedRequest
 @synthesize object;
-@synthesize url;
 
 inline BOOL nilOrNSNull(id obj)
 {
 	return !obj || obj == [NSNull null];
 }
 
-+ (id)requestWithObject:(XSPFMXspfObject *)anObject url:(NSURL *)anUrl;
++ (id)requestWithObject:(XSPFMXspfObject *)anObject
 {
-	return [[[self alloc] initWithObject:anObject url:anUrl] autorelease];
+	return [[[self alloc] initWithObject:anObject] autorelease];
 }
-- (id)initWithObject:(XSPFMXspfObject *)anObject url:(NSURL *)anUrl
+- (id)initWithObject:(XSPFMXspfObject *)anObject
 {
 	self = [super init];
 	self.object = anObject;
-	self.url = anUrl;
 	
 	return self;
 }
 - (void)dealloc
 {
 	self.object = nil;
-	self.url = nil;
 	
 	[super dealloc];
 }
@@ -42,7 +39,7 @@ inline BOOL nilOrNSNull(id obj)
 {
 	NSError *error = nil;
 	
-	id attrs = [[NSFileManager defaultManager ] attributesOfItemAtPath:[self.url path] error:&error];
+	id attrs = [[NSFileManager defaultManager ] attributesOfItemAtPath:[self.object.url path] error:&error];
 	if(!attrs) {
 		if(error) {
 			NSLog(@"Error at checking XSPF. %@", error);

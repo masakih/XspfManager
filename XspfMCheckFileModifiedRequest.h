@@ -14,11 +14,9 @@
 @interface XspfMCheckFileModifiedRequest : NSObject <HMRequest>
 {
 	XSPFMXspfObject *object;
-	NSURL *url;
 }
 @property (retain) XSPFMXspfObject *object;
-@property (retain) NSURL *url;
 
-+ (id)requestWithObject:(XSPFMXspfObject *)object url:(NSURL *)url;
-- (id)initWithObject:(XSPFMXspfObject *)object url:(NSURL *)url;
++ (id)requestWithObject:(XSPFMXspfObject *)object;
+- (id)initWithObject:(XSPFMXspfObject *)object;
 @end
