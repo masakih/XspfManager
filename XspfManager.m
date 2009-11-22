@@ -27,6 +27,10 @@
 - (void)setCurrentListViewType:(XspfMViewType)newType;
 @end
 
+@interface XspfManager(UKKQueueSupport) 
+- (void)registerToUKKQueue;
+@end
+
 @implementation XspfManager
 
 static XspfManager *sharedInstance = nil;
@@ -83,11 +87,6 @@ static XspfManager *sharedInstance = nil;
 	[super initWithWindowNibName:@"MainWindow"];
 	
 	viewControllers = [[NSMutableDictionary alloc] init];
-	
-//	NSNotificationCenter *nc = [[NSWorkspace sharedWorkspace] notificationCenter];
-	UKKQueue *queue = [UKKQueue sharedFileWatcher];
-//	[nc addObserver:self selector:@selector(ukkqueueFileModified:) name:nil object:queue];
-	[queue setDelegate:self];
 		
 	return self;
 }
@@ -97,6 +96,11 @@ static XspfManager *sharedInstance = nil;
 	
 	if(appDelegate && !didSetupOnMainMenu) {
 		didSetupOnMainMenu = YES;
+		
+		UKKQueue *queue = [UKKQueue sharedFileWatcher];
+		[queue setDelegate:self];
+//		[self registerToUKKQueue];
+		
 		[self window];
 	}
 }
@@ -307,7 +311,34 @@ static XspfManager *sharedInstance = nil;
 }
 
 #pragma mark#### UKKQUEUE ####
-//- (void)ukkqueueFileModified:(NSNotification *)notification
+- (void)registerToUKKQueue
+{
+	NSManagedObjectContext *moc = [[NSApp delegate] managedObjectContext];
+	NSError *error = nil;
+	NSFetchRequest *fetch;
+	if(!moc) {
+		NSLog(@"moc is nuil.");
+		exit(-1);
+	}
+	
+	fetch = [[[NSFetchRequest alloc] init] autorelease];
+	[fetch setEntity:[NSEntityDescription entityForName:@"Xspf" inManagedObjectContext:moc]];
+	
+	NSArray *array = [moc executeFetchRequest:fetch error:&error];
+	if(!array) {
+		if(error) {
+			NSLog(@"%@", [error localizedDescription]);
+		}
+		NSLog(@"Could not fetch.");
+		return;
+	}
+	
+	UKKQueue *queue = [UKKQueue sharedFileWatcher];
+	for(XSPFMXspfObject *obj in array) {
+		[queue addPathToQueue:obj.filePath];
+	}
+}
+
 -(void) watcher:(id<UKFileWatcher>)kq receivedNotification:(NSString*)notificationName forPath: (NSString*)filePath
 {
 	NSLog(@"UKKQueue notification. %@", notificationName);
@@ -340,26 +371,28 @@ static XspfManager *sharedInstance = nil;
 		NSLog(@"Target found too many!!! (%d).", [array count]);
 	}
 	
+	sleep(0.2);
 	XSPFMXspfObject *obj = [array objectAtIndex:0];
 	NSString *resolvedPath = [obj.alias resolvedPath];
 	
-	if(obj.deleted) {
-		if(!resolvedPath) {
-			NSLog(@"object already deleted.");
+	if(!resolvedPath) {
+		NSFileManager *fm = [NSFileManager defaultManager];
+		if(![fm fileExistsAtPath:filePath]) {
+			NSLog(@"object already deleted. (%@)", filePath);
 			[[UKKQueue sharedFileWatcher] removePathFromQueue:filePath];
+			obj.deleted = YES;
 			return;
+		} else {
+			obj.alias = [filePath aliasData];
 		}
-//		NSLog(@"What is happen???");
-		[[UKKQueue sharedFileWatcher] addPathToQueue:obj.filePath];
-		obj.deleted = NO;
 	}
 	
-	if([UKFileWatcherDeleteNotification isEqualToString:notificationName]) {
-		NSLog(@"File(%@) deleted", filePath);
-		[[UKKQueue sharedFileWatcher] removePathFromQueue:filePath];
-		obj.deleted = YES;
-		return;
-	}
+//	if([UKFileWatcherDeleteNotification isEqualToString:notificationName]) {
+//		NSLog(@"File(%@) deleted", filePath);
+//		[[UKKQueue sharedFileWatcher] removePathFromQueue:filePath];
+//		obj.deleted = YES;
+//		return;
+//	}
 	
 	if([UKFileWatcherRenameNotification isEqualToString:notificationName]) {
 		NSLog(@"File(%@) renamed", filePath);
@@ -369,12 +402,19 @@ static XspfManager *sharedInstance = nil;
 		return;
 	}
 	
-	NSLog(@"checking file.");
-	id<HMChannel> channel = [appDelegate channel];
-	id<HMRequest> request = [XspfMCheckFileModifiedRequest requestWithObject:obj];
-	[channel putRequest:request];
-	request = [XspfMMovieLoadRequest requestWithObject:obj];
-	[channel putRequest:request];
+	if([UKFileWatcherAttributeChangeNotification isEqualToString:notificationName]) { 
+		NSLog(@"checking file.");
+		
+		[[UKKQueue sharedFileWatcher] removePathFromQueue:filePath];
+		[[UKKQueue sharedFileWatcher] addPathToQueue:obj.filePath];
+		obj.alias = [obj.filePath aliasData];
+		
+		id<HMChannel> channel = [appDelegate channel];
+		id<HMRequest> request = [XspfMCheckFileModifiedRequest requestWithObject:obj];
+		[channel putRequest:request];
+		request = [XspfMMovieLoadRequest requestWithObject:obj];
+		[channel putRequest:request];
+	}
 }
 
 #pragma mark#### Test ####
