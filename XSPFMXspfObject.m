@@ -61,7 +61,7 @@
 
 - (void)setUrlString:(NSString *)string
 {
-	if([self.urlString isEqualToString:string]) return;
+	if(self.urlString && [self.urlString isEqualToString:string]) return;
 	
 	[self willChangeValueForKey:@"urlString"];
 	[self setPrimitiveValue:string forKey:@"urlString"];
@@ -87,7 +87,7 @@
 }
 - (void)setAlias:(NSData *)new
 {
-	if([self.alias isEqualToData:new]) return;
+	if(self.alias && [self.alias isEqualToData:new]) return;
 	
 	[self willChangeValueForKey:@"alias"];
 	[self setPrimitiveValue:new forKey:@"alias"];
@@ -102,7 +102,7 @@
 } 
 - (void)setUrl:(NSURL *)aURL
 {
-	if([self.url isEqualUsingLocalhost:aURL])  return;
+	if(self.url && [self.url isEqualUsingLocalhost:aURL])  return;
 	
 	[self willChangeValueForKey:@"url"];
 	[self setPrimitiveValue:aURL forKey:@"url"];
