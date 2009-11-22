@@ -26,6 +26,7 @@
 @property (retain) NSNumber *movieNum;
 @property (retain) NSDate * creationDate;
 @property (retain) NSData *alias;
+@property BOOL deleted;
 
 @property (retain) NSURL *url;
 @property (retain) NSImage *thumbnail;

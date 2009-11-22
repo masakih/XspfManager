@@ -97,6 +97,29 @@
 	[self setValue:[aURL absoluteString] forKey:@"urlString"];
 }
 
+- (BOOL)isDeleted
+{
+	[self willAccessValueForKey:@"deleted"];
+	NSNumber *deleted = [self primitiveValueForKey:@"deleted"];
+	[self didAccessValueForKey:@"deleted"];
+	
+	return [deleted boolValue];
+}
+- (BOOL)deleted
+{
+	return [self isDeleted];
+}
+- (void)setIsDeleted:(BOOL)flag
+{
+	NSNumber *deleted = [NSNumber numberWithBool:flag];
+	[self willChangeValueForKey:@"deleted"];
+	[self setPrimitiveValue:deleted forKey:@"deleted"];
+	[self didChangeValueForKey:@"deleted"];
+}
+- (void)setDeleted:(BOOL)flag
+{
+	[self setIsDeleted:flag];
+}
 - (NSImage *)thumbnail
 {
 	[self willAccessValueForKey:@"thumbnail"];
