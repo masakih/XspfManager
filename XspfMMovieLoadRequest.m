@@ -37,6 +37,10 @@
 	
 	[super dealloc];
 }
+- (NSTimeInterval)sleepTime
+{
+	return 1.0;
+}
 
 static QTMovie *loadFromMovieURL(NSURL *url)
 {

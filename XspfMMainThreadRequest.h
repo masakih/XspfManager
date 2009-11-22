@@ -16,4 +16,6 @@
 
 - (void)fire;	// shuld override subclass.
 
+- (NSTimeInterval)sleepTime;
+
 @end

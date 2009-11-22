@@ -30,6 +30,10 @@
 	
 	[super dealloc];
 }
+- (NSTimeInterval)sleepTime
+{
+	return 0.2;
+}
 
 - (void)fire
 {
