@@ -426,6 +426,7 @@ static XspfManager *sharedInstance = nil;
 	if(newModDate) {
 		obj.modificationDate = newModDate;
 	}
+	obj.alias = [filePath aliasData];
 }
 
 #pragma mark#### Test ####
