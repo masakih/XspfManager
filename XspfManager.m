@@ -197,16 +197,19 @@ static XspfManager *sharedInstance = nil;
 	[[UKKQueue sharedFileWatcher] addPathToQueue:obj.filePath];
 	
 	return obj;
-} 
-- (void)endOpenPanel:(NSOpenPanel *)panel :(NSInteger)returnCode :(void *)context
+}
+- (void)registerFilePaths:(NSArray *)filePaths
 {
-	[panel orderOut:nil];
+	NSMutableArray *array = [NSMutableArray array];
 	
-	if(returnCode == NSCancelButton) return;
+	for(NSString *filePath in filePaths) {
+		[array addObject:[NSURL fileURLWithPath:filePath]];
+	}
 	
-	NSArray *URLs = [panel URLs];
-	if([URLs count] == 0) return;
-	
+	[self registerURLs:array];
+}
+- (void)registerURLs:(NSArray *)URLs
+{
 	[progressBar setUsesThreadedAnimation:YES];
 	[progressBar startAnimation:self];
 	[progressMessage setStringValue:@"During register."];
@@ -230,6 +233,17 @@ static XspfManager *sharedInstance = nil;
 	[progressBar stopAnimation:self];
 	[progressPanel orderOut:self];
 	[NSApp endSheet:progressPanel];
+}
+- (void)endOpenPanel:(NSOpenPanel *)panel :(NSInteger)returnCode :(void *)context
+{
+	[panel orderOut:nil];
+	
+	if(returnCode == NSCancelButton) return;
+	
+	NSArray *URLs = [panel URLs];
+	if([URLs count] == 0) return;
+	
+	[self registerURLs:URLs];
 }
 	
 #pragma mark#### Other methods ####
