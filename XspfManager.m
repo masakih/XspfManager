@@ -175,11 +175,11 @@ static XspfManager *sharedInstance = nil;
 	[[self managedObjectContext] deleteObject:obj];
 }
 
-- (NSInteger)registerWithURL:(NSURL *)url
+- (XSPFMXspfObject *)registerWithURL:(NSURL *)url
 {
 	XSPFMXspfObject *obj = [NSEntityDescription insertNewObjectForEntityForName:@"Xspf"
 														 inManagedObjectContext:[appDelegate managedObjectContext]];
-	if(!obj) return 1;
+	if(!obj) return nil;
 	
 	obj.url = url;
 	obj.registerDate = [NSDate dateWithTimeIntervalSinceNow:0.0];
@@ -196,7 +196,7 @@ static XspfManager *sharedInstance = nil;
 	
 	[[UKKQueue sharedFileWatcher] addPathToQueue:obj.filePath];
 	
-	return noErr;
+	return obj;
 } 
 - (void)endOpenPanel:(NSOpenPanel *)panel :(NSInteger)returnCode :(void *)context
 {
@@ -217,8 +217,14 @@ static XspfManager *sharedInstance = nil;
 	   didEndSelector:Nil
 		  contextInfo:NULL];
 	
+	XSPFMXspfObject *insertedObject = nil;
 	for(id URL in URLs) {
-		[self registerWithURL:URL];
+		insertedObject = [self registerWithURL:URL];
+	}
+	if(insertedObject) {
+		[controller performSelector:@selector(setSelectedObjects:)
+						 withObject:[NSArray arrayWithObject:insertedObject]
+						 afterDelay:0.0];
 	}
 	
 	[progressBar stopAnimation:self];
