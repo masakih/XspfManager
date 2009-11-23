@@ -23,6 +23,7 @@
 - (void)setupXspfLists;
 - (void)setupDetailView;
 - (void)setupAccessorylView;
+- (BOOL)didRegisteredURL:(NSURL *)url;
 - (void)changeViewType:(XspfMViewType)newType;
 - (void)setCurrentListViewType:(XspfMViewType)newType;
 @end
@@ -177,6 +178,8 @@ static XspfManager *sharedInstance = nil;
 
 - (XSPFMXspfObject *)registerWithURL:(NSURL *)url
 {
+	if([self didRegisteredURL:url]) return nil;
+	
 	XSPFMXspfObject *obj = [NSEntityDescription insertNewObjectForEntityForName:@"Xspf"
 														 inManagedObjectContext:[appDelegate managedObjectContext]];
 	if(!obj) return nil;
@@ -247,6 +250,25 @@ static XspfManager *sharedInstance = nil;
 }
 	
 #pragma mark#### Other methods ####
+- (BOOL)didRegisteredURL:(NSURL *)url
+{
+	NSManagedObjectContext *moc = [appDelegate managedObjectContext];
+	NSError *error = nil;
+	NSFetchRequest *fetch;
+	NSInteger num;
+	
+	fetch = [[[NSFetchRequest alloc] init] autorelease];
+	[fetch setEntity:[NSEntityDescription entityForName:@"Xspf" inManagedObjectContext:moc]];
+	NSPredicate *aPredicate = [NSPredicate predicateWithFormat:@"urlString LIKE %@", [url absoluteString]];
+	[fetch setPredicate:aPredicate];
+	num = [moc countForFetchRequest:fetch error:&error];
+	if(error) {
+		NSLog(@"%@", [error localizedDescription]);
+		return NO;
+	}
+	
+	return num != 0;
+}
 - (void)changeViewType:(XspfMViewType)viewType
 {
 	if(currentListViewType == viewType) return;
@@ -270,7 +292,7 @@ static XspfManager *sharedInstance = nil;
 		[viewControllers setObject:targetContorller forKey:className];
 		[targetContorller setRepresentedObject:controller];
 	}
-		
+	
 	[[listViewController view] removeFromSuperview];
 	listViewController = targetContorller;
 	[listView addSubview:[listViewController view]];
@@ -318,23 +340,7 @@ static XspfManager *sharedInstance = nil;
 #pragma mark#### NSOpenPanel Delegate ####
 - (BOOL)panel:(id)sender shouldShowFilename:(NSString *)filename
 {
-	NSManagedObjectContext *moc = [appDelegate managedObjectContext];
-	NSError *error = nil;
-	NSFetchRequest *fetch;
-	NSInteger num;
-	NSURL *url = [NSURL fileURLWithPath:filename];
-	
-	fetch = [[[NSFetchRequest alloc] init] autorelease];
-	[fetch setEntity:[NSEntityDescription entityForName:@"Xspf" inManagedObjectContext:moc]];
-	NSPredicate *aPredicate = [NSPredicate predicateWithFormat:@"urlString LIKE %@", [url absoluteString]];
-	[fetch setPredicate:aPredicate];
-	num = [moc countForFetchRequest:fetch error:&error];
-	if(error) {
-		NSLog(@"%@", [error localizedDescription]);
-		return NO;
-	}
-	
-	return num == 0;
+	return ![self didRegisteredURL:[NSURL fileURLWithPath:filename]];
 }
 
 #pragma mark#### UKKQUEUE ####
