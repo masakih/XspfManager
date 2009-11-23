@@ -21,6 +21,42 @@
 - (void)awakeFromNib
 {
 	[tableView setDoubleAction:@selector(openXspf:)];
+	[tableView registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]];
+}
+
+
+- (NSDragOperation)tableView:(NSTableView*)table
+				validateDrop:(id <NSDraggingInfo>)info
+				 proposedRow:(NSInteger)row
+	   proposedDropOperation:(NSTableViewDropOperation)dropOperation
+{
+	id pb = [info draggingPasteboard];
+	id plist = [pb propertyListForType:NSFilenamesPboardType];
+	
+	NSWorkspace *ws = [NSWorkspace sharedWorkspace];
+	NSError *error = nil;
+	for(NSString *filePath in plist) {
+		NSString *type = [ws typeOfFile:filePath error:&error];
+		if(![ws type:type conformsToType:@"com.masakih.xspf"]) {
+			return NSDragOperationNone;
+		}
+	}
+	[table setDropRow:row dropOperation:NSTableViewDropAbove];
+	
+	return NSDragOperationCopy;
+}
+
+- (BOOL)tableView:(NSTableView*)table
+	   acceptDrop:(id <NSDraggingInfo>)info
+			  row:(NSInteger)row
+	dropOperation:(NSTableViewDropOperation)dropOperation
+{
+	id pb = [info draggingPasteboard];
+	id plist = [pb propertyListForType:NSFilenamesPboardType];
+	
+	[[[tableView window] windowController] registerFilePaths:plist];
+	
+	return YES;
 }
 
 @end
