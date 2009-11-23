@@ -167,13 +167,11 @@
 	NSDate *oldDate = [self primitiveValueForKey:@"modificationDate"];
 	[self didAccessValueForKey:@"modificationDate"];
 	
-	// 更新日時に変更がありサムネイルが既に存在していれば、ファイル内容を確認し直す。
+	// 更新日時に変更があれば、ファイル内容を確認し直す。
 	if(NSOrderedSame != [newDate compare:oldDate]) {
-		if(self.thumbnail) {
-			id<HMChannel> channel = [[NSApp delegate] channel];
-			id<HMRequest> request = [XspfMMovieLoadRequest requestWithObject:self];
-			[channel putRequest:request];
-		}
+		id<HMChannel> channel = [[NSApp delegate] channel];
+		id<HMRequest> request = [XspfMMovieLoadRequest requestWithObject:self];
+		[channel putRequest:request];
 	}
 	
 	[self willChangeValueForKey:@"modificationDate"];
