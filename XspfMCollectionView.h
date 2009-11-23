@@ -13,6 +13,8 @@
 @interface XspfMCollectionView : NSCollectionView
 {
 	IBOutlet id<XspfMCollectionView_Delegate> delegate;
+	
+	BOOL draggingHilight;
 }
 
 @end
