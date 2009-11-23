@@ -378,12 +378,19 @@ static XspfManager *sharedInstance = nil;
 		NSLog(@"Target found too many!!! (%d).", [array count]);
 	}
 	
-	sleep(0.2);
 	XSPFMXspfObject *obj = [array objectAtIndex:0];
 	NSString *resolvedPath = [obj.alias resolvedPath];
 	
+	if([UKFileWatcherRenameNotification isEqualToString:notificationName]) {
+		NSLog(@"File(%@) renamed", filePath);
+		obj.url = [NSURL fileURLWithPath:resolvedPath];
+		[[UKKQueue sharedFileWatcher] removePathFromQueue:filePath];
+		[[UKKQueue sharedFileWatcher] addPathToQueue:obj.filePath];
+		return;
+	}
+	
+	NSFileManager *fm = [NSFileManager defaultManager];
 	if(!resolvedPath) {
-		NSFileManager *fm = [NSFileManager defaultManager];
 		if(![fm fileExistsAtPath:filePath]) {
 			NSLog(@"object already deleted. (%@)", filePath);
 			[[UKKQueue sharedFileWatcher] removePathFromQueue:filePath];
@@ -394,33 +401,10 @@ static XspfManager *sharedInstance = nil;
 		}
 	}
 	
-//	if([UKFileWatcherDeleteNotification isEqualToString:notificationName]) {
-//		NSLog(@"File(%@) deleted", filePath);
-//		[[UKKQueue sharedFileWatcher] removePathFromQueue:filePath];
-//		obj.deleted = YES;
-//		return;
-//	}
-	
-	if([UKFileWatcherRenameNotification isEqualToString:notificationName]) {
-		NSLog(@"File(%@) renamed", filePath);
-		obj.url = [NSURL fileURLWithPath:resolvedPath];
-		[[UKKQueue sharedFileWatcher] removePathFromQueue:filePath];
-		[[UKKQueue sharedFileWatcher] addPathToQueue:obj.filePath];
-		return;
-	}
-	
-	if([UKFileWatcherAttributeChangeNotification isEqualToString:notificationName]) { 
-		NSLog(@"checking file.");
-		
-		[[UKKQueue sharedFileWatcher] removePathFromQueue:filePath];
-		[[UKKQueue sharedFileWatcher] addPathToQueue:obj.filePath];
-		obj.alias = [obj.filePath aliasData];
-		
-		id<HMChannel> channel = [appDelegate channel];
-		id<HMRequest> request = [XspfMCheckFileModifiedRequest requestWithObject:obj];
-		[channel putRequest:request];
-		request = [XspfMMovieLoadRequest requestWithObject:obj];
-		[channel putRequest:request];
+	id attr = [fm fileAttributesAtPath:resolvedPath traverseLink:YES];
+	NSDate *newModDate = [attr fileModificationDate];
+	if(newModDate) {
+		obj.modificationDate = newModDate;
 	}
 }
 
