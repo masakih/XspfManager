@@ -8,8 +8,8 @@
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
+			<integer value="2"/>
 			<integer value="563"/>
-			<integer value="776"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -664,6 +664,13 @@
 				<bool key="NSFilterRestrictsInsertion">YES</bool>
 				<bool key="NSClearsFilterPredicateOnInsertion">YES</bool>
 			</object>
+			<object class="NSUserDefaultsController" id="111408442">
+				<object class="NSMutableArray" key="NSDeclaredKeys">
+					<bool key="EncodedWithXMLCoder">YES</bool>
+					<string>sortDescriptors</string>
+				</object>
+				<bool key="NSSharedInstance">YES</bool>
+			</object>
 		</object>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
 			<object class="NSMutableArray" key="connectionRecords">
@@ -1058,6 +1065,26 @@
 					</object>
 					<int key="connectionID">821</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">sortDescriptors: values.sortDescriptors</string>
+						<reference key="source" ref="405619518"/>
+						<reference key="destination" ref="111408442"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="405619518"/>
+							<reference key="NSDestination" ref="111408442"/>
+							<string key="NSLabel">sortDescriptors: values.sortDescriptors</string>
+							<string key="NSBinding">sortDescriptors</string>
+							<string key="NSKeyPath">values.sortDescriptors</string>
+							<object class="NSDictionary" key="NSOptions">
+								<string key="NS.key.0">NSValueTransformerName</string>
+								<string key="NS.object.0">NSKeyedUnarchiveFromData</string>
+							</object>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">824</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -1366,6 +1393,11 @@
 						<reference key="object" ref="447586155"/>
 						<reference key="parent" ref="457532622"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">822</int>
+						<reference key="object" ref="111408442"/>
+						<reference key="parent" ref="0"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -1522,7 +1554,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">821</int>
+			<int key="maxID">824</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
