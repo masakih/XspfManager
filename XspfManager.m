@@ -143,6 +143,12 @@ static XspfManager *sharedInstance = nil;
 - (IBAction)openXspf:(id)sender
 {
 	XSPFMXspfObject *rep = [controller valueForKeyPath:@"selection.self"];
+	if(rep.deleted) {		
+		NSRunCriticalAlertPanel( NSLocalizedString(@"Xspf is Deleted", @"Xspf is Deleted"),
+								NSLocalizedString(@"\"%@\" is deleted",  @"\"%@\" is deleted"),
+								nil, nil, nil, rep.title);
+		return;
+	}
 	[[NSWorkspace sharedWorkspace] openFile:rep.filePath withApplication:@"XspfQT"];
 	rep.lastPlayDate = [NSDate dateWithTimeIntervalSinceNow:0.0];
 }
