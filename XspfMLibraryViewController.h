@@ -17,7 +17,10 @@
 	IBOutlet NSWindow *predicatePanel;
 	IBOutlet NSPredicateEditor *editor;
 	IBOutlet NSTextField *nameField;
+	
+	NSPredicate *selectedPredicate;
 }
+@property (retain) NSPredicate *selectedPredicate;
 
 - (IBAction)newPredicate:(id)sender;
 - (IBAction)editPredicate:(id)sender;

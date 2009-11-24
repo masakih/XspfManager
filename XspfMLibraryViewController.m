@@ -8,12 +8,23 @@
 
 #import "XspfMLibraryViewController.h"
 
+#import "XspfMXspfListObject.h"
+
+
 @interface XspfMLibraryViewController (HMPrivate)
 - (NSArray *)sortDescriptors;
 - (void)setupXspfList;
 @end
 
+enum {
+	kLibraryOrder = 0,
+	kFavoritesOrder,
+	kSmartLibraryOrder,
+};
+
 @implementation XspfMLibraryViewController
+@synthesize selectedPredicate;
+
 - (id)init
 {
 	[super initWithNibName:@"LibraryView" bundle:nil];
@@ -33,6 +44,14 @@
 	return [NSArray arrayWithObject:[desc autorelease]];
 }
 
+- (void)addSmartLibrary:(NSString *)name predicate:(NSPredicate *)predicate order:(NSInteger)order
+{
+	id obj = [NSEntityDescription insertNewObjectForEntityForName:@"XspfList"
+										   inManagedObjectContext:[self managedObjectContext]];
+	[obj setValue:predicate forKey:@"predicate"];
+	[obj setValue:name forKey:@"name"];
+	[obj setValue:[NSNumber numberWithInt:order] forKey:@"order"];
+}
 - (void)setupXspfList
 {
 	NSManagedObjectContext *moc = [self managedObjectContext];
@@ -47,32 +66,61 @@
 							  error:&error];
 	if(num != 0) return;
 	
-	id obj = [NSEntityDescription insertNewObjectForEntityForName:@"XspfList"
-										   inManagedObjectContext:moc];
 	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"urlString <> %@", @""];
-	[obj setValue:predicate forKey:@"predicate"];
-	[obj setValue:NSLocalizedString(@"Library", @"Library") forKey:@"name"];
-	[obj setValue:[NSNumber numberWithInt:0] forKey:@"order"];
+	[self addSmartLibrary:NSLocalizedString(@"Library", @"Library")
+				predicate:predicate
+					order:kLibraryOrder];
 	
-	obj = [NSEntityDescription insertNewObjectForEntityForName:@"XspfList"
-										inManagedObjectContext:moc];
 	predicate = [NSPredicate predicateWithFormat:@"favorites = %@", [NSNumber numberWithBool:YES]];
-	[obj setValue:predicate forKey:@"predicate"];
-	[obj setValue:NSLocalizedString(@"Favorites", @"Favorites") forKey:@"name"];
-	[obj setValue:[NSNumber numberWithInt:1] forKey:@"order"];
+	[self addSmartLibrary:NSLocalizedString(@"Favorites", @"Favorites")
+				predicate:predicate
+					order:kFavoritesOrder];
 }
 
+- (XspfMXspfListObject *)targetObject
+{
+	id array = [[self representedObject] arrangedObjects];
+	
+	NSInteger row = [tableView clickedRow];
+	if(row >= 0 && [array count] > row) {
+		return [array objectAtIndex:row];
+	}
+	return nil;
+}
 - (IBAction)newPredicate:(id)sender
 {
 	if([editor numberOfRows] == 0) {
 		[editor addRow:self];
 	}
 	
+	[nameField selectText:self];
+	
 	[NSApp beginSheet:predicatePanel
 	   modalForWindow:[tableView window]
 		modalDelegate:self
 	   didEndSelector:@selector(didEndEditPredicate:returnCode:contextInfo:)
 		  contextInfo:@"Createion"];
+}
+- (IBAction)editPredicate:(id)sender
+{
+	XspfMXspfListObject *obj = [self targetObject];
+	[nameField setStringValue:obj.name];
+	[nameField selectText:self];
+	
+	self.selectedPredicate = obj.predicate;
+	
+	[NSApp beginSheet:predicatePanel
+	   modalForWindow:[tableView window]
+		modalDelegate:self
+	   didEndSelector:@selector(didEndEditPredicate:returnCode:contextInfo:)
+		  contextInfo:obj];
+}
+- (IBAction)deletePredicate:(id)sender
+{
+	XspfMXspfListObject *obj = [self targetObject];
+	NSBeginInformationalAlertSheet(nil, nil, @"Cancel", nil, [[self view] window],
+								   self, @selector(didEndAskDelete:::), Nil, obj,
+								   @"Do you really delete smart library \"%@\"?", obj.name);
 }
 - (IBAction)didEndEditPredicate:(id)sender
 {
@@ -85,7 +133,35 @@
 	
 	NSPredicate *predicate = [editor predicate];
 	NSLog(@"predicate -> %@", predicate);
+	NSString *name = [nameField stringValue];
+	if([name length] == 0) {
+		NSBeep();
+		NSBeginAlertSheet(nil, nil, nil, nil, [[self view] window],
+						  self, @selector(retryEditPredicate:::), Nil, contextInfo,
+						  @"Name must not be empty.");
+	}
 	
+	if([(id)contextInfo isKindOfClass:[NSString class]]) {
+		[self addSmartLibrary:name predicate:predicate order:kSmartLibraryOrder];
+	} else {
+		XspfMXspfListObject *obj = contextInfo;
+		obj.name = name;
+		obj.predicate = predicate;
+	}
+}
+- (void)retryEditPredicate:(NSWindow *)sheet :(NSInteger)returnCode :(void *)contextInfo
+{
+	if([(id)contextInfo isKindOfClass:[NSString class]]) {
+		[self performSelector:@selector(newPredicate:) withObject:nil afterDelay:0.0];
+	} else {
+		[self performSelector:@selector(editPredicate:) withObject:nil afterDelay:0.0];
+	}
+}
+- (void)didEndAskDelete:(NSWindow *)sheet :(NSInteger)returnCode :(void *)contextInfo
+{
+	if(returnCode == NSCancelButton) return;
+	
+	[[self managedObjectContext] deleteObject:contextInfo];
 }
 - (IBAction)test01:(id)sender
 {

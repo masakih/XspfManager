@@ -15,5 +15,6 @@
 
 @property (retain) NSString * name;
 @property (retain) NSData * predicateData;
+@property (retain) NSPredicate *predicate;
 
 @end
