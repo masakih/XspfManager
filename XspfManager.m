@@ -297,6 +297,7 @@ static XspfManager *sharedInstance = nil;
 	listViewController = targetContorller;
 	[listView addSubview:[listViewController view]];
 	[[listViewController view] setFrame:[listView bounds]];
+	[[self window] recalculateKeyViewLoop];
 }
 
 
@@ -438,7 +439,9 @@ static XspfManager *sharedInstance = nil;
 #pragma mark#### Test ####
 - (IBAction)test01:(id)sender
 {
-	//
+	id moc = [appDelegate managedObjectContext];
+	
+	NSLog(@"Updated count -> %d", [[moc updatedObjects] count]);
 }
 - (IBAction)test02:(id)sender
 {
@@ -450,9 +453,14 @@ static XspfManager *sharedInstance = nil;
 }
 - (IBAction)test03:(id)sender
 {
+	id keyView = [[self window] firstResponder];
+	NSView *firstKeyView = keyView;
+	while(keyView) {
+		NSLog(@"Keyview -> %@", keyView);
+		keyView = [keyView nextKeyView];
+		if(keyView == firstKeyView) break;
+	}
 	
-	id moc = [appDelegate managedObjectContext];
-	
-	NSLog(@"Updated count -> %d", [[moc updatedObjects] count]);
+	NSLog(@"Valid next view -> %@", [firstKeyView nextValidKeyView]);
 }
 @end

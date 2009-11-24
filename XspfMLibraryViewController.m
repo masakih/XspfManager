@@ -62,11 +62,46 @@
 	[obj setValue:[NSNumber numberWithInt:1] forKey:@"order"];
 }
 
-
-- (void)test01:(id)sender
+- (IBAction)newPredicate:(id)sender
 {
-	id selection = [[self representedObject] valueForKey:@"selection"];
-	NSLog(@"Selection -> %@(%@)", [selection valueForKey:@"name"], [selection valueForKey:@"predicate"]);
+	if([editor numberOfRows] == 0) {
+		[editor addRow:self];
+	}
+	
+	[NSApp beginSheet:predicatePanel
+	   modalForWindow:[tableView window]
+		modalDelegate:self
+	   didEndSelector:@selector(didEndEditPredicate:returnCode:contextInfo:)
+		  contextInfo:@"Createion"];
+}
+- (IBAction)didEndEditPredicate:(id)sender
+{
+	[predicatePanel orderOut:self];
+	[NSApp endSheet:predicatePanel returnCode:[sender tag]];
+}
+- (void)didEndEditPredicate:(id)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
+{
+	if(returnCode == NSCancelButton) return;
+	
+	NSPredicate *predicate = [editor predicate];
+	NSLog(@"predicate -> %@", predicate);
+	
+}
+- (IBAction)test01:(id)sender
+{
+	NSArray *array = [editor rowTemplates];
+	
+//	for(id templ in array) {
+//		NSLog(@"Views -> %@", [templ templateViews]);
+//		for(id v in [templ templateViews]) {
+//			if([v respondsToSelector:@selector(tag)]) {
+//				NSLog(@"tag -> %d", [v tag]);
+//			}
+//		}
+//	}
+	for(id templ in array) {
+		NSLog(@"template -> %@", templ);
+	}
 }
 
 @end

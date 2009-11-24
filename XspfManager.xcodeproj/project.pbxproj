@@ -54,6 +54,8 @@
 		F49BD01310A477BF007136CE /* XspfMListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BD01210A477BF007136CE /* XspfMListViewController.m */; };
 		F49BD36910A66EC6007136CE /* XspfMXspfListObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BD36810A66EC6007136CE /* XspfMXspfListObject.m */; };
 		F4BB56C710BA0F1400EE50B7 /* CompleteData.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = F4BB56C610BA0F1300EE50B7 /* CompleteData.xcdatamodel */; };
+		F4BB598B10BBFCDA00EE50B7 /* XspfMDateRowTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = F4BB598A10BBFCDA00EE50B7 /* XspfMDateRowTemplate.m */; };
+		F4BB59BB10BC0C3700EE50B7 /* LibraryPredicate.strings in Resources */ = {isa = PBXBuildFile; fileRef = F4BB59BA10BC0C3700EE50B7 /* LibraryPredicate.strings */; };
 		F4CE4CD310A6A13E004AC4FA /* LibraryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CE4CD110A6A13E004AC4FA /* LibraryView.xib */; };
 		F4CE4D0510A6A7A9004AC4FA /* XspfMLibraryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CE4D0410A6A7A9004AC4FA /* XspfMLibraryViewController.m */; };
 		F4CE4E8010A706A8004AC4FA /* DetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CE4E7E10A706A8004AC4FA /* DetailView.xib */; };
@@ -164,6 +166,10 @@
 		F49BD36710A66EC6007136CE /* XspfMXspfListObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMXspfListObject.h; sourceTree = "<group>"; };
 		F49BD36810A66EC6007136CE /* XspfMXspfListObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMXspfListObject.m; sourceTree = "<group>"; };
 		F4BB56C610BA0F1300EE50B7 /* CompleteData.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = CompleteData.xcdatamodel; sourceTree = "<group>"; };
+		F4BB598910BBFCDA00EE50B7 /* XspfMDateRowTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMDateRowTemplate.h; sourceTree = "<group>"; };
+		F4BB598A10BBFCDA00EE50B7 /* XspfMDateRowTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMDateRowTemplate.m; sourceTree = "<group>"; };
+		F4BB59B610BC0C2C00EE50B7 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/LibraryPredicate.strings; sourceTree = "<group>"; };
+		F4BB5A1510BC2C5800EE50B7 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Japanese; path = Japanese.lproj/LibraryPredicate.strings; sourceTree = "<group>"; };
 		F4CE4CD210A6A13E004AC4FA /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/LibraryView.xib; sourceTree = "<group>"; };
 		F4CE4D0310A6A7A9004AC4FA /* XspfMLibraryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMLibraryViewController.h; sourceTree = "<group>"; };
 		F4CE4D0410A6A7A9004AC4FA /* XspfMLibraryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMLibraryViewController.m; sourceTree = "<group>"; };
@@ -218,6 +224,8 @@
 				F4CE4F1210A71084004AC4FA /* XspfMDetailViewController.m */,
 				F4CE4D0310A6A7A9004AC4FA /* XspfMLibraryViewController.h */,
 				F4CE4D0410A6A7A9004AC4FA /* XspfMLibraryViewController.m */,
+				F4BB598910BBFCDA00EE50B7 /* XspfMDateRowTemplate.h */,
+				F4BB598A10BBFCDA00EE50B7 /* XspfMDateRowTemplate.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -280,6 +288,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F4BB59BA10BC0C3700EE50B7 /* LibraryPredicate.strings */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				2F7446970DB6B7EA00F9684A /* MainMenu.xib */,
@@ -460,6 +469,7 @@
 				F480CEE510AFDAB400AC365B /* NSApplication.icns in Resources */,
 				F480CF9F10B03A0D00AC365B /* AccessoryView.xib in Resources */,
 				F40B342110B6BE2000896716 /* UKKQueue Readme.txt in Resources */,
+				F4BB59BB10BC0C3700EE50B7 /* LibraryPredicate.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -511,6 +521,7 @@
 				F40B342F10B6C09700896716 /* UKMainThreadProxy.m in Sources */,
 				F40B350410B8637000896716 /* XspfMMainModel.xcdatamodel in Sources */,
 				F4BB56C710BA0F1400EE50B7 /* CompleteData.xcdatamodel in Sources */,
+				F4BB598B10BBFCDA00EE50B7 /* XspfMDateRowTemplate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -563,6 +574,15 @@
 				F49BD00F10A47780007136CE /* English */,
 			);
 			name = ListView.xib;
+			sourceTree = "<group>";
+		};
+		F4BB59BA10BC0C3700EE50B7 /* LibraryPredicate.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F4BB59B610BC0C2C00EE50B7 /* English */,
+				F4BB5A1510BC2C5800EE50B7 /* Japanese */,
+			);
+			name = LibraryPredicate.strings;
 			sourceTree = "<group>";
 		};
 		F4CE4CD110A6A13E004AC4FA /* LibraryView.xib */ = {

@@ -13,6 +13,15 @@
 @interface XspfMLibraryViewController : XspfMViewController
 {
 	IBOutlet NSTableView *tableView;
+	
+	IBOutlet NSWindow *predicatePanel;
+	IBOutlet NSPredicateEditor *editor;
+	IBOutlet NSTextField *nameField;
 }
+
+- (IBAction)newPredicate:(id)sender;
+- (IBAction)editPredicate:(id)sender;
+- (IBAction)deletePredicate:(id)sender;
+- (IBAction)didEndEditPredicate:(id)sender;
 
 @end
