@@ -143,6 +143,9 @@ static XspfManager *sharedInstance = nil;
 #pragma mark#### Actions ####
 - (IBAction)openXspf:(id)sender
 {
+	BOOL isSelected = [[controller valueForKeyPath:@"selectedObjects.@count"] boolValue];
+	if(!isSelected) return;
+	
 	XSPFMXspfObject *rep = [controller valueForKeyPath:@"selection.self"];
 	if(rep.deleted) {		
 		NSRunCriticalAlertPanel( NSLocalizedString(@"Xspf is Deleted", @"Xspf is Deleted"),
