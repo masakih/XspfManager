@@ -153,13 +153,28 @@ enum {
 	XspfMXspfListObject *obj = [self targetObject];
 	NSBeginInformationalAlertSheet(nil, nil, @"Cancel", nil, [[self view] window],
 								   self, @selector(didEndAskDelete:::), Nil, obj,
-								   @"Do you really delete smart library \"%@\"?", obj.name);
+								   NSLocalizedString(@"Do you really delete smart library \"%@\"?", @"Do you really delete smart library \"%@\"?"),
+								   obj.name);
 }
 - (IBAction)didEndEditPredicate:(id)sender
 {
 	[predicatePanel orderOut:self];
 	[NSApp endSheet:predicatePanel returnCode:[sender tag]];
 }
+
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem
+{
+	SEL action = [menuItem action];
+	if(action == @selector(editPredicate:)
+	   || action == @selector(deletePredicate:)) {
+		XspfMXspfListObject *obj = [self targetObject];
+		if(!obj) return NO;
+		if(obj.order == kLibraryOrder || obj.order == kFavoritesOrder) return NO;
+	}
+	
+	return YES;
+}
+		
 - (void)didEndEditPredicate:(id)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
 {
 	if(returnCode == NSCancelButton) return;
@@ -171,7 +186,7 @@ enum {
 		NSBeep();
 		NSBeginAlertSheet(nil, nil, nil, nil, [[self view] window],
 						  self, @selector(retryEditPredicate:::), Nil, contextInfo,
-						  @"Name must not be empty.");
+						  NSLocalizedString(@"Name must not be empty.", @"Name must not be empty."));
 		return;
 	}
 	
