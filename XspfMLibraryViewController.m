@@ -87,12 +87,45 @@ enum {
 	}
 	return nil;
 }
+- (BOOL)canUseNewSmartLibraryName:(NSString *)newName
+{
+	NSManagedObjectContext *moc = [self managedObjectContext];
+	NSError *error = nil;
+	NSFetchRequest *fetch;
+	NSPredicate *predicate;
+	NSInteger num;
+	
+	fetch = [[[NSFetchRequest alloc] init] autorelease];
+	[fetch setEntity:[NSEntityDescription entityForName:@"XspfList"
+								 inManagedObjectContext:moc]];
+	predicate = [NSPredicate predicateWithFormat:@"name = %@", newName];
+	[fetch setPredicate:predicate];
+	num = [moc countForFetchRequest:fetch
+							  error:&error];
+	
+	return num == 0;
+}
+- (NSString *)newSmartLibraryName
+{
+	NSString *template = NSLocalizedString(@"Untitled Library", @"Untitled Library");
+	
+	if([self canUseNewSmartLibraryName:template]) return template;
+	
+	NSInteger i = 1;
+	do {
+		NSString *name = [NSString stringWithFormat:@"%@ %d", template, i];
+		if([self canUseNewSmartLibraryName:name]) return name;
+	} while (i++ < INT_MAX);
+	
+	return @"hoge";
+}
 - (IBAction)newPredicate:(id)sender
 {
 	if([editor numberOfRows] == 0) {
 		[editor addRow:self];
 	}
 	
+	[nameField setStringValue:[self newSmartLibraryName]];
 	[nameField selectText:self];
 	
 	[NSApp beginSheet:predicatePanel
@@ -139,6 +172,7 @@ enum {
 		NSBeginAlertSheet(nil, nil, nil, nil, [[self view] window],
 						  self, @selector(retryEditPredicate:::), Nil, contextInfo,
 						  @"Name must not be empty.");
+		return;
 	}
 	
 	if([(id)contextInfo isKindOfClass:[NSString class]]) {
