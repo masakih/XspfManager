@@ -11,10 +11,12 @@
 
 @interface XspfMXspfListObject :  NSManagedObject  
 {
+	short order;
 }
 
 @property (retain) NSString * name;
 @property (retain) NSData * predicateData;
 @property (retain) NSPredicate *predicate;
+@property short order;
 
 @end
