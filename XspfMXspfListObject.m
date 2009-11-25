@@ -13,6 +13,7 @@
 
 @dynamic name;
 @dynamic predicateData;
+@dynamic order;
 
 - (NSPredicate *)predicate
 {
@@ -36,4 +37,27 @@
 	[self setValue:[NSKeyedArchiver archivedDataWithRootObject:aPredicate] forKey:@"predicateData"];
 }
 
+- (short)primitiveOrder
+{
+	return order;
+}
+- (void)setPrimitiveOrder:(short)newOrder
+{
+	order = newOrder;
+}
+- (short)order
+{
+	short value;
+	[self willAccessValueForKey:@"order"];
+	value = order;
+	[self didAccessValueForKey:@"order"];
+	
+	return value;
+}
+- (void)setOrder:(short)newOrder
+{
+	[self willChangeValueForKey:@"order"];
+	order = newOrder;
+	[self didChangeValueForKey:@"order"];
+}
 @end
