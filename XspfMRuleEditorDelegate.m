@@ -24,6 +24,10 @@
 		XspfMStringPredicate *pre;
 		pre = [XspfMStringPredicate simpleWithKeyPath:@"title" rightType:0 operator:0];
 		[simples addObject:pre];
+		pre = [XspfMAbsoluteDatePredicate simpleWithKeyPath:@"lastPlayDate" rightType:0 operator:0];
+		[simples addObject:pre];
+		pre = [XspfMAbsoluteDatePredicate simpleWithKeyPath:@"modificationDate" rightType:0 operator:0];
+		[simples addObject:pre];
 		pre = [XspfMAbsoluteDatePredicate simpleWithKeyPath:@"creationDate" rightType:0 operator:0];
 		[simples addObject:pre];
 	}
@@ -110,5 +114,29 @@ end:
 	return result;
 }
 
-
+- (NSDictionary *)ruleEditor:(NSRuleEditor *)editor
+  predicatePartsForCriterion:(id)criterion
+			withDisplayValue:(id)value
+					   inRow:(NSInteger)row
+{
+	id result = nil;
+	
+	NSRuleEditorRowType rowType = [editor rowTypeForRow:row];
+	if(rowType == NSRuleEditorRowTypeCompound) {
+		result = [compound predicateForChild:criterion withDisplayValue:value];
+		goto end;
+	}
+	
+	for(id s in simples) {
+		if([s isMyChild:criterion]) {
+			result = [s predicateForChild:criterion withDisplayValue:value];
+			goto end;
+		}
+	}
+	
+end:
+//	NSLog(@"predicate\tcriterion -> %@, value -> %@, row -> %d, result -> %@", criterion, value, row, result);
+	
+	return result;
+}
 @end
