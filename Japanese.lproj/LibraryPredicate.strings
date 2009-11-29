@@ -13,19 +13,15 @@
 "%[rating]@ %[is less than or equal to]@ %@" = "%1$[レートが]@ %3$@ %2$[以下]@ ";
 "%[lastPlayDate]@ %[is]@ %@" = "%1$[最後の再生日時が]@ %3$@ %2$[である]@ ";
 "%[lastPlayDate]@ %[is not]@ %@" = "%1$[最後の再生日時が]@ %3$@ %2$[でない]@ ";
-"%[lastPlayDate]@ %[is greater than or equal to]@ %@" = "%1$[最後の再生日時が]@ %3$@ %2$[以上]@ ";
-"%[lastPlayDate]@ %[is greater than]@ %@" = "%1$[最後の再生日時が]@ %3$@ %2$[より大きい]@ ";
-"%[lastPlayDate]@ %[is less than]@ %@" = "%1$[最後の再生日時が]@ %3$@ %2$[より小さい]@ ";
-"%[lastPlayDate]@ %[is less than or equal to]@ %@" = "%1$[最後の再生日時が]@ %3$@ %2$[以下]@ ";
+"%[lastPlayDate]@ %[is greater than]@ %@" = "%1$[最後の再生日時が]@ %3$@ %2$[以降
+]@ ";
+"%[lastPlayDate]@ %[is less than]@ %@" = "%1$[最後の再生日時が]@ %3$@ %2$[以前]@ ";
 "%[modificationDate]@ %[is]@ %@" = "%1$[変更日が]@ %3$@ %2$[である]@ ";
 "%[modificationDate]@ %[is not]@ %@" = "%1$[変更日が]@ %3$@ %2$[でない]@ ";
-"%[modificationDate]@ %[is greater than or equal to]@ %@" = "%1$[変更日が]@ %3$@ %2$[以上]@ ";
-"%[modificationDate]@ %[is greater than]@ %@" = "%1$[変更日が]@ %3$@ %2$[より大きい]@ ";
-"%[modificationDate]@ %[is less than]@ %@" = "%1$[変更日が]@ %3$@ %2$[より小さい]@ ";
-"%[modificationDate]@ %[is less than or equal to]@ %@" = "%1$[変更日が]@ %3$@ %2$[以下]@ ";
+"%[modificationDate]@ %[is greater than]@ %@" = "%1$[変更日が]@ %3$@ %2$[以降]@ ";
+"%[modificationDate]@ %[is less than]@ %@" = "%1$[変更日が]@ %3$@ %2$[以前]@ ";
 "%[creationDate]@ %[is]@ %@" = "%1$[作成日が]@ %3$@ %2$[である]@ ";
 "%[creationDate]@ %[is not]@ %@" = "%1$[作成日が]@ %3$@ %2$[でない]@ ";
-"%[creationDate]@ %[is greater than or equal to]@ %@" = "%1$[作成日が]@ %3$@ %2$[以上]@ ";
-"%[creationDate]@ %[is greater than]@ %@" = "%1$[作成日が]@ %3$@ %2$[より大きい]@ ";
-"%[creationDate]@ %[is less than]@ %@" = "%1$[作成日が]@ %3$@ %2$[より小さい]@ ";
-"%[creationDate]@ %[is less than or equal to]@ %@" = "%1$[作成日が]@ %3$@ %2$[以下]@ ";
+"%[creationDate]@ %[is greater than]@ %@" = "%1$[作成日が]@ %3$@ %2$[以降]@ ";
+"%[creationDate]@ %[is less than]@ %@" = "%1$[作成日が]@ %3$@ %2$[以前]@";
+"%[creationDate]@ %[between]@ %@ and %@" = "%1$[作成日が]@ %3$@ から %4$@ %2$[の間]@";

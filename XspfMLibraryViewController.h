@@ -18,6 +18,8 @@
 	IBOutlet NSPredicateEditor *editor;
 	IBOutlet NSTextField *nameField;
 	
+	IBOutlet NSRuleEditor *editor02;
+	
 	NSPredicate *selectedPredicate;
 }
 @property (retain) NSPredicate *selectedPredicate;

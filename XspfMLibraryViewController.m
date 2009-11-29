@@ -125,6 +125,10 @@ enum {
 		[editor addRow:self];
 	}
 	
+	if([editor02 numberOfRows] == 0) {
+		[editor02 addRow:self];
+	}
+	
 	[nameField setStringValue:[self newSmartLibraryName]];
 	[nameField selectText:self];
 	
@@ -212,6 +216,7 @@ enum {
 	
 	[[self managedObjectContext] deleteObject:contextInfo];
 }
+
 - (IBAction)test01:(id)sender
 {
 	NSArray *array = [editor rowTemplates];
