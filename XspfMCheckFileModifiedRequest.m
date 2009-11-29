@@ -12,7 +12,7 @@
 @implementation XspfMCheckFileModifiedRequest
 @synthesize object;
 
-inline BOOL nilOrNSNull(id obj)
+static inline BOOL nilOrNSNull(id obj)
 {
 	return !obj || obj == [NSNull null];
 }
