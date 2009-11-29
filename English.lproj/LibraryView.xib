@@ -8,9 +8,9 @@
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="83"/>
-			<integer value="1" id="9"/>
 			<integer value="260"/>
+			<integer value="1" id="9"/>
+			<integer value="83"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1238,7 +1238,7 @@
 																		<reference ref="783421854"/>
 																	</object>
 																</object>
-																<object class="NSMutableDictionary" id="912551942">
+																<object class="NSMutableDictionary" id="751361191">
 																	<bool key="EncodedWithXMLCoder">YES</bool>
 																	<object class="NSMutableArray" key="dict.sortedKeys">
 																		<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1589,7 +1589,7 @@
 																		<reference ref="169737098"/>
 																	</object>
 																</object>
-																<object class="NSMutableDictionary" id="39000030">
+																<object class="NSMutableDictionary" id="268134197">
 																	<bool key="EncodedWithXMLCoder">YES</bool>
 																	<object class="NSMutableArray" key="dict.sortedKeys">
 																		<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1716,7 +1716,7 @@
 																			<bool key="EncodedWithXMLCoder">YES</bool>
 																			<reference ref="508938568"/>
 																			<reference ref="956011361"/>
-																			<reference ref="912551942"/>
+																			<reference ref="751361191"/>
 																		</object>
 																		<object class="NSMutableArray">
 																			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1745,7 +1745,7 @@
 																			<bool key="EncodedWithXMLCoder">YES</bool>
 																			<reference ref="385726742"/>
 																			<reference ref="461999781"/>
-																			<reference ref="39000030"/>
+																			<reference ref="268134197"/>
 																		</object>
 																		<object class="NSMutableArray">
 																			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -2931,7 +2931,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">292</int>
+			<int key="maxID">293</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2999,7 +2999,6 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>editor</string>
 							<string>editor02</string>
-							<string>editor03</string>
 							<string>nameField</string>
 							<string>predicatePanel</string>
 							<string>tableView</string>
@@ -3007,7 +3006,6 @@
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>NSPredicateEditor</string>
-							<string>NSRuleEditor</string>
 							<string>NSRuleEditor</string>
 							<string>NSTextField</string>
 							<string>NSWindow</string>

@@ -183,8 +183,10 @@ enum {
 {
 	if(returnCode == NSCancelButton) return;
 	
-	NSPredicate *predicate = [editor predicate];
+	[editor02 reloadPredicate];
+	NSPredicate *predicate = [editor02 predicate];
 	NSLog(@"predicate -> %@", predicate);
+	
 	NSString *name = [nameField stringValue];
 	if([name length] == 0) {
 		NSBeep();

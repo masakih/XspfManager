@@ -27,6 +27,23 @@
 {
 	return child;
 }
+- (NSDictionary *)predicateForChild:(id)child withDisplayValue:(id)value
+{
+	NSDictionary *result = nil;
+	
+	NSUInteger type = 9999;
+	if([child isEqualToString:@"All"]) {
+		type = NSAndPredicateType;
+	} else if([child isEqualToString:@"Any"]) {
+		type = NSOrPredicateType;
+	}
+	if(type <  10) {
+		result = [NSDictionary dictionaryWithObject:[NSNumber numberWithUnsignedInt:type]
+											 forKey:NSRuleEditorPredicateCompoundType];
+	}
+	
+	return result;
+}
 @end
 
 @interface XspfMKeyValueHolder : NSObject
@@ -88,7 +105,7 @@
 - (NSInteger)numberOfChildrenForChild:(id)child {return 0;}
 - (id)childForChild:(id)child atIndex:(NSInteger)index {return nil;}
 - (id)displayValueForChild:(id)child {return nil;}
-
+- (NSDictionary *)predicateForChild:(id)child withDisplayValue:(id)value {return nil;}
 + (id)simpleWithKeyPath:(NSString *)inKeyPath rightType:(XspfMRightType)type operator:(NSPredicateOperatorType)operator
 {
 	return [[[self alloc] initWithKeyPath:inKeyPath rightType:type operator:operator] autorelease];
@@ -115,6 +132,10 @@
 	if([super isEqual:object]) return YES;
 	return [self.keyPath isEqualToString:obj.keyPath];
 }
+- (void)setOwner:(NSRuleEditor *)editor
+{
+	owner = editor;
+}
 - (BOOL)isMyChild:(id)child
 {
 	if(!child) return YES;
@@ -135,6 +156,14 @@
 @end
 
 
+static NSString *XspfMStringPredicateLeftExpression = @"left";
+static NSString *XspfMStringPredicateRightExpression = @"field";
+static NSString *XspfMStringPredicateIsEqualOperator = @"is";
+static NSString *XspfMStringPredicateIsNotEqualOperator = @"is not";
+static NSString *XspfMStringPredicateContainsOperator = @"contains";
+static NSString *XspfMStringPredicateBeginsWithOperator = @"begins with";
+static NSString *XspfMStringPredicateEndsWithOperator = @"ends with";
+
 @implementation XspfMStringPredicate
 
 - (NSInteger)numberOfChildrenForChild:(id)child
@@ -144,33 +173,33 @@
 	child = [self myChildFromChild:child];
 	if(!child) return 0;
 	
-	if([child isEqualToString:@"left"]) return 5;
-	if([child isEqualToString:@"field"]) return 0;
+	if([child isEqualToString:XspfMStringPredicateLeftExpression]) return 5;
+	if([child isEqualToString:XspfMStringPredicateRightExpression]) return 0;
 	
 	return 1;
 }
 - (id)childForChild:(id)child atIndex:(NSInteger)index
 {
-	if(!child) return [self childFromMyChild:@"left"];
+	if(!child) return [self childFromMyChild:XspfMStringPredicateLeftExpression];
 	
 	child = [self myChildFromChild:child];
 	if(!child) return nil;
 	
-	if([child isEqualToString:@"left"]) {
+	if([child isEqualToString:XspfMStringPredicateLeftExpression]) {
 		switch(index) {
 			case 0:
-				return [self childFromMyChild:@"is"];
+				return [self childFromMyChild:XspfMStringPredicateIsEqualOperator];
 			case 1:
-				return [self childFromMyChild:@"is not"];
+				return [self childFromMyChild:XspfMStringPredicateIsNotEqualOperator];
 			case 2:
-				return [self childFromMyChild:@"contains"];
+				return [self childFromMyChild:XspfMStringPredicateContainsOperator];
 			case 3:
-				return [self childFromMyChild:@"begins with"];
+				return [self childFromMyChild:XspfMStringPredicateBeginsWithOperator];
 			case 4:
-				return [self childFromMyChild:@"ends with"];
+				return [self childFromMyChild:XspfMStringPredicateEndsWithOperator];
 		}
 	} else {
-		return [self childFromMyChild:@"field"];
+		return [self childFromMyChild:XspfMStringPredicateRightExpression];
 	}
 	
 	return nil;
@@ -181,7 +210,7 @@
 	child = [self myChildFromChild:child];
 	if(!child) return nil;
 	
-	if([child isEqualToString:@"left"]) {
+	if([child isEqualToString:XspfMStringPredicateLeftExpression]) {
 		if(1) {
 			return self.keyPath;
 		} else {
@@ -190,7 +219,7 @@
 		}
 	}
 	
-	if([child isEqualToString:@"field"]) {
+	if([child isEqualToString:XspfMStringPredicateRightExpression]) {
 		id text = [[[NSTextField alloc] initWithFrame:NSMakeRect(0,0,100,19)] autorelease];
 		[[text cell] setControlSize:NSSmallControlSize];
 		[text setFont:[NSFont controlContentFontOfSize:[NSFont systemFontSizeForControlSize:NSSmallControlSize]]];
@@ -208,7 +237,57 @@
 	
 	return child;
 }
+- (NSDictionary *)predicateForChild:(id)child withDisplayValue:(id)value
+{
+	NSMutableDictionary *result = nil;
+	
+	child = [self myChildFromChild:child];
+	if(!child) return nil;
+	
+	if([child isEqualToString:XspfMStringPredicateLeftExpression]) {
+		id exp = [NSExpression expressionForKeyPath:self.keyPath];
+		result = [NSDictionary dictionaryWithObject:exp forKey:NSRuleEditorPredicateLeftExpression];
+	} else if([child isEqualToString:XspfMStringPredicateRightExpression]) {
+		id exp = [NSExpression expressionForConstantValue:[value stringValue]];
+		result = [NSDictionary dictionaryWithObject:exp forKey:NSRuleEditorPredicateRightExpression];
+	} else {
+		NSPredicateOperatorType type = 9999;
+		if([child isEqualToString:XspfMStringPredicateIsEqualOperator]) {
+			type = NSEqualToPredicateOperatorType;
+		} else if([child isEqualToString:XspfMStringPredicateIsNotEqualOperator]) {
+			type = NSNotEqualToPredicateOperatorType;
+		} else if([child isEqualToString:XspfMStringPredicateContainsOperator]) {
+			type = NSContainsPredicateOperatorType;
+		} else if([child isEqualToString:XspfMStringPredicateBeginsWithOperator]) {
+			type = NSBeginsWithPredicateOperatorType;
+		} else if([child isEqualToString:XspfMStringPredicateEndsWithOperator]) {
+			type = NSEndsWithPredicateOperatorType;
+		}
+		
+		if(type < 999) {
+			result = [NSDictionary dictionaryWithObjectsAndKeys:
+					  [NSNumber numberWithUnsignedInt:type],
+					  NSRuleEditorPredicateOperatorType,
+					  [NSNumber numberWithInt:NSCaseInsensitivePredicateOption | NSDiacriticInsensitivePredicateOption],
+					  NSRuleEditorPredicateOptions,
+					  nil];
+		}
+	}
+	
+	return result;
+}
+
 @end
+
+static NSString *XspfMAbDatePredicateLeftExpression = @"left";
+static NSString *XspfMAbDatePredicatePicker01 = @"date";
+static NSString *XspfMAbDatePredicatePicker02 = @"beginDate";
+static NSString *XspfMAbDatePredicatePicker03 = @"endDate";
+static NSString *XspfMAbDatePredicateIsEqualOperator = @"is the date";
+static NSString *XspfMAbDatePredicateLessThanOperator = @"is after the date";
+static NSString *XspfMAbDatePredicateGreaterThanOperator = @"is before the date";
+static NSString *XspfMAbDatePredicateBetweenOperator = @"is in the range";
+static NSString *XspfMAbDatePredicateAndField = @"andField";
 
 @implementation XspfMAbsoluteDatePredicate
 - (NSView *)datePicker
@@ -230,43 +309,41 @@
 	child = [self myChildFromChild:child];
 	if(!child) return 0;
 	
-	if([child isEqualToString:@"left"]) return 5;
-	if([child isEqualToString:@"between"]) return 1;
-	if([child isEqualToString:@"beginDate"]) return 1;
-	if([child isEqualToString:@"andField"]) return 1;
-	if([child isEqualToString:@"endDate"]) return 0;
-	if([child isEqualToString:@"date"]) return 0;
+	if([child isEqualToString:XspfMAbDatePredicateLeftExpression]) return 4;
+	if([child isEqualToString:XspfMAbDatePredicateBetweenOperator]) return 1;
+	if([child isEqualToString:XspfMAbDatePredicatePicker02]) return 1;
+	if([child isEqualToString:XspfMAbDatePredicateAndField]) return 1;
+	if([child isEqualToString:XspfMAbDatePredicatePicker03]) return 0;
+	if([child isEqualToString:XspfMAbDatePredicatePicker01]) return 0;
 	
 	return 1;
 }
 - (id)childForChild:(id)child atIndex:(NSInteger)index
 {
-	if(!child) return [self childFromMyChild:@"left"];
+	if(!child) return [self childFromMyChild:XspfMAbDatePredicateLeftExpression];
 	
 	child = [self myChildFromChild:child];
 	if(!child) return nil;
 	
-	if([child isEqualToString:@"left"]) {
+	if([child isEqualToString:XspfMAbDatePredicateLeftExpression]) {
 		switch(index) {
 			case 0:
-				return [self childFromMyChild:@"is"];
+				return [self childFromMyChild:XspfMAbDatePredicateIsEqualOperator];
 			case 1:
-				return [self childFromMyChild:@"is not"];
+				return [self childFromMyChild:XspfMAbDatePredicateLessThanOperator];
 			case 2:
-				return [self childFromMyChild:@"is less than"];
+				return [self childFromMyChild:XspfMAbDatePredicateGreaterThanOperator];
 			case 3:
-				return [self childFromMyChild:@"is greater than"];
-			case 4:
-				return [self childFromMyChild:@"between"];
+				return [self childFromMyChild:XspfMAbDatePredicateBetweenOperator];
 		}
-	} else if([child isEqualToString:@"between"]) {
-		return [self childFromMyChild:@"beginDate"];
-	} else if([child isEqualToString:@"beginDate"]) {
-		return [self childFromMyChild:@"andField"];
-	} else if([child isEqualToString:@"andField"]) {
-		return [self childFromMyChild:@"endDate"];
+	} else if([child isEqualToString:XspfMAbDatePredicateBetweenOperator]) {
+		return [self childFromMyChild:XspfMAbDatePredicatePicker02];
+	} else if([child isEqualToString:XspfMAbDatePredicatePicker02]) {
+		return [self childFromMyChild:XspfMAbDatePredicateAndField];
+	} else if([child isEqualToString:XspfMAbDatePredicateAndField]) {
+		return [self childFromMyChild:XspfMAbDatePredicatePicker03];
 	} else {
-		return [self childFromMyChild:@"date"];
+		return [self childFromMyChild:XspfMAbDatePredicatePicker01];
 	}
 	
 	return nil;
@@ -277,7 +354,7 @@
 	child = [self myChildFromChild:child];
 	if(!child) return nil;
 	
-	if([child isEqualToString:@"left"]) {
+	if([child isEqualToString:XspfMAbDatePredicateLeftExpression]) {
 		if(1) {
 			return self.keyPath;
 		} else {
@@ -286,23 +363,23 @@
 		}
 	}
 	
-	if([child isEqualToString:@"date"]) {
+	if([child isEqualToString:XspfMAbDatePredicatePicker01]) {
 		id date = [self datePicker];
 		
 		return date;
 	}
-	if([child isEqualToString:@"beginDate"]) {
+	if([child isEqualToString:XspfMAbDatePredicatePicker02]) {
 		id date = [self datePicker];
 		
 		return date;
 	}
-	if([child isEqualToString:@"endDate"]) {
+	if([child isEqualToString:XspfMAbDatePredicatePicker03]) {
 		id date = [self datePicker];
 		
 		return date;
 	}
-	if([child isEqualToString:@"andField"]) {
-		return @"and";
+	if([child isEqualToString:XspfMAbDatePredicateAndField]) {
+		return @"to";
 	}
 	
 	while(0){
