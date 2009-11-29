@@ -175,7 +175,7 @@
 		F4BB598910BBFCDA00EE50B7 /* XspfMDateRowTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMDateRowTemplate.h; sourceTree = "<group>"; };
 		F4BB598A10BBFCDA00EE50B7 /* XspfMDateRowTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMDateRowTemplate.m; sourceTree = "<group>"; };
 		F4BB59B610BC0C2C00EE50B7 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/LibraryPredicate.strings; sourceTree = "<group>"; };
-		F4BB5A1510BC2C5800EE50B7 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Japanese; path = Japanese.lproj/LibraryPredicate.strings; sourceTree = "<group>"; };
+		F4BB5A1510BC2C5800EE50B7 /* Japanese */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Japanese; path = Japanese.lproj/LibraryPredicate.strings; sourceTree = "<group>"; };
 		F4CE4CD210A6A13E004AC4FA /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/LibraryView.xib; sourceTree = "<group>"; };
 		F4CE4D0310A6A7A9004AC4FA /* XspfMLibraryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMLibraryViewController.h; sourceTree = "<group>"; };
 		F4CE4D0410A6A7A9004AC4FA /* XspfMLibraryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMLibraryViewController.m; sourceTree = "<group>"; };
