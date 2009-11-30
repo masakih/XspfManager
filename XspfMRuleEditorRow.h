@@ -22,7 +22,6 @@
 typedef NSInteger XspfMRightType;
 @interface XspfMSimple : NSObject <XspfMPredicate>
 {
-	NSRuleEditor *owner;
 	NSString *keyPath;
 }
 @property (copy) NSString *keyPath;
@@ -30,18 +29,27 @@ typedef NSInteger XspfMRightType;
 + (id)simpleWithKeyPath:(NSString *)keyPath rightType:(XspfMRightType)type operator:(NSPredicateOperatorType)operator;
 - (id)initWithKeyPath:(NSString *)keyPath rightType:(XspfMRightType)type operator:(NSPredicateOperatorType)operator;
 
-- (void)setOwner:(NSRuleEditor *)editor;
-
+- (void)setup; // for subclass.
 - (BOOL)isMyChild:(id)child;
 - (id)myChildFromChild:(id)child;
 - (id)childFromMyChild:(id)myChild;
 @end
 
 @interface XspfMStringPredicate : XspfMSimple
+{
+	NSString *fieldValue;
+}
+@property (copy) NSString *fieldValue;
 @end
 @interface XspfMNumberPredicate : XspfMSimple
 @end
 @interface XspfMAbsoluteDatePredicate : XspfMSimple
+{
+	NSDate *firstValue;
+	NSDate *secondValue;
+}
+@property (copy) NSDate *firstValue;
+@property (copy) NSDate *secondValue;
 @end
 @interface XspfMRelativeDatePredicate : XspfMSimple
 @end

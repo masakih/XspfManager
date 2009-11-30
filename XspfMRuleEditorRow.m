@@ -114,6 +114,7 @@
 {
 	[super init];
 	self.keyPath = inKeyPath;
+	[self setup];
 	
 	return self;
 }
@@ -132,10 +133,7 @@
 	if([super isEqual:object]) return YES;
 	return [self.keyPath isEqualToString:obj.keyPath];
 }
-- (void)setOwner:(NSRuleEditor *)editor
-{
-	owner = editor;
-}
+- (void)setup {}
 - (BOOL)isMyChild:(id)child
 {
 	if(!child) return YES;
@@ -145,7 +143,6 @@
 - (id)myChildFromChild:(id)child
 {
 	XspfMKeyValueHolder *holder = child;
-//	if(holder.key == self) return holder.value;
 	if([holder.key isEqual:self]) return holder.value;
 	return nil;
 }
@@ -165,7 +162,27 @@ static NSString *XspfMStringPredicateBeginsWithOperator = @"begins with";
 static NSString *XspfMStringPredicateEndsWithOperator = @"ends with";
 
 @implementation XspfMStringPredicate
-
+@synthesize fieldValue;
+- (void)setup
+{
+	self.fieldValue = @"";
+}
+- (id)textField
+{
+	id text = [[[NSTextField alloc] initWithFrame:NSMakeRect(0,0,100,19)] autorelease];
+	[[text cell] setControlSize:NSSmallControlSize];
+	[text setFont:[NSFont controlContentFontOfSize:[NSFont systemFontSizeForControlSize:NSSmallControlSize]]];
+	[text setStringValue:@"0123456"];
+	[text sizeToFit];
+	[text setStringValue:self.fieldValue];
+	[text setDelegate:self];
+	
+	return text;
+}
+- (void)controlTextDidChange:(NSNotification *)obj
+{
+	self.fieldValue = [[obj object] stringValue];
+}
 - (NSInteger)numberOfChildrenForChild:(id)child
 {
 	if(!child) return 1;
@@ -220,12 +237,7 @@ static NSString *XspfMStringPredicateEndsWithOperator = @"ends with";
 	}
 	
 	if([child isEqualToString:XspfMStringPredicateRightExpression]) {
-		id text = [[[NSTextField alloc] initWithFrame:NSMakeRect(0,0,100,19)] autorelease];
-		[[text cell] setControlSize:NSSmallControlSize];
-		[text setFont:[NSFont controlContentFontOfSize:[NSFont systemFontSizeForControlSize:NSSmallControlSize]]];
-		[text setStringValue:@"0123456"];
-		[text sizeToFit];
-		[text setStringValue:@""];
+		id text = [self textField];
 		
 		return text;
 	}
@@ -290,6 +302,13 @@ static NSString *XspfMAbDatePredicateBetweenOperator = @"is in the range";
 static NSString *XspfMAbDatePredicateAndField = @"andField";
 
 @implementation XspfMAbsoluteDatePredicate
+@synthesize firstValue;
+@synthesize secondValue;
+
+- (void)setup
+{
+	self.firstValue = self.secondValue = [NSDate dateWithTimeIntervalSinceNow:0.0];
+}
 - (NSView *)datePicker
 {
 	id date = [[[NSDatePicker alloc] initWithFrame:NSMakeRect(0,0,100,19)] autorelease];
@@ -299,9 +318,24 @@ static NSString *XspfMAbDatePredicateAndField = @"andField";
 	[date setDrawsBackground:YES];
 	[date setDateValue:[NSDate dateWithTimeIntervalSinceNow:0.0]];
 	[date sizeToFit];
+	[date setDelegate:self];
 	
 	return date;
 }
+- (void)datePickerCell:(NSDatePickerCell *)aDatePickerCell
+validateProposedDateValue:(NSDate **)proposedDateValue
+		  timeInterval:(NSTimeInterval *)proposedTimeInterval
+{
+	switch([aDatePickerCell tag]) {
+		case 1000:
+			self.firstValue = [aDatePickerCell dateValue];
+			break;
+		case 2000:
+			self.secondValue = [aDatePickerCell dateValue];
+			break;
+	}
+}
+
 - (NSInteger)numberOfChildrenForChild:(id)child
 {
 	if(!child) return 1;
@@ -365,16 +399,22 @@ static NSString *XspfMAbDatePredicateAndField = @"andField";
 	
 	if([child isEqualToString:XspfMAbDatePredicatePicker01]) {
 		id date = [self datePicker];
+		[date setTag:1000];
+		[date setDateValue:self.firstValue];
 		
 		return date;
 	}
 	if([child isEqualToString:XspfMAbDatePredicatePicker02]) {
 		id date = [self datePicker];
+		[date setTag:1000];
+		[date setDateValue:self.firstValue];
 		
 		return date;
 	}
 	if([child isEqualToString:XspfMAbDatePredicatePicker03]) {
 		id date = [self datePicker];
+		[date setTag:2000];
+		[date setDateValue:self.secondValue];
 		
 		return date;
 	}

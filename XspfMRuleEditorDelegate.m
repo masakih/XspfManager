@@ -33,6 +33,36 @@
 	}
 }
 
+- (void)showPredicate:(id)predicate
+{
+	if([predicate isKindOfClass:[NSCompoundPredicate class]]) {
+		NSArray *sub = [predicate subpredicates];
+		NSLog(@"-> %d(%d)\n|\n-->",[predicate compoundPredicateType], [sub count]);
+		for(id p in sub) {
+			if([p isKindOfClass:[NSCompoundPredicate class]]) {
+				[self showPredicate:p];
+			} else if([p isKindOfClass:[NSComparisonPredicate class]]) {
+				NSLog(@"--> (Comparision) ope->%d, mod->%d, left->%@, right->%@, SEL->%s, opt->%u",
+				[p predicateOperatorType], [p comparisonPredicateModifier],
+				[p leftExpression], [p rightExpression],
+				[p customSelector], [p options]);
+			} else if([p isKindOfClass:[NSPredicate class]]) {
+				NSLog(@"--> %@", p);
+			} else {
+				NSLog(@"predicate class is %@", NSStringFromClass([p class]));
+			}
+		}
+	} else {
+		NSLog(@"???predicate class is %@", NSStringFromClass([predicate class]));
+	}
+}
+- (void)setPredicate:(id)predicate
+{
+	NSLog(@"predicate -> %@", predicate);
+//	NSLog(@"Predicate class is %@", [predicate class]);
+	
+	[self showPredicate:predicate];
+}
 #pragma mark#### NSRuleEditor Delegate ####
 - (NSInteger)ruleEditor:(NSRuleEditor *)editor
 numberOfChildrenForCriterion:(id)criterion

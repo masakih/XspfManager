@@ -145,6 +145,7 @@ enum {
 	[nameField selectText:self];
 	
 	self.selectedPredicate = obj.predicate;
+	[ruleEditorDelegate setPredicate:obj.predicate];
 	
 	[NSApp beginSheet:predicatePanel
 	   modalForWindow:[tableView window]
@@ -185,7 +186,7 @@ enum {
 	
 	[editor02 reloadPredicate];
 	NSPredicate *predicate = [editor02 predicate];
-	NSLog(@"predicate -> %@", predicate);
+	[ruleEditorDelegate setPredicate:predicate];
 	
 	NSString *name = [nameField stringValue];
 	if([name length] == 0) {
