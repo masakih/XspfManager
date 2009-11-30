@@ -1,5 +1,6 @@
 "%[All]@ of the following are true" = "%[すべて]@ の条件が一致したら";
 "%[Any]@ of the following are true" = "%[いずれか]@ の条件が一致したら";
+
 "%[title]@ %[contains]@ %@" = "%1$[タイトルが]@ %3$@ %2$[を含む]@";
 "%[title]@ %[begins with]@ %@" = "%1$[タイトルが]@ %3$@ %2$[で始まる]@ ";
 "%[title]@ %[ends with]@ %@" = "%1$[タイトルが]@ %3$@ %2$[で終わる]@ ";

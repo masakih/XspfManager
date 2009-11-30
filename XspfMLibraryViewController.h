@@ -19,6 +19,7 @@
 	IBOutlet NSTextField *nameField;
 	
 	IBOutlet NSRuleEditor *editor02;
+	IBOutlet id ruleEditorDelegate;
 	
 	NSPredicate *selectedPredicate;
 }
