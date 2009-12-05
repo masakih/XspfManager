@@ -136,19 +136,22 @@
 - (void)setup {}
 - (BOOL)isMyChild:(id)child
 {
-	if(!child) return YES;
-	child = [self myChildFromChild:child];
-	return child != nil;
+//	if(!child) return YES;
+//	child = [self myChildFromChild:child];
+//	return child != nil;
+	return YES;
 }
 - (id)myChildFromChild:(id)child
 {
-	XspfMKeyValueHolder *holder = child;
-	if([holder.key isEqual:self]) return holder.value;
-	return nil;
+//	XspfMKeyValueHolder *holder = child;
+//	if([holder.key isEqual:self]) return holder.value;
+//	return nil;
+	return child;
 }
 - (id)childFromMyChild:(id)myChild
 {
-	return [XspfMKeyValueHolder holderWithValue:myChild forKey:self];
+//	return [XspfMKeyValueHolder holderWithValue:myChild forKey:self];
+	return myChild;
 }
 @end
 
