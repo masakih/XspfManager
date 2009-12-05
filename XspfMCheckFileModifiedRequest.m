@@ -39,7 +39,7 @@ static inline BOOL nilOrNSNull(id obj)
 {
 	NSError *error = nil;
 	
-	id attrs = [[NSFileManager defaultManager ] attributesOfItemAtPath:[self.object.url path] error:&error];
+	id attrs = [[NSFileManager defaultManager ] attributesOfItemAtPath:self.object.filePath error:&error];
 	if(!attrs) {
 		if(error) {
 			NSLog(@"Error at checking XSPF. %@", error);
