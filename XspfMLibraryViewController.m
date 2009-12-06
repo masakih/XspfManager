@@ -186,8 +186,13 @@ enum {
 	
 	[editor02 reloadPredicate];
 	NSPredicate *predicate = [editor02 predicate];
-	[ruleEditorDelegate setPredicate:predicate];
+//	[ruleEditorDelegate setPredicate:predicate];
 	
+	if(!predicate || ![predicate isKindOfClass:[NSPredicate class]]) {
+		NSLog(@"????");
+		NSBeep();
+		return;
+	}
 	NSString *name = [nameField stringValue];
 	if([name length] == 0) {
 		NSBeep();

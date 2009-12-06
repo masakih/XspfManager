@@ -21,6 +21,7 @@
 	NSArray *rowTemplate;
 	NSMutableArray *rowIDs;
 	NSMutableDictionary *rowFields;
+	NSArray *predicateRows;
 }
 
 @end
