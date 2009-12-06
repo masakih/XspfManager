@@ -38,53 +38,6 @@ static NSString *XspfMStringPredicateEndsWithOperator = @"ends with";
 
 
 
-- (id)uniqueObject
-{
-	id object = nil;
-	unsigned i = 0;
-	do {
-		object = [NSNumber numberWithUnsignedInt:i++];
-	} while([rowIDs containsObject:object]);
-	
-	return object;
-}
-- (NSView *)fieldForName:(NSString *)name inRow:(NSInteger)row
-{
-	// throw exception.
-	id rowID = [rowIDs objectAtIndex:row];
-	
-	id fields= [rowFields objectForKey:rowID];
-	if(!fields) return nil;
-	
-	return [fields objectForKey:name];
-}
-- (void)setField:(NSView *)field forName:(NSString *)name inRow:(NSInteger)row
-{
-	id rowID = nil;
-	if([rowID count] < row) {
-		rowID = [self uniqueObject];
-	} else {
-		rowID = [rowIDs objectAtIndex:row];
-	}
-	id fields = [rowFields objectForKey:rowID];
-	if(!fields) {
-		fields = [NSMutableDictionary dictionary];
-	}
-	[fields setObject:field forKey:name];
-}
-
-- (NSInteger)tagAForType:(UInt16)type inRow:(UInt16)row
-{
-	return type + row << 16;
-}
-- (UInt16) typeForTag:(NSInteger)tag
-{
-	return 0x00FF & tag;
-}
-- (UInt16)rowForTag:(NSInteger)tag
-{
-	return tag >> 16;
-}
 - (NSExpression *)rangeDateFromDisplayValues:(NSArray *)displayValues
 {
 	id field01 = nil;
@@ -123,7 +76,7 @@ static NSString *XspfMStringPredicateEndsWithOperator = @"ends with";
 	id text = [[[NSTextField alloc] initWithFrame:NSMakeRect(0,0,100,19)] autorelease];
 	[[text cell] setControlSize:NSSmallControlSize];
 	[text setFont:[NSFont controlContentFontOfSize:[NSFont systemFontSizeForControlSize:NSSmallControlSize]]];
-	[text setStringValue:@"0123456"];
+	[text setStringValue:@"1234567890"];
 	[text sizeToFit];
 	[text setStringValue:@""];
 	[text setDelegate:self];
@@ -191,34 +144,47 @@ static NSString *XspfMStringPredicateEndsWithOperator = @"ends with";
 	NSMutableDictionary *result = [NSMutableDictionary dictionary];
 	for(id row in template) {
 		id criteria = [row valueForKey:XspfMREDCriteriaKey];
-//		if(criteria) {
-//			criteria = [self buildRowsFromTemplate:criteria];
-//		}
 		id name = [row valueForKey:XspfMREDNameKey];
 		[result setObject:criteria forKey:name];
 	}
 	
 	return result;
 }
+- (id)criteriaWithKeyPath:(NSString *)keypath
+{
+	NSString *key = nil;
+	if([keypath isEqualToString:@"title"]) {
+		key = @"String";
+	} else if([keypath isEqualToString:@"rating"]) {
+		key = @"Rate";
+	}
+	if(key) {
+		id row = [rowTemplate valueForKey:key];
+		id c = [[row objectAtIndex:0] mutableCopy];
+		[c setValue:keypath forKey:XspfMREDValueKey];
+		return [NSArray arrayWithObject:c];
+	}
+	
+	if([[NSArray arrayWithObjects:@"lastPlayDate", @"modificationDate", @"creationDate", nil] containsObject:keypath]) {
+		id keys = [NSArray arrayWithObjects:@"AbDate", nil];
+		id result = [NSMutableArray array];
+		for(key in keys) {
+			id row = [rowTemplate valueForKey:key];
+			id c = [[row objectAtIndex:0] mutableCopy];
+			[c setValue:keypath forKey:XspfMREDValueKey];
+			[result addObject:c];
+		}
+		
+		return result;
+	}
+	
+	return nil;
+}
 - (void)awakeFromNib
 {
 	if(!compound) {
 		compound = [[XspfMCompound alloc] init];
 	}
-//	if(!simples) {
-//		simples = [NSMutableArray array];
-//		[simples retain];
-//		
-//		XspfMStringPredicate *pre;
-//		pre = [XspfMStringPredicate simpleWithKeyPath:@"title" rightType:0 operator:0];
-//		[simples addObject:pre];
-//		pre = [XspfMAbsoluteDatePredicate simpleWithKeyPath:@"lastPlayDate" rightType:0 operator:0];
-//		[simples addObject:pre];
-//		pre = [XspfMAbsoluteDatePredicate simpleWithKeyPath:@"modificationDate" rightType:0 operator:0];
-//		[simples addObject:pre];
-//		pre = [XspfMAbsoluteDatePredicate simpleWithKeyPath:@"creationDate" rightType:0 operator:0];
-//		[simples addObject:pre];
-//	}
 	
 	rowIDs = [[NSMutableArray array] retain];
 	rowFields = [[NSMutableDictionary dictionary] retain];
@@ -236,30 +202,16 @@ static NSString *XspfMStringPredicateEndsWithOperator = @"ends with";
 	
 	NSMutableArray *newRows = [NSMutableArray array];
 	
-	id row = [rowTemplate valueForKey:@"String"];
-	row = [row mutableCopy];
-	id c = [row objectAtIndex:0];
-	[c setValue:@"title" forKey:XspfMREDValueKey];
-	[newRows addObject:c];
-	[row release];
+	id c = [self criteriaWithKeyPath:@"title"];
+	if(c) [newRows addObjectsFromArray:c];
 	
-	row = [rowTemplate valueForKey:@"AbDate"];
-	row = [row mutableCopy];
-	c = [row objectAtIndex:0];
 	for(id keyPath in [NSArray arrayWithObjects:@"lastPlayDate", @"modificationDate", @"creationDate", nil]) {
-		c = [c mutableCopy];
-		[c setValue:keyPath forKey:XspfMREDValueKey];
-		[newRows addObject:c];
-		[c release];
+		c = [self criteriaWithKeyPath:keyPath];
+		if(c) [newRows addObjectsFromArray:c];
 	}
-	[row release];
 	
-	row = [rowTemplate valueForKey:@"Rate"];
-	row = [row mutableCopy];
-	c = [row objectAtIndex:0];
-	[c setValue:@"rating" forKey:XspfMREDValueKey];
-	[newRows addObject:c];
-	[row release];
+	c = [self criteriaWithKeyPath:@"rating"];
+	if(c) [newRows addObjectsFromArray:c];
 	
 	rows = [newRows retain];
 	
@@ -356,10 +308,7 @@ static NSString *XspfMStringPredicateEndsWithOperator = @"ends with";
 		id disp = [NSArray arrayWithObjects:@"title", value02, value03, nil];
 		id type = [NSNumber numberWithInt:0];
 //		id subs = [NSArray array];
-		id row = [rowTemplate valueForKey:@"String"];
-		row = [[row mutableCopy] autorelease];
-		id c = [row objectAtIndex:0];
-		[c setValue:@"title" forKey:XspfMREDValueKey];
+		id row = [self criteriaWithKeyPath:@"title"];
 		
 		criteria01 = [NSMutableDictionary dictionaryWithObjectsAndKeys:
 					  row, XspfMREDCriteriaKey,
@@ -380,7 +329,7 @@ static NSString *XspfMStringPredicateEndsWithOperator = @"ends with";
 }
 - (void)setPredicate:(id)predicate
 {
-	NSLog(@"predicate -> %@", predicate);
+	NSLog(@"predicate -> (%@) %@", NSStringFromClass([predicate class]), predicate);
 //	NSLog(@"Predicate class is %@", [predicate class]);
 	
 //	NSLog(@"old rows -> %@", predicateRows);

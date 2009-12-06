@@ -193,6 +193,9 @@ enum {
 		NSBeep();
 		return;
 	}
+	if(![predicate isKindOfClass:[NSCompoundPredicate class]]) {
+		predicate = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObject:predicate]];
+	}
 	NSString *name = [nameField stringValue];
 	if([name length] == 0) {
 		NSBeep();
