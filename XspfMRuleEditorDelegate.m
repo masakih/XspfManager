@@ -242,6 +242,88 @@ static NSString *XspfMStringPredicateEndsWithOperator = @"ends with";
 		NSLog(@"???predicate class is %@", NSStringFromClass([predicate class]));
 	}
 }
+- (NSArray *)displayValuesWithPredicate:(NSComparisonPredicate *)predicate
+{
+	id value02 = nil; id value03 = nil;
+	id leftKeyPath = [[predicate leftExpression] keyPath];
+	
+	switch([predicate predicateOperatorType]) {
+		case NSEqualToPredicateOperatorType:
+			value02 = XspfMStringPredicateIsEqualOperator;
+			break;
+		case NSNotEqualToPredicateOperatorType:
+			value02 = XspfMStringPredicateIsNotEqualOperator;
+			break;
+		case NSContainsPredicateOperatorType:
+			value02 = XspfMStringPredicateContainsOperator;
+			break;
+		case NSBeginsWithPredicateOperatorType:
+			value02 = XspfMStringPredicateBeginsWithOperator;
+			break;
+		case NSEndsWithPredicateOperatorType:
+			value02 = XspfMStringPredicateEndsWithOperator;
+			break;
+	}
+	id rightConstant = [[predicate rightExpression] constantValue];
+	value03 = [self textField];
+	[value03 setObjectValue:rightConstant];
+	
+	id disp = [NSArray arrayWithObjects:leftKeyPath, value02, value03, nil];
+	
+	return disp;
+}
+- (NSArray *)ratingDisplayValuesWithPredicate:(NSComparisonPredicate *)predicate
+{
+	id value02 = nil; id value03 = nil;
+	id leftKeyPath = [[predicate leftExpression] keyPath];
+	
+	switch([predicate predicateOperatorType]) {
+		case NSEqualToPredicateOperatorType:
+			value02 = XspfMStringPredicateIsEqualOperator;
+			break;
+		case NSGreaterThanPredicateOperatorType:
+			value02 = @"is greater than";
+			break;
+		case NSLessThanPredicateOperatorType:
+			value02 = @"is less than";
+			break;
+	}
+	id rightConstant = [[predicate rightExpression] constantValue];
+	value03 = [self ratingIndicator];
+	[value03 setObjectValue:rightConstant];
+	
+	id disp = [NSArray arrayWithObjects:leftKeyPath, value02, value03, nil];
+
+	return disp;
+}
+- (NSArray *)dateDisplayValuesWithPredicate:(NSComparisonPredicate *)predicate
+{
+	id value02 = nil; id value03 = nil;
+	id leftKeyPath = [[predicate leftExpression] keyPath];
+	
+	switch([predicate predicateOperatorType]) {
+		case NSEqualToPredicateOperatorType:
+			value02 = @"is the date";
+			break;
+		case NSGreaterThanPredicateOperatorType:
+			value02 = @"is after the date";
+			break;
+		case NSLessThanPredicateOperatorType:
+			value02 = @"is before the date";
+			break;
+		case NSBetweenPredicateOperatorType:
+			return [self dateRangeDisplayValuesWithPredicate:predicate];
+			
+	}
+	id rightConstant = [[predicate rightExpression] constantValue];
+	value03 = [self datePicker];
+	[value03 setObjectValue:rightConstant];
+	
+	id disp = [NSArray arrayWithObjects:leftKeyPath, value02, value03, nil];
+	
+	return disp;
+}
+
 - (id)buildRowsFromPredicate:(id)predicate
 {
 	if([predicate isKindOfClass:[NSCompoundPredicate class]]) {
@@ -267,7 +349,7 @@ static NSString *XspfMStringPredicateEndsWithOperator = @"ends with";
 		}
 		
 		id criteria = [NSArray arrayWithObjects:value, @"of the following are true", nil];
-		id type = [NSNumber numberWithInt:1];
+		id type = [NSNumber numberWithInt:NSRuleEditorRowTypeCompound];
 		
 		id result = [NSMutableDictionary dictionaryWithObjectsAndKeys:
 					 criteria, XspfMREDCriteriaKey,
@@ -280,44 +362,43 @@ static NSString *XspfMStringPredicateEndsWithOperator = @"ends with";
 	} else if([predicate isKindOfClass:[NSComparisonPredicate class]]) {
 		id leftKeyPath = [[predicate leftExpression] keyPath];
 		if(!leftKeyPath) return [NSArray array];
-		if(![leftKeyPath isEqualToString:@"title"]) return [NSArray array];
-		
-		id value02 = nil; id value03 = nil; id criteria01;
-		
-		switch([predicate predicateOperatorType]) {
-			case NSEqualToPredicateOperatorType:
-				value02 = XspfMStringPredicateIsEqualOperator;
-				break;
-			case NSNotEqualToPredicateOperatorType:
-				value02 = XspfMStringPredicateIsNotEqualOperator;
-				break;
-			case NSContainsPredicateOperatorType:
-				value02 = XspfMStringPredicateContainsOperator;
-				break;
-			case NSBeginsWithPredicateOperatorType:
-				value02 = XspfMStringPredicateBeginsWithOperator;
-				break;
-			case NSEndsWithPredicateOperatorType:
-				value02 = XspfMStringPredicateEndsWithOperator;
-				break;
+		if([leftKeyPath isEqualToString:@"title"]) {		
+			NSArray *disp = [self displayValuesWithPredicate:predicate];
+			NSArray *row = [self criteriaWithKeyPath:leftKeyPath];
+			
+			NSMutableDictionary *criterion = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+											  row, XspfMREDCriteriaKey,
+											  disp, XspfMREDDisplayValuesKey,
+											  [NSNumber numberWithInt:NSRuleEditorRowTypeSimple], XspfMREDRowTypeKey,
+											  nil];
+			
+			return criterion;
 		}
-		id rightConstant = [[predicate rightExpression] constantValue];
-		value03 = [self textField];
-		[value03 setObjectValue:rightConstant];
+		if([leftKeyPath isEqualToString:@"rating"]) {		
+			NSArray *disp = [self ratingDisplayValuesWithPredicate:predicate];
+			NSArray *row = [self criteriaWithKeyPath:leftKeyPath];
+			
+			NSMutableDictionary *criterion = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+											  row, XspfMREDCriteriaKey,
+											  disp, XspfMREDDisplayValuesKey,
+											  [NSNumber numberWithInt:NSRuleEditorRowTypeSimple], XspfMREDRowTypeKey,
+											  nil];
+			
+			return criterion;
+		}
+		if([leftKeyPath isEqualToString:@"creationDate"]) {		
+			NSArray *disp = [self dateDisplayValuesWithPredicate:predicate];
+			NSArray *row = [self criteriaWithKeyPath:leftKeyPath];
+			
+			NSMutableDictionary *criterion = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+											  row, XspfMREDCriteriaKey,
+											  disp, XspfMREDDisplayValuesKey,
+											  [NSNumber numberWithInt:NSRuleEditorRowTypeSimple], XspfMREDRowTypeKey,
+											  nil];
+			
+			return criterion;
+		}
 		
-		id disp = [NSArray arrayWithObjects:@"title", value02, value03, nil];
-		id type = [NSNumber numberWithInt:0];
-//		id subs = [NSArray array];
-		id row = [self criteriaWithKeyPath:@"title"];
-		
-		criteria01 = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-					  row, XspfMREDCriteriaKey,
-					  disp, XspfMREDDisplayValuesKey,
-					  type, XspfMREDRowTypeKey,
-//					  subs, XspfMREDSubrowsKey,
-					  nil];
-		
-		return criteria01;
 		
 	} else if([predicate isKindOfClass:[NSPredicate class]]) {
 		NSLog(@"--> %@", predicate);
