@@ -70,7 +70,28 @@ static NSString *XspfMStringPredicateEndsWithOperator = @"ends with";
 	
 	return [NSExpression expressionForAggregate:[NSArray arrayWithObjects:expression01, expression02, nil]];
 }
-		
+- (NSExpression *)relatedDate:(NSNumber *)typeValue
+{
+	NSString *variable = nil;
+	NSInteger type = [typeValue integerValue];
+	switch(type) {
+		case 0:
+			variable = @"TODAY";
+			break;
+		case 1:
+			variable = @"YESTERDAY";
+			break;
+		case 2:
+			variable = @"THISWEEK";
+			break;
+		case 3:
+			variable = @"LASTWEEK";
+			break;
+	}
+	
+	return [NSExpression expressionForVariable:variable];
+}
+	
 - (NSView *)textField
 {
 	id text = [[[NSTextField alloc] initWithFrame:NSMakeRect(0,0,100,19)] autorelease];
@@ -144,7 +165,7 @@ static NSString *XspfMStringPredicateEndsWithOperator = @"ends with";
 	}
 	
 	if([[NSArray arrayWithObjects:@"lastPlayDate", @"modificationDate", @"creationDate", nil] containsObject:keypath]) {
-		id keys = [NSArray arrayWithObjects:@"AbDate", nil];
+		id keys = [NSArray arrayWithObjects:@"AbDate", /*@"RlDate",*/ nil];
 		id result = [NSMutableArray array];
 		for(key in keys) {
 			id row = [rowTemplate valueForKey:key];
@@ -254,6 +275,31 @@ static NSString *XspfMStringPredicateEndsWithOperator = @"ends with";
 
 	return disp;
 }
+- (NSArray *)dateRangeDisplayValuesWithPredicate:(NSComparisonPredicate *)predicate
+{
+	id leftKeyPath = [[predicate leftExpression] keyPath];
+	id rightVar = [[predicate rightExpression] variable];
+	
+	id value02 = nil;
+	id value03 = nil;
+	id value04 = nil;
+	id value05 = nil;
+	id value06 = nil;
+	id value07 = nil;
+	
+	if([rightVar isEqualToString:@"TODAY"]) {
+		value02 = @"is today";
+	} else if([rightVar isEqualToString:@"YESTERDAY"]) {
+		value02 = @"is yesterday";
+	} else if([rightVar isEqualToString:@"THISWEEK"]) {
+		value02 = @"is this week";
+	} else if([rightVar isEqualToString:@"LASTWEEK"]) {
+		value02 = @"is last week";
+	}
+	
+	return [NSArray arrayWithObjects:leftKeyPath, value02, value03, value04, value05, value06, value07, nil];
+}
+
 - (NSArray *)dateDisplayValuesWithPredicate:(NSComparisonPredicate *)predicate
 {
 	id value02 = nil; id value03 = nil;
@@ -328,7 +374,7 @@ static NSString *XspfMStringPredicateEndsWithOperator = @"ends with";
 		if([leftKeyPath isEqualToString:@"rating"]) {		
 			disp = [self ratingDisplayValuesWithPredicate:predicate];
 		}
-		if([leftKeyPath isEqualToString:@"creationDate"]) {		
+		if([[NSArray arrayWithObjects:@"lastPlayDate", @"modificationDate", @"creationDate", nil] containsObject:leftKeyPath]) {		
 			disp = [self dateDisplayValuesWithPredicate:predicate];
 		}
 		
@@ -430,6 +476,10 @@ displayValueForCriterion:(id)criterion
 		result = [criterion valueForKey:XspfMREDValueKey];
 	}
 	
+	if([result isEqualToString:@"separator"]) {
+		return [NSMenuItem separatorItem];
+	}
+	
 	// create or find field object.
 	do {
 		Class searchClass = Nil;
@@ -478,7 +528,10 @@ displayValueForCriterion:(id)criterion
 		return [compound predicateForChild:criterion withDisplayValue:displayValue];
 	}
 	
+	if([criterion valueForKey:@"XspfMIgnoreExpression"])  return nil;
+	
 	result = [NSMutableDictionary dictionary];
+	
 	if([criterion valueForKey:@"NSRuleEditorPredicateOperatorType"]) {
 		[result setValue:[criterion valueForKey:@"NSRuleEditorPredicateOperatorType"] forKey:@"NSRuleEditorPredicateOperatorType"];
 	}
@@ -515,7 +568,7 @@ displayValueForCriterion:(id)criterion
 //		id arg02 = [criterion valueForKey:@"XspfMRightExpressionArg02"];
 		
 		if(arg01) {
-			if([arg01 isEqualToString:XspfMREDDisplayValuesKey]) {
+			if([arg01 isEqual:XspfMREDDisplayValuesKey]) {
 				arg01 = [editor displayValuesForRow:row];
 			}
 			id r = [self performSelector:selector withObject:arg01];
