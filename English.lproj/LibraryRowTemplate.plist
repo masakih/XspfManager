@@ -178,6 +178,52 @@
 				<array>
 					<dict>
 						<key>NSRuleEditorPredicateOperatorType</key>
+						<integer>100</integer>
+						<key>XspfMPredicateRightExpression</key>
+						<string>relatedDate:</string>
+						<key>XspfMRightExpressionArg01</key>
+						<real>0</real>
+						<key>value</key>
+						<string>is today</string>
+					</dict>
+					<dict>
+						<key>NSRuleEditorPredicateOperatorType</key>
+						<integer>100</integer>
+						<key>XspfMPredicateRightExpression</key>
+						<string>relatedDate:</string>
+						<key>XspfMRightExpressionArg01</key>
+						<integer>1</integer>
+						<key>value</key>
+						<string>is yesterday</string>
+					</dict>
+					<dict>
+						<key>NSRuleEditorPredicateOperatorType</key>
+						<integer>100</integer>
+						<key>XspfMPredicateRightExpression</key>
+						<string>relatedDate:</string>
+						<key>XspfMRightExpressionArg01</key>
+						<integer>2</integer>
+						<key>value</key>
+						<string>is this week</string>
+					</dict>
+					<dict>
+						<key>NSRuleEditorPredicateOperatorType</key>
+						<integer>100</integer>
+						<key>XspfMPredicateRightExpression</key>
+						<string>relatedDate:</string>
+						<key>XspfMRightExpressionArg01</key>
+						<integer>3</integer>
+						<key>value</key>
+						<string>is last week</string>
+					</dict>
+					<dict>
+						<key>XspfMIgnoreExpression</key>
+						<true/>
+						<key>value</key>
+						<string>separator</string>
+					</dict>
+					<dict>
+						<key>NSRuleEditorPredicateOperatorType</key>
 						<integer>4</integer>
 						<key>value</key>
 						<string>is the date</string>
