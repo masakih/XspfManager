@@ -116,29 +116,7 @@ static NSString *XspfMStringPredicateEndsWithOperator = @"ends with";
 	return nil;
 }
 
-- (NSArray *)buildRowsFromTemplate:(NSArray *)template
-{
-	NSMutableArray *result = [NSMutableArray array];
-//	for(id row in template) {
-//		NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-//				
-//		id criteria = [row valueForKey:@"criteria"];
-//		if(criteria && ![criteria isEqual:[NSNull null]]) {
-//			criteria = [self buildRowsFromTemplate:criteria];
-//		}
-//		[dict setValue:criteria forKey:@"criteria"];
-//		
-//		id value = [row valueForKey:XspfMREDValueKey];
-//		if(value) {
-//			[dict setValue:value forKey:XspfMREDValueKey];
-//		}
-//		
-//		[result addObject:dict];
-//	}
-	return template;
-	
-	return result;
-}
+
 - (NSDictionary *)buildRows:(NSArray *)template
 {
 	NSMutableDictionary *result = [NSMutableDictionary dictionary];
@@ -222,26 +200,6 @@ static NSString *XspfMStringPredicateEndsWithOperator = @"ends with";
 	[ruleEditor bind:XspfMREDRowsKey toObject:self withKeyPath:XspfMREDPredicateRowsKey options:nil];
 }
 
-- (void)showPredicate:(id)predicate
-{
-	if([predicate isKindOfClass:[NSCompoundPredicate class]]) {
-		NSArray *sub = [predicate subpredicates];
-		NSLog(@"-> %d(%d)\n|\n-->",[predicate compoundPredicateType], [sub count]);
-		for(id p in sub) {
-			[self showPredicate:p];
-		}
-	} else if([predicate isKindOfClass:[NSComparisonPredicate class]]) {
-		NSLog(@"--> (Comparision) ope->%d, mod->%d, left->%@, right->%@, SEL->%s, opt->%u",
-			  [predicate predicateOperatorType], [predicate comparisonPredicateModifier],
-			  [predicate leftExpression], [predicate rightExpression],
-			  [predicate customSelector], [predicate options]);
-		
-	} else if([predicate isKindOfClass:[NSPredicate class]]) {
-		NSLog(@"--> %@", predicate);
-	} else {
-		NSLog(@"???predicate class is %@", NSStringFromClass([predicate class]));
-	}
-}
 - (NSArray *)displayValuesWithPredicate:(NSComparisonPredicate *)predicate
 {
 	id value02 = nil; id value03 = nil;
@@ -362,43 +320,27 @@ static NSString *XspfMStringPredicateEndsWithOperator = @"ends with";
 	} else if([predicate isKindOfClass:[NSComparisonPredicate class]]) {
 		id leftKeyPath = [[predicate leftExpression] keyPath];
 		if(!leftKeyPath) return [NSArray array];
+		
+		NSArray *disp = nil;
 		if([leftKeyPath isEqualToString:@"title"]) {		
-			NSArray *disp = [self displayValuesWithPredicate:predicate];
-			NSArray *row = [self criteriaWithKeyPath:leftKeyPath];
-			
-			NSMutableDictionary *criterion = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-											  row, XspfMREDCriteriaKey,
-											  disp, XspfMREDDisplayValuesKey,
-											  [NSNumber numberWithInt:NSRuleEditorRowTypeSimple], XspfMREDRowTypeKey,
-											  nil];
-			
-			return criterion;
+			disp = [self displayValuesWithPredicate:predicate];
 		}
 		if([leftKeyPath isEqualToString:@"rating"]) {		
-			NSArray *disp = [self ratingDisplayValuesWithPredicate:predicate];
-			NSArray *row = [self criteriaWithKeyPath:leftKeyPath];
-			
-			NSMutableDictionary *criterion = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-											  row, XspfMREDCriteriaKey,
-											  disp, XspfMREDDisplayValuesKey,
-											  [NSNumber numberWithInt:NSRuleEditorRowTypeSimple], XspfMREDRowTypeKey,
-											  nil];
-			
-			return criterion;
+			disp = [self ratingDisplayValuesWithPredicate:predicate];
 		}
 		if([leftKeyPath isEqualToString:@"creationDate"]) {		
-			NSArray *disp = [self dateDisplayValuesWithPredicate:predicate];
+			disp = [self dateDisplayValuesWithPredicate:predicate];
+		}
+		
+		if(disp) {
 			NSArray *row = [self criteriaWithKeyPath:leftKeyPath];
-			
 			NSMutableDictionary *criterion = [NSMutableDictionary dictionaryWithObjectsAndKeys:
 											  row, XspfMREDCriteriaKey,
 											  disp, XspfMREDDisplayValuesKey,
 											  [NSNumber numberWithInt:NSRuleEditorRowTypeSimple], XspfMREDRowTypeKey,
 											  nil];
-			
 			return criterion;
 		}
-		
 		
 	} else if([predicate isKindOfClass:[NSPredicate class]]) {
 		NSLog(@"--> %@", predicate);
@@ -411,20 +353,15 @@ static NSString *XspfMStringPredicateEndsWithOperator = @"ends with";
 - (void)setPredicate:(id)predicate
 {
 	NSLog(@"predicate -> (%@) %@", NSStringFromClass([predicate class]), predicate);
-//	NSLog(@"Predicate class is %@", [predicate class]);
 	
-//	NSLog(@"old rows -> %@", predicateRows);
 	id hoge = [self buildRowsFromPredicate:predicate];
 	id new = [NSArray arrayWithObject:hoge];
-//	NSLog(@"new rows -> %@", new);
 	
 	[self willChangeValueForKey:XspfMREDPredicateRowsKey];
 	[predicateRows release];
 	predicateRows = [new retain];
 	[self didChangeValueForKey:XspfMREDPredicateRowsKey];
 	[ruleEditor reloadCriteria];
-	
-//	[self showPredicate:predicate];
 }
 - (void)setPredicateRows:(id)p
 {
