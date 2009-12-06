@@ -27,7 +27,7 @@
 								<key>NSRuleEditorPredicateRightExpression</key>
 								<string>stringValue</string>
 								<key>value</key>
-								<string>text</string>
+								<string>textField</string>
 							</dict>
 						</array>
 					</dict>

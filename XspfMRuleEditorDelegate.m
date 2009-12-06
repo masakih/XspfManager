@@ -11,6 +11,33 @@
 #import "XspfMRuleEditorRow.h"
 
 @implementation XspfMRuleEditorDelegate
+
+static NSString *XspfMREDRowsKey = @"rows";
+static NSString *XspfMREDCriteriaKey = @"criteria";
+static NSString *XspfMREDDisplayValuesKey = @"displayValues";
+static NSString *XspfMREDRowTypeKey = @"rowType";
+static NSString *XspfMREDSubrowsKey = @"subrows";
+static NSString *XspfMREDValueKey = @"value";
+static NSString *XspfMREDPredicateRowsKey = @"predicateRows";
+static NSString *XspfMREDNameKey = @"name";
+
+static NSString *XspfMStringPredicateIsEqualOperator = @"is";
+static NSString *XspfMStringPredicateIsNotEqualOperator = @"is not";
+static NSString *XspfMStringPredicateContainsOperator = @"contains";
+static NSString *XspfMStringPredicateBeginsWithOperator = @"begins with";
+static NSString *XspfMStringPredicateEndsWithOperator = @"ends with";
+
+//static NSString *XspfMAbDatePredicatePicker01 = @"date";
+//static NSString *XspfMAbDatePredicatePicker02 = @"beginDate";
+//static NSString *XspfMAbDatePredicatePicker03 = @"endDate";
+//static NSString *XspfMAbDatePredicateIsEqualOperator = @"is the date";
+//static NSString *XspfMAbDatePredicateLessThanOperator = @"is after the date";
+//static NSString *XspfMAbDatePredicateGreaterThanOperator = @"is before the date";
+//static NSString *XspfMAbDatePredicateBetweenOperator = @"is in the range";
+//static NSString *XspfMAbDatePredicateAndField = @"andField";
+
+
+
 - (id)uniqueObject
 {
 	id object = nil;
@@ -148,9 +175,9 @@
 //		}
 //		[dict setValue:criteria forKey:@"criteria"];
 //		
-//		id value = [row valueForKey:@"value"];
+//		id value = [row valueForKey:XspfMREDValueKey];
 //		if(value) {
-//			[dict setValue:value forKey:@"value"];
+//			[dict setValue:value forKey:XspfMREDValueKey];
 //		}
 //		
 //		[result addObject:dict];
@@ -163,11 +190,11 @@
 {
 	NSMutableDictionary *result = [NSMutableDictionary dictionary];
 	for(id row in template) {
-		id criteria = [row valueForKey:@"criteria"];
+		id criteria = [row valueForKey:XspfMREDCriteriaKey];
 //		if(criteria) {
 //			criteria = [self buildRowsFromTemplate:criteria];
 //		}
-		id name = [row valueForKey:@"name"];
+		id name = [row valueForKey:XspfMREDNameKey];
 		[result setObject:criteria forKey:name];
 	}
 	
@@ -212,7 +239,7 @@
 	id row = [rowTemplate valueForKey:@"String"];
 	row = [row mutableCopy];
 	id c = [row objectAtIndex:0];
-	[c setValue:@"title" forKey:@"value"];
+	[c setValue:@"title" forKey:XspfMREDValueKey];
 	[newRows addObject:c];
 	[row release];
 	
@@ -221,7 +248,7 @@
 	c = [row objectAtIndex:0];
 	for(id keyPath in [NSArray arrayWithObjects:@"lastPlayDate", @"modificationDate", @"creationDate", nil]) {
 		c = [c mutableCopy];
-		[c setValue:keyPath forKey:@"value"];
+		[c setValue:keyPath forKey:XspfMREDValueKey];
 		[newRows addObject:c];
 		[c release];
 	}
@@ -230,11 +257,17 @@
 	row = [rowTemplate valueForKey:@"Rate"];
 	row = [row mutableCopy];
 	c = [row objectAtIndex:0];
-	[c setValue:@"rating" forKey:@"value"];
+	[c setValue:@"rating" forKey:XspfMREDValueKey];
 	[newRows addObject:c];
 	[row release];
 	
 	rows = [newRows retain];
+	
+	
+	
+	////
+	predicateRows = [[NSMutableArray alloc] init];
+	[ruleEditor bind:XspfMREDRowsKey toObject:self withKeyPath:XspfMREDPredicateRowsKey options:nil];
 }
 
 - (void)showPredicate:(id)predicate
@@ -250,20 +283,127 @@
 			  [predicate predicateOperatorType], [predicate comparisonPredicateModifier],
 			  [predicate leftExpression], [predicate rightExpression],
 			  [predicate customSelector], [predicate options]);
+		
 	} else if([predicate isKindOfClass:[NSPredicate class]]) {
 		NSLog(@"--> %@", predicate);
 	} else {
 		NSLog(@"???predicate class is %@", NSStringFromClass([predicate class]));
 	}
 }
+- (id)buildRowsFromPredicate:(id)predicate
+{
+	if([predicate isKindOfClass:[NSCompoundPredicate class]]) {
+		id subrows = [NSMutableArray array];
+		
+		id value = nil;
+		switch([predicate compoundPredicateType]) {
+			case NSNotPredicateType:
+				// ?
+				break;
+			case NSAndPredicateType:
+				value = @"All";
+				break;
+			case NSOrPredicateType:
+				value = @"Any";
+				break;
+		}
+		
+#warning MUST IMPLEMENT!!
+		NSArray *sub = [predicate subpredicates];
+		for(id p in sub) {
+			[subrows addObject:[self buildRowsFromPredicate:p]];
+		}
+		
+		id criteria = [NSArray arrayWithObjects:value, @"of the following are true", nil];
+		id type = [NSNumber numberWithInt:1];
+		
+		id result = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+					 criteria, XspfMREDCriteriaKey,
+					 criteria, XspfMREDDisplayValuesKey,
+					 type, XspfMREDRowTypeKey,
+					 subrows, XspfMREDSubrowsKey,
+					 nil];
+		
+		return result;
+	} else if([predicate isKindOfClass:[NSComparisonPredicate class]]) {
+		id leftKeyPath = [[predicate leftExpression] keyPath];
+		if(!leftKeyPath) return [NSArray array];
+		if(![leftKeyPath isEqualToString:@"title"]) return [NSArray array];
+		
+		id value02 = nil; id value03 = nil; id criteria01;
+		
+		switch([predicate predicateOperatorType]) {
+			case NSEqualToPredicateOperatorType:
+				value02 = XspfMStringPredicateIsEqualOperator;
+				break;
+			case NSNotEqualToPredicateOperatorType:
+				value02 = XspfMStringPredicateIsNotEqualOperator;
+				break;
+			case NSContainsPredicateOperatorType:
+				value02 = XspfMStringPredicateContainsOperator;
+				break;
+			case NSBeginsWithPredicateOperatorType:
+				value02 = XspfMStringPredicateBeginsWithOperator;
+				break;
+			case NSEndsWithPredicateOperatorType:
+				value02 = XspfMStringPredicateEndsWithOperator;
+				break;
+		}
+		id rightConstant = [[predicate rightExpression] constantValue];
+		value03 = [self textField];
+		[value03 setObjectValue:rightConstant];
+		
+		id disp = [NSArray arrayWithObjects:@"title", value02, value03, nil];
+		id type = [NSNumber numberWithInt:0];
+//		id subs = [NSArray array];
+		id row = [rowTemplate valueForKey:@"String"];
+		row = [[row mutableCopy] autorelease];
+		id c = [row objectAtIndex:0];
+		[c setValue:@"title" forKey:XspfMREDValueKey];
+		
+		criteria01 = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+					  row, XspfMREDCriteriaKey,
+					  disp, XspfMREDDisplayValuesKey,
+					  type, XspfMREDRowTypeKey,
+//					  subs, XspfMREDSubrowsKey,
+					  nil];
+		
+		return criteria01;
+		
+	} else if([predicate isKindOfClass:[NSPredicate class]]) {
+		NSLog(@"--> %@", predicate);
+	} else {
+		NSLog(@"???predicate class is %@", NSStringFromClass([predicate class]));
+	}
+	
+	return [NSArray array];
+}
 - (void)setPredicate:(id)predicate
 {
 	NSLog(@"predicate -> %@", predicate);
 //	NSLog(@"Predicate class is %@", [predicate class]);
 	
-	[self showPredicate:predicate];
+//	NSLog(@"old rows -> %@", predicateRows);
+	id hoge = [self buildRowsFromPredicate:predicate];
+	id new = [NSArray arrayWithObject:hoge];
+//	NSLog(@"new rows -> %@", new);
+	
+	[self willChangeValueForKey:XspfMREDPredicateRowsKey];
+	[predicateRows release];
+	predicateRows = [new retain];
+	[self didChangeValueForKey:XspfMREDPredicateRowsKey];
+	[ruleEditor reloadCriteria];
+	
+//	[self showPredicate:predicate];
 }
-#if 1
+- (void)setPredicateRows:(id)p
+{
+	NSLog(@"new -> %@", p);
+	[predicateRows release];
+	predicateRows = [p retain];
+}
+
+#pragma mark#### NSRleEditor Delegate ####
 - (NSInteger)ruleEditor:(NSRuleEditor *)editor
 numberOfChildrenForCriterion:(id)criterion
 			withRowType:(NSRuleEditorRowType)rowType
@@ -277,7 +417,7 @@ numberOfChildrenForCriterion:(id)criterion
 	if(!criterion) {
 		result = [rows count];
 	} else {
-		result = [[criterion valueForKey:@"criteria"] count];
+		result = [[criterion valueForKey:XspfMREDCriteriaKey] count];
 	}
 	
 //	NSLog(@"numner\tcriterion -> %@, type -> %d, result -> %d", criterion, rowType, result);
@@ -299,7 +439,7 @@ numberOfChildrenForCriterion:(id)criterion
 	if(!criterion) {
 		result = [rows objectAtIndex:index];
 	} else {
-		result = [[criterion valueForKey:@"criteria"] objectAtIndex:index];
+		result = [[criterion valueForKey:XspfMREDCriteriaKey] objectAtIndex:index];
 	}
 	
 //	NSLog(@"child\tindex -> %d, criterion -> %@, type -> %d, result -> %@", index, criterion, rowType, result);
@@ -320,7 +460,7 @@ displayValueForCriterion:(id)criterion
 	if(!criterion) {
 		//
 	} else {
-		result = [criterion valueForKey:@"value"];
+		result = [criterion valueForKey:XspfMREDValueKey];
 	}
 	
 	// create or find field object.
@@ -329,7 +469,7 @@ displayValueForCriterion:(id)criterion
 		SEL defaultSEL = Nil;
 		NSInteger tag = 0;
 		
-		if([result hasPrefix:@"text"]) {
+		if([result hasPrefix:@"textField"]) {
 			searchClass = [NSTextField class];
 			defaultSEL = @selector(textField);
 		} else if([result hasPrefix:@"dateField"]) {
@@ -381,7 +521,7 @@ displayValueForCriterion:(id)criterion
 	if([criterion valueForKey:@"NSRuleEditorPredicateLeftExpression"]) {
 		id value = [criterion valueForKey:@"NSRuleEditorPredicateLeftExpression"];
 		id exp = nil;
-		if([value isEqual:@"value"]) {
+		if([value isEqual:XspfMREDValueKey]) {
 			exp = [NSExpression expressionForKeyPath:displayValue];
 		} else {
 			exp = [NSExpression expressionForKeyPath:[criterion valueForKey:@"NSRuleEditorPredicateLeft"]];
@@ -408,7 +548,7 @@ displayValueForCriterion:(id)criterion
 //		id arg02 = [criterion valueForKey:@"XspfMRightExpressionArg02"];
 		
 		if(arg01) {
-			if([arg01 isEqualToString:@"displayValues"]) {
+			if([arg01 isEqualToString:XspfMREDDisplayValuesKey]) {
 				arg01 = [editor displayValuesForRow:row];
 			}
 			id r = [self performSelector:selector withObject:arg01];
@@ -419,7 +559,7 @@ displayValueForCriterion:(id)criterion
 		}
 	}
 	
-	NSLog(@"predicate\tcriterion -> %@, value -> %@, row -> %d, result -> %@", criterion, displayValue, row, result);
+//	NSLog(@"predicate\tcriterion -> %@, value -> %@, row -> %d, result -> %@", criterion, displayValue, row, result);
 	
 	return result;
 }
@@ -428,112 +568,4 @@ displayValueForCriterion:(id)criterion
 	//
 }
 
-#else
-#pragma mark#### NSRuleEditor Delegate ####
-- (NSInteger)ruleEditor:(NSRuleEditor *)editor
-numberOfChildrenForCriterion:(id)criterion
-			withRowType:(NSRuleEditorRowType)rowType
-{
-	NSInteger result = 0;
-	
-	if(rowType == NSRuleEditorRowTypeCompound) {
-		result = [compound numberOfChildrenForChild:criterion];
-		goto end;
-	}
-	
-	if(!criterion) {
-		result = [simples count];
-		goto end;
-		return result;
-	}
-	
-	for(id s in simples) {
-		if([s isMyChild:criterion]) result += [s numberOfChildrenForChild:criterion];
-	}
-	
-end:
-//	NSLog(@"numner\tcriterion -> %@, type -> %d, result -> %d", criterion, rowType, result);
-	
-	return result;
-}
-- (id)ruleEditor:(NSRuleEditor *)editor
-		   child:(NSInteger)index
-	forCriterion:(id)criterion
-	 withRowType:(NSRuleEditorRowType)rowType
-{
-	id result = nil;
-	
-	if(rowType == NSRuleEditorRowTypeCompound) {
-		result = [compound childForChild:criterion atIndex:index];
-		goto end;
-	}
-	
-	if(!criterion) {
-		id s = [simples objectAtIndex:index];
-		result = [s childForChild:criterion atIndex:index];
-		goto end;
-	}
-	
-	for(id s in simples) {
-		if([s isMyChild:criterion]) {
-			result = [s childForChild:criterion atIndex:index];
-			goto end;
-		}
-	}
-	
-end:
-//	NSLog(@"child\tindex -> %d, criterion -> %@, type -> %d, result -> %@", index, criterion, rowType, result);
-	
-	return result;
-}
-- (id)ruleEditor:(NSRuleEditor *)editor
-displayValueForCriterion:(id)criterion
-		   inRow:(NSInteger)row
-{
-	id result = nil;
-	
-	NSRuleEditorRowType rowType = [editor rowTypeForRow:row];
-	if(rowType == NSRuleEditorRowTypeCompound) {
-		result = [compound displayValueForChild:criterion];
-		goto end;
-	}
-			
-	for(id s in simples) {
-		if([s isMyChild:criterion]) {
-			result = [s displayValueForChild:criterion];
-			goto end;
-		}
-	}
-	
-end:
-//	NSLog(@"display\tcriterion -> %@, row -> %d, result -> %@", criterion, row, result);
-	return result;
-}
-
-- (NSDictionary *)ruleEditor:(NSRuleEditor *)editor
-  predicatePartsForCriterion:(id)criterion
-			withDisplayValue:(id)value
-					   inRow:(NSInteger)row
-{
-	id result = nil;
-	
-	NSRuleEditorRowType rowType = [editor rowTypeForRow:row];
-	if(rowType == NSRuleEditorRowTypeCompound) {
-		result = [compound predicateForChild:criterion withDisplayValue:value];
-		goto end;
-	}
-	
-	for(id s in simples) {
-		if([s isMyChild:criterion]) {
-			result = [s predicateForChild:criterion withDisplayValue:value];
-			goto end;
-		}
-	}
-	
-end:
-//	NSLog(@"predicate\tcriterion -> %@, value -> %@, row -> %d, result -> %@", criterion, value, row, result);
-	
-	return result;
-}
-#endif
 @end
