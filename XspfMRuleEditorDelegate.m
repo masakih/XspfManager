@@ -65,8 +65,8 @@ static NSString *XspfMStringPredicateEndsWithOperator = @"ends with";
 	}
 	
 	id expression01, expression02;
-	expression01 = [NSExpression expressionForConstantValue:[field01 dateValue]];
-	expression02 = [NSExpression expressionForConstantValue:[field02 dateValue]];
+	expression01 = [NSExpression expressionForConstantValue:value01];
+	expression02 = [NSExpression expressionForConstantValue:value02];
 	
 	return [NSExpression expressionForAggregate:[NSArray arrayWithObjects:expression01, expression02, nil]];
 }
@@ -159,7 +159,7 @@ static NSString *XspfMStringPredicateEndsWithOperator = @"ends with";
 	}
 	if(key) {
 		id row = [rowTemplate valueForKey:key];
-		id c = [[row objectAtIndex:0] mutableCopy];
+		id c = [[[row objectAtIndex:0] mutableCopy] autorelease];
 		[c setValue:keypath forKey:XspfMREDValueKey];
 		return [NSArray arrayWithObject:c];
 	}
@@ -169,7 +169,7 @@ static NSString *XspfMStringPredicateEndsWithOperator = @"ends with";
 		id result = [NSMutableArray array];
 		for(key in keys) {
 			id row = [rowTemplate valueForKey:key];
-			id c = [[row objectAtIndex:0] mutableCopy];
+			id c = [[[row objectAtIndex:0] mutableCopy] autorelease];
 			[c setValue:keypath forKey:XspfMREDValueKey];
 			[result addObject:c];
 		}
