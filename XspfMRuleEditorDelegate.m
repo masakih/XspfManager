@@ -133,8 +133,19 @@ static NSString *XspfMStringPredicateEndsWithOperator = @"ends with";
 }
 - (NSView *)numberField
 {
-	[self doesNotRecognizeSelector:_cmd];
-	return nil;
+	id text = [[[NSTextField alloc] initWithFrame:NSMakeRect(0,0,100,19)] autorelease];
+	[[text cell] setControlSize:NSSmallControlSize];
+	[text setFont:[NSFont controlContentFontOfSize:[NSFont systemFontSizeForControlSize:NSSmallControlSize]]];
+	[text setStringValue:@"123"];
+	NSNumberFormatter *formatter = [[[NSNumberFormatter alloc] init] autorelease];
+	[formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+	[formatter setMinimum:[NSNumber numberWithInt:0]];
+	[text setFormatter:formatter];
+	[text sizeToFit];
+	[text setStringValue:@"1"];
+	[text setDelegate:self];
+	
+	return text;
 }
 
 
@@ -498,6 +509,14 @@ displayValueForCriterion:(id)criterion
 		} else if([result hasPrefix:@"rateField"]) {
 			searchClass = [NSLevelIndicator class];
 			defaultSEL = @selector(ratingIndicator);
+		} else if([result hasPrefix:@"numberField"]) {
+			searchClass = [NSTextField class];
+			defaultSEL = @selector(numberField);
+			if([result isEqualToString:@"numberField"]) {
+				tag = 2000;
+			} else { // result == numberField02
+				tag = 2100;
+			}
 		}
 		if(!searchClass) break;
 		
