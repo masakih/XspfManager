@@ -37,7 +37,31 @@ static NSString *XspfMStringPredicateEndsWithOperator = @"ends with";
 //static NSString *XspfMAbDatePredicateAndField = @"andField";
 
 
-
+- (NSExpression *)rangeUnitFromDisplayValues:(NSArray *)displayValues option:(NSNumber *)optionValue
+{
+	NSInteger option = [optionValue integerValue];
+	
+	NSString *variable = nil;
+	id value02 = [displayValues objectAtIndex:2];
+	id value03 = [displayValues objectAtIndex:3];
+	id value04 = nil, value05 = nil;
+	 switch(option) {
+		case 0:
+			 variable = [NSString stringWithFormat:@"%d-%@-AGO", [value02 intValue], [value03 uppercaseString]];
+			 break;
+		 case 1:
+		 case 2:
+			 variable = [NSString stringWithFormat:@"%d-%@", [value02 intValue], [value03 uppercaseString]];
+			 break;
+		 case 3:
+			 value04 = [displayValues objectAtIndex:4];
+			 value05 = [displayValues objectAtIndex:5];
+			 variable = [NSString stringWithFormat:@"%d-%@-%d-%@", [value02 intValue], [value03 uppercaseString], [value04 intValue], [value05 uppercaseString]];
+			 break;
+	 }
+	
+	return [NSExpression expressionForVariable:variable];
+}
 - (NSExpression *)rangeDateFromDisplayValues:(NSArray *)displayValues
 {
 	id field01 = nil;
@@ -584,9 +608,19 @@ displayValueForCriterion:(id)criterion
 	if([criterion valueForKey:@"XspfMPredicateRightExpression"]) {
 		SEL selector = NSSelectorFromString([criterion valueForKey:@"XspfMPredicateRightExpression"]);
 		id arg01 = [criterion valueForKey:@"XspfMRightExpressionArg01"];
-//		id arg02 = [criterion valueForKey:@"XspfMRightExpressionArg02"];
+		id arg02 = [criterion valueForKey:@"XspfMRightExpressionArg02"];
 		
-		if(arg01) {
+		
+		if(arg02 && arg01) {
+			if([arg01 isEqual:XspfMREDDisplayValuesKey]) {
+				arg01 = [editor displayValuesForRow:row];
+			}
+			if([arg02 isEqual:XspfMREDDisplayValuesKey]) {
+				arg02 = [editor displayValuesForRow:row];
+			}
+			id r = [self performSelector:selector withObject:arg01 withObject:arg02];
+			[result setValue:r forKey:@"NSRuleEditorPredicateRightExpression"];
+		} else if(arg01) {
 			if([arg01 isEqual:XspfMREDDisplayValuesKey]) {
 				arg01 = [editor displayValuesForRow:row];
 			}
