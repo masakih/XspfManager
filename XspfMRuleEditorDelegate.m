@@ -47,16 +47,18 @@ static NSString *XspfMStringPredicateEndsWithOperator = @"ends with";
 	id value04 = nil, value05 = nil;
 	 switch(option) {
 		case 0:
-			 variable = [NSString stringWithFormat:@"%d-%@-AGO", [value02 intValue], [value03 uppercaseString]];
+			 variable = [NSString stringWithFormat:@"%d-%@-ago", [value02 intValue], value03];
 			 break;
 		 case 1:
+			 variable = [NSString stringWithFormat:@"%d-%@", [value02 intValue], value03];
+			 break;
 		 case 2:
-			 variable = [NSString stringWithFormat:@"%d-%@", [value02 intValue], [value03 uppercaseString]];
+			 variable = [NSString stringWithFormat:@"not-%d-%@", [value02 intValue], value03];
 			 break;
 		 case 3:
 			 value04 = [displayValues objectAtIndex:4];
 			 value05 = [displayValues objectAtIndex:5];
-			 variable = [NSString stringWithFormat:@"%d-%@-%d-%@", [value02 intValue], [value03 uppercaseString], [value04 intValue], [value05 uppercaseString]];
+			 variable = [NSString stringWithFormat:@"%d-%@-%d-%@", [value02 intValue], value03, [value04 intValue], value05];
 			 break;
 	 }
 	
@@ -310,6 +312,49 @@ static NSString *XspfMStringPredicateEndsWithOperator = @"ends with";
 
 	return disp;
 }
+- (void)resolveVariable:(NSString *)variable value02:(id *)value02 value03:(id *)value03 value04:(id *)value04 value05:(id *)value05 value06:(id *)value06 value07:(id *)value07
+{
+	NSArray *words = [variable componentsSeparatedByString:@"-"];
+	
+	switch([words count]) {
+		case 2:
+			*value02 = @"is in the last";
+			*value03 = [self numberField];
+			[*value03 setTag:2000];
+			[*value03 setStringValue:[words objectAtIndex:0]];
+			*value04 = [words objectAtIndex:1];
+			break;
+		case 3:
+			if([[words objectAtIndex:0] isEqualToString:@"not"]) {
+				*value02 = @"is not in the last";
+				*value03 = [self numberField];
+				[*value03 setTag:2000];
+				[*value03 setStringValue:[words objectAtIndex:1]];
+				*value04 = [words objectAtIndex:2];
+			} else {
+				*value02 = @"is exactly";
+				*value03 = [self numberField];
+				[*value03 setTag:2000];
+				[*value03 setStringValue:[words objectAtIndex:0]];
+				*value04 = [words objectAtIndex:1];
+				*value05 = @"ago";
+			}
+			break;
+		case 4:
+			*value02 = @"is between";
+			*value03 = [self numberField];
+			[*value03 setTag:2000];
+			[*value03 setStringValue:[words objectAtIndex:0]];
+			*value04 = @"and";
+			*value05 = [self numberField];
+			[*value05 setTag:2100];
+			[*value05 setStringValue:[words objectAtIndex:2]];
+			*value06 = [words objectAtIndex:3];
+			*value07 = @"ago";
+			break;
+	}
+}
+
 - (NSArray *)dateRangeDisplayValuesWithPredicate:(NSComparisonPredicate *)predicate
 {
 	id leftKeyPath = [[predicate leftExpression] keyPath];
@@ -330,6 +375,8 @@ static NSString *XspfMStringPredicateEndsWithOperator = @"ends with";
 		value02 = @"is this week";
 	} else if([rightVar isEqualToString:@"LASTWEEK"]) {
 		value02 = @"is last week";
+	} else {
+		[self resolveVariable:rightVar value02:&value02 value03:&value03 value04:&value04 value05:&value05 value06:&value06 value07:&value07];
 	}
 	
 	return [NSArray arrayWithObjects:leftKeyPath, value02, value03, value04, value05, value06, value07, nil];
@@ -381,7 +428,6 @@ static NSString *XspfMStringPredicateEndsWithOperator = @"ends with";
 				break;
 		}
 		
-#warning MUST IMPLEMENT!!
 		NSArray *sub = [predicate subpredicates];
 		for(id p in sub) {
 			[subrows addObject:[self buildRowsFromPredicate:p]];
@@ -411,6 +457,7 @@ static NSString *XspfMStringPredicateEndsWithOperator = @"ends with";
 		}
 		if([[NSArray arrayWithObjects:@"lastPlayDate", @"modificationDate", @"creationDate", nil] containsObject:leftKeyPath]) {		
 			disp = [self dateDisplayValuesWithPredicate:predicate];
+			NSLog(@"dispalyValues -> %@", disp);
 		}
 		
 		if(disp) {
