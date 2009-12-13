@@ -8,391 +8,309 @@
 
 #import "XspfMRuleEditorRow.h"
 
-@interface XspfMRule (XspfMAccessor)
-- (void)setChildren:(NSArray *)newChildren;
-- (void)addChild:(XspfMRule *)child;
-- (void)setPredicateParts:(NSDictionary *)parts;
-- (void)setExpression:(id)expression forKey:(id)key;
-- (void)setValue:(NSString *)newValue;
-@end
-
-@interface XspfMRule (XspfMExpressionBuilder)
-@end
-
-@implementation XspfMRule (XspfMAccessor)
-- (void)setChildren:(NSArray *)newChildren
+@implementation XspfMCompound
+- (NSInteger)numberOfChildrenForChild:(id)child
 {
-	if(!newChildren) newChildren = [NSArray array];
-	
-	[children autorelease];
-	children = [newChildren mutableCopy];
+	if(!child) return 2;
+	if([child isEqualToString:@"All"] || [child isEqualToString:@"Any"]) return 1;
+	return 0;
 }
-- (void)addChild:(XspfMRule *)child
+- (id)childForChild:(id)child atIndex:(NSInteger)index
 {
-	[children addObject:child];
-}
-- (void)setPredicateParts:(NSDictionary *)parts
-{
-	[predicateHints autorelease];
-	predicateHints = [parts mutableCopy];
-}
-- (void)setExpression:(id)expression forKey:(id)key
-{
-	[predicateHints setObject:expression forKey:key];
-}
-- (void)setValue:(NSString *)newValue
-{
-	if([value isEqualToString:newValue]) return;
-	
-	[value autorelease];
-	value = [newValue copy];
-}
-- (NSString *)value { return value; }
-@end
-
-@implementation XspfMRule
-@dynamic value;
-
-- (NSInteger)numberOfChildren
-{
-	return [children count];
-}
-- (id)childAtIndex:(NSInteger)index
-{
-	return [children objectAtIndex:index];
-}
-- (id)displayValueForRuleEditor:(NSRuleEditor *)ruleEditor inRow:(NSInteger)row
-{
-	return value;
-}
-#if 1
-- (NSDictionary *)predicatePartsWithDisplayValue:(id)displayValue forRuleEditor:(NSRuleEditor *)ruleEditor inRow:(NSInteger)row
-{
-	id result = [NSMutableDictionary dictionary];
-	
-	NSRuleEditorRowType rowType = [ruleEditor rowTypeForRow:row];
-	if(rowType == NSRuleEditorRowTypeCompound) {
-		return predicateHints;
+	if(!child) {
+		if(index == 0) return @"All";
+		if(index == 1) return @"Any";
 	}
+	return @"of the following are true";
+}
+- (id)displayValueForChild:(id)child
+{
+	return child;
+}
+- (NSDictionary *)predicateForChild:(id)child withDisplayValue:(id)value
+{
+	NSDictionary *result = nil;
 	
-	if([predicateHints valueForKey:@"XspfMIgnoreExpression"])  return nil;	
-	
-	id operatorType = [predicateHints valueForKey:@"NSRuleEditorPredicateOperatorType"];
-	id option = [predicateHints valueForKey:@"NSRuleEditorPredicateOptions"];
-	id leftExp = [predicateHints valueForKey:@"NSRuleEditorPredicateLeftExpression"];
-	id rightExp = [predicateHints valueForKey:@"NSRuleEditorPredicateRightExpression"];
-	id customRightExp = [predicateHints valueForKey:@"XspfMPredicateRightExpression"];
-	
-	if(operatorType) {
-		[result setValue:operatorType forKey:@"NSRuleEditorPredicateOperatorType"];
+	NSUInteger type = 9999;
+	if([child isEqualToString:@"All"]) {
+		type = NSAndPredicateType;
+	} else if([child isEqualToString:@"Any"]) {
+		type = NSOrPredicateType;
 	}
-	if(option) {
-		[result setValue:option forKey:@"NSRuleEditorPredicateOptions"];
+	if(type <  10) {
+		result = [NSDictionary dictionaryWithObject:[NSNumber numberWithUnsignedInt:type]
+											 forKey:NSRuleEditorPredicateCompoundType];
 	}
-	if(leftExp) {
-		id exp = nil;
-		if([leftExp isEqual:@"value"]) {
-			exp = [NSExpression expressionForKeyPath:displayValue];
-		} else {
-			exp = [NSExpression expressionForKeyPath:leftExp];
-		}
-		if(exp) {
-			[result setValue:exp forKey:@"NSRuleEditorPredicateLeftExpression"];
-		}
-	}
-	if(rightExp) {
-		SEL selector = NSSelectorFromString(rightExp);
-		id exp = nil;
-		if(selector) {
-			exp = [NSExpression expressionForConstantValue:[displayValue performSelector:selector]];
-		} else {
-			exp = [NSExpression expressionForConstantValue:rightExp];
-		}
-		if(exp) {
-			[result setValue:exp forKey:@"NSRuleEditorPredicateRightExpression"];
-		}
-	}
-	if(customRightExp) {
-		SEL selector = NSSelectorFromString(customRightExp);
-		id arg01 = [predicateHints valueForKey:@"XspfMRightExpressionArg01"];
-		id arg02 = [predicateHints valueForKey:@"XspfMRightExpressionArg02"];
-		
-		
-		if(arg02 && arg01) {
-			if([arg01 isEqual:@"displayValues"]) {
-				arg01 = [ruleEditor displayValuesForRow:row];
-			}
-			if([arg02 isEqual:@"displayValues"]) {
-				arg02 = [ruleEditor displayValuesForRow:row];
-			}
-			id r = [self performSelector:selector withObject:arg01 withObject:arg02];
-			[result setValue:r forKey:@"NSRuleEditorPredicateRightExpression"];
-		} else if(arg01) {
-			if([arg01 isEqual:@"displayValues"]) {
-				arg01 = [ruleEditor displayValuesForRow:row];
-			}
-			id r = [self performSelector:selector withObject:arg01];
-			[result setValue:r forKey:@"NSRuleEditorPredicateRightExpression"];
-		} else {
-			id r = [self performSelector:selector];
-			[result setValue:r forKey:@"NSRuleEditorPredicateRightExpression"];
-		}
-	}
-	
-	//	NSLog(@"predicate\tcriterion -> %@, value -> %@, row -> %d, result -> %@", predicateHints, displayValue, row, result);
 	
 	return result;
 }
+@end
 
-#else
-- (NSDictionary *)predicatePartsWithDisplayValue:(id)value forRuleEditor:(NSRuleEditor *)ruleEditor inRow:(NSInteger)row
+@interface XspfMKeyValueHolder : NSObject
 {
-#warning MUST IMPLEMENT
-	return predicateHints;
+	id key;
+	id value;
 }
-#endif
-- (id)displayValue { return value; }
-
-- (id)copyWithZone:(NSZone *)zone
+@property (retain) id key;
+@property (retain) id value;
++ (id)holderWithValue:(id)value forKey:(id)key;
+- (id)initWithValue:(id)value forKey:(id)key;
+@end
+@implementation XspfMKeyValueHolder
+@synthesize key;
+@synthesize value;
++ (id)holderWithValue:(id)inValue forKey:(id)inKey
 {
-	XspfMRule *result = [[[self class] allocWithZone:zone] init];
-	result->children = [children copy];
-	result->predicateHints = [predicateHints copy];
-	result->value = [value copy];
+	return [[[self alloc] initWithValue:inValue forKey:inKey] autorelease];
+}
+- (id)initWithValue:(id)inValue forKey:(id)inKey
+{
+	[super init];
+	self.value = inValue;
+	self.key = inKey;
 	
-	return result;
+	return self;
+}
+- (void)dealloc
+{
+	self.value = nil;
+	self.key = nil;
+	[super dealloc];
 }
 
-- (BOOL)isEqual:(id)other
+- (NSUInteger)hash
 {
-	if([super isEqual:other]) return YES;
-	if(![other isKindOfClass:[XspfMRule class]]) return NO;
-	
-	XspfMRule *o = other;
-	if(![value isEqualToString:o->value]) return NO;
-//	if(![children isEqual:o->children]) return NO;
-//	if(![predicateHints isEqual:o->predicateHints]) return NO;
+	NSLog(@"hash wad called.");
+	exit(-1234);
+}
+- (BOOL)isEqual:(id)object
+{
+	if([super isEqual:object]) return YES;
+	XspfMKeyValueHolder *obj = object;
+	if(![self.key isEqual:obj.key]) return NO;
+	if(![self.value isEqual:obj.value]) return NO;
 	
 	return YES;
+}
+- (id)description
+{
+	return [NSString stringWithFormat:@"(%@ = %@;)", self.key, self.value];
+}
+@end
+
+
+@implementation XspfMSimple
+@synthesize keyPath;
+
+- (NSInteger)numberOfChildrenForChild:(id)child {return 0;}
+- (id)childForChild:(id)child atIndex:(NSInteger)index {return nil;}
+- (id)displayValueForChild:(id)child {return nil;}
+- (NSDictionary *)predicateForChild:(id)child withDisplayValue:(id)value {return nil;}
++ (id)simpleWithKeyPath:(NSString *)inKeyPath rightType:(XspfMRightType)type operator:(NSPredicateOperatorType)operator
+{
+	return [[[self alloc] initWithKeyPath:inKeyPath rightType:type operator:operator] autorelease];
+}
+- (id)initWithKeyPath:(NSString *)inKeyPath rightType:(XspfMRightType)type operator:(NSPredicateOperatorType)operator
+{
+	[super init];
+	self.keyPath = inKeyPath;
+	[self setup];
+	
+	return self;
+}
+- (void)dealloc
+{
+	self.keyPath = nil;
+	[super dealloc];
 }
 - (NSUInteger)hash
 {
-	return value ? [value hash] : [super hash];
+	return [keyPath hash];
 }
-
-- (id)description
+- (BOOL)isEqual:(id)object
 {
-	return [NSString stringWithFormat:@"%@ {\n\t%@ = %@;\n\t%@ = %@;\n\t%@ = %@;}",
-			NSStringFromClass([self class]),
-			@"value", value,
-			@"hints", predicateHints,
-			@"children", children,
-			nil];
+	XspfMSimple *obj = object;
+	if([super isEqual:object]) return YES;
+	return [self.keyPath isEqualToString:obj.keyPath];
 }
-@end
-
-@implementation XspfMRule (XspfMCreation)
-
-- (id)init
+- (void)setup {}
+- (BOOL)isMyChild:(id)child
 {
-	[super init];
-	
-	children = [[NSMutableArray array] retain];
-	predicateHints = [[NSMutableDictionary dictionary] retain];
-	
-	return self;
-}
-
-- (id)initWithValue:(NSString *)newValue children:(NSArray *)newChildren predicateHints:(NSDictionary *)parts
-{
-	[self init];
-	
-	if([newValue isEqualToString:@"separator"]) {
-		[self release];
-		return [[XspfMSeparatorRule alloc] initSparetorRule];
-	}
-	
-	NSInteger tag = XspfMDefaultTag;
-	XspfMFieldType type = XspfMUnknownType;
-	if([newValue hasPrefix:@"textField"]) {
-		type = XspfMTextFieldType;
-	} else if([newValue hasPrefix:@"dateField"]) {
-		type = XspfMDateFieldType;
-		if([newValue isEqualToString:@"dateField"]) {
-			tag = XspfMPrimaryDateFieldTag;
-		} else {
-			tag = XspfMSeconraryDateFieldTag;
-		}
-	} else if([newValue hasPrefix:@"rateField"]) {
-		type = XspfMRateFieldType;
-	} else if([newValue hasPrefix:@"numberField"]) {
-		type = XspfMNumberFieldType;
-		if([newValue isEqualToString:@"numberField"]) {
-			tag = XspfMPrimaryNumberFieldTag;
-		} else {
-			tag = XspfMSecondaryNumberFieldTag;
-		}
-	}
-	if(type != XspfMUnknownType) {
-		[self release];
-		self = [[XspfMFieldRule alloc] initWithFieldType:type tag:tag];
-	}
-	
-	[self setValue:newValue];
-	[self setChildren:newChildren];
-	[self setPredicateParts:parts];
-	
-	return self;
-}
-+ (id)ruleWithValue:(NSString *)newValue children:(NSArray *)newChildren predicateHints:(NSDictionary *)parts
-{
-	return [[[self alloc] initWithValue:newValue children:newChildren predicateHints:parts] autorelease];
-}
-
-+ (NSArray *)compoundRule
-{
-	id comp = [self ruleWithValue:@"of the following are true" children:nil predicateHints:[NSDictionary dictionary]];
-	
-	id allExp = [NSNumber numberWithUnsignedInt:NSAndPredicateType];
-	id all = [self ruleWithValue:@"All"
-						children:[NSArray arrayWithObject:comp]
-				  predicateHints:[NSDictionary dictionaryWithObject:allExp forKey:NSRuleEditorPredicateCompoundType]];
-	
-	id anyExp = [NSNumber numberWithUnsignedInt:NSOrPredicateType];
-	id any = [self ruleWithValue:@"Any"
-						children:[NSArray arrayWithObject:comp]
-				  predicateHints:[NSDictionary dictionaryWithObject:anyExp forKey:NSRuleEditorPredicateCompoundType]];
-	
-	return [NSArray arrayWithObjects:all, any, nil];
-}
-
-- (NSDictionary *)predicateHintsWithPlist:(NSDictionary *)plist
-{
-	NSMutableDictionary *result = [NSMutableDictionary dictionaryWithDictionary:plist];
-	[result removeObjectForKey:@"criteria"];
-	[result removeObjectForKey:@"value"];
-	
-	return result;
-}
-
-+ (id)ruleWithPlist:(id)plist
-{
-	return [[[self alloc] initWithPlist:plist] autorelease];
-}
-- (id)initWithPlist:(id)plist
-{
-	if(![plist isKindOfClass:[NSDictionary class]]) {
-		[self init];
-		[self release];
-		return nil;
-	}
-	
-	id pValue = [plist valueForKey:@"value"];
-	id criteria = [plist valueForKey:@"criteria"];
-	id pChildren = [NSMutableArray array];
-	for(id criterion in criteria) {
-		id c = [[self class] ruleWithPlist:criterion];
-		if(c) [pChildren addObject:c];
-	}
-	id hints = [self predicateHintsWithPlist:plist];
-	
-	return [self initWithValue:pValue children:pChildren predicateHints:hints];
-}
-
-- (void)dealloc
-{
-	[children release];
-	[predicateHints release];
-	[value release];
-	
-	[super dealloc];
-}
-
-@end
-
-
-@implementation XspfMSeparatorRule
-+ (id)separatorRule
-{
-	return [[[self alloc] initSparetorRule] autorelease];
-}
-- (id)initSparetorRule
-{
-	[super init];
-	
-	return self;
-}
-- (id)displayValue
-{
-	return [NSMenuItem separatorItem];
-}
-- (id)displayValueForRuleEditor:(NSRuleEditor *)ruleEditor inRow:(NSInteger)row
-{
-	return [NSMenuItem separatorItem];
-}
-- (NSDictionary *)predicatePartsWithDisplayValue:(id)value forRuleEditor:(NSRuleEditor *)ruleEditor inRow:(NSInteger)row
-{
-	return nil;
-}
-@end
-
-@implementation XspfMFieldRule
-+ (id)ruleWithFieldType:(XspfMFieldType)aType
-{
-	return [[[self alloc] initWithFieldType:aType tag:XspfMDefaultTag] autorelease];
-}
-- (id)initWithFieldType:(XspfMFieldType)aType
-{
-	return [self initWithFieldType:aType tag:XspfMDefaultTag];
-}
-+ (id)ruleWithFieldType:(XspfMFieldType)aType tag:(NSInteger)aTag
-{
-	return [[[self alloc] initWithFieldType:aType tag:aTag] autorelease];
-}
-- (id)initWithFieldType:(XspfMFieldType)aType tag:(NSInteger)aTag
-{
-	[super init];
-	
-	type = aType;
-	tag = aTag;
-	
-	return self;
-}
-- (id)copyWithZone:(NSZone *)zone
-{
-	XspfMFieldRule *result = [super copyWithZone:zone];
-	result->type = type;
-	result->tag = tag;
-	
-	return result;
-}
-- (void)dealloc
-{
-	[field release];
-	[super dealloc];
-}
-- (BOOL)isEqual:(id)other
-{
-	if(![super isEqual:other]) return NO;
-	
-	XspfMFieldRule *o = other;
-	if(tag != o->tag) return NO;
-	if(type != o->type) return NO;
-	
+//	if(!child) return YES;
+//	child = [self myChildFromChild:child];
+//	return child != nil;
 	return YES;
 }
+- (id)myChildFromChild:(id)child
+{
+//	XspfMKeyValueHolder *holder = child;
+//	if([holder.key isEqual:self]) return holder.value;
+//	return nil;
+	return child;
+}
+- (id)childFromMyChild:(id)myChild
+{
+//	return [XspfMKeyValueHolder holderWithValue:myChild forKey:self];
+	return myChild;
+}
+@end
 
-- (NSView *)textField
+
+static NSString *XspfMStringPredicateLeftExpression = @"left";
+static NSString *XspfMStringPredicateRightExpression = @"field";
+static NSString *XspfMStringPredicateIsEqualOperator = @"is";
+static NSString *XspfMStringPredicateIsNotEqualOperator = @"is not";
+static NSString *XspfMStringPredicateContainsOperator = @"contains";
+static NSString *XspfMStringPredicateBeginsWithOperator = @"begins with";
+static NSString *XspfMStringPredicateEndsWithOperator = @"ends with";
+
+@implementation XspfMStringPredicate
+@synthesize fieldValue;
+- (void)setup
+{
+	self.fieldValue = @"";
+}
+- (id)textField
 {
 	id text = [[[NSTextField alloc] initWithFrame:NSMakeRect(0,0,100,19)] autorelease];
 	[[text cell] setControlSize:NSSmallControlSize];
 	[text setFont:[NSFont controlContentFontOfSize:[NSFont systemFontSizeForControlSize:NSSmallControlSize]]];
-	[text setStringValue:@"1234567890"];
+	[text setStringValue:@"0123456"];
 	[text sizeToFit];
-	[text setStringValue:@""];
+	[text setStringValue:self.fieldValue];
 	[text setDelegate:self];
 	
 	return text;
+}
+- (void)controlTextDidChange:(NSNotification *)obj
+{
+	self.fieldValue = [[obj object] stringValue];
+}
+- (NSInteger)numberOfChildrenForChild:(id)child
+{
+	if(!child) return 1;
+	
+	child = [self myChildFromChild:child];
+	if(!child) return 0;
+	
+	if([child isEqualToString:XspfMStringPredicateLeftExpression]) return 5;
+	if([child isEqualToString:XspfMStringPredicateRightExpression]) return 0;
+	
+	return 1;
+}
+- (id)childForChild:(id)child atIndex:(NSInteger)index
+{
+	if(!child) return [self childFromMyChild:XspfMStringPredicateLeftExpression];
+	
+	child = [self myChildFromChild:child];
+	if(!child) return nil;
+	
+	if([child isEqualToString:XspfMStringPredicateLeftExpression]) {
+		switch(index) {
+			case 0:
+				return [self childFromMyChild:XspfMStringPredicateIsEqualOperator];
+			case 1:
+				return [self childFromMyChild:XspfMStringPredicateIsNotEqualOperator];
+			case 2:
+				return [self childFromMyChild:XspfMStringPredicateContainsOperator];
+			case 3:
+				return [self childFromMyChild:XspfMStringPredicateBeginsWithOperator];
+			case 4:
+				return [self childFromMyChild:XspfMStringPredicateEndsWithOperator];
+		}
+	} else {
+		return [self childFromMyChild:XspfMStringPredicateRightExpression];
+	}
+	
+	return nil;
+}
+- (id)displayValueForChild:(id)child
+{
+	if(!child) return nil;
+	child = [self myChildFromChild:child];
+	if(!child) return nil;
+	
+	if([child isEqualToString:XspfMStringPredicateLeftExpression]) {
+		if(1) {
+			return self.keyPath;
+		} else {
+			NSMenuItem *item = [[[NSMenuItem alloc] initWithTitle:self.keyPath action:Nil keyEquivalent:@""] autorelease];
+			return item;
+		}
+	}
+	
+	if([child isEqualToString:XspfMStringPredicateRightExpression]) {
+		id text = [self textField];
+		
+		return text;
+	}
+	
+	while(0){
+		NSMenuItem *item = [[[NSMenuItem alloc] initWithTitle:child action:Nil keyEquivalent:@""] autorelease];
+		return item;
+	}
+	
+	return child;
+}
+- (NSDictionary *)predicateForChild:(id)child withDisplayValue:(id)value
+{
+	NSMutableDictionary *result = nil;
+	
+	child = [self myChildFromChild:child];
+	if(!child) return nil;
+	
+	if([child isEqualToString:XspfMStringPredicateLeftExpression]) {
+		id exp = [NSExpression expressionForKeyPath:self.keyPath];
+		result = [NSDictionary dictionaryWithObject:exp forKey:NSRuleEditorPredicateLeftExpression];
+	} else if([child isEqualToString:XspfMStringPredicateRightExpression]) {
+		id exp = [NSExpression expressionForConstantValue:[value stringValue]];
+		result = [NSDictionary dictionaryWithObject:exp forKey:NSRuleEditorPredicateRightExpression];
+	} else {
+		NSPredicateOperatorType type = 9999;
+		if([child isEqualToString:XspfMStringPredicateIsEqualOperator]) {
+			type = NSEqualToPredicateOperatorType;
+		} else if([child isEqualToString:XspfMStringPredicateIsNotEqualOperator]) {
+			type = NSNotEqualToPredicateOperatorType;
+		} else if([child isEqualToString:XspfMStringPredicateContainsOperator]) {
+			type = NSContainsPredicateOperatorType;
+		} else if([child isEqualToString:XspfMStringPredicateBeginsWithOperator]) {
+			type = NSBeginsWithPredicateOperatorType;
+		} else if([child isEqualToString:XspfMStringPredicateEndsWithOperator]) {
+			type = NSEndsWithPredicateOperatorType;
+		}
+		
+		if(type < 999) {
+			result = [NSDictionary dictionaryWithObjectsAndKeys:
+					  [NSNumber numberWithUnsignedInt:type],
+					  NSRuleEditorPredicateOperatorType,
+					  [NSNumber numberWithInt:NSCaseInsensitivePredicateOption | NSDiacriticInsensitivePredicateOption],
+					  NSRuleEditorPredicateOptions,
+					  nil];
+		}
+	}
+	
+	return result;
+}
+
+@end
+
+static NSString *XspfMAbDatePredicateLeftExpression = @"left";
+static NSString *XspfMAbDatePredicatePicker01 = @"date";
+static NSString *XspfMAbDatePredicatePicker02 = @"beginDate";
+static NSString *XspfMAbDatePredicatePicker03 = @"endDate";
+static NSString *XspfMAbDatePredicateIsEqualOperator = @"is the date";
+static NSString *XspfMAbDatePredicateLessThanOperator = @"is after the date";
+static NSString *XspfMAbDatePredicateGreaterThanOperator = @"is before the date";
+static NSString *XspfMAbDatePredicateBetweenOperator = @"is in the range";
+static NSString *XspfMAbDatePredicateAndField = @"andField";
+
+@implementation XspfMAbsoluteDatePredicate
+@synthesize firstValue;
+@synthesize secondValue;
+
+- (void)setup
+{
+	self.firstValue = self.secondValue = [NSDate dateWithTimeIntervalSinceNow:0.0];
 }
 - (NSView *)datePicker
 {
@@ -407,185 +325,111 @@
 	
 	return date;
 }
-- (NSView *)ratingIndicator
+- (void)datePickerCell:(NSDatePickerCell *)aDatePickerCell
+validateProposedDateValue:(NSDate **)proposedDateValue
+		  timeInterval:(NSTimeInterval *)proposedTimeInterval
 {
-	id rate = [[[NSLevelIndicator alloc] initWithFrame:NSMakeRect(0,0,100,19)] autorelease];
-	id cell = [rate cell];
-	[cell setControlSize:NSSmallControlSize];
-	[rate setFont:[NSFont controlContentFontOfSize:[NSFont systemFontSizeForControlSize:NSSmallControlSize]]];
-	[rate setMinValue:0];
-	[rate setMaxValue:5];
-	[cell setLevelIndicatorStyle:NSRatingLevelIndicatorStyle];
-	[cell setEditable:YES];
-	[rate sizeToFit];
-	
-	return rate;
-}
-- (NSView *)numberField
-{
-	id text = [[[NSTextField alloc] initWithFrame:NSMakeRect(0,0,100,19)] autorelease];
-	[[text cell] setControlSize:NSSmallControlSize];
-	[text setFont:[NSFont controlContentFontOfSize:[NSFont systemFontSizeForControlSize:NSSmallControlSize]]];
-	[text setStringValue:@"123"];
-	NSNumberFormatter *formatter = [[[NSNumberFormatter alloc] init] autorelease];
-	[formatter setNumberStyle:NSNumberFormatterDecimalStyle];
-	[formatter setMinimum:[NSNumber numberWithInt:0]];
-	[text setFormatter:formatter];
-	[text sizeToFit];
-	[text setStringValue:@"1"];
-	[text setDelegate:self];
-	
-	return text;
+	switch([aDatePickerCell tag]) {
+		case 1000:
+			self.firstValue = [aDatePickerCell dateValue];
+			break;
+		case 2000:
+			self.secondValue = [aDatePickerCell dateValue];
+			break;
+	}
 }
 
-- (Class)fieldClass
+- (NSInteger)numberOfChildrenForChild:(id)child
 {
-	Class result = Nil;
-	switch(type) {
-		case XspfMTextFieldType:
-		case XspfMNumberFieldType:
-			result = [NSTextField class];
-			break;
-		case XspfMDateFieldType:
-			result = [NSDatePicker class];
-			break;
-		case XspfMRateFieldType:
-			result = [NSLevelIndicator class];
-			break;
-	}
-	return result;
-}
-- (SEL)fieldCreateSelector
-{
-	SEL result = Nil;
-	switch(type) {
-		case XspfMTextFieldType:
-			result = @selector(textField);
-			break;
-		case XspfMNumberFieldType:
-			result = @selector(numberField);
-			break;
-		case XspfMDateFieldType:
-			result = @selector(datePicker);
-			break;
-		case XspfMRateFieldType:
-			result = @selector(ratingIndicator);
-			break;
-	}
-	return result;
-}
-- (id)displayValue
-{
-	if(field) return field;
+	if(!child) return 1;
 	
-	id res = [self performSelector:[self fieldCreateSelector]];
-	[res setTag:tag];
+	child = [self myChildFromChild:child];
+	if(!child) return 0;
 	
-	return res;
+	if([child isEqualToString:XspfMAbDatePredicateLeftExpression]) return 4;
+	if([child isEqualToString:XspfMAbDatePredicateBetweenOperator]) return 1;
+	if([child isEqualToString:XspfMAbDatePredicatePicker02]) return 1;
+	if([child isEqualToString:XspfMAbDatePredicateAndField]) return 1;
+	if([child isEqualToString:XspfMAbDatePredicatePicker03]) return 0;
+	if([child isEqualToString:XspfMAbDatePredicatePicker01]) return 0;
+	
+	return 1;
 }
-- (id)displayValueForRuleEditor:(NSRuleEditor *)ruleEditor inRow:(NSInteger)row
+- (id)childForChild:(id)child atIndex:(NSInteger)index
 {
-	if(field) return field;
+	if(!child) return [self childFromMyChild:XspfMAbDatePredicateLeftExpression];
 	
-	id displayValues = [ruleEditor displayValuesForRow:row];
-	Class fieldCalss = [self fieldClass];
-	for(id v in displayValues) {
-		if([v isKindOfClass:fieldCalss] && [v tag] == tag) {
-			field = [v retain];
-			break;
+	child = [self myChildFromChild:child];
+	if(!child) return nil;
+	
+	if([child isEqualToString:XspfMAbDatePredicateLeftExpression]) {
+		switch(index) {
+			case 0:
+				return [self childFromMyChild:XspfMAbDatePredicateIsEqualOperator];
+			case 1:
+				return [self childFromMyChild:XspfMAbDatePredicateLessThanOperator];
+			case 2:
+				return [self childFromMyChild:XspfMAbDatePredicateGreaterThanOperator];
+			case 3:
+				return [self childFromMyChild:XspfMAbDatePredicateBetweenOperator];
 		}
-	}
-	if(!field) field = [[self displayValue] retain];
-	
-	return field;
-}
-//- (NSDictionary *)predicatePartsWithDisplayValue:(id)value forRuleEditor:(NSRuleEditor *)ruleEditor inRow:(NSInteger)row
-//{
-//#warning MUST IMPLEMENT
-//	return nil;
-//}
-@end
-
-@implementation XspfMRule (XspfMExpressionBuilder)
-- (NSExpression *)rangeUnitFromDisplayValues:(NSArray *)displayValues option:(NSNumber *)optionValue
-{
-	NSInteger option = [optionValue integerValue];
-	
-	NSString *variable = nil;
-	id value02 = [displayValues objectAtIndex:2];
-	id value03 = [displayValues objectAtIndex:3];
-	id value04 = nil, value05 = nil;
-	switch(option) {
-		case 0:
-			variable = [NSString stringWithFormat:@"%d-%@-ago", [value02 intValue], value03];
-			break;
-		case 1:
-			variable = [NSString stringWithFormat:@"%d-%@", [value02 intValue], value03];
-			break;
-		case 2:
-			variable = [NSString stringWithFormat:@"not-%d-%@", [value02 intValue], value03];
-			break;
-		case 3:
-			value04 = [displayValues objectAtIndex:4];
-			value05 = [displayValues objectAtIndex:5];
-			variable = [NSString stringWithFormat:@"%d-%@-%d-%@", [value02 intValue], value03, [value04 intValue], value05];
-			break;
+	} else if([child isEqualToString:XspfMAbDatePredicateBetweenOperator]) {
+		return [self childFromMyChild:XspfMAbDatePredicatePicker02];
+	} else if([child isEqualToString:XspfMAbDatePredicatePicker02]) {
+		return [self childFromMyChild:XspfMAbDatePredicateAndField];
+	} else if([child isEqualToString:XspfMAbDatePredicateAndField]) {
+		return [self childFromMyChild:XspfMAbDatePredicatePicker03];
+	} else {
+		return [self childFromMyChild:XspfMAbDatePredicatePicker01];
 	}
 	
-	return [NSExpression expressionForVariable:variable];
+	return nil;
 }
-- (NSExpression *)rangeDateFromDisplayValues:(NSArray *)displayValues
+- (id)displayValueForChild:(id)child
 {
-	id field01 = nil;
-	id field02 = nil;
+	if(!child) return nil;
+	child = [self myChildFromChild:child];
+	if(!child) return nil;
 	
-	Class datepickerclass = [NSDatePicker class];
-	for(id v in displayValues) {
-		if([v isKindOfClass:datepickerclass]) {
-			if([v tag] == XspfMPrimaryDateFieldTag) {
-				field01 = v;
-			} else {
-				field02 = v;
-			}
+	if([child isEqualToString:XspfMAbDatePredicateLeftExpression]) {
+		if(1) {
+			return self.keyPath;
+		} else {
+			NSMenuItem *item = [[[NSMenuItem alloc] initWithTitle:self.keyPath action:Nil keyEquivalent:@""] autorelease];
+			return item;
 		}
 	}
 	
-	if(!field01 || !field02) return nil;
-	
-	id value01, value02;
-	value01 = [field01 dateValue]; value02 = [field02 dateValue];
-	if([value01 compare:value02] == NSOrderedDescending) {
-		id t = value02;
-		value02 = value01;
-		value01 = t;
+	if([child isEqualToString:XspfMAbDatePredicatePicker01]) {
+		id date = [self datePicker];
+		[date setTag:1000];
+		[date setDateValue:self.firstValue];
+		
+		return date;
+	}
+	if([child isEqualToString:XspfMAbDatePredicatePicker02]) {
+		id date = [self datePicker];
+		[date setTag:1000];
+		[date setDateValue:self.firstValue];
+		
+		return date;
+	}
+	if([child isEqualToString:XspfMAbDatePredicatePicker03]) {
+		id date = [self datePicker];
+		[date setTag:2000];
+		[date setDateValue:self.secondValue];
+		
+		return date;
+	}
+	if([child isEqualToString:XspfMAbDatePredicateAndField]) {
+		return @"to";
 	}
 	
-	id expression01, expression02;
-	expression01 = [NSExpression expressionForConstantValue:value01];
-	expression02 = [NSExpression expressionForConstantValue:value02];
-	
-	return [NSExpression expressionForAggregate:[NSArray arrayWithObjects:expression01, expression02, nil]];
-}
-- (NSExpression *)relatedDate:(NSNumber *)typeValue
-{
-	NSString *variable = nil;
-	NSInteger expType = [typeValue integerValue];
-	switch(expType) {
-		case 0:
-			variable = @"TODAY";
-			break;
-		case 1:
-			variable = @"YESTERDAY";
-			break;
-		case 2:
-			variable = @"THISWEEK";
-			break;
-		case 3:
-			variable = @"LASTWEEK";
-			break;
+	while(0){
+		NSMenuItem *item = [[[NSMenuItem alloc] initWithTitle:child action:Nil keyEquivalent:@""] autorelease];
+		return item;
 	}
 	
-	return [NSExpression expressionForVariable:variable];
+	return child;
 }
 @end
-
