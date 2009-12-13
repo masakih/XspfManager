@@ -35,6 +35,7 @@
 
 @interface XspfMSeparatorRule : XspfMRule
 + (id)separatorRule;
+- (id)initSparetorRule;
 @end
 
 typedef enum {
