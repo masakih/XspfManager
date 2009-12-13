@@ -9,47 +9,51 @@
 #import <Cocoa/Cocoa.h>
 
 
-@protocol XspfMPredicate
-- (NSInteger)numberOfChildrenForChild:(id)child;
-- (id)childForChild:(id)child atIndex:(NSInteger)index;
-- (id)displayValueForChild:(id)child;
-- (NSDictionary *)predicateForChild:(id)child withDisplayValue:(id)value;
-@end
-
-@interface XspfMCompound : NSObject <XspfMPredicate>
-@end
-
-typedef NSInteger XspfMRightType;
-@interface XspfMSimple : NSObject <XspfMPredicate>
+@interface XspfMRule : NSObject
 {
-	NSString *keyPath;
+	@private
+	NSMutableArray *children;
+	NSMutableDictionary *predicateHints;
+	NSString *value;
 }
-@property (copy) NSString *keyPath;
 
-+ (id)simpleWithKeyPath:(NSString *)keyPath rightType:(XspfMRightType)type operator:(NSPredicateOperatorType)operator;
-- (id)initWithKeyPath:(NSString *)keyPath rightType:(XspfMRightType)type operator:(NSPredicateOperatorType)operator;
+@property (copy) NSString *value;
 
-- (void)setup; // for subclass.
-- (BOOL)isMyChild:(id)child;
-- (id)myChildFromChild:(id)child;
-- (id)childFromMyChild:(id)myChild;
+- (NSInteger)numberOfChildren;
+- (id)childAtIndex:(NSInteger)index;
+- (id)displayValueForRuleEditor:(NSRuleEditor *)ruleEditor inRow:(NSInteger)row;
+- (NSDictionary *)predicatePartsWithDisplayValue:(id)value forRuleEditor:(NSRuleEditor *)ruleEditor inRow:(NSInteger)row;
 @end
 
-@interface XspfMStringPredicate : XspfMSimple
+
+@interface XspfMRule (XspfMCreation)
++ (id)ruleWithPlist:(id)plist;
+- (id)initWithPlist:(id)plist;
+
++ (NSArray *)compoundRule;
+@end
+
+@interface XspfMSeparatorRule : XspfMRule
++ (id)separatorRule;
+@end
+
+typedef enum {
+	XspfMUnknownType = 0,
+	XspfMTextFieldType = 1,
+	XspfMNumberFieldType,
+	XspfMDateFieldType,
+	XspfMRateFieldType,
+} XspfMFieldType;
+
+@interface XspfMFieldRule : XspfMRule
 {
-	NSString *fieldValue;
+	XspfMFieldType type;
+	NSInteger tag;
+	id field;
 }
-@property (copy) NSString *fieldValue;
++ (id)ruleWithFieldType:(XspfMFieldType)type;
+- (id)initWithFieldType:(XspfMFieldType)type;
++ (id)ruleWithFieldType:(XspfMFieldType)type tag:(NSInteger)tag;
+- (id)initWithFieldType:(XspfMFieldType)type tag:(NSInteger)tag;
 @end
-@interface XspfMNumberPredicate : XspfMSimple
-@end
-@interface XspfMAbsoluteDatePredicate : XspfMSimple
-{
-	NSDate *firstValue;
-	NSDate *secondValue;
-}
-@property (copy) NSDate *firstValue;
-@property (copy) NSDate *secondValue;
-@end
-@interface XspfMRelativeDatePredicate : XspfMSimple
-@end
+
