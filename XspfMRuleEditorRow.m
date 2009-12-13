@@ -110,7 +110,7 @@
 	
 	if([newValue isEqualToString:@"separator"]) {
 		[self release];
-		return [XspfMSeparatorRule separatorRule];
+		return [[XspfMSeparatorRule alloc] initSparetorRule];
 	}
 	
 	NSInteger tag = 0;
@@ -135,7 +135,7 @@
 	}
 	if(type != XspfMUnknownType) {
 		[self release];
-		self = [XspfMFieldRule ruleWithFieldType:type tag:tag];
+		self = [[XspfMFieldRule alloc] initWithFieldType:type tag:tag];
 	}
 	
 	[self setValue:newValue];
@@ -152,6 +152,7 @@
 + (NSArray *)compoundRule
 {
 	id comp = [self ruleWithValue:@"of the following are true" children:nil predicateHints:nil];
+	[comp setPredicateParts:[NSDictionary dictionary]];
 	
 	id allExp = [NSNumber numberWithUnsignedInt:NSAndPredicateType];
 	id all = [self ruleWithValue:@"All"
@@ -212,6 +213,10 @@
 
 @implementation XspfMSeparatorRule
 + (id)separatorRule
+{
+	return [[[self alloc] initSparetorRule] autorelease];
+}
+- (id)initSparetorRule
 {
 	[super init];
 	
