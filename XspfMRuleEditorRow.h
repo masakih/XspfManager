@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface XspfMRule : NSObject
+@interface XspfMRule : NSObject <NSCopying>
 {
 	@private
 	NSMutableArray *children;
@@ -23,6 +23,8 @@
 - (id)childAtIndex:(NSInteger)index;
 - (id)displayValueForRuleEditor:(NSRuleEditor *)ruleEditor inRow:(NSInteger)row;
 - (NSDictionary *)predicatePartsWithDisplayValue:(id)value forRuleEditor:(NSRuleEditor *)ruleEditor inRow:(NSInteger)row;
+
+- (id)displayValue;
 @end
 
 
@@ -45,6 +47,16 @@ typedef enum {
 	XspfMDateFieldType,
 	XspfMRateFieldType,
 } XspfMFieldType;
+
+enum XspfMFieldTag {
+	XspfMDefaultTag = 0,
+	
+	XspfMPrimaryDateFieldTag = 1000,
+	XspfMSeconraryDateFieldTag = 1100,
+	
+	XspfMPrimaryNumberFieldTag = 2000,
+	XspfMSecondaryNumberFieldTag = 2100,
+};
 
 @interface XspfMFieldRule : XspfMRule
 {

@@ -16,6 +16,9 @@
 - (void)setValue:(NSString *)newValue;
 @end
 
+@interface XspfMRule (XspfMExpressionBuilder)
+@end
+
 @implementation XspfMRule (XspfMAccessor)
 - (void)setChildren:(NSArray *)newChildren
 {
@@ -62,10 +65,102 @@
 {
 	return value;
 }
+#if 1
+- (NSDictionary *)predicatePartsWithDisplayValue:(id)displayValue forRuleEditor:(NSRuleEditor *)ruleEditor inRow:(NSInteger)row
+{
+	id result = [NSMutableDictionary dictionary];
+	
+	NSRuleEditorRowType rowType = [ruleEditor rowTypeForRow:row];
+	if(rowType == NSRuleEditorRowTypeCompound) {
+		return predicateHints;
+	}
+	
+	if([predicateHints valueForKey:@"XspfMIgnoreExpression"])  return nil;	
+	
+	id operatorType = [predicateHints valueForKey:@"NSRuleEditorPredicateOperatorType"];
+	id option = [predicateHints valueForKey:@"NSRuleEditorPredicateOptions"];
+	id leftExp = [predicateHints valueForKey:@"NSRuleEditorPredicateLeftExpression"];
+	id rightExp = [predicateHints valueForKey:@"NSRuleEditorPredicateRightExpression"];
+	id customRightExp = [predicateHints valueForKey:@"XspfMPredicateRightExpression"];
+	
+	if(operatorType) {
+		[result setValue:operatorType forKey:@"NSRuleEditorPredicateOperatorType"];
+	}
+	if(option) {
+		[result setValue:option forKey:@"NSRuleEditorPredicateOptions"];
+	}
+	if(leftExp) {
+		id exp = nil;
+		if([leftExp isEqual:@"value"]) {
+			exp = [NSExpression expressionForKeyPath:displayValue];
+		} else {
+			exp = [NSExpression expressionForKeyPath:leftExp];
+		}
+		if(exp) {
+			[result setValue:exp forKey:@"NSRuleEditorPredicateLeftExpression"];
+		}
+	}
+	if(rightExp) {
+		SEL selector = NSSelectorFromString(rightExp);
+		id exp = nil;
+		if(selector) {
+			exp = [NSExpression expressionForConstantValue:[displayValue performSelector:selector]];
+		} else {
+			exp = [NSExpression expressionForConstantValue:rightExp];
+		}
+		if(exp) {
+			[result setValue:exp forKey:@"NSRuleEditorPredicateRightExpression"];
+		}
+	}
+	if(customRightExp) {
+		SEL selector = NSSelectorFromString(customRightExp);
+		id arg01 = [predicateHints valueForKey:@"XspfMRightExpressionArg01"];
+		id arg02 = [predicateHints valueForKey:@"XspfMRightExpressionArg02"];
+		
+		
+		if(arg02 && arg01) {
+			if([arg01 isEqual:@"displayValues"]) {
+				arg01 = [ruleEditor displayValuesForRow:row];
+			}
+			if([arg02 isEqual:@"displayValues"]) {
+				arg02 = [ruleEditor displayValuesForRow:row];
+			}
+			id r = [self performSelector:selector withObject:arg01 withObject:arg02];
+			[result setValue:r forKey:@"NSRuleEditorPredicateRightExpression"];
+		} else if(arg01) {
+			if([arg01 isEqual:@"displayValues"]) {
+				arg01 = [ruleEditor displayValuesForRow:row];
+			}
+			id r = [self performSelector:selector withObject:arg01];
+			[result setValue:r forKey:@"NSRuleEditorPredicateRightExpression"];
+		} else {
+			id r = [self performSelector:selector];
+			[result setValue:r forKey:@"NSRuleEditorPredicateRightExpression"];
+		}
+	}
+	
+	//	NSLog(@"predicate\tcriterion -> %@, value -> %@, row -> %d, result -> %@", predicateHints, displayValue, row, result);
+	
+	return result;
+}
+
+#else
 - (NSDictionary *)predicatePartsWithDisplayValue:(id)value forRuleEditor:(NSRuleEditor *)ruleEditor inRow:(NSInteger)row
 {
 #warning MUST IMPLEMENT
 	return predicateHints;
+}
+#endif
+- (id)displayValue { return value; }
+
+- (id)copyWithZone:(NSZone *)zone
+{
+	XspfMRule *result = [[[self class] allocWithZone:zone] init];
+	result->children = [children copy];
+	result->predicateHints = [predicateHints copy];
+	result->value = [value copy];
+	
+	return result;
 }
 
 - (BOOL)isEqual:(id)other
@@ -80,10 +175,14 @@
 	
 	return YES;
 }
+- (NSUInteger)hash
+{
+	return value ? [value hash] : [super hash];
+}
 
 - (id)description
 {
-	return [NSString stringWithFormat:@"%@ {\n%@ = %@,\n%@ = %@,\n%@ = %@,}",
+	return [NSString stringWithFormat:@"%@ {\n\t%@ = %@;\n\t%@ = %@;\n\t%@ = %@;}",
 			NSStringFromClass([self class]),
 			@"value", value,
 			@"hints", predicateHints,
@@ -113,24 +212,25 @@
 		return [[XspfMSeparatorRule alloc] initSparetorRule];
 	}
 	
-	NSInteger tag = 0;
+	NSInteger tag = XspfMDefaultTag;
 	XspfMFieldType type = XspfMUnknownType;
 	if([newValue hasPrefix:@"textField"]) {
 		type = XspfMTextFieldType;
 	} else if([newValue hasPrefix:@"dateField"]) {
 		type = XspfMDateFieldType;
 		if([newValue isEqualToString:@"dateField"]) {
-			tag = 0;
+			tag = XspfMPrimaryDateFieldTag;
 		} else {
-			tag = 1000;
+			tag = XspfMSeconraryDateFieldTag;
 		}
 	} else if([newValue hasPrefix:@"rateField"]) {
 		type = XspfMRateFieldType;
 	} else if([newValue hasPrefix:@"numberField"]) {
+		type = XspfMNumberFieldType;
 		if([newValue isEqualToString:@"numberField"]) {
-			tag = 2000;
+			tag = XspfMPrimaryNumberFieldTag;
 		} else {
-			tag = 2100;
+			tag = XspfMSecondaryNumberFieldTag;
 		}
 	}
 	if(type != XspfMUnknownType) {
@@ -151,8 +251,7 @@
 
 + (NSArray *)compoundRule
 {
-	id comp = [self ruleWithValue:@"of the following are true" children:nil predicateHints:nil];
-	[comp setPredicateParts:[NSDictionary dictionary]];
+	id comp = [self ruleWithValue:@"of the following are true" children:nil predicateHints:[NSDictionary dictionary]];
 	
 	id allExp = [NSNumber numberWithUnsignedInt:NSAndPredicateType];
 	id all = [self ruleWithValue:@"All"
@@ -160,7 +259,7 @@
 				  predicateHints:[NSDictionary dictionaryWithObject:allExp forKey:NSRuleEditorPredicateCompoundType]];
 	
 	id anyExp = [NSNumber numberWithUnsignedInt:NSOrPredicateType];
-	id any = [self ruleWithValue:@"All"
+	id any = [self ruleWithValue:@"Any"
 						children:[NSArray arrayWithObject:comp]
 				  predicateHints:[NSDictionary dictionaryWithObject:anyExp forKey:NSRuleEditorPredicateCompoundType]];
 	
@@ -211,6 +310,7 @@
 
 @end
 
+
 @implementation XspfMSeparatorRule
 + (id)separatorRule
 {
@@ -221,6 +321,10 @@
 	[super init];
 	
 	return self;
+}
+- (id)displayValue
+{
+	return [NSMenuItem separatorItem];
 }
 - (id)displayValueForRuleEditor:(NSRuleEditor *)ruleEditor inRow:(NSInteger)row
 {
@@ -235,11 +339,11 @@
 @implementation XspfMFieldRule
 + (id)ruleWithFieldType:(XspfMFieldType)aType
 {
-	return [[[self alloc] initWithFieldType:aType tag:0] autorelease];
+	return [[[self alloc] initWithFieldType:aType tag:XspfMDefaultTag] autorelease];
 }
 - (id)initWithFieldType:(XspfMFieldType)aType
 {
-	return [self initWithFieldType:aType tag:0];
+	return [self initWithFieldType:aType tag:XspfMDefaultTag];
 }
 + (id)ruleWithFieldType:(XspfMFieldType)aType tag:(NSInteger)aTag
 {
@@ -253,6 +357,29 @@
 	tag = aTag;
 	
 	return self;
+}
+- (id)copyWithZone:(NSZone *)zone
+{
+	XspfMFieldRule *result = [super copyWithZone:zone];
+	result->type = type;
+	result->tag = tag;
+	
+	return result;
+}
+- (void)dealloc
+{
+	[field release];
+	[super dealloc];
+}
+- (BOOL)isEqual:(id)other
+{
+	if(![super isEqual:other]) return NO;
+	
+	XspfMFieldRule *o = other;
+	if(tag != o->tag) return NO;
+	if(type != o->type) return NO;
+	
+	return YES;
 }
 
 - (NSView *)textField
@@ -347,7 +474,15 @@
 	}
 	return result;
 }
-
+- (id)displayValue
+{
+	if(field) return field;
+	
+	id res = [self performSelector:[self fieldCreateSelector]];
+	[res setTag:tag];
+	
+	return res;
+}
 - (id)displayValueForRuleEditor:(NSRuleEditor *)ruleEditor inRow:(NSInteger)row
 {
 	if(field) return field;
@@ -356,19 +491,101 @@
 	Class fieldCalss = [self fieldClass];
 	for(id v in displayValues) {
 		if([v isKindOfClass:fieldCalss] && [v tag] == tag) {
-			field = v;
+			field = [v retain];
+			break;
 		}
 	}
-	if(!field) field = [[self performSelector:[self fieldCreateSelector]] retain];
-	[field setTag:tag];
+	if(!field) field = [[self displayValue] retain];
 	
 	return field;
 }
-- (NSDictionary *)predicatePartsWithDisplayValue:(id)value forRuleEditor:(NSRuleEditor *)ruleEditor inRow:(NSInteger)row
-{
-#warning MUST IMPLEMENT
-	return nil;
-}
+//- (NSDictionary *)predicatePartsWithDisplayValue:(id)value forRuleEditor:(NSRuleEditor *)ruleEditor inRow:(NSInteger)row
+//{
+//#warning MUST IMPLEMENT
+//	return nil;
+//}
 @end
 
+@implementation XspfMRule (XspfMExpressionBuilder)
+- (NSExpression *)rangeUnitFromDisplayValues:(NSArray *)displayValues option:(NSNumber *)optionValue
+{
+	NSInteger option = [optionValue integerValue];
+	
+	NSString *variable = nil;
+	id value02 = [displayValues objectAtIndex:2];
+	id value03 = [displayValues objectAtIndex:3];
+	id value04 = nil, value05 = nil;
+	switch(option) {
+		case 0:
+			variable = [NSString stringWithFormat:@"%d-%@-ago", [value02 intValue], value03];
+			break;
+		case 1:
+			variable = [NSString stringWithFormat:@"%d-%@", [value02 intValue], value03];
+			break;
+		case 2:
+			variable = [NSString stringWithFormat:@"not-%d-%@", [value02 intValue], value03];
+			break;
+		case 3:
+			value04 = [displayValues objectAtIndex:4];
+			value05 = [displayValues objectAtIndex:5];
+			variable = [NSString stringWithFormat:@"%d-%@-%d-%@", [value02 intValue], value03, [value04 intValue], value05];
+			break;
+	}
+	
+	return [NSExpression expressionForVariable:variable];
+}
+- (NSExpression *)rangeDateFromDisplayValues:(NSArray *)displayValues
+{
+	id field01 = nil;
+	id field02 = nil;
+	
+	Class datepickerclass = [NSDatePicker class];
+	for(id v in displayValues) {
+		if([v isKindOfClass:datepickerclass]) {
+			if([v tag] == XspfMPrimaryDateFieldTag) {
+				field01 = v;
+			} else {
+				field02 = v;
+			}
+		}
+	}
+	
+	if(!field01 || !field02) return nil;
+	
+	id value01, value02;
+	value01 = [field01 dateValue]; value02 = [field02 dateValue];
+	if([value01 compare:value02] == NSOrderedDescending) {
+		id t = value02;
+		value02 = value01;
+		value01 = t;
+	}
+	
+	id expression01, expression02;
+	expression01 = [NSExpression expressionForConstantValue:value01];
+	expression02 = [NSExpression expressionForConstantValue:value02];
+	
+	return [NSExpression expressionForAggregate:[NSArray arrayWithObjects:expression01, expression02, nil]];
+}
+- (NSExpression *)relatedDate:(NSNumber *)typeValue
+{
+	NSString *variable = nil;
+	NSInteger expType = [typeValue integerValue];
+	switch(expType) {
+		case 0:
+			variable = @"TODAY";
+			break;
+		case 1:
+			variable = @"YESTERDAY";
+			break;
+		case 2:
+			variable = @"THISWEEK";
+			break;
+		case 3:
+			variable = @"LASTWEEK";
+			break;
+	}
+	
+	return [NSExpression expressionForVariable:variable];
+}
+@end
 
