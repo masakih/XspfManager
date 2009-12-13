@@ -55,7 +55,6 @@
 		F49BD36910A66EC6007136CE /* XspfMXspfListObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BD36810A66EC6007136CE /* XspfMXspfListObject.m */; };
 		F4A6F90B10C1666600345D77 /* XspfMRuleEditorDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A6F90A10C1666600345D77 /* XspfMRuleEditorDelegate.m */; };
 		F4A6FAE610C2442E00345D77 /* XspfMRuleEditorRow.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A6FAE510C2442E00345D77 /* XspfMRuleEditorRow.m */; };
-		F4B59A1810C40CBA00D76389 /* LibraryRows.plist in Resources */ = {isa = PBXBuildFile; fileRef = F4B59A1610C40CBA00D76389 /* LibraryRows.plist */; };
 		F4BB56C710BA0F1400EE50B7 /* CompleteData.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = F4BB56C610BA0F1300EE50B7 /* CompleteData.xcdatamodel */; };
 		F4BB598B10BBFCDA00EE50B7 /* XspfMDateRowTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = F4BB598A10BBFCDA00EE50B7 /* XspfMDateRowTemplate.m */; };
 		F4BB59BB10BC0C3700EE50B7 /* LibraryPredicate.strings in Resources */ = {isa = PBXBuildFile; fileRef = F4BB59BA10BC0C3700EE50B7 /* LibraryPredicate.strings */; };
@@ -173,7 +172,6 @@
 		F4A6F90A10C1666600345D77 /* XspfMRuleEditorDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMRuleEditorDelegate.m; sourceTree = "<group>"; };
 		F4A6FAE410C2442E00345D77 /* XspfMRuleEditorRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMRuleEditorRow.h; sourceTree = "<group>"; };
 		F4A6FAE510C2442E00345D77 /* XspfMRuleEditorRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMRuleEditorRow.m; sourceTree = "<group>"; };
-		F4B59A1710C40CBA00D76389 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = English; path = English.lproj/LibraryRows.plist; sourceTree = "<group>"; };
 		F4BB56C610BA0F1300EE50B7 /* CompleteData.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = CompleteData.xcdatamodel; sourceTree = "<group>"; };
 		F4BB598910BBFCDA00EE50B7 /* XspfMDateRowTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMDateRowTemplate.h; sourceTree = "<group>"; };
 		F4BB598A10BBFCDA00EE50B7 /* XspfMDateRowTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMDateRowTemplate.m; sourceTree = "<group>"; };
@@ -303,7 +301,6 @@
 			isa = PBXGroup;
 			children = (
 				F4D0E98510C5484000B642D0 /* LibraryRowTemplate.plist */,
-				F4B59A1610C40CBA00D76389 /* LibraryRows.plist */,
 				F4BB59BA10BC0C3700EE50B7 /* LibraryPredicate.strings */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
@@ -486,7 +483,6 @@
 				F480CF9F10B03A0D00AC365B /* AccessoryView.xib in Resources */,
 				F40B342110B6BE2000896716 /* UKKQueue Readme.txt in Resources */,
 				F4BB59BB10BC0C3700EE50B7 /* LibraryPredicate.strings in Resources */,
-				F4B59A1810C40CBA00D76389 /* LibraryRows.plist in Resources */,
 				F4D0E98710C5484000B642D0 /* LibraryRowTemplate.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -594,14 +590,6 @@
 				F49BD00F10A47780007136CE /* English */,
 			);
 			name = ListView.xib;
-			sourceTree = "<group>";
-		};
-		F4B59A1610C40CBA00D76389 /* LibraryRows.plist */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F4B59A1710C40CBA00D76389 /* English */,
-			);
-			name = LibraryRows.plist;
 			sourceTree = "<group>";
 		};
 		F4BB59BA10BC0C3700EE50B7 /* LibraryPredicate.strings */ = {
