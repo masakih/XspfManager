@@ -56,7 +56,6 @@
 		F4A6F90B10C1666600345D77 /* XspfMRuleEditorDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A6F90A10C1666600345D77 /* XspfMRuleEditorDelegate.m */; };
 		F4A6FAE610C2442E00345D77 /* XspfMRuleEditorRow.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A6FAE510C2442E00345D77 /* XspfMRuleEditorRow.m */; };
 		F4BB56C710BA0F1400EE50B7 /* CompleteData.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = F4BB56C610BA0F1300EE50B7 /* CompleteData.xcdatamodel */; };
-		F4BB598B10BBFCDA00EE50B7 /* XspfMDateRowTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = F4BB598A10BBFCDA00EE50B7 /* XspfMDateRowTemplate.m */; };
 		F4BB59BB10BC0C3700EE50B7 /* LibraryPredicate.strings in Resources */ = {isa = PBXBuildFile; fileRef = F4BB59BA10BC0C3700EE50B7 /* LibraryPredicate.strings */; };
 		F4CE4CD310A6A13E004AC4FA /* LibraryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CE4CD110A6A13E004AC4FA /* LibraryView.xib */; };
 		F4CE4D0510A6A7A9004AC4FA /* XspfMLibraryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CE4D0410A6A7A9004AC4FA /* XspfMLibraryViewController.m */; };
@@ -173,8 +172,6 @@
 		F4A6FAE410C2442E00345D77 /* XspfMRuleEditorRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMRuleEditorRow.h; sourceTree = "<group>"; };
 		F4A6FAE510C2442E00345D77 /* XspfMRuleEditorRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMRuleEditorRow.m; sourceTree = "<group>"; };
 		F4BB56C610BA0F1300EE50B7 /* CompleteData.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = CompleteData.xcdatamodel; sourceTree = "<group>"; };
-		F4BB598910BBFCDA00EE50B7 /* XspfMDateRowTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMDateRowTemplate.h; sourceTree = "<group>"; };
-		F4BB598A10BBFCDA00EE50B7 /* XspfMDateRowTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMDateRowTemplate.m; sourceTree = "<group>"; };
 		F4BB59B610BC0C2C00EE50B7 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/LibraryPredicate.strings; sourceTree = "<group>"; };
 		F4BB5A1510BC2C5800EE50B7 /* Japanese */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Japanese; path = Japanese.lproj/LibraryPredicate.strings; sourceTree = "<group>"; };
 		F4CE4CD210A6A13E004AC4FA /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/LibraryView.xib; sourceTree = "<group>"; };
@@ -232,8 +229,6 @@
 				F4CE4F1210A71084004AC4FA /* XspfMDetailViewController.m */,
 				F4CE4D0310A6A7A9004AC4FA /* XspfMLibraryViewController.h */,
 				F4CE4D0410A6A7A9004AC4FA /* XspfMLibraryViewController.m */,
-				F4BB598910BBFCDA00EE50B7 /* XspfMDateRowTemplate.h */,
-				F4BB598A10BBFCDA00EE50B7 /* XspfMDateRowTemplate.m */,
 				F4A6F90910C1666600345D77 /* XspfMRuleEditorDelegate.h */,
 				F4A6F90A10C1666600345D77 /* XspfMRuleEditorDelegate.m */,
 				F4A6FAE410C2442E00345D77 /* XspfMRuleEditorRow.h */,
@@ -535,7 +530,6 @@
 				F40B342F10B6C09700896716 /* UKMainThreadProxy.m in Sources */,
 				F40B350410B8637000896716 /* XspfMMainModel.xcdatamodel in Sources */,
 				F4BB56C710BA0F1400EE50B7 /* CompleteData.xcdatamodel in Sources */,
-				F4BB598B10BBFCDA00EE50B7 /* XspfMDateRowTemplate.m in Sources */,
 				F4A6F90B10C1666600345D77 /* XspfMRuleEditorDelegate.m in Sources */,
 				F4A6FAE610C2442E00345D77 /* XspfMRuleEditorRow.m in Sources */,
 			);
