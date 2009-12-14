@@ -23,7 +23,6 @@ enum {
 };
 
 @implementation XspfMLibraryViewController
-@synthesize selectedPredicate;
 
 - (id)init
 {
@@ -124,11 +123,7 @@ enum {
 	if([editor numberOfRows] == 0) {
 		[editor addRow:self];
 	}
-	
-	if([editor02 numberOfRows] == 0) {
-		[editor02 addRow:self];
-	}
-	
+		
 	[nameField setStringValue:[self newSmartLibraryName]];
 	[nameField selectText:self];
 	
@@ -144,7 +139,6 @@ enum {
 	[nameField setStringValue:obj.name];
 	[nameField selectText:self];
 	
-	self.selectedPredicate = obj.predicate;
 	[ruleEditorDelegate setPredicate:obj.predicate];
 	
 	[NSApp beginSheet:predicatePanel
@@ -184,9 +178,8 @@ enum {
 {
 	if(returnCode == NSCancelButton) return;
 	
-	[editor02 reloadPredicate];
-	NSPredicate *predicate = [editor02 predicate];
-//	[ruleEditorDelegate setPredicate:predicate];
+	[editor reloadPredicate];
+	NSPredicate *predicate = [editor predicate];
 	
 	if(!predicate || ![predicate isKindOfClass:[NSPredicate class]]) {
 		NSLog(@"????");
@@ -230,7 +223,7 @@ enum {
 
 - (IBAction)test01:(id)sender
 {
-	NSArray *array = [editor rowTemplates];
+//	NSArray *array = [editor rowTemplates];
 	
 //	for(id templ in array) {
 //		NSLog(@"Views -> %@", [templ templateViews]);
@@ -240,9 +233,9 @@ enum {
 //			}
 //		}
 //	}
-	for(id templ in array) {
-		NSLog(@"template -> %@", templ);
-	}
+//	for(id templ in array) {
+//		NSLog(@"template -> %@", templ);
+//	}
 }
 
 @end

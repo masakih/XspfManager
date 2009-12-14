@@ -533,7 +533,7 @@ static NSString *XspfMStringPredicateEndsWithOperator = @"ends with";
 		}
 		if([[NSArray arrayWithObjects:@"lastPlayDate", @"modificationDate", @"creationDate", nil] containsObject:leftKeyPath]) {		
 			disp = [self dateDisplayValuesWithPredicate:predicate];
-			NSLog(@"dispalyValues -> %@", disp);
+//			NSLog(@"dispalyValues -> %@", disp);
 		}
 		
 		if(disp) {
@@ -557,7 +557,7 @@ static NSString *XspfMStringPredicateEndsWithOperator = @"ends with";
 }
 - (void)setPredicate:(id)predicate
 {
-	NSLog(@"predicate -> (%@) %@", NSStringFromClass([predicate class]), predicate);
+//	NSLog(@"predicate -> (%@) %@", NSStringFromClass([predicate class]), predicate);
 	
 	id hoge = [self buildRowsFromPredicate:predicate];
 	id new = [NSArray arrayWithObject:hoge];
@@ -570,7 +570,7 @@ static NSString *XspfMStringPredicateEndsWithOperator = @"ends with";
 }
 - (void)setPredicateRows:(id)p
 {
-	NSLog(@"new -> %@", p);
+//	NSLog(@"new -> %@", p);
 	[predicateRows release];
 	predicateRows = [p retain];
 }
