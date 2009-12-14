@@ -354,11 +354,27 @@ static NSString *XspfMStringPredicateEndsWithOperator = @"ends with";
 			break;
 	}
 }
+- (void)rangeDateDisplayValuesWithExpression:(NSExpression *)rightExp value02:(id *)value02 value03:(id *)value03 value04:(id *)value04 value05:(id *)value05
+{
+	NSExpression *firstExp = [[rightExp collection] objectAtIndex:0];
+	NSExpression *secondExp = [[rightExp collection] objectAtIndex:1];
+	
+	*value02 = @"is in the range";
+	*value03 = [self datePicker];
+	[*value03 setObjectValue:[firstExp constantValue]];
+	*value04 = @"to";
+	*value05 = [self datePicker];
+	[*value05 setObjectValue:[secondExp constantValue]];
+	[*value05 setTag:1000];
+}
 
 - (NSArray *)dateRangeDisplayValuesWithPredicate:(NSComparisonPredicate *)predicate
 {
 	id leftKeyPath = [[predicate leftExpression] keyPath];
-	id rightVar = [[predicate rightExpression] variable];
+	id rightVar = nil;
+	if([[predicate rightExpression] expressionType] == NSVariableExpressionType) {
+		rightVar = [[predicate rightExpression] variable];
+	}
 	
 	id value02 = nil;
 	id value03 = nil;
@@ -366,6 +382,10 @@ static NSString *XspfMStringPredicateEndsWithOperator = @"ends with";
 	id value05 = nil;
 	id value06 = nil;
 	id value07 = nil;
+	
+	if(!rightVar) {
+		[self rangeDateDisplayValuesWithExpression:[predicate rightExpression] value02:&value02 value03:&value03 value04:&value04 value05:&value05];
+	}
 	
 	if([rightVar isEqualToString:@"TODAY"]) {
 		value02 = @"is today";
@@ -546,7 +566,7 @@ static NSString *XspfMStringPredicateEndsWithOperator = @"ends with";
 	[predicateRows release];
 	predicateRows = [new retain];
 	[self didChangeValueForKey:XspfMREDPredicateRowsKey];
-	[ruleEditor reloadCriteria];
+//	[ruleEditor reloadCriteria];
 }
 - (void)setPredicateRows:(id)p
 {
