@@ -15,15 +15,11 @@
 	IBOutlet NSTableView *tableView;
 	
 	IBOutlet NSWindow *predicatePanel;
-	IBOutlet NSPredicateEditor *editor;
+	IBOutlet NSRuleEditor *editor;
 	IBOutlet NSTextField *nameField;
 	
-	IBOutlet NSRuleEditor *editor02;
 	IBOutlet id ruleEditorDelegate;
-	
-	NSPredicate *selectedPredicate;
 }
-@property (retain) NSPredicate *selectedPredicate;
 
 - (IBAction)newPredicate:(id)sender;
 - (IBAction)editPredicate:(id)sender;
