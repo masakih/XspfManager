@@ -189,6 +189,42 @@ enum {
 	if(![predicate isKindOfClass:[NSCompoundPredicate class]]) {
 		predicate = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObject:predicate]];
 	}
+	
+//	NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+//								 [NSArray arrayWithObjects:
+//								  [NSDate dateWithTimeIntervalSinceNow:0.0],
+//								  [NSDate dateWithTimeIntervalSinceNow:-60*60*24],
+//								  nil], @"TODAY",
+//								 [NSArray arrayWithObjects:
+//								  [NSDate dateWithTimeIntervalSinceNow:-60*60*24],
+//								  [NSDate dateWithTimeIntervalSinceNow:-60*60*24*2],
+//								  nil], @"YESTERDAY",
+//								 nil];
+//	BOOL isOK = YES;
+//	do {
+//		isOK = YES;
+//		NSString *binding = nil;
+//		@try {
+//			[predicate evaluateWithObject:[NSDictionary dictionaryWithObject:[NSDate dateWithTimeIntervalSinceNow:0.0] forKey:@"lastPlayDate"]
+//					substitutionVariables:dict];
+//		}
+//		@catch(NSException *exception) {
+//			NSLog(@"caught exception(%@) -> %@", NSStringFromClass([exception class]), exception);
+//			NSLog(@"reason -> %@", [exception reason]);
+//			NSScanner *scanner = [NSScanner scannerWithString:[exception reason]];
+//			if(![scanner scanString:@"Can't get value for '" intoString:nil]) {
+//				@throw;
+//			}
+//			if(![scanner scanUpToString:@"'" intoString:&binding]) {
+//				@throw;
+//			}
+//		}
+//		if(binding) {
+//			isOK = NO;
+//			[dict setObject:@"TEST" forKey:binding];
+//		}
+//	} while(!isOK);
+		
 	NSString *name = [nameField stringValue];
 	if([name length] == 0) {
 		NSBeep();
