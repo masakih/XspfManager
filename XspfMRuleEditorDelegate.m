@@ -555,9 +555,67 @@ static NSString *XspfMStringPredicateEndsWithOperator = @"ends with";
 	
 	return [NSArray array];
 }
+- (void)resolveExpression:(id)exp
+{
+	NSString *message = nil;
+	
+	switch([exp expressionType]) {
+		case NSConstantValueExpressionType:
+			message = [NSString stringWithFormat:@"constant -> %@", [exp constantValue]];
+			break;
+		case NSEvaluatedObjectExpressionType:
+			message = [NSString stringWithFormat:@"constant -> %@", [exp constantValue]];
+			break;
+		case NSVariableExpressionType:
+			message = [NSString stringWithFormat:@"variable -> %@", [exp variable]];
+			break;
+		case NSKeyPathExpressionType:
+			message = [NSString stringWithFormat:@"keyPath -> %@", [exp keyPath]];
+			break;
+		case NSFunctionExpressionType:
+			message = [NSString stringWithFormat:@"oprand -> %@(%@)function -> %@, argumect -> %@",
+					   [exp operand], NSStringFromClass([[exp operand] class]),
+					   [exp function], [exp arguments]];
+			break;
+		case NSAggregateExpressionType:
+			message = [NSString stringWithFormat:@"collection -> %@", [exp collection]];
+			break;
+	}
+	
+	fprintf(stderr, "%s\n", [message UTF8String]);
+}
+- (void)resolvePredicate:(id)predicate
+{
+	if([predicate isKindOfClass:[NSCompoundPredicate class]]) {
+		NSArray *sub = [predicate subpredicates];
+		for(id p in sub) {
+			[self resolvePredicate:p];
+		}
+	} else if([predicate isKindOfClass:[NSComparisonPredicate class]]) {
+		id left = [predicate leftExpression];
+		id right = [predicate rightExpression];
+		SEL sel = Nil;
+		if([predicate predicateOperatorType] == NSCustomSelectorPredicateOperatorType) {
+			sel = [predicate customSelector];
+		}
+		fprintf(stderr, "left ->\t");
+		[self resolveExpression:left];
+		if(sel) {
+			fprintf(stderr, "%s\n", [[NSString stringWithFormat:@"SEL -> %@", NSStringFromSelector(sel)] UTF8String]);
+		} else {
+			fprintf(stderr, "%s\n", [[NSString stringWithFormat:@"type -> %d, opt -> %d, mod -> %d", [predicate predicateOperatorType], [predicate options], [predicate comparisonPredicateModifier]] UTF8String]);
+		}
+		fprintf(stderr, "right ->\t");
+		[self resolveExpression:right];
+		fprintf(stderr, "end resolve.\n");
+	}
+}
+
 - (void)setPredicate:(id)predicate
 {
-//	NSLog(@"predicate -> (%@) %@", NSStringFromClass([predicate class]), predicate);
+	NSLog(@"predicate -> (%@) %@", NSStringFromClass([predicate class]), predicate);
+	[self resolvePredicate:predicate];
+	
 	
 	id hoge = [self buildRowsFromPredicate:predicate];
 	id new = [NSArray arrayWithObject:hoge];
@@ -755,7 +813,18 @@ displayValueForCriterion:(id)criterion
 			[result setValue:r forKey:@"NSRuleEditorPredicateRightExpression"];
 		}
 	}
-	
+	if([criterion valueForKey:@"NSRuleEditorPredicateCustomSelector"]) {
+		id selName = [criterion valueForKey:@"NSRuleEditorPredicateCustomSelector"];
+		id arg01 = [criterion valueForKey:@"XspfMCustomSelectorArg"];
+		id exp = [NSArray arrayWithObjects:[NSExpression expressionForConstantValue:arg01], nil];
+		
+		id exp03 = [NSExpression expressionForConstantValue:@"DATE_RANGE_CREATOR"];
+		id exp02 = [NSExpression expressionForFunction:exp03 selectorName:selName arguments:exp];
+		[result setValue:exp02 forKey:@"NSRuleEditorPredicateRightExpression"];
+	//	[result setValue:[criterion valueForKey:@"NSRuleEditorPredicateCustomSelector"] forKey:@"NSRuleEditorPredicateCustomSelector"];
+	}
+	NSLog(@"predicate\tresult -> %@", result);
+
 //	NSLog(@"predicate\tcriterion -> %@, value -> %@, row -> %d, result -> %@", criterion, displayValue, row, result);
 	
 	return result;
@@ -764,5 +833,97 @@ displayValueForCriterion:(id)criterion
 {
 	//
 }
+@end
 
+@implementation NSString (XspfMTest)
+- (NSArray *)rangeOfToday
+{
+	NSCalendar *aCalendar = [NSCalendar currentCalendar];
+	NSDate *now = [NSDate dateWithTimeIntervalSinceNow:0.0];
+	NSDateComponents *nowComp = [aCalendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit
+											 fromDate:now];
+	NSDate *startOfToday = [aCalendar dateFromComponents:nowComp];
+	
+	id result = [NSArray arrayWithObjects:startOfToday, now, nil];
+	return result;
+}
+- (NSArray *)rangeOfYesterday
+{
+	
+	NSCalendar *aCalendar = [NSCalendar currentCalendar];
+	NSDate *now = [NSDate dateWithTimeIntervalSinceNow:0.0];
+	NSDateComponents *nowComp = [aCalendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit
+											 fromDate:now];
+	NSDate *startOfToday = [aCalendar dateFromComponents:nowComp];
+	
+	NSDateComponents *comp = [[NSDateComponents alloc] init];
+	[comp setDay:-1];
+	NSDate *startOfYesterday = [aCalendar dateByAddingComponents:comp toDate:startOfToday options:0];
+		
+	id result = [NSArray arrayWithObjects:startOfYesterday, startOfToday, nil];
+	return result;
+}
+- (NSArray *)rangeOfThisWeek
+{
+	NSCalendar *aCalendar = [NSCalendar currentCalendar];
+	NSDate *now = [NSDate dateWithTimeIntervalSinceNow:0.0];
+	NSDateComponents *nowComp = [aCalendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit
+											 fromDate:now];
+	NSDate *startOfToday = [aCalendar dateFromComponents:nowComp];
+	
+	NSDateComponents *comp = [[NSDateComponents alloc] init];
+	
+	[comp setWeekday:-[nowComp weekday]+1];
+	NSDate *startOfThisWeek = [aCalendar dateByAddingComponents:comp toDate:startOfToday options:0];
+		
+	id result = [NSArray arrayWithObjects:startOfThisWeek, now, nil];
+	return result;
+}
+- (NSArray *)rangeOfLastWeek
+{
+	NSCalendar *aCalendar = [NSCalendar currentCalendar];
+	NSDate *now = [NSDate dateWithTimeIntervalSinceNow:0.0];
+	NSDateComponents *nowComp = [aCalendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit
+											 fromDate:now];
+	NSDate *startOfToday = [aCalendar dateFromComponents:nowComp];
+	
+	NSDateComponents *comp = [[NSDateComponents alloc] init];
+	[comp setWeekday:-[nowComp weekday]+1];
+	NSDate *startOfThisWeek = [aCalendar dateByAddingComponents:comp toDate:startOfToday options:0];
+	
+	[comp setWeekday:-[nowComp weekday]+1];
+	[comp setWeek:-1];
+	NSDate *startOfLastWeek = [aCalendar dateByAddingComponents:comp toDate:startOfToday options:0];
+		
+	id result = [NSArray arrayWithObjects:startOfLastWeek, startOfThisWeek, nil];
+	return result;
+}
+- (NSArray *)dateRangeFromVariable:(NSString *)date
+{
+	NSLog(@"In function argument is %@", date);
+	
+	NSCalendar *aCalendar = [NSCalendar currentCalendar];
+	NSDate *now = [NSDate dateWithTimeIntervalSinceNow:0.0];
+	NSDateComponents *nowComp = [aCalendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit
+											fromDate:now];
+	NSDate *startOfToday = [aCalendar dateFromComponents:nowComp];
+	
+	NSDateComponents *comp = [[NSDateComponents alloc] init];
+	[comp setDay:-1];
+	NSDate *startOfYesterday = [aCalendar dateByAddingComponents:comp toDate:startOfToday options:0];
+	
+	[comp setDay:0];
+	[comp setWeekday:-[nowComp weekday]+1];
+	NSDate *startOfThisWeek = [aCalendar dateByAddingComponents:comp toDate:startOfToday options:0];
+	
+	[comp setWeekday:-[nowComp weekday]+1];
+	[comp setWeek:-1];
+	NSDate *startOfLastWeek = [aCalendar dateByAddingComponents:comp toDate:startOfToday options:0];
+	
+	NSLog(@"now -> %@\ntoday -> %@\nyesterday -> %@\nthisweek -> %@\nlastweek -> %@",
+		  now, startOfToday, startOfYesterday, startOfThisWeek, startOfLastWeek);
+	
+	id result = [NSArray arrayWithObjects:now, startOfToday, nil];
+	return result;
+}
 @end
