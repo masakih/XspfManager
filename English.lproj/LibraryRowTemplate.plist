@@ -179,7 +179,7 @@
 					<dict>
 						<key>NSRuleEditorPredicateOperatorType</key>
 						<integer>100</integer>
-						<key>NSRuleEditorPredicateCustomSelector</key>
+						<key>XspfMCustomSelector</key>
 						<string>rangeOfToday</string>
 						<key>value</key>
 						<string>is today</string>
@@ -187,7 +187,7 @@
 					<dict>
 						<key>NSRuleEditorPredicateOperatorType</key>
 						<integer>100</integer>
-						<key>NSRuleEditorPredicateCustomSelector</key>
+						<key>XspfMCustomSelector</key>
 						<string>rangeOfYesterday</string>
 						<key>value</key>
 						<string>is yesterday</string>
@@ -195,7 +195,7 @@
 					<dict>
 						<key>NSRuleEditorPredicateOperatorType</key>
 						<integer>100</integer>
-						<key>NSRuleEditorPredicateCustomSelector</key>
+						<key>XspfMCustomSelector</key>
 						<string>rangeOfThisWeek</string>
 						<key>value</key>
 						<string>is this week</string>
@@ -203,7 +203,7 @@
 					<dict>
 						<key>NSRuleEditorPredicateOperatorType</key>
 						<integer>100</integer>
-						<key>NSRuleEditorPredicateCustomSelector</key>
+						<key>XspfMCustomSelector</key>
 						<string>rangeOfLastWeek</string>
 						<key>value</key>
 						<string>is last week</string>

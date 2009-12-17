@@ -813,8 +813,8 @@ displayValueForCriterion:(id)criterion
 			[result setValue:r forKey:@"NSRuleEditorPredicateRightExpression"];
 		}
 	}
-	if([criterion valueForKey:@"NSRuleEditorPredicateCustomSelector"]) {
-		id selName = [criterion valueForKey:@"NSRuleEditorPredicateCustomSelector"];
+	if([criterion valueForKey:@"XspfMCustomSelector"]) {
+		id selName = [criterion valueForKey:@"XspfMCustomSelector"];
 		id arg01 = [criterion valueForKey:@"XspfMCustomSelectorArg"];
 		id exp = [NSArray arrayWithObjects:[NSExpression expressionForConstantValue:arg01], nil];
 		
