@@ -23,7 +23,7 @@
 @private
 	NSMutableArray *children;
 	NSMutableDictionary *predicateHints;
-	NSString *value;
+	NSString *_value;
 }
 
 @property (copy) NSString *value;
@@ -43,6 +43,11 @@
 
 + (NSArray *)compoundRule;
 @end
+@interface XspfMRule (XspfMRuleBuilder)
++ (NSArray *)ruleEditorRowsFromPredicate:(NSPredicate *)predicate withRowTemplate:(id)rowTemplate;
+- (NSArray *)ruleEditorRowsFromPredicate:(NSPredicate *)predicate withRowTemplate:(id)rowTemplate;
+@end
+
 
 @interface XspfMSeparatorRule : XspfMRule
 + (id)separatorRule;

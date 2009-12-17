@@ -49,6 +49,7 @@
 		F480CD6710AF8A4300AC365B /* XspfMTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F480CD6610AF8A4300AC365B /* XspfMTableView.m */; };
 		F480CEE510AFDAB400AC365B /* NSApplication.icns in Resources */ = {isa = PBXBuildFile; fileRef = F480CEE410AFDAB300AC365B /* NSApplication.icns */; };
 		F480CF9F10B03A0D00AC365B /* AccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F480CF9D10B03A0D00AC365B /* AccessoryView.xib */; };
+		F499CBCE10DA73620053923E /* XspfMRule_RuleBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = F499CBCD10DA73620053923E /* XspfMRule_RuleBuilder.m */; };
 		F49BCF9510A45178007136CE /* XspfMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BCF9410A45178007136CE /* XspfMViewController.m */; };
 		F49BD01010A47781007136CE /* ListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F49BD00E10A47780007136CE /* ListView.xib */; };
 		F49BD01310A477BF007136CE /* XspfMListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BD01210A477BF007136CE /* XspfMListViewController.m */; };
@@ -160,6 +161,8 @@
 		F480CD6610AF8A4300AC365B /* XspfMTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMTableView.m; sourceTree = "<group>"; };
 		F480CEE410AFDAB300AC365B /* NSApplication.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = NSApplication.icns; sourceTree = "<group>"; };
 		F480CF9E10B03A0D00AC365B /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/AccessoryView.xib; sourceTree = "<group>"; };
+		F499CBCD10DA73620053923E /* XspfMRule_RuleBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMRule_RuleBuilder.m; sourceTree = "<group>"; };
+		F499CBE710DA7A960053923E /* XspfMRule_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMRule_private.h; sourceTree = "<group>"; };
 		F49BCF9310A45175007136CE /* XspfMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMViewController.h; sourceTree = "<group>"; };
 		F49BCF9410A45178007136CE /* XspfMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMViewController.m; sourceTree = "<group>"; };
 		F49BD00F10A47780007136CE /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/ListView.xib; sourceTree = "<group>"; };
@@ -233,6 +236,8 @@
 				F4A6F90A10C1666600345D77 /* XspfMRuleEditorDelegate.m */,
 				F4A6FAE410C2442E00345D77 /* XspfMRuleEditorRow.h */,
 				F4A6FAE510C2442E00345D77 /* XspfMRuleEditorRow.m */,
+				F499CBCD10DA73620053923E /* XspfMRule_RuleBuilder.m */,
+				F499CBE710DA7A960053923E /* XspfMRule_private.h */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -532,6 +537,7 @@
 				F4BB56C710BA0F1400EE50B7 /* CompleteData.xcdatamodel in Sources */,
 				F4A6F90B10C1666600345D77 /* XspfMRuleEditorDelegate.m in Sources */,
 				F4A6FAE610C2442E00345D77 /* XspfMRuleEditorRow.m in Sources */,
+				F499CBCE10DA73620053923E /* XspfMRule_RuleBuilder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

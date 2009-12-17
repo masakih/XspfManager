@@ -81,12 +81,12 @@
 }
 - (void)setValue:(NSString *)newValue
 {
-	if([value isEqualToString:newValue]) return;
+	if([_value isEqualToString:newValue]) return;
 	
-	[value autorelease];
-	value = [newValue copy];
+	[_value autorelease];
+	_value = [newValue copy];
 }
-- (NSString *)value { return value; }
+- (NSString *)value { return _value; }
 @end
 
 @implementation XspfMRule
@@ -102,7 +102,7 @@
 }
 - (id)displayValueForRuleEditor:(NSRuleEditor *)ruleEditor inRow:(NSInteger)row
 {
-	return value;
+	return _value;
 }
 #if 1
 - (NSDictionary *)predicatePartsWithDisplayValue:(id)displayValue forRuleEditor:(NSRuleEditor *)ruleEditor inRow:(NSInteger)row
@@ -200,14 +200,14 @@
 	return predicateHints;
 }
 #endif
-- (id)displayValue { return value; }
+- (id)displayValue { return _value; }
 
 - (id)copyWithZone:(NSZone *)zone
 {
 	XspfMRule *result = [[[self class] allocWithZone:zone] init];
 	result->children = [children copy];
 	result->predicateHints = [predicateHints copy];
-	result->value = [value copy];
+	result->_value = [_value copy];
 	
 	return result;
 }
@@ -218,7 +218,7 @@
 	if(![other isKindOfClass:[XspfMRule class]]) return NO;
 	
 	XspfMRule *o = other;
-	if(![value isEqualToString:o->value]) return NO;
+	if(![_value isEqualToString:o->_value]) return NO;
 	//	if(![children isEqual:o->children]) return NO;
 	//	if(![predicateHints isEqual:o->predicateHints]) return NO;
 	
@@ -226,14 +226,14 @@
 }
 - (NSUInteger)hash
 {
-	return value ? [value hash] : [super hash];
+	return _value ? [_value hash] : [super hash];
 }
 
 - (id)description
 {
 	return [NSString stringWithFormat:@"%@ {\n\t%@ = %@;\n\t%@ = %@;\n\t%@ = %@;}",
 			NSStringFromClass([self class]),
-			@"value", value,
+			@"value", _value,
 			@"hints", predicateHints,
 			@"children", children,
 			nil];
@@ -352,13 +352,71 @@
 {
 	[children release];
 	[predicateHints release];
-	[value release];
+	[_value release];
 	
 	[super dealloc];
 }
 
 @end
 
+@implementation XspfMRule (XspfMPrivate)
+
+- (NSView *)textField
+{
+	id text = [[[NSTextField alloc] initWithFrame:NSMakeRect(0,0,100,19)] autorelease];
+	[[text cell] setControlSize:NSSmallControlSize];
+	[text setFont:[NSFont controlContentFontOfSize:[NSFont systemFontSizeForControlSize:NSSmallControlSize]]];
+	[text setStringValue:@"1234567890"];
+	[text sizeToFit];
+	[text setStringValue:@""];
+	[text setDelegate:self];
+	
+	return text;
+}
+- (NSView *)datePicker
+{
+	id date = [[[NSDatePicker alloc] initWithFrame:NSMakeRect(0,0,100,19)] autorelease];
+	[[date cell] setControlSize:NSSmallControlSize];
+	[date setFont:[NSFont controlContentFontOfSize:[NSFont systemFontSizeForControlSize:NSSmallControlSize]]];
+	[date setDatePickerElements:NSYearMonthDayDatePickerElementFlag];
+	[date setDrawsBackground:YES];
+	[date setDateValue:[NSDate dateWithTimeIntervalSinceNow:0.0]];
+	[date sizeToFit];
+	[date setDelegate:self];
+	
+	return date;
+}
+- (NSView *)ratingIndicator
+{
+	id rate = [[[NSLevelIndicator alloc] initWithFrame:NSMakeRect(0,0,100,19)] autorelease];
+	id cell = [rate cell];
+	[cell setControlSize:NSSmallControlSize];
+	[rate setFont:[NSFont controlContentFontOfSize:[NSFont systemFontSizeForControlSize:NSSmallControlSize]]];
+	[rate setMinValue:0];
+	[rate setMaxValue:5];
+	[cell setLevelIndicatorStyle:NSRatingLevelIndicatorStyle];
+	[cell setEditable:YES];
+	[rate sizeToFit];
+	
+	return rate;
+}
+- (NSView *)numberField
+{
+	id text = [[[NSTextField alloc] initWithFrame:NSMakeRect(0,0,100,19)] autorelease];
+	[[text cell] setControlSize:NSSmallControlSize];
+	[text setFont:[NSFont controlContentFontOfSize:[NSFont systemFontSizeForControlSize:NSSmallControlSize]]];
+	[text setStringValue:@"123"];
+	NSNumberFormatter *formatter = [[[NSNumberFormatter alloc] init] autorelease];
+	[formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+	[formatter setMinimum:[NSNumber numberWithInt:0]];
+	[text setFormatter:formatter];
+	[text sizeToFit];
+	[text setStringValue:@"1"];
+	[text setDelegate:self];
+	
+	return text;
+}
+@end
 
 @implementation XspfMSeparatorRule
 + (id)separatorRule
@@ -429,62 +487,6 @@
 	if(type != o->type) return NO;
 	
 	return YES;
-}
-
-- (NSView *)textField
-{
-	id text = [[[NSTextField alloc] initWithFrame:NSMakeRect(0,0,100,19)] autorelease];
-	[[text cell] setControlSize:NSSmallControlSize];
-	[text setFont:[NSFont controlContentFontOfSize:[NSFont systemFontSizeForControlSize:NSSmallControlSize]]];
-	[text setStringValue:@"1234567890"];
-	[text sizeToFit];
-	[text setStringValue:@""];
-	[text setDelegate:self];
-	
-	return text;
-}
-- (NSView *)datePicker
-{
-	id date = [[[NSDatePicker alloc] initWithFrame:NSMakeRect(0,0,100,19)] autorelease];
-	[[date cell] setControlSize:NSSmallControlSize];
-	[date setFont:[NSFont controlContentFontOfSize:[NSFont systemFontSizeForControlSize:NSSmallControlSize]]];
-	[date setDatePickerElements:NSYearMonthDayDatePickerElementFlag];
-	[date setDrawsBackground:YES];
-	[date setDateValue:[NSDate dateWithTimeIntervalSinceNow:0.0]];
-	[date sizeToFit];
-	[date setDelegate:self];
-	
-	return date;
-}
-- (NSView *)ratingIndicator
-{
-	id rate = [[[NSLevelIndicator alloc] initWithFrame:NSMakeRect(0,0,100,19)] autorelease];
-	id cell = [rate cell];
-	[cell setControlSize:NSSmallControlSize];
-	[rate setFont:[NSFont controlContentFontOfSize:[NSFont systemFontSizeForControlSize:NSSmallControlSize]]];
-	[rate setMinValue:0];
-	[rate setMaxValue:5];
-	[cell setLevelIndicatorStyle:NSRatingLevelIndicatorStyle];
-	[cell setEditable:YES];
-	[rate sizeToFit];
-	
-	return rate;
-}
-- (NSView *)numberField
-{
-	id text = [[[NSTextField alloc] initWithFrame:NSMakeRect(0,0,100,19)] autorelease];
-	[[text cell] setControlSize:NSSmallControlSize];
-	[text setFont:[NSFont controlContentFontOfSize:[NSFont systemFontSizeForControlSize:NSSmallControlSize]]];
-	[text setStringValue:@"123"];
-	NSNumberFormatter *formatter = [[[NSNumberFormatter alloc] init] autorelease];
-	[formatter setNumberStyle:NSNumberFormatterDecimalStyle];
-	[formatter setMinimum:[NSNumber numberWithInt:0]];
-	[text setFormatter:formatter];
-	[text sizeToFit];
-	[text setStringValue:@"1"];
-	[text setDelegate:self];
-	
-	return text;
 }
 
 - (Class)fieldClass
