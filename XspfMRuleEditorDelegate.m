@@ -311,7 +311,7 @@ displayValueForCriterion:(id)criterion
 	return result;
 }
 
-- (NSArray *)rangeOfDateByNumber:(NSNumber *)numberValue unit:(NSNumber *)unitValue
+- (NSArray *)dateRangeByNumber:(NSNumber *)numberValue unit:(NSNumber *)unitValue
 {
 	NSInteger number = [numberValue integerValue];
 	NSInteger unit = [unitValue integerValue];
@@ -385,6 +385,52 @@ displayValueForCriterion:(id)criterion
 	NSDate *pastDay = [aCalendar dateByAddingComponents:comp toDate:aDay options:0];
 	
 	return pastDay;
+}
+- (NSArray *)rangeDateByNumber:(NSNumber *)numberValue toNumber:(NSNumber *)number02Value unit:(NSNumber *)unitValue
+{
+	NSInteger number = [numberValue integerValue];
+	NSInteger number02 = [number02Value integerValue];
+	NSInteger unit = [unitValue integerValue];
+	
+	NSDateComponents *comp01 = [[NSDateComponents alloc] init];
+	NSDateComponents *comp02 = [[NSDateComponents alloc] init];
+	NSUInteger unitFlag = 0;
+	switch(unit) {
+		case 0:
+			unitFlag = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
+			[comp01 setDay:-number];
+			[comp02 setDay:-number02];
+			break;
+		case 1:
+			unitFlag = NSYearCalendarUnit | NSMonthCalendarUnit | NSWeekCalendarUnit;
+			[comp01 setWeek:-number+1];
+			[comp01 setDay:-1];
+			[comp02 setWeek:-number02];
+			break;
+		case 2:
+			unitFlag = NSYearCalendarUnit | NSMonthCalendarUnit;
+			[comp01 setMonth:-number+1];
+			[comp01 setDay:-1];
+			[comp02 setMonth:-number02];
+			break;
+		case 3:
+			unitFlag = NSYearCalendarUnit;
+			[comp01 setYear:-number+1];
+			[comp01 setDay:-1];
+			[comp02 setYear:-number02];
+			break;
+	}
+	NSCalendar *aCalendar = [NSCalendar currentCalendar];
+	NSDate *now = [NSDate dateWithTimeIntervalSinceNow:0.0];
+	NSDateComponents *nowComp = [aCalendar components:unitFlag fromDate:now];
+	NSDate *aDay = [aCalendar dateFromComponents:nowComp];
+	
+	NSDate *pastDay01 = [aCalendar dateByAddingComponents:comp01 toDate:aDay options:0];
+	NSDate *pastDay02 = [aCalendar dateByAddingComponents:comp02 toDate:aDay options:0];
+	
+	id result = [NSArray arrayWithObjects:pastDay01, pastDay02, nil];
+	NSLog(@"2 days -> %@", result);
+	return result;
 }
 - (NSArray *)dateRangeFromVariable:(NSString *)date
 {

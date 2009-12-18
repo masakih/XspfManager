@@ -216,7 +216,7 @@
 					</dict>
 					<dict>
 						<key>XspfMCustomSelector</key>
-						<string>rangeOfDateByNumber:unit:</string>
+						<string>dateRangeByNumber:unit:</string>
 						<key>XspfMCustomSelectorArgumentsCteator</key>
 						<string>numberAndUnitArgs:</string>
 						<key>XspfMCustomSelectorArgumentsCteatorArg01</key>
@@ -357,12 +357,12 @@
 						</array>
 					</dict>
 					<dict>
-						<key>XspfMPredicateRightExpression</key>
-						<string>rangeUnitFromDisplayValues:option:</string>
-						<key>XspfMRightExpressionArg01</key>
+						<key>XspfMCustomSelector</key>
+						<string>rangeDateByNumber:toNumber:unit:</string>
+						<key>XspfMCustomSelectorArgumentsCteator</key>
+						<string>twoNumberAndUnitArgs:</string>
+						<key>XspfMCustomSelectorArgumentsCteatorArg01</key>
 						<string>displayValues</string>
-						<key>XspfMRightExpressionArg02</key>
-						<integer>3</integer>
 						<key>NSRuleEditorPredicateOperatorType</key>
 						<integer>100</integer>
 						<key>value</key>
