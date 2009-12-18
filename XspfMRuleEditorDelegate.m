@@ -100,7 +100,7 @@ static NSString *XspfMREDNameKey = @"name";
 			message = [NSString stringWithFormat:@"keyPath -> %@", [exp keyPath]];
 			break;
 		case NSFunctionExpressionType:
-			message = [NSString stringWithFormat:@"oprand -> %@(%@)function -> %@, argumect -> %@",
+			message = [NSString stringWithFormat:@"oprand -> %@(%@), function -> %@, arguments -> %@",
 					   [exp operand], NSStringFromClass([[exp operand] class]),
 					   [exp function], [exp arguments]];
 			break;
@@ -143,11 +143,7 @@ static NSString *XspfMREDNameKey = @"name";
 	NSLog(@"predicate -> (%@) %@", NSStringFromClass([predicate class]), predicate);
 	[self resolvePredicate:predicate];
 	
-	
-//	id hoge = [self buildRowsFromPredicate:predicate];
-//	id new = [NSArray arrayWithObject:hoge];
 	id new = [XspfMRule ruleEditorRowsFromPredicate:predicate withRowTemplate:rowTemplate];
-
 	
 	[self willChangeValueForKey:XspfMREDPredicateRowsKey];
 	[predicateRows release];
@@ -222,7 +218,6 @@ displayValueForCriterion:(id)criterion
 	} else {
 		result = [criterion displayValueForRuleEditor:editor inRow:row];
 	}
-	
 		
 	//	NSLog(@"display\tcriterion -> %@, row -> %d, result -> %@", criterion, row, result);
 	
@@ -267,7 +262,6 @@ displayValueForCriterion:(id)criterion
 }
 - (NSArray *)rangeOfYesterday
 {
-	
 	NSCalendar *aCalendar = [NSCalendar currentCalendar];
 	NSDate *now = [NSDate dateWithTimeIntervalSinceNow:0.0];
 	NSDateComponents *nowComp = [aCalendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit
@@ -316,6 +310,49 @@ displayValueForCriterion:(id)criterion
 	id result = [NSArray arrayWithObjects:startOfLastWeek, startOfThisWeek, nil];
 	return result;
 }
+
+- (NSArray *)rangeOfNumber:(NSNumber *)numberValue byUnit:(NSNumber *)unitValue
+{
+	NSInteger number = [numberValue integerValue];
+	NSInteger unit = [unitValue integerValue];
+	
+	NSDateComponents *comp01 = [[NSDateComponents alloc] init];
+	NSDateComponents *comp02 = [[NSDateComponents alloc] init];
+	NSUInteger unitFlag = 0;
+	switch(unit) {
+		case 0:
+			unitFlag = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
+			[comp01 setDay:-number];
+			[comp02 setDay:-number+1];
+			break;
+		case 1:
+			unitFlag = NSYearCalendarUnit | NSMonthCalendarUnit | NSWeekCalendarUnit;
+			[comp01 setWeek:-number];
+			[comp02 setDay:-1];
+			break;
+		case 2:
+			unitFlag = NSYearCalendarUnit | NSMonthCalendarUnit;
+			[comp01 setMonth:-number];
+			[comp02 setDay:-1];
+			break;
+		case 3:
+			unitFlag = NSYearCalendarUnit;
+			[comp01 setYear:-number];
+			[comp02 setDay:-1];
+			break;
+	}
+	NSCalendar *aCalendar = [NSCalendar currentCalendar];
+	NSDate *now = [NSDate dateWithTimeIntervalSinceNow:0.0];
+	NSDateComponents *nowComp = [aCalendar components:unitFlag fromDate:now];
+	NSDate *aDay = [aCalendar dateFromComponents:nowComp];
+	
+	NSDate *pastDay01 = [aCalendar dateByAddingComponents:comp01 toDate:aDay options:0];
+	NSDate *pastDay02 = [aCalendar dateByAddingComponents:comp02 toDate:aDay options:0];
+	
+	id result = [NSArray arrayWithObjects:pastDay01, pastDay02, nil];
+	return result;
+}
+
 - (NSArray *)dateRangeFromVariable:(NSString *)date
 {
 	NSLog(@"In function argument is %@", date);

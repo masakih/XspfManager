@@ -215,12 +215,12 @@
 						<string>separator</string>
 					</dict>
 					<dict>
-						<key>XspfMPredicateRightExpression</key>
-						<string>rangeUnitFromDisplayValues:option:</string>
-						<key>XspfMRightExpressionArg01</key>
+						<key>XspfMCustomSelector</key>
+						<string>rangeOfNumber:byUnit:</string>
+						<key>XspfMCustomSelectorArgumentsCteator</key>
+						<string>numberAndUnitArgs:</string>
+						<key>XspfMCustomSelectorArgumentsCteatorArg01</key>
 						<string>displayValues</string>
-						<key>XspfMRightExpressionArg02</key>
-						<integer>0</integer>
 						<key>NSRuleEditorPredicateOperatorType</key>
 						<integer>100</integer>
 						<key>value</key>
