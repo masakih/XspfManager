@@ -311,7 +311,7 @@ displayValueForCriterion:(id)criterion
 	return result;
 }
 
-- (NSArray *)rangeOfNumber:(NSNumber *)numberValue byUnit:(NSNumber *)unitValue
+- (NSArray *)rangeOfDateByNumber:(NSNumber *)numberValue unit:(NSNumber *)unitValue
 {
 	NSInteger number = [numberValue integerValue];
 	NSInteger unit = [unitValue integerValue];
@@ -352,7 +352,40 @@ displayValueForCriterion:(id)criterion
 	id result = [NSArray arrayWithObjects:pastDay01, pastDay02, nil];
 	return result;
 }
-
+- (NSDate *)dateByNumber:(NSNumber *)numberValue unit:(NSNumber *)unitValue
+{
+	NSInteger number = [numberValue integerValue];
+	NSInteger unit = [unitValue integerValue];
+	
+	NSDateComponents *comp = [[NSDateComponents alloc] init];
+	NSUInteger unitFlag = 0;
+	switch(unit) {
+		case 0:
+			unitFlag = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
+			[comp setDay:-number];
+			break;
+		case 1:
+			unitFlag = NSYearCalendarUnit | NSMonthCalendarUnit | NSWeekCalendarUnit;
+			[comp setWeek:-number];
+			break;
+		case 2:
+			unitFlag = NSYearCalendarUnit | NSMonthCalendarUnit;
+			[comp setMonth:-number];
+			break;
+		case 3:
+			unitFlag = NSYearCalendarUnit;
+			[comp setYear:-number];
+			break;
+	}
+	NSCalendar *aCalendar = [NSCalendar currentCalendar];
+	NSDate *now = [NSDate dateWithTimeIntervalSinceNow:0.0];
+	NSDateComponents *nowComp = [aCalendar components:unitFlag fromDate:now];
+	NSDate *aDay = [aCalendar dateFromComponents:nowComp];
+	
+	NSDate *pastDay = [aCalendar dateByAddingComponents:comp toDate:aDay options:0];
+	
+	return pastDay;
+}
 - (NSArray *)dateRangeFromVariable:(NSString *)date
 {
 	NSLog(@"In function argument is %@", date);
