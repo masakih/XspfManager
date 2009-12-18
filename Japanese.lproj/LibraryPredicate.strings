@@ -41,7 +41,7 @@
 "%[lastPlayDate]@ %[is between]@ %@ and %@ %[Days]@ ago" = "%1$[最後の再生日時が]@ %3$@ 〜 %4$@ %5$[日]@ 前 %2$[の範囲]@";
 "%[lastPlayDate]@ %[is between]@ %@ and %@ %[Weeks]@ ago" = "%1$[最後の再生日時が]@ %3$@ 〜 %4$@ %5$[週]@ 前 %2$[の範囲]@";
 "%[lastPlayDate]@ %[is between]@ %@ and %@ %[Months]@ ago" = "%1$[最後の再生日時が]@ %3$@ 〜 %4$@ %5$[月]@ 前 %2$[の範囲]@";
-"%[lastPlayDate]@ %[is between]@ %@ and %@ %[Years]@ ago" = "%1$[最後の再生日時が]@ %3$@ 〜 %4$@ %5$[年]@ [前 %2$[の範囲]@";
+"%[lastPlayDate]@ %[is between]@ %@ and %@ %[Years]@ ago" = "%1$[最後の再生日時が]@ %3$@ 〜 %4$@ %5$[年]@ 前 %2$[の範囲]@";
 
 
 "%[modificationDate]@ %[is the date]@ %@" = "%1$[変更日が]@ %3$@ %2$[である]@ ";
