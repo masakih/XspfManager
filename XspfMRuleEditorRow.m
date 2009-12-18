@@ -571,6 +571,37 @@
 @end
 
 @implementation XspfMRule (XspfMExpressionBuilder)
+- (NSArray *)twoNumberAndUnitArgs:(NSArray *)displayValues
+{
+	id value03 = [displayValues objectAtIndex:2];
+	id arg01 = [NSNumber numberWithInt:[[value03 objectValue] intValue]];
+	
+	id value05 = [displayValues objectAtIndex:4];
+	id arg02 = [NSNumber numberWithInt:[[value05 objectValue] intValue]];
+	
+	id value06 = [displayValues objectAtIndex:5];
+	id arg03 = nil;
+	if([value06 isEqualToString:@"Days"]) {
+		arg03 = [NSNumber numberWithInt:0];
+	} else if([value06 isEqualToString:@"Weeks"]) {
+		arg03 = [NSNumber numberWithInt:1];
+	} else if([value06 isEqualToString:@"Months"]) {
+		arg03 = [NSNumber numberWithInt:2];
+	} else if([value06 isEqualToString:@"Years"]) {
+		arg03 = [NSNumber numberWithInt:3];
+	}
+	
+	if([arg01 compare:arg02] == NSOrderedDescending) {
+		id t = arg01;
+		arg01 = arg02;
+		arg02 = t;
+	}
+	
+	return [NSArray arrayWithObjects:[NSExpression expressionForConstantValue:arg01],
+			[NSExpression expressionForConstantValue:arg02],
+			[NSExpression expressionForConstantValue:arg03],
+			nil];
+}
 - (NSArray *)numberAndUnitArgs:(NSArray *)displayValues
 {
 	id value03 = [displayValues objectAtIndex:2];
