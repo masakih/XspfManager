@@ -104,7 +104,6 @@
 {
 	return _value;
 }
-#if 1
 - (NSDictionary *)predicatePartsWithDisplayValue:(id)displayValue forRuleEditor:(NSRuleEditor *)ruleEditor inRow:(NSInteger)row
 {
 	id result = [NSMutableDictionary dictionary];
@@ -179,12 +178,33 @@
 	}
 	
 	if([predicateHints valueForKey:@"XspfMCustomSelector"]) {
-		id selName = [predicateHints valueForKey:@"XspfMCustomSelector"];
-		id arg01 = [predicateHints valueForKey:@"XspfMCustomSelectorArg"];
-		id exp = [NSArray arrayWithObjects:[NSExpression expressionForConstantValue:arg01], nil];
+		NSString *selName = [predicateHints valueForKey:@"XspfMCustomSelector"];
+		id args = nil;
+		NSString *argSelName = [predicateHints valueForKey:@"XspfMCustomSelectorArgumentsCteator"];
+		if(argSelName) {
+			SEL argSel = NSSelectorFromString(argSelName);
+			id argSelArg01 = [predicateHints valueForKey:@"XspfMCustomSelectorArgumentsCteatorArg01"];
+			if([argSelArg01 isEqual:@"displayValues"]) {
+				argSelArg01 = [ruleEditor displayValuesForRow:row];
+			}
+			id argSelArg02 = [predicateHints valueForKey:@"XspfMCustomSelectorArgumentsCteatorArg02"];
+			if([argSelArg02 isEqual:@"displayValues"]) {
+				argSelArg02 = [ruleEditor displayValuesForRow:row];
+			}
+			if(argSelArg02) {
+				args = [self performSelector:argSel withObject:argSelArg01 withObject:argSelArg02];
+			} else if(argSelArg01) {
+				args = [self performSelector:argSel withObject:argSelArg01];
+			} else {
+				args = [self performSelector:argSel];
+			}
+		} else {
+			id arg01 = [predicateHints valueForKey:@"XspfMCustomSelectorArg01"];
+			args = [NSArray arrayWithObjects:[NSExpression expressionForConstantValue:arg01], nil];
+		}
 		
 		id exp03 = [NSExpression expressionForConstantValue:@"DATE_RANGE_CREATOR"];
-		id exp02 = [NSExpression expressionForFunction:exp03 selectorName:selName arguments:exp];
+		id exp02 = [NSExpression expressionForFunction:exp03 selectorName:selName arguments:args];
 		[result setValue:exp02 forKey:@"NSRuleEditorPredicateRightExpression"];
 	}
 	
@@ -193,13 +213,6 @@
 	return result;
 }
 
-#else
-- (NSDictionary *)predicatePartsWithDisplayValue:(id)value forRuleEditor:(NSRuleEditor *)ruleEditor inRow:(NSInteger)row
-{
-#warning MUST IMPLEMENT
-	return predicateHints;
-}
-#endif
 - (id)displayValue { return _value; }
 
 - (id)copyWithZone:(NSZone *)zone
@@ -558,6 +571,26 @@
 @end
 
 @implementation XspfMRule (XspfMExpressionBuilder)
+- (NSArray *)numberAndUnitArgs:(NSArray *)displayValues
+{
+	id value03 = [displayValues objectAtIndex:2];
+	id arg01 = [NSNumber numberWithInt:[[value03 objectValue] intValue]];
+	
+	id value04 = [displayValues objectAtIndex:3];
+	id arg02 = nil;
+	if([value04 isEqualToString:@"Days"]) {
+		arg02 = [NSNumber numberWithInt:0];
+	} else if([value04 isEqualToString:@"Weeks"]) {
+		arg02 = [NSNumber numberWithInt:1];
+	} else if([value04 isEqualToString:@"Months"]) {
+		arg02 = [NSNumber numberWithInt:2];
+	} else if([value04 isEqualToString:@"Years"]) {
+		arg02 = [NSNumber numberWithInt:3];
+	}
+	
+	return [NSArray arrayWithObjects:[NSExpression expressionForConstantValue:arg01],
+			[NSExpression expressionForConstantValue:arg02], nil];
+}
 - (NSExpression *)rangeUnitFromDisplayValues:(NSArray *)displayValues option:(NSNumber *)optionValue
 {
 	NSInteger option = [optionValue integerValue];
