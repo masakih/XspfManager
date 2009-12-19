@@ -12,16 +12,13 @@
 
 @implementation XspfMRuleEditorDelegate
 
-static NSString *XspfMREDRowsKey = @"rows";
 static NSString *XspfMREDPredicateRowsKey = @"predicateRows";
-static NSString *XspfMREDNameKey = @"name";
-
 
 - (NSDictionary *)buildRows:(NSArray *)template
 {
 	NSMutableDictionary *result = [NSMutableDictionary dictionary];
 	for(id row in template) {
-		id name = [row valueForKey:XspfMREDNameKey];
+		id name = [row valueForKey:@"name"];
 		id rule = [XspfMRule ruleWithPlist:row];
 		[result setObject:rule forKey:name];
 	}
@@ -79,7 +76,7 @@ static NSString *XspfMREDNameKey = @"name";
 		
 	////
 	predicateRows = [[NSMutableArray alloc] init];
-	[ruleEditor bind:XspfMREDRowsKey toObject:self withKeyPath:XspfMREDPredicateRowsKey options:nil];
+	[ruleEditor bind:@"rows" toObject:self withKeyPath:XspfMREDPredicateRowsKey options:nil];
 }
 
 - (void)resolveExpression:(id)exp
@@ -429,7 +426,6 @@ displayValueForCriterion:(id)criterion
 	NSDate *pastDay02 = [aCalendar dateByAddingComponents:comp02 toDate:aDay options:0];
 	
 	id result = [NSArray arrayWithObjects:pastDay01, pastDay02, nil];
-	NSLog(@"2 days -> %@", result);
 	return result;
 }
 - (NSArray *)dateRangeFromVariable:(NSString *)date

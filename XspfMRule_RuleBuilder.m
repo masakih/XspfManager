@@ -130,8 +130,9 @@ static NSString *XspfMREDSubrowsKey = @"subrows";
 			break;
 	}
 }
-- (void)resolveFunctionExpression:(NSExpression *)rightExp value02:(id *)value02 value03:(id *)value03 value04:(id *)value04 value05:(id *)value05 value06:(id *)value06 value07:(id *)value07
+- (void)resolveFunctionExpression:(NSComparisonPredicate *)predicate value02:(id *)value02 value03:(id *)value03 value04:(id *)value04 value05:(id *)value05 value06:(id *)value06 value07:(id *)value07
 {
+	NSExpression *rightExp = [predicate rightExpression];
 	NSString *function = [rightExp function];
 	
 	if([function isEqualToString:@"rangeOfToday"]) {
@@ -142,6 +143,79 @@ static NSString *XspfMREDSubrowsKey = @"subrows";
 		*value02 = @"is this week";
 	} else if([function isEqualToString:@"rangeOfLastWeek"]) {
 		*value02 = @"is last week";
+	} else if([function isEqualToString:@"dateRangeByNumber:unit:"]) {
+		*value02 = @"is exactly";
+		*value03 = [self numberField];
+		[*value03 setTag:XspfMPrimaryNumberFieldTag];
+		[*value03 setObjectValue:[[[rightExp arguments] objectAtIndex:0] constantValue]];
+		id unitValue = [[[rightExp arguments] objectAtIndex:1] constantValue];
+		switch([unitValue intValue]) {
+			case 0:
+				*value04 = @"Days";
+				break;
+			case 1:
+				*value04 = @"Weeks";
+				break;
+			case 2:
+				*value04 = @"Months";
+				break;
+			case 3:
+				*value04 = @"Years";
+				break;
+		}
+		*value05 = @"ago";
+	} else if([function isEqualToString:@"dateByNumber:unit:"]) {
+		switch([predicate predicateOperatorType]) {
+			case NSGreaterThanOrEqualToPredicateOperatorType:
+				*value02 = @"is in the last";
+				break;
+			case NSLessThanPredicateOperatorType:
+				*value02 = @"is not in the last";
+				break;
+		}
+		*value03 = [self numberField];
+		[*value03 setTag:XspfMPrimaryNumberFieldTag];
+		[*value03 setObjectValue:[[[rightExp arguments] objectAtIndex:0] constantValue]];
+		id unitValue = [[[rightExp arguments] objectAtIndex:1] constantValue];
+		switch([unitValue intValue]) {
+			case 0:
+				*value04 = @"Days";
+				break;
+			case 1:
+				*value04 = @"Weeks";
+				break;
+			case 2:
+				*value04 = @"Months";
+				break;
+			case 3:
+				*value04 = @"Years";
+				break;
+		}
+	} else if([function isEqualToString:@"rangeDateByNumber:toNumber:unit:"]) {
+		*value02 = @"is between";
+		*value03 = [self numberField];
+		[*value03 setTag:XspfMPrimaryNumberFieldTag];
+		[*value03 setObjectValue:[[[rightExp arguments] objectAtIndex:0] constantValue]];
+		*value04 = @"and";
+		*value05 = [self numberField];
+		[*value05 setTag:XspfMSecondaryNumberFieldTag];
+		[*value05 setObjectValue:[[[rightExp arguments] objectAtIndex:1] constantValue]];
+		id unitValue = [[[rightExp arguments] objectAtIndex:2] constantValue];
+		switch([unitValue intValue]) {
+			case 0:
+				*value06 = @"Days";
+				break;
+			case 1:
+				*value06 = @"Weeks";
+				break;
+			case 2:
+				*value06 = @"Months";
+				break;
+			case 3:
+				*value06 = @"Years";
+				break;
+		}
+		*value07 = @"ago";
 	}
 }
 
@@ -152,17 +226,35 @@ static NSString *XspfMREDSubrowsKey = @"subrows";
 	
 	*value02 = @"is in the range";
 	*value03 = [self datePicker];
+	[*value03 setTag:XspfMPrimaryDateFieldTag];
 	[*value03 setObjectValue:[firstExp constantValue]];
 	*value04 = @"to";
 	*value05 = [self datePicker];
 	[*value05 setObjectValue:[secondExp constantValue]];
-	[*value05 setTag:1000];
+	[*value05 setTag:XspfMSeconraryDateFieldTag];
 }
 
-- (NSArray *)dateRangeDisplayValuesWithPredicate:(NSComparisonPredicate *)predicate
+- (void)resolveConstant:(NSComparisonPredicate *)predicate value02:(id *)value02 value03:(id *)value03 value04:(id *)value04
 {
-	id leftKeyPath = [[predicate leftExpression] keyPath];
-	
+	switch([predicate predicateOperatorType]) {
+		case NSEqualToPredicateOperatorType:
+			*value02 = @"is the date";
+			break;
+		case NSGreaterThanPredicateOperatorType:
+			*value02 = @"is after the date";
+			break;
+		case NSLessThanPredicateOperatorType:
+			*value02 = @"is before the date";
+			break;			
+	}
+	id rightConstant = [[predicate rightExpression] constantValue];
+	*value03 = [self datePicker];
+	[*value03 setObjectValue:rightConstant];
+	[*value03 setTag:XspfMPrimaryDateFieldTag];
+}
+
+- (NSArray *)dateDisplayValuesWithPredicate:(NSComparisonPredicate *)predicate
+{
 	id value02 = nil;
 	id value03 = nil;
 	id value04 = nil;
@@ -172,43 +264,19 @@ static NSString *XspfMREDSubrowsKey = @"subrows";
 	
 	NSExpressionType rightType = [[predicate rightExpression] expressionType];
 	if(rightType == NSFunctionExpressionType) {
-		[self resolveFunctionExpression:[predicate rightExpression] value02:&value02 value03:&value03 value04:&value04 value05:&value05 value06:&value06 value07:&value07];
+		[self resolveFunctionExpression:predicate value02:&value02 value03:&value03 value04:&value04 value05:&value05 value06:&value06 value07:&value07];
 	} else if(rightType == NSAggregateExpressionType) {
 		[self rangeDateDisplayValuesWithExpression:[predicate rightExpression] value02:&value02 value03:&value03 value04:&value04 value05:&value05];
 	} else if(rightType == NSVariableExpressionType) {
 		id rightVar = [[predicate rightExpression] variable];
 		[self resolveVariable:rightVar value02:&value02 value03:&value03 value04:&value04 value05:&value05 value06:&value06 value07:&value07];
+	} else if(rightType == NSConstantValueExpressionType) {
+		[self resolveConstant:predicate value02:&value02 value03:&value03 value04:&value04];
 	}
 	
-	return [NSArray arrayWithObjects:leftKeyPath, value02, value03, value04, value05, value06, value07, nil];
-}
-
-- (NSArray *)dateDisplayValuesWithPredicate:(NSComparisonPredicate *)predicate
-{
-	id value02 = nil; id value03 = nil;
 	id leftKeyPath = [[predicate leftExpression] keyPath];
 	
-	switch([predicate predicateOperatorType]) {
-		case NSEqualToPredicateOperatorType:
-			value02 = @"is the date";
-			break;
-		case NSGreaterThanPredicateOperatorType:
-			value02 = @"is after the date";
-			break;
-		case NSLessThanPredicateOperatorType:
-			value02 = @"is before the date";
-			break;
-		case NSBetweenPredicateOperatorType:
-			return [self dateRangeDisplayValuesWithPredicate:predicate];
-			
-	}
-	id rightConstant = [[predicate rightExpression] constantValue];
-	value03 = [self datePicker];
-	[value03 setObjectValue:rightConstant];
-	
-	id disp = [NSArray arrayWithObjects:leftKeyPath, value02, value03, nil];
-	
-	return disp;
+	return [NSArray arrayWithObjects:leftKeyPath, value02, value03, value04, value05, value06, value07, nil];
 }
 
 - (id)criterionFromCriteria:(id)criteria withDisplayValues:(NSArray *)displayValues
@@ -235,17 +303,19 @@ static NSString *XspfMREDSubrowsKey = @"subrows";
 				fieldClass = [NSTextField class];
 			} else if([value hasPrefix:@"dateField"]) {
 				fieldClass = [NSDatePicker class];
-				if(![value isEqualToString:@"dateField"]) { // result == dateField02
-					tag = 1000;
+				if([value isEqualToString:@"dateField"]) {
+					tag = XspfMPrimaryDateFieldTag;
+				} else { // result == dateField02
+					tag = XspfMSeconraryDateFieldTag;
 				}
 			} else if([value hasPrefix:@"rateField"]) {
 				fieldClass = [NSLevelIndicator class];
 			} else if([value hasPrefix:@"numberField"]) {
 				fieldClass = [NSTextField class];
 				if([value isEqualToString:@"numberField"]) {
-					tag = 2000;
+					tag = XspfMPrimaryNumberFieldTag;
 				} else { // result == numberField02
-					tag = 2100;
+					tag = XspfMSecondaryNumberFieldTag;
 				}
 			}
 			if(!fieldClass)  continue;

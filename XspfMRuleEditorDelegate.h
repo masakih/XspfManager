@@ -19,8 +19,6 @@
 	IBOutlet NSRuleEditor *ruleEditor;
 	NSArray *rows;
 	NSArray *rowTemplate;
-	NSMutableArray *rowIDs;
-	NSMutableDictionary *rowFields;
 	NSArray *predicateRows;
 }
 
