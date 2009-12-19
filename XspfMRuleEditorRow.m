@@ -61,10 +61,10 @@
 @implementation XspfMRule (XspfMAccessor)
 - (void)setChildren:(NSArray *)newChildren
 {
-	if(!newChildren) newChildren = [NSArray array];
+	if(!newChildren) newChildren = [NSMutableArray array];
 	
 	[children autorelease];
-	children = [newChildren mutableCopy];
+	children = [[NSMutableArray alloc] initWithArray:newChildren copyItems:YES];
 }
 - (void)addChild:(XspfMRule *)child
 {
@@ -218,9 +218,9 @@
 - (id)copyWithZone:(NSZone *)zone
 {
 	XspfMRule *result = [[[self class] allocWithZone:zone] init];
-	result->children = [children copy];
-	result->predicateHints = [predicateHints copy];
-	result->_value = [_value copy];
+	[result setChildren:children];
+	[result setPredicateParts:predicateHints];
+	[result setValue:_value];
 	
 	return result;
 }
@@ -486,11 +486,6 @@
 	
 	return result;
 }
-- (void)dealloc
-{
-	[field release];
-	[super dealloc];
-}
 - (BOOL)isEqual:(id)other
 {
 	if(![super isEqual:other]) return NO;
@@ -540,8 +535,6 @@
 }
 - (id)displayValue
 {
-	if(field) return field;
-	
 	id res = [self performSelector:[self fieldCreateSelector]];
 	[res setTag:tag];
 	
@@ -549,19 +542,19 @@
 }
 - (id)displayValueForRuleEditor:(NSRuleEditor *)ruleEditor inRow:(NSInteger)row
 {
-	if(field) return field;
+	id result = nil;
 	
 	id displayValues = [ruleEditor displayValuesForRow:row];
 	Class fieldCalss = [self fieldClass];
 	for(id v in displayValues) {
 		if([v isKindOfClass:fieldCalss] && [v tag] == tag) {
-			field = [v retain];
+			result = v;
 			break;
 		}
 	}
-	if(!field) field = [[self displayValue] retain];
+	if(!result) result = [self displayValue];
 	
-	return field;
+	return result;
 }
 //- (NSDictionary *)predicatePartsWithDisplayValue:(id)value forRuleEditor:(NSRuleEditor *)ruleEditor inRow:(NSInteger)row
 //{
