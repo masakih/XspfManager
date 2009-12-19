@@ -76,7 +76,6 @@ enum XspfMFieldTag {
 {
 	XspfMFieldType type;
 	NSInteger tag;
-	id field;
 }
 + (id)ruleWithFieldType:(XspfMFieldType)type;
 - (id)initWithFieldType:(XspfMFieldType)type;
