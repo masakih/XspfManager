@@ -29,6 +29,7 @@
 		F43E62BD10A0710E00BF88DA /* XspfMImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E62BC10A0710E00BF88DA /* XspfMImageView.m */; };
 		F43E652E10A315D000BF88DA /* CollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F43E652C10A315D000BF88DA /* CollectionView.xib */; };
 		F43E653410A3167700BF88DA /* XspfMCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E653310A3167700BF88DA /* XspfMCollectionViewController.m */; };
+		F478A95A10DD1F0F000A75B4 /* XspfMRule_Subclasses.m in Sources */ = {isa = PBXBuildFile; fileRef = F478A95910DD1F0F000A75B4 /* XspfMRule_Subclasses.m */; };
 		F47C00B7109D479100F5991C /* XspfManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C00B6109D479100F5991C /* XspfManager.m */; };
 		F47C00FE109D51CC00F5991C /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F47C00FD109D51CC00F5991C /* QTKit.framework */; };
 		F47C023A109D603D00F5991C /* XSPFMXspfObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C0239109D603D00F5991C /* XSPFMXspfObject.m */; };
@@ -124,6 +125,7 @@
 		F43E652D10A315D000BF88DA /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/CollectionView.xib; sourceTree = "<group>"; };
 		F43E653210A3167700BF88DA /* XspfMCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMCollectionViewController.h; sourceTree = "<group>"; };
 		F43E653310A3167700BF88DA /* XspfMCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMCollectionViewController.m; sourceTree = "<group>"; };
+		F478A95910DD1F0F000A75B4 /* XspfMRule_Subclasses.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMRule_Subclasses.m; sourceTree = "<group>"; };
 		F47C00B5109D479100F5991C /* XspfManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfManager.h; sourceTree = "<group>"; };
 		F47C00B6109D479100F5991C /* XspfManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfManager.m; sourceTree = "<group>"; };
 		F47C00FD109D51CC00F5991C /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = /System/Library/Frameworks/QTKit.framework; sourceTree = "<absolute>"; };
@@ -208,6 +210,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				F478A95910DD1F0F000A75B4 /* XspfMRule_Subclasses.m */,
 				77C8280B06725ACE000B614F /* XspfManager_AppDelegate.h */,
 				77C8280C06725ACE000B614F /* XspfManager_AppDelegate.m */,
 				F47C00B5109D479100F5991C /* XspfManager.h */,
@@ -538,6 +541,7 @@
 				F4A6F90B10C1666600345D77 /* XspfMRuleEditorDelegate.m in Sources */,
 				F4A6FAE610C2442E00345D77 /* XspfMRuleEditorRow.m in Sources */,
 				F499CBCE10DA73620053923E /* XspfMRule_RuleBuilder.m in Sources */,
+				F478A95A10DD1F0F000A75B4 /* XspfMRule_Subclasses.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
