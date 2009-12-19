@@ -163,22 +163,22 @@
 			if([arg02 isEqual:@"displayValues"]) {
 				arg02 = [ruleEditor displayValuesForRow:row];
 			}
-			id r = [self performSelector:selector withObject:arg01 withObject:arg02];
-			[result setValue:r forKey:NSRuleEditorPredicateRightExpression];
+			id rhs = [self performSelector:selector withObject:arg01 withObject:arg02];
+			[result setValue:rhs forKey:NSRuleEditorPredicateRightExpression];
 		} else if(arg01) {
 			if([arg01 isEqual:@"displayValues"]) {
 				arg01 = [ruleEditor displayValuesForRow:row];
 			}
-			id r = [self performSelector:selector withObject:arg01];
-			[result setValue:r forKey:NSRuleEditorPredicateRightExpression];
+			id rhs = [self performSelector:selector withObject:arg01];
+			[result setValue:rhs forKey:NSRuleEditorPredicateRightExpression];
 		} else {
-			id r = [self performSelector:selector];
-			[result setValue:r forKey:NSRuleEditorPredicateRightExpression];
+			id rhs = [self performSelector:selector];
+			[result setValue:rhs forKey:NSRuleEditorPredicateRightExpression];
 		}
 	}
 	
-	if([predicateHints valueForKey:@"XspfMCustomSelector"]) {
-		NSString *selName = [predicateHints valueForKey:@"XspfMCustomSelector"];
+	NSString *selName = [predicateHints valueForKey:@"XspfMCustomSelector"];
+	if(selName) {
 		id args = nil;
 		NSString *argSelName = [predicateHints valueForKey:@"XspfMCustomSelectorArgumentsCteator"];
 		if(argSelName) {
@@ -442,13 +442,13 @@
 	id value06 = [displayValues objectAtIndex:5];
 	id arg03 = nil;
 	if([value06 isEqualToString:@"Days"]) {
-		arg03 = [NSNumber numberWithInt:0];
+		arg03 = [NSNumber numberWithInt:XspfMDaysUnitType];
 	} else if([value06 isEqualToString:@"Weeks"]) {
-		arg03 = [NSNumber numberWithInt:1];
+		arg03 = [NSNumber numberWithInt:XpsfMWeeksUnitType];
 	} else if([value06 isEqualToString:@"Months"]) {
-		arg03 = [NSNumber numberWithInt:2];
+		arg03 = [NSNumber numberWithInt:XspfMMonthsUnitType];
 	} else if([value06 isEqualToString:@"Years"]) {
-		arg03 = [NSNumber numberWithInt:3];
+		arg03 = [NSNumber numberWithInt:XspfMYearsUnitType];
 	}
 	
 	if([arg01 compare:arg02] == NSOrderedDescending) {
@@ -470,44 +470,17 @@
 	id value04 = [displayValues objectAtIndex:3];
 	id arg02 = nil;
 	if([value04 isEqualToString:@"Days"]) {
-		arg02 = [NSNumber numberWithInt:0];
+		arg02 = [NSNumber numberWithInt:XspfMDaysUnitType];
 	} else if([value04 isEqualToString:@"Weeks"]) {
-		arg02 = [NSNumber numberWithInt:1];
+		arg02 = [NSNumber numberWithInt:XpsfMWeeksUnitType];
 	} else if([value04 isEqualToString:@"Months"]) {
-		arg02 = [NSNumber numberWithInt:2];
+		arg02 = [NSNumber numberWithInt:XspfMMonthsUnitType];
 	} else if([value04 isEqualToString:@"Years"]) {
-		arg02 = [NSNumber numberWithInt:3];
+		arg02 = [NSNumber numberWithInt:XspfMYearsUnitType];
 	}
 	
 	return [NSArray arrayWithObjects:[NSExpression expressionForConstantValue:arg01],
 			[NSExpression expressionForConstantValue:arg02], nil];
-}
-- (NSExpression *)rangeUnitFromDisplayValues:(NSArray *)displayValues option:(NSNumber *)optionValue
-{
-	NSInteger option = [optionValue integerValue];
-	
-	NSString *variable = nil;
-	id value02 = [displayValues objectAtIndex:2];
-	id value03 = [displayValues objectAtIndex:3];
-	id value04 = nil, value05 = nil;
-	switch(option) {
-		case 0:
-			variable = [NSString stringWithFormat:@"%d-%@-ago", [value02 intValue], value03];
-			break;
-		case 1:
-			variable = [NSString stringWithFormat:@"%d-%@", [value02 intValue], value03];
-			break;
-		case 2:
-			variable = [NSString stringWithFormat:@"not-%d-%@", [value02 intValue], value03];
-			break;
-		case 3:
-			value04 = [displayValues objectAtIndex:4];
-			value05 = [displayValues objectAtIndex:5];
-			variable = [NSString stringWithFormat:@"%d-%@-%d-%@", [value02 intValue], value03, [value04 intValue], value05];
-			break;
-	}
-	
-	return [NSExpression expressionForVariable:variable];
 }
 - (NSExpression *)rangeDateFromDisplayValues:(NSArray *)displayValues
 {
