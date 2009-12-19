@@ -25,22 +25,22 @@
 
 "%[lastPlayDate]@ %[is exactly]@ %@ %[Days]@ ago" = "%1$[最後の再生日時が]@ %3$@ %4$[日]@ 前 %2$[である]@";
 "%[lastPlayDate]@ %[is exactly]@ %@ %[Weeks]@ ago" = "%1$[最後の再生日時が]@ %3$@ %4$[週]@ 前 %2$[である]@";
-"%[lastPlayDate]@ %[is exactly]@ %@ %[Months]@ ago" = "%1$[最後の再生日時が]@ %3$@ %4$[月]@ 前 %2$[である]@";
+"%[lastPlayDate]@ %[is exactly]@ %@ %[Months]@ ago" = "%1$[最後の再生日時が]@ %3$@ %4$[ヶ月]@ 前 %2$[である]@";
 "%[lastPlayDate]@ %[is exactly]@ %@ %[Years]@ ago" = "%1$[最後の再生日時が]@ %3$@ %4$[年]@ 前 %2$[である]@";
 
 "%[lastPlayDate]@ %[is in the last]@ %@ %[Days]@" = "%1$[最後の再生日時が]@ %3$@ %4$[日]@ %2$[以内]@";
 "%[lastPlayDate]@ %[is in the last]@ %@ %[Weeks]@" = "%1$[最後の再生日時が]@ %3$@ %4$[週]@ %2$[以内]@";
-"%[lastPlayDate]@ %[is in the last]@ %@ %[Months]@" = "%1$[最後の再生日時が]@ %3$@ %4$[月]@ %2$[以内]@";
+"%[lastPlayDate]@ %[is in the last]@ %@ %[Months]@" = "%1$[最後の再生日時が]@ %3$@ %4$[ヶ月]@ %2$[以内]@";
 "%[lastPlayDate]@ %[is in the last]@ %@ %[Years]@" = "%1$[最後の再生日時が]@ %3$@ %4$[年]@ %2$[以内]@";
 
 "%[lastPlayDate]@ %[is not in the last]@ %@ %[Days]@" = "%1$[最後の再生日時が]@ %3$@ %4$[日]@ %2$[以内ではない]@";
 "%[lastPlayDate]@ %[is not in the last]@ %@ %[Weeks]@" = "%1$[最後の再生日時が]@ %3$@ %4$[週]@ %2$[以内ではない]@";
-"%[lastPlayDate]@ %[is not in the last]@ %@ %[Months]@" = "%1$[最後の再生日時が]@ %3$@ %4$[月]@ %2$[以内ではない]@";
+"%[lastPlayDate]@ %[is not in the last]@ %@ %[Months]@" = "%1$[最後の再生日時が]@ %3$@ %4$[ヶ月]@ %2$[以内ではない]@";
 "%[lastPlayDate]@ %[is not in the last]@ %@ %[Years]@" = "%1$[最後の再生日時が]@ %3$@ %4$[年]@ %2$[以内ではない]@";
 
 "%[lastPlayDate]@ %[is between]@ %@ and %@ %[Days]@ ago" = "%1$[最後の再生日時が]@ %3$@ 〜 %4$@ %5$[日]@ 前 %2$[の範囲]@";
 "%[lastPlayDate]@ %[is between]@ %@ and %@ %[Weeks]@ ago" = "%1$[最後の再生日時が]@ %3$@ 〜 %4$@ %5$[週]@ 前 %2$[の範囲]@";
-"%[lastPlayDate]@ %[is between]@ %@ and %@ %[Months]@ ago" = "%1$[最後の再生日時が]@ %3$@ 〜 %4$@ %5$[月]@ 前 %2$[の範囲]@";
+"%[lastPlayDate]@ %[is between]@ %@ and %@ %[Months]@ ago" = "%1$[最後の再生日時が]@ %3$@ 〜 %4$@ %5$[ヶ月]@ 前 %2$[の範囲]@";
 "%[lastPlayDate]@ %[is between]@ %@ and %@ %[Years]@ ago" = "%1$[最後の再生日時が]@ %3$@ 〜 %4$@ %5$[年]@ 前 %2$[の範囲]@";
 
 
@@ -56,22 +56,22 @@
 
 "%[modificationDate]@ %[is exactly]@ %@ %[Days]@ ago" = "%1$[変更日が]@ %3$@ %4$[日]@ 前 %2$[である]@";
 "%[modificationDate]@ %[is exactly]@ %@ %[Weeks]@ ago" = "%1$[変更日が]@ %3$@ %4$[週]@ 前 %2$[である]@";
-"%[modificationDate]@ %[is exactly]@ %@ %[Months]@ ago" = "%1$[変更日が]@ %3$@ %4$[月]@ 前 %2$[である]@";
+"%[modificationDate]@ %[is exactly]@ %@ %[Months]@ ago" = "%1$[変更日が]@ %3$@ %4$[ヶ月]@ 前 %2$[である]@";
 "%[modificationDate]@ %[is exactly]@ %@ %[Years]@ ago" = "%1$[変更日が]@ %3$@ %4$[年]@ 前 %2$[である]@";
 
 "%[modificationDate]@ %[is in the last]@ %@ %[Days]@" = "%1$[変更日が]@ %3$@ %4$[日]@ %2$[以内]@";
 "%[modificationDate]@ %[is in the last]@ %@ %[Weeks]@" = "%1$[変更日が]@ %3$@ %4$[週]@ %2$[以内]@";
-"%[modificationDate]@ %[is in the last]@ %@ %[Months]@" = "%1$[変更日が]@ %3$@ %4$[月]@ %2$[以内]@";
+"%[modificationDate]@ %[is in the last]@ %@ %[Months]@" = "%1$[変更日が]@ %3$@ %4$[ヶ月]@ %2$[以内]@";
 "%[modificationDate]@ %[is in the last]@ %@ %[Years]@" = "%1$[変更日が]@ %3$@ %4$[年]@ %2$[以内]@";
 
 "%[modificationDate]@ %[is not in the last]@ %@ %[Days]@" = "%1$[変更日が]@ %3$@ %4$[日]@ %2$[以内ではない]@";
 "%[modificationDate]@ %[is not in the last]@ %@ %[Weeks]@" = "%1$[変更日が]@ %3$@ %4$[週]@ %2$[以内ではない]@";
-"%[modificationDate]@ %[is not in the last]@ %@ %[Months]@" = "%1$[変更日が]@ %3$@ %4$[月]@ %2$[以内ではない]@";
+"%[modificationDate]@ %[is not in the last]@ %@ %[Months]@" = "%1$[変更日が]@ %3$@ %4$[ヶ月]@ %2$[以内ではない]@";
 "%[modificationDate]@ %[is not in the last]@ %@ %[Years]@" = "%1$[変更日が]@ %3$@ %4$[年]@ %2$[以内ではない]@";
 
 "%[modificationDate]@ %[is between]@ %@ and %@ %[Days]@ ago" = "%1$[変更日が]@ %3$@ 〜 %4$@ %5$[日]@ 前 %2$[の範囲]@";
 "%[modificationDate]@ %[is between]@ %@ and %@ %[Weeks]@ ago" = "%1$[変更日が]@ %3$@ 〜 %4$@ %5$[週]@ 前 %2$[の範囲]@";
-"%[modificationDate]@ %[is between]@ %@ and %@ %[Months]@ ago" = "%1$[変更日が]@ %3$@ 〜 %4$@ %5$[月]@ 前 %2$[の範囲]@";
+"%[modificationDate]@ %[is between]@ %@ and %@ %[Months]@ ago" = "%1$[変更日が]@ %3$@ 〜 %4$@ %5$[ヶ月]@ 前 %2$[の範囲]@";
 "%[modificationDate]@ %[is between]@ %@ and %@ %[Years]@ ago" = "%1$[変更日が]@ %3$@ 〜 %4$@ %5$[年]@ 前 %2$[の範囲]@";
 
 
@@ -87,21 +87,21 @@
 
 "%[creationDate]@ %[is exactly]@ %@ %[Days]@ ago" = "%1$[作成日が]@ %3$@ %4$[日]@ 前 %2$[である]@";
 "%[creationDate]@ %[is exactly]@ %@ %[Weeks]@ ago" = "%1$[作成日が]@ %3$@ %4$[週]@ 前 %2$[である]@";
-"%[creationDate]@ %[is exactly]@ %@ %[Months]@ ago" = "%1$[作成日が]@ %3$@ %4$[月]@ 前 %2$[である]@";
+"%[creationDate]@ %[is exactly]@ %@ %[Months]@ ago" = "%1$[作成日が]@ %3$@ %4$[ヶ月]@ 前 %2$[である]@";
 "%[creationDate]@ %[is exactly]@ %@ %[Years]@ ago" = "%1$[作成日が]@ %3$@ %4$[年]@ 前 %2$[である]@";
 
 "%[creationDate]@ %[is in the last]@ %@ %[Days]@" = "%1$[作成日が]@ %3$@ %4$[日]@ %2$[以内]@";
 "%[creationDate]@ %[is in the last]@ %@ %[Weeks]@" = "%1$[作成日が]@ %3$@ %4$[週]@ %2$[以内]@";
-"%[creationDate]@ %[is in the last]@ %@ %[Months]@" = "%1$[作成日が]@ %3$@ %4$[月]@ %2$[以内]@";
+"%[creationDate]@ %[is in the last]@ %@ %[Months]@" = "%1$[作成日が]@ %3$@ %4$[ヶ月]@ %2$[以内]@";
 "%[creationDate]@ %[is in the last]@ %@ %[Years]@" = "%1$[作成日が]@ %3$@ %4$[年]@ %2$[以内]@";
 
 "%[creationDate]@ %[is not in the last]@ %@ %[Days]@" = "%1$[作成日が]@ %3$@ %4$[日]@ %2$[以内ではない]@";
 "%[creationDate]@ %[is not in the last]@ %@ %[Weeks]@" = "%1$[作成日が]@ %3$@ %4$[週]@ %2$[以内ではない]@";
-"%[creationDate]@ %[is not in the last]@ %@ %[Months]@" = "%1$[作成日が]@ %3$@ %4$[月]@ %2$[以内ではない]@";
+"%[creationDate]@ %[is not in the last]@ %@ %[Months]@" = "%1$[作成日が]@ %3$@ %4$[ヶ月]@ %2$[以内ではない]@";
 "%[creationDate]@ %[is not in the last]@ %@ %[Years]@" = "%1$[作成日が]@ %3$@ %4$[年]@ %2$[以内ではない]@";
 
 "%[creationDate]@ %[is between]@ %@ and %@ %[Days]@ ago" = "%1$[作成日が]@ %3$@ 〜 %4$@ %5$[日]@ 前 %2$[の範囲]@";
 "%[creationDate]@ %[is between]@ %@ and %@ %[Weeks]@ ago" = "%1$[作成日が]@ %3$@ 〜 %4$@ %5$[週]@ 前 %2$[の範囲]@";
-"%[creationDate]@ %[is between]@ %@ and %@ %[Months]@ ago" = "%1$[作成日が]@ %3$@ 〜 %4$@ %5$[月]@ 前 %2$[の範囲]@";
+"%[creationDate]@ %[is between]@ %@ and %@ %[Months]@ ago" = "%1$[作成日が]@ %3$@ 〜 %4$@ %5$[ヶ月]@ 前 %2$[の範囲]@";
 "%[creationDate]@ %[is between]@ %@ and %@ %[Years]@ ago" = "%1$[作成日が]@ %3$@ 〜 %4$@ %5$[年]@ 前 %2$[の範囲]@";
 
