@@ -72,6 +72,13 @@ enum XspfMFieldTag {
 	XspfMSecondaryNumberFieldTag = 2100,
 };
 
+enum XspfMUnitType {
+	XspfMDaysUnitType,
+	XpsfMWeeksUnitType,
+	XspfMMonthsUnitType,
+	XspfMYearsUnitType,
+};
+
 @interface XspfMFieldRule : XspfMRule
 {
 	XspfMFieldType type;

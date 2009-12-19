@@ -55,6 +55,9 @@ static NSString *XspfMREDSubrowsKey = @"subrows";
 		case NSEndsWithPredicateOperatorType:
 			value02 = @"ends with";
 			break;
+		default:
+			[NSException raise:@"XspfMUnknownPredicateType" format:@"XpsfM: unknown predicate type."];
+			break;
 	}
 	id rightConstant = [[predicate rightExpression] constantValue];
 	value03 = [self textField];
@@ -79,6 +82,9 @@ static NSString *XspfMREDSubrowsKey = @"subrows";
 		case NSLessThanPredicateOperatorType:
 			value02 = @"is less than";
 			break;
+		default:
+			[NSException raise:@"XspfMUnknownPredicateType" format:@"XpsfM: unknown predicate type."];
+			break;
 	}
 	id rightConstant = [[predicate rightExpression] constantValue];
 	value03 = [self ratingIndicator];
@@ -88,48 +94,31 @@ static NSString *XspfMREDSubrowsKey = @"subrows";
 	
 	return disp;
 }
-- (void)resolveVariable:(NSString *)variable value02:(id *)value02 value03:(id *)value03 value04:(id *)value04 value05:(id *)value05 value06:(id *)value06 value07:(id *)value07
+- (NSString *)displayValueForUnitType:(NSNumber *)unitValue
 {
-	NSArray *words = [variable componentsSeparatedByString:@"-"];
+	NSString *result = nil;
 	
-	switch([words count]) {
-		case 2:
-			*value02 = @"is in the last";
-			*value03 = [self numberField];
-			[*value03 setTag:2000];
-			[*value03 setStringValue:[words objectAtIndex:0]];
-			*value04 = [words objectAtIndex:1];
+	switch([unitValue intValue]) {
+		case XspfMDaysUnitType:
+			result = @"Days";
 			break;
-		case 3:
-			if([[words objectAtIndex:0] isEqualToString:@"not"]) {
-				*value02 = @"is not in the last";
-				*value03 = [self numberField];
-				[*value03 setTag:2000];
-				[*value03 setStringValue:[words objectAtIndex:1]];
-				*value04 = [words objectAtIndex:2];
-			} else {
-				*value02 = @"is exactly";
-				*value03 = [self numberField];
-				[*value03 setTag:2000];
-				[*value03 setStringValue:[words objectAtIndex:0]];
-				*value04 = [words objectAtIndex:1];
-				*value05 = @"ago";
-			}
+		case XpsfMWeeksUnitType:
+			result = @"Weeks";
 			break;
-		case 4:
-			*value02 = @"is between";
-			*value03 = [self numberField];
-			[*value03 setTag:2000];
-			[*value03 setStringValue:[words objectAtIndex:0]];
-			*value04 = @"and";
-			*value05 = [self numberField];
-			[*value05 setTag:2100];
-			[*value05 setStringValue:[words objectAtIndex:2]];
-			*value06 = [words objectAtIndex:3];
-			*value07 = @"ago";
+		case XspfMMonthsUnitType:
+			result = @"Months";
+			break;
+		case XspfMYearsUnitType:
+			result = @"Years";
+			break;
+		default:
+			[NSException raise:@"XspfMUnknownUnitType" format:@"XpsfM: unknown unit type."];
 			break;
 	}
+	
+	return result;
 }
+	
 - (void)resolveFunctionExpression:(NSComparisonPredicate *)predicate value02:(id *)value02 value03:(id *)value03 value04:(id *)value04 value05:(id *)value05 value06:(id *)value06 value07:(id *)value07
 {
 	NSExpression *rightExp = [predicate rightExpression];
@@ -149,20 +138,7 @@ static NSString *XspfMREDSubrowsKey = @"subrows";
 		[*value03 setTag:XspfMPrimaryNumberFieldTag];
 		[*value03 setObjectValue:[[[rightExp arguments] objectAtIndex:0] constantValue]];
 		id unitValue = [[[rightExp arguments] objectAtIndex:1] constantValue];
-		switch([unitValue intValue]) {
-			case 0:
-				*value04 = @"Days";
-				break;
-			case 1:
-				*value04 = @"Weeks";
-				break;
-			case 2:
-				*value04 = @"Months";
-				break;
-			case 3:
-				*value04 = @"Years";
-				break;
-		}
+		*value04 = [self displayValueForUnitType:unitValue];
 		*value05 = @"ago";
 	} else if([function isEqualToString:@"dateByNumber:unit:"]) {
 		switch([predicate predicateOperatorType]) {
@@ -172,25 +148,15 @@ static NSString *XspfMREDSubrowsKey = @"subrows";
 			case NSLessThanPredicateOperatorType:
 				*value02 = @"is not in the last";
 				break;
+			default:
+				[NSException raise:@"XspfMUnknownPredicateType" format:@"XpsfM: unknown predicate type."];
+				break;
 		}
 		*value03 = [self numberField];
 		[*value03 setTag:XspfMPrimaryNumberFieldTag];
 		[*value03 setObjectValue:[[[rightExp arguments] objectAtIndex:0] constantValue]];
 		id unitValue = [[[rightExp arguments] objectAtIndex:1] constantValue];
-		switch([unitValue intValue]) {
-			case 0:
-				*value04 = @"Days";
-				break;
-			case 1:
-				*value04 = @"Weeks";
-				break;
-			case 2:
-				*value04 = @"Months";
-				break;
-			case 3:
-				*value04 = @"Years";
-				break;
-		}
+		*value04 = [self displayValueForUnitType:unitValue];
 	} else if([function isEqualToString:@"rangeDateByNumber:toNumber:unit:"]) {
 		*value02 = @"is between";
 		*value03 = [self numberField];
@@ -201,20 +167,7 @@ static NSString *XspfMREDSubrowsKey = @"subrows";
 		[*value05 setTag:XspfMSecondaryNumberFieldTag];
 		[*value05 setObjectValue:[[[rightExp arguments] objectAtIndex:1] constantValue]];
 		id unitValue = [[[rightExp arguments] objectAtIndex:2] constantValue];
-		switch([unitValue intValue]) {
-			case 0:
-				*value06 = @"Days";
-				break;
-			case 1:
-				*value06 = @"Weeks";
-				break;
-			case 2:
-				*value06 = @"Months";
-				break;
-			case 3:
-				*value06 = @"Years";
-				break;
-		}
+		*value06 = [self displayValueForUnitType:unitValue];
 		*value07 = @"ago";
 	}
 }
@@ -245,7 +198,10 @@ static NSString *XspfMREDSubrowsKey = @"subrows";
 			break;
 		case NSLessThanPredicateOperatorType:
 			*value02 = @"is before the date";
-			break;			
+			break;
+		default:
+			[NSException raise:@"XspfMUnknownPredicateType" format:@"XpsfM: unknown predicate type."];
+			break;
 	}
 	id rightConstant = [[predicate rightExpression] constantValue];
 	*value03 = [self datePicker];
@@ -267,11 +223,10 @@ static NSString *XspfMREDSubrowsKey = @"subrows";
 		[self resolveFunctionExpression:predicate value02:&value02 value03:&value03 value04:&value04 value05:&value05 value06:&value06 value07:&value07];
 	} else if(rightType == NSAggregateExpressionType) {
 		[self rangeDateDisplayValuesWithExpression:[predicate rightExpression] value02:&value02 value03:&value03 value04:&value04 value05:&value05];
-	} else if(rightType == NSVariableExpressionType) {
-		id rightVar = [[predicate rightExpression] variable];
-		[self resolveVariable:rightVar value02:&value02 value03:&value03 value04:&value04 value05:&value05 value06:&value06 value07:&value07];
 	} else if(rightType == NSConstantValueExpressionType) {
 		[self resolveConstant:predicate value02:&value02 value03:&value03 value04:&value04];
+	} else {
+		[NSException raise:@"XspfMUnknownPredicateType" format:@"XpsfM: unknown predicate type."];
 	}
 	
 	id leftKeyPath = [[predicate leftExpression] keyPath];
@@ -336,6 +291,10 @@ static NSString *XspfMREDSubrowsKey = @"subrows";
 	
 	return result;
 }
+- (BOOL)isDateKeyPath:(NSString *)keyPath
+{
+	return [[NSArray arrayWithObjects:@"lastPlayDate", @"modificationDate", @"creationDate", nil] containsObject:keyPath];
+}
 - (id)criteriaWithKeyPath:(NSString *)keypath withRowTemplate:(id)rowTemplate
 {
 	NSString *key = nil;
@@ -343,7 +302,7 @@ static NSString *XspfMREDSubrowsKey = @"subrows";
 		key = @"String";
 	} else if([keypath isEqualToString:@"rating"]) {
 		key = @"Rate";
-	} else if([[NSArray arrayWithObjects:@"lastPlayDate", @"modificationDate", @"creationDate", nil] containsObject:keypath]) {
+	} else if([self isDateKeyPath:keypath]) {
 		key = @"AbDate";
 	}
 	if(key) {
@@ -362,14 +321,15 @@ static NSString *XspfMREDSubrowsKey = @"subrows";
 		
 		id value = nil;
 		switch([predicate compoundPredicateType]) {
-			case NSNotPredicateType:
-				// ?
-				break;
 			case NSAndPredicateType:
 				value = @"All";
 				break;
 			case NSOrPredicateType:
 				value = @"Any";
+				break;
+			case NSNotPredicateType:
+			default:
+				[NSException raise:@"XspfMUnknownPredicateType" format:@"XpsfM: unknown predicate type."];
 				break;
 		}
 		
@@ -400,7 +360,7 @@ static NSString *XspfMREDSubrowsKey = @"subrows";
 		if([leftKeyPath isEqualToString:@"rating"]) {		
 			disp = [self ratingDisplayValuesWithPredicate:predicate];
 		}
-		if([[NSArray arrayWithObjects:@"lastPlayDate", @"modificationDate", @"creationDate", nil] containsObject:leftKeyPath]) {		
+		if([self isDateKeyPath:leftKeyPath]) {		
 			disp = [self dateDisplayValuesWithPredicate:predicate];
 		}
 		
