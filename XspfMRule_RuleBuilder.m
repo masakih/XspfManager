@@ -320,12 +320,15 @@ static NSString *XspfMREDSubrowsKey = @"subrows";
 		id subrows = [NSMutableArray array];
 		
 		id value = nil;
+		id compoundType = nil;
 		switch([predicate compoundPredicateType]) {
 			case NSAndPredicateType:
 				value = @"All";
+				compoundType = [NSNumber numberWithUnsignedInt:NSAndPredicateType];
 				break;
 			case NSOrPredicateType:
 				value = @"Any";
+				compoundType = [NSNumber numberWithUnsignedInt:NSOrPredicateType];
 				break;
 			case NSNotPredicateType:
 			default:
@@ -338,12 +341,20 @@ static NSString *XspfMREDSubrowsKey = @"subrows";
 			[subrows addObject:[self buildRowsFromPredicate:p withRowTemplate:rowTemplate]];
 		}
 		
-		id criteria = [NSArray arrayWithObjects:value, @"of the following are true", nil];
+		id value02 = @"of the following are true";
+		id criterion02 = [XspfMRule ruleWithValue:value02 children:nil predicateHints:[NSDictionary dictionary]];
+		id criterion01 = [XspfMRule ruleWithValue:value
+										 children:[NSArray arrayWithObject:criterion02]
+								   predicateHints:[NSDictionary dictionaryWithObject:compoundType forKey:NSRuleEditorPredicateCompoundType]];
+		NSArray *criteria = [NSArray arrayWithObjects:criterion01, criterion02, nil];
+		id displayValues = [NSArray arrayWithObjects:value, value02, nil];
 		id type = [NSNumber numberWithInt:NSRuleEditorRowTypeCompound];
+		
+		NSLog(@"Compound criteria -> %@, displayValues -> %@", criteria, displayValues);
 		
 		id result = [NSMutableDictionary dictionaryWithObjectsAndKeys:
 					 criteria, XspfMREDCriteriaKey,
-					 criteria, XspfMREDDisplayValuesKey,
+					 displayValues, XspfMREDDisplayValuesKey,
 					 type, XspfMREDRowTypeKey,
 					 subrows, XspfMREDSubrowsKey,
 					 nil];

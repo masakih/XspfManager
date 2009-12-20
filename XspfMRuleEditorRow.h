@@ -38,6 +38,9 @@
 
 
 @interface XspfMRule (XspfMCreation)
++ (id)ruleWithValue:(NSString *)newValue children:(NSArray *)newChildren predicateHints:(NSDictionary *)parts;
+- (id)initWithValue:(NSString *)newValue children:(NSArray *)newChildren predicateHints:(NSDictionary *)parts;
+
 + (id)ruleWithPlist:(id)plist;
 - (id)initWithPlist:(id)plist;
 

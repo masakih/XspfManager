@@ -115,10 +115,10 @@
 	
 	if([predicateHints valueForKey:@"XspfMIgnoreExpression"])  return nil;	
 	
-	id operatorType = [predicateHints valueForKey:@"NSRuleEditorPredicateOperatorType"];
-	id option = [predicateHints valueForKey:@"NSRuleEditorPredicateOptions"];
-	id leftExp = [predicateHints valueForKey:@"NSRuleEditorPredicateLeftExpression"];
-	id rightExp = [predicateHints valueForKey:@"NSRuleEditorPredicateRightExpression"];
+	id operatorType = [predicateHints valueForKey:NSRuleEditorPredicateOperatorType];
+	id option = [predicateHints valueForKey:NSRuleEditorPredicateOptions];
+	id leftExp = [predicateHints valueForKey:NSRuleEditorPredicateLeftExpression];
+	id rightExp = [predicateHints valueForKey:NSRuleEditorPredicateRightExpression];
 	id customRightExp = [predicateHints valueForKey:@"XspfMPredicateRightExpression"];
 	
 	if(operatorType) {
@@ -205,7 +205,7 @@
 		
 		id target = [NSExpression expressionForConstantValue:[[[[self class] alloc] init] autorelease]];
 		id rhs = [NSExpression expressionForFunction:target selectorName:selName arguments:args];
-		[result setValue:rhs forKey:@"NSRuleEditorPredicateRightExpression"];
+		[result setValue:rhs forKey:NSRuleEditorPredicateRightExpression];
 	}
 	
 	//	NSLog(@"predicate\tcriterion -> %@, value -> %@, row -> %d, result -> %@", predicateHints, displayValue, row, result);
