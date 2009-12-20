@@ -51,6 +51,7 @@
 		F480CEE510AFDAB400AC365B /* NSApplication.icns in Resources */ = {isa = PBXBuildFile; fileRef = F480CEE410AFDAB300AC365B /* NSApplication.icns */; };
 		F480CF9F10B03A0D00AC365B /* AccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F480CF9D10B03A0D00AC365B /* AccessoryView.xib */; };
 		F499881910DDAD3800AAC6D6 /* XspfMRule_NSExpressionFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = F499881810DDAD3800AAC6D6 /* XspfMRule_NSExpressionFunctions.m */; };
+		F499886B10DDFB3E00AAC6D6 /* XspfMThreadSpleepRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F499886A10DDFB3E00AAC6D6 /* XspfMThreadSpleepRequest.m */; };
 		F499CBCE10DA73620053923E /* XspfMRule_RuleBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = F499CBCD10DA73620053923E /* XspfMRule_RuleBuilder.m */; };
 		F49BCF9510A45178007136CE /* XspfMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BCF9410A45178007136CE /* XspfMViewController.m */; };
 		F49BD01010A47781007136CE /* ListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F49BD00E10A47780007136CE /* ListView.xib */; };
@@ -165,6 +166,8 @@
 		F480CEE410AFDAB300AC365B /* NSApplication.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = NSApplication.icns; sourceTree = "<group>"; };
 		F480CF9E10B03A0D00AC365B /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/AccessoryView.xib; sourceTree = "<group>"; };
 		F499881810DDAD3800AAC6D6 /* XspfMRule_NSExpressionFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMRule_NSExpressionFunctions.m; sourceTree = "<group>"; };
+		F499886910DDFB3E00AAC6D6 /* XspfMThreadSpleepRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMThreadSpleepRequest.h; sourceTree = "<group>"; };
+		F499886A10DDFB3E00AAC6D6 /* XspfMThreadSpleepRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMThreadSpleepRequest.m; sourceTree = "<group>"; };
 		F499CBCD10DA73620053923E /* XspfMRule_RuleBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMRule_RuleBuilder.m; sourceTree = "<group>"; };
 		F499CBE710DA7A960053923E /* XspfMRule_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMRule_private.h; sourceTree = "<group>"; };
 		F49BCF9310A45175007136CE /* XspfMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMViewController.h; sourceTree = "<group>"; };
@@ -409,6 +412,8 @@
 				F47C04F9109DC19C00F5991C /* HMWorker.h */,
 				F47C04FA109DC19C00F5991C /* HMWorker.m */,
 				F47C04FB109DC19C00F5991C /* HMWorkerProtocols.h */,
+				F499886910DDFB3E00AAC6D6 /* XspfMThreadSpleepRequest.h */,
+				F499886A10DDFB3E00AAC6D6 /* XspfMThreadSpleepRequest.m */,
 			);
 			name = WorkerThread;
 			sourceTree = "<group>";
@@ -546,6 +551,7 @@
 				F499CBCE10DA73620053923E /* XspfMRule_RuleBuilder.m in Sources */,
 				F478A95A10DD1F0F000A75B4 /* XspfMRule_Subclasses.m in Sources */,
 				F499881910DDAD3800AAC6D6 /* XspfMRule_NSExpressionFunctions.m in Sources */,
+				F499886B10DDFB3E00AAC6D6 /* XspfMThreadSpleepRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
