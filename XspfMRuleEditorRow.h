@@ -9,15 +9,6 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface XspfMCompound : NSObject
-- (NSInteger)numberOfChildrenForChild:(id)child;
-- (id)childForChild:(id)child atIndex:(NSInteger)index;
-- (id)displayValueForChild:(id)child;
-- (NSDictionary *)predicateForChild:(id)child withDisplayValue:(id)value;
-@end
-
-
-
 @interface XspfMRule : NSObject <NSCopying, NSCoding>
 {
 @private
