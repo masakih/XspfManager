@@ -46,9 +46,9 @@ static NSString *XspfMREDPredicateRowsKey = @"predicateRows";
 }
 - (void)awakeFromNib
 {
-	if(!compound) {
-		compound = [[XspfMCompound alloc] init];
-	}
+//	if(!compound) {
+//		compound = [[XspfMCompound alloc] init];
+//	}
 		
 	NSBundle *m = [NSBundle mainBundle];
 	NSString *path = [m pathForResource:@"LibraryRowTemplate" ofType:@"plist"];
@@ -73,6 +73,8 @@ static NSString *XspfMREDPredicateRowsKey = @"predicateRows";
 	if(c) [newRows addObjectsFromArray:c];
 	
 	simples = [newRows retain];
+	
+	compounds = [[XspfMRule compoundRule] retain];
 		
 	////
 	predicateRows = [[NSMutableArray alloc] init];
@@ -163,12 +165,16 @@ numberOfChildrenForCriterion:(id)criterion
 {
 	NSInteger result = 0;
 	
-	if(rowType == NSRuleEditorRowTypeCompound) {
-		return [compound numberOfChildrenForChild:criterion];
-	}
+//	if(rowType == NSRuleEditorRowTypeCompound) {
+//		return [compound numberOfChildrenForChild:criterion];
+//	}
 	
 	if(!criterion) {
-		result = [simples count];
+		if(rowType == NSRuleEditorRowTypeCompound) {
+			result = [compounds count];
+		} else {
+			result = [simples count];
+		}
 	} else {
 		result = [criterion numberOfChildren];
 	}
@@ -185,12 +191,16 @@ numberOfChildrenForCriterion:(id)criterion
 {
 	id result = nil;
 	
-	if(rowType == NSRuleEditorRowTypeCompound) {
-		return [compound childForChild:criterion atIndex:index];
-	}
+//	if(rowType == NSRuleEditorRowTypeCompound) {
+//		return [compound childForChild:criterion atIndex:index];
+//	}
 	
 	if(!criterion) {
-		result = [simples objectAtIndex:index];
+		if(rowType == NSRuleEditorRowTypeCompound) {
+			result = [compounds objectAtIndex:index];
+		} else {
+			result = [simples objectAtIndex:index];
+		}
 	} else {
 		result = [criterion childAtIndex:index];
 	}
@@ -205,10 +215,10 @@ displayValueForCriterion:(id)criterion
 {
 	id result = nil;
 	
-	NSRuleEditorRowType rowType = [editor rowTypeForRow:row];
-	if(rowType == NSRuleEditorRowTypeCompound) {
-		return [compound displayValueForChild:criterion];
-	}
+//	NSRuleEditorRowType rowType = [editor rowTypeForRow:row];
+//	if(rowType == NSRuleEditorRowTypeCompound) {
+//		return [compound displayValueForChild:criterion];
+//	}
 	
 	if(!criterion) {
 		//
@@ -227,10 +237,10 @@ displayValueForCriterion:(id)criterion
 {
 	id result = nil;
 	
-	NSRuleEditorRowType rowType = [editor rowTypeForRow:row];
-	if(rowType == NSRuleEditorRowTypeCompound) {
-		return [compound predicateForChild:criterion withDisplayValue:displayValue];
-	}
+//	NSRuleEditorRowType rowType = [editor rowTypeForRow:row];
+//	if(rowType == NSRuleEditorRowTypeCompound) {
+//		return [compound predicateForChild:criterion withDisplayValue:displayValue];
+//	}
 	
 	result = [criterion predicatePartsWithDisplayValue:displayValue forRuleEditor:editor inRow:row];
 //	NSLog(@"predicate\tresult -> %@", result);
