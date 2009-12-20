@@ -8,44 +8,6 @@
 
 #import "XspfMRuleEditorRow.h"
 
-@implementation XspfMCompound
-- (NSInteger)numberOfChildrenForChild:(id)child
-{
-	if(!child) return 2;
-	if([child isEqualToString:@"All"] || [child isEqualToString:@"Any"]) return 1;
-	return 0;
-}
-- (id)childForChild:(id)child atIndex:(NSInteger)index
-{
-	if(!child) {
-		if(index == 0) return @"All";
-		if(index == 1) return @"Any";
-	}
-	return @"of the following are true";
-}
-- (id)displayValueForChild:(id)child
-{
-	return child;
-}
-- (NSDictionary *)predicateForChild:(id)child withDisplayValue:(id)value
-{
-	NSDictionary *result = nil;
-	
-	NSUInteger type = 9999;
-	if([child isEqualToString:@"All"]) {
-		type = NSAndPredicateType;
-	} else if([child isEqualToString:@"Any"]) {
-		type = NSOrPredicateType;
-	}
-	if(type <  10) {
-		result = [NSDictionary dictionaryWithObject:[NSNumber numberWithUnsignedInt:type]
-											 forKey:NSRuleEditorPredicateCompoundType];
-	}
-	
-	return result;
-}
-@end
-
 
 @interface XspfMRule (XspfMAccessor)
 - (void)setChildren:(NSArray *)newChildren;

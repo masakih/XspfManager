@@ -9,11 +9,8 @@
 #import <Cocoa/Cocoa.h>
 
 
-@class XspfMCompound, XspfMSimple;
-
 @interface XspfMRuleEditorDelegate : NSObject
 {
-	XspfMCompound *compound;
 	NSArray *compounds;
 	NSMutableArray *simples;
 	

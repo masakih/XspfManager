@@ -46,10 +46,6 @@ static NSString *XspfMREDPredicateRowsKey = @"predicateRows";
 }
 - (void)awakeFromNib
 {
-//	if(!compound) {
-//		compound = [[XspfMCompound alloc] init];
-//	}
-		
 	NSBundle *m = [NSBundle mainBundle];
 	NSString *path = [m pathForResource:@"LibraryRowTemplate" ofType:@"plist"];
 	NSArray *rowsTemplate = [NSArray arrayWithContentsOfFile:path];
@@ -165,10 +161,6 @@ numberOfChildrenForCriterion:(id)criterion
 {
 	NSInteger result = 0;
 	
-//	if(rowType == NSRuleEditorRowTypeCompound) {
-//		return [compound numberOfChildrenForChild:criterion];
-//	}
-	
 	if(!criterion) {
 		if(rowType == NSRuleEditorRowTypeCompound) {
 			result = [compounds count];
@@ -191,10 +183,6 @@ numberOfChildrenForCriterion:(id)criterion
 {
 	id result = nil;
 	
-//	if(rowType == NSRuleEditorRowTypeCompound) {
-//		return [compound childForChild:criterion atIndex:index];
-//	}
-	
 	if(!criterion) {
 		if(rowType == NSRuleEditorRowTypeCompound) {
 			result = [compounds objectAtIndex:index];
@@ -215,11 +203,6 @@ displayValueForCriterion:(id)criterion
 {
 	id result = nil;
 	
-//	NSRuleEditorRowType rowType = [editor rowTypeForRow:row];
-//	if(rowType == NSRuleEditorRowTypeCompound) {
-//		return [compound displayValueForChild:criterion];
-//	}
-	
 	if(!criterion) {
 		//
 	} else {
@@ -236,11 +219,6 @@ displayValueForCriterion:(id)criterion
 					   inRow:(NSInteger)row
 {
 	id result = nil;
-	
-//	NSRuleEditorRowType rowType = [editor rowTypeForRow:row];
-//	if(rowType == NSRuleEditorRowTypeCompound) {
-//		return [compound predicateForChild:criterion withDisplayValue:displayValue];
-//	}
 	
 	result = [criterion predicatePartsWithDisplayValue:displayValue forRuleEditor:editor inRow:row];
 //	NSLog(@"predicate\tresult -> %@", result);
