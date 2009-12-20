@@ -10,10 +10,10 @@
 
 #import "XspfMRule_private.h"
 
-static NSString *XspfMREDCriteriaKey = @"criteria";
-static NSString *XspfMREDDisplayValuesKey = @"displayValues";
-static NSString *XspfMREDRowTypeKey = @"rowType";
-static NSString *XspfMREDSubrowsKey = @"subrows";
+static NSString *const XspfMREDCriteriaKey = @"criteria";
+static NSString *const XspfMREDDisplayValuesKey = @"displayValues";
+static NSString *const XspfMREDRowTypeKey = @"rowType";
+static NSString *const XspfMREDSubrowsKey = @"subrows";
 
 
 @interface XspfMRule (XspfMRuleBuilder_private)
@@ -349,9 +349,7 @@ static NSString *XspfMREDSubrowsKey = @"subrows";
 		NSArray *criteria = [NSArray arrayWithObjects:criterion01, criterion02, nil];
 		id displayValues = [NSArray arrayWithObjects:value, value02, nil];
 		id type = [NSNumber numberWithInt:NSRuleEditorRowTypeCompound];
-		
-		NSLog(@"Compound criteria -> %@, displayValues -> %@", criteria, displayValues);
-		
+				
 		id result = [NSMutableDictionary dictionaryWithObjectsAndKeys:
 					 criteria, XspfMREDCriteriaKey,
 					 displayValues, XspfMREDDisplayValuesKey,
@@ -386,8 +384,6 @@ static NSString *XspfMREDSubrowsKey = @"subrows";
 			return criterion;
 		}
 		
-	} else if([predicate isKindOfClass:[NSPredicate class]]) {
-		NSLog(@"--> %@", predicate);
 	} else {
 		NSLog(@"???predicate class is %@", NSStringFromClass([predicate class]));
 	}
