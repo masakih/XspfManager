@@ -18,7 +18,7 @@
 
 
 
-@interface XspfMRule : NSObject <NSCopying>
+@interface XspfMRule : NSObject <NSCopying, NSCoding>
 {
 @private
 	NSMutableArray *children;
