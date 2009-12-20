@@ -203,9 +203,9 @@
 			args = [NSArray arrayWithObjects:[NSExpression expressionForConstantValue:arg01], nil];
 		}
 		
-		id exp03 = [NSExpression expressionForConstantValue:@"DATE_RANGE_CREATOR"];
-		id exp02 = [NSExpression expressionForFunction:exp03 selectorName:selName arguments:args];
-		[result setValue:exp02 forKey:@"NSRuleEditorPredicateRightExpression"];
+		id target = [NSExpression expressionForConstantValue:[[[[self class] alloc] init] autorelease]];
+		id rhs = [NSExpression expressionForFunction:target selectorName:selName arguments:args];
+		[result setValue:rhs forKey:@"NSRuleEditorPredicateRightExpression"];
 	}
 	
 	//	NSLog(@"predicate\tcriterion -> %@, value -> %@, row -> %d, result -> %@", predicateHints, displayValue, row, result);
