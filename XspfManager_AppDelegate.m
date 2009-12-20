@@ -11,6 +11,8 @@
 #import "XspfMChannelManager.h"
 #import "XspfManager.h"
 
+#import "XspfMThreadSpleepRequest.h"
+
 @implementation XspfManager_AppDelegate
 
 /**
@@ -180,6 +182,16 @@
 	[super dealloc];
 }
 
+- (IBAction)launchXspfQT:(id)sender
+{
+	[[NSWorkspace sharedWorkspace] launchApplication:@"XspfQT"];
+}
+
+- (void)applicationDidFinishLaunching:(NSNotification *)notification
+{
+	XspfMThreadSpleepRequest *request = [XspfMThreadSpleepRequest requestWithSleepTime:0.5];
+	[[self channel] putRequest:request];
+}
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender
 {
 	return YES;

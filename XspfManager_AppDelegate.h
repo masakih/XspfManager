@@ -29,6 +29,8 @@
 
 - (IBAction)saveAction:sender;
 
+- (IBAction)launchXspfQT:(id)sender;
+
 - (id<HMChannel>)channel;
 
 @end
