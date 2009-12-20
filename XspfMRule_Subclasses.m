@@ -57,6 +57,8 @@
 	
 	return self;
 }
+
+#pragma mark == NSCopying Protocol ==
 - (id)copyWithZone:(NSZone *)zone
 {
 	XspfMFieldRule *result = [super copyWithZone:zone];
@@ -65,6 +67,26 @@
 	
 	return result;
 }
+
+#pragma mark == NSCoding Protocol ==
+static NSString *const XspfMRuleTagKey = @"XspfMRuleTagKey";
+static NSString *const XspfMRuleTypeKey = @"XspfMRuleTypeKey";
+- (id)initWithCoder:(NSCoder *)decoder
+{
+	self = [super initWithCoder:decoder];
+	tag = [decoder decodeIntegerForKey:XspfMRuleTagKey];
+	type = [decoder decodeIntegerForKey:XspfMRuleTypeKey];
+	
+	return self;
+}
+- (void)encodeWithCoder:(NSCoder *)encoder
+{
+	[super encodeWithCoder:encoder];
+	
+	[encoder encodeInteger:tag forKey:XspfMRuleTagKey];
+	[encoder encodeInteger:type forKey:XspfMRuleTypeKey];
+}
+
 - (BOOL)isEqual:(id)other
 {
 	if(![super isEqual:other]) return NO;

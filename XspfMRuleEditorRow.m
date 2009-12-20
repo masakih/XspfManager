@@ -215,6 +215,7 @@
 
 - (id)displayValue { return _value; }
 
+#pragma mark == NSCopying Protocol ==
 - (id)copyWithZone:(NSZone *)zone
 {
 	XspfMRule *result = [[[self class] allocWithZone:zone] init];
@@ -223,6 +224,27 @@
 	[result setValue:_value];
 	
 	return result;
+}
+
+#pragma mark == NSCoding Protocol ==
+static NSString *const XspfMRuleChildrenKey = @"XspfMRuleChildrenKey";
+static NSString *const XspfMRulePredicateHintsKey = @"XspfMRulePredicateHintsKey";
+static NSString *const XspfMRuleValueKey = @"XspfMRuleValueKey";
+- (id)initWithCoder:(NSCoder *)decoder
+{
+	self = [self init];
+	
+	[self setChildren:[decoder decodeObjectForKey:XspfMRuleChildrenKey]];
+	[self setPredicateParts:[decoder decodeObjectForKey:XspfMRulePredicateHintsKey]];
+	[self setValue:[decoder decodeObjectForKey:XspfMRuleValueKey]];
+	
+	return self;
+}
+- (void)encodeWithCoder:(NSCoder *)encoder
+{
+	[encoder encodeObject:children forKey:XspfMRuleChildrenKey];
+	[encoder encodeObject:predicateHints forKey:XspfMRulePredicateHintsKey];
+	[encoder encodeObject:_value forKey:XspfMRuleValueKey];
 }
 
 - (BOOL)isEqual:(id)other

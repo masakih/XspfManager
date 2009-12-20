@@ -210,7 +210,6 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				F478A95910DD1F0F000A75B4 /* XspfMRule_Subclasses.m */,
 				77C8280B06725ACE000B614F /* XspfManager_AppDelegate.h */,
 				77C8280C06725ACE000B614F /* XspfManager_AppDelegate.m */,
 				F47C00B5109D479100F5991C /* XspfManager.h */,
@@ -239,6 +238,7 @@
 				F4A6F90A10C1666600345D77 /* XspfMRuleEditorDelegate.m */,
 				F4A6FAE410C2442E00345D77 /* XspfMRuleEditorRow.h */,
 				F4A6FAE510C2442E00345D77 /* XspfMRuleEditorRow.m */,
+				F478A95910DD1F0F000A75B4 /* XspfMRule_Subclasses.m */,
 				F499CBCD10DA73620053923E /* XspfMRule_RuleBuilder.m */,
 				F499CBE710DA7A960053923E /* XspfMRule_private.h */,
 			);
