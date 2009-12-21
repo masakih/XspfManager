@@ -7,18 +7,8 @@
 //
 
 #import "XspfMRuleEditorRow.h"
+#import "XspfMRule_private.h"
 
-
-@interface XspfMRule (XspfMAccessor)
-- (void)setChildren:(NSArray *)newChildren;
-- (void)addChild:(XspfMRule *)child;
-- (void)setPredicateParts:(NSDictionary *)parts;
-- (void)setExpression:(id)expression forKey:(id)key;
-- (void)setValue:(NSString *)newValue;
-@end
-
-@interface XspfMRule (XspfMExpressionBuilder)
-@end
 
 @implementation XspfMRule (XspfMAccessor)
 - (void)setChildren:(NSArray *)newChildren
@@ -258,30 +248,10 @@ static NSString *const XspfMRuleValueKey = @"XspfMRuleValueKey";
 		return [[XspfMSeparatorRule alloc] initSparetorRule];
 	}
 	
-	NSInteger tag = XspfMDefaultTag;
-	XspfMFieldType type = XspfMUnknownType;
-	if([newValue hasPrefix:@"textField"]) {
-		type = XspfMTextFieldType;
-	} else if([newValue hasPrefix:@"dateField"]) {
-		type = XspfMDateFieldType;
-		if([newValue isEqualToString:@"dateField"]) {
-			tag = XspfMPrimaryDateFieldTag;
-		} else {
-			tag = XspfMSeconraryDateFieldTag;
-		}
-	} else if([newValue hasPrefix:@"rateField"]) {
-		type = XspfMRateFieldType;
-	} else if([newValue hasPrefix:@"numberField"]) {
-		type = XspfMNumberFieldType;
-		if([newValue isEqualToString:@"numberField"]) {
-			tag = XspfMPrimaryNumberFieldTag;
-		} else {
-			tag = XspfMSecondaryNumberFieldTag;
-		}
-	}
-	if(type != XspfMUnknownType) {
+	id fieldRule = [XspfMFieldRule fieldRuleWithValue:newValue];
+	if(fieldRule) {
 		[self release];
-		self = [[XspfMFieldRule alloc] initWithFieldType:type tag:tag];
+		self = [fieldRule retain];
 	}
 	
 	[self setValue:newValue];
