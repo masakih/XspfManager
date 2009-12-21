@@ -58,6 +58,45 @@
 	return self;
 }
 
++ (id)fieldRuleWithValue:(NSString *)value
+{
+	return [[[self alloc] initWithValue:value] autorelease];
+}
+- (id)initWithValue:(NSString *)value
+{
+	XspfMFieldType aType = XspfMUnknownType;
+	NSInteger aTag = XspfMDefaultTag;
+	
+	if([value hasPrefix:@"textField"]) {
+		aType = XspfMTextFieldType;
+	} else if([value hasPrefix:@"dateField"]) {
+		aType = XspfMDateFieldType;
+		if([value isEqualToString:@"dateField"]) {
+			aTag = XspfMPrimaryDateFieldTag;
+		} else {
+			aTag = XspfMSeconraryDateFieldTag;
+		}
+	} else if([value hasPrefix:@"rateField"]) {
+		aType = XspfMRateFieldType;
+	} else if([value hasPrefix:@"numberField"]) {
+		aType = XspfMNumberFieldType;
+		if([value isEqualToString:@"numberField"]) {
+			aTag = XspfMPrimaryNumberFieldTag;
+		} else {
+			aTag = XspfMSecondaryNumberFieldTag;
+		}
+	}
+	if(aType == XspfMUnknownType) {
+		[super init];
+		[self release];
+		return nil;
+	}
+	
+	self = [self initWithFieldType:aType tag:aTag];
+	[self setValue:value];
+	return self;
+}
+
 #pragma mark == NSCopying Protocol ==
 - (id)copyWithZone:(NSZone *)zone
 {
