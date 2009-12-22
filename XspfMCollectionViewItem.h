@@ -13,7 +13,11 @@
 {
 	// because [self conllectionView] is already nil at [self dealloc].
 	NSCollectionView *collectionViewHolder;	// not retained.
+	
+	NSLevelIndicator *rating;
 }
+
+- (IBAction)changeRate:(id)sender;
 
 - (void)coodinateColors;
 @end

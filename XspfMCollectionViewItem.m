@@ -76,9 +76,16 @@
 		for(id view in views) {
 			if([view isKindOfClass:[XspfMCollectionItemBox class]]) {
 				[view setCollectionViewItem:self];
+				NSArray *boxViews = [[view contentView] subviews];
+				for(id aView in boxViews) {
+					if([aView isKindOfClass:[NSLevelIndicator class]]) {
+						rating = aView;
+						break;
+					}
+				}
 			}
 		}
-	}
+	}	
 }
 	
 - (BOOL)isFirstResponder
@@ -112,7 +119,17 @@
 	}
 	return [NSColor blackColor];
 }
-
+- (IBAction)changeRate:(id)sender
+{
+	[self performSelector:@selector(highlightRateIfNeeded) withObject:nil afterDelay:0.0];
+}
+- (void)highlightRateIfNeeded
+{
+	BOOL flag = [self isSelected] && [self isFirstResponder] && [NSApp isActive];
+	NSLevelIndicatorCell *cell = [rating cell];
+	[cell setHighlighted:flag];
+	[cell setBackgroundStyle:flag ? NSBackgroundStyleDark : NSBackgroundStyleLight];
+}
 - (void)coodinateColors
 {
 	[self willChangeValueForKey:@"backgroundColor"];
@@ -120,6 +137,8 @@
 	
 	[self willChangeValueForKey:@"textColor"];
 	[self didChangeValueForKey:@"textColor"];
+	
+	[self highlightRateIfNeeded];
 }
 - (void)applicationDidBecomeOrResignActive:(id)notification
 {
