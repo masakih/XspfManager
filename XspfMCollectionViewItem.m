@@ -29,6 +29,8 @@
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 	[nc removeObserver:self];
 	
+	[self setBox:nil];
+	
 	[super dealloc];
 }
 
@@ -67,27 +69,26 @@
 	
 	[super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 }
+- (void)setBox:(XspfMCollectionItemBox *)box
+{
+	[_box autorelease];
+	_box = [box retain];
+	[_box setCollectionViewItem:self];
+}
 - (void)setView:(NSView *)view
 {
 	[super setView:view];
 	
-	if(view) {
-		id views = [view subviews];
-		for(id view in views) {
-			if([view isKindOfClass:[XspfMCollectionItemBox class]]) {
-				[view setCollectionViewItem:self];
-				NSArray *boxViews = [[view contentView] subviews];
-				for(id aView in boxViews) {
-					if([aView isKindOfClass:[NSLevelIndicator class]]) {
-						rating = aView;
-						break;
-					}
-				}
-			}
-		}
-	}	
-}
+	if(!view) return;
 	
+	id views = [view subviews];
+	for(id view in views) {
+		if([view isKindOfClass:[XspfMCollectionItemBox class]]) {
+			[self setBox:view];
+		}
+	}
+}
+
 - (BOOL)isFirstResponder
 {
 	return [[self collectionView] isFirstResponder];
@@ -109,7 +110,6 @@
 										  blue:212/255.0
 										 alpha:1.0];
 	}
-	
 }
 
 - (NSColor *)textColor
@@ -126,7 +126,7 @@
 - (void)highlightRateIfNeeded
 {
 	BOOL flag = [self isSelected] && [self isFirstResponder] && [NSApp isActive];
-	NSLevelIndicatorCell *cell = [rating cell];
+	NSLevelIndicatorCell *cell = [_box.rating cell];
 	[cell setHighlighted:flag];
 	[cell setBackgroundStyle:flag ? NSBackgroundStyleDark : NSBackgroundStyleLight];
 }
