@@ -8,16 +8,18 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class XspfMCollectionItemBox;
 
 @interface XspfMCollectionViewItem : NSCollectionViewItem
 {
 	// because [self conllectionView] is already nil at [self dealloc].
 	NSCollectionView *collectionViewHolder;	// not retained.
 	
-	NSLevelIndicator *rating;
+	XspfMCollectionItemBox *_box;
 }
 
 - (IBAction)changeRate:(id)sender;
+- (void)setBox:(XspfMCollectionItemBox *)box;
 
 - (void)coodinateColors;
 @end

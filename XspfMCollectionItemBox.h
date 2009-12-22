@@ -12,7 +12,17 @@
 @interface XspfMCollectionItemBox : NSBox
 {
 	IBOutlet NSCollectionViewItem *viewItem;
+	
+	IBOutlet NSImageView *thumbnail;
+	IBOutlet NSTextField *titleField;
+	IBOutlet NSTextField *ratingLabel;
+	IBOutlet NSLevelIndicator *rating;
 }
+@property (readonly) NSImageView *thumbnail;
+@property (readonly) NSTextField *titleField;
+@property (readonly) NSTextField *ratingLabel;
+@property (readonly) NSLevelIndicator *rating;
 
 - (void)setCollectionViewItem:(NSCollectionViewItem *)item;
+
 @end
