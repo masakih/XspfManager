@@ -15,8 +15,9 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-	id result = [super copyWithZone:zone];
+	XspfMCollectionViewItem *result = [super copyWithZone:zone];
 	
+	result->menu = menu;
 	[result performSelector:@selector(setupBinding:) withObject:nil afterDelay:0.0];
 	
 	return result;
@@ -57,6 +58,9 @@
 			 object:NSApp];
 	
 	[self coodinateColors];
+	
+	[_box setMenu:menu];
+	[[self view] setMenu:menu];
 }
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
@@ -80,6 +84,8 @@
 	[super setView:view];
 	
 	if(!view) return;
+	
+	[view setMenu:menu];
 	
 	id views = [view subviews];
 	for(id view in views) {
