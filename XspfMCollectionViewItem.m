@@ -41,6 +41,15 @@
 	[self coodinateColors];
 }
 
+- (void)findAndSetBox
+{
+	id views = [[self view] subviews];
+	for(id view in views) {
+		if([view isKindOfClass:[XspfMCollectionItemBox class]]) {
+			[self setBox:view];
+		}
+	}
+}
 - (void)setupBinding:(id)obj
 {
 	collectionViewHolder = [self collectionView];
@@ -59,8 +68,8 @@
 	
 	[self coodinateColors];
 	
-	[_box setMenu:menu];
 	[[self view] setMenu:menu];
+	[self findAndSetBox];
 }
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
@@ -78,6 +87,8 @@
 	[_box autorelease];
 	_box = [box retain];
 	[_box setCollectionViewItem:self];
+	
+	[_box setMenu:menu];
 }
 - (void)setView:(NSView *)view
 {
@@ -86,13 +97,12 @@
 	if(!view) return;
 	
 	[view setMenu:menu];
-	
-	id views = [view subviews];
-	for(id view in views) {
-		if([view isKindOfClass:[XspfMCollectionItemBox class]]) {
-			[self setBox:view];
-		}
-	}
+		
+	[self findAndSetBox];
+}
+- (void)setMenu:(NSMenu *)aMenu
+{
+	menu = aMenu;
 }
 
 - (BOOL)isFirstResponder

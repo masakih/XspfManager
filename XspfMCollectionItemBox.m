@@ -65,6 +65,9 @@
 
 -(void)setMenu:(NSMenu *)menu
 {
+	NSLog(@"Box. menu %@", menu);
+	[super setMenu:menu];
+	
 	[[self contentView] setMenu:menu];
 	[thumbnail setMenu:menu];
 	[titleField setMenu:menu];
