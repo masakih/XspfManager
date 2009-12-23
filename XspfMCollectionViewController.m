@@ -8,6 +8,8 @@
 
 #import "XspfMCollectionViewController.h"
 
+#import "XspfMCollectionViewItem.h"
+
 
 @implementation XspfMCollectionViewController
 
@@ -23,6 +25,23 @@
 	NSView *view = [collectionViewItem view];
 	
 	[scrollView setVerticalLineScroll:[view frame].size.height];
+}
+
+- (void)setCollectionItem:(NSCollectionViewItem *)newItem
+{
+	[collectionView setItemPrototype:newItem];
+	NSSize viewSize = [[newItem view] frame].size;
+	[collectionView setMinItemSize:viewSize];
+	[collectionView setMaxItemSize:viewSize];
+	[scrollView setVerticalLineScroll:viewSize.height];
+}
+- (IBAction)collectionViewItemViewRegular:(id)sender
+{
+	[self setCollectionItem:regularItem];
+}
+- (IBAction)collectionViewItemViewSmall:(id)sender
+{
+	[self setCollectionItem:smallItem];
 }
 
 #pragma mark#### XspfMCollectionView Delegate ####

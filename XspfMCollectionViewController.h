@@ -13,10 +13,19 @@
 
 #import "XspfMViewController.h"
 
+@class XspfMCollectionViewItem;
+
 @interface XspfMCollectionViewController : XspfMViewController <XspfMCollectionView_Delegate>
 {
 	IBOutlet NSScrollView *scrollView;
 	IBOutlet NSCollectionView *collectionView;
-	IBOutlet NSCollectionViewItem *collectionViewItem;
+	IBOutlet XspfMCollectionViewItem *collectionViewItem;
+	
+	IBOutlet XspfMCollectionViewItem *regularItem;
+	IBOutlet XspfMCollectionViewItem *smallItem;
 }
+
+- (IBAction)collectionViewItemViewRegular:(id)sender;
+- (IBAction)collectionViewItemViewSmall:(id)sender;
+
 @end
