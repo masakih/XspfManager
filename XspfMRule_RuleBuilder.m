@@ -317,8 +317,6 @@ static NSString *const XspfMREDSubrowsKey = @"subrows";
 - (id)buildRowsFromPredicate:(id)predicate withRowTemplate:(id)rowTemplate
 {
 	if([predicate isKindOfClass:[NSCompoundPredicate class]]) {
-		id subrows = [NSMutableArray array];
-		
 		id value = nil;
 		id compoundType = nil;
 		switch([predicate compoundPredicateType]) {
@@ -336,6 +334,7 @@ static NSString *const XspfMREDSubrowsKey = @"subrows";
 				break;
 		}
 		
+		id subrows = [NSMutableArray array];
 		NSArray *sub = [predicate subpredicates];
 		for(id p in sub) {
 			[subrows addObject:[self buildRowsFromPredicate:p withRowTemplate:rowTemplate]];
@@ -348,12 +347,11 @@ static NSString *const XspfMREDSubrowsKey = @"subrows";
 								   predicateHints:[NSDictionary dictionaryWithObject:compoundType forKey:NSRuleEditorPredicateCompoundType]];
 		NSArray *criteria = [NSArray arrayWithObjects:criterion01, criterion02, nil];
 		id displayValues = [NSArray arrayWithObjects:value, value02, nil];
-		id type = [NSNumber numberWithInt:NSRuleEditorRowTypeCompound];
-				
+		
 		id result = [NSMutableDictionary dictionaryWithObjectsAndKeys:
 					 criteria, XspfMREDCriteriaKey,
 					 displayValues, XspfMREDDisplayValuesKey,
-					 type, XspfMREDRowTypeKey,
+					 [NSNumber numberWithInt:NSRuleEditorRowTypeCompound], XspfMREDRowTypeKey,
 					 subrows, XspfMREDSubrowsKey,
 					 nil];
 		
@@ -365,11 +363,9 @@ static NSString *const XspfMREDSubrowsKey = @"subrows";
 		NSArray *disp = nil;
 		if([leftKeyPath isEqualToString:@"title"]) {		
 			disp = [self displayValuesWithPredicate:predicate];
-		}
-		if([leftKeyPath isEqualToString:@"rating"]) {		
+		} else if([leftKeyPath isEqualToString:@"rating"]) {		
 			disp = [self ratingDisplayValuesWithPredicate:predicate];
-		}
-		if([self isDateKeyPath:leftKeyPath]) {		
+		} else if([self isDateKeyPath:leftKeyPath]) {		
 			disp = [self dateDisplayValuesWithPredicate:predicate];
 		}
 		
