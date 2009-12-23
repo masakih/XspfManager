@@ -29,7 +29,7 @@
 											 fromDate:now];
 	NSDate *startOfToday = [aCalendar dateFromComponents:nowComp];
 	
-	NSDateComponents *comp = [[NSDateComponents alloc] init];
+	NSDateComponents *comp = [[[NSDateComponents alloc] init] autorelease];
 	[comp setDay:-1];
 	NSDate *startOfYesterday = [aCalendar dateByAddingComponents:comp toDate:startOfToday options:0];
 	
@@ -44,7 +44,7 @@
 											 fromDate:now];
 	NSDate *startOfToday = [aCalendar dateFromComponents:nowComp];
 	
-	NSDateComponents *comp = [[NSDateComponents alloc] init];
+	NSDateComponents *comp = [[[NSDateComponents alloc] init] autorelease];
 	
 	[comp setWeekday:-[nowComp weekday]+1];
 	NSDate *startOfThisWeek = [aCalendar dateByAddingComponents:comp toDate:startOfToday options:0];
@@ -60,7 +60,7 @@
 											 fromDate:now];
 	NSDate *startOfToday = [aCalendar dateFromComponents:nowComp];
 	
-	NSDateComponents *comp = [[NSDateComponents alloc] init];
+	NSDateComponents *comp = [[[NSDateComponents alloc] init] autorelease];
 	[comp setWeekday:-[nowComp weekday]+1];
 	NSDate *startOfThisWeek = [aCalendar dateByAddingComponents:comp toDate:startOfToday options:0];
 	
@@ -77,8 +77,8 @@
 	NSInteger number = [numberValue integerValue];
 	NSInteger unit = [unitValue integerValue];
 	
-	NSDateComponents *comp01 = [[NSDateComponents alloc] init];
-	NSDateComponents *comp02 = [[NSDateComponents alloc] init];
+	NSDateComponents *comp01 = [[[NSDateComponents alloc] init] autorelease];
+	NSDateComponents *comp02 = [[[NSDateComponents alloc] init] autorelease];
 	NSUInteger unitFlag = 0;
 	switch(unit) {
 		case XspfMDaysUnitType:
@@ -121,7 +121,7 @@
 	NSInteger number = [numberValue integerValue];
 	NSInteger unit = [unitValue integerValue];
 	
-	NSDateComponents *comp = [[NSDateComponents alloc] init];
+	NSDateComponents *comp = [[[NSDateComponents alloc] init] autorelease];
 	NSUInteger unitFlag = 0;
 	switch(unit) {
 		case XspfMDaysUnitType:
@@ -159,8 +159,8 @@
 	NSInteger number02 = [number02Value integerValue];
 	NSInteger unit = [unitValue integerValue];
 	
-	NSDateComponents *comp01 = [[NSDateComponents alloc] init];
-	NSDateComponents *comp02 = [[NSDateComponents alloc] init];
+	NSDateComponents *comp01 = [[[NSDateComponents alloc] init] autorelease];
+	NSDateComponents *comp02 = [[[NSDateComponents alloc] init] autorelease];
 	NSUInteger unitFlag = 0;
 	switch(unit) {
 		case XspfMDaysUnitType:
@@ -211,7 +211,7 @@
 											 fromDate:now];
 	NSDate *startOfToday = [aCalendar dateFromComponents:nowComp];
 	
-	NSDateComponents *comp = [[NSDateComponents alloc] init];
+	NSDateComponents *comp = [[[NSDateComponents alloc] init] autorelease];
 	[comp setDay:-1];
 	NSDate *startOfYesterday = [aCalendar dateByAddingComponents:comp toDate:startOfToday options:0];
 	
