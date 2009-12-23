@@ -61,4 +61,14 @@
    withKeyPath:@"backgroundColor"
 	   options:nil];
 }
+
+
+-(void)setMenu:(NSMenu *)menu
+{
+	[[self contentView] setMenu:menu];
+	[thumbnail setMenu:menu];
+	[titleField setMenu:menu];
+	[ratingLabel setMenu:menu];
+	[rating setMenu:menu];
+}
 @end
