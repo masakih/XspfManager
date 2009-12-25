@@ -114,7 +114,7 @@ static XspfManager *sharedInstance = nil;
 	[self setupDetailView];
 	[self setupAccessorylView];
 	if(currentListViewType == typeNotSelected) {
-		[self setCurrentListViewType:typeCollectionView];
+		[self setCurrentListViewType:typeTableView];
 	}
 	
 	[self showWindow:nil];
@@ -293,6 +293,7 @@ static XspfManager *sharedInstance = nil;
 		targetContorller = [[[NSClassFromString(className) alloc] init] autorelease];
 		if(!targetContorller) return;
 		[viewControllers setObject:targetContorller forKey:className];
+		[targetContorller view];
 		[targetContorller setRepresentedObject:controller];
 	}
 	
