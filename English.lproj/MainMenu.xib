@@ -754,7 +754,7 @@
 				<string key="NSName">_NSMainMenu</string>
 			</object>
 			<object class="NSCustomObject" id="612578685">
-				<string key="NSClassName">XspfManager_AppDelegate</string>
+				<string key="NSClassName">XspfManager</string>
 			</object>
 			<object class="NSCustomObject" id="276321920">
 				<string key="NSClassName">XspfMMainWindowController</string>
@@ -2022,7 +2022,7 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">XspfManager_AppDelegate</string>
+					<string key="className">XspfManager</string>
 					<string key="superclassName">NSObject</string>
 					<object class="NSMutableDictionary" key="actions">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -2050,14 +2050,6 @@
 							<string>NSWindow</string>
 						</object>
 					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">XspfManager_AppDelegate.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">XspfManager_AppDelegate</string>
-					<string key="superclassName">NSObject</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBUserSource</string>
 						<string key="minorKey"/>

@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2F7446990DB6B7EA00F9684A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F7446970DB6B7EA00F9684A /* MainMenu.xib */; };
-		77C8280E06725ACE000B614F /* XspfManager_AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C8280C06725ACE000B614F /* XspfManager_AppDelegate.m */; };
+		77C8280E06725ACE000B614F /* XspfManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C8280C06725ACE000B614F /* XspfManager.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -92,8 +92,8 @@
 		2F7446980DB6B7EA00F9684A /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* XspfManager_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfManager_Prefix.pch; sourceTree = "<group>"; };
 		77C82804067257F0000B614F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
-		77C8280B06725ACE000B614F /* XspfManager_AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfManager_AppDelegate.h; sourceTree = "<group>"; };
-		77C8280C06725ACE000B614F /* XspfManager_AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfManager_AppDelegate.m; sourceTree = "<group>"; };
+		77C8280B06725ACE000B614F /* XspfManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfManager.h; sourceTree = "<group>"; };
+		77C8280C06725ACE000B614F /* XspfManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfManager.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* XspfManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XspfManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F40B31DB10B4398E00896716 /* XspfMChannelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMChannelManager.h; sourceTree = "<group>"; };
@@ -215,8 +215,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				77C8280B06725ACE000B614F /* XspfManager_AppDelegate.h */,
-				77C8280C06725ACE000B614F /* XspfManager_AppDelegate.m */,
+				77C8280B06725ACE000B614F /* XspfManager.h */,
+				77C8280C06725ACE000B614F /* XspfManager.m */,
 				F47C00B5109D479100F5991C /* XspfMMainWindowController.h */,
 				F47C00B6109D479100F5991C /* XspfMMainWindowController.m */,
 				F43E62BB10A0710E00BF88DA /* XspfMImageView.h */,
@@ -506,7 +506,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
-				77C8280E06725ACE000B614F /* XspfManager_AppDelegate.m in Sources */,
+				77C8280E06725ACE000B614F /* XspfManager.m in Sources */,
 				F47C00B7109D479100F5991C /* XspfMMainWindowController.m in Sources */,
 				F47C023A109D603D00F5991C /* XSPFMXspfObject.m in Sources */,
 				F47C02CF109D6BB800F5991C /* XspfQTValueTransformers.m in Sources */,

@@ -10,7 +10,7 @@
 
 #import "HMWorkerProtocols.h"
 
-@interface XspfManager_AppDelegate : NSObject 
+@interface XspfManager : NSObject 
 {
     IBOutlet NSWindow *window;
     
