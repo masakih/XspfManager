@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 #import "XspfMCollectionView.h"
-#import "XspfManager.h"
+#import "XspfMMainWindowController.h"
 
 #import "XspfMViewController.h"
 

@@ -30,7 +30,7 @@
 		F43E652E10A315D000BF88DA /* CollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F43E652C10A315D000BF88DA /* CollectionView.xib */; };
 		F43E653410A3167700BF88DA /* XspfMCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E653310A3167700BF88DA /* XspfMCollectionViewController.m */; };
 		F478A95A10DD1F0F000A75B4 /* XspfMRule_Subclasses.m in Sources */ = {isa = PBXBuildFile; fileRef = F478A95910DD1F0F000A75B4 /* XspfMRule_Subclasses.m */; };
-		F47C00B7109D479100F5991C /* XspfManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C00B6109D479100F5991C /* XspfManager.m */; };
+		F47C00B7109D479100F5991C /* XspfMMainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C00B6109D479100F5991C /* XspfMMainWindowController.m */; };
 		F47C00FE109D51CC00F5991C /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F47C00FD109D51CC00F5991C /* QTKit.framework */; };
 		F47C023A109D603D00F5991C /* XSPFMXspfObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C0239109D603D00F5991C /* XSPFMXspfObject.m */; };
 		F47C02CF109D6BB800F5991C /* XspfQTValueTransformers.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C02CE109D6BB800F5991C /* XspfQTValueTransformers.m */; };
@@ -46,12 +46,12 @@
 		F47C06EA109F02C900F5991C /* XspfQTTrackList.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C06E4109F02C800F5991C /* XspfQTTrackList.m */; };
 		F47C0719109F1DDD00F5991C /* XSPFMInfomationObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C0718109F1DDD00F5991C /* XSPFMInfomationObject.m */; };
 		F47C0750109FAFB000F5991C /* FamilyName.txt in Resources */ = {isa = PBXBuildFile; fileRef = F47C074F109FAFB000F5991C /* FamilyName.txt */; };
-		F47C096610A049DD00F5991C /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F47C096410A049DD00F5991C /* MainWindow.xib */; };
 		F480CD6710AF8A4300AC365B /* XspfMTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F480CD6610AF8A4300AC365B /* XspfMTableView.m */; };
 		F480CEE510AFDAB400AC365B /* NSApplication.icns in Resources */ = {isa = PBXBuildFile; fileRef = F480CEE410AFDAB300AC365B /* NSApplication.icns */; };
 		F480CF9F10B03A0D00AC365B /* AccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F480CF9D10B03A0D00AC365B /* AccessoryView.xib */; };
 		F499881910DDAD3800AAC6D6 /* XspfMRule_NSExpressionFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = F499881810DDAD3800AAC6D6 /* XspfMRule_NSExpressionFunctions.m */; };
 		F499886B10DDFB3E00AAC6D6 /* XspfMThreadSpleepRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F499886A10DDFB3E00AAC6D6 /* XspfMThreadSpleepRequest.m */; };
+		F4998DA110E6C7CB00AAC6D6 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4998DA010E6C7CB00AAC6D6 /* MainWindow.xib */; };
 		F499CBCE10DA73620053923E /* XspfMRule_RuleBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = F499CBCD10DA73620053923E /* XspfMRule_RuleBuilder.m */; };
 		F49BCF9510A45178007136CE /* XspfMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BCF9410A45178007136CE /* XspfMViewController.m */; };
 		F49BD01010A47781007136CE /* ListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F49BD00E10A47780007136CE /* ListView.xib */; };
@@ -128,8 +128,8 @@
 		F43E653210A3167700BF88DA /* XspfMCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMCollectionViewController.h; sourceTree = "<group>"; };
 		F43E653310A3167700BF88DA /* XspfMCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMCollectionViewController.m; sourceTree = "<group>"; };
 		F478A95910DD1F0F000A75B4 /* XspfMRule_Subclasses.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMRule_Subclasses.m; sourceTree = "<group>"; };
-		F47C00B5109D479100F5991C /* XspfManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfManager.h; sourceTree = "<group>"; };
-		F47C00B6109D479100F5991C /* XspfManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfManager.m; sourceTree = "<group>"; };
+		F47C00B5109D479100F5991C /* XspfMMainWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMMainWindowController.h; sourceTree = "<group>"; };
+		F47C00B6109D479100F5991C /* XspfMMainWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMMainWindowController.m; sourceTree = "<group>"; };
 		F47C00FD109D51CC00F5991C /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = /System/Library/Frameworks/QTKit.framework; sourceTree = "<absolute>"; };
 		F47C0238109D603D00F5991C /* XSPFMXspfObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XSPFMXspfObject.h; sourceTree = "<group>"; };
 		F47C0239109D603D00F5991C /* XSPFMXspfObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XSPFMXspfObject.m; sourceTree = "<group>"; };
@@ -217,8 +217,8 @@
 			children = (
 				77C8280B06725ACE000B614F /* XspfManager_AppDelegate.h */,
 				77C8280C06725ACE000B614F /* XspfManager_AppDelegate.m */,
-				F47C00B5109D479100F5991C /* XspfManager.h */,
-				F47C00B6109D479100F5991C /* XspfManager.m */,
+				F47C00B5109D479100F5991C /* XspfMMainWindowController.h */,
+				F47C00B6109D479100F5991C /* XspfMMainWindowController.m */,
 				F43E62BB10A0710E00BF88DA /* XspfMImageView.h */,
 				F43E62BC10A0710E00BF88DA /* XspfMImageView.m */,
 				F480CD6510AF8A4300AC365B /* XspfMTableView.h */,
@@ -314,7 +314,7 @@
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				2F7446970DB6B7EA00F9684A /* MainMenu.xib */,
-				F47C096410A049DD00F5991C /* MainWindow.xib */,
+				F4998DA010E6C7CB00AAC6D6 /* MainWindow.xib */,
 				F4CE4CD110A6A13E004AC4FA /* LibraryView.xib */,
 				F43E652C10A315D000BF88DA /* CollectionView.xib */,
 				F49BD00E10A47780007136CE /* ListView.xib */,
@@ -485,7 +485,7 @@
 				F47C0750109FAFB000F5991C /* FamilyName.txt in Resources */,
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				2F7446990DB6B7EA00F9684A /* MainMenu.xib in Resources */,
-				F47C096610A049DD00F5991C /* MainWindow.xib in Resources */,
+				F4998DA110E6C7CB00AAC6D6 /* MainWindow.xib in Resources */,
 				F43E652E10A315D000BF88DA /* CollectionView.xib in Resources */,
 				F49BD01010A47781007136CE /* ListView.xib in Resources */,
 				F4CE4CD310A6A13E004AC4FA /* LibraryView.xib in Resources */,
@@ -507,7 +507,7 @@
 			files = (
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
 				77C8280E06725ACE000B614F /* XspfManager_AppDelegate.m in Sources */,
-				F47C00B7109D479100F5991C /* XspfManager.m in Sources */,
+				F47C00B7109D479100F5991C /* XspfMMainWindowController.m in Sources */,
 				F47C023A109D603D00F5991C /* XSPFMXspfObject.m in Sources */,
 				F47C02CF109D6BB800F5991C /* XspfQTValueTransformers.m in Sources */,
 				F47C04FC109DC19C00F5991C /* HMChannel.m in Sources */,
@@ -582,20 +582,20 @@
 			name = CollectionView.xib;
 			sourceTree = "<group>";
 		};
-		F47C096410A049DD00F5991C /* MainWindow.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F47C096510A049DD00F5991C /* English */,
-			);
-			name = MainWindow.xib;
-			sourceTree = "<group>";
-		};
 		F480CF9D10B03A0D00AC365B /* AccessoryView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				F480CF9E10B03A0D00AC365B /* English */,
 			);
 			name = AccessoryView.xib;
+			sourceTree = "<group>";
+		};
+		F4998DA010E6C7CB00AAC6D6 /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F47C096510A049DD00F5991C /* English */,
+			);
+			name = MainWindow.xib;
 			sourceTree = "<group>";
 		};
 		F49BD00E10A47780007136CE /* ListView.xib */ = {
