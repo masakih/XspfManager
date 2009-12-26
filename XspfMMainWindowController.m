@@ -6,7 +6,7 @@
 //  Copyright 2009 masakih. All rights reserved.
 //
 
-#import "XspfManager.h"
+#import "XspfMMainWindowController.h"
 
 #import "XspfMMovieLoadRequest.h"
 #import "XspfMCheckFileModifiedRequest.h"
@@ -19,7 +19,7 @@
 #import "UKKQueue.h"
 #import "NSPathUtilities-XspfQT-Extensions.h"
 
-@interface XspfManager(HMPrivate)
+@interface XspfMMainWindowController(HMPrivate)
 - (void)setupXspfLists;
 - (void)setupDetailView;
 - (void)setupAccessorylView;
@@ -28,15 +28,15 @@
 - (void)setCurrentListViewType:(XspfMViewType)newType;
 @end
 
-@interface XspfManager(UKKQueueSupport) 
+@interface XspfMMainWindowController(UKKQueueSupport) 
 - (void)registerToUKKQueue;
 @end
 
-@implementation XspfManager
+@implementation XspfMMainWindowController
 
-static XspfManager *sharedInstance = nil;
+static XspfMMainWindowController *sharedInstance = nil;
 
-+ (XspfManager *)sharedInstance
++ (XspfMMainWindowController *)sharedInstance
 {
     @synchronized(self) {
         if (sharedInstance == nil) {
@@ -251,7 +251,7 @@ static XspfManager *sharedInstance = nil;
 	
 	[self registerURLs:URLs];
 }
-	
+
 #pragma mark#### Other methods ####
 - (BOOL)didRegisteredURL:(NSURL *)url
 {

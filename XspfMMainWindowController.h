@@ -17,7 +17,7 @@ typedef enum {
 	typeTableView,
 } XspfMViewType;
 
-@interface XspfManager : NSWindowController
+@interface XspfMMainWindowController : NSWindowController
 {
 	IBOutlet NSArrayController *controller;
 	IBOutlet id	appDelegate;

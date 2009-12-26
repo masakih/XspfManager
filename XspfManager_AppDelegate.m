@@ -9,7 +9,7 @@
 #import "XspfManager_AppDelegate.h"
 
 #import "XspfMChannelManager.h"
-#import "XspfManager.h"
+#import "XspfMMainWindowController.h"
 
 #import "XspfMThreadSpleepRequest.h"
 
