@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-#import "XspfManager_AppDelegate.h"
+#import "XspfManager.h"
 
 
 typedef enum {

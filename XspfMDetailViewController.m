@@ -8,7 +8,7 @@
 
 #import "XspfMDetailViewController.h"
 
-#import "XspfManager_AppDelegate.h"
+#import "XspfManager.h"
 
 @interface XspfMDetailViewController(HMPrivate)
 - (void)buildFamilyNameFromFile;

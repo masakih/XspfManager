@@ -6,14 +6,14 @@
 //  Copyright masakih 2009 . All rights reserved.
 //
 
-#import "XspfManager_AppDelegate.h"
+#import "XspfManager.h"
 
 #import "XspfMChannelManager.h"
 #import "XspfMMainWindowController.h"
 
 #import "XspfMThreadSpleepRequest.h"
 
-@implementation XspfManager_AppDelegate
+@implementation XspfManager
 
 /**
     Returns the support folder for the application, used to store the Core Data
