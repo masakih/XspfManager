@@ -34,3 +34,20 @@
 - (id<HMChannel>)channel;
 
 @end
+
+extern NSString *const XspfManagerDidAddXspfObjectsNotification; // @"XspfManagerAddedXspfObjects"
+
+
+@class XSPFMXspfObject;
+@protocol UKFileWatcher;
+
+@interface XspfManager(WillMoveXspfMMainWindowController)
+- (BOOL)didRegisteredURL:(NSURL *)url;
+- (XSPFMXspfObject *)registerWithURL:(NSURL *)url;
+- (void)registerFilePaths:(NSArray *)filePaths;
+- (void)registerURLs:(NSArray *)URLs;
+
+- (void)registerToUKKQueue;
+-(void) watcher:(id<UKFileWatcher>)kq receivedNotification:(NSString*)notificationName forPath: (NSString*)filePath;
+
+@end

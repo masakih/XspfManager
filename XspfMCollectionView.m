@@ -67,7 +67,7 @@
 	id pb = [sender draggingPasteboard];
 	id plist = [pb propertyListForType:NSFilenamesPboardType];
 	
-	[[[self window] windowController] registerFilePaths:plist];
+	[[NSApp delegate] registerFilePaths:plist];
 	
 	return YES;
 }
