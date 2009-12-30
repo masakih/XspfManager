@@ -43,8 +43,8 @@ typedef enum {
 	IBOutlet NSArrayController *listController;
 }
 
-- (void)registerFilePaths:(NSArray *)filePaths;
-- (void)registerURLs:(NSArray *)URLs;
+//- (void)registerFilePaths:(NSArray *)filePaths;
+//- (void)registerURLs:(NSArray *)URLs;
 
 - (IBAction)openXspf:(id)sender;
 

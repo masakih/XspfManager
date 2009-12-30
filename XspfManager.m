@@ -12,8 +12,16 @@
 #import "XspfMMainWindowController.h"
 
 #import "XspfMThreadSpleepRequest.h"
+#import "XspfMCheckFileModifiedRequest.h"
+#import "XspfMMovieLoadRequest.h"
+
+#import "UKKQueue.h"
+#import "XSPFMXspfObject.h"
+
+#import "NSPathUtilities-XspfQT-Extensions.h"
 
 @implementation XspfManager
+NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXspfObjectsNotification";
 
 /**
     Returns the support folder for the application, used to store the Core Data
@@ -189,8 +197,13 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification
 {
+	UKKQueue *queue = [UKKQueue sharedFileWatcher];
+	[queue setDelegate:self];
+	
 	XspfMThreadSpleepRequest *request = [XspfMThreadSpleepRequest requestWithSleepTime:0.5];
 	[[self channel] putRequest:request];
+	
+	[self performSelector:@selector(registerToUKKQueue) withObject:nil afterDelay:0.0];
 }
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender
 {
@@ -206,5 +219,167 @@
 	return channel;
 }
 
+#pragma maark-
+- (BOOL)didRegisteredURL:(NSURL *)url
+{
+	NSManagedObjectContext *moc = [self managedObjectContext];
+	NSError *error = nil;
+	NSFetchRequest *fetch;
+	NSInteger num;
+	
+	fetch = [[[NSFetchRequest alloc] init] autorelease];
+	[fetch setEntity:[NSEntityDescription entityForName:@"Xspf" inManagedObjectContext:moc]];
+	NSPredicate *aPredicate = [NSPredicate predicateWithFormat:@"urlString LIKE %@", [url absoluteString]];
+	[fetch setPredicate:aPredicate];
+	num = [moc countForFetchRequest:fetch error:&error];
+	if(error) {
+		NSLog(@"%@", [error localizedDescription]);
+		return NO;
+	}
+	
+	return num != 0;
+}
+- (XSPFMXspfObject *)registerWithURL:(NSURL *)url
+{
+	if([self didRegisteredURL:url]) return nil;
+	
+	XSPFMXspfObject *obj = [NSEntityDescription insertNewObjectForEntityForName:@"Xspf"
+														 inManagedObjectContext:[self managedObjectContext]];
+	if(!obj) return nil;
+	
+	obj.url = url;
+	obj.registerDate = [NSDate dateWithTimeIntervalSinceNow:0.0];
+	
+	// will set in XspfMCheckFileModifiedRequest.
+	//	[obj setValue:[NSDate dateWithTimeIntervalSinceNow:0.0] forKey:@"modificationDate"];
+	//	[obj setValue:[NSDate dateWithTimeIntervalSinceNow:0.0] forKey:@"creationDate"];
+	
+	id<HMChannel> aChannel = [self channel];
+	id<HMRequest> request = [XspfMCheckFileModifiedRequest requestWithObject:obj];
+	[aChannel putRequest:request];
+	request = [XspfMMovieLoadRequest requestWithObject:obj];
+	[aChannel putRequest:request];
+	
+	[[UKKQueue sharedFileWatcher] addPathToQueue:obj.filePath];
+	
+	return obj;
+}
+- (void)registerFilePaths:(NSArray *)filePaths
+{
+	NSMutableArray *array = [NSMutableArray array];
+	
+	for(NSString *filePath in filePaths) {
+		[array addObject:[NSURL fileURLWithPath:filePath]];
+	}
+	
+	[self registerURLs:array];
+}
+- (void)registerURLs:(NSArray *)URLs
+{
+	NSMutableArray *addedObjects = [NSMutableArray array];
+	
+	XSPFMXspfObject *insertedObject = nil;
+	for(id URL in URLs) {
+		insertedObject = [self registerWithURL:URL];
+		if(insertedObject) [addedObjects addObject:insertedObject];
+	}
+	
+	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+	[nc postNotificationName:XspfManagerDidAddXspfObjectsNotification
+					  object:self
+					userInfo:[NSDictionary dictionaryWithObject:addedObjects forKey:@"XspfManagerAddedXspfObjects"]];
+}
+
+#pragma mark#### UKKQUEUE ####
+- (void)registerToUKKQueue
+{
+	NSManagedObjectContext *moc = [self managedObjectContext];
+	NSError *error = nil;
+	NSFetchRequest *fetch = [[[NSFetchRequest alloc] init] autorelease];
+	[fetch setEntity:[NSEntityDescription entityForName:@"Xspf" inManagedObjectContext:moc]];
+	
+	NSArray *array = [moc executeFetchRequest:fetch error:&error];
+	if(!array) {
+		if(error) {
+			NSLog(@"could not fetch : %@", [error localizedDescription]);
+		}
+		NSLog(@"Could not fetch.");
+		return;
+	}
+	
+	NSFileManager *fm = [NSFileManager defaultManager];
+	UKKQueue *queue = [UKKQueue sharedFileWatcher];
+	for(XSPFMXspfObject *obj in array) {
+		NSString *filePath = obj.filePath;
+		if([fm fileExistsAtPath:filePath]) {
+			[queue addPathToQueue:filePath];
+		} else {
+			obj.deleted = YES;
+		}
+	}
+}
+
+-(void) watcher:(id<UKFileWatcher>)kq receivedNotification:(NSString*)notificationName forPath: (NSString*)filePath
+{
+	NSLog(@"UKKQueue notification. %@", notificationName);
+	if(![NSThread isMainThread]) {
+		NSLog(@"there is not main thread.");
+	}
+	
+	NSString *fileURL = [[NSURL fileURLWithPath:filePath] absoluteString];
+	NSFetchRequest *fetch = [[[NSFetchRequest alloc] init] autorelease];
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"urlString = %@", fileURL];
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Xspf"
+											  inManagedObjectContext:[self managedObjectContext]]; 
+	[fetch setPredicate:predicate];
+	[fetch setEntity:entity];
+	
+	NSError *error = nil;
+	NSArray *array = [[self managedObjectContext] executeFetchRequest:fetch error:&error];
+	if(!array) {
+		if(error) {
+			NSLog(@"%@", [error localizedDescription]);
+		}
+		NSLog(@"Could not fetch.");
+		return;
+	}
+	if([array count] == 0) {
+		NSLog(@"Target file is not found.");
+		return;
+	}
+	if([array count] > 1) {
+		NSLog(@"Target found too many!!! (%d).", [array count]);
+	}
+	
+	XSPFMXspfObject *obj = [array objectAtIndex:0];
+	NSString *resolvedPath = [obj.alias resolvedPath];
+	
+	if([UKFileWatcherRenameNotification isEqualToString:notificationName]) {
+		NSLog(@"File(%@) renamed", filePath);
+		obj.url = [NSURL fileURLWithPath:resolvedPath];
+		[[UKKQueue sharedFileWatcher] removePathFromQueue:filePath];
+		[[UKKQueue sharedFileWatcher] addPathToQueue:obj.filePath];
+		return;
+	}
+	
+	NSFileManager *fm = [NSFileManager defaultManager];
+	if(!resolvedPath) {
+		if(![fm fileExistsAtPath:filePath]) {
+			NSLog(@"object already deleted. (%@)", filePath);
+			[[UKKQueue sharedFileWatcher] removePathFromQueue:filePath];
+			obj.deleted = YES;
+			return;
+		} else {
+			obj.alias = [filePath aliasData];
+		}
+	}
+	
+	id attr = [fm fileAttributesAtPath:resolvedPath traverseLink:YES];
+	NSDate *newModDate = [attr fileModificationDate];
+	if(newModDate) {
+		obj.modificationDate = newModDate;
+	}
+	obj.alias = [filePath aliasData];
+}
 @end
 

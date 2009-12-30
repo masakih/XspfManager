@@ -54,7 +54,7 @@
 	id pb = [info draggingPasteboard];
 	id plist = [pb propertyListForType:NSFilenamesPboardType];
 	
-	[[[tableView window] windowController] registerFilePaths:plist];
+	[[NSApp delegate] registerFilePaths:plist];
 	
 	return YES;
 }
