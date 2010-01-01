@@ -29,6 +29,7 @@
 		F43E62BD10A0710E00BF88DA /* XspfMImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E62BC10A0710E00BF88DA /* XspfMImageView.m */; };
 		F43E652E10A315D000BF88DA /* CollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F43E652C10A315D000BF88DA /* CollectionView.xib */; };
 		F43E653410A3167700BF88DA /* XspfMCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E653310A3167700BF88DA /* XspfMCollectionViewController.m */; };
+		F45AB02310EE3675005BE9C1 /* HMUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = F45AB02210EE3675005BE9C1 /* HMUtilities.m */; };
 		F478A95A10DD1F0F000A75B4 /* XspfMRule_Subclasses.m in Sources */ = {isa = PBXBuildFile; fileRef = F478A95910DD1F0F000A75B4 /* XspfMRule_Subclasses.m */; };
 		F47C00B7109D479100F5991C /* XspfMMainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C00B6109D479100F5991C /* XspfMMainWindowController.m */; };
 		F47C00FE109D51CC00F5991C /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F47C00FD109D51CC00F5991C /* QTKit.framework */; };
@@ -127,6 +128,8 @@
 		F43E652D10A315D000BF88DA /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/CollectionView.xib; sourceTree = "<group>"; };
 		F43E653210A3167700BF88DA /* XspfMCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMCollectionViewController.h; sourceTree = "<group>"; };
 		F43E653310A3167700BF88DA /* XspfMCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMCollectionViewController.m; sourceTree = "<group>"; };
+		F45AB02110EE3675005BE9C1 /* HMUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMUtilities.h; sourceTree = "<group>"; };
+		F45AB02210EE3675005BE9C1 /* HMUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMUtilities.m; sourceTree = "<group>"; };
 		F478A95910DD1F0F000A75B4 /* XspfMRule_Subclasses.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMRule_Subclasses.m; sourceTree = "<group>"; };
 		F47C00B5109D479100F5991C /* XspfMMainWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMMainWindowController.h; sourceTree = "<group>"; };
 		F47C00B6109D479100F5991C /* XspfMMainWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMMainWindowController.m; sourceTree = "<group>"; };
@@ -281,6 +284,8 @@
 		29B97314FDCFA39411CA2CEA /* XspfManager */ = {
 			isa = PBXGroup;
 			children = (
+				F45AB02110EE3675005BE9C1 /* HMUtilities.h */,
+				F45AB02210EE3675005BE9C1 /* HMUtilities.m */,
 				F480CEE410AFDAB300AC365B /* NSApplication.icns */,
 				F40B341D10B6BDEE00896716 /* UKKQueue */,
 				F4343DE610AD76F70090F57B /* HMExtensions */,
@@ -552,6 +557,7 @@
 				F478A95A10DD1F0F000A75B4 /* XspfMRule_Subclasses.m in Sources */,
 				F499881910DDAD3800AAC6D6 /* XspfMRule_NSExpressionFunctions.m in Sources */,
 				F499886B10DDFB3E00AAC6D6 /* XspfMThreadSpleepRequest.m in Sources */,
+				F45AB02310EE3675005BE9C1 /* HMUtilities.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

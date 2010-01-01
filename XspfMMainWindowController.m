@@ -287,9 +287,7 @@ static XspfMMainWindowController *sharedInstance = nil;
 - (void)managerDidAddObjects:(NSNotification *)notification
 {
 	id addedObjects = [[notification userInfo] objectForKey:@"XspfManagerAddedXspfObjects"];
-	NSLog(@"added -> %@", addedObjects);
 	if(!addedObjects || ![addedObjects isKindOfClass:[NSArray class]] || [addedObjects count] == 0) return;
-	NSLog(@"Do select!");
 	
 	[controller performSelector:@selector(setSelectedObjects:)
 					 withObject:addedObjects
