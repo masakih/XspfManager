@@ -109,12 +109,14 @@ static XspfMMainWindowController *sharedInstance = nil;
 	if(appDelegate && !didSetupOnMainMenu) {
 		didSetupOnMainMenu = YES;
 		
-//		UKKQueue *queue = [UKKQueue sharedFileWatcher];
-//		[queue setDelegate:self];
+		NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+		[nc addObserver:self
+			   selector:@selector(managerDidAddObjects:)
+				   name:XspfManagerDidAddXspfObjectsNotification
+				 object:appDelegate];
 		
 		[self window];
 		
-//		[appDelegate performSelector:@selector(registerToUKKQueue) withObject:nil afterDelay:0.0];
 	}
 }
 - (void)windowDidLoad
@@ -279,6 +281,19 @@ static XspfMMainWindowController *sharedInstance = nil;
 - (BOOL)panel:(id)sender shouldShowFilename:(NSString *)filename
 {
 	return ![appDelegate didRegisteredURL:[NSURL fileURLWithPath:filename]];
+}
+
+#pragma mark#### XspfManager Notifications ####
+- (void)managerDidAddObjects:(NSNotification *)notification
+{
+	id addedObjects = [[notification userInfo] objectForKey:@"XspfManagerAddedXspfObjects"];
+	NSLog(@"added -> %@", addedObjects);
+	if(!addedObjects || ![addedObjects isKindOfClass:[NSArray class]] || [addedObjects count] == 0) return;
+	NSLog(@"Do select!");
+	
+	[controller performSelector:@selector(setSelectedObjects:)
+					 withObject:addedObjects
+					 afterDelay:0.01];
 }
 
 #pragma mark#### Test ####
