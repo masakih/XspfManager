@@ -53,7 +53,7 @@
 #pragma mark#### Test ####
 - (void)test01:(id)sender
 {
-	NSLog(@"hoge");
+	HMLog(HMLogLevelError, @"hoge");
 }
 	
 

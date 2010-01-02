@@ -43,8 +43,8 @@ enum {
 			[_channel finishRequest:_request];
 		}
 		@catch(id localException) {
-			NSLog( @"An uncaught exception" );
-			NSLog( @"%@", localException );
+			HMLog(HMLogLevelError,  @"An uncaught exception" );
+			HMLog(HMLogLevelError,  @"%@", localException );
 		}
 		
         [_requestLock lock];

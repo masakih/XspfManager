@@ -42,9 +42,9 @@ static inline BOOL nilOrNSNull(id obj)
 	id attrs = [[NSFileManager defaultManager ] attributesOfItemAtPath:self.object.filePath error:&error];
 	if(!attrs) {
 		if(error) {
-			NSLog(@"Error at checking XSPF. %@", error);
+			HMLog(HMLogLevelError, @"Error at checking XSPF. %@", error);
 		} else {
-			NSLog(@"Error at checking XSPF.");
+			HMLog(HMLogLevelError, @"Error at checking XSPF.");
 		}
 		return;
 	}

@@ -182,7 +182,7 @@ enum {
 	NSPredicate *predicate = [editor predicate];
 	
 	if(!predicate || ![predicate isKindOfClass:[NSPredicate class]]) {
-		NSLog(@"????");
+		HMLog(HMLogLevelError, @"Could not create NSPredicate.");
 		NSBeep();
 		return;
 	}
@@ -227,15 +227,15 @@ enum {
 //	NSArray *array = [editor rowTemplates];
 	
 //	for(id templ in array) {
-//		NSLog(@"Views -> %@", [templ templateViews]);
+//		HMLog(HMLogLevelDebug @"Views -> %@", [templ templateViews]);
 //		for(id v in [templ templateViews]) {
 //			if([v respondsToSelector:@selector(tag)]) {
-//				NSLog(@"tag -> %d", [v tag]);
+//				HMLog(HMLogLevelDebug, @"tag -> %d", [v tag]);
 //			}
 //		}
 //	}
 //	for(id templ in array) {
-//		NSLog(@"template -> %@", templ);
+//		HMLog(HMLogLevelDebug, @"template -> %@", templ);
 //	}
 }
 

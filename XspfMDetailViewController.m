@@ -73,7 +73,7 @@ completionsForSubstring:(NSString *)substring
 	NSArray *objects = [moc executeFetchRequest:fetch error:&error];
 	if(!objects) {
 		if(error) {
-			NSLog(@"fail fetch reason -> %@", error);
+			HMLog(HMLogLevelError, @"fail fetch reason -> %@", error);
 		}
 	}
 	
@@ -109,7 +109,7 @@ completionsForSubstring:(NSString *)substring
 	objects = [moc executeFetchRequest:fetch error:&error];
 	if(!objects) {
 		if(error) {
-			NSLog(@"fail fetch reason -> %@", error);
+			HMLog(HMLogLevelError, @"fail fetch reason -> %@", error);
 		}
 	}
 	
@@ -150,7 +150,7 @@ completionsForSubstring:(NSString *)substring
 	NSArray *objects = [moc executeFetchRequest:fetch error:&error];
 	if(!objects) {
 		if(error) {
-			NSLog(@"fail fetch reason -> %@", error);
+			HMLog(HMLogLevelError, @"fail fetch reason -> %@", error);
 		}
 	}
 	
@@ -191,7 +191,7 @@ completionsForSubstring:(NSString *)substring
 		NSError *error = nil;
 		NSUInteger count = [moc countForFetchRequest:fetch error:&error];
 		if(error) {
-			NSLog(@"fail fetch reason -> %@", error);
+			HMLog(HMLogLevelError, @"fail fetch reason -> %@", error);
 			continue;
 		}
 		if(count == 0) {
@@ -230,7 +230,7 @@ completionsForSubstring:(NSString *)substring
 													 error:&error];
 	if(error) {
 		HMLog(HMLogLevelDebug, @"path => %@", path);
-		NSLog(@"%@", [error localizedDescription]);
+		HMLog(HMLogLevelError, @"%@", [error localizedDescription]);
 		return NO;
 	}
 	
@@ -256,7 +256,7 @@ completionsForSubstring:(NSString *)substring
 	[fetch release];
 	fetch = nil;
 	if(error) {
-		NSLog(@"%@", [error localizedDescription]);
+		HMLog(HMLogLevelError, @"%@", [error localizedDescription]);
 		return NO;
 	}
 	
@@ -303,7 +303,7 @@ completionsForSubstring:(NSString *)substring
 	NSArray *objects = [moc executeFetchRequest:fetch error:&error];
 	if(!objects) {
 		if(error) {
-			NSLog(@"fail fetch reason -> %@", error);
+			HMLog(HMLogLevelError, @"fail fetch reason -> %@", error);
 		}
 	}
 	

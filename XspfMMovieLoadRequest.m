@@ -50,7 +50,7 @@ static QTMovie *loadFromMovieURL(NSURL *url)
 	QTMovie *result = [[QTMovie alloc] initWithAttributes:attrs error:&error];
 	if (result == nil) {
 		if (error != nil) {
-			NSLog(@"Couldn't load movie URL, error = %@", error);
+			HMLog(HMLogLevelError, @"Couldn't load movie URL, error = %@", error);
 		}
 	}
 	
@@ -65,15 +65,16 @@ static XspfQTComponent *componentForURL(NSURL *url)
 															 options:0
 															   error:&theErr] autorelease];
 	if(!d) {
+		HMLog(HMLogLevelError, @"Could not load XML.");
 		if(theErr) {
-			NSLog(@"%@", theErr);
+			HMLog(HMLogLevelError, @"%@", theErr);
 		}
 		return nil;
 	}
 	NSXMLElement *root = [d rootElement];
 	XspfQTComponent *pl = [XspfQTComponent xspfComponemtWithXMLElement:root];
 	if(!pl) {
-		NSLog(@"Can not create XspfQTComponent.");
+		HMLog(HMLogLevelError, @"Can not create XspfQTComponent.");
 		return nil;
 	}
 	
@@ -150,7 +151,7 @@ static NSImage *thumbnailForTrackTime(XspfQTComponent *track, NSTimeInterval tim
 													 error:&theErr];
     if (theImage == nil) {
         if (theErr != nil) {
-            NSLog(@"Couldn't create CGImageRef, error = %@", theErr);
+            HMLog(HMLogLevelError, @"Couldn't create CGImageRef, error = %@", theErr);
         }
         return NULL;
     }
