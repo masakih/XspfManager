@@ -73,7 +73,7 @@
 }
 - (void)concludeDragOperation:(id <NSDraggingInfo>)sender
 {
-//	NSLog(@"Enter method %@", NSStringFromSelector(_cmd));
+//	HMLog(HMLogLevelDebug, @"Enter method %@", NSStringFromSelector(_cmd));
 }
 - (void)draggingEnded:(id <NSDraggingInfo>)sender
 {
@@ -103,7 +103,7 @@
 #define kENTER_KEY	52
 	
 	unsigned short code = [theEvent keyCode];
-//	NSLog(@"code -> %d", code);
+//	HMLog(HMLogLevelDebug, @"code -> %d", code);
 	switch(code) {
 		case kRETURN_KEY:
 		case kENTER_KEY:

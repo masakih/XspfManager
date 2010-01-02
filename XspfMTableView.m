@@ -18,7 +18,7 @@
 #define kENTER_KEY	52
 	
 	unsigned short code = [theEvent keyCode];
-	//	NSLog(@"code -> %d", code);
+	//	HMLog(HMLogLevelDebug, @"code -> %d", code);
 	switch(code) {
 		case kRETURN_KEY:
 		case kENTER_KEY:

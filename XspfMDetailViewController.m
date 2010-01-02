@@ -126,7 +126,7 @@ completionsForSubstring:(NSString *)substring
 		   indexOfToken:(NSInteger)tokenIndex
 	indexOfSelectedItem:(NSInteger *)selectedIndex
 {
-	NSLog(@"Enter %@", NSStringFromSelector(_cmd));
+	HMLog(HMLogLevelDebug, @"Enter %@", NSStringFromSelector(_cmd));
 	
 	NSString *entryName = @"";
 	switch([tokenField tag]) {
@@ -229,7 +229,7 @@ completionsForSubstring:(NSString *)substring
 												  encoding:NSUTF8StringEncoding
 													 error:&error];
 	if(error) {
-		NSLog(@"path => %@", path);
+		HMLog(HMLogLevelDebug, @"path => %@", path);
 		NSLog(@"%@", [error localizedDescription]);
 		return NO;
 	}
