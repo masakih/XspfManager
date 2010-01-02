@@ -17,6 +17,8 @@ typedef enum {
 	typeTableView,
 } XspfMViewType;
 
+@class XspfMViewController;
+
 @interface XspfMMainWindowController : NSWindowController
 {
 	IBOutlet NSArrayController *controller;
@@ -27,20 +29,22 @@ typedef enum {
 	IBOutlet NSProgressIndicator *progressBar;
 	
 	IBOutlet NSView *listView;
-	NSViewController *listViewController;
+	XspfMViewController *listViewController;
 	XspfMViewType currentListViewType;
 	NSMutableDictionary *viewControllers;
 	
 	IBOutlet NSView *libraryView;
-	NSViewController *libraryViewController;
+	XspfMViewController *libraryViewController;
 	
 	IBOutlet NSView *detailView;
-	NSViewController *detailViewController;
+	XspfMViewController *detailViewController;
 	
 	IBOutlet NSView *accessoryView;
 	NSViewController *accessoryViewController;
 	
 	IBOutlet NSArrayController *listController;
+	
+	IBOutlet NSSearchField *searchField;
 }
 
 //- (void)registerFilePaths:(NSArray *)filePaths;

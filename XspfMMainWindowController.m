@@ -11,6 +11,7 @@
 #import "XspfMMovieLoadRequest.h"
 #import "XspfMCheckFileModifiedRequest.h"
 
+#import "XspfMViewController.h"
 #import "XspfMLibraryViewController.h"
 #import "XspfMCollectionViewController.h"
 #import "XspfMListViewController.h"
@@ -25,6 +26,7 @@
 - (void)setupAccessorylView;
 - (void)changeViewType:(XspfMViewType)newType;
 - (void)setCurrentListViewType:(XspfMViewType)newType;
+- (void)recalculateKeyViewLoop;
 @end
 
 @interface XspfMMainWindowController(XspfMDeprecated)
@@ -131,6 +133,7 @@ static XspfMMainWindowController *sharedInstance = nil;
 	}
 	
 	[self showWindow:nil];
+	[self recalculateKeyViewLoop];
 }
 #pragma mark#### KVC ####
 - (NSManagedObjectContext *)managedObjectContext
@@ -206,7 +209,13 @@ static XspfMMainWindowController *sharedInstance = nil;
 }
 
 #pragma mark#### Other methods ####
-
+- (void)recalculateKeyViewLoop
+{
+	[searchField setNextKeyView:[libraryViewController firstKeyView]];
+	[libraryViewController setNextKeyView:[listViewController firstKeyView]];
+	[listViewController setNextKeyView:[detailViewController firstKeyView]];
+	[detailViewController setNextKeyView:searchField];
+}
 - (void)changeViewType:(XspfMViewType)viewType
 {
 	if(currentListViewType == viewType) return;
@@ -223,20 +232,22 @@ static XspfMMainWindowController *sharedInstance = nil;
 	}
 	if(!className) return;
 	
-	NSViewController *targetContorller = [viewControllers objectForKey:className];
+	XspfMViewController *targetContorller = [viewControllers objectForKey:className];
 	if(!targetContorller) {
 		targetContorller = [[[NSClassFromString(className) alloc] init] autorelease];
 		if(!targetContorller) return;
 		[viewControllers setObject:targetContorller forKey:className];
 		[targetContorller view];
 		[targetContorller setRepresentedObject:controller];
+		[targetContorller recalculateKeyViewLoop];
 	}
 	
 	[[listViewController view] removeFromSuperview];
 	listViewController = targetContorller;
 	[listView addSubview:[listViewController view]];
 	[[listViewController view] setFrame:[listView bounds]];
-	[[self window] recalculateKeyViewLoop];
+//	[[self window] recalculateKeyViewLoop];
+	[self recalculateKeyViewLoop];
 }
 
 
@@ -248,6 +259,7 @@ static XspfMMainWindowController *sharedInstance = nil;
 	[libraryViewController setRepresentedObject:listController];
 	[libraryView addSubview:[libraryViewController view]];
 	[[libraryViewController view] setFrame:[libraryView bounds]];
+	[libraryViewController recalculateKeyViewLoop];
 }
 - (void)setupDetailView
 {
@@ -257,6 +269,7 @@ static XspfMMainWindowController *sharedInstance = nil;
 	[detailViewController setRepresentedObject:controller];
 	[detailView addSubview:[detailViewController view]];
 	[[detailViewController view] setFrame:[detailView bounds]];
+	[detailViewController recalculateKeyViewLoop];
 }
 - (void)setupAccessorylView
 {
@@ -266,6 +279,7 @@ static XspfMMainWindowController *sharedInstance = nil;
 	[accessoryViewController setRepresentedObject:[appDelegate channel]];
 	[accessoryView addSubview:[accessoryViewController view]];
 	[[accessoryViewController view] setFrame:[accessoryView bounds]];
+//	[accessoryViewController recalculateKeyViewLoop];
 }
 #pragma mark#### NSWidnow Delegate ####
 /**

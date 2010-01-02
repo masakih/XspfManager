@@ -101,6 +101,7 @@
 	
 #define kRETURN_KEY	36
 #define kENTER_KEY	52
+#define kTAB_KEY	48
 	
 	unsigned short code = [theEvent keyCode];
 //	HMLog(HMLogLevelDebug, @"code -> %d", code);
@@ -112,8 +113,17 @@
 				return;
 			}
 			break;
+		case kTAB_KEY:
+			if(([theEvent modifierFlags] | NSShiftKeyMask) == NSShiftKeyMask) {
+				[[self window] selectPreviousKeyView:nil];
+			} else {
+				[[self window] selectNextKeyView:nil];
+			}
+			return;
+			break;
 	}
 	
+	HMLog(HMLogLevelDebug, @"enter %@", theEvent);
 	[super keyDown:theEvent];
 }
 

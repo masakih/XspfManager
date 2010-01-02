@@ -12,9 +12,17 @@
 @interface XspfMViewController : NSViewController
 {
 	IBOutlet NSResponder *initialFirstResponder;
+	
+	IBOutlet NSView *firstKeyView;
+	IBOutlet NSView *lastKeyView;
 }
 
 - (NSManagedObjectContext *)managedObjectContext;
+
+- (void)recalculateKeyViewLoop;
+- (NSView *)firstKeyView;
+- (NSView *)lastKeyView;
+- (void)setNextKeyView:(NSView *)view;
 
 // if you overwrite this method, you MUST call super's one.
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
