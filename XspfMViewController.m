@@ -51,4 +51,17 @@
 	return [[NSApp delegate] managedObjectContext];
 }
 
+- (void)recalculateKeyViewLoop {}
+- (NSView *)firstKeyView
+{
+	return firstKeyView;
+}
+- (NSView *)lastKeyView
+{
+	return lastKeyView ? lastKeyView : [self firstKeyView];
+}
+- (void)setNextKeyView:(NSView *)view
+{
+	[[self lastKeyView] setNextKeyView:view];
+}
 @end

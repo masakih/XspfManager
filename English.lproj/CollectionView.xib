@@ -77,7 +77,6 @@
 						</object>
 						<string key="NSFrame">{{1, 1}, {634, 465}}</string>
 						<reference key="NSSuperview" ref="703664969"/>
-						<reference key="NSNextKeyView" ref="577697930"/>
 						<reference key="NSDocView" ref="577697930"/>
 						<object class="NSColor" key="NSBGColor" id="944783703">
 							<int key="NSColorSpace">6</int>
@@ -112,7 +111,6 @@
 					</object>
 				</object>
 				<string key="NSFrameSize">{636, 467}</string>
-				<reference key="NSNextKeyView" ref="61212402"/>
 				<int key="NSsFlags">562</int>
 				<reference key="NSVScroller" ref="751228704"/>
 				<reference key="NSHScroller" ref="24313786"/>
@@ -1085,6 +1083,14 @@
 					</object>
 					<int key="connectionID">784</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">firstKeyView</string>
+						<reference key="source" ref="284594433"/>
+						<reference key="destination" ref="577697930"/>
+					</object>
+					<int key="connectionID">785</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -1469,7 +1475,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">784</int>
+			<int key="maxID">786</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1652,6 +1658,7 @@
 							<string>progressBar</string>
 							<string>progressMessage</string>
 							<string>progressPanel</string>
+							<string>searchField</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1665,8 +1672,17 @@
 							<string>NSProgressIndicator</string>
 							<string>NSTextField</string>
 							<string>NSWindow</string>
+							<string>NSSearchField</string>
 						</object>
 					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">XspfMMainWindowController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">XspfMMainWindowController</string>
+					<string key="superclassName">NSWindowController</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBUserSource</string>
 						<string key="minorKey"/>
@@ -1676,8 +1692,19 @@
 					<string key="className">XspfMViewController</string>
 					<string key="superclassName">NSViewController</string>
 					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">initialFirstResponder</string>
-						<string key="NS.object.0">NSResponder</string>
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSMutableArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>firstKeyView</string>
+							<string>initialFirstResponder</string>
+							<string>lastKeyView</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>NSView</string>
+							<string>NSResponder</string>
+							<string>NSView</string>
+						</object>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
