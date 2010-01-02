@@ -186,7 +186,7 @@ static XspfMMainWindowController *sharedInstance = nil;
 	[self setCurrentListViewType:typeCollectionView];
 	[(XspfMCollectionViewController *)listViewController collectionViewItemViewSmall:sender];
 }
-- (void)addSortByKey:(NSString *)key
+- (void)sortByKey:(NSString *)key
 {
 	NSMutableArray *sortDescs = [[controller sortDescriptors] mutableCopy];
 	NSSortDescriptor *sortDesc = nil;
@@ -201,7 +201,7 @@ static XspfMMainWindowController *sharedInstance = nil;
 	}
 	// remove same key.
 	if(!sortDesc) {
-		BOOL newAscemding = NO;
+		BOOL newAscending = NO;
 		NSSortDescriptor *foundDesc = nil;
 		for(id desc in sortDescs) {
 			if([key isEqualToString:[desc key]]) {
@@ -210,11 +210,11 @@ static XspfMMainWindowController *sharedInstance = nil;
 			}
 		}
 		if(foundDesc) {
-			newAscemding = [foundDesc ascending];
+			newAscending = [foundDesc ascending];
 			[sortDescs removeObject:foundDesc];
 		}
 		
-		sortDesc = [[[NSSortDescriptor alloc] initWithKey:key ascending:newAscemding] autorelease];
+		sortDesc = [[[NSSortDescriptor alloc] initWithKey:key ascending:newAscending] autorelease];
 	}
 	
 	[sortDescs insertObject:sortDesc atIndex:0];
@@ -225,31 +225,31 @@ static XspfMMainWindowController *sharedInstance = nil;
 }
 - (IBAction)sortByTitle:(id)sender
 {
-	[self addSortByKey:@"title"];
+	[self sortByKey:@"title"];
 }
 - (IBAction)sortByLastPlayDate:(id)sender
 {
-	[self addSortByKey:@"lastPlayDate"];
+	[self sortByKey:@"lastPlayDate"];
 }
 - (IBAction)sortByModificationDate:(id)sender
 {
-	[self addSortByKey:@"modificationDate"];
+	[self sortByKey:@"modificationDate"];
 }
 - (IBAction)sortByCreationDate:(id)sender
 {
-	[self addSortByKey:@"creationDate"];
+	[self sortByKey:@"creationDate"];
 }
 - (IBAction)sortByRegisterDate:(id)sender
 {
-	[self addSortByKey:@"registerDate"];
+	[self sortByKey:@"registerDate"];
 }
 - (IBAction)sortByRate:(id)sender
 {
-	[self addSortByKey:@"rating"];
+	[self sortByKey:@"rating"];
 }
 - (IBAction)sortByMovieNumber:(id)sender
 {
-	[self addSortByKey:@"movieNum"];
+	[self sortByKey:@"movieNum"];
 }
 - (IBAction)sortByLabel:(id)sender
 {
