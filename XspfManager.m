@@ -321,7 +321,7 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 
 -(void) watcher:(id<UKFileWatcher>)kq receivedNotification:(NSString*)notificationName forPath: (NSString*)filePath
 {
-	NSLog(@"UKKQueue notification. %@", notificationName);
+	HMLog(HMLogLevelDebug, @"UKKQueue notification. %@", notificationName);
 	if(![NSThread isMainThread]) {
 		NSLog(@"there is not main thread.");
 	}

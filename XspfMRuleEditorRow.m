@@ -160,7 +160,7 @@
 		[result setValue:rhs forKey:NSRuleEditorPredicateRightExpression];
 	}
 	
-	//	NSLog(@"predicate\tcriterion -> %@, value -> %@, row -> %d, result -> %@", predicateHints, displayValue, row, result);
+	//	HMLog(HMLogLevelDebug, @"predicate\tcriterion -> %@, value -> %@, row -> %d, result -> %@", predicateHints, displayValue, row, result);
 	
 	return result;
 }

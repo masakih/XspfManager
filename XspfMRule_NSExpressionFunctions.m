@@ -203,7 +203,7 @@
 }
 - (NSArray *)dateRangeFromVariable:(NSString *)date
 {
-	NSLog(@"In function argument is %@", date);
+	HMLog(HMLogLevelDebug, @"In function argument is %@", date);
 	
 	NSCalendar *aCalendar = [NSCalendar currentCalendar];
 	NSDate *now = [NSDate dateWithTimeIntervalSinceNow:0.0];
@@ -223,7 +223,7 @@
 	[comp setWeek:-1];
 	NSDate *startOfLastWeek = [aCalendar dateByAddingComponents:comp toDate:startOfToday options:0];
 	
-	NSLog(@"now -> %@\ntoday -> %@\nyesterday -> %@\nthisweek -> %@\nlastweek -> %@",
+	HMLog(HMLogLevelDebug, @"now -> %@\ntoday -> %@\nyesterday -> %@\nthisweek -> %@\nlastweek -> %@",
 		  now, startOfToday, startOfYesterday, startOfThisWeek, startOfLastWeek);
 	
 	id result = [NSArray arrayWithObjects:now, startOfToday, nil];

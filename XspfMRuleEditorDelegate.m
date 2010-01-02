@@ -135,7 +135,7 @@ static NSString *XspfMREDPredicateRowsKey = @"predicateRows";
 
 - (void)setPredicate:(id)predicate
 {
-	NSLog(@"predicate -> (%@) %@", NSStringFromClass([predicate class]), predicate);
+	HMLog(HMLogLevelDebug, @"predicate -> (%@) %@", NSStringFromClass([predicate class]), predicate);
 	[self resolvePredicate:predicate];
 	
 	id new = [XspfMRule ruleEditorRowsFromPredicate:predicate withRowTemplate:rowTemplate];
@@ -148,7 +148,7 @@ static NSString *XspfMREDPredicateRowsKey = @"predicateRows";
 }
 - (void)setPredicateRows:(id)p
 {
-//	NSLog(@"new -> %@", p);
+//	HMLog(HMLogLevelDebug, @"new -> %@", p);
 	[predicateRows release];
 	predicateRows = [p retain];
 }
@@ -171,7 +171,7 @@ numberOfChildrenForCriterion:(id)criterion
 		result = [criterion numberOfChildren];
 	}
 	
-	//	NSLog(@"numner\tcriterion -> %@, type -> %d, result -> %d", criterion, rowType, result);
+	//	HMLog(HMLogLevelDebug, @"numner\tcriterion -> %@, type -> %d, result -> %d", criterion, rowType, result);
 	
 	return result;
 }
@@ -193,7 +193,7 @@ numberOfChildrenForCriterion:(id)criterion
 		result = [criterion childAtIndex:index];
 	}
 	
-	//	NSLog(@"child\tindex -> %d, criterion -> %@, type -> %d, result -> %@", index, criterion, rowType, result);
+	//	HMLog(HMLogLevelDebug, @"child\tindex -> %d, criterion -> %@, type -> %d, result -> %@", index, criterion, rowType, result);
 	
 	return result;
 }
@@ -209,7 +209,7 @@ displayValueForCriterion:(id)criterion
 		result = [criterion displayValueForRuleEditor:editor inRow:row];
 	}
 		
-	//	NSLog(@"display\tcriterion -> %@, row -> %d, result -> %@", criterion, row, result);
+	//	HMLog(HMLogLevelDebug, @"display\tcriterion -> %@, row -> %d, result -> %@", criterion, row, result);
 	
 	return result;
 }
@@ -221,9 +221,9 @@ displayValueForCriterion:(id)criterion
 	id result = nil;
 	
 	result = [criterion predicatePartsWithDisplayValue:displayValue forRuleEditor:editor inRow:row];
-//	NSLog(@"predicate\tresult -> %@", result);
+//	HMLog(HMLogLevelDebug, @"predicate\tresult -> %@", result);
 	
-	//	NSLog(@"predicate\tcriterion -> %@, value -> %@, row -> %d, result -> %@", criterion, displayValue, row, result);
+	//	HMLog(HMLogLevelDebug, @"predicate\tcriterion -> %@, value -> %@, row -> %d, result -> %@", criterion, displayValue, row, result);
 	
 	return result;
 }

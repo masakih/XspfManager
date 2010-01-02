@@ -381,7 +381,7 @@ static NSString *const XspfMREDSubrowsKey = @"subrows";
 		}
 		
 	} else {
-		NSLog(@"???predicate class is %@", NSStringFromClass([predicate class]));
+		HMLog(HMLogLevelDebug, @"???predicate class is %@", NSStringFromClass([predicate class]));
 	}
 	
 	return [NSArray array];

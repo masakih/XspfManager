@@ -297,9 +297,13 @@ static XspfMMainWindowController *sharedInstance = nil;
 #pragma mark#### Test ####
 - (IBAction)test01:(id)sender
 {
-	id moc = [appDelegate managedObjectContext];
+	HMLog(HMLogLevelDebug, @"HMLogLevelDebug");
+	HMLog(HMLogLevelNotice, @"HMLogLevelNotice");
+	HMLog(HMLogLevelCaution, @"HMLogLevelCaution");
+	HMLog(HMLogLevelAlert, @"HMLogLevelAlert");
+	HMLog(HMLogLevelError, @"HMLogLevelError");
 	
-	NSLog(@"Updated count -> %d", [[moc updatedObjects] count]);
+	HMLog(HMLogLevelDebug, @"HMLogLevelDebug -> %@", @"DEBUG");
 }
 - (IBAction)test02:(id)sender
 {

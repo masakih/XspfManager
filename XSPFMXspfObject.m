@@ -9,7 +9,7 @@
 #import "XSPFMXspfObject.h"
 #import "XspfMThumbnailData.h"
 
-#import "XspfManager_AppDelegate.h"
+#import "XspfManager.h"
 #import "XspfMCheckFileModifiedRequest.h"
 #import "XspfMMovieLoadRequest.h"
 #import "XspfLoadThumbnailRequest.h"
