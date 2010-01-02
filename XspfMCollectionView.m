@@ -123,7 +123,6 @@
 			break;
 	}
 	
-	HMLog(HMLogLevelDebug, @"enter %@", theEvent);
 	[super keyDown:theEvent];
 }
 

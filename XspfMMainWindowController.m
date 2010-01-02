@@ -172,6 +172,90 @@ static XspfMMainWindowController *sharedInstance = nil;
 	[[NSWorkspace sharedWorkspace] openFile:rep.filePath withApplication:@"XspfQT"];
 	rep.lastPlayDate = [NSDate dateWithTimeIntervalSinceNow:0.0];
 }
+- (IBAction)switchListView:(id)sender
+{
+	[self setCurrentListViewType:typeTableView];
+}
+- (IBAction)switchRegularIconView:(id)sender
+{
+	[self setCurrentListViewType:typeCollectionView];
+	[(XspfMCollectionViewController *)listViewController collectionViewItemViewRegular:sender];
+}
+- (IBAction)switchSmallIconView:(id)sender
+{
+	[self setCurrentListViewType:typeCollectionView];
+	[(XspfMCollectionViewController *)listViewController collectionViewItemViewSmall:sender];
+}
+- (void)addSortByKey:(NSString *)key
+{
+	NSMutableArray *sortDescs = [[controller sortDescriptors] mutableCopy];
+	NSSortDescriptor *sortDesc = nil;
+	
+	// key is descs first key.
+	if([sortDescs count] > 1) {
+		NSSortDescriptor *firstDesc = [sortDescs objectAtIndex:0];
+		if([key isEqualToString:[firstDesc key]]) {
+			sortDesc = [[[NSSortDescriptor alloc] initWithKey:key ascending:![firstDesc ascending]] autorelease];
+			[sortDescs removeObject:firstDesc];
+		}
+	}
+	// remove same key.
+	if(!sortDesc) {
+		BOOL newAscemding = NO;
+		NSSortDescriptor *foundDesc = nil;
+		for(id desc in sortDescs) {
+			if([key isEqualToString:[desc key]]) {
+				foundDesc = desc;
+				break;
+			}
+		}
+		if(foundDesc) {
+			newAscemding = [foundDesc ascending];
+			[sortDescs removeObject:foundDesc];
+		}
+		
+		sortDesc = [[[NSSortDescriptor alloc] initWithKey:key ascending:newAscemding] autorelease];
+	}
+	
+	[sortDescs insertObject:sortDesc atIndex:0];
+	
+	NSArray *selectedObjects = [controller selectedObjects];
+	[controller setSortDescriptors:sortDescs];
+	[controller setSelectedObjects:selectedObjects];
+}
+- (IBAction)sortByTitle:(id)sender
+{
+	[self addSortByKey:@"title"];
+}
+- (IBAction)sortByLastPlayDate:(id)sender
+{
+	[self addSortByKey:@"lastPlayDate"];
+}
+- (IBAction)sortByModificationDate:(id)sender
+{
+	[self addSortByKey:@"modificationDate"];
+}
+- (IBAction)sortByCreationDate:(id)sender
+{
+	[self addSortByKey:@"creationDate"];
+}
+- (IBAction)sortByRegisterDate:(id)sender
+{
+	[self addSortByKey:@"registerDate"];
+}
+- (IBAction)sortByRate:(id)sender
+{
+	[self addSortByKey:@"rating"];
+}
+- (IBAction)sortByMovieNumber:(id)sender
+{
+	[self addSortByKey:@"movieNum"];
+}
+- (IBAction)sortByLabel:(id)sender
+{
+	[self doesNotRecognizeSelector:_cmd];
+}
+
 - (IBAction)add:(id)sender
 {
 	NSOpenPanel *panel = [NSOpenPanel openPanel];
@@ -188,14 +272,6 @@ static XspfMMainWindowController *sharedInstance = nil;
 				   didEndSelector:@selector(endOpenPanel:::)
 					  contextInfo:NULL];
 }
-- (IBAction)remove:(id)sender
-{
-	XSPFMXspfObject *obj = [controller valueForKeyPath:@"selection.self"];
-	[[UKKQueue sharedFileWatcher] removePathFromQueue:obj.filePath];
-	[[self managedObjectContext] deleteObject:obj];
-}
-
-
 - (void)endOpenPanel:(NSOpenPanel *)panel :(NSInteger)returnCode :(void *)context
 {
 	[panel orderOut:nil];
@@ -206,6 +282,44 @@ static XspfMMainWindowController *sharedInstance = nil;
 	if([URLs count] == 0) return;
 	
 	[appDelegate registerURLs:URLs];
+}
+- (IBAction)remove:(id)sender
+{
+	XSPFMXspfObject *obj = [controller valueForKeyPath:@"selection.self"];
+	[[UKKQueue sharedFileWatcher] removePathFromQueue:obj.filePath];
+	[[self managedObjectContext] deleteObject:obj];
+}
+
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem
+{
+	BOOL enabled = YES;
+	SEL action = [menuItem action];
+	
+	if(action == @selector(switchListView:)) {
+		if(currentListViewType == typeTableView) {
+			[menuItem setState:NSOnState];
+		} else {
+			[menuItem setState:NSOffState];
+		}
+	} else if(action == @selector(switchRegularIconView:)) {
+		if(currentListViewType == typeCollectionView 
+		   && [(XspfMCollectionViewController*)listViewController collectionItemType] == typeXspfMRegularItem) {
+			[menuItem setState:NSOnState];
+		} else {
+			[menuItem setState:NSOffState];
+		}
+	} else if(action == @selector(switchSmallIconView:)) {
+		if(currentListViewType == typeCollectionView
+			&& [(XspfMCollectionViewController*)listViewController collectionItemType] == typeXSpfMSmallItem) {
+			[menuItem setState:NSOnState];
+		} else {
+			[menuItem setState:NSOffState];
+		}
+	} else if(action == @selector(sortByLabel:)) {
+		enabled = NO;
+	}
+	
+	return enabled;
 }
 
 #pragma mark#### Other methods ####
