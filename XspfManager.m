@@ -82,7 +82,7 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 	
 	persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: [self managedObjectModel]];
 	if(!persistentStoreCoordinator) {
-		NSLog(@"Could not create store coordinator");
+		HMLog(HMLogLevelError, @"Could not create store coordinator");
 		exit(-1);
 	}
 	
@@ -90,7 +90,7 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 	
 	if(![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:options error:&error]){
 		[[NSApplication sharedApplication] presentError:error];
-		NSLog(@"Error -> %@", [error localizedDescription]);
+		HMLog(HMLogLevelError, @"Error -> %@", [error localizedDescription]);
 	}
 	
 	return persistentStoreCoordinator;
@@ -233,7 +233,7 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 	[fetch setPredicate:aPredicate];
 	num = [moc countForFetchRequest:fetch error:&error];
 	if(error) {
-		NSLog(@"%@", [error localizedDescription]);
+		HMLog(HMLogLevelError, @"%@", [error localizedDescription]);
 		return NO;
 	}
 	
@@ -301,9 +301,9 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 	NSArray *array = [moc executeFetchRequest:fetch error:&error];
 	if(!array) {
 		if(error) {
-			NSLog(@"could not fetch : %@", [error localizedDescription]);
+			HMLog(HMLogLevelError, @"could not fetch : %@", [error localizedDescription]);
 		}
-		NSLog(@"Could not fetch.");
+		HMLog(HMLogLevelError, @"Could not fetch.");
 		return;
 	}
 	
@@ -323,7 +323,7 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 {
 	HMLog(HMLogLevelDebug, @"UKKQueue notification. %@", notificationName);
 	if(![NSThread isMainThread]) {
-		NSLog(@"there is not main thread.");
+		HMLog(HMLogLevelError, @"there is not main thread.");
 	}
 	
 	NSString *fileURL = [[NSURL fileURLWithPath:filePath] absoluteString];
@@ -338,24 +338,24 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 	NSArray *array = [[self managedObjectContext] executeFetchRequest:fetch error:&error];
 	if(!array) {
 		if(error) {
-			NSLog(@"%@", [error localizedDescription]);
+			HMLog(HMLogLevelError, @"%@", [error localizedDescription]);
 		}
-		NSLog(@"Could not fetch.");
+		HMLog(HMLogLevelError, @"Could not fetch.");
 		return;
 	}
 	if([array count] == 0) {
-		NSLog(@"Target file is not found.");
+		HMLog(HMLogLevelError, @"Target file is not found.");
 		return;
 	}
 	if([array count] > 1) {
-		NSLog(@"Target found too many!!! (%d).", [array count]);
+		HMLog(HMLogLevelError, @"Target found too many!!! (%d).", [array count]);
 	}
 	
 	XSPFMXspfObject *obj = [array objectAtIndex:0];
 	NSString *resolvedPath = [obj.alias resolvedPath];
 	
 	if([UKFileWatcherRenameNotification isEqualToString:notificationName]) {
-		NSLog(@"File(%@) renamed", filePath);
+		HMLog(HMLogLevelNotice, @"File(%@) renamed", filePath);
 		obj.url = [NSURL fileURLWithPath:resolvedPath];
 		[[UKKQueue sharedFileWatcher] removePathFromQueue:filePath];
 		[[UKKQueue sharedFileWatcher] addPathToQueue:obj.filePath];
@@ -365,7 +365,7 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 	NSFileManager *fm = [NSFileManager defaultManager];
 	if(!resolvedPath) {
 		if(![fm fileExistsAtPath:filePath]) {
-			NSLog(@"object already deleted. (%@)", filePath);
+			HMLog(HMLogLevelNotice, @"object already deleted. (%@)", filePath);
 			[[UKKQueue sharedFileWatcher] removePathFromQueue:filePath];
 			obj.deleted = YES;
 			return;

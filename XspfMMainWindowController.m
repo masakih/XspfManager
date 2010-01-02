@@ -309,7 +309,7 @@ static XspfMMainWindowController *sharedInstance = nil;
 {
 	NSResponder *responder = [[self window] firstResponder];
 	while(responder) {
-		NSLog(@"Responder -> %@", responder);
+		HMLog(HMLogLevelDebug, @"Responder -> %@", responder);
 		responder = [responder nextResponder];
 	}
 }
@@ -318,12 +318,12 @@ static XspfMMainWindowController *sharedInstance = nil;
 	id keyView = [[self window] firstResponder];
 	NSView *firstKeyView = keyView;
 	while(keyView) {
-		NSLog(@"Keyview -> %@", keyView);
+		HMLog(HMLogLevelDebug, @"Keyview -> %@", keyView);
 		keyView = [keyView nextKeyView];
 		if(keyView == firstKeyView) break;
 	}
 	
-	NSLog(@"Valid next view -> %@", [firstKeyView nextValidKeyView]);
+	HMLog(HMLogLevelDebug, @"Valid next view -> %@", [firstKeyView nextValidKeyView]);
 }
 @end
 
@@ -331,7 +331,7 @@ static XspfMMainWindowController *sharedInstance = nil;
 
 - (BOOL)didRegisteredURL:(NSURL *)url
 {
-	NSLog(@"-[%@ %@] is Deprecated.", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+	HMLog(HMLogLevelError, @"-[%@ %@] is Deprecated.", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
 	
 	NSManagedObjectContext *moc = [appDelegate managedObjectContext];
 	NSError *error = nil;
@@ -344,7 +344,7 @@ static XspfMMainWindowController *sharedInstance = nil;
 	[fetch setPredicate:aPredicate];
 	num = [moc countForFetchRequest:fetch error:&error];
 	if(error) {
-		NSLog(@"%@", [error localizedDescription]);
+		HMLog(HMLogLevelError, @"%@", [error localizedDescription]);
 		return NO;
 	}
 	
@@ -353,7 +353,7 @@ static XspfMMainWindowController *sharedInstance = nil;
 #pragma mark#### UKKQUEUE ####
 - (void)registerToUKKQueue
 {
-	NSLog(@"-[%@ %@] is Deprecated.", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+	HMLog(HMLogLevelError, @"-[%@ %@] is Deprecated.", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
 	
 	NSManagedObjectContext *moc = [[NSApp delegate] managedObjectContext];
 	NSError *error = nil;
@@ -363,9 +363,9 @@ static XspfMMainWindowController *sharedInstance = nil;
 	NSArray *array = [moc executeFetchRequest:fetch error:&error];
 	if(!array) {
 		if(error) {
-			NSLog(@"could not fetch : %@", [error localizedDescription]);
+			HMLog(HMLogLevelError, @"could not fetch : %@", [error localizedDescription]);
 		}
-		NSLog(@"Could not fetch.");
+		HMLog(HMLogLevelError, @"Could not fetch.");
 		return;
 	}
 	
@@ -382,7 +382,7 @@ static XspfMMainWindowController *sharedInstance = nil;
 }
 - (XSPFMXspfObject *)registerWithURL:(NSURL *)url
 {
-	NSLog(@"-[%@ %@] is Deprecated.", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+	HMLog(HMLogLevelError, @"-[%@ %@] is Deprecated.", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
 	
 	if([appDelegate didRegisteredURL:url]) return nil;
 	
@@ -409,7 +409,7 @@ static XspfMMainWindowController *sharedInstance = nil;
 }
 - (void)registerFilePaths:(NSArray *)filePaths
 {
-	NSLog(@"-[%@ %@] is Deprecated.", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+	HMLog(HMLogLevelError, @"-[%@ %@] is Deprecated.", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
 	
 	NSMutableArray *array = [NSMutableArray array];
 	
@@ -421,7 +421,7 @@ static XspfMMainWindowController *sharedInstance = nil;
 }
 - (void)registerURLs:(NSArray *)URLs
 {
-	NSLog(@"-[%@ %@] is Deprecated.", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+	HMLog(HMLogLevelError, @"-[%@ %@] is Deprecated.", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
 	
 	[progressBar setUsesThreadedAnimation:YES];
 	[progressBar startAnimation:self];
@@ -449,10 +449,10 @@ static XspfMMainWindowController *sharedInstance = nil;
 }
 -(void) watcher:(id<UKFileWatcher>)kq receivedNotification:(NSString*)notificationName forPath: (NSString*)filePath
 {
-	NSLog(@"-[%@ %@] is Deprecated.", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+	HMLog(HMLogLevelError, @"-[%@ %@] is Deprecated.", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
 	
 	if(![NSThread isMainThread]) {
-		NSLog(@"there is not main thread.");
+		HMLog(HMLogLevelError, @"there is not main thread.");
 	}
 	
 	NSString *fileURL = [[NSURL fileURLWithPath:filePath] absoluteString];
@@ -467,17 +467,17 @@ static XspfMMainWindowController *sharedInstance = nil;
 	NSArray *array = [[self managedObjectContext] executeFetchRequest:fetch error:&error];
 	if(!array) {
 		if(error) {
-			NSLog(@"%@", [error localizedDescription]);
+			HMLog(HMLogLevelError, @"%@", [error localizedDescription]);
 		}
-		NSLog(@"Could not fetch.");
+		HMLog(HMLogLevelError, @"Could not fetch.");
 		return;
 	}
 	if([array count] == 0) {
-		NSLog(@"Target file is not found.");
+		HMLog(HMLogLevelError, @"Target file is not found.");
 		return;
 	}
 	if([array count] > 1) {
-		NSLog(@"Target found too many!!! (%d).", [array count]);
+		HMLog(HMLogLevelError, @"Target found too many!!! (%d).", [array count]);
 	}
 	
 	XSPFMXspfObject *obj = [array objectAtIndex:0];
