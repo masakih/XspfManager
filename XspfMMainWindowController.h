@@ -52,6 +52,19 @@ typedef enum {
 
 - (IBAction)openXspf:(id)sender;
 
+- (IBAction)switchListView:(id)sender;
+- (IBAction)switchRegularIconView:(id)sender;
+- (IBAction)switchSmallIconView:(id)sender;
+
+- (IBAction)sortByTitle:(id)sender;
+- (IBAction)sortByLastPlayDate:(id)sender;
+- (IBAction)sortByModificationDate:(id)sender;
+- (IBAction)sortByCreationDate:(id)sender;
+- (IBAction)sortByRegisterDate:(id)sender;
+- (IBAction)sortByRate:(id)sender;
+- (IBAction)sortByMovieNumber:(id)sender;
+- (IBAction)sortByLabel:(id)sender;
+
 - (IBAction)add:(id)sender;
 - (IBAction)remove:(id)sender;
 

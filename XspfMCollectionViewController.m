@@ -27,13 +27,14 @@
 	[scrollView setVerticalLineScroll:[view frame].size.height];
 }
 
-- (void)setCollectionItem:(NSCollectionViewItem *)newItem
+- (void)setCollectionItem:(XspfMCollectionViewItem *)newItem
 {
 	[collectionView setItemPrototype:newItem];
 	NSSize viewSize = [[newItem view] frame].size;
 	[collectionView setMinItemSize:viewSize];
 	[collectionView setMaxItemSize:viewSize];
 	[scrollView setVerticalLineScroll:viewSize.height];
+	collectionViewItem = newItem;
 }
 - (IBAction)collectionViewItemViewRegular:(id)sender
 {
@@ -42,6 +43,14 @@
 - (IBAction)collectionViewItemViewSmall:(id)sender
 {
 	[self setCollectionItem:smallItem];
+}
+
+- (XspfMCollectionItemType)collectionItemType
+{
+	if(collectionViewItem == regularItem) return typeXspfMRegularItem;
+	if(collectionViewItem == smallItem) return typeXSpfMSmallItem;
+	
+	return typeXspfMUnknownItem;
 }
 
 #pragma mark#### XspfMCollectionView Delegate ####

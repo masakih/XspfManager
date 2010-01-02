@@ -15,6 +15,13 @@
 
 @class XspfMCollectionViewItem;
 
+typedef enum _XspfMCollectionItemType
+{
+	typeXspfMUnknownItem,
+	typeXspfMRegularItem,
+	typeXSpfMSmallItem,
+} XspfMCollectionItemType;
+
 @interface XspfMCollectionViewController : XspfMViewController <XspfMCollectionView_Delegate>
 {
 	IBOutlet NSScrollView *scrollView;
@@ -27,5 +34,7 @@
 
 - (IBAction)collectionViewItemViewRegular:(id)sender;
 - (IBAction)collectionViewItemViewSmall:(id)sender;
+
+- (XspfMCollectionItemType)collectionItemType;
 
 @end
