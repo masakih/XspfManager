@@ -48,7 +48,7 @@
 		F47C0719109F1DDD00F5991C /* XSPFMInfomationObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C0718109F1DDD00F5991C /* XSPFMInfomationObject.m */; };
 		F47C0750109FAFB000F5991C /* FamilyName.txt in Resources */ = {isa = PBXBuildFile; fileRef = F47C074F109FAFB000F5991C /* FamilyName.txt */; };
 		F480CD6710AF8A4300AC365B /* XspfMTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F480CD6610AF8A4300AC365B /* XspfMTableView.m */; };
-		F480CEE510AFDAB400AC365B /* NSApplication.icns in Resources */ = {isa = PBXBuildFile; fileRef = F480CEE410AFDAB300AC365B /* NSApplication.icns */; };
+		F480CEE510AFDAB400AC365B /* NSApplicationIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = F480CEE410AFDAB300AC365B /* NSApplicationIcon.icns */; };
 		F480CF9F10B03A0D00AC365B /* AccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F480CF9D10B03A0D00AC365B /* AccessoryView.xib */; };
 		F481B3F910F08DE200B7EA4F /* XspfMSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = F481B3F810F08DE200B7EA4F /* XspfMSplitView.m */; };
 		F481B42110F0993B00B7EA4F /* draggingArea.png in Resources */ = {isa = PBXBuildFile; fileRef = F481B42010F0993B00B7EA4F /* draggingArea.png */; };
@@ -169,7 +169,7 @@
 		F47C096510A049DD00F5991C /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		F480CD6510AF8A4300AC365B /* XspfMTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMTableView.h; sourceTree = "<group>"; };
 		F480CD6610AF8A4300AC365B /* XspfMTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMTableView.m; sourceTree = "<group>"; };
-		F480CEE410AFDAB300AC365B /* NSApplication.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = NSApplication.icns; sourceTree = "<group>"; };
+		F480CEE410AFDAB300AC365B /* NSApplicationIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = NSApplicationIcon.icns; sourceTree = "<group>"; };
 		F480CF9E10B03A0D00AC365B /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/AccessoryView.xib; sourceTree = "<group>"; };
 		F481B3F710F08DE200B7EA4F /* XspfMSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMSplitView.h; sourceTree = "<group>"; };
 		F481B3F810F08DE200B7EA4F /* XspfMSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMSplitView.m; sourceTree = "<group>"; };
@@ -298,7 +298,7 @@
 			children = (
 				F45AB02110EE3675005BE9C1 /* HMUtilities.h */,
 				F45AB02210EE3675005BE9C1 /* HMUtilities.m */,
-				F480CEE410AFDAB300AC365B /* NSApplication.icns */,
+				F480CEE410AFDAB300AC365B /* NSApplicationIcon.icns */,
 				F40B341D10B6BDEE00896716 /* UKKQueue */,
 				F4343DE610AD76F70090F57B /* HMExtensions */,
 				F47C06D7109F027500F5991C /* HMXSPFcomponent */,
@@ -508,7 +508,7 @@
 				F49BD01010A47781007136CE /* ListView.xib in Resources */,
 				F4CE4CD310A6A13E004AC4FA /* LibraryView.xib in Resources */,
 				F4CE4E8010A706A8004AC4FA /* DetailView.xib in Resources */,
-				F480CEE510AFDAB400AC365B /* NSApplication.icns in Resources */,
+				F480CEE510AFDAB400AC365B /* NSApplicationIcon.icns in Resources */,
 				F480CF9F10B03A0D00AC365B /* AccessoryView.xib in Resources */,
 				F40B342110B6BE2000896716 /* UKKQueue Readme.txt in Resources */,
 				F4BB59BB10BC0C3700EE50B7 /* LibraryPredicate.strings in Resources */,
