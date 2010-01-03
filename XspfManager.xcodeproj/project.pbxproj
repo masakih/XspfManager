@@ -53,6 +53,7 @@
 		F481B42110F0993B00B7EA4F /* draggingArea.png in Resources */ = {isa = PBXBuildFile; fileRef = F481B42010F0993B00B7EA4F /* draggingArea.png */; };
 		F481B42510F09A6E00B7EA4F /* XspfMDragControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F481B42410F09A6E00B7EA4F /* XspfMDragControl.m */; };
 		F481B6F110F0F50300B7EA4F /* XspfMMainModel.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = F481B6F010F0F50200B7EA4F /* XspfMMainModel.xcdatamodel */; };
+		F481B70A10F0F80700B7EA4F /* XspfMLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F481B70910F0F80700B7EA4F /* XspfMLabelCell.m */; };
 		F499881910DDAD3800AAC6D6 /* XspfMRule_NSExpressionFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = F499881810DDAD3800AAC6D6 /* XspfMRule_NSExpressionFunctions.m */; };
 		F499886B10DDFB3E00AAC6D6 /* XspfMThreadSpleepRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F499886A10DDFB3E00AAC6D6 /* XspfMThreadSpleepRequest.m */; };
 		F4998DA110E6C7CB00AAC6D6 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4998DA010E6C7CB00AAC6D6 /* MainWindow.xib */; };
@@ -176,6 +177,8 @@
 		F481B42310F09A6E00B7EA4F /* XspfMDragControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMDragControl.h; sourceTree = "<group>"; };
 		F481B42410F09A6E00B7EA4F /* XspfMDragControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMDragControl.m; sourceTree = "<group>"; };
 		F481B6F010F0F50200B7EA4F /* XspfMMainModel.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = XspfMMainModel.xcdatamodel; sourceTree = "<group>"; };
+		F481B70810F0F80700B7EA4F /* XspfMLabelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMLabelCell.h; sourceTree = "<group>"; };
+		F481B70910F0F80700B7EA4F /* XspfMLabelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMLabelCell.m; sourceTree = "<group>"; };
 		F499881810DDAD3800AAC6D6 /* XspfMRule_NSExpressionFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMRule_NSExpressionFunctions.m; sourceTree = "<group>"; };
 		F499886910DDFB3E00AAC6D6 /* XspfMThreadSpleepRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMThreadSpleepRequest.h; sourceTree = "<group>"; };
 		F499886A10DDFB3E00AAC6D6 /* XspfMThreadSpleepRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMThreadSpleepRequest.m; sourceTree = "<group>"; };
@@ -262,6 +265,8 @@
 				F481B3F810F08DE200B7EA4F /* XspfMSplitView.m */,
 				F481B42310F09A6E00B7EA4F /* XspfMDragControl.h */,
 				F481B42410F09A6E00B7EA4F /* XspfMDragControl.m */,
+				F481B70810F0F80700B7EA4F /* XspfMLabelCell.h */,
+				F481B70910F0F80700B7EA4F /* XspfMLabelCell.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -574,6 +579,7 @@
 				F481B3F910F08DE200B7EA4F /* XspfMSplitView.m in Sources */,
 				F481B42510F09A6E00B7EA4F /* XspfMDragControl.m in Sources */,
 				F481B6F110F0F50300B7EA4F /* XspfMMainModel.xcdatamodel in Sources */,
+				F481B70A10F0F80700B7EA4F /* XspfMLabelCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
