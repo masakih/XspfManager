@@ -8,8 +8,7 @@
 
 #import "XspfMMainWindowController.h"
 
-#import "XspfMMovieLoadRequest.h"
-//#import "XspfMCheckFileModifiedRequest.h"
+#import "XSPFMXspfObject.h"
 
 #import "XspfMViewController.h"
 #import "XspfMLibraryViewController.h"
@@ -19,7 +18,6 @@
 
 #import "XspfMDragControl.h"
 
-#import "UKKQueue.h"
 
 @interface XspfMMainWindowController(HMPrivate)
 - (void)setupXspfLists;
@@ -28,6 +26,8 @@
 - (void)changeViewType:(XspfMViewType)newType;
 - (void)setCurrentListViewType:(XspfMViewType)newType;
 - (void)recalculateKeyViewLoop;
+
+- (void)removeSelectedItem;
 @end
 
 
@@ -122,10 +122,6 @@ static XspfMMainWindowController *sharedInstance = nil;
 	[self recalculateKeyViewLoop];
 }
 #pragma mark#### KVC ####
-- (NSManagedObjectContext *)managedObjectContext
-{
-	return [appDelegate managedObjectContext];
-}
 - (NSArrayController *)arrayController
 {
 	return controller;
@@ -271,9 +267,7 @@ static XspfMMainWindowController *sharedInstance = nil;
 }
 - (IBAction)remove:(id)sender
 {
-	XSPFMXspfObject *obj = [controller valueForKeyPath:@"selection.self"];
-	[[UKKQueue sharedFileWatcher] removePathFromQueue:obj.filePath];
-	[[self managedObjectContext] deleteObject:obj];
+	[self removeSelectedItem];
 }
 
 - (IBAction)newPredicate:(id)sender
@@ -314,6 +308,22 @@ static XspfMMainWindowController *sharedInstance = nil;
 }
 
 #pragma mark#### Other methods ####
+- (void)removeSelectedItem
+{
+	XSPFMXspfObject *obj = [controller valueForKeyPath:@"selection.self"];
+	
+	NSBeginInformationalAlertSheet(nil, nil, @"Cancel", nil, [self window],
+								   self, @selector(didEndAskDelete:::), Nil, obj,
+								   NSLocalizedString(@"Do you really delete item  \"%@\" from list?", @"Do you really delete item  \"%@\" from list?"),
+								   obj.title);
+}
+- (void)didEndAskDelete:(NSWindow *)sheet :(NSInteger)returnCode :(void *)contextInfo
+{
+	if(returnCode == NSCancelButton) return;
+	
+	[appDelegate removeObject:contextInfo];
+}
+
 - (void)recalculateKeyViewLoop
 {
 	[searchField setNextKeyView:[libraryViewController firstKeyView]];
