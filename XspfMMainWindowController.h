@@ -50,9 +50,6 @@ typedef enum {
 	IBOutlet NSSearchField *searchField;
 }
 
-//- (void)registerFilePaths:(NSArray *)filePaths;
-//- (void)registerURLs:(NSArray *)URLs;
-
 - (IBAction)openXspf:(id)sender;
 
 - (IBAction)switchListView:(id)sender;
