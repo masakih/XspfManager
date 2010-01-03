@@ -28,6 +28,8 @@ typedef enum {
 	IBOutlet NSTextField *progressMessage;
 	IBOutlet NSProgressIndicator *progressBar;
 	
+	IBOutlet NSSplitView *splitView;
+	
 	IBOutlet NSView *listView;
 	XspfMViewController *listViewController;
 	XspfMViewType currentListViewType;

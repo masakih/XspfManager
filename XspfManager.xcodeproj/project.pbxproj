@@ -50,6 +50,9 @@
 		F480CD6710AF8A4300AC365B /* XspfMTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F480CD6610AF8A4300AC365B /* XspfMTableView.m */; };
 		F480CEE510AFDAB400AC365B /* NSApplication.icns in Resources */ = {isa = PBXBuildFile; fileRef = F480CEE410AFDAB300AC365B /* NSApplication.icns */; };
 		F480CF9F10B03A0D00AC365B /* AccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F480CF9D10B03A0D00AC365B /* AccessoryView.xib */; };
+		F481B3F910F08DE200B7EA4F /* XspfMSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = F481B3F810F08DE200B7EA4F /* XspfMSplitView.m */; };
+		F481B42110F0993B00B7EA4F /* draggingArea.png in Resources */ = {isa = PBXBuildFile; fileRef = F481B42010F0993B00B7EA4F /* draggingArea.png */; };
+		F481B42510F09A6E00B7EA4F /* XspfMDragControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F481B42410F09A6E00B7EA4F /* XspfMDragControl.m */; };
 		F499881910DDAD3800AAC6D6 /* XspfMRule_NSExpressionFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = F499881810DDAD3800AAC6D6 /* XspfMRule_NSExpressionFunctions.m */; };
 		F499886B10DDFB3E00AAC6D6 /* XspfMThreadSpleepRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F499886A10DDFB3E00AAC6D6 /* XspfMThreadSpleepRequest.m */; };
 		F4998DA110E6C7CB00AAC6D6 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4998DA010E6C7CB00AAC6D6 /* MainWindow.xib */; };
@@ -168,6 +171,11 @@
 		F480CD6610AF8A4300AC365B /* XspfMTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMTableView.m; sourceTree = "<group>"; };
 		F480CEE410AFDAB300AC365B /* NSApplication.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = NSApplication.icns; sourceTree = "<group>"; };
 		F480CF9E10B03A0D00AC365B /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/AccessoryView.xib; sourceTree = "<group>"; };
+		F481B3F710F08DE200B7EA4F /* XspfMSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMSplitView.h; sourceTree = "<group>"; };
+		F481B3F810F08DE200B7EA4F /* XspfMSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMSplitView.m; sourceTree = "<group>"; };
+		F481B42010F0993B00B7EA4F /* draggingArea.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = draggingArea.png; sourceTree = "<group>"; };
+		F481B42310F09A6E00B7EA4F /* XspfMDragControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMDragControl.h; sourceTree = "<group>"; };
+		F481B42410F09A6E00B7EA4F /* XspfMDragControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMDragControl.m; sourceTree = "<group>"; };
 		F499881810DDAD3800AAC6D6 /* XspfMRule_NSExpressionFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMRule_NSExpressionFunctions.m; sourceTree = "<group>"; };
 		F499886910DDFB3E00AAC6D6 /* XspfMThreadSpleepRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMThreadSpleepRequest.h; sourceTree = "<group>"; };
 		F499886A10DDFB3E00AAC6D6 /* XspfMThreadSpleepRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMThreadSpleepRequest.m; sourceTree = "<group>"; };
@@ -250,6 +258,10 @@
 				F499CBCD10DA73620053923E /* XspfMRule_RuleBuilder.m */,
 				F499881810DDAD3800AAC6D6 /* XspfMRule_NSExpressionFunctions.m */,
 				F499CBE710DA7A960053923E /* XspfMRule_private.h */,
+				F481B3F710F08DE200B7EA4F /* XspfMSplitView.h */,
+				F481B3F810F08DE200B7EA4F /* XspfMSplitView.m */,
+				F481B42310F09A6E00B7EA4F /* XspfMDragControl.h */,
+				F481B42410F09A6E00B7EA4F /* XspfMDragControl.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -314,6 +326,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F481B42010F0993B00B7EA4F /* draggingArea.png */,
 				F4D0E98510C5484000B642D0 /* LibraryRowTemplate.plist */,
 				F4BB59BA10BC0C3700EE50B7 /* LibraryPredicate.strings */,
 				8D1107310486CEB800E47090 /* Info.plist */,
@@ -500,6 +513,7 @@
 				F40B342110B6BE2000896716 /* UKKQueue Readme.txt in Resources */,
 				F4BB59BB10BC0C3700EE50B7 /* LibraryPredicate.strings in Resources */,
 				F4D0E98710C5484000B642D0 /* LibraryRowTemplate.plist in Resources */,
+				F481B42110F0993B00B7EA4F /* draggingArea.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -558,6 +572,8 @@
 				F499881910DDAD3800AAC6D6 /* XspfMRule_NSExpressionFunctions.m in Sources */,
 				F499886B10DDFB3E00AAC6D6 /* XspfMThreadSpleepRequest.m in Sources */,
 				F45AB02310EE3675005BE9C1 /* HMUtilities.m in Sources */,
+				F481B3F910F08DE200B7EA4F /* XspfMSplitView.m in Sources */,
+				F481B42510F09A6E00B7EA4F /* XspfMDragControl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -17,6 +17,8 @@
 #import "XspfMListViewController.h"
 #import "XspfMDetailViewController.h"
 
+#import "XspfMDragControl.h"
+
 #import "UKKQueue.h"
 #import "NSPathUtilities-XspfQT-Extensions.h"
 
@@ -375,7 +377,10 @@ static XspfMMainWindowController *sharedInstance = nil;
 	libraryViewController = [[XspfMLibraryViewController alloc] init];
 	[libraryViewController setRepresentedObject:listController];
 	[libraryView addSubview:[libraryViewController view]];
-	[[libraryViewController view] setFrame:[libraryView bounds]];
+	NSRect rect = [libraryView bounds];
+	rect.size.width += 2;
+	rect.origin.x -= 1;
+	[[libraryViewController view] setFrame:rect];
 	[libraryViewController recalculateKeyViewLoop];
 }
 - (void)setupDetailView
@@ -412,6 +417,14 @@ static XspfMMainWindowController *sharedInstance = nil;
 - (BOOL)panel:(id)sender shouldShowFilename:(NSString *)filename
 {
 	return ![appDelegate didRegisteredURL:[NSURL fileURLWithPath:filename]];
+}
+
+#pragma mark#### XspfMDragControl Delegate ####
+- (void)dragControl:(XspfMDragControl *)control dragDelta:(NSSize)delta
+{
+	HMLog(HMLogLevelDebug, @"Enter %@", NSStringFromSelector(_cmd));
+	CGFloat libWidth = [libraryView frame].size.width;
+	[splitView setPosition:libWidth + delta.width ofDividerAtIndex:0];
 }
 
 #pragma mark#### XspfManager Notifications ####
