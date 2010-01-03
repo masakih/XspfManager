@@ -8,8 +8,8 @@
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="260"/>
 			<integer value="83"/>
+			<integer value="260"/>
 			<integer value="1" id="9"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
@@ -68,21 +68,13 @@
 											<object class="NSTableView" id="541994366">
 												<reference key="NSNextResponder" ref="42402308"/>
 												<int key="NSvFlags">4352</int>
-												<string key="NSFrameSize">{190, 392}</string>
+												<string key="NSFrameSize">{190, 408}</string>
 												<reference key="NSSuperview" ref="42402308"/>
 												<bool key="NSEnabled">YES</bool>
-												<object class="NSTableHeaderView" key="NSHeaderView" id="654864416">
-													<reference key="NSNextResponder" ref="593267674"/>
-													<int key="NSvFlags">256</int>
-													<string key="NSFrameSize">{190, 17}</string>
-													<reference key="NSSuperview" ref="593267674"/>
-													<reference key="NSTableView" ref="541994366"/>
-												</object>
-												<object class="_NSCornerView" key="NSCornerView" id="232339886">
-													<reference key="NSNextResponder" ref="489813088"/>
+												<object class="_NSCornerView" key="NSCornerView">
+													<nil key="NSNextResponder"/>
 													<int key="NSvFlags">-2147483392</int>
 													<string key="NSFrame">{{-26, 0}, {16, 17}}</string>
-													<reference key="NSSuperview" ref="489813088"/>
 												</object>
 												<object class="NSMutableArray" key="NSTableColumns">
 													<bool key="EncodedWithXMLCoder">YES</bool>
@@ -173,7 +165,7 @@
 												<int key="NSTableViewSelectionHighlightStyle">1</int>
 											</object>
 										</object>
-										<string key="NSFrame">{{1, 17}, {190, 392}}</string>
+										<string key="NSFrame">{{1, 1}, {190, 408}}</string>
 										<reference key="NSSuperview" ref="489813088"/>
 										<reference key="NSNextKeyView" ref="541994366"/>
 										<reference key="NSDocView" ref="541994366"/>
@@ -183,38 +175,22 @@
 									<object class="NSScroller" id="351187507">
 										<reference key="NSNextResponder" ref="489813088"/>
 										<int key="NSvFlags">-2147483392</int>
-										<string key="NSFrame">{{-100, -100}, {15, 377}}</string>
+										<string key="NSFrame">{{176, 1}, {15, 393}}</string>
 										<reference key="NSSuperview" ref="489813088"/>
 										<reference key="NSTarget" ref="489813088"/>
 										<string key="NSAction">_doScroller:</string>
-										<double key="NSCurValue">3.700000e+01</double>
-										<double key="NSPercent">1.947368e-01</double>
+										<double key="NSPercent">9.975550e-01</double>
 									</object>
 									<object class="NSScroller" id="632744272">
 										<reference key="NSNextResponder" ref="489813088"/>
 										<int key="NSvFlags">-2147483392</int>
-										<string key="NSFrame">{{-100, -100}, {190, 15}}</string>
+										<string key="NSFrame">{{1, 394}, {175, 15}}</string>
 										<reference key="NSSuperview" ref="489813088"/>
 										<int key="NSsFlags">1</int>
 										<reference key="NSTarget" ref="489813088"/>
 										<string key="NSAction">_doScroller:</string>
-										<double key="NSPercent">9.943182e-01</double>
+										<double key="NSPercent">9.947644e-01</double>
 									</object>
-									<object class="NSClipView" id="593267674">
-										<reference key="NSNextResponder" ref="489813088"/>
-										<int key="NSvFlags">2304</int>
-										<object class="NSMutableArray" key="NSSubviews">
-											<bool key="EncodedWithXMLCoder">YES</bool>
-											<reference ref="654864416"/>
-										</object>
-										<string key="NSFrame">{{1, 0}, {190, 17}}</string>
-										<reference key="NSSuperview" ref="489813088"/>
-										<reference key="NSNextKeyView" ref="654864416"/>
-										<reference key="NSDocView" ref="654864416"/>
-										<reference key="NSBGColor" ref="197852477"/>
-										<int key="NScvFlags">4</int>
-									</object>
-									<reference ref="232339886"/>
 								</object>
 								<string key="NSFrame">{{0, 20}, {192, 410}}</string>
 								<reference key="NSSuperview" ref="657476282"/>
@@ -223,8 +199,6 @@
 								<reference key="NSVScroller" ref="351187507"/>
 								<reference key="NSHScroller" ref="632744272"/>
 								<reference key="NSContentView" ref="42402308"/>
-								<reference key="NSHeaderClipView" ref="593267674"/>
-								<reference key="NSCornerView" ref="232339886"/>
 								<bytes key="NSScrollAmts">QSAAAEEgAABBmAAAQZgAAA</bytes>
 							</object>
 						</object>
@@ -739,17 +713,11 @@
 						<reference key="object" ref="489813088"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="654864416"/>
 							<reference ref="541994366"/>
 							<reference ref="632744272"/>
 							<reference ref="351187507"/>
 						</object>
 						<reference key="parent" ref="657476282"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">29</int>
-						<reference key="object" ref="654864416"/>
-						<reference key="parent" ref="489813088"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">28</int>
@@ -954,7 +922,6 @@
 					<string>274.IBPluginDependency</string>
 					<string>277.IBPluginDependency</string>
 					<string>28.IBPluginDependency</string>
-					<string>29.IBPluginDependency</string>
 					<string>30.IBPluginDependency</string>
 					<string>31.IBPluginDependency</string>
 					<string>33.IBPluginDependency</string>
@@ -984,7 +951,6 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>{{173, 411}, {207, 63}}</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1031,6 +997,13 @@
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<bool key="EncodedWithXMLCoder">YES</bool>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSObject</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">XspfMDragControl.h</string>
+					</object>
+				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">NSObject</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
