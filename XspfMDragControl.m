@@ -51,7 +51,6 @@
 }
 - (void)drawRect:(NSRect)rect
 {
-	HMLog(HMLogLevelDebug, @"Enter %@", NSStringFromSelector(_cmd));
 	[super drawRect:rect];
 	
 	[[NSColor darkGrayColor] set];
@@ -69,8 +68,6 @@
 
 - (void)mouseDown:(NSEvent *)theEvent
 {
-	HMLog(HMLogLevelDebug, @"Enter %@", NSStringFromSelector(_cmd));
-	
 	NSEvent *event;
 	
 	NSPoint prevMouse = [theEvent locationInWindow];
@@ -79,7 +76,6 @@
 	if(!NSPointInRect(mouse, [self draggingRect])) return;
 	
 	while(YES) {
-		HMLog(HMLogLevelDebug, @"Start tracking.");
 		event = [NSApp nextEventMatchingMask:NSLeftMouseUpMask | NSLeftMouseDraggedMask
 								   untilDate:[NSDate distantFuture]
 									  inMode:NSEventTrackingRunLoopMode
@@ -87,18 +83,12 @@
 		NSPoint newMouse = [event locationInWindow];
 		NSSize delta = NSMakeSize(newMouse.x - prevMouse.x, newMouse.y - prevMouse.y);
 		[delegate dragControl:self dragDelta:delta];
-//		NSRect frame = [self frame];
-//		frame.size.width += delta.width;
-//		frame.size.height += delta.height;
-//		[self setFrame:frame];
 		
 		if([event type] == NSLeftMouseUp) {
 			break;
 		}
 		prevMouse = newMouse;
 	}
-	
-	HMLog(HMLogLevelDebug, @"Exit %@", NSStringFromSelector(_cmd));
 }
 
 - (void)setDelegae:(id)newDelegate
