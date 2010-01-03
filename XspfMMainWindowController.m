@@ -350,10 +350,13 @@ static XspfMMainWindowController *sharedInstance = nil;
 	if(!targetContorller) {
 		targetContorller = [[[NSClassFromString(className) alloc] init] autorelease];
 		if(!targetContorller) return;
+		
+		id selectionIndexes = [controller selectionIndexes];
 		[viewControllers setObject:targetContorller forKey:className];
 		[targetContorller view];
 		[targetContorller setRepresentedObject:controller];
 		[targetContorller recalculateKeyViewLoop];
+		[controller setSelectionIndexes:selectionIndexes];
 	}
 	
 	[[listViewController view] removeFromSuperview];
