@@ -33,60 +33,12 @@
 
 @implementation XspfMMainWindowController
 
-static XspfMMainWindowController *sharedInstance = nil;
-
-+ (XspfMMainWindowController *)sharedInstance
-{
-    @synchronized(self) {
-        if (sharedInstance == nil) {
-            [[self alloc] init]; // assignment not done here
-        }
-    }
-    return sharedInstance;
-}
-
-+ (id)allocWithZone:(NSZone *)zone
-{
-    @synchronized(self) {
-        if (sharedInstance == nil) {
-            sharedInstance = [super allocWithZone:zone];
-            return sharedInstance;  // assignment and return on first allocation
-        }
-    }
-    return nil; //on subsequent allocation attempts return nil
-}
-
-- (id)copyWithZone:(NSZone *)zone
-{
-    return self;
-}
-
-- (id)retain
-{
-    return self;
-}
-
-- (unsigned)retainCount
-{
-    return UINT_MAX;  //denotes an object that cannot be released
-}
-
-- (void)release
-{
-    //do nothing
-}
-
-- (id)autorelease
-{
-    return self;
-}
-
-
 - (id)init
 {
-	[super initWithWindowNibName:@"MainWindow"];
-	
-	viewControllers = [[NSMutableDictionary alloc] init];
+	self = [super initWithWindowNibName:@"MainWindow"];
+	if(self) {
+		viewControllers = [[NSMutableDictionary alloc] init];
+	}
 		
 	return self;
 }
@@ -122,6 +74,10 @@ static XspfMMainWindowController *sharedInstance = nil;
 	[self recalculateKeyViewLoop];
 }
 #pragma mark#### KVC ####
+- (NSManagedObjectContext *)managedObjectContext
+{
+	return [appDelegate managedObjectContext];
+}
 - (NSArrayController *)arrayController
 {
 	return controller;
