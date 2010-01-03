@@ -8,6 +8,8 @@
 
 #import "XspfMListViewController.h"
 
+#import "XspfManager.h"
+
 
 @implementation XspfMListViewController
 
@@ -22,6 +24,14 @@
 {
 	[tableView setDoubleAction:@selector(openXspf:)];
 	[tableView registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]];
+}
+
+
+- (void)tableView:(NSTableView *)table sortDescriptorsDidChange:(NSArray *)oldDescriptors
+{
+	id controller = [self representedObject];
+	[controller willChangeValueForKey:@"selectionIndexes"];
+	[controller didChangeValueForKey:@"selectionIndexes"];
 }
 
 
