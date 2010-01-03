@@ -133,6 +133,21 @@
 {
 	[self setIsDeleted:flag];
 }
+- (NSInteger)label
+{
+	[self willAccessValueForKey:@"label"];
+	NSNumber *label = [self primitiveValueForKey:@"label"];
+	[self didAccessValueForKey:@"label"];
+	
+	return [label integerValue];
+}
+- (void)setLabel:(NSInteger)newLabel
+{
+	NSNumber *label = [NSNumber numberWithInteger:newLabel];
+	[self willChangeValueForKey:@"label"];
+	[self setPrimitiveValue:label forKey:@"label"];
+	[self didChangeValueForKey:@"label"];
+}
 - (NSImage *)thumbnail
 {
 	[self willAccessValueForKey:@"thumbnail"];

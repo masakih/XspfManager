@@ -27,6 +27,7 @@
 @property (retain) NSDate * creationDate;
 @property (retain) NSData *alias;
 @property BOOL deleted;
+@property NSInteger label;
 
 @property (retain) NSURL *url;
 @property (retain) NSImage *thumbnail;
