@@ -582,7 +582,7 @@
 													<string>NeXT TIFF v4.0 pasteboard type</string>
 												</object>
 											</object>
-											<string key="NSFrame">{{65, 0}, {81, 21}}</string>
+											<string key="NSFrame">{{65, 0}, {79, 21}}</string>
 											<reference key="NSSuperview" ref="841726608"/>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSImageCell" key="NSCell" id="327639597">
@@ -600,7 +600,7 @@
 											<bool key="NSEditable">YES</bool>
 										</object>
 									</object>
-									<string key="NSFrameSize">{144, 438}</string>
+									<string key="NSFrameSize">{142, 438}</string>
 									<reference key="NSSuperview" ref="593733723"/>
 									<string key="NSClassName">NSView</string>
 								</object>
@@ -612,7 +612,7 @@
 										<object class="NSCustomView" id="19631665">
 											<reference key="NSNextResponder" ref="11418218"/>
 											<int key="NSvFlags">274</int>
-											<string key="NSFrame">{{0, 20}, {695, 418}}</string>
+											<string key="NSFrame">{{0, 20}, {687, 418}}</string>
 											<reference key="NSSuperview" ref="11418218"/>
 											<string key="NSClassName">NSView</string>
 										</object>
@@ -662,12 +662,12 @@
 											</object>
 										</object>
 									</object>
-									<string key="NSFrame">{{145, 0}, {695, 438}}</string>
+									<string key="NSFrame">{{143, 0}, {687, 438}}</string>
 									<reference key="NSSuperview" ref="593733723"/>
 									<string key="NSClassName">NSView</string>
 								</object>
 							</object>
-							<string key="NSFrame">{{0, 192}, {840, 438}}</string>
+							<string key="NSFrame">{{0, 192}, {830, 438}}</string>
 							<reference key="NSSuperview" ref="72950107"/>
 							<bool key="NSIsVertical">YES</bool>
 							<int key="NSDividerStyle">2</int>
@@ -1661,7 +1661,7 @@
 					<string>{{64, 146}, {830, 629}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="0" id="8"/>
-					<integer value="0"/>
+					<reference ref="8"/>
 					<string>{{64, 146}, {830, 629}}</string>
 					<reference ref="9"/>
 					<reference ref="8"/>
