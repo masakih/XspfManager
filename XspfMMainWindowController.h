@@ -18,6 +18,7 @@ typedef enum {
 } XspfMViewType;
 
 @class XspfMViewController;
+@class XspfMLibraryViewController, XspfMDetailViewController;
 
 @interface XspfMMainWindowController : NSWindowController
 {
@@ -36,10 +37,10 @@ typedef enum {
 	NSMutableDictionary *viewControllers;
 	
 	IBOutlet NSView *libraryView;
-	XspfMViewController *libraryViewController;
+	XspfMLibraryViewController *libraryViewController;
 	
 	IBOutlet NSView *detailView;
-	XspfMViewController *detailViewController;
+	XspfMDetailViewController *detailViewController;
 	
 	IBOutlet NSView *accessoryView;
 	NSViewController *accessoryViewController;
@@ -69,6 +70,10 @@ typedef enum {
 
 - (IBAction)add:(id)sender;
 - (IBAction)remove:(id)sender;
+
+//
+- (IBAction)newPredicate:(id)sender;
+
 
 - (IBAction)test01:(id)sender;
 - (IBAction)test02:(id)sender;

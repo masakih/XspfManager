@@ -292,6 +292,11 @@ static XspfMMainWindowController *sharedInstance = nil;
 	[[self managedObjectContext] deleteObject:obj];
 }
 
+- (IBAction)newPredicate:(id)sender
+{
+	[libraryViewController newPredicate:sender];
+}
+
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
 	BOOL enabled = YES;
