@@ -29,6 +29,7 @@
 
 - (void)tableView:(NSTableView *)table sortDescriptorsDidChange:(NSArray *)oldDescriptors
 {
+//	HMLog(HMLogLevelDebug, @"Enter %@, desc-> %@", NSStringFromSelector(_cmd), [table sortDescriptors]);
 	id controller = [self representedObject];
 	[controller willChangeValueForKey:@"selectionIndexes"];
 	[controller didChangeValueForKey:@"selectionIndexes"];

@@ -397,7 +397,8 @@
 - (IBAction)test01:(id)sender
 {
 	XSPFMXspfObject *obj = [controller valueForKeyPath:@"selection.self"];
-	obj.label = 3;
+	srandom([[NSDate date] timeIntervalSince1970]);
+	obj.label = [NSNumber numberWithInteger:random() % 8];
 	HMLog(HMLogLevelDebug, @"HMLogLevelDebug -> %@", obj);
 }
 - (IBAction)test02:(id)sender
