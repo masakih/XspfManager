@@ -9,7 +9,7 @@
 #import "XspfMMainWindowController.h"
 
 #import "XspfMMovieLoadRequest.h"
-#import "XspfMCheckFileModifiedRequest.h"
+//#import "XspfMCheckFileModifiedRequest.h"
 
 #import "XspfMViewController.h"
 #import "XspfMLibraryViewController.h"
@@ -20,7 +20,6 @@
 #import "XspfMDragControl.h"
 
 #import "UKKQueue.h"
-#import "NSPathUtilities-XspfQT-Extensions.h"
 
 @interface XspfMMainWindowController(HMPrivate)
 - (void)setupXspfLists;
@@ -31,21 +30,6 @@
 - (void)recalculateKeyViewLoop;
 @end
 
-@interface XspfMMainWindowController(XspfMDeprecated)
-- (BOOL)didRegisteredURL:(NSURL *)url;
-- (XSPFMXspfObject *)registerWithURL:(NSURL *)url;
-- (void)registerFilePaths:(NSArray *)filePaths;
-- (void)registerURLs:(NSArray *)URLs;
-
-- (void)registerToUKKQueue;
--(void) watcher:(id<UKFileWatcher>)kq receivedNotification:(NSString*)notificationName forPath: (NSString*)filePath;
-
-@end
-
-
-@interface XspfMMainWindowController(UKKQueueSupport) 
-- (void)registerToUKKQueue;
-@end
 
 @implementation XspfMMainWindowController
 
@@ -474,188 +458,4 @@ static XspfMMainWindowController *sharedInstance = nil;
 	
 	HMLog(HMLogLevelDebug, @"Valid next view -> %@", [firstKeyView nextValidKeyView]);
 }
-@end
-
-@implementation XspfMMainWindowController(XspfMDeprecated)
-
-- (BOOL)didRegisteredURL:(NSURL *)url
-{
-	HMLog(HMLogLevelError, @"-[%@ %@] is Deprecated.", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
-	
-	NSManagedObjectContext *moc = [appDelegate managedObjectContext];
-	NSError *error = nil;
-	NSFetchRequest *fetch;
-	NSInteger num;
-	
-	fetch = [[[NSFetchRequest alloc] init] autorelease];
-	[fetch setEntity:[NSEntityDescription entityForName:@"Xspf" inManagedObjectContext:moc]];
-	NSPredicate *aPredicate = [NSPredicate predicateWithFormat:@"urlString LIKE %@", [url absoluteString]];
-	[fetch setPredicate:aPredicate];
-	num = [moc countForFetchRequest:fetch error:&error];
-	if(error) {
-		HMLog(HMLogLevelError, @"%@", [error localizedDescription]);
-		return NO;
-	}
-	
-	return num != 0;
-}
-#pragma mark#### UKKQUEUE ####
-- (void)registerToUKKQueue
-{
-	HMLog(HMLogLevelError, @"-[%@ %@] is Deprecated.", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
-	
-	NSManagedObjectContext *moc = [[NSApp delegate] managedObjectContext];
-	NSError *error = nil;
-	NSFetchRequest *fetch = [[[NSFetchRequest alloc] init] autorelease];
-	[fetch setEntity:[NSEntityDescription entityForName:@"Xspf" inManagedObjectContext:moc]];
-	
-	NSArray *array = [moc executeFetchRequest:fetch error:&error];
-	if(!array) {
-		if(error) {
-			HMLog(HMLogLevelError, @"could not fetch : %@", [error localizedDescription]);
-		}
-		HMLog(HMLogLevelError, @"Could not fetch.");
-		return;
-	}
-	
-	NSFileManager *fm = [NSFileManager defaultManager];
-	UKKQueue *queue = [UKKQueue sharedFileWatcher];
-	for(XSPFMXspfObject *obj in array) {
-		NSString *filePath = obj.filePath;
-		if([fm fileExistsAtPath:filePath]) {
-			[queue addPathToQueue:filePath];
-		} else {
-			obj.deleted = YES;
-		}
-	}
-}
-- (XSPFMXspfObject *)registerWithURL:(NSURL *)url
-{
-	HMLog(HMLogLevelError, @"-[%@ %@] is Deprecated.", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
-	
-	if([appDelegate didRegisteredURL:url]) return nil;
-	
-	XSPFMXspfObject *obj = [NSEntityDescription insertNewObjectForEntityForName:@"Xspf"
-														 inManagedObjectContext:[appDelegate managedObjectContext]];
-	if(!obj) return nil;
-	
-	obj.url = url;
-	obj.registerDate = [NSDate dateWithTimeIntervalSinceNow:0.0];
-	
-	// will set in XspfMCheckFileModifiedRequest.
-	//	[obj setValue:[NSDate dateWithTimeIntervalSinceNow:0.0] forKey:@"modificationDate"];
-	//	[obj setValue:[NSDate dateWithTimeIntervalSinceNow:0.0] forKey:@"creationDate"];
-	
-	id<HMChannel> channel = [appDelegate channel];
-	id<HMRequest> request = [XspfMCheckFileModifiedRequest requestWithObject:obj];
-	[channel putRequest:request];
-	request = [XspfMMovieLoadRequest requestWithObject:obj];
-	[channel putRequest:request];
-	
-	[[UKKQueue sharedFileWatcher] addPathToQueue:obj.filePath];
-	
-	return obj;
-}
-- (void)registerFilePaths:(NSArray *)filePaths
-{
-	HMLog(HMLogLevelError, @"-[%@ %@] is Deprecated.", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
-	
-	NSMutableArray *array = [NSMutableArray array];
-	
-	for(NSString *filePath in filePaths) {
-		[array addObject:[NSURL fileURLWithPath:filePath]];
-	}
-	
-	[self registerURLs:array];
-}
-- (void)registerURLs:(NSArray *)URLs
-{
-	HMLog(HMLogLevelError, @"-[%@ %@] is Deprecated.", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
-	
-	[progressBar setUsesThreadedAnimation:YES];
-	[progressBar startAnimation:self];
-	[progressMessage setStringValue:@"During register."];
-	
-	[NSApp beginSheet:progressPanel
-	   modalForWindow:[self window]
-		modalDelegate:nil
-	   didEndSelector:Nil
-		  contextInfo:NULL];
-	
-	XSPFMXspfObject *insertedObject = nil;
-	for(id URL in URLs) {
-		insertedObject = [appDelegate registerWithURL:URL];
-	}
-	if(insertedObject) {
-		[controller performSelector:@selector(setSelectedObjects:)
-						 withObject:[NSArray arrayWithObject:insertedObject]
-						 afterDelay:0.0];
-	}
-	
-	[progressBar stopAnimation:self];
-	[progressPanel orderOut:self];
-	[NSApp endSheet:progressPanel];
-}
--(void) watcher:(id<UKFileWatcher>)kq receivedNotification:(NSString*)notificationName forPath: (NSString*)filePath
-{
-	HMLog(HMLogLevelError, @"-[%@ %@] is Deprecated.", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
-	
-	if(![NSThread isMainThread]) {
-		HMLog(HMLogLevelError, @"there is not main thread.");
-	}
-	
-	NSString *fileURL = [[NSURL fileURLWithPath:filePath] absoluteString];
-	NSFetchRequest *fetch = [[[NSFetchRequest alloc] init] autorelease];
-	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"urlString = %@", fileURL];
-	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Xspf"
-											  inManagedObjectContext:[self managedObjectContext]]; 
-	[fetch setPredicate:predicate];
-	[fetch setEntity:entity];
-	
-	NSError *error = nil;
-	NSArray *array = [[self managedObjectContext] executeFetchRequest:fetch error:&error];
-	if(!array) {
-		if(error) {
-			HMLog(HMLogLevelError, @"%@", [error localizedDescription]);
-		}
-		HMLog(HMLogLevelError, @"Could not fetch.");
-		return;
-	}
-	if([array count] == 0) {
-		HMLog(HMLogLevelError, @"Target file is not found.");
-		return;
-	}
-	if([array count] > 1) {
-		HMLog(HMLogLevelError, @"Target found too many!!! (%d).", [array count]);
-	}
-	
-	XSPFMXspfObject *obj = [array objectAtIndex:0];
-	NSString *resolvedPath = [obj.alias resolvedPath];
-	
-	if([UKFileWatcherRenameNotification isEqualToString:notificationName]) {
-		obj.url = [NSURL fileURLWithPath:resolvedPath];
-		[[UKKQueue sharedFileWatcher] removePathFromQueue:filePath];
-		[[UKKQueue sharedFileWatcher] addPathToQueue:obj.filePath];
-		return;
-	}
-	
-	NSFileManager *fm = [NSFileManager defaultManager];
-	if(!resolvedPath) {
-		if(![fm fileExistsAtPath:filePath]) {
-			[[UKKQueue sharedFileWatcher] removePathFromQueue:filePath];
-			obj.deleted = YES;
-			return;
-		} else {
-			obj.alias = [filePath aliasData];
-		}
-	}
-	
-	id attr = [fm fileAttributesAtPath:resolvedPath traverseLink:YES];
-	NSDate *newModDate = [attr fileModificationDate];
-	if(newModDate) {
-		obj.modificationDate = newModDate;
-	}
-	obj.alias = [filePath aliasData];
-}
-
 @end

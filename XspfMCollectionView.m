@@ -8,6 +8,7 @@
 
 #import "XspfMCollectionView.h"
 
+#import "XspfManager.h"
 
 @implementation XspfMCollectionView
 
