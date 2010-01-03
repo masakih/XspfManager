@@ -396,13 +396,9 @@
 #pragma mark#### Test ####
 - (IBAction)test01:(id)sender
 {
-	HMLog(HMLogLevelDebug, @"HMLogLevelDebug");
-	HMLog(HMLogLevelNotice, @"HMLogLevelNotice");
-	HMLog(HMLogLevelCaution, @"HMLogLevelCaution");
-	HMLog(HMLogLevelAlert, @"HMLogLevelAlert");
-	HMLog(HMLogLevelError, @"HMLogLevelError");
-	
-	HMLog(HMLogLevelDebug, @"HMLogLevelDebug -> %@", @"DEBUG");
+	XSPFMXspfObject *obj = [controller valueForKeyPath:@"selection.self"];
+	obj.label = 3;
+	HMLog(HMLogLevelDebug, @"HMLogLevelDebug -> %@", obj);
 }
 - (IBAction)test02:(id)sender
 {
