@@ -289,6 +289,11 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 					  object:self
 					userInfo:[NSDictionary dictionaryWithObject:addedObjects forKey:@"XspfManagerAddedXspfObjects"]];
 }
+- (void)removeObject:(XSPFMXspfObject *)obj
+{
+	[[UKKQueue sharedFileWatcher] removePathFromQueue:obj.filePath];
+	[[self managedObjectContext] deleteObject:obj];
+}
 
 #pragma mark#### UKKQUEUE ####
 - (void)registerToUKKQueue

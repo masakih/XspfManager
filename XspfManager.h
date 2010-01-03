@@ -10,6 +10,9 @@
 
 #import "HMWorkerProtocols.h"
 
+@class XSPFMXspfObject;
+@protocol UKFileWatcher;
+
 @interface XspfManager : NSObject 
 {
     IBOutlet NSWindow *window;
@@ -33,21 +36,16 @@
 
 - (id<HMChannel>)channel;
 
-@end
 
-extern NSString *const XspfManagerDidAddXspfObjectsNotification; // @"XspfManagerAddedXspfObjects"
-
-
-@class XSPFMXspfObject;
-@protocol UKFileWatcher;
-
-@interface XspfManager(WillMoveXspfMMainWindowController)
 - (BOOL)didRegisteredURL:(NSURL *)url;
 - (XSPFMXspfObject *)registerWithURL:(NSURL *)url;
 - (void)registerFilePaths:(NSArray *)filePaths;
 - (void)registerURLs:(NSArray *)URLs;
+- (void)removeObject:(XSPFMXspfObject *)object;
 
 - (void)registerToUKKQueue;
--(void) watcher:(id<UKFileWatcher>)kq receivedNotification:(NSString*)notificationName forPath: (NSString*)filePath;
+- (void)watcher:(id<UKFileWatcher>)kq receivedNotification:(NSString*)notificationName forPath:(NSString*)filePath;
 
 @end
+
+extern NSString *const XspfManagerDidAddXspfObjectsNotification; // @"XspfManagerAddedXspfObjects"
