@@ -195,8 +195,92 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 	[[NSWorkspace sharedWorkspace] launchApplication:@"XspfQT"];
 }
 
+
+-(IBAction)toggleEnableLog:(id)sender
+{
+	NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+	[ud setBool:![ud boolForKey:@"HMLogEnable"] forKey:@"HMLogEnable"];
+}
+- (IBAction)changeLogLevel:(id)sender
+{
+	NSInteger level = [sender tag];
+	NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+	[ud setInteger:level forKey:@"HMLogLevel"];
+}
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem
+{
+	SEL action = [menuItem action];
+	NSInteger tag = [menuItem tag];
+	
+	NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+	
+	if(action == @selector(toggleEnableLog:)) {
+		if([ud boolForKey:@"HMLogEnable"]) {
+			[menuItem setTitle:@"Disable log"];
+		} else {
+			[menuItem setTitle:@"Enable log"];
+		}
+	} else if(action == @selector(changeLogLevel:)) {
+		NSInteger level = [ud integerForKey:@"HMLogLevel"];
+		if(level == tag) {
+			[menuItem setState:NSOnState];
+		} else {
+			[menuItem setState:NSOffState];
+		}
+	}
+	
+	return YES;
+}
+- (void)setupDebugMenu
+{
+	NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+	if(![ud boolForKey:@"HMEnableDebugMenu"]) return;
+	
+	NSMenu *debugMenu = [[[NSMenu alloc] initWithTitle:@"Debug"] autorelease];
+	NSMenuItem *enableLogItem = [[[NSMenuItem alloc] initWithTitle:@"Enable log"
+															action:@selector(toggleEnableLog:)
+													 keyEquivalent:@""] autorelease];
+	[debugMenu addItem:enableLogItem];
+	
+	[debugMenu addItem:[NSMenuItem separatorItem]];
+	
+	NSMenuItem *logLevelItem = [[[NSMenuItem alloc] initWithTitle:@"Debug level"
+														   action:@selector(changeLogLevel:)
+													keyEquivalent:@""] autorelease];
+	[logLevelItem setTag:HMLogLevelDebug];
+	[debugMenu addItem:logLevelItem];
+	
+	logLevelItem = [[[NSMenuItem alloc] initWithTitle:@"Notice level"
+											   action:@selector(changeLogLevel:)
+										keyEquivalent:@""] autorelease];
+	[logLevelItem setTag:HMLogLevelNotice];
+	[debugMenu addItem:logLevelItem];
+	
+	logLevelItem = [[[NSMenuItem alloc] initWithTitle:@"Caution level"
+											   action:@selector(changeLogLevel:)
+										keyEquivalent:@""] autorelease];
+	[logLevelItem setTag:HMLogLevelCaution];
+	[debugMenu addItem:logLevelItem];
+	
+	logLevelItem = [[[NSMenuItem alloc] initWithTitle:@"Alert level"
+											   action:@selector(changeLogLevel:)
+										keyEquivalent:@""] autorelease];
+	[logLevelItem setTag:HMLogLevelAlert];
+	[debugMenu addItem:logLevelItem];
+	
+	NSMenu *menubar = [NSApp mainMenu];
+	NSUInteger itemCount = [[menubar itemArray] count];
+	NSMenuItem *debugMenuItem = [menubar insertItemWithTitle:@"Debug"
+													  action:Nil
+											   keyEquivalent:@""
+													 atIndex:itemCount - 1];
+	[debugMenuItem setSubmenu:debugMenu];
+}
+
 - (void)applicationDidFinishLaunching:(NSNotification *)notification
 {
+	[self setupDebugMenu];
+	
 	UKKQueue *queue = [UKKQueue sharedFileWatcher];
 	[queue setDelegate:self];
 	
