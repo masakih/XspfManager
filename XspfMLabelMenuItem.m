@@ -18,6 +18,8 @@
 	XspfMLabelMenuView *view = [[[XspfMLabelMenuView alloc] initWithFrame:viewFrame] autorelease];
 	[view setAction:[self action]];
 	[view setTarget:[self target]];
+	[view setMenuLabel:[self title]];
+	[view sizeToFit];
 	[super setView:view];
 }
 - (id)initWithTitle:(NSString *)aString action:(SEL)aSelector keyEquivalent:(NSString *)charCode
