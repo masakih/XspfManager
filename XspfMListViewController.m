@@ -10,6 +10,9 @@
 
 #import "XspfManager.h"
 
+#import "XspfMTableView.h"
+
+#import "XSPFMXspfObject.h"
 #import "XspfMLabelMenuItem.h"
 
 
@@ -21,8 +24,22 @@
 	
 	return self;
 }
+- (void)awakeFromNib
+{
+	[tableView setDoubleAction:@selector(openXspf:)];
+	[tableView registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]];
+	
+//	[tableView setMenu:[self contextMenuForObject:nil]];
+}
 
-- (NSMenu *)contextMenu
+
+- (IBAction)changeLabel:(id)sender
+{
+	XSPFMXspfObject *object = [sender representedObject];
+	object.label = [sender objectValue];
+}
+
+- (NSMenu *)contextMenuForObject:(XSPFMXspfObject *)object
 {
 	NSMenu *menu = [[[NSMenu alloc] initWithTitle:@"title"] autorelease];
 	
@@ -31,7 +48,9 @@
 	
 	item = [[[XspfMLabelMenuItem alloc] initWithTitle:@"Label:" action:Nil keyEquivalent:@""] autorelease];
 	[menu addItem:item];
-	[(XspfMLabelMenuItem *)item setIntegerValue:4];
+	[(XspfMLabelMenuItem *)item setObjectValue:object.label];
+	[item setAction:@selector(changeLabel:)];
+	[item setRepresentedObject:object];
 	
 	item = [[[NSMenuItem alloc] initWithTitle:@"This is MenuMMMMMMMMMMMMMMMMMMMMMM" action:Nil keyEquivalent:@""] autorelease];
 	[menu addItem:item];
@@ -39,15 +58,15 @@
 	return menu;
 }
 
-- (void)awakeFromNib
+- (NSMenu *)tableView:(XspfMTableView *)table menuForEvent:(NSEvent *)event
 {
-	[tableView setDoubleAction:@selector(openXspf:)];
-	[tableView registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]];
+	NSPoint mouse = [table convertPoint:[event locationInWindow] fromView:nil];
+	NSInteger row = [table rowAtPoint:mouse];
+	if(row == NSNotFound || row == -1) return nil;
 	
-	[tableView setMenu:[self contextMenu]];
+	XSPFMXspfObject *object = [[[self representedObject] arrangedObjects] objectAtIndex:row];
+	return [self contextMenuForObject:object];
 }
-
-
 - (void)tableView:(NSTableView *)table sortDescriptorsDidChange:(NSArray *)oldDescriptors
 {
 //	HMLog(HMLogLevelDebug, @"Enter %@, desc-> %@", NSStringFromSelector(_cmd), [table sortDescriptors]);
