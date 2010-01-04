@@ -10,9 +10,16 @@
 
 #import "XspfMViewController.h"
 
+@class XspfMLabelMenuItem;
+
 @interface XspfMListViewController : XspfMViewController
 {
 	IBOutlet NSTableView *tableView;
+	
+	IBOutlet NSMenu *menu;
+	IBOutlet XspfMLabelMenuItem *labelMenuItem;
 }
+
+- (IBAction)changeLabel:(id)sender;
 
 @end
