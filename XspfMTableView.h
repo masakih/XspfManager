@@ -14,3 +14,11 @@
 }
 
 @end
+
+
+@interface NSObject (XspfMTableViewDataSource)
+/* Optional - Context menu support
+ This method overwrite returned NSMenu's delegate.
+ */
+- (NSMenu *)tableView:(XspfMTableView *)tableView menuForEvent:(NSEvent *)event;
+@end
