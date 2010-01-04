@@ -194,6 +194,13 @@ const CGFloat leftMargin = 19;
 	return _value;
 }
 
+- (void)sendActionToTarget
+{
+	NSMenuItem *item = [self enclosingMenuItem];
+	NSMenu *menu = [item menu];
+	NSInteger index = [menu indexOfItem:item];
+	[menu performActionForItemAtIndex:index];
+}
 - (void)blinkTimerOperate:(NSTimer *)timer
 {
 	id userInfo = [timer userInfo];
@@ -211,7 +218,8 @@ const CGFloat leftMargin = 19;
 		[labelName setStringValue:@""];
 		[self setNeedsDisplayInRect:[self labelNameRect]];
 		
-		[self sendAction:[self action] to:[self target]];
+		[self sendActionToTarget];
+		
 		[[[self enclosingMenuItem] menu] cancelTracking];
 		[timer invalidate];
 		blinkMode = NO;
