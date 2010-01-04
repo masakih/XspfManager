@@ -24,6 +24,11 @@
 	
 	return self;
 }
+- (void)dealloc
+{
+	[menu release];
+	[super dealloc];
+}
 - (void)awakeFromNib
 {
 	[tableView setDoubleAction:@selector(openXspf:)];
@@ -32,6 +37,11 @@
 //	[tableView setMenu:[self contextMenuForObject:nil]];
 }
 
+- (void)setMenu:(NSMenu *)inMenu
+{
+	[menu autorelease];
+	menu = [inMenu retain];
+}
 
 - (IBAction)changeLabel:(id)sender
 {
@@ -41,19 +51,8 @@
 
 - (NSMenu *)contextMenuForObject:(XSPFMXspfObject *)object
 {
-	NSMenu *menu = [[[NSMenu alloc] initWithTitle:@"title"] autorelease];
-	
-	NSMenuItem *item = [[[NSMenuItem alloc] initWithTitle:@"Label is Menu" action:Nil keyEquivalent:@""] autorelease];
-	[menu addItem:item];
-	
-	item = [[[XspfMLabelMenuItem alloc] initWithTitle:@"Label:" action:Nil keyEquivalent:@""] autorelease];
-	[menu addItem:item];
-	[(XspfMLabelMenuItem *)item setObjectValue:object.label];
-	[item setAction:@selector(changeLabel:)];
-	[item setRepresentedObject:object];
-	
-	item = [[[NSMenuItem alloc] initWithTitle:@"This is MenuMMMMMMMMMMMMMMMMMMMMMM" action:Nil keyEquivalent:@""] autorelease];
-	[menu addItem:item];
+	[labelMenuItem setObjectValue:object.label];
+	[labelMenuItem setRepresentedObject:object];
 	
 	return menu;
 }
