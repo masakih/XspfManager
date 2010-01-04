@@ -18,6 +18,8 @@
 	if(self) {
 		NSRect viewFrame = NSMakeRect(0,0,200, 62);
 		XspfMLabelMenuView *view = [[[XspfMLabelMenuView alloc] initWithFrame:viewFrame] autorelease];
+		[view setAction:[self action]];
+		[view setTarget:[self target]];
 		[super setView:view];
 	}
 	
