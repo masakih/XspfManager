@@ -10,6 +10,8 @@
 
 #import "XspfManager.h"
 
+#import "XspfMLabelMenuItem.h"
+
 
 @implementation XspfMListViewController
 
@@ -20,10 +22,29 @@
 	return self;
 }
 
+- (NSMenu *)contextMenu
+{
+	NSMenu *menu = [[[NSMenu alloc] initWithTitle:@"title"] autorelease];
+	
+	NSMenuItem *item = [[[NSMenuItem alloc] initWithTitle:@"Label is Menu" action:Nil keyEquivalent:@""] autorelease];
+	[menu addItem:item];
+	
+	item = [[[XspfMLabelMenuItem alloc] initWithTitle:@"Label:" action:Nil keyEquivalent:@""] autorelease];
+	[menu addItem:item];
+	[(XspfMLabelMenuItem *)item setIntegerValue:4];
+	
+	item = [[[NSMenuItem alloc] initWithTitle:@"This is MenuMMMMMMMMMMMMMMMMMMMMMM" action:Nil keyEquivalent:@""] autorelease];
+	[menu addItem:item];
+	
+	return menu;
+}
+
 - (void)awakeFromNib
 {
 	[tableView setDoubleAction:@selector(openXspf:)];
 	[tableView registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]];
+	
+	[tableView setMenu:[self contextMenu]];
 }
 
 
