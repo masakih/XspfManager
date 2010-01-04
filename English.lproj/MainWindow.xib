@@ -511,7 +511,7 @@
 						</object>
 						<object class="NSSplitView" id="593733723">
 							<reference key="NSNextResponder" ref="72950107"/>
-							<int key="NSvFlags">256</int>
+							<int key="NSvFlags">274</int>
 							<object class="NSMutableArray" key="NSSubviews">
 								<bool key="EncodedWithXMLCoder">YES</bool>
 								<object class="NSCustomView" id="841726608">
