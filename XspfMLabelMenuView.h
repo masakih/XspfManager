@@ -36,4 +36,6 @@
 	NSInteger blinkModeBlinkTime;
 }
 
+- (void)setMenuLabel:(NSString *)menuLabel;
+- (NSString *)menuLabel;
 @end

@@ -16,6 +16,7 @@
 - (NSDictionary *)titleAttribute;
 - (NSRect)titleRect;
 - (NSFont *)labelNameFont;
+- (NSRect)labelNameRect;
 - (NSRect)labelRectForIndex:(NSInteger)index;
 @end
 
@@ -25,7 +26,7 @@ const CGFloat labelCount = 8;
 
 - (void)setupCells
 {
-	title = [[NSTextFieldCell alloc] initTextCell:@"Label:"];
+	title = [[NSTextFieldCell alloc] initTextCell:@""];
 	[title setControlSize:NSRegularControlSize];
 	[title setFont:[self titleFont]];
 	
@@ -64,6 +65,28 @@ const CGFloat labelCount = 8;
         [self setupCells];
     }
     return self;
+}
+
+- (void)sizeToFit
+{
+	CGFloat width = 200;
+	CGFloat height = 0;
+	
+	NSRect rect = [self titleRect];
+	width = MAX(width, NSMaxX(rect));
+	height += rect.size.height;
+	
+	rect = [self labelNameRect];
+	width = MAX(width, NSMaxX(rect));
+	height += rect.size.height;
+	
+	rect = [self labelRectForIndex:0];
+	width = MAX(width, NSMaxX(rect));
+	height += rect.size.height;
+	
+	height += 6 + 6;
+	
+	[self setFrameSize:NSMakeSize(width, height)];
 }
 
 const CGFloat leftMargin = 19;
@@ -139,12 +162,6 @@ const CGFloat leftMargin = 19;
 	
 	return cellRect;
 }
-- (NSRect)labelCellRectForIndex:(NSInteger)index
-{
-	NSRect cellRect = [self labelRectForIndex:index];
-	
-	return NSInsetRect(cellRect, 2, 2);
-}
 
 - (void)drawRect:(NSRect)rect {
     // Drawing code here.
@@ -165,7 +182,14 @@ const CGFloat leftMargin = 19;
 		[labelName drawWithFrame:cellFrame inView:self];
 	}
 }
-
+- (void)setMenuLabel:(NSString *)menuTitle
+{
+	[title setStringValue:menuTitle];
+}
+- (NSString *)menuLabel
+{
+	return [title stringValue];
+}
 - (void)setObjectValue:(id)value
 {
 	if([value respondsToSelector:@selector(integerValue)]) {
@@ -277,7 +301,7 @@ const CGFloat leftMargin = 19;
 			label = @"Orange";
 			break;
 		case 3:
-			label = @"Yelliow";
+			label = @"Yellow";
 			break;
 		case 4:
 			label = @"Green";
