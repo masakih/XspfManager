@@ -20,6 +20,7 @@
 		F40B342210B6BE2000896716 /* UKKQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = F40B342010B6BE2000896716 /* UKKQueue.m */; };
 		F40B342810B6BE9B00896716 /* UKFileWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = F40B342710B6BE9B00896716 /* UKFileWatcher.m */; };
 		F40B342F10B6C09700896716 /* UKMainThreadProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = F40B342D10B6C09700896716 /* UKMainThreadProxy.m */; };
+		F42BF7B710F1C59F00D8F8C1 /* XspfMLabelMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F42BF7B610F1C59F00D8F8C1 /* XspfMLabelMenuItem.m */; };
 		F4343DEF10AD774A0090F57B /* NSAppleEventDescriptor-Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = F4343DE810AD774A0090F57B /* NSAppleEventDescriptor-Extensions.m */; };
 		F4343DF010AD774A0090F57B /* NSPathUtilities-XspfQT-Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = F4343DEA10AD774A0090F57B /* NSPathUtilities-XspfQT-Extensions.m */; };
 		F4343DF110AD774A0090F57B /* NSURL-XspfQT-Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = F4343DEC10AD774A0090F57B /* NSURL-XspfQT-Extensions.m */; };
@@ -54,6 +55,7 @@
 		F481B42510F09A6E00B7EA4F /* XspfMDragControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F481B42410F09A6E00B7EA4F /* XspfMDragControl.m */; };
 		F481B6F110F0F50300B7EA4F /* XspfMMainModel.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = F481B6F010F0F50200B7EA4F /* XspfMMainModel.xcdatamodel */; };
 		F481B70A10F0F80700B7EA4F /* XspfMLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F481B70910F0F80700B7EA4F /* XspfMLabelCell.m */; };
+		F481B82E10F1754600B7EA4F /* XspfMLabelMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = F481B82D10F1754600B7EA4F /* XspfMLabelMenuView.m */; };
 		F499881910DDAD3800AAC6D6 /* XspfMRule_NSExpressionFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = F499881810DDAD3800AAC6D6 /* XspfMRule_NSExpressionFunctions.m */; };
 		F499886B10DDFB3E00AAC6D6 /* XspfMThreadSpleepRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F499886A10DDFB3E00AAC6D6 /* XspfMThreadSpleepRequest.m */; };
 		F4998DA110E6C7CB00AAC6D6 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4998DA010E6C7CB00AAC6D6 /* MainWindow.xib */; };
@@ -116,6 +118,8 @@
 		F40B342710B6BE9B00896716 /* UKFileWatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKFileWatcher.m; sourceTree = "<group>"; };
 		F40B342D10B6C09700896716 /* UKMainThreadProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKMainThreadProxy.m; sourceTree = "<group>"; };
 		F40B342E10B6C09700896716 /* UKMainThreadProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKMainThreadProxy.h; sourceTree = "<group>"; };
+		F42BF7B510F1C59F00D8F8C1 /* XspfMLabelMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMLabelMenuItem.h; sourceTree = "<group>"; };
+		F42BF7B610F1C59F00D8F8C1 /* XspfMLabelMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMLabelMenuItem.m; sourceTree = "<group>"; };
 		F4343DE710AD774A0090F57B /* NSAppleEventDescriptor-Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAppleEventDescriptor-Extensions.h"; sourceTree = "<group>"; };
 		F4343DE810AD774A0090F57B /* NSAppleEventDescriptor-Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAppleEventDescriptor-Extensions.m"; sourceTree = "<group>"; };
 		F4343DE910AD774A0090F57B /* NSPathUtilities-XspfQT-Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSPathUtilities-XspfQT-Extensions.h"; sourceTree = "<group>"; };
@@ -179,6 +183,8 @@
 		F481B6F010F0F50200B7EA4F /* XspfMMainModel.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = XspfMMainModel.xcdatamodel; sourceTree = "<group>"; };
 		F481B70810F0F80700B7EA4F /* XspfMLabelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMLabelCell.h; sourceTree = "<group>"; };
 		F481B70910F0F80700B7EA4F /* XspfMLabelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMLabelCell.m; sourceTree = "<group>"; };
+		F481B82C10F1754600B7EA4F /* XspfMLabelMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMLabelMenuView.h; sourceTree = "<group>"; };
+		F481B82D10F1754600B7EA4F /* XspfMLabelMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMLabelMenuView.m; sourceTree = "<group>"; };
 		F499881810DDAD3800AAC6D6 /* XspfMRule_NSExpressionFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMRule_NSExpressionFunctions.m; sourceTree = "<group>"; };
 		F499886910DDFB3E00AAC6D6 /* XspfMThreadSpleepRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMThreadSpleepRequest.h; sourceTree = "<group>"; };
 		F499886A10DDFB3E00AAC6D6 /* XspfMThreadSpleepRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMThreadSpleepRequest.m; sourceTree = "<group>"; };
@@ -233,18 +239,10 @@
 				77C8280C06725ACE000B614F /* XspfManager.m */,
 				F47C00B5109D479100F5991C /* XspfMMainWindowController.h */,
 				F47C00B6109D479100F5991C /* XspfMMainWindowController.m */,
-				F43E62BB10A0710E00BF88DA /* XspfMImageView.h */,
-				F43E62BC10A0710E00BF88DA /* XspfMImageView.m */,
-				F480CD6510AF8A4300AC365B /* XspfMTableView.h */,
-				F480CD6610AF8A4300AC365B /* XspfMTableView.m */,
-				F43E629F10A0692500BF88DA /* XspfMCollectionView.h */,
-				F43E62A010A0692500BF88DA /* XspfMCollectionView.m */,
-				F4CE525310AAEBE8004AC4FA /* XspfMCollectionItemBox.h */,
-				F4CE525410AAEBE8004AC4FA /* XspfMCollectionItemBox.m */,
-				F4CE51B010A99E4E004AC4FA /* XspfMCollectionViewItem.h */,
-				F4CE51B110A99E4E004AC4FA /* XspfMCollectionViewItem.m */,
 				F49BCF9310A45175007136CE /* XspfMViewController.h */,
 				F49BCF9410A45178007136CE /* XspfMViewController.m */,
+				F4CE51B010A99E4E004AC4FA /* XspfMCollectionViewItem.h */,
+				F4CE51B110A99E4E004AC4FA /* XspfMCollectionViewItem.m */,
 				F43E653210A3167700BF88DA /* XspfMCollectionViewController.h */,
 				F43E653310A3167700BF88DA /* XspfMCollectionViewController.m */,
 				F49BD01110A477BF007136CE /* XspfMListViewController.h */,
@@ -261,12 +259,6 @@
 				F499CBCD10DA73620053923E /* XspfMRule_RuleBuilder.m */,
 				F499881810DDAD3800AAC6D6 /* XspfMRule_NSExpressionFunctions.m */,
 				F499CBE710DA7A960053923E /* XspfMRule_private.h */,
-				F481B3F710F08DE200B7EA4F /* XspfMSplitView.h */,
-				F481B3F810F08DE200B7EA4F /* XspfMSplitView.m */,
-				F481B42310F09A6E00B7EA4F /* XspfMDragControl.h */,
-				F481B42410F09A6E00B7EA4F /* XspfMDragControl.m */,
-				F481B70810F0F80700B7EA4F /* XspfMLabelCell.h */,
-				F481B70910F0F80700B7EA4F /* XspfMLabelCell.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -310,6 +302,7 @@
 				F47C04F4109DC18C00F5991C /* WorkerThread */,
 				F47C02CC109D6BA200F5991C /* ValueTransformers */,
 				7756732906782D8800D1FEB8 /* Models */,
+				F481B82910F1737700B7EA4F /* Views&Cells */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -461,6 +454,31 @@
 			path = extFiles/HMXSPFcomponent;
 			sourceTree = "<group>";
 		};
+		F481B82910F1737700B7EA4F /* Views&Cells */ = {
+			isa = PBXGroup;
+			children = (
+				F43E62BB10A0710E00BF88DA /* XspfMImageView.h */,
+				F43E62BC10A0710E00BF88DA /* XspfMImageView.m */,
+				F480CD6510AF8A4300AC365B /* XspfMTableView.h */,
+				F480CD6610AF8A4300AC365B /* XspfMTableView.m */,
+				F43E629F10A0692500BF88DA /* XspfMCollectionView.h */,
+				F43E62A010A0692500BF88DA /* XspfMCollectionView.m */,
+				F4CE525310AAEBE8004AC4FA /* XspfMCollectionItemBox.h */,
+				F4CE525410AAEBE8004AC4FA /* XspfMCollectionItemBox.m */,
+				F481B3F710F08DE200B7EA4F /* XspfMSplitView.h */,
+				F481B3F810F08DE200B7EA4F /* XspfMSplitView.m */,
+				F481B42310F09A6E00B7EA4F /* XspfMDragControl.h */,
+				F481B42410F09A6E00B7EA4F /* XspfMDragControl.m */,
+				F481B70810F0F80700B7EA4F /* XspfMLabelCell.h */,
+				F481B70910F0F80700B7EA4F /* XspfMLabelCell.m */,
+				F481B82C10F1754600B7EA4F /* XspfMLabelMenuView.h */,
+				F481B82D10F1754600B7EA4F /* XspfMLabelMenuView.m */,
+				F42BF7B510F1C59F00D8F8C1 /* XspfMLabelMenuItem.h */,
+				F42BF7B610F1C59F00D8F8C1 /* XspfMLabelMenuItem.m */,
+			);
+			name = "Views&Cells";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -580,6 +598,8 @@
 				F481B42510F09A6E00B7EA4F /* XspfMDragControl.m in Sources */,
 				F481B6F110F0F50300B7EA4F /* XspfMMainModel.xcdatamodel in Sources */,
 				F481B70A10F0F80700B7EA4F /* XspfMLabelCell.m in Sources */,
+				F481B82E10F1754600B7EA4F /* XspfMLabelMenuView.m in Sources */,
+				F42BF7B710F1C59F00D8F8C1 /* XspfMLabelMenuItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,6 +11,16 @@
 
 @implementation XspfMLabelCell
 
+- (void)setIntegerValue:(NSInteger)integer
+{
+	if(integer == [self integerValue]) return;
+	
+	[gradient release];
+	gradient = nil;
+	
+	[super setIntegerValue:integer];
+}
+
 - (void)setObjectValue:(id)value
 {
 	if([value isEqual:[self objectValue]]) return;
@@ -73,7 +83,32 @@
 	
 	return gradient;
 }
-
+- (void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
+{
+	NSRect interFrame;
+	if([self isBordered]) {
+		interFrame = NSInsetRect(cellFrame, 2, 2);
+	} else {
+		interFrame = cellFrame;
+	}
+	if(![self isEnabled] || ![self isBordered] || NSOnState != [self state]) {
+		[self drawInteriorWithFrame:interFrame inView:controlView];
+		return;
+	}
+	
+	[NSGraphicsContext saveGraphicsState];
+	
+	[[NSColor lightGrayColor] set];
+	NSShadow *shadow = [[[NSShadow alloc] init] autorelease];
+	[shadow setShadowOffset:NSMakeSize(.3, .3)];
+	[shadow setShadowBlurRadius:0.5];
+	[shadow set];
+	NSFrameRect(cellFrame);
+	
+	[NSGraphicsContext restoreGraphicsState];
+	
+	[self drawInteriorWithFrame:interFrame inView:controlView];
+}
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
 	CGFloat circleRadius = (cellFrame.size.height - 2) / 2.0;
