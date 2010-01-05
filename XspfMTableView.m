@@ -29,17 +29,48 @@
 	}
 }
 
+- (void)setup
+{
+	contextMenuRow = -1;
+}
+- (id)initWithFrame:(NSRect)frame
+{
+	self = [super initWithFrame:frame];
+	if(self) {
+		[self setup];
+	}
+	return self;
+}
+- (id)initWithCoder:(id)decoder
+{
+	self = [super initWithCoder:decoder];
+	if(self) {
+		[self setup];
+	}
+	return self;
+}
+
 #pragma mark#### NSMenu Delegate ####
 - (void)menuDidClose:(NSMenu *)menu
 {
 	HMLog(HMLogLevelDebug, @"Enter %@", NSStringFromSelector(_cmd));
-	NSMenuItem *hiddenItem = [menu itemAtIndex:0];
-	id rowValue = [hiddenItem representedObject];	
-	HMLog(HMLogLevelDebug, @"rowValue is %@", rowValue);
-	NSInteger row = [rowValue integerValue];
-	NSRect rowRect = [self rectOfRow:row];
+	NSRect rowRect = [self rectOfRow:contextMenuRow];
 	[self setNeedsDisplayInRect:rowRect];
+	[menu setDelegate:nil];
+	
+	contextMenuRow = -1;
 }
+- (void)drawRect:(NSRect)rect
+{
+	[super drawRect:rect];
+	
+	if(contextMenuRow == -1) return;
+	
+	NSRect rowRect = [self rectOfRow:contextMenuRow];
+	[[self _highlightColorForCell:[self preparedCellAtColumn:0 row:contextMenuRow]] set];
+	NSFrameRectWithWidth(rowRect, 2);
+}
+
 - (NSMenu *)menuForEvent:(NSEvent *)event
 {
 	if([[self dataSource] respondsToSelector:@selector(tableView:menuForEvent:)]) {
@@ -47,21 +78,16 @@
 		if(menu) {
 			// draw select frame rectangle.
 			NSPoint mouse = [self convertPoint:[event locationInWindow] fromView:nil];
-			NSInteger row = [self rowAtPoint:mouse];
-			NSInteger col = [self columnAtPoint:mouse];
-			NSRect rowRect= [self rectOfRow:row];
-			[self lockFocus];
-			[[self _highlightColorForCell:[self preparedCellAtColumn:col row:row]] set];
-			NSFrameRectWithWidth(rowRect, 2);
-			[self unlockFocus];
+			contextMenuRow = [self rowAtPoint:mouse];
+			NSRect rowRect= [self rectOfRow:contextMenuRow];
+			[self setNeedsDisplayInRect:rowRect];
+			[self displayIfNeeded];
 			
 			if([menu delegate]) {
 				HMLog(HMLogLevelAlert, @"-[%@ %@] method overwrite returned NSMenu's delegate.",
 					  NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+				HMLog(HMLogLevelAlert, @"Delegate is %@(%p)", NSStringFromClass([[menu delegate] class]), [menu delegate]);
 			}
-			NSMenuItem *hiddenItem = [menu insertItemWithTitle:@"hidden" action:Nil keyEquivalent:@"" atIndex:0];
-			[hiddenItem setHidden:YES];
-			[hiddenItem setRepresentedObject:[NSNumber numberWithInteger:row]];
 			[menu setDelegate:self];
 			
 			return menu;

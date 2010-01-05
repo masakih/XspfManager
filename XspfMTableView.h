@@ -11,6 +11,7 @@
 
 @interface XspfMTableView : NSTableView
 {
+	NSInteger contextMenuRow;
 }
 
 @end
