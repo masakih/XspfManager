@@ -126,7 +126,7 @@
 }
 - (void)sortByKey:(NSString *)key
 {
-	NSMutableArray *sortDescs = [[controller sortDescriptors] mutableCopy];
+	NSMutableArray *sortDescs = [[[controller sortDescriptors] mutableCopy] autorelease];
 	NSSortDescriptor *sortDesc = nil;
 	
 	// key is descs first key.
