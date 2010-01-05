@@ -250,7 +250,11 @@ const CGFloat leftMargin = 19;
 	}
 	blinkModeBlinkTime--;
 }
-	
+
+- (BOOL)acceptsFirstMouse:(NSEvent *)theEvent
+{
+	return YES;
+}
 - (void)mouseDown:(NSEvent *)theEvent
 {
 	if(blinkMode) return;
