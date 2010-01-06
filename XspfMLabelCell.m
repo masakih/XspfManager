@@ -37,11 +37,30 @@
 	
 	[super dealloc];
 }
+
+- (void)setLabelStyle:(NSInteger)style
+{
+	labelStyle = style;
+}
+- (NSInteger)labelStyle
+{
+	return labelStyle;
+}
+- (void)setDrawX:(BOOL)flag
+{
+	drawX = flag;
+}
+- (BOOL)isDrawX
+{
+	return drawX;
+}
+
 - (NSColor *)baseColor
 {
 	NSColor *result = nil;
 	switch([self integerValue]) {
 		case 0:
+			result = [NSColor darkGrayColor];
 			break;
 		case 1:
 			result = [NSColor redColor];
@@ -78,6 +97,8 @@
 }
 - (NSGradient *)gradient
 {
+	if([self integerValue] == 0) return nil;
+	
 	if(gradient) return gradient;
 	gradient = [[NSGradient alloc] initWithStartingColor:[self startColor] endingColor:[self endColor]];
 	
@@ -109,14 +130,54 @@
 	
 	[self drawInteriorWithFrame:interFrame inView:controlView];
 }
-- (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
+- (NSBezierPath *)bezierWithFrame:(NSRect)cellFrame
 {
+	if(labelStyle == XspfMSquareStyle) {
+		CGFloat radius = cellFrame.size.width / 10;
+		radius = MIN(radius, cellFrame.size.height / 10);
+		return [NSBezierPath bezierPathWithRoundedRect:cellFrame xRadius:radius yRadius:radius];
+	}
+	
 	CGFloat circleRadius = (cellFrame.size.height - 2) / 2.0;
 	
 	NSRect circleRect = NSMakeRect(NSMidX(cellFrame) - circleRadius, NSMidY(cellFrame) - circleRadius,
 								   circleRadius * 2, circleRadius * 2);
-	id bezier = [NSBezierPath bezierPathWithOvalInRect:circleRect];
-	[[self gradient] drawInBezierPath:bezier angle:90];
+	return [NSBezierPath bezierPathWithOvalInRect:circleRect];
+}
+
+- (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
+{
+	if(drawX && [self integerValue] == 0) {
+		cellFrame = NSInsetRect(cellFrame, 3, 3);
+		CGFloat maxX, midX, minX, maxY, midY, minY;
+		maxX = NSMaxX(cellFrame); midX = NSMidX(cellFrame); minX = NSMinX(cellFrame);
+		maxY = NSMaxY(cellFrame); midY = NSMidY(cellFrame); minY = NSMinY(cellFrame);
+		CGFloat d = 1;
+		
+		NSBezierPath *result = [NSBezierPath bezierPath];
+		[result setLineWidth:1];
+		[result moveToPoint:NSMakePoint(minX + d, minY)];
+		[result lineToPoint:NSMakePoint(midX, midY - d)];
+		[result lineToPoint:NSMakePoint(maxX - d, minY)];
+		[result lineToPoint:NSMakePoint(maxX, minY + d)];
+		[result lineToPoint:NSMakePoint(midX + d, midY)];
+		[result lineToPoint:NSMakePoint(maxX, maxY - d)];
+		[result lineToPoint:NSMakePoint(maxX - d, maxY)];
+		[result lineToPoint:NSMakePoint(midX, midY + d)];
+		[result lineToPoint:NSMakePoint(minX + d, maxY)];
+		[result lineToPoint:NSMakePoint(minX, maxY - d)];
+		[result lineToPoint:NSMakePoint(midX - d, midY)];
+		[result lineToPoint:NSMakePoint(minX, minY + d)];
+		[result closePath];
+		
+		
+		[[self baseColor] set];
+		[result fill];
+		
+		return;
+	}
+	
+	[[self gradient] drawInBezierPath:[self bezierWithFrame:cellFrame] angle:90];
 }
 
 @end
