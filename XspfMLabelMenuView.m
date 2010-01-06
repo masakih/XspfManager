@@ -41,7 +41,7 @@ const CGFloat labelSize = 19;
 	[labelName setFont:[self labelNameFont]];
 	[labelName setAlignment:NSCenterTextAlignment];
 	[labelName setTextColor:[NSColor disabledControlTextColor]];
-	[labelName setBordered:YES];
+//	[labelName setBordered:YES];
 	
 	label01 = [[[XspfMLabelCell alloc] initTextCell:@""] autorelease];
 	label02 = [[[XspfMLabelCell alloc] initTextCell:@""] autorelease];
