@@ -11,7 +11,6 @@
 #import "XspfMLabelCell.h"
 
 @interface XspfMLabelMenuView(XspfMPrivate)
-- (CGFloat)titleSize;
 - (NSFont *)titleFont;
 - (NSDictionary *)titleAttribute;
 - (NSRect)titleRect;
@@ -79,7 +78,6 @@ const CGFloat labelSize = 19;
 	[title release];
 	[labelCells release];
 	[labelName release];
-	[titleFont release];
 	
 	[super dealloc];
 }
@@ -108,22 +106,14 @@ const CGFloat labelSize = 19;
 }
 
 
-- (CGFloat)titleSize
+-(CGFloat)titleFontSize
 {
-	return [NSFont systemFontSizeForControlSize:NSRegularControlSize] + 1;
-}
-- (void)setFont:(NSFont *)newFont
-{
-	HMLog(HMLogLevelDebug, @"new font -> %@", newFont);
-	[titleFont autorelease];
-	titleFont = [newFont retain];
+	return [[NSFont menuFontOfSize:0] pointSize] + 1;
 }
 - (NSFont *)titleFont
 {
-	if(titleFont) return titleFont;
-	titleFont = [[NSFont menuFontOfSize:[self titleSize]] retain];
+	return [NSFont menuFontOfSize:[self titleFontSize]];
 	
-	return titleFont;
 }
 - (NSDictionary *)titleAttribute
 {
@@ -143,7 +133,7 @@ const CGFloat labelSize = 19;
 	CGFloat height = [self titleHeight];
 	NSRect rect = NSMakeRect(leftMargin, NSMaxY([self frame]) - height,
 							 [self frame].size.width, height);
-		
+	
 	return rect;
 }
 - (CGFloat)labelNameSize
@@ -272,6 +262,7 @@ const CGFloat labelSize = 19;
 		[labelName setStringValue:@""];
 		[self setNeedsDisplayInRect:[self labelNameRect]];
 		
+		[self setIntegerValue:labelIndex];
 		[self sendActionToTarget];
 		
 		[[[self enclosingMenuItem] menu] cancelTracking];
@@ -301,9 +292,7 @@ const CGFloat labelSize = 19;
 	}
 	if(!inLabelCell) return;
 	blinkMode = YES;
-	
-	[self setIntegerValue:labelIndex];
-	
+		
 	id info = [NSMutableDictionary dictionaryWithObjectsAndKeys:
 			   [NSNumber numberWithInteger:labelIndex], @"labelIndex",
 			   nil];
