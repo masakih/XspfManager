@@ -191,7 +191,7 @@
 }
 - (IBAction)sortByLabel:(id)sender
 {
-	[self doesNotRecognizeSelector:_cmd];
+	[self sortByKey:@"label"];
 }
 
 - (IBAction)add:(id)sender
@@ -256,8 +256,6 @@
 		} else {
 			[menuItem setState:NSOffState];
 		}
-	} else if(action == @selector(sortByLabel:)) {
-		enabled = NO;
 	}
 	
 	return enabled;
