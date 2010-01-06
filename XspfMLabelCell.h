@@ -9,9 +9,24 @@
 #import <Cocoa/Cocoa.h>
 
 
+enum _XspfMLabelStyle {
+	XspfMCircleStyle,
+	XspfMSquareStyle,
+};
+
+
 @interface XspfMLabelCell : NSActionCell
 {
 	NSGradient *gradient;
+	
+	NSInteger labelStyle;
+	BOOL drawX;
+
 }
+
+- (void)setLabelStyle:(NSInteger)style;
+- (NSInteger)labelStyle;
+- (void)setDrawX:(BOOL)flag;
+- (BOOL)isDrawX;
 
 @end
