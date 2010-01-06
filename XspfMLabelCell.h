@@ -9,10 +9,22 @@
 #import <Cocoa/Cocoa.h>
 
 
+enum _XspfMLabelColor {
+	XspfMLabelNone,
+	XspfMLabelRed,
+	XpsfMLabelOrange,
+	XpsfMLabelYellow,
+	XSpfMLabelGreen,
+	XspfMLabelBlue,
+	XspfMLabelPurple,
+	XspfMLabelGray,
+};
+
 enum _XspfMLabelStyle {
 	XspfMCircleStyle,
 	XspfMSquareStyle,
 };
+
 
 
 @interface XspfMLabelCell : NSActionCell
