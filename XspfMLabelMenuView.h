@@ -29,6 +29,8 @@
 	
 	NSTextFieldCell *labelName;
 	
+	NSFont *titleFont;
+	
 	CGFloat titleHeight;
 	CGFloat labelNameHeight;
 	
@@ -38,4 +40,5 @@
 
 - (void)setMenuLabel:(NSString *)menuLabel;
 - (NSString *)menuLabel;
+- (void)setFont:(NSFont *)newFont;
 @end
