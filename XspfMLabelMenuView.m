@@ -24,6 +24,11 @@
 
 const CGFloat labelCount = 8;
 
+const CGFloat leftMargin = 19;
+const CGFloat rightMargin = 23;
+const CGFloat labelMargin = 3;
+const CGFloat labelSize = 19;
+
 - (void)setupCells
 {
 	title = [[NSTextFieldCell alloc] initTextCell:@""];
@@ -36,15 +41,16 @@ const CGFloat labelCount = 8;
 	[labelName setFont:[self labelNameFont]];
 	[labelName setAlignment:NSCenterTextAlignment];
 	[labelName setTextColor:[NSColor disabledControlTextColor]];
+	[labelName setBordered:YES];
 	
-	label01 = [[XspfMLabelCell alloc] initTextCell:@""];
-	label02 = [[XspfMLabelCell alloc] initTextCell:@""];
-	label03 = [[XspfMLabelCell alloc] initTextCell:@""];
-	label04 = [[XspfMLabelCell alloc] initTextCell:@""];
-	label05 = [[XspfMLabelCell alloc] initTextCell:@""];
-	label06 = [[XspfMLabelCell alloc] initTextCell:@""];
-	label07 = [[XspfMLabelCell alloc] initTextCell:@""];
-	label08 = [[XspfMLabelCell alloc] initTextCell:@""];
+	label01 = [[[XspfMLabelCell alloc] initTextCell:@""] autorelease];
+	label02 = [[[XspfMLabelCell alloc] initTextCell:@""] autorelease];
+	label03 = [[[XspfMLabelCell alloc] initTextCell:@""] autorelease];
+	label04 = [[[XspfMLabelCell alloc] initTextCell:@""] autorelease];
+	label05 = [[[XspfMLabelCell alloc] initTextCell:@""] autorelease];
+	label06 = [[[XspfMLabelCell alloc] initTextCell:@""] autorelease];
+	label07 = [[[XspfMLabelCell alloc] initTextCell:@""] autorelease];
+	label08 = [[[XspfMLabelCell alloc] initTextCell:@""] autorelease];
 	
 	labelCells = [NSArray arrayWithObjects:label01, label02, label03, label04, label05, label06, label07, label08, nil];
 	[labelCells retain];
@@ -68,38 +74,56 @@ const CGFloat labelCount = 8;
     }
     return self;
 }
-
+- (void)dealloc
+{
+	[title release];
+	[labelCells release];
+	[labelName release];
+	[titleFont release];
+	
+	[super dealloc];
+}
 - (void)sizeToFit
 {
 	CGFloat width = 200;
 	CGFloat height = 0;
 	
-	NSRect rect = [self titleRect];
-	width = MAX(width, NSMaxX(rect));
-	height += rect.size.height;
+	NSSize size = [[title stringValue] sizeWithAttributes:[self titleAttribute]];
+	HMLog(HMLogLevelDebug, @"title size is %@", NSStringFromSize(size));
+	width = MAX(width, size.width + leftMargin);
+	height += size.height;
 	
-	rect = [self labelNameRect];
-	width = MAX(width, NSMaxX(rect));
+	NSRect rect = [self labelNameRect];
+//	width = MAX(width, NSMaxX(rect));
 	height += rect.size.height;
 	
 	rect = [self labelRectForIndex:0];
 	width = MAX(width, NSMaxX(rect));
 	height += rect.size.height;
 	
+	width += rightMargin;
 	height += 6 + 6;
 	
 	[self setFrameSize:NSMakeSize(width, height)];
 }
 
-const CGFloat leftMargin = 19;
 
 - (CGFloat)titleSize
 {
-	return [NSFont systemFontSizeForControlSize:NSRegularControlSize];
+	return [NSFont systemFontSizeForControlSize:NSRegularControlSize] + 1;
+}
+- (void)setFont:(NSFont *)newFont
+{
+	HMLog(HMLogLevelDebug, @"new font -> %@", newFont);
+	[titleFont autorelease];
+	titleFont = [newFont retain];
 }
 - (NSFont *)titleFont
 {
-	return [NSFont menuFontOfSize:[self titleSize]];
+	if(titleFont) return titleFont;
+	titleFont = [[NSFont menuFontOfSize:[self titleSize]] retain];
+	
+	return titleFont;
 }
 - (NSDictionary *)titleAttribute
 {
@@ -145,22 +169,18 @@ const CGFloat leftMargin = 19;
 }
 - (NSRect)labelNameRect
 {
-	const CGFloat UIMargin = 6;
-	CGFloat xMargin = 100;
 	CGFloat height = [self labelNameHeight];
-	NSRect rect = NSMakeRect(leftMargin + xMargin, NSMinY([self labelRectForIndex:0]) - height - 3,
-							 [self frame].size.width - leftMargin - xMargin - UIMargin, height);
+	NSRect rect = NSMakeRect(leftMargin, NSMinY([self labelRectForIndex:0]) - height - 3,
+							 (labelSize + labelMargin) * (labelCount - 1) + labelSize, height);
 	
 	return rect;
 }
 - (NSRect)labelRectForIndex:(NSInteger)index
 {
 	CGFloat maxY = NSMinY([self titleRect]);
-	CGFloat height = 19;
-	CGFloat xMargin = 3;
 	CGFloat yMargin = 6;
 	
-	NSRect cellRect = NSMakeRect((height + xMargin) * index + leftMargin, maxY - height - yMargin, height, height);
+	NSRect cellRect = NSMakeRect((labelSize + labelMargin) * index + leftMargin, maxY - labelSize - yMargin, labelSize, labelSize);
 	
 	return cellRect;
 }
@@ -183,6 +203,9 @@ const CGFloat leftMargin = 19;
 	if(NSIntersectsRect(rect, cellFrame)) {
 		[labelName drawWithFrame:cellFrame inView:self];
 	}
+	
+//	[[NSColor redColor] set];
+//	NSFrameRect([self frame]);
 }
 - (void)setMenuLabel:(NSString *)menuTitle
 {
