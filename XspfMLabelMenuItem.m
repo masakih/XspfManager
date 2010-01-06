@@ -44,26 +44,26 @@
 {
 	// ignore.
 }
-- (XspfMLabelMenuView *)view
+- (XspfMLabelMenuView *)labelView
 {
 	return (XspfMLabelMenuView *)[super view];
 }
 
 - (void)setObjectValue:(id)value
 {
-	[[self view] setObjectValue:value];
+	[[self labelView] setObjectValue:value];
 }
 - (id)objectValue
 {
-	return [[self view] objectValue];
+	return [[self labelView] objectValue];
 }
 - (void)setIntegerValue:(NSInteger)value
 {
-	[[self view] setIntegerValue:value];
+	[[self labelView] setIntegerValue:value];
 }
 - (NSInteger)integerValue
 {
-	return [[self view] integerValue];
+	return [[self labelView] integerValue];
 }
 
 
