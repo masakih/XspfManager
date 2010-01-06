@@ -59,28 +59,43 @@
 {
 	NSColor *result = nil;
 	switch([self integerValue]) {
-		case 0:
+		case XspfMLabelNone:
 			result = [NSColor darkGrayColor];
 			break;
-		case 1:
-			result = [NSColor redColor];
+		case XspfMLabelRed:
+			result = [NSColor colorWithCalibratedRed:238 / 255.0
+											   green:93 / 255.0
+												blue:84 / 255.0
+											   alpha:1.0];
 			break;
-		case 2:
+		case XpsfMLabelOrange:
 			result = [NSColor orangeColor];
 			break;
-		case 3:
-			result = [NSColor yellowColor];
+		case XpsfMLabelYellow:
+			result = [NSColor colorWithCalibratedRed:225 / 255.0
+											   green:207 / 255.0
+												blue:60 / 255.0
+											   alpha:1.0];
 			break;
-		case 4:
-			result = [NSColor greenColor];
+		case XSpfMLabelGreen:
+			result = [NSColor colorWithCalibratedRed:160 /255.0
+											   green:190/ 255.0
+												blue:59 / 255.0
+											   alpha:1.0];
 			break;
-		case 5:
-			result = [NSColor blueColor];
+		case XspfMLabelBlue:
+			result = [NSColor colorWithCalibratedRed:80 / 255.0
+											   green:145 / 255.0
+												blue:230 / 255.0
+											   alpha:1.0];
 			break;
-		case 6:
-			result = [NSColor purpleColor];
+		case XspfMLabelPurple:
+			result = [NSColor colorWithCalibratedRed:141 / 255.0
+											   green:104 / 255.0
+												blue:160 / 255.0
+											   alpha:1.0];
 			break;
-		case 7:
+		case XspfMLabelGray:
 			result = [NSColor grayColor];
 			break;
 	}
@@ -89,15 +104,16 @@
 }
 - (NSColor *)endColor
 {
+	return [self baseColor];
 	return [[self baseColor] highlightWithLevel:0.1];
 }
 - (NSColor *)startColor
 {
-	return [[self baseColor] highlightWithLevel:0.7];
+	return [[self baseColor] highlightWithLevel:0.45];
 }
 - (NSGradient *)gradient
 {
-	if([self integerValue] == 0) return nil;
+	if([self integerValue] == XspfMLabelNone) return nil;
 	
 	if(gradient) return gradient;
 	gradient = [[NSGradient alloc] initWithStartingColor:[self startColor] endingColor:[self endColor]];
@@ -133,8 +149,8 @@
 - (NSBezierPath *)bezierWithFrame:(NSRect)cellFrame
 {
 	if(labelStyle == XspfMSquareStyle) {
-		CGFloat radius = cellFrame.size.width / 10;
-		radius = MIN(radius, cellFrame.size.height / 10);
+		CGFloat radius = cellFrame.size.width * 0.1;
+		radius = MIN(radius, cellFrame.size.height * 0.1);
 		return [NSBezierPath bezierPathWithRoundedRect:cellFrame xRadius:radius yRadius:radius];
 	}
 	
@@ -144,10 +160,15 @@
 								   circleRadius * 2, circleRadius * 2);
 	return [NSBezierPath bezierPathWithOvalInRect:circleRect];
 }
+- (CGFloat)gradientAngle
+{
+	if(labelStyle == XspfMSquareStyle) return -90.0;
+	return 90.0;
+}
 
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
-	if(drawX && [self integerValue] == 0) {
+	if(drawX && [self integerValue] == XspfMLabelNone) {
 		cellFrame = NSInsetRect(cellFrame, 3, 3);
 		CGFloat maxX, midX, minX, maxY, midY, minY;
 		maxX = NSMaxX(cellFrame); midX = NSMidX(cellFrame); minX = NSMinX(cellFrame);
@@ -177,7 +198,7 @@
 		return;
 	}
 	
-	[[self gradient] drawInBezierPath:[self bezierWithFrame:cellFrame] angle:90];
+	[[self gradient] drawInBezierPath:[self bezierWithFrame:cellFrame] angle:[self gradientAngle]];
 }
 
 @end
