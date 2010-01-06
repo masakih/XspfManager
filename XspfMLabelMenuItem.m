@@ -10,6 +10,11 @@
 
 #import "XspfMLabelMenuView.h"
 
+
+@interface XspfMLabelMenuItem(XspfM_CocoaPrivateMethodHack)
+- (NSFont *)font;
+@end
+
 @implementation XspfMLabelMenuItem
 
 - (void)setupView
@@ -18,9 +23,13 @@
 	XspfMLabelMenuView *view = [[[XspfMLabelMenuView alloc] initWithFrame:viewFrame] autorelease];
 	[view setAction:[self action]];
 	[view setTarget:[self target]];
+	if([super respondsToSelector:@selector(font)]) {
+		[view setFont:[self font]];
+	}
 	[view setMenuLabel:[self title]];
 	[view sizeToFit];
 	[super setView:view];
+	[[self menu] update];
 }
 - (id)initWithTitle:(NSString *)aString action:(SEL)aSelector keyEquivalent:(NSString *)charCode
 {
