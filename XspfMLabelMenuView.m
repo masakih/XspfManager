@@ -56,6 +56,8 @@ const CGFloat labelCount = 8;
 		[cell setEnabled:YES];
 		[cell setBordered:YES];
 		[cell setIntegerValue:i];
+		[cell setLabelStyle:XspfMSquareStyle];
+		[cell setDrawX:YES];
 	}
 }
 
@@ -227,12 +229,17 @@ const CGFloat leftMargin = 19;
 }
 - (void)blinkTimerOperate:(NSTimer *)timer
 {
+	if(blinkModeBlinkTime % 3) {
+		blinkModeBlinkTime--;
+		return;
+	}
+	
 	id userInfo = [timer userInfo];
 	NSInteger labelIndex = [[userInfo valueForKey:@"labelIndex"] integerValue];
 	NSCell *cell = [labelCells objectAtIndex:labelIndex];
 	NSRect cellFrame = NSInsetRect([self labelRectForIndex:labelIndex], -1,-1);
 	
-	NSInteger state = blinkModeBlinkTime % 2 ? NSOnState : NSOffState;
+	NSInteger state = blinkModeBlinkTime % 6 ? NSOnState : NSOffState;
 	
 	[cell setState:state];
 	[self setNeedsDisplayInRect:cellFrame];
@@ -277,8 +284,8 @@ const CGFloat leftMargin = 19;
 	id info = [NSMutableDictionary dictionaryWithObjectsAndKeys:
 			   [NSNumber numberWithInteger:labelIndex], @"labelIndex",
 			   nil];
-	blinkModeBlinkTime = 5;
-	NSTimer *timer = [NSTimer timerWithTimeInterval:0.1
+	blinkModeBlinkTime = 12;
+	NSTimer *timer = [NSTimer timerWithTimeInterval:0.03
 											 target:self
 										   selector:@selector(blinkTimerOperate:)
 										   userInfo:info
