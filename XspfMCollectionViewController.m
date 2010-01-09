@@ -9,6 +9,7 @@
 #import "XspfMCollectionViewController.h"
 
 #import "XspfMCollectionViewItem.h"
+#import "XSPFMXspfObject.h"
 
 
 @implementation XspfMCollectionViewController
@@ -36,6 +37,13 @@
 	[scrollView setVerticalLineScroll:viewSize.height];
 	collectionViewItem = newItem;
 }
+
+- (IBAction)changeLabel:(id)sender
+{
+	XSPFMXspfObject *object = [sender representedObject];
+	object.label = [sender objectValue];
+}
+
 - (IBAction)collectionViewItemViewRegular:(id)sender
 {
 	[self setCollectionItem:regularItem];
