@@ -9,6 +9,8 @@
 #import "XspfMCollectionViewItem.h"
 
 #import "XspfMCollectionItemBox.h"
+#import "XSPFMXspfObject.h"
+#import "XspfMLabelMenuItem.h"
 
 
 @implementation XspfMCollectionViewItem
@@ -17,7 +19,7 @@
 {
 	XspfMCollectionViewItem *result = [super copyWithZone:zone];
 	
-	result->menu = menu;
+	result->menu = [menu copy];
 	[result performSelector:@selector(setupBinding:) withObject:nil afterDelay:0.0];
 	
 	return result;
@@ -67,6 +69,11 @@
 			 object:NSApp];
 	
 	[self coodinateColors];
+	
+	XspfMLabelMenuItem *item = (XspfMLabelMenuItem *)[menu itemWithTag:1000];
+	XSPFMXspfObject *object = [self representedObject];
+	[item setRepresentedObject:object];
+	[item setObjectValue:object.label];
 	
 	[[self view] setMenu:menu];
 	[self findAndSetBox];
@@ -128,6 +135,16 @@
 	}
 }
 
+- (NSColor *)labelTextColor
+{
+	XSPFMXspfObject *obj = [self representedObject];
+	HMLog(HMLogLevelDebug, @"Label is %@", obj.label);
+	
+	if([self isSelected] && [self isFirstResponder] && [NSApp isActive] && [obj.label integerValue] == 0) {//XspfMLabelNone) {
+		return [NSColor whiteColor];
+	}
+	return [NSColor blackColor];
+}
 - (NSColor *)textColor
 {
 	if([self isSelected] && [self isFirstResponder] && [NSApp isActive]) {
@@ -153,6 +170,9 @@
 	
 	[self willChangeValueForKey:@"textColor"];
 	[self didChangeValueForKey:@"textColor"];
+	
+	[self willChangeValueForKey:@"labelTextColor"];
+	[self didChangeValueForKey:@"labelTextColor"];
 	
 	[self highlightRateIfNeeded];
 }
