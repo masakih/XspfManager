@@ -103,7 +103,7 @@
 	}
 }
 
-- (void)setDelegae:(id)newDelegate
+- (void)setDelegate:(id)newDelegate
 {
 	if(!newDelegate) delegate = nil;
 	

@@ -14,7 +14,7 @@
 	id delegate;
 }
 
-- (void)setDelegae:(id)newDelegate;
+- (void)setDelegate:(id)newDelegate;
 - (id)delegate;
 
 @end
