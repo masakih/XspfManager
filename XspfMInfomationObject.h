@@ -1,5 +1,5 @@
 //
-//  XSPFMInfomationObject.h
+//  XspfMInfomationObject.h
 //  XspfManager
 //
 //  Created by Hori,Masaki on 09/11/02.
@@ -10,7 +10,7 @@
 
 @class XspfMXspfObject;
 
-@interface XSPFMInfomationObject :  NSManagedObject  
+@interface XspfMInfomationObject :  NSManagedObject  
 {
 }
 
