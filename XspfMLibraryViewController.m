@@ -80,6 +80,13 @@ enum {
 					order:kFavoritesOrder];
 }
 
+- (BOOL)mouseInTableView
+{
+	NSEvent *event = [[[self view] window] currentEvent];
+	NSPoint mouse = [[tableView superview] convertPoint:[event locationInWindow] fromView:nil];
+	
+	return NSPointInRect(mouse, [tableView visibleRect]);
+}
 - (XspfMXspfListObject *)targetObject
 {
 	id array = [[self representedObject] arrangedObjects];
@@ -88,8 +95,17 @@ enum {
 	if(row >= 0 && [array count] > row) {
 		return [array objectAtIndex:row];
 	}
+	
+	if(![self mouseInTableView]) {
+		NSArray *selection = [[self representedObject] selectedObjects];
+		if([selection count] != 0) {
+			return [selection objectAtIndex:0];
+		}
+	}
 	return nil;
 }
+
+	
 - (BOOL)canUseNewSmartLibraryName:(NSString *)newName
 {
 	NSManagedObjectContext *moc = [self managedObjectContext];
@@ -139,7 +155,12 @@ enum {
 }
 - (IBAction)editPredicate:(id)sender
 {
-	XspfMXspfListObject *obj = [self targetObject];
+	XspfMXspfListObject *obj = [sender representedObject];
+	if(!obj) {
+		HMLog(HMLogLevelError, @"-[%@ %@] paramater's representedObject is nil.",
+			  NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+		return;
+	}
 	[nameField setStringValue:obj.name];
 	[nameField selectText:self];
 	
@@ -153,7 +174,12 @@ enum {
 }
 - (IBAction)deletePredicate:(id)sender
 {
-	XspfMXspfListObject *obj = [self targetObject];
+	XspfMXspfListObject *obj = [sender representedObject];
+	if(!obj) {
+		HMLog(HMLogLevelError, @"-[%@ %@] paramater's representedObject is nil.",
+			  NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+		return;
+	}
 	NSBeginInformationalAlertSheet(nil, nil, @"Cancel", nil, [[self view] window],
 								   self, @selector(didEndAskDelete:::), Nil, obj,
 								   NSLocalizedString(@"Do you really delete smart library \"%@\"?", @"Do you really delete smart library \"%@\"?"),
@@ -173,6 +199,7 @@ enum {
 		XspfMXspfListObject *obj = [self targetObject];
 		if(!obj) return NO;
 		if(obj.order == kLibraryOrder || obj.order == kFavoritesOrder) return NO;
+		[menuItem setRepresentedObject:obj];
 	}
 	
 	return YES;
