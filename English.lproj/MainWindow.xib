@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="2"/>
+			<integer value="746"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -530,64 +530,6 @@
 								<object class="NSCustomView" id="841726608">
 									<reference key="NSNextResponder" ref="593733723"/>
 									<int key="NSvFlags">272</int>
-									<object class="NSMutableArray" key="NSSubviews">
-										<bool key="EncodedWithXMLCoder">YES</bool>
-										<object class="NSCustomView" id="694217088">
-											<reference key="NSNextResponder" ref="841726608"/>
-											<int key="NSvFlags">290</int>
-											<string key="NSFrame">{{64, -1}, {79, 23}}</string>
-											<reference key="NSSuperview" ref="841726608"/>
-											<string key="NSClassName">XspfMDragControl</string>
-										</object>
-										<object class="NSButton" id="508723422">
-											<reference key="NSNextResponder" ref="841726608"/>
-											<int key="NSvFlags">256</int>
-											<string key="NSFrame">{{28, -1}, {37, 23}}</string>
-											<reference key="NSSuperview" ref="841726608"/>
-											<bool key="NSEnabled">YES</bool>
-											<object class="NSButtonCell" key="NSCell" id="800583573">
-												<int key="NSCellFlags">67239424</int>
-												<int key="NSCellFlags2">134348800</int>
-												<string key="NSContents">Gradient Button</string>
-												<reference key="NSSupport" ref="26"/>
-												<reference key="NSControlView" ref="508723422"/>
-												<int key="NSButtonFlags">-2033958657</int>
-												<int key="NSButtonFlags2">162</int>
-												<object class="NSCustomResource" key="NSNormalImage">
-													<string key="NSClassName">NSImage</string>
-													<string key="NSResourceName">NSSmartBadgeTemplate</string>
-												</object>
-												<string key="NSAlternateContents"/>
-												<string key="NSKeyEquivalent"/>
-												<int key="NSPeriodicDelay">400</int>
-												<int key="NSPeriodicInterval">75</int>
-											</object>
-										</object>
-										<object class="NSButton" id="323357242">
-											<reference key="NSNextResponder" ref="841726608"/>
-											<int key="NSvFlags">256</int>
-											<string key="NSFrame">{{-1, -1}, {30, 23}}</string>
-											<reference key="NSSuperview" ref="841726608"/>
-											<bool key="NSEnabled">YES</bool>
-											<object class="NSButtonCell" key="NSCell" id="702874544">
-												<int key="NSCellFlags">-2080244224</int>
-												<int key="NSCellFlags2">134217728</int>
-												<string key="NSContents">Gradient Button</string>
-												<reference key="NSSupport" ref="168253491"/>
-												<reference key="NSControlView" ref="323357242"/>
-												<int key="NSButtonFlags">-2033958657</int>
-												<int key="NSButtonFlags2">162</int>
-												<object class="NSCustomResource" key="NSNormalImage" id="195049974">
-													<string key="NSClassName">NSImage</string>
-													<string key="NSResourceName">NSAddTemplate</string>
-												</object>
-												<string key="NSAlternateContents"/>
-												<string key="NSKeyEquivalent"/>
-												<int key="NSPeriodicDelay">400</int>
-												<int key="NSPeriodicInterval">75</int>
-											</object>
-										</object>
-									</object>
 									<string key="NSFrameSize">{142, 438}</string>
 									<reference key="NSSuperview" ref="593733723"/>
 									<string key="NSClassName">NSView</string>
@@ -618,7 +560,10 @@
 												<reference key="NSControlView" ref="444268717"/>
 												<int key="NSButtonFlags">-2033434369</int>
 												<int key="NSButtonFlags2">162</int>
-												<reference key="NSNormalImage" ref="195049974"/>
+												<object class="NSCustomResource" key="NSNormalImage">
+													<string key="NSClassName">NSImage</string>
+													<string key="NSResourceName">NSAddTemplate</string>
+												</object>
 												<string key="NSAlternateContents"/>
 												<string key="NSKeyEquivalent"/>
 												<int key="NSPeriodicDelay">400</int>
@@ -1175,22 +1120,6 @@
 					</object>
 					<int key="connectionID">854</int>
 				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">newPredicate:</string>
-						<reference key="source" ref="771522425"/>
-						<reference key="destination" ref="323357242"/>
-					</object>
-					<int key="connectionID">856</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">delegate</string>
-						<reference key="source" ref="694217088"/>
-						<reference key="destination" ref="771522425"/>
-					</object>
-					<int key="connectionID">861</int>
-				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -1467,9 +1396,6 @@
 						<reference key="object" ref="841726608"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="323357242"/>
-							<reference ref="694217088"/>
-							<reference ref="508723422"/>
 						</object>
 						<reference key="parent" ref="593733723"/>
 					</object>
@@ -1516,39 +1442,6 @@
 						<int key="objectID">647</int>
 						<reference key="object" ref="468207364"/>
 						<reference key="parent" ref="444268717"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">848</int>
-						<reference key="object" ref="323357242"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="702874544"/>
-						</object>
-						<reference key="parent" ref="841726608"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">849</int>
-						<reference key="object" ref="702874544"/>
-						<reference key="parent" ref="323357242"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">860</int>
-						<reference key="object" ref="694217088"/>
-						<reference key="parent" ref="841726608"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">846</int>
-						<reference key="object" ref="508723422"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="800583573"/>
-						</object>
-						<reference key="parent" ref="841726608"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">847</int>
-						<reference key="object" ref="800583573"/>
-						<reference key="parent" ref="508723422"/>
 					</object>
 				</object>
 			</object>
@@ -1614,11 +1507,6 @@
 					<string>822.IBPluginDependency</string>
 					<string>841.CustomClassName</string>
 					<string>841.IBPluginDependency</string>
-					<string>846.IBPluginDependency</string>
-					<string>847.IBPluginDependency</string>
-					<string>848.IBPluginDependency</string>
-					<string>849.IBPluginDependency</string>
-					<string>860.IBPluginDependency</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1705,11 +1593,6 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>XspfMSplitView</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="unlocalizedProperties">
@@ -1735,7 +1618,7 @@
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="IBPartialClassDescription">
 					<string key="className">NSObject</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier" id="127006678">
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">XspfMDragControl.h</string>
 					</object>
@@ -1767,15 +1650,6 @@
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">extFiles/UKKQueue/UKMainThreadProxy.h</string>
 					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">XspfMDragControl</string>
-					<string key="superclassName">NSControl</string>
-					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">delegate</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<reference key="sourceIdentifier" ref="127006678"/>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">XspfMMainWindowController</string>
