@@ -8,17 +8,17 @@
 
 #import "XspfLoadThumbnailRequest.h"
 
-#import "XSPFMXspfObject.h"
+#import "XspfMXspfObject.h"
 #import "XspfMThumbnailData.h"
 
 @implementation XspfLoadThumbnailRequest
 @synthesize object;
 
-+ (id)requestWithObject:(XSPFMXspfObject *)obj
++ (id)requestWithObject:(XspfMXspfObject *)obj
 {
 	return [[[self alloc] initWithObject:obj] autorelease];
 }
-- (id)initWithObject:(XSPFMXspfObject *)obj
+- (id)initWithObject:(XspfMXspfObject *)obj
 {
 	[super init];
 	self.object = obj;

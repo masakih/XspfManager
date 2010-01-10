@@ -8,7 +8,7 @@
 
 #import "XspfMMainWindowController.h"
 
-#import "XSPFMXspfObject.h"
+#import "XspfMXspfObject.h"
 
 #import "XspfMViewController.h"
 #import "XspfMLibraryViewController.h"
@@ -100,7 +100,7 @@
 	BOOL isSelected = [[controller valueForKeyPath:@"selectedObjects.@count"] boolValue];
 	if(!isSelected) return;
 	
-	XSPFMXspfObject *rep = [controller valueForKeyPath:@"selection.self"];
+	XspfMXspfObject *rep = [controller valueForKeyPath:@"selection.self"];
 	if(rep.deleted) {		
 		NSRunCriticalAlertPanel( NSLocalizedString(@"Xspf is Deleted", @"Xspf is Deleted"),
 								NSLocalizedString(@"\"%@\" is deleted",  @"\"%@\" is deleted"),
@@ -264,7 +264,7 @@
 #pragma mark#### Other methods ####
 - (void)removeSelectedItem
 {
-	XSPFMXspfObject *obj = [controller valueForKeyPath:@"selection.self"];
+	XspfMXspfObject *obj = [controller valueForKeyPath:@"selection.self"];
 	
 	NSBeginInformationalAlertSheet(nil, nil, @"Cancel", nil, [self window],
 								   self, @selector(didEndAskDelete:::), Nil, obj,
@@ -395,7 +395,7 @@
 #pragma mark#### Test ####
 - (IBAction)test01:(id)sender
 {
-	XSPFMXspfObject *obj = [controller valueForKeyPath:@"selection.self"];
+	XspfMXspfObject *obj = [controller valueForKeyPath:@"selection.self"];
 	srandom([[NSDate date] timeIntervalSince1970]);
 	obj.label = [NSNumber numberWithInteger:random() % 8];
 	HMLog(HMLogLevelDebug, @"HMLogLevelDebug -> %@", obj);

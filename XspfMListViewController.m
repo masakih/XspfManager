@@ -12,7 +12,7 @@
 
 #import "XspfMTableView.h"
 
-#import "XSPFMXspfObject.h"
+#import "XspfMXspfObject.h"
 #import "XspfMLabelMenuItem.h"
 
 
@@ -45,11 +45,11 @@
 
 - (IBAction)changeLabel:(id)sender
 {
-	XSPFMXspfObject *object = [sender representedObject];
+	XspfMXspfObject *object = [sender representedObject];
 	object.label = [sender objectValue];
 }
 
-- (NSMenu *)contextMenuForObject:(XSPFMXspfObject *)object
+- (NSMenu *)contextMenuForObject:(XspfMXspfObject *)object
 {
 	[labelMenuItem setObjectValue:object.label];
 	[labelMenuItem setRepresentedObject:object];
@@ -63,7 +63,7 @@
 	NSInteger row = [table rowAtPoint:mouse];
 	if(row == NSNotFound || row == -1) return nil;
 	
-	XSPFMXspfObject *object = [[[self representedObject] arrangedObjects] objectAtIndex:row];
+	XspfMXspfObject *object = [[[self representedObject] arrangedObjects] objectAtIndex:row];
 	return [self contextMenuForObject:object];
 }
 - (void)tableView:(NSTableView *)table sortDescriptorsDidChange:(NSArray *)oldDescriptors

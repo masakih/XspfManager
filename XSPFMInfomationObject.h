@@ -8,7 +8,7 @@
 
 #import <CoreData/CoreData.h>
 
-@class XSPFMXspfObject;
+@class XspfMXspfObject;
 
 @interface XSPFMInfomationObject :  NSManagedObject  
 {
@@ -18,7 +18,7 @@
 //@property (retain) NSArray *voiceActors;
 @property (retain) NSString * productsList;
 @property (retain) NSString * voiceActorsList;
-@property (retain) XSPFMXspfObject * xspf;
+@property (retain) XspfMXspfObject * xspf;
 
 @end
 

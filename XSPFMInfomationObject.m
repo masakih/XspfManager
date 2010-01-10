@@ -8,7 +8,7 @@
 
 #import "XSPFMInfomationObject.h"
 
-#import "XSPFMXspfObject.h"
+#import "XspfMXspfObject.h"
 
 @implementation XSPFMInfomationObject 
 

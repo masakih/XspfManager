@@ -9,7 +9,7 @@
 #import "XspfMCollectionViewController.h"
 
 #import "XspfMCollectionViewItem.h"
-#import "XSPFMXspfObject.h"
+#import "XspfMXspfObject.h"
 
 
 @implementation XspfMCollectionViewController
@@ -40,7 +40,7 @@
 
 - (IBAction)changeLabel:(id)sender
 {
-	XSPFMXspfObject *object = [sender representedObject];
+	XspfMXspfObject *object = [sender representedObject];
 	object.label = [sender objectValue];
 }
 

@@ -8,7 +8,7 @@
 
 #import "XspfMThumbnailData.h"
 
-#import "XSPFMXspfObject.h"
+#import "XspfMXspfObject.h"
 
 @implementation XspfMThumbnailData 
 

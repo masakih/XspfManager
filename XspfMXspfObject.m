@@ -1,12 +1,12 @@
 // 
-//  XSPFMXspfObject.m
+//  XspfMXspfObject.m
 //  XspfManager
 //
 //  Created by Hori,Masaki on 09/11/01.
 //  Copyright 2009 masakih. All rights reserved.
 //
 
-#import "XSPFMXspfObject.h"
+#import "XspfMXspfObject.h"
 #import "XspfMThumbnailData.h"
 
 #import "XspfManager.h"
@@ -17,11 +17,11 @@
 #import "NSPathUtilities-XspfQT-Extensions.h"
 #import "NSURL-XspfQT-Extensions.h"
 
-@interface XSPFMXspfObject(HMPrivate)
+@interface XspfMXspfObject(HMPrivate)
 - (NSURL *)url;
 @end
 
-@implementation XSPFMXspfObject 
+@implementation XspfMXspfObject 
 
 @dynamic registerDate;
 @dynamic thumbnailData;
