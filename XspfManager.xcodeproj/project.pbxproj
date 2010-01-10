@@ -25,6 +25,7 @@
 		F4343DF010AD774A0090F57B /* NSPathUtilities-XspfQT-Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = F4343DEA10AD774A0090F57B /* NSPathUtilities-XspfQT-Extensions.m */; };
 		F4343DF110AD774A0090F57B /* NSURL-XspfQT-Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = F4343DEC10AD774A0090F57B /* NSURL-XspfQT-Extensions.m */; };
 		F4343DF210AD774A0090F57B /* NSWorkspace-Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = F4343DEE10AD774A0090F57B /* NSWorkspace-Extensions.m */; };
+		F43E046B10F9B2D200D0428E /* XspfMPopUpButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E046A10F9B2D200D0428E /* XspfMPopUpButton.m */; };
 		F43E62A110A0692500BF88DA /* XspfMCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E62A010A0692500BF88DA /* XspfMCollectionView.m */; };
 		F43E62BD10A0710E00BF88DA /* XspfMImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E62BC10A0710E00BF88DA /* XspfMImageView.m */; };
 		F43E652E10A315D000BF88DA /* CollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F43E652C10A315D000BF88DA /* CollectionView.xib */; };
@@ -128,6 +129,8 @@
 		F4343DEC10AD774A0090F57B /* NSURL-XspfQT-Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL-XspfQT-Extensions.m"; sourceTree = "<group>"; };
 		F4343DED10AD774A0090F57B /* NSWorkspace-Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSWorkspace-Extensions.h"; sourceTree = "<group>"; };
 		F4343DEE10AD774A0090F57B /* NSWorkspace-Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSWorkspace-Extensions.m"; sourceTree = "<group>"; };
+		F43E046910F9B2D200D0428E /* XspfMPopUpButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMPopUpButton.h; sourceTree = "<group>"; };
+		F43E046A10F9B2D200D0428E /* XspfMPopUpButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMPopUpButton.m; sourceTree = "<group>"; };
 		F43E629F10A0692500BF88DA /* XspfMCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMCollectionView.h; sourceTree = "<group>"; };
 		F43E62A010A0692500BF88DA /* XspfMCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMCollectionView.m; sourceTree = "<group>"; };
 		F43E62BB10A0710E00BF88DA /* XspfMImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMImageView.h; sourceTree = "<group>"; };
@@ -477,6 +480,8 @@
 				F42BF7B610F1C59F00D8F8C1 /* XspfMLabelMenuItem.m */,
 				F4FE861510F475740076B366 /* XspfMLabelControl.h */,
 				F4FE861610F475740076B366 /* XspfMLabelControl.m */,
+				F43E046910F9B2D200D0428E /* XspfMPopUpButton.h */,
+				F43E046A10F9B2D200D0428E /* XspfMPopUpButton.m */,
 			);
 			name = "Views&Cells";
 			sourceTree = "<group>";
@@ -602,6 +607,7 @@
 				F481B82E10F1754600B7EA4F /* XspfMLabelMenuView.m in Sources */,
 				F42BF7B710F1C59F00D8F8C1 /* XspfMLabelMenuItem.m in Sources */,
 				F4FE861710F475740076B366 /* XspfMLabelControl.m in Sources */,
+				F43E046B10F9B2D200D0428E /* XspfMPopUpButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
