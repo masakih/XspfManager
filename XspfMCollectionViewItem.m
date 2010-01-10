@@ -9,7 +9,7 @@
 #import "XspfMCollectionViewItem.h"
 
 #import "XspfMCollectionItemBox.h"
-#import "XSPFMXspfObject.h"
+#import "XspfMXspfObject.h"
 #import "XspfMLabelMenuItem.h"
 #import "XspfMLabelCell.h"
 
@@ -72,7 +72,7 @@
 	[self coodinateColors];
 	
 	XspfMLabelMenuItem *item = (XspfMLabelMenuItem *)[menu itemWithTag:1000];
-	XSPFMXspfObject *object = [self representedObject];
+	XspfMXspfObject *object = [self representedObject];
 	[item setRepresentedObject:object];
 	[item setObjectValue:object.label];
 	
@@ -138,7 +138,7 @@
 
 - (NSColor *)labelTextColor
 {
-	XSPFMXspfObject *obj = [self representedObject];
+	XspfMXspfObject *obj = [self representedObject];
 	
 	if([self isSelected] && [self isFirstResponder] && [NSApp isActive] && [obj.label integerValue] == XspfMLabelNone) {
 		return [NSColor whiteColor];

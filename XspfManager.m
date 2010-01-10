@@ -1,5 +1,5 @@
 //
-//  XspfManager_AppDelegate.m
+//  XspfManager.m
 //  XspfManager
 //
 //  Created by Hori,Masaki on 09/11/01.
@@ -16,7 +16,7 @@
 #import "XspfMMovieLoadRequest.h"
 
 #import "UKKQueue.h"
-#import "XSPFMXspfObject.h"
+#import "XspfMXspfObject.h"
 
 #import "NSPathUtilities-XspfQT-Extensions.h"
 
@@ -323,11 +323,11 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 	
 	return num != 0;
 }
-- (XSPFMXspfObject *)registerWithURL:(NSURL *)url
+- (XspfMXspfObject *)registerWithURL:(NSURL *)url
 {
 	if([self didRegisteredURL:url]) return nil;
 	
-	XSPFMXspfObject *obj = [NSEntityDescription insertNewObjectForEntityForName:@"Xspf"
+	XspfMXspfObject *obj = [NSEntityDescription insertNewObjectForEntityForName:@"Xspf"
 														 inManagedObjectContext:[self managedObjectContext]];
 	if(!obj) return nil;
 	
@@ -362,7 +362,7 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 {
 	NSMutableArray *addedObjects = [NSMutableArray array];
 	
-	XSPFMXspfObject *insertedObject = nil;
+	XspfMXspfObject *insertedObject = nil;
 	for(id URL in URLs) {
 		insertedObject = [self registerWithURL:URL];
 		if(insertedObject) [addedObjects addObject:insertedObject];
@@ -373,7 +373,7 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 					  object:self
 					userInfo:[NSDictionary dictionaryWithObject:addedObjects forKey:@"XspfManagerAddedXspfObjects"]];
 }
-- (void)removeObject:(XSPFMXspfObject *)obj
+- (void)removeObject:(XspfMXspfObject *)obj
 {
 	[[UKKQueue sharedFileWatcher] removePathFromQueue:obj.filePath];
 	[[self managedObjectContext] deleteObject:obj];
@@ -398,7 +398,7 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 	
 	NSFileManager *fm = [NSFileManager defaultManager];
 	UKKQueue *queue = [UKKQueue sharedFileWatcher];
-	for(XSPFMXspfObject *obj in array) {
+	for(XspfMXspfObject *obj in array) {
 		NSString *filePath = obj.filePath;
 		if([fm fileExistsAtPath:filePath]) {
 			[queue addPathToQueue:filePath];
@@ -440,7 +440,7 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 		HMLog(HMLogLevelError, @"Target found too many!!! (%d).", [array count]);
 	}
 	
-	XSPFMXspfObject *obj = [array objectAtIndex:0];
+	XspfMXspfObject *obj = [array objectAtIndex:0];
 	NSString *resolvedPath = [obj.alias resolvedPath];
 	
 	if([UKFileWatcherRenameNotification isEqualToString:notificationName]) {

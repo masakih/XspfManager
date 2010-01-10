@@ -8,14 +8,14 @@
 
 #import <CoreData/CoreData.h>
 
-@class XSPFMXspfObject;
+@class XspfMXspfObject;
 
 @interface XspfMThumbnailData :  NSManagedObject  
 {
 }
 
 @property (retain) NSData * data;
-@property (retain) XSPFMXspfObject * xspf;
+@property (retain) XspfMXspfObject * xspf;
 
 @end
 

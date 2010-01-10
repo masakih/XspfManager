@@ -1,5 +1,5 @@
 //
-//  XSPFMXspfObject.h
+//  XspfMXspfObject.h
 //  XspfManager
 //
 //  Created by Hori,Masaki on 09/11/01.
@@ -10,7 +10,7 @@
 
 @class XspfMThumbnailData;
 
-@interface XSPFMXspfObject :  NSManagedObject
+@interface XspfMXspfObject :  NSManagedObject
 {
 	NSString *title;
 	NSString *filePath;

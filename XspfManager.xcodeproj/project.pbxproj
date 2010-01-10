@@ -34,7 +34,7 @@
 		F478A95A10DD1F0F000A75B4 /* XspfMRule_Subclasses.m in Sources */ = {isa = PBXBuildFile; fileRef = F478A95910DD1F0F000A75B4 /* XspfMRule_Subclasses.m */; };
 		F47C00B7109D479100F5991C /* XspfMMainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C00B6109D479100F5991C /* XspfMMainWindowController.m */; };
 		F47C00FE109D51CC00F5991C /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F47C00FD109D51CC00F5991C /* QTKit.framework */; };
-		F47C023A109D603D00F5991C /* XSPFMXspfObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C0239109D603D00F5991C /* XSPFMXspfObject.m */; };
+		F47C023A109D603D00F5991C /* XspfMXspfObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C0239109D603D00F5991C /* XspfMXspfObject.m */; };
 		F47C02CF109D6BB800F5991C /* XspfQTValueTransformers.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C02CE109D6BB800F5991C /* XspfQTValueTransformers.m */; };
 		F47C04FC109DC19C00F5991C /* HMChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C04F6109DC19C00F5991C /* HMChannel.m */; };
 		F47C04FD109DC19C00F5991C /* HMQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C04F8109DC19C00F5991C /* HMQueue.m */; };
@@ -144,8 +144,8 @@
 		F47C00B5109D479100F5991C /* XspfMMainWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMMainWindowController.h; sourceTree = "<group>"; };
 		F47C00B6109D479100F5991C /* XspfMMainWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMMainWindowController.m; sourceTree = "<group>"; };
 		F47C00FD109D51CC00F5991C /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = /System/Library/Frameworks/QTKit.framework; sourceTree = "<absolute>"; };
-		F47C0238109D603D00F5991C /* XSPFMXspfObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XSPFMXspfObject.h; sourceTree = "<group>"; };
-		F47C0239109D603D00F5991C /* XSPFMXspfObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XSPFMXspfObject.m; sourceTree = "<group>"; };
+		F47C0238109D603D00F5991C /* XspfMXspfObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMXspfObject.h; sourceTree = "<group>"; };
+		F47C0239109D603D00F5991C /* XspfMXspfObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMXspfObject.m; sourceTree = "<group>"; };
 		F47C02CD109D6BB800F5991C /* XspfQTValueTransformers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XspfQTValueTransformers.h; path = ../XspfQT/XspfQTValueTransformers.h; sourceTree = SOURCE_ROOT; };
 		F47C02CE109D6BB800F5991C /* XspfQTValueTransformers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XspfQTValueTransformers.m; path = ../XspfQT/XspfQTValueTransformers.m; sourceTree = SOURCE_ROOT; };
 		F47C04F5109DC19C00F5991C /* HMChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMChannel.h; sourceTree = "<group>"; };
@@ -363,8 +363,8 @@
 				F49BD36810A66EC6007136CE /* XspfMXspfListObject.m */,
 				F47C0717109F1DDD00F5991C /* XSPFMInfomationObject.h */,
 				F47C0718109F1DDD00F5991C /* XSPFMInfomationObject.m */,
-				F47C0238109D603D00F5991C /* XSPFMXspfObject.h */,
-				F47C0239109D603D00F5991C /* XSPFMXspfObject.m */,
+				F47C0238109D603D00F5991C /* XspfMXspfObject.h */,
+				F47C0239109D603D00F5991C /* XspfMXspfObject.m */,
 				F40B335810B577FD00896716 /* XspfMThumbnailData.h */,
 				F40B335910B577FD00896716 /* XspfMThumbnailData.m */,
 			);
@@ -556,7 +556,7 @@
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
 				77C8280E06725ACE000B614F /* XspfManager.m in Sources */,
 				F47C00B7109D479100F5991C /* XspfMMainWindowController.m in Sources */,
-				F47C023A109D603D00F5991C /* XSPFMXspfObject.m in Sources */,
+				F47C023A109D603D00F5991C /* XspfMXspfObject.m in Sources */,
 				F47C02CF109D6BB800F5991C /* XspfQTValueTransformers.m in Sources */,
 				F47C04FC109DC19C00F5991C /* HMChannel.m in Sources */,
 				F47C04FD109DC19C00F5991C /* HMQueue.m in Sources */,

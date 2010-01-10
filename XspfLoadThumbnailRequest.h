@@ -10,14 +10,14 @@
 
 #import "XspfMMainThreadRequest.h"
 
-@class XSPFMXspfObject;
+@class XspfMXspfObject;
 
 @interface XspfLoadThumbnailRequest : XspfMMainThreadRequest
 {
-	XSPFMXspfObject *object;
+	XspfMXspfObject *object;
 }
-@property (retain) XSPFMXspfObject *object;
+@property (retain) XspfMXspfObject *object;
 
-+ (id)requestWithObject:(XSPFMXspfObject *)object;
-- (id)initWithObject:(XSPFMXspfObject *)object;
++ (id)requestWithObject:(XspfMXspfObject *)object;
+- (id)initWithObject:(XspfMXspfObject *)object;
 @end

@@ -17,11 +17,11 @@ static inline BOOL nilOrNSNull(id obj)
 	return !obj || obj == [NSNull null];
 }
 
-+ (id)requestWithObject:(XSPFMXspfObject *)anObject
++ (id)requestWithObject:(XspfMXspfObject *)anObject
 {
 	return [[[self alloc] initWithObject:anObject] autorelease];
 }
-- (id)initWithObject:(XSPFMXspfObject *)anObject
+- (id)initWithObject:(XspfMXspfObject *)anObject
 {
 	self = [super init];
 	self.object = anObject;

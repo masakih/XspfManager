@@ -9,15 +9,15 @@
 #import <Cocoa/Cocoa.h>
 
 #import "XspfMMainThreadRequest.h"
-#import "XSPFMXspfObject.h"
+#import "XspfMXspfObject.h"
 
 @interface XspfMMovieLoadRequest : XspfMMainThreadRequest
 {
-	XSPFMXspfObject *object;
+	XspfMXspfObject *object;
 }
-@property (retain) XSPFMXspfObject *object;
+@property (retain) XspfMXspfObject *object;
 
-+ (id)requestWithObject:(XSPFMXspfObject *)object;
-- (id)initWithObject:(XSPFMXspfObject *)object;
++ (id)requestWithObject:(XspfMXspfObject *)object;
+- (id)initWithObject:(XspfMXspfObject *)object;
 
 @end
