@@ -11,6 +11,7 @@
 #import "XspfMCollectionItemBox.h"
 #import "XSPFMXspfObject.h"
 #import "XspfMLabelMenuItem.h"
+#import "XspfMLabelCell.h"
 
 
 @implementation XspfMCollectionViewItem
@@ -138,9 +139,8 @@
 - (NSColor *)labelTextColor
 {
 	XSPFMXspfObject *obj = [self representedObject];
-	HMLog(HMLogLevelDebug, @"Label is %@", obj.label);
 	
-	if([self isSelected] && [self isFirstResponder] && [NSApp isActive] && [obj.label integerValue] == 0) {//XspfMLabelNone) {
+	if([self isSelected] && [self isFirstResponder] && [NSApp isActive] && [obj.label integerValue] == XspfMLabelNone) {
 		return [NSColor whiteColor];
 	}
 	return [NSColor blackColor];
