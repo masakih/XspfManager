@@ -37,31 +37,37 @@
 }
 - (void)dealloc
 {
-	[_menu release];
+	[menu release];
 	
 	[super dealloc];
 }
+- (void)setMenu:(NSMenu *)aMenu
+{
+	HMLog(HMLogLevelDebug, @"Enter -> %@", NSStringFromSelector(_cmd));
+	[menu autorelease];
+	menu = [aMenu retain];
+}
 - (NSMenu *)menu
 {
-	return _menu;
+	return menu;
 }
-- (void)menuDidClose:(NSMenu *)menu
+- (void)menuDidClose:(NSMenu *)aMenu
 {
 	[[self cell] setState:NSOffState];
 	[self display];
-	[menu setDelegate:nil];
+	[aMenu setDelegate:nil];
 }
 - (void)mouseDown:(NSEvent *)event
 {
 	HMLog(HMLogLevelDebug, @"Enter -> %@", NSStringFromSelector(_cmd));
-	NSMenu *menu = [self menu];
-	if(!menu) return;
-	[menu setDelegate:self];
+	NSMenu *aMenu = [self menu];
+	if(!aMenu) return;
+	[aMenu setDelegate:self];
 		
 	[[self cell] setState:NSOnState];
 	[self display];
 	
-	[NSMenu popUpContextMenu:menu withEvent:event forView:self];
+	[NSMenu popUpContextMenu:aMenu withEvent:event forView:self];
 }
 
 @end

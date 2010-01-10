@@ -11,7 +11,7 @@
 
 @interface XspfMPopUpButton : NSButton
 {
-	IBOutlet NSMenu *_menu;
+	IBOutlet NSMenu *menu;
 }
 
 @end
