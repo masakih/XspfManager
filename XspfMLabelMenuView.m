@@ -42,14 +42,14 @@ const CGFloat labelSize = 19;
 	[labelName setTextColor:[NSColor disabledControlTextColor]];
 //	[labelName setBordered:YES];
 	
-	label01 = [[[XspfMLabelCell alloc] initTextCell:@""] autorelease];
-	label02 = [[[XspfMLabelCell alloc] initTextCell:@""] autorelease];
-	label03 = [[[XspfMLabelCell alloc] initTextCell:@""] autorelease];
-	label04 = [[[XspfMLabelCell alloc] initTextCell:@""] autorelease];
-	label05 = [[[XspfMLabelCell alloc] initTextCell:@""] autorelease];
-	label06 = [[[XspfMLabelCell alloc] initTextCell:@""] autorelease];
-	label07 = [[[XspfMLabelCell alloc] initTextCell:@""] autorelease];
-	label08 = [[[XspfMLabelCell alloc] initTextCell:@""] autorelease];
+	XspfMLabelCell *label01 = [[[XspfMLabelCell alloc] initTextCell:@""] autorelease];
+	XspfMLabelCell *label02 = [[[XspfMLabelCell alloc] initTextCell:@""] autorelease];
+	XspfMLabelCell *label03 = [[[XspfMLabelCell alloc] initTextCell:@""] autorelease];
+	XspfMLabelCell *label04 = [[[XspfMLabelCell alloc] initTextCell:@""] autorelease];
+	XspfMLabelCell *label05 = [[[XspfMLabelCell alloc] initTextCell:@""] autorelease];
+	XspfMLabelCell *label06 = [[[XspfMLabelCell alloc] initTextCell:@""] autorelease];
+	XspfMLabelCell *label07 = [[[XspfMLabelCell alloc] initTextCell:@""] autorelease];
+	XspfMLabelCell *label08 = [[[XspfMLabelCell alloc] initTextCell:@""] autorelease];
 	
 	labelCells = [NSArray arrayWithObjects:label01, label02, label03, label04, label05, label06, label07, label08, nil];
 	[labelCells retain];
