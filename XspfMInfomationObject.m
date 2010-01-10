@@ -1,16 +1,16 @@
 // 
-//  XSPFMInfomationObject.m
+//  XspfMInfomationObject.m
 //  XspfManager
 //
 //  Created by Hori,Masaki on 09/11/02.
 //  Copyright 2009 masakih. All rights reserved.
 //
 
-#import "XSPFMInfomationObject.h"
+#import "XspfMInfomationObject.h"
 
 #import "XspfMXspfObject.h"
 
-@implementation XSPFMInfomationObject 
+@implementation XspfMInfomationObject 
 
 @dynamic productsList;
 @dynamic voiceActorsList;

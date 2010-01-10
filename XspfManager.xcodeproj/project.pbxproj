@@ -46,7 +46,7 @@
 		F47C06E8109F02C900F5991C /* XspfQTPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C06E0109F02C800F5991C /* XspfQTPlaylist.m */; };
 		F47C06E9109F02C900F5991C /* XspfQTTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C06E2109F02C800F5991C /* XspfQTTrack.m */; };
 		F47C06EA109F02C900F5991C /* XspfQTTrackList.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C06E4109F02C800F5991C /* XspfQTTrackList.m */; };
-		F47C0719109F1DDD00F5991C /* XSPFMInfomationObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C0718109F1DDD00F5991C /* XSPFMInfomationObject.m */; };
+		F47C0719109F1DDD00F5991C /* XspfMInfomationObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C0718109F1DDD00F5991C /* XspfMInfomationObject.m */; };
 		F47C0750109FAFB000F5991C /* FamilyName.txt in Resources */ = {isa = PBXBuildFile; fileRef = F47C074F109FAFB000F5991C /* FamilyName.txt */; };
 		F480CD6710AF8A4300AC365B /* XspfMTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F480CD6610AF8A4300AC365B /* XspfMTableView.m */; };
 		F480CEE510AFDAB400AC365B /* NSApplicationIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = F480CEE410AFDAB300AC365B /* NSApplicationIcon.icns */; };
@@ -169,8 +169,8 @@
 		F47C06E2109F02C800F5991C /* XspfQTTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfQTTrack.m; sourceTree = "<group>"; };
 		F47C06E3109F02C800F5991C /* XspfQTTrackList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfQTTrackList.h; sourceTree = "<group>"; };
 		F47C06E4109F02C800F5991C /* XspfQTTrackList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfQTTrackList.m; sourceTree = "<group>"; };
-		F47C0717109F1DDD00F5991C /* XSPFMInfomationObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XSPFMInfomationObject.h; sourceTree = "<group>"; };
-		F47C0718109F1DDD00F5991C /* XSPFMInfomationObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XSPFMInfomationObject.m; sourceTree = "<group>"; };
+		F47C0717109F1DDD00F5991C /* XspfMInfomationObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMInfomationObject.h; sourceTree = "<group>"; };
+		F47C0718109F1DDD00F5991C /* XspfMInfomationObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMInfomationObject.m; sourceTree = "<group>"; };
 		F47C074F109FAFB000F5991C /* FamilyName.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FamilyName.txt; sourceTree = "<group>"; };
 		F47C0752109FBE9B00F5991C /* fixFamilyNames.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = fixFamilyNames.sh; sourceTree = "<group>"; };
 		F47C096510A049DD00F5991C /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainWindow.xib; sourceTree = "<group>"; };
@@ -361,8 +361,8 @@
 				F481B6F010F0F50200B7EA4F /* XspfMMainModel.xcdatamodel */,
 				F49BD36710A66EC6007136CE /* XspfMXspfListObject.h */,
 				F49BD36810A66EC6007136CE /* XspfMXspfListObject.m */,
-				F47C0717109F1DDD00F5991C /* XSPFMInfomationObject.h */,
-				F47C0718109F1DDD00F5991C /* XSPFMInfomationObject.m */,
+				F47C0717109F1DDD00F5991C /* XspfMInfomationObject.h */,
+				F47C0718109F1DDD00F5991C /* XspfMInfomationObject.m */,
 				F47C0238109D603D00F5991C /* XspfMXspfObject.h */,
 				F47C0239109D603D00F5991C /* XspfMXspfObject.m */,
 				F40B335810B577FD00896716 /* XspfMThumbnailData.h */,
@@ -568,7 +568,7 @@
 				F47C06E8109F02C900F5991C /* XspfQTPlaylist.m in Sources */,
 				F47C06E9109F02C900F5991C /* XspfQTTrack.m in Sources */,
 				F47C06EA109F02C900F5991C /* XspfQTTrackList.m in Sources */,
-				F47C0719109F1DDD00F5991C /* XSPFMInfomationObject.m in Sources */,
+				F47C0719109F1DDD00F5991C /* XspfMInfomationObject.m in Sources */,
 				F43E62A110A0692500BF88DA /* XspfMCollectionView.m in Sources */,
 				F43E62BD10A0710E00BF88DA /* XspfMImageView.m in Sources */,
 				F43E653410A3167700BF88DA /* XspfMCollectionViewController.m in Sources */,
