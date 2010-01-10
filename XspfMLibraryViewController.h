@@ -10,6 +10,8 @@
 
 #import "XspfMViewController.h"
 
+@class XspfMDragControl;
+
 @interface XspfMLibraryViewController : XspfMViewController
 {
 	IBOutlet NSTableView *tableView;
@@ -19,11 +21,15 @@
 	IBOutlet NSTextField *nameField;
 	
 	IBOutlet id ruleEditorDelegate;
+	
+	IBOutlet XspfMDragControl *dragControl;
 }
 
 - (IBAction)newPredicate:(id)sender;
 - (IBAction)editPredicate:(id)sender;
 - (IBAction)deletePredicate:(id)sender;
 - (IBAction)didEndEditPredicate:(id)sender;
+
+- (XspfMDragControl *)dragControl;
 
 @end
