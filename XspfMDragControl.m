@@ -10,6 +10,7 @@
 
 
 @interface XspfMDragControl (XspfMPrivate)
+- (void)setup;
 - (NSRect)draggingRect;
 @end
 
@@ -19,6 +20,7 @@
 {
 	self = [super initWithFrame:frameRect];
 	if(self) {
+		[self setup];
 		[self resetCursorRects];
 	}
 	
@@ -28,12 +30,22 @@
 {
 	self = [super initWithCoder:decoder];
 	if(self) {
+		[self setup];
 		[self resetCursorRects];
 	}
 	
 	return self;
 }
 
+- (void)setup
+{
+	NSButtonCell *cell = [[[NSButtonCell alloc] initTextCell:@""] autorelease];
+	[cell setBordered:YES];
+	[cell setBezelStyle:NSSmallSquareBezelStyle];
+	[cell setControlSize:NSSmallControlSize];
+	
+	[self setCell:cell];
+}
 - (void)resetCursorRects
 {
 	[self addCursorRect:[self draggingRect] cursor:[NSCursor resizeLeftRightCursor]];
@@ -56,7 +68,7 @@
 	[[NSColor darkGrayColor] set];
 	
 	NSRect drawRect = [self draggingRect];
-	drawRect.origin = NSMakePoint(drawRect.origin.x + 5, 5);
+	drawRect.origin = NSMakePoint(drawRect.origin.x + 7, 6);
 	drawRect.size.width = 1;
 	drawRect.size.height = 10;
 	NSRectFill(drawRect);

@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface XspfMDragControl : NSImageView
+@interface XspfMDragControl : NSControl
 {
 	id delegate;
 }

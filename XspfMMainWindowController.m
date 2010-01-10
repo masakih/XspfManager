@@ -61,7 +61,7 @@
 }
 - (void)windowDidLoad
 {
-	[[self window] setContentBorderThickness:38 forEdge:NSMinYEdge];
+	[[self window] setContentBorderThickness:32 forEdge:NSMinYEdge];
 	
 	[self setupXspfLists];
 	[self setupDetailView];
@@ -398,6 +398,11 @@
 	srandom([[NSDate date] timeIntervalSince1970]);
 	obj.label = [NSNumber numberWithInteger:random() % 8];
 	HMLog(HMLogLevelDebug, @"HMLogLevelDebug -> %@", obj);
+	
+	NSButtonCell *cell = [sender cell];
+	HMLog(HMLogLevelDebug, @"boardered -> %@\nbezeled -> %@\ngradientType -> %d\n bezelStyle -> %d",
+		  [cell isBordered] ? @"YES" : @"NO", [cell isBezeled] ? @"YES" : @"NO",
+		  [cell gradientType], [cell bezelStyle]);
 }
 - (IBAction)test02:(id)sender
 {
