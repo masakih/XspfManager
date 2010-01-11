@@ -14,6 +14,6 @@
 {
 	if([theEvent clickCount] != 2) return [super mouseDown:theEvent];
 	
-	[NSApp sendAction:[self action] to:[self target] from:self];
+	[self sendAction:[self action] to:[self target]];
 }
 @end
