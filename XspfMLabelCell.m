@@ -102,12 +102,7 @@
 	
 	return result;
 }
-- (NSColor *)endColor
-{
-	return [self baseColor];
-	return [[self baseColor] highlightWithLevel:0.1];
-}
-- (NSColor *)startColor
+- (NSColor *)highlightColor
 {
 	return [[self baseColor] highlightWithLevel:0.45];
 }
@@ -116,7 +111,7 @@
 	if([self integerValue] == XspfMLabelNone) return nil;
 	
 	if(gradient) return gradient;
-	gradient = [[NSGradient alloc] initWithStartingColor:[self startColor] endingColor:[self endColor]];
+	gradient = [[NSGradient alloc] initWithStartingColor:[self highlightColor] endingColor:[self baseColor]];
 	
 	return gradient;
 }
