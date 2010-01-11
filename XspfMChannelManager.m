@@ -37,6 +37,9 @@
 	[self unbind:@"channelRequestNum"];
 	[self unbind:@"mainThreadChannelRequestNum"];
 	
+	[mainThreadChannel release];
+	[channel release];
+	
 	[super dealloc];
 }
 
