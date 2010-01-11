@@ -21,12 +21,12 @@
 
 @implementation XspfMLabelMenuView
 
-const CGFloat labelCount = 8;
+static const NSInteger labelCount = 8;
 
-const CGFloat leftMargin = 19;
-const CGFloat rightMargin = 23;
-const CGFloat labelMargin = 3;
-const CGFloat labelSize = 19;
+static const CGFloat leftMargin = 19;
+static const CGFloat rightMargin = 23;
+static const CGFloat labelMargin = 3;
+static const CGFloat labelSize = 19;
 
 - (void)setupCells
 {
