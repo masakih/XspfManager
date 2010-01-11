@@ -391,8 +391,8 @@ static NSString *const XspfMRuleValueKey = @"XspfMRuleValueKey";
 	HMLog(HMLogLevelDebug, @"Enter -> %@", NSStringFromSelector(_cmd));
 	id label = [[[XspfMLabelField alloc] initWithFrame:NSMakeRect(0,0,100,19)] autorelease];
 	[label sizeToFit];
-	[[label cell] setLabelStyle:XspfMSquareStyle];
-	[[label cell] setDrawX:YES];
+	[label setLabelStyle:XspfMSquareStyle];
+	[label setDrawX:YES];
 	
 	return label;
 }
