@@ -1,25 +1,107 @@
 "%[All]@ of the following are true" = "%[All]@ of the following are true";
 "%[Any]@ of the following are true" = "%[Any]@ of the following are true";
-"%[title]@ %[contains]@ %@" = "%[title]@ %[contains]@ %@";
-"%[title]@ %[begins with]@ %@" = "%[title]@ %[begins with]@ %@";
-"%[title]@ %[ends with]@ %@" = "%[title]@ %[ends with]@ %@";
-"%[title]@ %[is]@ %@" = "%[title]@ %[is]@ %@";
-"%[title]@ %[is not]@ %@" = "%[title]@ %[is not]@ %@";
-"%[rating]@ %[is]@ %@" = "%[rating]@ %[is]@ %@";
-"%[rating]@ %[is not]@ %@" = "%[rating]@ %[is not]@ %@";
-"%[rating]@ %[is greater than or equal to]@ %@" = "%[rating]@ %[is greater than or equal to]@ %@";
-"%[rating]@ %[is greater than]@ %@" = "%[rating]@ %[is greater than]@ %@";
-"%[rating]@ %[is less than]@ %@" = "%[rating]@ %[is less than]@ %@";
-"%[rating]@ %[is less than or equal to]@ %@" = "%[rating]@ %[is less than or equal to]@ %@";
-"%[lastPlayDate]@ %[is]@ %@" = "%[Last Play Date]@ %[is]@ %@";
-"%[lastPlayDate]@ %[is not]@ %@" = "%[Last Play Date]@ %[is not]@ %@";
-"%[lastPlayDate]@ %[is greater than]@ %@" = "%[Last Play Date]@ %[is greater than]@ %@";
-"%[lastPlayDate]@ %[is less than]@ %@" = "%[Last Play Date]@ %[is less than]@ %@";
-"%[modificationDate]@ %[is]@ %@" = "%[Modification Date]@ %[is]@ %@";
-"%[modificationDate]@ %[is not]@ %@" = "%[Modification Date]@ %[is not]@ %@";
-"%[modificationDate]@ %[is greater than]@ %@" = "%[Modification Date]@ %[is greater than]@ %@";
-"%[modificationDate]@ %[is less than]@ %@" = "%[Modification Date]@ %[is less than]@ %@";
-"%[creationDate]@ %[is]@ %@" = "%[Creation Date]@ %[is]@ %@";
-"%[creationDate]@ %[is not]@ %@" = "%[Creation Date]@ %[is not]@ %@";
-"%[creationDate]@ %[is greater than]@ %@" = "%[Creation Date]@ %[is greater than]@ %@";
-"%[creationDate]@ %[is less than]@ %@" = "%[Creation Date]@ %[is less than]@ %@";
+
+"%[title]@ %[contains]@ %@" = "%[Title]@ %[contains]@ %@";
+"%[title]@ %[begins with]@ %@" = "%[Title]@ %[begins with]@ %@";
+"%[title]@ %[ends with]@ %@" = "%[Title]@ %[ends with]@ %@";
+"%[title]@ %[is]@ %@" = "%[Title]@ %[is]@ %@";
+"%[title]@ %[is not]@ %@" = "%[Title]@ %[is not]@ %@";
+
+"%[rating]@ %[is]@ %@" = "%[Rating]@ %[is]@ %@";
+"%[rating]@ %[is greater than or equal to]@ %@" = "%[Rating]@ %[is greater than or equal to]@ %@";
+"%[rating]@ %[is greater than]@ %@" = "%[Rating]@ %[is greater than]@ %@";
+"%[rating]@ %[is less than]@ %@" = "%[Rating]@ %[is less than]@ %@";
+"%[rating]@ %[is less than or equal to]@ %@" = "%[Rating]@ %[is less than or equal to]@ %@";
+
+"%[lastPlayDate]@ %[is the date]@ %@" = "%[Last Play Date]@ %[is the date]@ %@";
+"%[lastPlayDate]@ %[is after the date]@ %@" = "%[Last Play Date]@ %[is after the date]@ %@";
+"%[lastPlayDate]@ %[is before the date]@ %@" = "%[Last Play Date]@ %[is before the date]@ %@";
+"%[lastPlayDate]@ %[is in the range]@ %@ to %@" = "%[Last Play Date]@ %[is in the range]@ %@ to %@";
+
+"%[lastPlayDate]@ %[is today]@" = "%[Last Play Date]@ %[is today]@";
+"%[lastPlayDate]@ %[is yesterday]@" = "%[Last Play Date]@ %[is yesterday]@";
+"%[lastPlayDate]@ %[is this week]@" = "%[Last Play Date]@ %[is this week]@";
+"%[lastPlayDate]@ %[is last week]@" = "%[Last Play Date]@ %[is last week]@";
+
+"%[lastPlayDate]@ %[is exactly]@ %@ %[Days]@ ago" = "%[Last Play Date]@ %[is exactly]@ %@ %[Days]@ ago";
+"%[lastPlayDate]@ %[is exactly]@ %@ %[Weeks]@ ago" = "%[Last Play Date]@ %[is exactly]@ %@ %[Weeks]@ ago";
+"%[lastPlayDate]@ %[is exactly]@ %@ %[Months]@ ago" = "%[Last Play Date]@ %[is exactly]@ %@ %[Months]@ ago";
+"%[lastPlayDate]@ %[is exactly]@ %@ %[Years]@ ago" = "%[Last Play Date]@ %[is exactly]@ %@ %[Years]@ ago";
+
+"%[lastPlayDate]@ %[is in the last]@ %@ %[Days]@" = "%[Last Play Date]@ %[is in the last]@ %@ %[Days]@";
+"%[lastPlayDate]@ %[is in the last]@ %@ %[Weeks]@" = "%[Last Play Date]@ %[is in the last]@ %@ %[Weeks]@";
+"%[lastPlayDate]@ %[is in the last]@ %@ %[Months]@" = "%[Last Play Date]@ %[is in the last]@ %@ %[Months]@";
+"%[lastPlayDate]@ %[is in the last]@ %@ %[Years]@" = "%[Last Play Date]@ %[is in the last]@ %@ %[Years]@";
+
+"%[lastPlayDate]@ %[is not in the last]@ %@ %[Days]@" = "%[Last Play Date]@ %[is not in the last]@ %@ %[Days]@";
+"%[lastPlayDate]@ %[is not in the last]@ %@ %[Weeks]@" = "%[Last Play Date]@ %[is not in the last]@ %@ %[Weeks]@";
+"%[lastPlayDate]@ %[is not in the last]@ %@ %[Months]@" = "%[Last Play Date]@ %[is not in the last]@ %@ %[Months]@";
+"%[lastPlayDate]@ %[is not in the last]@ %@ %[Years]@" = "%[Last Play Date]@ %[is not in the last]@ %@ %[Years]@";
+
+"%[lastPlayDate]@ %[is between]@ %@ and %@ %[Days]@ ago" = "%[Last Play Date]@ %[is between]@ %@ and %@ %[Days]@ ago";
+"%[lastPlayDate]@ %[is between]@ %@ and %@ %[Weeks]@ ago" = "%[Last Play Date]@ %[is between]@ %@ and %@ %[Weeks]@ ago";
+"%[lastPlayDate]@ %[is between]@ %@ and %@ %[Months]@ ago" = "%[Last Play Date]@ %[is between]@ %@ and %@ %[Months]@ ago";
+"%[lastPlayDate]@ %[is between]@ %@ and %@ %[Years]@ ago" = "%[Last Play Date]@ %[is between]@ %@ and %@ %[Years]@ ago";
+
+
+"%[modificationDate]@ %[is the date]@ %@" = "%[Modification Date]@ %[is the date]@ %@";
+"%[modificationDate]@ %[is after the date]@ %@" = "%[Modification Date]@ %[is after the date]@ %@";
+"%[modificationDate]@ %[is before the date]@ %@" = "%[Modification Date]@ %[is before the date]@ %@";
+"%[modificationDate]@ %[is in the range]@ %@ to %@" = "%[Modification Date]@ %[is in the range]@ %@ to %@";
+
+"%[modificationDate]@ %[is today]@" = "%[Modification Date]@ %[is today]@";
+"%[modificationDate]@ %[is yesterday]@" = "%[Modification Date]@ %[is yesterday]@";
+"%[modificationDate]@ %[is this week]@" = "%[Modification Date]@ %[is this week]@";
+"%[modificationDate]@ %[is last week]@" = "%[Modification Date]@ %[is last week]@";
+
+"%[modificationDate]@ %[is exactly]@ %@ %[Days]@ ago" = "%[Modification Date]@ %[is exactly]@ %@ %[Days]@ ago";
+"%[modificationDate]@ %[is exactly]@ %@ %[Weeks]@ ago" = "%[Modification Date]@ %[is exactly]@ %@ %[Weeks]@ ago";
+"%[modificationDate]@ %[is exactly]@ %@ %[Months]@ ago" = "%[Modification Date]@ %[is exactly]@ %@ %[Months]@ ago";
+"%[modificationDate]@ %[is exactly]@ %@ %[Years]@ ago" = "%[Modification Date]@ %[is exactly]@ %@ %[Years]@ ago";
+
+"%[modificationDate]@ %[is in the last]@ %@ %[Days]@" = "%[Modification Date]@ %[is in the last]@ %@ %[Days]@";
+"%[modificationDate]@ %[is in the last]@ %@ %[Weeks]@" = "%[Modification Date]@ %[is in the last]@ %@ %[Weeks]@";
+"%[modificationDate]@ %[is in the last]@ %@ %[Months]@" = "%[Modification Date]@ %[is in the last]@ %@ %[Months]@";
+"%[modificationDate]@ %[is in the last]@ %@ %[Years]@" = "%[Modification Date]@ %[is in the last]@ %@ %[Years]@";
+
+"%[modificationDate]@ %[is not in the last]@ %@ %[Days]@" = "%[Modification Date]@ %[is not in the last]@ %@ %[Days]@";
+"%[modificationDate]@ %[is not in the last]@ %@ %[Weeks]@" = "%[Modification Date]@ %[is not in the last]@ %@ %[Weeks]@";
+"%[modificationDate]@ %[is not in the last]@ %@ %[Months]@" = "%[Modification Date]@ %[is not in the last]@ %@ %[Months]@";
+"%[modificationDate]@ %[is not in the last]@ %@ %[Years]@" = "%[Modification Date]@ %[is not in the last]@ %@ %[Years]@";
+
+"%[modificationDate]@ %[is between]@ %@ and %@ %[Days]@ ago" = "%[Modification Date]@ %[is between]@ %@ and %@ %[Days]@ ago";
+"%[modificationDate]@ %[is between]@ %@ and %@ %[Weeks]@ ago" = "%[Modification Date]@ %[is between]@ %@ and %@ %[Weeks]@ ago";
+"%[modificationDate]@ %[is between]@ %@ and %@ %[Months]@ ago" = "%[Modification Date]@ %[is between]@ %@ and %@ %[Months]@ ago";
+"%[modificationDate]@ %[is between]@ %@ and %@ %[Years]@ ago" = "%[Modification Date]@ %[is between]@ %@ and %@ %[Years]@ ago";
+
+
+"%[creationDate]@ %[is the date]@ %@" = "%[Creation Date]@ %[is the date]@ %@";
+"%[creationDate]@ %[is after the date]@ %@" = "%[Creation Date]@ %[is after the date]@ %@";
+"%[creationDate]@ %[is before the date]@ %@" = "%[Creation Date]@ %[is before the date]@ %@";
+"%[creationDate]@ %[is in the range]@ %@ to %@" = "%[Creation Date]@ %[is in the range]@ %@ to %@";
+
+"%[creationDate]@ %[is today]@" = "%[Creation Date]@ %[is today]@";
+"%[creationDate]@ %[is yesterday]@" = "%[Creation Date]@ %[is yesterday]@";
+"%[creationDate]@ %[is this week]@" = "%[Creation Date]@ %[is this week]@";
+"%[creationDate]@ %[is last week]@" = "%[Creation Date]@ %[is last week]@";
+
+"%[creationDate]@ %[is exactly]@ %@ %[Days]@ ago" = "%[Creation Date]@ %[is exactly]@ %@ %[Days]@ ago";
+"%[creationDate]@ %[is exactly]@ %@ %[Weeks]@ ago" = "%[Creation Date]@ %[is exactly]@ %@ %[Weeks]@ ago";
+"%[creationDate]@ %[is exactly]@ %@ %[Months]@ ago" = "%[Creation Date]@ %[is exactly]@ %@ %[Months]@ ago";
+"%[creationDate]@ %[is exactly]@ %@ %[Years]@ ago" = "%[Creation Date]@ %[is exactly]@ %@ %[Years]@ ago";
+
+"%[creationDate]@ %[is in the last]@ %@ %[Days]@" = "%[Creation Date]@ %[is in the last]@ %@ %[Days]@";
+"%[creationDate]@ %[is in the last]@ %@ %[Weeks]@" = "%[Creation Date]@ %[is in the last]@ %@ %[Weeks]@";
+"%[creationDate]@ %[is in the last]@ %@ %[Months]@" = "%[Creation Date]@ %[is in the last]@ %@ %[Months]@";
+"%[creationDate]@ %[is in the last]@ %@ %[Years]@" = "%[Creation Date]@ %[is in the last]@ %@ %[Years]@";
+
+"%[creationDate]@ %[is not in the last]@ %@ %[Days]@" = "%[Creation Date]@ %[is not in the last]@ %@ %[Days]@";
+"%[creationDate]@ %[is not in the last]@ %@ %[Weeks]@" = "%[Creation Date]@ %[is not in the last]@ %@ %[Weeks]@";
+"%[creationDate]@ %[is not in the last]@ %@ %[Months]@" = "%[Creation Date]@ %[is not in the last]@ %@ %[Months]@";
+"%[creationDate]@ %[is not in the last]@ %@ %[Years]@" = "%[Creation Date]@ %[is not in the last]@ %@ %[Years]@";
+
+"%[creationDate]@ %[is between]@ %@ and %@ %[Days]@ ago" = "%[Creation Date]@ %[is between]@ %@ and %@ %[Days]@ ago";
+"%[creationDate]@ %[is between]@ %@ and %@ %[Weeks]@ ago" = "%[Creation Date]@ %[is between]@ %@ and %@ %[Weeks]@ ago";
+"%[creationDate]@ %[is between]@ %@ and %@ %[Months]@ ago" = "%[Creation Date]@ %[is between]@ %@ and %@ %[Months]@ ago";
+"%[creationDate]@ %[is between]@ %@ and %@ %[Years]@ ago" = "%[Creation Date]@ %[is between]@ %@ and %@ %[Years]@ ago";
+
