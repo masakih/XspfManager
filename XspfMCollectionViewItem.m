@@ -68,9 +68,7 @@
 	[nc addObserver:self selector:@selector(applicationDidBecomeOrResignActive:)
 			   name:NSApplicationDidResignActiveNotification
 			 object:NSApp];
-	
-	[self coodinateColors];
-	
+		
 	XspfMLabelMenuItem *item = (XspfMLabelMenuItem *)[menu itemWithTag:1000];
 	XspfMXspfObject *object = [self representedObject];
 	[item setRepresentedObject:object];
@@ -78,6 +76,8 @@
 	
 	[[self view] setMenu:menu];
 	[self findAndSetBox];
+	
+	[self coodinateColors];
 }
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
