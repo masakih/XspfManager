@@ -40,23 +40,11 @@ const CGFloat labelSize = 19;
 	[labelName setFont:[self labelNameFont]];
 	[labelName setAlignment:NSCenterTextAlignment];
 	[labelName setTextColor:[NSColor disabledControlTextColor]];
-//	[labelName setBordered:YES];
 	
-	XspfMLabelCell *label01 = [[[XspfMLabelCell alloc] initTextCell:@""] autorelease];
-	XspfMLabelCell *label02 = [[[XspfMLabelCell alloc] initTextCell:@""] autorelease];
-	XspfMLabelCell *label03 = [[[XspfMLabelCell alloc] initTextCell:@""] autorelease];
-	XspfMLabelCell *label04 = [[[XspfMLabelCell alloc] initTextCell:@""] autorelease];
-	XspfMLabelCell *label05 = [[[XspfMLabelCell alloc] initTextCell:@""] autorelease];
-	XspfMLabelCell *label06 = [[[XspfMLabelCell alloc] initTextCell:@""] autorelease];
-	XspfMLabelCell *label07 = [[[XspfMLabelCell alloc] initTextCell:@""] autorelease];
-	XspfMLabelCell *label08 = [[[XspfMLabelCell alloc] initTextCell:@""] autorelease];
-	
-	labelCells = [NSArray arrayWithObjects:label01, label02, label03, label04, label05, label06, label07, label08, nil];
-	[labelCells retain];
-	
-	
+	NSMutableArray *cells = [NSMutableArray arrayWithCapacity:labelCount];
 	for(NSInteger i = 0; i < labelCount; i++) {
-		XspfMLabelCell *cell = [labelCells objectAtIndex:i];
+		XspfMLabelCell *cell = [[[XspfMLabelCell alloc] initTextCell:@""] autorelease];
+		[cells addObject:cell];
 		[self addTrackingRect:[self labelRectForIndex:i] owner:self userData:[NSNumber numberWithInteger:i] assumeInside:NO];
 		[cell setEnabled:YES];
 		[cell setBordered:YES];
@@ -64,6 +52,7 @@ const CGFloat labelSize = 19;
 		[cell setLabelStyle:XspfMSquareStyle];
 		[cell setDrawX:YES];
 	}
+	labelCells = [[NSArray alloc] initWithArray:cells];
 }
 
 - (id)initWithFrame:(NSRect)frame {
@@ -92,10 +81,9 @@ const CGFloat labelSize = 19;
 	height += size.height;
 	
 	NSRect rect = [self labelNameRect];
-//	width = MAX(width, NSMaxX(rect));
 	height += rect.size.height;
 	
-	rect = [self labelRectForIndex:0];
+	rect = [self labelRectForIndex:labelCount - 1];
 	width = MAX(width, NSMaxX(rect));
 	height += rect.size.height;
 	
@@ -315,28 +303,28 @@ const CGFloat labelSize = 19;
 	NSInteger labelIndex = [cellIndex integerValue];
 	switch(labelIndex) {
 		case 0:
-			label = @"None";
+			label = NSLocalizedString(@"None", @"LabelNameNone");
 			break;
 		case 1:
-			label = @"Red";
+			label = NSLocalizedString(@"Red", @"LabelNameRed");
 			break;
 		case 2:
-			label = @"Orange";
+			label = NSLocalizedString(@"Orange", @"LabelNameOrange");
 			break;
 		case 3:
-			label = @"Yellow";
+			label = NSLocalizedString(@"Yellow", @"LabelNameYellow");
 			break;
 		case 4:
-			label = @"Green";
+			label = NSLocalizedString(@"Green", @"LabelNameGreen");
 			break;
 		case 5:
-			label = @"Blue";
+			label = NSLocalizedString(@"Blue", @"LabelNameBlue");
 			break;
 		case 6:
-			label = @"Purple";
+			label = NSLocalizedString(@"Purple", @"LabelNamePurple");
 			break;
 		case 7:
-			label = @"Gray";
+			label = NSLocalizedString(@"Gray", @"LabelNameGray");
 			break;
 		default:
 			HMLog(HMLogLevelError, @"Unknown label number (%@).", cellIndex);
