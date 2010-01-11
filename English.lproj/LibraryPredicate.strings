@@ -13,6 +13,8 @@
 "%[rating]@ %[is less than]@ %@" = "%[Rating]@ %[is less than]@ %@";
 "%[rating]@ %[is less than or equal to]@ %@" = "%[Rating]@ %[is less than or equal to]@ %@";
 
+"%[label]@ %[is]@ %@" = "%[Label]@ %[is]@ %@";
+
 "%[lastPlayDate]@ %[is the date]@ %@" = "%[Last Play Date]@ %[is the date]@ %@";
 "%[lastPlayDate]@ %[is after the date]@ %@" = "%[Last Play Date]@ %[is after the date]@ %@";
 "%[lastPlayDate]@ %[is before the date]@ %@" = "%[Last Play Date]@ %[is before the date]@ %@";

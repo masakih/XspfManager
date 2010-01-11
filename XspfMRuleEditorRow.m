@@ -9,6 +9,9 @@
 #import "XspfMRuleEditorRow.h"
 #import "XspfMRule_private.h"
 
+#import "XspfMLabelField.h"
+#import "XspfMLabelCell.h"
+
 
 @implementation XspfMRule (XspfMAccessor)
 - (void)setChildren:(NSArray *)newChildren
@@ -382,6 +385,16 @@ static NSString *const XspfMRuleValueKey = @"XspfMRuleValueKey";
 	[text setDelegate:self];
 	
 	return text;
+}
+- (NSView *)labelField
+{
+	HMLog(HMLogLevelDebug, @"Enter -> %@", NSStringFromSelector(_cmd));
+	id label = [[[XspfMLabelField alloc] initWithFrame:NSMakeRect(0,0,100,19)] autorelease];
+	[label sizeToFit];
+	[[label cell] setLabelStyle:XspfMSquareStyle];
+	[[label cell] setDrawX:YES];
+	
+	return label;
 }
 @end
 @implementation XspfMRule (XspfMExpressionBuilder)

@@ -10,6 +10,9 @@
 
 #import "XspfMRule_private.h"
 
+#import "XspfMLabelField.h"
+
+
 static NSString *const XspfMREDCriteriaKey = @"criteria";
 static NSString *const XspfMREDDisplayValuesKey = @"displayValues";
 static NSString *const XspfMREDRowTypeKey = @"rowType";
@@ -88,6 +91,27 @@ static NSString *const XspfMREDSubrowsKey = @"subrows";
 	}
 	id rightConstant = [[predicate rightExpression] constantValue];
 	value03 = [self ratingIndicator];
+	[value03 setObjectValue:rightConstant];
+	
+	id disp = [NSArray arrayWithObjects:leftKeyPath, value02, value03, nil];
+	
+	return disp;
+}
+- (NSArray *)labelDisplayValuesWithPredicate:(NSComparisonPredicate *)predicate
+{
+	id value02 = nil; id value03 = nil;
+	id leftKeyPath = [[predicate leftExpression] keyPath];
+	
+	switch([predicate predicateOperatorType]) {
+		case NSEqualToPredicateOperatorType:
+			value02 = @"is";
+			break;
+		default:
+			[NSException raise:@"XspfMUnknownPredicateType" format:@"XpsfM: unknown predicate type."];
+			break;
+	}
+	id rightConstant = [[predicate rightExpression] constantValue];
+	value03 = [self labelField];
 	[value03 setObjectValue:rightConstant];
 	
 	id disp = [NSArray arrayWithObjects:leftKeyPath, value02, value03, nil];
@@ -272,6 +296,8 @@ static NSString *const XspfMREDSubrowsKey = @"subrows";
 				} else { // result == numberField02
 					tag = XspfMSecondaryNumberFieldTag;
 				}
+			} else if([value hasPrefix:@"labelField"]) {
+				fieldClass = [XspfMLabelField class];
 			}
 			if(!fieldClass)  continue;
 			
@@ -304,6 +330,8 @@ static NSString *const XspfMREDSubrowsKey = @"subrows";
 		key = @"Rate";
 	} else if([self isDateKeyPath:keypath]) {
 		key = @"AbDate";
+	} else if([keypath isEqualToString:@"label"]) {
+		key = @"Label";
 	}
 	if(key) {
 		id row = [rowTemplate valueForKey:key];
@@ -367,6 +395,8 @@ static NSString *const XspfMREDSubrowsKey = @"subrows";
 			disp = [self ratingDisplayValuesWithPredicate:predicate];
 		} else if([self isDateKeyPath:leftKeyPath]) {		
 			disp = [self dateDisplayValuesWithPredicate:predicate];
+		} else if([leftKeyPath isEqualToString:@"label"]) {
+			disp = [self labelDisplayValuesWithPredicate:predicate];
 		}
 		
 		if(disp) {

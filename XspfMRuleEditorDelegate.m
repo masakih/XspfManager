@@ -34,6 +34,8 @@ static NSString *XspfMREDPredicateRowsKey = @"predicateRows";
 		key = @"Rate";
 	} else if([[NSArray arrayWithObjects:@"lastPlayDate", @"modificationDate", @"creationDate", nil] containsObject:keypath]) {
 		key = @"AbDate";
+	} else if([keypath isEqualToString:@"label"]) {
+		key = @"Label";
 	}
 	if(key) {
 		id row = [rowTemplate valueForKey:key];
@@ -57,17 +59,15 @@ static NSString *XspfMREDPredicateRowsKey = @"predicateRows";
 		
 	NSMutableArray *newRows = [NSMutableArray array];
 	
-	id c = [self criteriaWithKeyPath:@"title"];
-	if(c) [newRows addObjectsFromArray:c];
-	
-	for(id keyPath in [NSArray arrayWithObjects:@"lastPlayDate", @"modificationDate", @"creationDate", nil]) {
-		c = [self criteriaWithKeyPath:keyPath];
+	for(id keyPath in [NSArray arrayWithObjects:@"title",
+					   @"lastPlayDate", @"modificationDate", @"creationDate",
+					   @"rating",
+					   @"label",
+					   nil]) {
+		id c = [self criteriaWithKeyPath:keyPath];
 		if(c) [newRows addObjectsFromArray:c];
 	}
-	
-	c = [self criteriaWithKeyPath:@"rating"];
-	if(c) [newRows addObjectsFromArray:c];
-	
+		
 	simples = [newRows retain];
 	
 	compounds = [[XspfMRule compoundRule] retain];
@@ -136,7 +136,7 @@ static NSString *XspfMREDPredicateRowsKey = @"predicateRows";
 - (void)setPredicate:(id)predicate
 {
 	HMLog(HMLogLevelDebug, @"predicate -> (%@) %@", NSStringFromClass([predicate class]), predicate);
-	[self resolvePredicate:predicate];
+//	[self resolvePredicate:predicate];
 	
 	id new = [XspfMRule ruleEditorRowsFromPredicate:predicate withRowTemplate:rowTemplate];
 	
