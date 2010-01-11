@@ -13,11 +13,6 @@
 
 @implementation XspfMLabelControl
 
-+ (Class)cellClass
-{
-	return [XspfMLabelCell class];
-}
-
 - (void)setup
 {
 	id cell = [[[XspfMLabelCell alloc] initTextCell:@""] autorelease];
