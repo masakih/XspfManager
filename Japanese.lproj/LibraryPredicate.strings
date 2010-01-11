@@ -13,6 +13,8 @@
 "%[rating]@ %[is less than]@ %@" = "%1$[レートが]@ %3$@ %2$[より小さい]@ ";
 "%[rating]@ %[is less than or equal to]@ %@" = "%1$[レートが]@ %3$@ %2$[以下]@ ";
 
+"%[label]@ %[is]@ %@" = "%1$[ラベルが]@ %3$@ %2$[である]@ ";
+
 "%[lastPlayDate]@ %[is the date]@ %@" = "%1$[最後の再生日時が]@ %3$@ %2$[である]@ ";
 "%[lastPlayDate]@ %[is after the date]@ %@" = "%1$[最後の再生日時が]@ %3$@ %2$[より新しい日付]@ ";
 "%[lastPlayDate]@ %[is before the date]@ %@" = "%1$[最後の再生日時が]@ %3$@ %2$[より古い日付]@ ";

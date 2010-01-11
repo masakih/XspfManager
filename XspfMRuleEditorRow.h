@@ -54,6 +54,7 @@ typedef enum {
 	XspfMNumberFieldType,
 	XspfMDateFieldType,
 	XspfMRateFieldType,
+	XspfMLabelFieldType,
 } XspfMFieldType;
 
 enum XspfMFieldTag {

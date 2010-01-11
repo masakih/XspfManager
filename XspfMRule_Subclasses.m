@@ -9,6 +9,8 @@
 #import "XspfMRuleEditorRow.h"
 #import "XspfMRule_private.h"
 
+#import "XspfMLabelField.h"
+
 
 @implementation XspfMSeparatorRule
 + (id)separatorRule
@@ -85,7 +87,10 @@
 		} else {
 			aTag = XspfMSecondaryNumberFieldTag;
 		}
+	} else if([value hasPrefix:@"labelField"]) {
+		aType = XspfMLabelFieldType;
 	}
+	
 	if(aType == XspfMUnknownType) {
 		[super init];
 		[self release];
@@ -151,6 +156,9 @@ static NSString *const XspfMRuleTypeKey = @"XspfMRuleTypeKey";
 		case XspfMRateFieldType:
 			result = [NSLevelIndicator class];
 			break;
+		case XspfMLabelFieldType:
+			result = [XspfMLabelField class];
+			break;
 	}
 	return result;
 }
@@ -169,6 +177,9 @@ static NSString *const XspfMRuleTypeKey = @"XspfMRuleTypeKey";
 			break;
 		case XspfMRateFieldType:
 			result = @selector(ratingIndicator);
+			break;
+		case XspfMLabelFieldType:
+			result = @selector(labelField);
 			break;
 	}
 	return result;

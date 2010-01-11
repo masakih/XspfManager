@@ -24,6 +24,7 @@
 - (NSView *)datePicker;
 - (NSView *)ratingIndicator;
 - (NSView *)numberField;
+- (NSView *)labelField;
 @end
 
 @interface XspfMFieldRule (XspfMPrivate)

@@ -522,5 +522,36 @@
 			</dict>
 		</array>
 	</dict>
+	<dict>
+		<key>name</key>
+		<string>Label</string>
+		<key>criteria</key>
+		<array>
+			<dict>
+				<key>NSRuleEditorPredicateLeftExpression</key>
+				<string>value</string>
+				<key>value</key>
+				<string>placeholder</string>
+				<key>criteria</key>
+				<array>
+					<dict>
+						<key>NSRuleEditorPredicateOperatorType</key>
+						<integer>4</integer>
+						<key>value</key>
+						<string>is</string>
+						<key>criteria</key>
+						<array>
+							<dict>
+								<key>NSRuleEditorPredicateRightExpression</key>
+								<string>objectValue</string>
+								<key>value</key>
+								<string>labelField</string>
+							</dict>
+						</array>
+					</dict>
+				</array>
+			</dict>
+		</array>
+	</dict>
 </array>
 </plist>
