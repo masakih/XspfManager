@@ -14,7 +14,7 @@
 
 @end
 
-@protocol HMChannel
+@protocol HMChannel <NSObject>
 
 -(void)putRequest:(id <HMRequest>)aRequest;
 -(id <HMRequest>)takeRequest;
@@ -24,7 +24,7 @@
 
 @end
 
-@protocol HMWorker
+@protocol HMWorker <NSObject>
 
 -(id)initWithChannel:(id <HMChannel>)aChannel;
 -(void)startWorking;
