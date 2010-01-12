@@ -32,7 +32,7 @@
 }
 - (NSTimeInterval)sleepTime
 {
-	return 0.2;
+	return 0.03;
 }
 
 - (void)fire
