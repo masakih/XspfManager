@@ -19,25 +19,10 @@
 {
 	self = [super initWithCoder:decoder];
 	
-	NSArray *views = [[self contentView] subviews];
-	for(id view in views) {
-		if(![view isKindOfClass:[NSControl class]]) continue;
-		
-		switch([view tag]) {
-			case 1000:
-				thumbnail = view;
-				break;
-			case 1001:
-				titleField = view;
-				break;
-			case 1002:
-				ratingLabel = view;
-				break;
-			case 1003:
-				rating = view;
-				break;
-		}
-	}
+	thumbnail = [self viewWithTag:1000];
+	titleField = [self viewWithTag:1001];
+	ratingLabel = [self viewWithTag:1002];
+	rating = [self viewWithTag:1003];
 	
 	return self;
 }
@@ -62,6 +47,10 @@
 	   options:nil];
 }
 
+- (NSInteger)tag
+{
+	return 1100;
+}
 
 -(void)setMenu:(NSMenu *)menu
 {

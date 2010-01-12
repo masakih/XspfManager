@@ -46,12 +46,7 @@
 
 - (void)findAndSetBox
 {
-	id views = [[self view] subviews];
-	for(id view in views) {
-		if([view isKindOfClass:[XspfMCollectionItemBox class]]) {
-			[self setBox:view];
-		}
-	}
+	[self setBox:[[self view] viewWithTag:1100]];
 }
 - (void)setupBinding:(id)obj
 {
