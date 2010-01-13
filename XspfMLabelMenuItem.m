@@ -42,6 +42,13 @@
 	}
 	return self;
 }
+- (id)copyWithZone:(NSZone *)zone
+{
+	id result = [super copyWithZone:zone];
+	[result setObjectValue:[self objectValue]];
+	
+	return result;
+}
 
 - (void)setView:(NSView *)view
 {
