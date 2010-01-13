@@ -22,6 +22,8 @@
     NSManagedObjectContext *managedObjectContext;
 	
 	id<HMChannel> channel;
+	
+	IBOutlet NSMenu *objectMenu;
 }
 
 - (NSString *)applicationSupportFolder;
@@ -33,6 +35,12 @@
 - (IBAction)saveAction:sender;
 
 - (IBAction)launchXspfQT:(id)sender;
+
+- (IBAction)showXSPFInFinder:(id)sender;
+- (IBAction)showXSPFInformation:(id)sender;
+- (IBAction)changeLabel:(id)sender;
+
+- (NSMenu *)menuForXspfObject:(XspfMXspfObject *)object;
 
 - (id<HMChannel>)channel;
 
