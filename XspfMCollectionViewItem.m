@@ -8,11 +8,15 @@
 
 #import "XspfMCollectionViewItem.h"
 
+#import "XspfManager.h"
+
 #import "XspfMCollectionItemBox.h"
 #import "XspfMXspfObject.h"
-#import "XspfMLabelMenuItem.h"
-#import "XspfMLabelCell.h"
 
+@interface XspfMCollectionViewItem (XspfMPrivate)
+- (void)setMenu:(NSMenu *)menu;
+- (void)setupMenu;
+@end
 
 @implementation XspfMCollectionViewItem
 
@@ -20,7 +24,7 @@
 {
 	XspfMCollectionViewItem *result = [super copyWithZone:zone];
 	
-	result->menu = [menu copy];
+	[result setMenu:[menu copy]];
 	[result performSelector:@selector(setupBinding:) withObject:nil afterDelay:0.0];
 	
 	return result;
@@ -34,8 +38,15 @@
 	[nc removeObserver:self];
 	
 	[self setBox:nil];
+	[menu release];
 	
 	[super dealloc];
+}
+
+- (void)awakeFromNib
+{
+	id item = [menu itemAtIndex:0];
+	HMLog(HMLogLevelDebug, @"initial menu -> %@ item -> %@, SEL -> %@, target -> %@", menu, item, NSStringFromSelector([item action]), [item target]);
 }
 
 - (void)setSelected:(BOOL)flag
@@ -63,12 +74,8 @@
 	[nc addObserver:self selector:@selector(applicationDidBecomeOrResignActive:)
 			   name:NSApplicationDidResignActiveNotification
 			 object:NSApp];
-		
-	XspfMLabelMenuItem *item = (XspfMLabelMenuItem *)[menu itemWithTag:1000];
-	XspfMXspfObject *object = [self representedObject];
-	[item setRepresentedObject:object];
-	[item setObjectValue:object.label];
 	
+	[self setupMenu];
 	[[self view] setMenu:menu];
 	[self findAndSetBox];
 	
@@ -99,9 +106,28 @@
 	
 	if(!view) return;
 	
+	[self setupMenu];
 	[view setMenu:menu];
-		
+	
 	[self findAndSetBox];
+}
+- (void)setupMenu
+{
+	id object = [self representedObject];
+	if(!object) return;
+	NSMenu *objMenu = [[[NSApp delegate] menuForXspfObject:object] copy];
+	
+	NSArray *itemArray = [objMenu itemArray];
+	NSInteger count = [itemArray count];
+	if(count == 0) return;
+	
+	[menu insertItem:[NSMenuItem separatorItem] atIndex:0];
+	for(count--;count >= 0; count--) {
+		id item = [itemArray objectAtIndex:count];
+		[objMenu removeItem:item];
+		[menu insertItem:item atIndex:0];
+	}
+	[objMenu release];
 }
 - (void)setMenu:(NSMenu *)aMenu
 {
