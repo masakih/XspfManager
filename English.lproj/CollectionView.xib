@@ -12,10 +12,10 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="705"/>
-			<integer value="421"/>
 			<integer value="720"/>
 			<integer value="733"/>
+			<integer value="705"/>
+			<integer value="421"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -474,62 +474,27 @@
 				<string key="NSTitle"/>
 				<object class="NSMutableArray" key="NSMenuItems">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<object class="NSMenuItem" id="727588429">
-						<reference key="NSMenu" ref="417305955"/>
-						<string key="NSTitle">Item</string>
-						<string key="NSKeyEquiv"/>
-						<int key="NSMnemonicLoc">2147483647</int>
-						<object class="NSCustomResource" key="NSOnImage" id="295467306">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">NSMenuCheckmark</string>
-						</object>
-						<object class="NSCustomResource" key="NSMixedImage" id="538257917">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">NSMenuMixedState</string>
-						</object>
-					</object>
-					<object class="NSMenuItem" id="731597651">
-						<reference key="NSMenu" ref="417305955"/>
-						<string key="NSTitle">Item</string>
-						<string key="NSKeyEquiv"/>
-						<int key="NSMnemonicLoc">2147483647</int>
-						<reference key="NSOnImage" ref="295467306"/>
-						<reference key="NSMixedImage" ref="538257917"/>
-					</object>
-					<object class="NSMenuItem" id="324733546">
-						<reference key="NSMenu" ref="417305955"/>
-						<string key="NSTitle">Label:</string>
-						<string key="NSKeyEquiv"/>
-						<int key="NSMnemonicLoc">2147483647</int>
-						<reference key="NSOnImage" ref="295467306"/>
-						<reference key="NSMixedImage" ref="538257917"/>
-						<int key="NSTag">1000</int>
-					</object>
-					<object class="NSMenuItem" id="888261303">
-						<reference key="NSMenu" ref="417305955"/>
-						<bool key="NSIsDisabled">YES</bool>
-						<bool key="NSIsSeparator">YES</bool>
-						<string key="NSTitle"/>
-						<string key="NSKeyEquiv"/>
-						<int key="NSMnemonicLoc">2147483647</int>
-						<reference key="NSOnImage" ref="295467306"/>
-						<reference key="NSMixedImage" ref="538257917"/>
-					</object>
 					<object class="NSMenuItem" id="88119022">
 						<reference key="NSMenu" ref="417305955"/>
 						<string key="NSTitle">Regular Size</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
-						<reference key="NSOnImage" ref="295467306"/>
-						<reference key="NSMixedImage" ref="538257917"/>
+						<object class="NSCustomResource" key="NSOnImage" id="484235018">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">NSMenuCheckmark</string>
+						</object>
+						<object class="NSCustomResource" key="NSMixedImage" id="447357004">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">NSMenuMixedState</string>
+						</object>
 					</object>
 					<object class="NSMenuItem" id="1046955692">
 						<reference key="NSMenu" ref="417305955"/>
 						<string key="NSTitle">Small Size</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
-						<reference key="NSOnImage" ref="295467306"/>
-						<reference key="NSMixedImage" ref="538257917"/>
+						<reference key="NSOnImage" ref="484235018"/>
+						<reference key="NSMixedImage" ref="447357004"/>
 					</object>
 				</object>
 			</object>
@@ -1152,14 +1117,6 @@
 					<int key="connectionID">796</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">changeLabel:</string>
-						<reference key="source" ref="2334056"/>
-						<reference key="destination" ref="324733546"/>
-					</object>
-					<int key="connectionID">805</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">textColor: labelTextColor</string>
 						<reference key="source" ref="1017907771"/>
@@ -1422,10 +1379,6 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="88119022"/>
 							<reference ref="1046955692"/>
-							<reference ref="888261303"/>
-							<reference ref="727588429"/>
-							<reference ref="731597651"/>
-							<reference ref="324733546"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -1458,26 +1411,6 @@
 						<int key="objectID">691</int>
 						<reference key="object" ref="1014411703"/>
 						<reference key="parent" ref="1017907771"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">797</int>
-						<reference key="object" ref="731597651"/>
-						<reference key="parent" ref="417305955"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">798</int>
-						<reference key="object" ref="727588429"/>
-						<reference key="parent" ref="417305955"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">799</int>
-						<reference key="object" ref="888261303"/>
-						<reference key="parent" ref="417305955"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">736</int>
-						<reference key="object" ref="324733546"/>
-						<reference key="parent" ref="417305955"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">790</int>
@@ -1559,14 +1492,9 @@
 					<string>733.IBPluginDependency</string>
 					<string>734.IBPluginDependency</string>
 					<string>735.IBPluginDependency</string>
-					<string>736.CustomClassName</string>
-					<string>736.IBPluginDependency</string>
 					<string>790.CustomClassName</string>
 					<string>790.IBPluginDependency</string>
 					<string>791.IBPluginDependency</string>
-					<string>797.IBPluginDependency</string>
-					<string>798.IBPluginDependency</string>
-					<string>799.IBPluginDependency</string>
 					<string>807.CustomClassName</string>
 					<string>807.IBPluginDependency</string>
 					<string>808.IBPluginDependency</string>
@@ -1618,16 +1546,11 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{217, 553}, {136, 113}}</string>
+					<string>{{217, 623}, {136, 43}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>XspfMLabelMenuItem</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>XspfMLabelControl</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>XspfMLabelControl</string>
@@ -1818,41 +1741,6 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">XspfMLabelControl.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">XspfMLabelMenuItem</string>
-					<string key="superclassName">NSMenuItem</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">XspfMLabelMenuItem.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">XspfMListViewController</string>
-					<string key="superclassName">XspfMViewController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">changeLabel:</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="outlets">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>labelMenuItem</string>
-							<string>menu</string>
-							<string>tableView</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>XspfMLabelMenuItem</string>
-							<string>NSMenu</string>
-							<string>NSTableView</string>
-						</object>
-					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">XspfMListViewController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -2235,7 +2123,7 @@
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">NSObject</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier" id="320371192">
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBFrameworkSource</string>
 						<string key="minorKey">AppKit.framework/Headers/NSTableView.h</string>
 					</object>
@@ -2498,11 +2386,6 @@
 						<string key="majorKey">IBFrameworkSource</string>
 						<string key="minorKey">AppKit.framework/Headers/NSSplitView.h</string>
 					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">NSTableView</string>
-					<string key="superclassName">NSControl</string>
-					<reference key="sourceIdentifier" ref="320371192"/>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">NSTextField</string>

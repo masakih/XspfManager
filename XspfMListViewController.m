@@ -13,7 +13,6 @@
 #import "XspfMTableView.h"
 
 #import "XspfMXspfObject.h"
-#import "XspfMLabelMenuItem.h"
 
 
 @implementation XspfMListViewController
@@ -51,8 +50,8 @@
 
 - (NSMenu *)contextMenuForObject:(XspfMXspfObject *)object
 {
-	[labelMenuItem setObjectValue:object.label];
-	[labelMenuItem setRepresentedObject:object];
+	NSMenu *objMenu = [[NSApp delegate] menuForXspfObject:object];
+	return objMenu;
 	
 	return menu;
 }
