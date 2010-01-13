@@ -17,6 +17,7 @@
 
 #import "UKKQueue.h"
 #import "XspfMXspfObject.h"
+#import "XspfMLabelMenuItem.h"
 
 #import "NSPathUtilities-XspfQT-Extensions.h"
 
@@ -377,6 +378,45 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 {
 	[[UKKQueue sharedFileWatcher] removePathFromQueue:obj.filePath];
 	[[self managedObjectContext] deleteObject:obj];
+}
+
+- (void)setObectMenu:(NSMenu *)menu
+{
+	[objectMenu release];
+	objectMenu = [menu retain];
+}
+- (NSMenu *)objectMenu
+{
+	return objectMenu;
+}
+- (NSMenu *)menuForXspfObject:(XspfMXspfObject *)object
+{
+	NSMenu *result = [self objectMenu];
+	
+	for(id item in [result itemArray]) {
+		[item setRepresentedObject:object];
+		if([item isKindOfClass:[XspfMLabelMenuItem class]]) {
+			[item setObjectValue:object.label];
+		}
+	}
+	
+	return result;
+}
+
+- (IBAction)showXSPFInFinder:(id)sender
+{
+	NSBeep();
+	HMLog(HMLogLevelError, @"MUST implemente %@", NSStringFromSelector(_cmd));
+}
+- (IBAction)showXSPFInformation:(id)sender
+{
+	NSBeep();
+	HMLog(HMLogLevelError, @"MUST implemente %@", NSStringFromSelector(_cmd));
+}
+- (IBAction)changeLabel:(id)sender
+{
+	XspfMXspfObject *object = [sender representedObject];
+	object.label = [sender objectValue];
 }
 
 #pragma mark#### UKKQUEUE ####
