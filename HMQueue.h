@@ -13,19 +13,19 @@
 {
     id* _queue;
     NSConditionLock* _lock;
-    unsigned _capacity;
-    unsigned _top, _bottom;
-    int _stat;
+    NSUInteger _capacity;
+    NSUInteger _top, _bottom;
+    NSInteger _stat;
 }
 
-+(id)queueWithCapacity:(unsigned int)aCapacity;
--(id)initWithCapacity:(unsigned int)aCapacity;
++(id)queueWithCapacity:(NSUInteger)aCapacity;
+-(id)initWithCapacity:(NSUInteger)aCapacity;
 
 // throw exception named HMQueueOverflow, if queue is full.
 -(void)put:(id)data;
 -(id)take;
 
--(unsigned)next:(unsigned)current;
+-(NSUInteger)next:(NSUInteger)current;
 
 @end
 

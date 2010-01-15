@@ -11,6 +11,7 @@
 #import "XspfManager.h"
 
 #import "XspfMCollectionItemBox.h"
+#import "XspfMLabelCell.h"
 #import "XspfMXspfObject.h"
 
 @interface XspfMCollectionViewItem (XspfMPrivate)
