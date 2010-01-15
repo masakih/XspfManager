@@ -22,12 +22,12 @@ enum {
 
 @implementation HMQueue
 
-+(id)queueWithCapacity:(unsigned int)aCapacity
++(id)queueWithCapacity:(NSUInteger)aCapacity
 {
     return [[[self alloc] initWithCapacity:aCapacity] autorelease];
 }
 
--(id)initWithCapacity:(unsigned int)aCapacity
+-(id)initWithCapacity:(NSUInteger)aCapacity
 {
     self = [super init];
     
@@ -60,7 +60,7 @@ enum {
     [super dealloc];
 }
 
--(unsigned)next:(unsigned)current
+-(NSUInteger)next:(NSUInteger)current
 {
     return ( current + 1 ) % ( _capacity + 1 );
 }

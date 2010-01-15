@@ -143,7 +143,7 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
 {
 	NSError *error;
-	int reply = NSTerminateNow;
+	NSUInteger reply = NSTerminateNow;
 	
 	if(managedObjectContext != nil) {
 		if([managedObjectContext commitEditing]) {
@@ -164,7 +164,7 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 					reply = NSTerminateCancel;
 				} else {
 					
-					int alertReturn = NSRunAlertPanel(nil, @"Could not save changes while quitting. Quit anyway?" , @"Quit anyway", @"Cancel", nil);
+					NSInteger alertReturn = NSRunAlertPanel(nil, @"Could not save changes while quitting. Quit anyway?" , @"Quit anyway", @"Cancel", nil);
 					if(alertReturn == NSAlertAlternateReturn) {
 						reply = NSTerminateCancel;	
 					}

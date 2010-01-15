@@ -20,7 +20,7 @@
 	NSInteger _requestNum;
 }
 
--(id)initWithWorkerNum:(int)num;
+-(id)initWithWorkerNum:(NSInteger)num;
 
 // called from HMWorker. take care thread safty.
 - (oneway void)finishRequest:(id <HMRequest>)request;

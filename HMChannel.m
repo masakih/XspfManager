@@ -13,7 +13,7 @@
 
 @implementation HMChannel
 
--(void)makeWokers:(int)num
+-(void)makeWokers:(NSInteger)num
 {
     for(; num > 0 ; num-- ) {
         HMWorker* worker = [[[HMWorker alloc] initWithChannel:self] autorelease];
@@ -23,7 +23,7 @@
     }
 }
 
--(id)initWithWorkerNum:(int)num
+-(id)initWithWorkerNum:(NSInteger)num
 {
     self = [super init];
     if( self ) {
