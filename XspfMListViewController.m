@@ -23,37 +23,16 @@
 	
 	return self;
 }
-- (void)dealloc
-{
-	[menu release];
-	[super dealloc];
-}
 - (void)awakeFromNib
 {
 	[tableView setDoubleAction:@selector(openXspf:)];
 	[tableView registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]];
-	
-//	[tableView setMenu:[self contextMenuForObject:nil]];
-}
-
-- (void)setMenu:(NSMenu *)inMenu
-{
-	[menu autorelease];
-	menu = [inMenu retain];
-}
-
-- (IBAction)changeLabel:(id)sender
-{
-	XspfMXspfObject *object = [sender representedObject];
-	object.label = [sender objectValue];
 }
 
 - (NSMenu *)contextMenuForObject:(XspfMXspfObject *)object
 {
 	NSMenu *objMenu = [[NSApp delegate] menuForXspfObject:object];
 	return objMenu;
-	
-	return menu;
 }
 
 - (NSMenu *)tableView:(XspfMTableView *)table menuForEvent:(NSEvent *)event
