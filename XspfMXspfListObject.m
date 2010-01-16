@@ -15,6 +15,15 @@
 @dynamic predicateData;
 @dynamic order;
 
+- (NSString *)name
+{
+	NSString *value;
+	[self willAccessValueForKey:@"name"];
+	value = [self primitiveValueForKey:@"name"];
+	[self didAccessValueForKey:@"name"];
+	
+	return NSLocalizedString(value, @"vaule");
+}
 - (NSPredicate *)predicate
 {
 	[self willAccessValueForKey:@"predicate"];

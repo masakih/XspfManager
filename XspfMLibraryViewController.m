@@ -70,12 +70,12 @@ enum {
 	if(num != 0) return;
 	
 	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"urlString <> %@", @""];
-	[self addSmartLibrary:NSLocalizedString(@"Library", @"Library")
+	[self addSmartLibrary:@"Library"
 				predicate:predicate
 					order:kLibraryOrder];
 	
 	predicate = [NSPredicate predicateWithFormat:@"favorites = %@", [NSNumber numberWithBool:YES]];
-	[self addSmartLibrary:NSLocalizedString(@"Favorites", @"Favorites")
+	[self addSmartLibrary:@"Favorites"
 				predicate:predicate
 					order:kFavoritesOrder];
 }

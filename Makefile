@@ -1,4 +1,4 @@
-/ encoding=utf-8
+# encoding=utf-8
 PRODUCT_NAME=XspfManager
 PRODUCT_EXTENSION=app
 BUILD_PATH=./build
@@ -51,7 +51,7 @@ package: release
 updateRevision: update_svn
 	if [ ! -f $(INFO_PLIST).bak ] ; then cp $(INFO_PLIST) $(INFO_PLIST).bak ; fi ;	\
 	REV=`LC_ALL=C svn info | awk '/Last Changed Rev/ {print $$4}'` ;	\
-	sed -e "s/%%%%REVISION%%%%/$${REV}/" $(INFO_PLIST) > $(INFO_PLIST).r ;	\
+	sed -e "s/%%%%REVISION%%%%/$${REV}-beta/" $(INFO_PLIST) > $(INFO_PLIST).r ;	\
 	mv -f $(INFO_PLIST).r $(INFO_PLIST) ;	\
 
 restorInfoPlist:
