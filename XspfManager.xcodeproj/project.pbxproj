@@ -28,6 +28,7 @@
 		F43E046B10F9B2D200D0428E /* XspfMPopUpButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E046A10F9B2D200D0428E /* XspfMPopUpButton.m */; };
 		F43E077F10FAA6B800D0428E /* XspfMLabelField.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E077E10FAA6B800D0428E /* XspfMLabelField.m */; };
 		F43E0DD511021E0200D0428E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F43E0DD311021E0200D0428E /* Localizable.strings */; };
+		F43E0E5711027E1900D0428E /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = F43E0E5611027E1900D0428E /* Credits.rtf */; };
 		F43E62A110A0692500BF88DA /* XspfMCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E62A010A0692500BF88DA /* XspfMCollectionView.m */; };
 		F43E62BD10A0710E00BF88DA /* XspfMImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E62BC10A0710E00BF88DA /* XspfMImageView.m */; };
 		F43E652E10A315D000BF88DA /* CollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F43E652C10A315D000BF88DA /* CollectionView.xib */; };
@@ -144,6 +145,7 @@
 		F43E0DB31102112D00D0428E /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = Japanese.lproj/AccessoryView.xib; sourceTree = "<group>"; };
 		F43E0DD411021E0200D0428E /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F43E0DD611021E0F00D0428E /* Japanese */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Japanese; path = Japanese.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F43E0E2B11027B3B00D0428E /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
 		F43E629F10A0692500BF88DA /* XspfMCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMCollectionView.h; sourceTree = "<group>"; };
 		F43E62A010A0692500BF88DA /* XspfMCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMCollectionView.m; sourceTree = "<group>"; };
 		F43E62BB10A0710E00BF88DA /* XspfMImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMImageView.h; sourceTree = "<group>"; };
@@ -341,6 +343,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F43E0E5611027E1900D0428E /* Credits.rtf */,
 				F43E0DD311021E0200D0428E /* Localizable.strings */,
 				F4D0E98510C5484000B642D0 /* LibraryRowTemplate.plist */,
 				F4BB59BA10BC0C3700EE50B7 /* LibraryPredicate.strings */,
@@ -560,6 +563,7 @@
 				F4BB59BB10BC0C3700EE50B7 /* LibraryPredicate.strings in Resources */,
 				F4D0E98710C5484000B642D0 /* LibraryRowTemplate.plist in Resources */,
 				F43E0DD511021E0200D0428E /* Localizable.strings in Resources */,
+				F43E0E5711027E1900D0428E /* Credits.rtf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -656,6 +660,14 @@
 				F43E0DD611021E0F00D0428E /* Japanese */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		F43E0E5611027E1900D0428E /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F43E0E2B11027B3B00D0428E /* English */,
+			);
+			name = Credits.rtf;
 			sourceTree = "<group>";
 		};
 		F43E652C10A315D000BF88DA /* CollectionView.xib */ = {
