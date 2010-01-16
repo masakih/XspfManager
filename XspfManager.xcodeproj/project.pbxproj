@@ -27,6 +27,7 @@
 		F4343DF210AD774A0090F57B /* NSWorkspace-Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = F4343DEE10AD774A0090F57B /* NSWorkspace-Extensions.m */; };
 		F43E046B10F9B2D200D0428E /* XspfMPopUpButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E046A10F9B2D200D0428E /* XspfMPopUpButton.m */; };
 		F43E077F10FAA6B800D0428E /* XspfMLabelField.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E077E10FAA6B800D0428E /* XspfMLabelField.m */; };
+		F43E0DD511021E0200D0428E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F43E0DD311021E0200D0428E /* Localizable.strings */; };
 		F43E62A110A0692500BF88DA /* XspfMCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E62A010A0692500BF88DA /* XspfMCollectionView.m */; };
 		F43E62BD10A0710E00BF88DA /* XspfMImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E62BC10A0710E00BF88DA /* XspfMImageView.m */; };
 		F43E652E10A315D000BF88DA /* CollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F43E652C10A315D000BF88DA /* CollectionView.xib */; };
@@ -134,6 +135,15 @@
 		F43E046A10F9B2D200D0428E /* XspfMPopUpButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMPopUpButton.m; sourceTree = "<group>"; };
 		F43E077D10FAA6B800D0428E /* XspfMLabelField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMLabelField.h; sourceTree = "<group>"; };
 		F43E077E10FAA6B800D0428E /* XspfMLabelField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMLabelField.m; sourceTree = "<group>"; };
+		F43E0D6911020A5800D0428E /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = Japanese.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		F43E0D6C11020C5D00D0428E /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = Japanese.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		F43E0D8811020DEE00D0428E /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = Japanese.lproj/ListView.xib; sourceTree = "<group>"; };
+		F43E0D9611020EBC00D0428E /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = Japanese.lproj/LibraryView.xib; sourceTree = "<group>"; };
+		F43E0D9F11020F5400D0428E /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = Japanese.lproj/DetailView.xib; sourceTree = "<group>"; };
+		F43E0DAA1102105E00D0428E /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = Japanese.lproj/CollectionView.xib; sourceTree = "<group>"; };
+		F43E0DB31102112D00D0428E /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = Japanese.lproj/AccessoryView.xib; sourceTree = "<group>"; };
+		F43E0DD411021E0200D0428E /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F43E0DD611021E0F00D0428E /* Japanese */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Japanese; path = Japanese.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F43E629F10A0692500BF88DA /* XspfMCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMCollectionView.h; sourceTree = "<group>"; };
 		F43E62A010A0692500BF88DA /* XspfMCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMCollectionView.m; sourceTree = "<group>"; };
 		F43E62BB10A0710E00BF88DA /* XspfMImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMImageView.h; sourceTree = "<group>"; };
@@ -331,6 +341,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F43E0DD311021E0200D0428E /* Localizable.strings */,
 				F4D0E98510C5484000B642D0 /* LibraryRowTemplate.plist */,
 				F4BB59BA10BC0C3700EE50B7 /* LibraryPredicate.strings */,
 				8D1107310486CEB800E47090 /* Info.plist */,
@@ -548,6 +559,7 @@
 				F40B342110B6BE2000896716 /* UKKQueue Readme.txt in Resources */,
 				F4BB59BB10BC0C3700EE50B7 /* LibraryPredicate.strings in Resources */,
 				F4D0E98710C5484000B642D0 /* LibraryRowTemplate.plist in Resources */,
+				F43E0DD511021E0200D0428E /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -632,14 +644,25 @@
 			isa = PBXVariantGroup;
 			children = (
 				2F7446980DB6B7EA00F9684A /* English */,
+				F43E0D6911020A5800D0428E /* Japanese */,
 			);
 			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		F43E0DD311021E0200D0428E /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F43E0DD411021E0200D0428E /* English */,
+				F43E0DD611021E0F00D0428E /* Japanese */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		F43E652C10A315D000BF88DA /* CollectionView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				F43E652D10A315D000BF88DA /* English */,
+				F43E0DAA1102105E00D0428E /* Japanese */,
 			);
 			name = CollectionView.xib;
 			sourceTree = "<group>";
@@ -648,6 +671,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				F480CF9E10B03A0D00AC365B /* English */,
+				F43E0DB31102112D00D0428E /* Japanese */,
 			);
 			name = AccessoryView.xib;
 			sourceTree = "<group>";
@@ -656,6 +680,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				F47C096510A049DD00F5991C /* English */,
+				F43E0D6C11020C5D00D0428E /* Japanese */,
 			);
 			name = MainWindow.xib;
 			sourceTree = "<group>";
@@ -664,6 +689,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				F49BD00F10A47780007136CE /* English */,
+				F43E0D8811020DEE00D0428E /* Japanese */,
 			);
 			name = ListView.xib;
 			sourceTree = "<group>";
@@ -681,6 +707,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				F4CE4CD210A6A13E004AC4FA /* English */,
+				F43E0D9611020EBC00D0428E /* Japanese */,
 			);
 			name = LibraryView.xib;
 			sourceTree = "<group>";
@@ -689,6 +716,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				F4CE4E7F10A706A8004AC4FA /* English */,
+				F43E0D9F11020F5400D0428E /* Japanese */,
 			);
 			name = DetailView.xib;
 			sourceTree = "<group>";
