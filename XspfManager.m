@@ -20,6 +20,7 @@
 #import "XspfMLabelMenuItem.h"
 
 #import "NSPathUtilities-XspfQT-Extensions.h"
+#import "NSWorkspace-Extensions.h"
 
 @implementation XspfManager
 NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXspfObjectsNotification";
@@ -405,13 +406,17 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 
 - (IBAction)showXSPFInFinder:(id)sender
 {
-	NSBeep();
-	HMLog(HMLogLevelError, @"MUST implemente %@", NSStringFromSelector(_cmd));
+	XspfMXspfObject *object = [sender representedObject];
+	
+	NSWorkspace *ws = [NSWorkspace sharedWorkspace];
+	[ws selectFile:object.filePath inFileViewerRootedAtPath:@""];
 }
 - (IBAction)showXSPFInformation:(id)sender
 {
-	NSBeep();
-	HMLog(HMLogLevelError, @"MUST implemente %@", NSStringFromSelector(_cmd));
+	XspfMXspfObject *object = [sender representedObject];
+	
+	NSWorkspace *ws = [NSWorkspace sharedWorkspace];
+	[ws showInformationInFinder:object.filePath];
 }
 - (IBAction)changeLabel:(id)sender
 {
