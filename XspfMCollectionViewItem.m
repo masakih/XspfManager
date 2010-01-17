@@ -120,7 +120,10 @@
 	
 	NSArray *itemArray = [objMenu itemArray];
 	NSInteger count = [itemArray count];
-	if(count == 0) return;
+	if(count == 0) {
+		[objMenu release];
+		return;
+	}
 	
 	[menu insertItem:[NSMenuItem separatorItem] atIndex:0];
 	for(count--;count >= 0; count--) {
