@@ -13,7 +13,7 @@
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<integer value="602"/>
-			<integer value="569"/>
+			<integer value="81"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1621,7 +1621,6 @@
 					<string>58.ImportedFromIB2</string>
 					<string>581.IBPluginDependency</string>
 					<string>592.IBPluginDependency</string>
-					<string>599.CustomClassName</string>
 					<string>599.IBPluginDependency</string>
 					<string>600.IBPluginDependency</string>
 					<string>600.ImportedFromIB2</string>
@@ -1755,7 +1754,6 @@
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>XspfMLabelMenuItem</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
