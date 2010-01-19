@@ -478,7 +478,7 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 		return;
 	}
 	if([array count] == 0) {
-		HMLog(HMLogLevelError, @"Target file is not found.");
+		HMLog(HMLogLevelError, @"Target file(%@) is not found.", filePath);
 		return;
 	}
 	if([array count] > 1) {

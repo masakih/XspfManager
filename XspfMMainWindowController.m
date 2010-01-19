@@ -101,14 +101,22 @@
 	if(!isSelected) return;
 	
 	XspfMXspfObject *rep = [controller valueForKeyPath:@"selection.self"];
-	if(rep.deleted) {		
-		NSRunCriticalAlertPanel( NSLocalizedString(@"Xspf is Deleted", @"Xspf is Deleted"),
-								NSLocalizedString(@"\"%@\" is deleted",  @"\"%@\" is deleted"),
-								nil, nil, nil, rep.title);
+	BOOL didOpen = [[NSWorkspace sharedWorkspace] openFile:rep.filePath withApplication:@"XspfQT"];
+	if(didOpen) {
+		rep.lastPlayDate = [NSDate dateWithTimeIntervalSinceNow:0.0];
 		return;
 	}
-	[[NSWorkspace sharedWorkspace] openFile:rep.filePath withApplication:@"XspfQT"];
-	rep.lastPlayDate = [NSDate dateWithTimeIntervalSinceNow:0.0];
+	
+	NSInteger result = NSRunCriticalAlertPanel(NSLocalizedString(@"Xspf is not found", @"Xspf is not found"),
+											   NSLocalizedString(@"\"%@\" is not found.",  @"\"%@\" is not found."),
+											   nil, nil/*@"Search Original"*/, nil, rep.title);
+	if(result == NSAlertDefaultReturn) {
+		return;
+	} else if(result == NSAlertAlternateReturn) {
+		//
+#warning shuld implement.
+	}
+	
 }
 - (IBAction)switchListView:(id)sender
 {
