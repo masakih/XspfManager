@@ -52,9 +52,26 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 	}
 	
 	managedObjectModel = [[NSManagedObjectModel mergedModelFromBundles:nil] retain];    
+//	HMLog(HMLogLevelDebug, @"ManagedObjectModel -> %@", managedObjectModel);
 	return managedObjectModel;
 }
 
+- (NSURL *)storeURL
+{
+	NSFileManager *fileManager;
+	NSString *applicationSupportFolder = nil;
+	NSURL *url;
+	
+	fileManager = [NSFileManager defaultManager];
+	applicationSupportFolder = [self applicationSupportFolder];
+	if(![fileManager fileExistsAtPath:applicationSupportFolder isDirectory:NULL]) {
+		[fileManager createDirectoryAtPath:applicationSupportFolder attributes:nil];
+	}
+	
+	url = [NSURL fileURLWithPath: [applicationSupportFolder stringByAppendingPathComponent: @"XspfManager.qdb"]];
+	
+	return url;
+}
 
 /**
     Returns the persistent store coordinator for the application.  This 
@@ -69,18 +86,9 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 		return persistentStoreCoordinator;
 	}
 
-	NSFileManager *fileManager;
-	NSString *applicationSupportFolder = nil;
-	NSURL *url;
 	NSError *error;
     
-	fileManager = [NSFileManager defaultManager];
-	applicationSupportFolder = [self applicationSupportFolder];
-	if(![fileManager fileExistsAtPath:applicationSupportFolder isDirectory:NULL]) {
-		[fileManager createDirectoryAtPath:applicationSupportFolder attributes:nil];
-	}
-	
-	url = [NSURL fileURLWithPath: [applicationSupportFolder stringByAppendingPathComponent: @"XspfManager.qdb"]];
+	NSURL *url = [self storeURL];
 	
 	persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: [self managedObjectModel]];
 	if(!persistentStoreCoordinator) {
@@ -88,11 +96,13 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 		exit(-1);
 	}
 	
-	NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, nil];
+	NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
+							 [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
+							 nil];
 	
 	if(![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:options error:&error]){
 		[[NSApplication sharedApplication] presentError:error];
-		HMLog(HMLogLevelError, @"Error -> %@", [error localizedDescription]);
+		HMLog(HMLogLevelError, @"Error -> %@", error);// localizedDescription]);
 	}
 	
 	return persistentStoreCoordinator;
