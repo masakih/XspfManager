@@ -32,6 +32,7 @@
 @dynamic creationDate;
 @dynamic alias;
 @dynamic label;
+@dynamic title;
 
 
 - (void)awakeFromFetch
@@ -182,13 +183,17 @@
 
 - (NSString *)title
 {
-	if(title == nil) {
-		NSString *aTitle = self.filePath;
+	[self willAccessValueForKey:@"title"];
+	NSString *title = [self primitiveValueForKey:@"title"];
+	[self didAccessValueForKey:@"title"];
+	
+	if(title == nil || [title isEqualToString:@""]) {
+		NSString *aTitle = self.urlString;
 		aTitle = [aTitle lastPathComponent];
 		aTitle = [aTitle stringByDeletingPathExtension];
+		aTitle = [aTitle stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 		if(aTitle) {
-			[title release];
-			title = [aTitle copy];
+			[self setPrimitiveValue:aTitle forKey:@"title"];
 		}
 	}
 	

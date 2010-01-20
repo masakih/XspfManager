@@ -28,6 +28,7 @@
 
 - (NSString *)applicationSupportFolder;
 
+- (NSURL *)storeURL;
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator;
 - (NSManagedObjectModel *)managedObjectModel;
 - (NSManagedObjectContext *)managedObjectContext;

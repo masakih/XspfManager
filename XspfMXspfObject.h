@@ -12,7 +12,6 @@
 
 @interface XspfMXspfObject :  NSManagedObject
 {
-	NSString *title;
 	NSString *filePath;
 	
 	BOOL didPutLoadRequest;
@@ -32,7 +31,7 @@
 @property (retain) NSURL *url;
 @property (retain) NSImage *thumbnail;
 
-@property (retain, readonly) NSString *title;
+@property (retain) NSString *title;
 @property (retain, readonly) NSString *filePath;
 
 @end
