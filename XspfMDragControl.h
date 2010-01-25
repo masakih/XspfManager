@@ -12,10 +12,19 @@
 @interface XspfMDragControl : NSControl
 {
 	id delegate;
+	
+	BOOL drawsBackground;
+	BOOL _vertical;
+	NSImageAlignment _position;
+	
 }
 
 - (void)setDelegate:(id)newDelegate;
 - (id)delegate;
+
+- (void)setDrawsBackground:(BOOL)flag;
+- (void)setVertical:(BOOL)flag;
+- (void)setDragPosition:(NSImageAlignment)position;
 
 @end
 
