@@ -15,6 +15,8 @@
 #import "XspfMCollectionViewController.h"
 #import "XspfMListViewController.h"
 #import "XspfMDetailViewController.h"
+#import "XspfMCoverFlowViewController.h"
+
 
 #import "XspfMDragControl.h"
 
@@ -132,6 +134,11 @@
 	[self setCurrentListViewType:typeCollectionView];
 	[(XspfMCollectionViewController *)listViewController collectionViewItemViewSmall:sender];
 }
+- (IBAction)switchCoverFlowView:(id)sender
+{
+	[self setCurrentListViewType:typeCoverFlowView];
+}
+
 - (void)sortByKey:(NSString *)key
 {
 	NSMutableArray *sortDescs = [[[controller sortDescriptors] mutableCopy] autorelease];
@@ -264,6 +271,12 @@
 		} else {
 			[menuItem setState:NSOffState];
 		}
+	} else if(action == @selector(switchCoverFlowView:)) {
+		if(currentListViewType == typeCoverFlowView) {
+			[menuItem setState:NSOnState];
+		} else {
+			[menuItem setState:NSOffState];
+		}
 	}
 	
 	return enabled;
@@ -305,6 +318,9 @@
 			break;
 		case typeTableView:
 			className = @"XspfMListViewController";
+			break;
+		case typeCoverFlowView:
+			className = @"XspfMCoverFlowViewController";
 			break;
 	}
 	if(!className) return;
