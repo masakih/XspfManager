@@ -15,6 +15,7 @@ typedef enum {
 	typeNotSelected = 0,
 	typeCollectionView = 1,
 	typeTableView,
+	typeCoverFlowView,
 } XspfMViewType;
 
 @class XspfMViewController;
@@ -55,6 +56,7 @@ typedef enum {
 - (IBAction)switchListView:(id)sender;
 - (IBAction)switchRegularIconView:(id)sender;
 - (IBAction)switchSmallIconView:(id)sender;
+- (IBAction)switchCoverFlowView:(id)sender;
 
 - (IBAction)sortByTitle:(id)sender;
 - (IBAction)sortByLastPlayDate:(id)sender;
