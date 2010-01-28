@@ -28,9 +28,6 @@
 {
 	NSArrayController *rep = [self representedObject];
 	
-	if(rep) {
-		[coverFlow bind:@"content" toObject:rep withKeyPath:@"arrangedObjects" options:nil];
-	}
 	coverFlow.imageKeyPath = @"thumbnail";
 	coverFlow.showsScrollbar = YES;
 	
@@ -42,7 +39,6 @@
 	[listViewController view];
 	[listViewController setRepresentedObject:rep];
 	[listViewController recalculateKeyViewLoop];
-	
 	[listPlaceHolder addSubview:[listViewController view]];
 	[[listViewController view] setFrame:[listPlaceHolder bounds]];
 	[self recalculateKeyViewLoop];
@@ -56,12 +52,15 @@
 - (void)setRepresentedObject:(id)representedObject
 {
 	[super setRepresentedObject:representedObject];
+	[listViewController setRepresentedObject:representedObject];
 	
 	if(representedObject) {
+		coverFlow.itemSize = NSMakeSize(200, 150);
 		[coverFlow bind:@"content" toObject:representedObject withKeyPath:@"arrangedObjects" options:nil];
 		[coverFlow bind:@"selectionIndex" toObject:representedObject withKeyPath:@"selectionIndex" options:nil];
-		
-		[listViewController setRepresentedObject:representedObject];
+	} else {
+		[coverFlow unbind:@"content"];
+		[coverFlow unbind:@"selectionIndex"];
 	}
 }
 
