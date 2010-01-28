@@ -68,6 +68,10 @@ static NSString *MBCoverFlowViewImagePathContext;
 #define MBRightArrowKeyCode 124
 #define MBReturnKeyCode 36
 
+// Class variable
+static NSGradient *_shadowGradient = nil;
+
+
 @interface MBCoverFlowView ()
 - (float)_positionOfSelectedItem;
 - (CALayer *)_insertLayerInScrollLayer;
@@ -162,7 +166,11 @@ static BOOL drawBorderForDebug = NO;
 		[_containerLayer addSublayer:_scrollLayer];
 		
 		// Create a gradient image to use for image shadows
-		_shadowGradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithDeviceWhite:0 alpha:0.6] endingColor:[NSColor colorWithDeviceWhite:0 alpha:1.0]];
+		
+		if(!_shadowGradient) {
+			_shadowGradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithDeviceWhite:0 alpha:0.6]
+															endingColor:[NSColor colorWithDeviceWhite:0 alpha:1.0]];
+		}
 		
 		/* create a pleasant gradient mask around our central layer.
 		 We don't have to worry about re-creating these when the window
@@ -300,14 +308,22 @@ static BOOL drawBorderForDebug = NO;
 
 - (void)scrollWheel:(NSEvent *)theEvent
 {
-	if (fabs([theEvent deltaY]) > MBCoverFlowScrollMinimumDeltaThreshold) {
-		if ([theEvent deltaY] > 0) {
-			[self _setSelectionIndex:(self.selectionIndex - 1)];
-		} else {
-			[self _setSelectionIndex:(self.selectionIndex + 1)];
-		}
-	} else if (fabs([theEvent deltaX]) > MBCoverFlowScrollMinimumDeltaThreshold) {
-		if ([theEvent deltaX] > 0) {
+	CGFloat deltaY = [theEvent deltaY];
+	CGFloat deltaX = [theEvent deltaX];
+	CGFloat absDeltaY = fabs(deltaY);
+	CGFloat absDeltaX = fabs(deltaX);
+	
+	CGFloat targetDelta, targetAbsDelta;
+	if(absDeltaY > absDeltaX) {
+		targetDelta = deltaY;
+		targetAbsDelta = absDeltaY;
+	} else {
+		targetDelta = deltaX;
+		targetAbsDelta = absDeltaX;
+	}
+	
+	if (targetAbsDelta > MBCoverFlowScrollMinimumDeltaThreshold) {
+		if (targetDelta > 0) {
 			[self _setSelectionIndex:(self.selectionIndex - 1)];
 		} else {
 			[self _setSelectionIndex:(self.selectionIndex + 1)];
@@ -568,8 +584,8 @@ static BOOL drawBorderForDebug = NO;
 		_dragControl = nil;
 	}
 	
+	_dragControl = [aControl retain];
 	if (aControl != nil) {
-		_dragControl = [aControl retain];
 		[self addSubview:self.dragControl];
 	}
 	
@@ -690,6 +706,75 @@ static inline CALayer *_reflectionLayerForItemLayer(CALayer *itemLayer)
 {
 	return [[itemLayer sublayers] objectAtIndex:1];
 }
+static BOOL _setContentImageAdjustedSizeToItemLayer(NSImage *image, NSSize size, CALayer *layer)
+{
+	NSUInteger canvasWidth, canvasHeight;
+	CGFloat imageWidth, imageHeight;
+	CGFloat imageAspect, canvasAspect;
+	CGFloat targetLeft;
+	
+	if(!image || !layer) return NO;
+	
+	imageWidth = [image size].width;
+	imageHeight = [image size].height;
+	if(imageWidth <= 0 || imageHeight <= 0 || size.width <= 0 || size.height <= 0) return NO;
+	
+	CGFloat maxHeight = size.height * 3;
+	if(imageWidth > maxHeight) {
+		imageWidth *= maxHeight / imageHeight;
+		imageHeight = maxHeight;
+	}
+	
+	imageAspect = imageWidth / imageHeight;
+	canvasAspect = size.width / size.height;
+	if(imageAspect > canvasAspect) {
+		canvasWidth = imageWidth;
+		canvasHeight = imageWidth / canvasAspect;
+		targetLeft = 0;
+	} else {
+		canvasHeight = imageHeight;
+		canvasWidth = canvasHeight * canvasAspect;
+		targetLeft = (canvasWidth - imageWidth) / 2.0;
+	}
+	
+	size_t bytesPerRow = 4*canvasWidth;
+	void* bitmapData = malloc(bytesPerRow * canvasHeight);
+	if(!bitmapData) return NO;
+	CGContextRef context = CGBitmapContextCreate(bitmapData, 
+												 canvasWidth,  
+												 canvasHeight, 
+												 8,
+												 bytesPerRow, 
+												 [[NSColorSpace genericRGBColorSpace] CGColorSpace], 
+												 kCGBitmapByteOrder32Host|kCGImageAlphaPremultipliedFirst);
+	if(!context) return NO;
+	
+	[NSGraphicsContext saveGraphicsState];
+	[NSGraphicsContext setCurrentContext:[NSGraphicsContext graphicsContextWithGraphicsPort:context flipped:NO]];
+	
+	// create CGImageRef
+	[[NSColor clearColor] set];
+	NSRectFill(NSMakeRect(0, 0, canvasWidth, canvasHeight));
+	[image drawInRect:NSMakeRect(targetLeft,0, imageWidth, imageHeight) fromRect:NSZeroRect operation:NSCompositeCopy fraction:1.0];
+	CGImageRef cgImage = CGBitmapContextCreateImage(context);
+	CALayer *imageLayer = _imageLayerForItemLayer(layer);
+	imageLayer.contents = (id)cgImage;
+	CGImageRelease(cgImage);
+	
+	// create reflection image
+	[_shadowGradient drawInRect:NSMakeRect(0, 0, canvasWidth, imageHeight) angle:90];
+	CGImageRef cgShadowImage = CGBitmapContextCreateImage(context);
+	CALayer *reflectionLayer = _reflectionLayerForItemLayer(layer);
+	reflectionLayer.contents = (id)cgShadowImage;
+	CGImageRelease(cgShadowImage);
+	
+	[NSGraphicsContext restoreGraphicsState];
+	CGContextRelease(context);
+	free(bitmapData);
+	
+	return YES;
+}
+
 - (CALayer *)_insertLayerInScrollLayer
 {
 	/* this enables a perspective transform.  The value of zDistance
@@ -716,7 +801,6 @@ static inline CALayer *_reflectionLayerForItemLayer(CALayer *itemLayer)
 	[imageLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMaxX relativeTo:@"superlayer" attribute:kCAConstraintMaxX]];
 	imageLayer.contents = (id)_placeholderRef;
 	imageLayer.name = @"image";
-	imageLayer.contentsGravity = kCAGravityResizeAspectFill;
 	[layer addSublayer:imageLayer];
 	
 	CALayer *reflectionLayer = [CALayer layer];
@@ -727,7 +811,6 @@ static inline CALayer *_reflectionLayerForItemLayer(CALayer *itemLayer)
 	reflectionLayer.name = @"reflection";
 	reflectionLayer.transform = CATransform3DMakeScale(1, -1, 1);
 	reflectionLayer.contents = (id)_placeholderRef;
-	reflectionLayer.contentsGravity = kCAGravityResizeAspectFill;
 	[layer addSublayer:reflectionLayer];
 	
 	[_scrollLayer addSublayer:layer];
@@ -780,7 +863,6 @@ static inline CALayer *_reflectionLayerForItemLayer(CALayer *itemLayer)
 {
 	@try {
 		NSImage *image;
-		NSImage *refImage = nil;
 		NSObject *object = [layer valueForKey:@"representedObject"];
 		
 		if (self.imageKeyPath != nil) {
@@ -793,34 +875,15 @@ static inline CALayer *_reflectionLayerForItemLayer(CALayer *itemLayer)
 			image = [[[NSImage alloc] initWithData:(NSData *)image] autorelease];
 		}
 		
-		CGImageRef imageRef;
-		CGImageRef refRef;
-		
-		if (!image) {
-			imageRef = CGImageRetain(_placeholderRef);
-			refRef = imageRef;
-			[layer setValue:[NSNumber numberWithBool:NO] forKey:@"hasImage"];
-		} else {
-			imageRef = [image imageRefCopy];
-			
-			refImage = [image copy];
-			NSSize imageSize = [image size];
-			[refImage lockFocus];
-			[_shadowGradient drawInRect:NSMakeRect(0, 0, imageSize.width, imageSize.height) angle:90];
-			[refImage unlockFocus];
-			refRef = [refImage imageRefCopy];
-			
+		if(_setContentImageAdjustedSizeToItemLayer(image, [self itemSize], layer)) {
 			[layer setValue:[NSNumber numberWithBool:YES] forKey:@"hasImage"];
+		} else {
+			CALayer *imageLayer = _imageLayerForItemLayer(layer);
+			CALayer *reflectionLayer = _reflectionLayerForItemLayer(layer);
+			imageLayer.contents = (id)_placeholderRef;
+			reflectionLayer.contents = (id)_placeholderRef;
+			[layer setValue:[NSNumber numberWithBool:NO] forKey:@"hasImage"];
 		}
-		
-		CALayer *imageLayer = _imageLayerForItemLayer(layer);
-		CALayer *reflectionLayer = _reflectionLayerForItemLayer(layer);
-		
-		imageLayer.contents = (id)imageRef;
-		reflectionLayer.contents = (id)refRef;
-		imageLayer.backgroundColor = NULL;
-		reflectionLayer.backgroundColor = NULL;
-		CGImageRelease(imageRef);
 	} @catch (NSException *e) {
 		// If the key path isn't valid, do nothing
 	}
@@ -897,8 +960,8 @@ static inline CALayer *_reflectionLayerForItemLayer(CALayer *itemLayer)
 	// Update the placeholder for all necessary items
 	for (CALayer *layer in [_scrollLayer sublayers]) {
 		if (![[layer valueForKey:@"hasImage"] boolValue]) {
-			CALayer *imageLayer = _imageLayerForItemLayer(self.layer);
-			CALayer *reflectionLayer = _reflectionLayerForItemLayer(self.layer);
+			CALayer *imageLayer = _imageLayerForItemLayer(layer);
+			CALayer *reflectionLayer = _reflectionLayerForItemLayer(layer);
 			imageLayer.contents = (id)_placeholderRef;
 			reflectionLayer.contents = (id)_placeholderRef;
 		}
@@ -956,29 +1019,29 @@ static inline CALayer *_reflectionLayerForItemLayer(CALayer *itemLayer)
 		if (index < self.selectionIndex) {
 			// Left
 			sublayer.anchorPoint = CGPointMake(0, MBCoverFlowAnchorPointY);
+			sublayer.zPosition = MBCoverFlowViewPerspectiveSidePosition - 0.1 * (self.selectionIndex - index);
 			frame.origin.x += currentItemSize.width * MBCoverFlowViewPerspectiveSideSpacingFactor * (float)(self.selectionIndex - index - MBCoverFlowViewPerspectiveRowScaleFactor);
 			imageLayer.transform = _leftTransform;
 			imageLayer.zPosition = MBCoverFlowViewPerspectiveSidePosition;
 			reflectionLayer.transform = CATransform3DConcat(_leftTransform, CATransform3DMakeScale(1, -1, 1));
 			reflectionLayer.zPosition = MBCoverFlowViewPerspectiveSidePosition;
-			sublayer.zPosition = MBCoverFlowViewPerspectiveSidePosition - 0.1 * (self.selectionIndex - index);
 		} else if (index > self.selectionIndex) {
 			// Right
 			sublayer.anchorPoint = CGPointMake(1, MBCoverFlowAnchorPointY);
+			sublayer.zPosition = MBCoverFlowViewPerspectiveSidePosition - 0.1 * (index - self.selectionIndex);
 			frame.origin.x -= currentItemSize.width * MBCoverFlowViewPerspectiveSideSpacingFactor * (float)(index - self.selectionIndex - MBCoverFlowViewPerspectiveRowScaleFactor);
 			imageLayer.transform = _rightTransform;
 			imageLayer.zPosition = MBCoverFlowViewPerspectiveSidePosition;
 			reflectionLayer.transform = CATransform3DConcat(_rightTransform, CATransform3DMakeScale(1, -1, 1));
 			reflectionLayer.zPosition = MBCoverFlowViewPerspectiveSidePosition;
-			sublayer.zPosition = MBCoverFlowViewPerspectiveSidePosition - 0.1 * (index - self.selectionIndex);
 		} else {
 			// Center
+			sublayer.anchorPoint = CGPointMake(0.5, MBCoverFlowAnchorPointY);
+			sublayer.zPosition = MBCoverFlowViewPerspectiveSidePosition;
 			imageLayer.transform = CATransform3DIdentity;
 			imageLayer.zPosition = MBCoverFlowViewPerspectiveCenterPosition;
 			reflectionLayer.transform = CATransform3DMakeScale(1, -1, 1);
 			reflectionLayer.zPosition = MBCoverFlowViewPerspectiveCenterPosition;
-			sublayer.zPosition = MBCoverFlowViewPerspectiveSidePosition;
-			sublayer.anchorPoint = CGPointMake(0.5, MBCoverFlowAnchorPointY);
 		}
 		
 		[sublayer setFrame:frame];
