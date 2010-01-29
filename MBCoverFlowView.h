@@ -43,6 +43,7 @@
 	CALayer *_rightGradientLayer;
 	
 	// Appearance
+	CGImageRef _shadowImage;
 	CATransform3D _leftTransform;
 	CATransform3D _rightTransform;
 	
