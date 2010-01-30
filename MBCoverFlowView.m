@@ -97,6 +97,7 @@ static NSGradient *_shadowGradient = nil;
 
 // add by masakih
 - (void)recalcSubviewSize;
+- (void)_updateMaskConstraint;
 static inline CALayer *_imageLayerForItemLayer(CALayer *itemLayer);
 static inline CALayer *_reflectionLayerForItemLayer(CALayer *itemLayer);
 
@@ -249,14 +250,17 @@ static BOOL drawBorderForDebug = YES;
 		// the autoresizing mask allows it to change shape with the parent layer
 		maskLayer.autoresizingMask = kCALayerWidthSizable | kCALayerHeightSizable;
 		maskLayer.layoutManager = [CAConstraintLayoutManager layoutManager];
-		[_leftGradientLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMinX relativeTo:@"superlayer" attribute:kCAConstraintMinX]];
-		[_leftGradientLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMinY relativeTo:@"superlayer" attribute:kCAConstraintMinY]];
-		[_leftGradientLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMaxY relativeTo:@"superlayer" attribute:kCAConstraintMaxY]];
-		[_leftGradientLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMaxX relativeTo:@"superlayer" attribute:kCAConstraintMaxX scale:.5 offset:-[self itemSize].width / 2]];
-		[_rightGradientLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMaxX relativeTo:@"superlayer" attribute:kCAConstraintMaxX]];
-		[_rightGradientLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMinY relativeTo:@"superlayer" attribute:kCAConstraintMinY]];
-		[_rightGradientLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMaxY relativeTo:@"superlayer" attribute:kCAConstraintMaxY]];
-		[_rightGradientLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMinX relativeTo:@"superlayer" attribute:kCAConstraintMaxX scale:.5 offset:[self itemSize].width / 2]];
+		
+		[self _updateMaskConstraint];
+		
+		if(drawBorderForDebug) {
+			maskLayer.borderWidth = 1;
+			maskLayer.borderColor = CGColorCreateGenericRGB(255, 255, 0, 1.0);
+			_rightGradientLayer.borderWidth = 1;
+			_rightGradientLayer.borderColor = CGColorCreateGenericRGB(0, 255, 255, 1.0);
+			_leftGradientLayer.borderWidth = 1;
+			_leftGradientLayer.borderColor = CGColorCreateGenericRGB(255, 0, 255, 1.0);
+		}
 		
 		[maskLayer addSublayer:_rightGradientLayer];
 		[maskLayer addSublayer:_leftGradientLayer];
@@ -288,6 +292,14 @@ static BOOL drawBorderForDebug = YES;
 {
 	[self setWantsLayer:YES];
 	[self _recachePlaceholder];
+	
+	// Why do i need this?
+	[CATransaction begin];
+	[CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
+	NSRect frame = self.frame;
+	self.frame = NSMakeRect(0, 0, 100, 100);
+	self.frame = frame;
+	[CATransaction commit];
 }
 
 #pragma mark -
@@ -368,6 +380,7 @@ static BOOL drawBorderForDebug = YES;
 - (void)setFrame:(NSRect)newFrame
 {
 	[super setFrame:newFrame];
+	[self _updateMaskConstraint];
 //	[self recalcSubviewSize];
 	self.selectionIndex = self.selectionIndex;
 }
@@ -544,16 +557,7 @@ static BOOL drawBorderForDebug = YES;
 	_itemSize = newSize;
 	
 	// Update all the various constraints which depend on the item size
-	_leftGradientLayer.constraints = nil;
-	[_leftGradientLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMinX relativeTo:@"superlayer" attribute:kCAConstraintMinX]];
-	[_leftGradientLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMinY relativeTo:@"superlayer" attribute:kCAConstraintMinY]];
-	[_leftGradientLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMaxY relativeTo:@"superlayer" attribute:kCAConstraintMaxY]];
-	[_leftGradientLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMaxX relativeTo:@"superlayer" attribute:kCAConstraintMaxX scale:.5 offset:-[self itemSize].width / 2]];
-	_rightGradientLayer.constraints = nil;
-	[_rightGradientLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMaxX relativeTo:@"superlayer" attribute:kCAConstraintMaxX]];
-	[_rightGradientLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMinY relativeTo:@"superlayer" attribute:kCAConstraintMinY]];
-	[_rightGradientLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMaxY relativeTo:@"superlayer" attribute:kCAConstraintMaxY]];
-	[_rightGradientLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMinX relativeTo:@"superlayer" attribute:kCAConstraintMaxX scale:.5 offset:[self itemSize].width / 2]];
+	[self _updateMaskConstraint];
 	
 	// Update the view
 	[self _recachePlaceholder];
@@ -787,7 +791,19 @@ static BOOL _setContentImageAdjustedSizeToItemLayer(NSImage *image, NSSize size,
 	
 	return YES;
 }
-
+- (void)_updateMaskConstraint
+{
+	_leftGradientLayer.constraints = nil;
+	[_leftGradientLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMinX relativeTo:@"superlayer" attribute:kCAConstraintMinX]];
+	[_leftGradientLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMinY relativeTo:@"superlayer" attribute:kCAConstraintMinY]];
+	[_leftGradientLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMaxY relativeTo:@"superlayer" attribute:kCAConstraintMaxY]];
+	[_leftGradientLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMaxX relativeTo:@"superlayer" attribute:kCAConstraintMaxX scale:.5 offset:-[self itemSize].width / 2]];
+	_rightGradientLayer.constraints = nil;
+	[_rightGradientLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMaxX relativeTo:@"superlayer" attribute:kCAConstraintMaxX]];
+	[_rightGradientLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMinY relativeTo:@"superlayer" attribute:kCAConstraintMinY]];
+	[_rightGradientLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMaxY relativeTo:@"superlayer" attribute:kCAConstraintMaxY]];
+	[_rightGradientLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMinX relativeTo:@"superlayer" attribute:kCAConstraintMaxX scale:.5 offset:[self itemSize].width / 2]];
+}
 - (CALayer *)_insertLayerInScrollLayer
 {
 	/* this enables a perspective transform.  The value of zDistance
