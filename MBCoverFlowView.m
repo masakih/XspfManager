@@ -98,10 +98,11 @@ static NSGradient *_shadowGradient = nil;
 // add by masakih
 - (void)recalcSubviewSize;
 - (void)_updateMaskConstraint;
+static inline void _removeActionFromLayer(NSString *action, CALayer *layer);
 static inline CALayer *_imageLayerForItemLayer(CALayer *itemLayer);
 static inline CALayer *_reflectionLayerForItemLayer(CALayer *itemLayer);
 
-static BOOL drawBorderForDebug = YES;
+static BOOL drawBorderForDebug = NO;
 @end
 
 
@@ -150,9 +151,9 @@ static BOOL drawBorderForDebug = YES;
 		
 		_leftTransform = CATransform3DMakeRotation(-MBCoverFlowViewPerspectiveAngle, 0, -1, 0);
 		_rightTransform = CATransform3DMakeRotation(MBCoverFlowViewPerspectiveAngle, 0, -1, 0);
-	
+		
 		_itemSize = NSMakeSize(MBCoverFlowViewDefaultItemWidth, MBCoverFlowViewDefaultItemHeight);
-	
+		
 		CALayer *rootLayer = [CALayer layer];
 		rootLayer.layoutManager = [CAConstraintLayoutManager layoutManager];
 		rootLayer.backgroundColor = CGColorGetConstantColor(kCGColorBlack);
@@ -322,8 +323,8 @@ static BOOL drawBorderForDebug = YES;
 			[self _setSelectionIndex:(self.selectionIndex + 1)];
 			break;
 		case MBReturnKeyCode:
-			if (self.target && self.action) {
-				[self.target performSelector:self.action withObject:self];
+			if (self.action) {
+				[NSApp sendAction:self.action to:self.target from:self];
 				break;
 			}
 		default:
@@ -334,8 +335,8 @@ static BOOL drawBorderForDebug = YES;
 
 - (void)mouseDown:(NSEvent *)theEvent
 {
-	if ([theEvent clickCount] == 2 && self.target && self.action) {
-		[self.target performSelector:self.action withObject:self];
+	if ([theEvent clickCount] == 2 && self.action) {
+		[NSApp sendAction:self.action to:self.target from:self];
 	}
 	
 	NSPoint mouseLocation = [self convertPoint:[theEvent locationInWindow] fromView:nil];
@@ -791,6 +792,13 @@ static BOOL _setContentImageAdjustedSizeToItemLayer(NSImage *image, NSSize size,
 	
 	return YES;
 }
+static inline void _removeActionFromLayer(NSString *action, CALayer *layer)
+{
+	NSMutableDictionary *actions = [NSMutableDictionary dictionaryWithDictionary:[layer actions]];
+	[actions setObject:[NSNull null] forKey:action];
+	layer.actions = actions;
+}
+	
 - (void)_updateMaskConstraint
 {
 	_leftGradientLayer.constraints = nil;
