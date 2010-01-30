@@ -48,6 +48,8 @@
 	[accessoryController setXspfMDragControlDelegate:self];
 	coverFlow.dragControl = [accessoryController dragControl];
 	coverFlow.accessoryController = accessoryController;
+	
+	coverFlow.action = @selector(openXspf:);
 }
 
 - (void)setRepresentedObject:(id)representedObject
