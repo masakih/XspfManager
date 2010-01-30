@@ -672,12 +672,9 @@ static BOOL drawBorderForDebug = YES;
 	if(hit) {
 		NSString *name = hit.name;
 		CALayer *itemLayer = nil;
-		if([name isEqualToString:@"image"] || [name isEqualToString:@"reflection"]) {
+		if([name isEqualToString:@"image"]) {
 			itemLayer = hit.superlayer;
-		} else if([name isEqualToString:@"gradient"]) {
-			itemLayer = hit.superlayer.superlayer;
 		}
-		
 		if(itemLayer) {
 			id object = [itemLayer valueForKey:@"representedObject"];
 			return [self.content indexOfObject:object];
@@ -836,7 +833,6 @@ static BOOL _setContentImageAdjustedSizeToItemLayer(NSImage *image, NSSize size,
 	[gradientLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMinX relativeTo:@"superlayer" attribute:kCAConstraintMinX]];
 	[gradientLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMaxX relativeTo:@"superlayer" attribute:kCAConstraintMaxX]];
 	[gradientLayer setContents:(id)_shadowImage];
-	gradientLayer.name = @"gradient";
 	[reflectionLayer addSublayer:gradientLayer];
 	
 	[_scrollLayer addSublayer:layer];
