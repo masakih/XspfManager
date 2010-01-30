@@ -667,7 +667,8 @@ static BOOL drawBorderForDebug = YES;
 
 - (NSInteger)indexOfItemAtPoint:(NSPoint)aPoint
 {
-	CALayer *hit = [_scrollLayer hitTest:NSPointToCGPoint(aPoint)];
+	CGPoint scrollerPoint = [_scrollLayer.superlayer convertPoint:NSPointToCGPoint(aPoint) fromLayer:self.layer];
+	CALayer *hit = [_scrollLayer hitTest:scrollerPoint];
 	if(hit) {
 		NSString *name = hit.name;
 		CALayer *itemLayer = nil;

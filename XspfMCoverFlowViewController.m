@@ -30,6 +30,7 @@
 	
 	coverFlow.imageKeyPath = @"thumbnail";
 	coverFlow.showsScrollbar = YES;
+	coverFlow.itemSize = NSMakeSize(200, 150);
 	
 	[dragControl setDrawsBackground:NO];
 	[dragControl setDragPosition:NSImageAlignCenter];
@@ -55,7 +56,6 @@
 	[listViewController setRepresentedObject:representedObject];
 	
 	if(representedObject) {
-		coverFlow.itemSize = NSMakeSize(200, 150);
 		[coverFlow bind:@"content" toObject:representedObject withKeyPath:@"arrangedObjects" options:nil];
 		[coverFlow bind:@"selectionIndex" toObject:representedObject withKeyPath:@"selectionIndex" options:nil];
 	} else {
