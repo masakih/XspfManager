@@ -65,6 +65,7 @@
 {
 	[[self window] setContentBorderThickness:32 forEdge:NSMinYEdge];
 	
+	[splitView setDelegate:self];
 	[self setupXspfLists];
 	[self setupDetailView];
 	[self setupAccessorylView];
@@ -395,6 +396,11 @@
 - (BOOL)panel:(id)sender shouldShowFilename:(NSString *)filename
 {
 	return ![appDelegate didRegisteredURL:[NSURL fileURLWithPath:filename]];
+}
+#pragma mark#### NSSplitView Delegate ####
+- (CGFloat)splitView:(NSSplitView *)splitView constrainMinCoordinate:(CGFloat)proposedMinimumPosition ofSubviewAt:(NSInteger)dividerIndex
+{
+	return 130;
 }
 
 #pragma mark#### XspfMDragControl Delegate ####
