@@ -50,6 +50,8 @@
 	coverFlow.accessoryController = accessoryController;
 	
 	coverFlow.action = @selector(openXspf:);
+	
+	[splitView setDelegate:self];
 }
 
 - (void)setRepresentedObject:(id)representedObject
@@ -73,6 +75,13 @@
 	CGFloat libWidth = [coverFlow frame].size.height;
 	[splitView setPosition:libWidth - delta.height ofDividerAtIndex:0];
 }
+
+#pragma mark#### NSSplitView Delegate ####
+- (CGFloat)splitView:(NSSplitView *)splitView constrainMinCoordinate:(CGFloat)proposedMinimumPosition ofSubviewAt:(NSInteger)dividerIndex
+{
+	return 130;
+}
+
 
 
 @end
