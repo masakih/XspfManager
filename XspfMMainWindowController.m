@@ -402,7 +402,24 @@
 {
 	return 130;
 }
-
+- (void)splitView:(NSSplitView *)aSplitView resizeSubviewsWithOldSize:(NSSize)oldSize
+{
+	NSView *rightView = [[splitView subviews] objectAtIndex:1];
+	NSRect newFrame = [splitView frame];
+	NSRect libFrame = [libraryView frame];
+	NSRect listFrame = [rightView frame];
+	CGFloat dividerThickness = [splitView dividerThickness];
+	
+	libFrame.size.height = newFrame.size.height;
+	listFrame.size.height = newFrame.size.height;
+	
+	listFrame.size.width = newFrame.size.width - libFrame.size.width - dividerThickness;
+	
+	if(listFrame.size.width < 0) listFrame.size.width = 0;
+	
+	[libraryView setFrame:libFrame];
+	[rightView setFrame:listFrame];
+}
 #pragma mark#### XspfMDragControl Delegate ####
 - (void)dragControl:(XspfMDragControl *)control dragDelta:(NSSize)delta
 {
