@@ -102,7 +102,7 @@ static inline void _removeActionFromLayer(NSString *action, CALayer *layer);
 static inline CALayer *_imageLayerForItemLayer(CALayer *itemLayer);
 static inline CALayer *_reflectionLayerForItemLayer(CALayer *itemLayer);
 
-static BOOL drawBorderForDebug = NO;
+static BOOL drawBorderForDebug = YES;
 @end
 
 
@@ -647,6 +647,7 @@ static BOOL drawBorderForDebug = NO;
 	// Scroll so the selected item is centered
 	[_scrollLayer scrollToPoint:CGPointMake([self _positionOfSelectedItem], layerFrame.origin.y)];
 	[_scroller setIntegerValue:self.selectionIndex];
+	[_scrollLayer layoutSublayers];
 }
 
 - (id)selectedObject
@@ -811,6 +812,8 @@ static inline void _removeActionFromLayer(NSString *action, CALayer *layer)
 	[_rightGradientLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMinY relativeTo:@"superlayer" attribute:kCAConstraintMinY]];
 	[_rightGradientLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMaxY relativeTo:@"superlayer" attribute:kCAConstraintMaxY]];
 	[_rightGradientLayer addConstraint:[CAConstraint constraintWithAttribute:kCAConstraintMinX relativeTo:@"superlayer" attribute:kCAConstraintMaxX scale:.5 offset:[self itemSize].width / 2]];
+	
+	[_containerLayer layoutSublayers];
 }
 - (CALayer *)_insertLayerInScrollLayer
 {
@@ -1093,6 +1096,8 @@ static inline void _removeActionFromLayer(NSString *action, CALayer *layer)
 		}
 		
 		[sublayer setFrame:frame];
+		[sublayer layoutSublayers];
+		[reflectionLayer layoutSublayers];
 	}
 }
 
