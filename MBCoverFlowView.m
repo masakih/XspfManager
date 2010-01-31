@@ -102,7 +102,7 @@ static inline void _removeActionFromLayer(NSString *action, CALayer *layer);
 static inline CALayer *_imageLayerForItemLayer(CALayer *itemLayer);
 static inline CALayer *_reflectionLayerForItemLayer(CALayer *itemLayer);
 
-static BOOL drawBorderForDebug = YES;
+static BOOL drawBorderForDebug = NO;
 @end
 
 
