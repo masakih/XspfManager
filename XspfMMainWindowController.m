@@ -465,8 +465,11 @@ static id previewPanel = nil;
 		[qlPanel setURLs:[[controller arrangedObjects] mutableArrayValueForKey:@"url"]
 			currentIndex:[controller selectionIndex]
   preservingDisplayState:YES];
+		[qlPanel makeKeyAndOrderFrontWithEffect:2];
+		NSLog(@"10.5");
 	} else if(osVersion <= 106) {
 		//		[qlPanel setCurrentPreviewItemIndex:[controller selectionIndex]];
+		NSLog(@"10.6");
 		[qlPanel makeKeyAndOrderFront:nil];
 	}
 }
