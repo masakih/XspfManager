@@ -122,6 +122,9 @@
 			}
 			return;
 			break;
+		case 49:
+			[NSApp sendAction:@selector(togglePreviewPanel:) to:nil from:nil];
+			break;
 	}
 	
 	[super keyDown:theEvent];

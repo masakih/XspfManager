@@ -19,6 +19,7 @@
 
 - (NSManagedObjectContext *)managedObjectContext;
 
+- (NSResponder *)initialFirstResponder;
 - (void)recalculateKeyViewLoop;
 - (NSView *)firstKeyView;
 - (NSView *)lastKeyView;
