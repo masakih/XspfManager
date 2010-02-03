@@ -32,19 +32,33 @@
 - (void)removeSelectedItem;
 @end
 
+@interface NSObject(XspfMPreviewPanelSupport)
+- (NSPanel *)sharedPreviewPanel;
+@end
+@interface NSPanel(XspfMPreviewPanelSupport)
+- (void)setURLs:(NSArray *)URLs currentIndex:(NSUInteger)index preservingDisplayState:(BOOL)flag;
+- (void)makeKeyAndOrderFrontWithEffect:(NSInteger)mode;
+- (void)setCurrentPreviewItemIndex:(NSUInteger)index;
+@end
+
+
 static NSInteger osVersion = 0;
 static id previewPanel = nil;
 
 @implementation XspfMMainWindowController
 + (void)initialize
 {
-	if([[NSBundle bundleWithPath:@"/System/Library/PrivateFrameworks/QuickLookUI.framework"] load]) {
-		NSLog(@"Quick Look loaded!");
-		osVersion = 105;
-	}
-	if([[NSBundle bundleWithPath:@"/System/Library/Frameworks/Quartz.framework/Frameworks/QuickLookUI.framework"] load]) {
-		NSLog(@"Quick Look loaded!");
-		osVersion = 106;
+	static BOOL isFirst = YES;
+	if(isFirst) {
+		isFirst = NO;
+		if([[NSBundle bundleWithPath:@"/System/Library/PrivateFrameworks/QuickLookUI.framework"] load]) {
+			NSLog(@"Quick Look for 10.5 loaded!");
+			osVersion = 105;
+		}
+		if([[NSBundle bundleWithPath:@"/System/Library/Frameworks/Quartz.framework/Frameworks/QuickLookUI.framework"] load]) {
+			NSLog(@"Quick Look for 10.6 loaded!");
+			osVersion = 106;
+		}
 	}
 }
 
@@ -466,10 +480,7 @@ static id previewPanel = nil;
 			currentIndex:[controller selectionIndex]
   preservingDisplayState:YES];
 		[qlPanel makeKeyAndOrderFrontWithEffect:2];
-		NSLog(@"10.5");
 	} else if(osVersion <= 106) {
-		//		[qlPanel setCurrentPreviewItemIndex:[controller selectionIndex]];
-		NSLog(@"10.6");
 		[qlPanel makeKeyAndOrderFront:nil];
 	}
 }
@@ -555,9 +566,6 @@ static id previewPanel = nil;
 // This delegate method provides a transition image between the table view and the preview panel
 - (id)previewPanel:(id /*QLPreviewPanel* */)panel transitionImageForPreviewItem:(id /*<QLPreviewItem>*/)item contentRect:(NSRect *)contentRect
 {
-//	DownloadItem* downloadItem = (DownloadItem *)item;
-//	
-//	return downloadItem.iconImage;
 	XspfMXspfObject *obj = item;
 	return obj.thumbnail;
 }
