@@ -50,7 +50,10 @@
 {
 	return [[NSApp delegate] managedObjectContext];
 }
-
+- (NSResponder *)initialFirstResponder
+{
+	return initialFirstResponder;
+}
 - (void)recalculateKeyViewLoop {}
 - (NSView *)firstKeyView
 {

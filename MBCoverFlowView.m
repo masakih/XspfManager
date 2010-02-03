@@ -325,8 +325,12 @@ static BOOL drawBorderForDebug = NO;
 		case MBReturnKeyCode:
 			if (self.action) {
 				[NSApp sendAction:self.action to:self.target from:self];
-				break;
 			}
+			break;
+		case 49:
+			[NSApp sendAction:@selector(togglePreviewPanel:) to:nil from:nil];
+			break;
+			 
 		default:
 			[super keyDown:theEvent];
 			break;

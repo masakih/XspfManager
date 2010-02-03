@@ -32,8 +32,21 @@
 - (void)removeSelectedItem;
 @end
 
+static NSInteger osVersion = 0;
+static id previewPanel = nil;
 
 @implementation XspfMMainWindowController
++ (void)initialize
+{
+	if([[NSBundle bundleWithPath:@"/System/Library/PrivateFrameworks/QuickLookUI.framework"] load]) {
+		NSLog(@"Quick Look loaded!");
+		osVersion = 105;
+	}
+	if([[NSBundle bundleWithPath:@"/System/Library/Frameworks/Quartz.framework/Frameworks/QuickLookUI.framework"] load]) {
+		NSLog(@"Quick Look loaded!");
+		osVersion = 106;
+	}
+}
 
 - (id)init
 {
@@ -439,6 +452,112 @@
 					 afterDelay:0.01];
 }
 
+#pragma mark#### PreviewPanel Support ####
+- (IBAction)togglePreviewPanel:(id)panel
+{
+	Class aClass = NSClassFromString(@"QLPreviewPanel");
+	if(!aClass) {
+		NSBeep();
+		return;
+	}
+	id qlPanel = [aClass sharedPreviewPanel];
+	if(osVersion == 105) {
+		[qlPanel setURLs:[[controller arrangedObjects] mutableArrayValueForKey:@"url"]
+			currentIndex:[controller selectionIndex]
+  preservingDisplayState:YES];
+	} else if(osVersion <= 106) {
+		//		[qlPanel setCurrentPreviewItemIndex:[controller selectionIndex]];
+		[qlPanel makeKeyAndOrderFront:nil];
+	}
+}
+
+#pragma mark---- QLPreviewPanelController ----
+- (BOOL)acceptsPreviewPanelControl:(id /*QLPreviewPanel* */)panel
+{
+	return YES;
+}
+- (void)beginPreviewPanelControl:(id /*QLPreviewPanel* */)panel
+{
+	// This document is now responsible of the preview panel
+	// It is allowed to set the delegate, data source and refresh panel.
+	previewPanel = [panel retain];
+	[panel setDelegate:self];
+	[panel setDataSource:self];
+	[previewPanel setCurrentPreviewItemIndex:[controller selectionIndex]];
+}
+- (void)endPreviewPanelControl:(id /*QLPreviewPanel* */)panel
+{
+	// This document loses its responsisibility on the preview panel
+	// Until the next call to -beginPreviewPanelControl: it must not
+	// change the panel's delegate, data source or refresh it.
+	[previewPanel release];
+	previewPanel = nil;
+}
+
+#pragma mark---- QLPreviewPanelDataSource ----
+- (NSInteger)numberOfPreviewItemsInPreviewPanel:(id /*QLPreviewPanel* */)panel
+{
+	return [[controller arrangedObjects] count];
+}
+- (id /*<QLPreviewItem>*/)previewPanel:(id)panel previewItemAtIndex:(NSInteger)index
+{
+	return [[controller arrangedObjects] objectAtIndex:index];
+}
+
+#pragma mark---- QLPreviewPanelDelegate ----
+- (BOOL)previewPanel:(id /*QLPreviewPanel* */)panel handleEvent:(NSEvent *)event
+{
+	// redirect all key down events to the table view
+	if ([event type] == NSKeyDown) {
+		NSResponder *target = nil;
+		target = [listViewController initialFirstResponder];
+		if(!target) {
+			target = [listViewController firstKeyView];
+		}
+		if(!target) {
+			target = [listViewController view];
+		}
+		if(!target) return NO;
+		
+		NSLog(@"target -> %@", target);
+		[target keyDown:event];
+		return YES;
+	}
+	return NO;
+}
+- (NSRect)previewPanel:(id /*QLPreviewPanel* */)panel sourceFrameOnScreenForPreviewItem:(id /*<QLPreviewItem>*/)item
+{
+//	NSInteger index = [downloads indexOfObject:item];
+//	if (index == NSNotFound) {
+//		return NSZeroRect;
+//	}
+//	
+//	NSRect iconRect = [downloadsTableView frameOfCellAtColumn:0 row:index];
+//	
+//	// check that the icon rect is visible on screen
+//	NSRect visibleRect = [downloadsTableView visibleRect];
+//	
+//	if (!NSIntersectsRect(visibleRect, iconRect)) {
+//		return NSZeroRect;
+//	}
+//	
+//	// convert icon rect to screen coordinates
+//	iconRect = [downloadsTableView convertRectToBase:iconRect];
+//	iconRect.origin = [[downloadsTableView window] convertBaseToScreen:iconRect.origin];
+//	
+//	return iconRect;
+	return NSZeroRect;
+}
+
+// This delegate method provides a transition image between the table view and the preview panel
+- (id)previewPanel:(id /*QLPreviewPanel* */)panel transitionImageForPreviewItem:(id /*<QLPreviewItem>*/)item contentRect:(NSRect *)contentRect
+{
+//	DownloadItem* downloadItem = (DownloadItem *)item;
+//	
+//	return downloadItem.iconImage;
+	XspfMXspfObject *obj = item;
+	return obj.thumbnail;
+}
 #pragma mark#### Test ####
 - (IBAction)test01:(id)sender
 {
@@ -471,5 +590,16 @@
 	}
 	
 	HMLog(HMLogLevelDebug, @"Valid next view -> %@", [firstKeyView nextValidKeyView]);
+}
+@end
+
+@implementation XspfMXspfObject (XspfMPreviewPanelSupport)
+- (NSString *)previewItemTitle
+{
+	return self.title;
+}
+- (NSURL *)previewItemURL
+{
+	return self.url;
 }
 @end
