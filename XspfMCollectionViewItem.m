@@ -93,6 +93,13 @@
 	
 	[super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 }
+- (NSRect)thumbnailFrameCoordinateBase
+{
+	NSRect frame = [_box.thumbnail frame];
+	frame = [_box convertRectToBase:frame];
+	frame.origin = [[_box window] convertBaseToScreen:frame.origin];
+	return frame;
+}
 - (void)setBox:(XspfMCollectionItemBox *)box
 {
 	[_box autorelease];

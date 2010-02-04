@@ -8,6 +8,7 @@
 
 #import "XspfMCollectionViewController.h"
 
+#import "XspfMCollectionView.h"
 #import "XspfMCollectionViewItem.h"
 #import "XspfMXspfObject.h"
 
@@ -65,6 +66,14 @@
 - (void)enterAction:(XspfMCollectionView *)view
 {
 	[NSApp sendAction:@selector(openXspf:) to:nil from:self];
+}
+
+// QLPreviewPanel support
+- (NSRect)selectionItemRect
+{
+	id item = [collectionView itemAtIndex:[[self representedObject] selectionIndex]];
+	NSRect rect = [item thumbnailFrameCoordinateBase];
+	return rect;
 }
 
 #pragma mark#### Test ####

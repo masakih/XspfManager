@@ -13,7 +13,7 @@
 
 #import "XspfMViewController.h"
 
-@class XspfMCollectionViewItem;
+@class XspfMCollectionView, XspfMCollectionViewItem;
 
 typedef enum _XspfMCollectionItemType
 {
@@ -25,7 +25,7 @@ typedef enum _XspfMCollectionItemType
 @interface XspfMCollectionViewController : XspfMViewController <XspfMCollectionView_Delegate>
 {
 	IBOutlet NSScrollView *scrollView;
-	IBOutlet NSCollectionView *collectionView;
+	IBOutlet XspfMCollectionView *collectionView;
 	IBOutlet XspfMCollectionViewItem *collectionViewItem;
 	
 	IBOutlet XspfMCollectionViewItem *regularItem;

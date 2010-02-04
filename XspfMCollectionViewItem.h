@@ -23,5 +23,7 @@
 - (IBAction)changeRate:(id)sender;
 - (void)setBox:(XspfMCollectionItemBox *)box;
 
+- (NSRect)thumbnailFrameCoordinateBase;
+
 - (void)coodinateColors;
 @end

@@ -39,6 +39,7 @@
 - (void)setURLs:(NSArray *)URLs currentIndex:(NSUInteger)index preservingDisplayState:(BOOL)flag;
 - (void)makeKeyAndOrderFrontWithEffect:(NSInteger)mode;
 - (void)setCurrentPreviewItemIndex:(NSUInteger)index;
+- (NSUInteger)currentPreviewItemIndex;
 @end
 
 
@@ -83,7 +84,7 @@ static id previewPanel = nil;
 			   selector:@selector(managerDidAddObjects:)
 				   name:XspfManagerDidAddXspfObjectsNotification
 				 object:appDelegate];
-		
+				
 		[self window];
 		
 	}
@@ -99,6 +100,8 @@ static id previewPanel = nil;
 	if(currentListViewType == typeNotSelected) {
 		[self setCurrentListViewType:typeTableView];
 	}
+	
+	[controller addObserver:self forKeyPath:@"selectionIndex" options:0 context:NULL];
 	
 	[self showWindow:nil];
 	[self recalculateKeyViewLoop];
@@ -122,6 +125,15 @@ static id previewPanel = nil;
 	if(currentListViewType == newType) return;
 	
 	[self changeViewType:newType];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+	if([keyPath isEqualToString:@"selectionIndex"]) {
+		[previewPanel reloadData];
+		return;
+	}
+	[super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 }
 
 #pragma mark#### Actions ####
@@ -511,11 +523,11 @@ static id previewPanel = nil;
 #pragma mark---- QLPreviewPanelDataSource ----
 - (NSInteger)numberOfPreviewItemsInPreviewPanel:(id /*QLPreviewPanel* */)panel
 {
-	return [[controller arrangedObjects] count];
+	return [[controller selectedObjects] count];
 }
 - (id /*<QLPreviewItem>*/)previewPanel:(id)panel previewItemAtIndex:(NSInteger)index
 {
-	return [[controller arrangedObjects] objectAtIndex:index];
+	return [[controller selectedObjects] objectAtIndex:index];
 }
 
 #pragma mark---- QLPreviewPanelDelegate ----
@@ -533,7 +545,6 @@ static id previewPanel = nil;
 		}
 		if(!target) return NO;
 		
-		NSLog(@"target -> %@", target);
 		[target keyDown:event];
 		return YES;
 	}
@@ -541,26 +552,7 @@ static id previewPanel = nil;
 }
 - (NSRect)previewPanel:(id /*QLPreviewPanel* */)panel sourceFrameOnScreenForPreviewItem:(id /*<QLPreviewItem>*/)item
 {
-//	NSInteger index = [downloads indexOfObject:item];
-//	if (index == NSNotFound) {
-//		return NSZeroRect;
-//	}
-//	
-//	NSRect iconRect = [downloadsTableView frameOfCellAtColumn:0 row:index];
-//	
-//	// check that the icon rect is visible on screen
-//	NSRect visibleRect = [downloadsTableView visibleRect];
-//	
-//	if (!NSIntersectsRect(visibleRect, iconRect)) {
-//		return NSZeroRect;
-//	}
-//	
-//	// convert icon rect to screen coordinates
-//	iconRect = [downloadsTableView convertRectToBase:iconRect];
-//	iconRect.origin = [[downloadsTableView window] convertBaseToScreen:iconRect.origin];
-//	
-//	return iconRect;
-	return NSZeroRect;
+	return [listViewController selectionItemRect];
 }
 
 // This delegate method provides a transition image between the table view and the preview panel
@@ -569,6 +561,8 @@ static id previewPanel = nil;
 	XspfMXspfObject *obj = item;
 	return obj.thumbnail;
 }
+
+
 #pragma mark#### Test ####
 - (IBAction)test01:(id)sender
 {

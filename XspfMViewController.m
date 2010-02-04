@@ -67,4 +67,11 @@
 {
 	[[self lastKeyView] setNextKeyView:view];
 }
+
+// QLPreviewPanel support
+- (NSRect)selectionItemRect
+{
+	return NSZeroRect;
+}
+
 @end

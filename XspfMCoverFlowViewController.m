@@ -19,6 +19,7 @@
 - (void)setShowSplitter:(BOOL)flag;
 - (void)setInlinePreviewEnabled:(BOOL)flag;
 - (void)setSelectedIndex:(NSUInteger)index;
+- (NSRect)selectedImageFrame;
 @end
 
 @implementation XspfMCoverFlowViewController
@@ -145,6 +146,15 @@ finish:
     }
 }
 
+
+// QLPreviewPanel support
+- (NSRect)selectionItemRect
+{
+	NSRect rect = [coverFlow selectedImageFrame];
+	rect = [coverFlow convertRectToBase:rect];
+	rect.origin = [[coverFlow window] convertBaseToScreen:rect.origin];
+	return rect;
+}
 
 #pragma mark#### NSSplitView Delegate ####
 - (CGFloat)splitView:(NSSplitView *)splitView constrainMinCoordinate:(CGFloat)proposedMinimumPosition ofSubviewAt:(NSInteger)dividerIndex
