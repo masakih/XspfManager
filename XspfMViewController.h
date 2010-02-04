@@ -25,6 +25,9 @@
 - (NSView *)lastKeyView;
 - (void)setNextKeyView:(NSView *)view;
 
+// QLPreviewPanel support
+- (NSRect)selectionItemRect;
+
 // if you overwrite this method, you MUST call super's one.
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
 

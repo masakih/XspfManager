@@ -19,6 +19,10 @@
 
 @end
 
+@interface XspfMCollectionView(CocoaPrivateMethods)
+- (id)itemAtIndex:(unsigned int)index;
+@end
+
 @protocol XspfMCollectionView_Delegate
 - (void)enterAction:(XspfMCollectionView *)view;
 @end

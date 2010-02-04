@@ -87,4 +87,16 @@
 	return YES;
 }
 
+
+// QLPreviewPanel support
+- (NSRect)selectionItemRect
+{
+	NSInteger col = [tableView columnWithIdentifier:@"title"];
+	NSInteger row = [tableView selectedRow];
+	NSRect rect = [tableView frameOfCellAtColumn:col row:row];
+	rect = [tableView convertRectToBase:rect];
+	rect.origin = [[tableView window] convertBaseToScreen:rect.origin];
+	rect.size.width = rect.size.height;
+	return rect;
+}
 @end
