@@ -10,19 +10,19 @@
 
 #import "XspfMViewController.h"
 
-@class MBCoverFlowView;
-@class XspfMDragControl;
-@class XspfMListViewController, XspfMCoverFlowAccessoryViewController;
+//@class MBCoverFlowView;
+//@class XspfMDragControl;
+@class XspfMListViewController;//, XspfMCoverFlowAccessoryViewController;
 
 @interface XspfMCoverFlowViewController : XspfMViewController
 {
 	IBOutlet NSSplitView *splitView;
-	IBOutlet MBCoverFlowView *coverFlow;
+	IBOutlet id coverFlow;
 	IBOutlet NSView *listPlaceHolder;
-	IBOutlet XspfMDragControl *dragControl;
+//	IBOutlet XspfMDragControl *dragControl;
 	
 	XspfMListViewController *listViewController;
-	XspfMCoverFlowAccessoryViewController *accessoryController;
+//	XspfMCoverFlowAccessoryViewController *accessoryController;
 }
 
 @end

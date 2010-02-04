@@ -36,6 +36,7 @@
 		F43E653410A3167700BF88DA /* XspfMCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E653310A3167700BF88DA /* XspfMCollectionViewController.m */; };
 		F45AB02310EE3675005BE9C1 /* HMUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = F45AB02210EE3675005BE9C1 /* HMUtilities.m */; };
 		F468493211188CDB00F3396B /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F468493111188CDB00F3396B /* QuickLook.framework */; };
+		F4684A931119D0A300F3396B /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4684A921119D0A300F3396B /* Quartz.framework */; };
 		F478A95A10DD1F0F000A75B4 /* XspfMRule_Subclasses.m in Sources */ = {isa = PBXBuildFile; fileRef = F478A95910DD1F0F000A75B4 /* XspfMRule_Subclasses.m */; };
 		F47C00B7109D479100F5991C /* XspfMMainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C00B6109D479100F5991C /* XspfMMainWindowController.m */; };
 		F47C00FE109D51CC00F5991C /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F47C00FD109D51CC00F5991C /* QTKit.framework */; };
@@ -82,9 +83,6 @@
 		F4D0E98710C5484000B642D0 /* LibraryRowTemplate.plist in Resources */ = {isa = PBXBuildFile; fileRef = F4D0E98510C5484000B642D0 /* LibraryRowTemplate.plist */; };
 		F4D2F69B110754ED007681F4 /* XspfMMainModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F4D2F69A110754ED007681F4 /* XspfMMainModel.xcdatamodeld */; };
 		F4D2F69E11075545007681F4 /* XspfMMainModel1To2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = F4D2F69D11075545007681F4 /* XspfMMainModel1To2.xcmappingmodel */; };
-		F4D2F7151108771C007681F4 /* MBCoverFlowScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D2F7101108771C007681F4 /* MBCoverFlowScroller.m */; };
-		F4D2F7161108771C007681F4 /* MBCoverFlowView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D2F7121108771C007681F4 /* MBCoverFlowView.m */; };
-		F4D2F7171108771C007681F4 /* NSImage+MBCoverFlowAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D2F7141108771C007681F4 /* NSImage+MBCoverFlowAdditions.m */; };
 		F4D2F71A11087748007681F4 /* XspfMCoverFlowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D2F71911087748007681F4 /* XspfMCoverFlowViewController.m */; };
 		F4D2F71E110877DC007681F4 /* XspfMCoverFlowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4D2F71D110877DC007681F4 /* XspfMCoverFlowView.xib */; };
 		F4D2F72E110879F0007681F4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4D2F72D110879F0007681F4 /* QuartzCore.framework */; };
@@ -168,6 +166,7 @@
 		F45AB02110EE3675005BE9C1 /* HMUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMUtilities.h; sourceTree = "<group>"; };
 		F45AB02210EE3675005BE9C1 /* HMUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMUtilities.m; sourceTree = "<group>"; };
 		F468493111188CDB00F3396B /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
+		F4684A921119D0A300F3396B /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		F478A95910DD1F0F000A75B4 /* XspfMRule_Subclasses.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMRule_Subclasses.m; sourceTree = "<group>"; };
 		F47C00B5109D479100F5991C /* XspfMMainWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMMainWindowController.h; sourceTree = "<group>"; };
 		F47C00B6109D479100F5991C /* XspfMMainWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMMainWindowController.m; sourceTree = "<group>"; };
@@ -248,12 +247,6 @@
 		F4D2F6821107545C007681F4 /* XspfMMainModel.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = XspfMMainModel.xcdatamodel; sourceTree = "<group>"; };
 		F4D2F69C110754ED007681F4 /* XspfMMainModel 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "XspfMMainModel 2.xcdatamodel"; sourceTree = "<group>"; };
 		F4D2F69D11075545007681F4 /* XspfMMainModel1To2.xcmappingmodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcmappingmodel; path = XspfMMainModel1To2.xcmappingmodel; sourceTree = "<group>"; };
-		F4D2F70F1108771C007681F4 /* MBCoverFlowScroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBCoverFlowScroller.h; sourceTree = "<group>"; };
-		F4D2F7101108771C007681F4 /* MBCoverFlowScroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBCoverFlowScroller.m; sourceTree = "<group>"; };
-		F4D2F7111108771C007681F4 /* MBCoverFlowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBCoverFlowView.h; sourceTree = "<group>"; };
-		F4D2F7121108771C007681F4 /* MBCoverFlowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBCoverFlowView.m; sourceTree = "<group>"; };
-		F4D2F7131108771C007681F4 /* NSImage+MBCoverFlowAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSImage+MBCoverFlowAdditions.h"; sourceTree = "<group>"; };
-		F4D2F7141108771C007681F4 /* NSImage+MBCoverFlowAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSImage+MBCoverFlowAdditions.m"; sourceTree = "<group>"; };
 		F4D2F71811087748007681F4 /* XspfMCoverFlowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMCoverFlowViewController.h; sourceTree = "<group>"; };
 		F4D2F71911087748007681F4 /* XspfMCoverFlowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMCoverFlowViewController.m; sourceTree = "<group>"; };
 		F4D2F71B110877C4007681F4 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/XspfMCoverFlowView.xib; sourceTree = "<group>"; };
@@ -274,6 +267,7 @@
 				F47C00FE109D51CC00F5991C /* QTKit.framework in Frameworks */,
 				F4D2F72E110879F0007681F4 /* QuartzCore.framework in Frameworks */,
 				F468493211188CDB00F3396B /* QuickLook.framework in Frameworks */,
+				F4684A931119D0A300F3396B /* Quartz.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,6 +326,7 @@
 				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
 				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
 				F468493111188CDB00F3396B /* QuickLook.framework */,
+				F4684A921119D0A300F3396B /* Quartz.framework */,
 			);
 			name = "Other Frameworks";
 			sourceTree = "<group>";
@@ -347,7 +342,6 @@
 		29B97314FDCFA39411CA2CEA /* XspfManager */ = {
 			isa = PBXGroup;
 			children = (
-				F4D2F70A110876FD007681F4 /* MBCoverFlowView */,
 				F45AB02110EE3675005BE9C1 /* HMUtilities.h */,
 				F45AB02210EE3675005BE9C1 /* HMUtilities.m */,
 				F480CEE410AFDAB300AC365B /* NSApplicationIcon.icns */,
@@ -545,19 +539,6 @@
 			name = "Views&Cells";
 			sourceTree = "<group>";
 		};
-		F4D2F70A110876FD007681F4 /* MBCoverFlowView */ = {
-			isa = PBXGroup;
-			children = (
-				F4D2F70F1108771C007681F4 /* MBCoverFlowScroller.h */,
-				F4D2F7101108771C007681F4 /* MBCoverFlowScroller.m */,
-				F4D2F7111108771C007681F4 /* MBCoverFlowView.h */,
-				F4D2F7121108771C007681F4 /* MBCoverFlowView.m */,
-				F4D2F7131108771C007681F4 /* NSImage+MBCoverFlowAdditions.h */,
-				F4D2F7141108771C007681F4 /* NSImage+MBCoverFlowAdditions.m */,
-			);
-			name = MBCoverFlowView;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -686,9 +667,6 @@
 				F436E40011060096004BA387 /* XspfMMainModelTransformer.m in Sources */,
 				F4D2F69B110754ED007681F4 /* XspfMMainModel.xcdatamodeld in Sources */,
 				F4D2F69E11075545007681F4 /* XspfMMainModel1To2.xcmappingmodel in Sources */,
-				F4D2F7151108771C007681F4 /* MBCoverFlowScroller.m in Sources */,
-				F4D2F7161108771C007681F4 /* MBCoverFlowView.m in Sources */,
-				F4D2F7171108771C007681F4 /* NSImage+MBCoverFlowAdditions.m in Sources */,
 				F4D2F71A11087748007681F4 /* XspfMCoverFlowViewController.m in Sources */,
 				F4D2F96811089B7A007681F4 /* XspfMCoverFlowAccessoryViewController.m in Sources */,
 			);
