@@ -62,7 +62,9 @@ finish:
 	NSArrayController *rep = [self representedObject];
 	
 	[coverFlow setShowSplitter:YES];
-	[coverFlow setInlinePreviewEnabled:YES];
+	if([coverFlow respondsToSelector:@selector(setInlinePreviewEnabled:)]) {
+		[coverFlow setInlinePreviewEnabled:YES];
+	}
 	[coverFlow setDataSource:self];
 	[coverFlow setDelegate:self];
 //	NSDictionary *attr = [NSDictionary dictionaryWithObject:[NSColor darkGrayColor]  forKey:NSForegroundColorAttributeName];
