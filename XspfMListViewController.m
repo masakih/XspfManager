@@ -94,6 +94,11 @@
 	NSInteger col = [tableView columnWithIdentifier:@"title"];
 	NSInteger row = [tableView selectedRow];
 	NSRect rect = [tableView frameOfCellAtColumn:col row:row];
+	
+	if(!NSIntersectsRect([tableView visibleRect], rect)) {
+		return NSZeroRect;
+	}
+	
 	rect = [tableView convertRectToBase:rect];
 	rect.origin = [[tableView window] convertBaseToScreen:rect.origin];
 	rect.size.width = rect.size.height;
