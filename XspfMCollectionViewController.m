@@ -13,8 +13,8 @@
 #import "XspfMXspfObject.h"
 
 @interface NSCollectionView(CocoaPrivatemethods)
-- (void)_getRow:(unsigned int *)fp8 column:(unsigned int *)fp12 forPoint:(struct _NSPoint)fp16;
-- (NSRect)_frameRectForIndexInGrid:(unsigned int)fp8 gridSize:(struct _NSSize)fp12;
+- (void)_getRow:(NSUInteger *)fp8 column:(NSUInteger *)fp12 forPoint:(NSPoint)fp16;
+- (NSRect)_frameRectForIndexInGrid:(NSUInteger)fp8 gridSize:(NSSize)fp12;
 - (NSRange)columnCountRange;
 @end
 
