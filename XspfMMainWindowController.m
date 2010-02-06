@@ -32,15 +32,19 @@
 - (void)removeSelectedItem;
 @end
 
-@interface NSObject(XspfMPreviewPanelSupport)
-- (NSPanel *)sharedPreviewPanel;
-@end
+
 @interface NSPanel(XspfMPreviewPanelSupport)
++ (NSPanel *)sharedPreviewPanel;
+
+- (BOOL)isOpen;
+- (void)setCurrentPreviewItemIndex:(NSUInteger)index;
+- (NSUInteger)currentPreviewItemIndex;
+
+// for Leopard
 - (void)setURLs:(NSArray *)URLs;
 - (void)setURLs:(NSArray *)URLs currentIndex:(NSUInteger)index preservingDisplayState:(BOOL)flag;
 - (void)makeKeyAndOrderFrontWithEffect:(NSInteger)mode;
-- (void)setCurrentPreviewItemIndex:(NSUInteger)index;
-- (NSUInteger)currentPreviewItemIndex;
+- (void)closeWithEffect:(NSInteger)mode;
 @end
 
 
@@ -498,11 +502,22 @@ static id previewPanel = nil;
 		return;
 	}
 	id qlPanel = [aClass sharedPreviewPanel];
+	
+	if([qlPanel isOpen]) {
+		if(osVersion == 105) {
+			[qlPanel closeWithEffect:2];
+		} else if(osVersion >= 106) {
+			[qlPanel orderOut:nil];
+		}
+		
+		return;
+	}
+	
 	if(osVersion == 105) {
 		[qlPanel setDelegate:self];
 		[qlPanel setURLs:[[controller selectedObjects] mutableArrayValueForKey:@"url"]];
 		[qlPanel makeKeyAndOrderFrontWithEffect:2];
-	} else if(osVersion <= 106) {
+	} else if(osVersion >= 106) {
 		[qlPanel makeKeyAndOrderFront:nil];
 	}
 }
