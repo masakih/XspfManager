@@ -280,6 +280,25 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 	[logLevelItem setTag:HMLogLevelAlert];
 	[debugMenu addItem:logLevelItem];
 	
+	[debugMenu addItem:[NSMenuItem separatorItem]];
+	
+	NSMenuItem *testItem;
+	
+	testItem = [[[NSMenuItem alloc] initWithTitle:@"test01"
+										   action:@selector(test01:)
+									keyEquivalent:@""] autorelease];
+	[debugMenu addItem:testItem];
+	
+	testItem = [[[NSMenuItem alloc] initWithTitle:@"test02"
+										   action:@selector(test02:)
+									keyEquivalent:@""] autorelease];
+	[debugMenu addItem:testItem];
+	
+	testItem = [[[NSMenuItem alloc] initWithTitle:@"test03"
+										   action:@selector(test03:)
+									keyEquivalent:@""] autorelease];
+	[debugMenu addItem:testItem];
+	
 	NSMenu *menubar = [NSApp mainMenu];
 	NSUInteger itemCount = [[menubar itemArray] count];
 	NSMenuItem *debugMenuItem = [menubar insertItemWithTitle:@"Debug"
