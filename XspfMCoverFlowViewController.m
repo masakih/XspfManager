@@ -86,10 +86,7 @@ finish:
 {
 	id oldRep = [self representedObject];
 	if([oldRep isEqual:representedObject]) return;
-	
-	[oldRep unbind:@"arrangedObjects"];
-	[oldRep unbind:@"selectionIndex"];
-	
+		
 	if(representedObject) {
 		[representedObject addObserver:self forKeyPath:@"arrangedObjects" options:0 context:NULL];
 		[representedObject addObserver:self forKeyPath:@"selectionIndex" options:0 context:NULL];
