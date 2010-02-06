@@ -706,22 +706,6 @@
 					<int key="connectionID">668</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">managedObjectContext: managedObjectContext</string>
-						<reference key="source" ref="464509523"/>
-						<reference key="destination" ref="771522425"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="464509523"/>
-							<reference key="NSDestination" ref="771522425"/>
-							<string key="NSLabel">managedObjectContext: managedObjectContext</string>
-							<string key="NSBinding">managedObjectContext</string>
-							<string key="NSKeyPath">managedObjectContext</string>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">724</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">listController</string>
 						<reference key="source" ref="771522425"/>
@@ -736,22 +720,6 @@
 						<reference key="destination" ref="841726608"/>
 					</object>
 					<int key="connectionID">747</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">managedObjectContext: managedObjectContext</string>
-						<reference key="source" ref="604849764"/>
-						<reference key="destination" ref="771522425"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="604849764"/>
-							<reference key="NSDestination" ref="771522425"/>
-							<string key="NSLabel">managedObjectContext: managedObjectContext</string>
-							<string key="NSBinding">managedObjectContext</string>
-							<string key="NSKeyPath">managedObjectContext</string>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">753</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -1042,6 +1010,14 @@
 						</object>
 					</object>
 					<int key="connectionID">863</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">allXspfController</string>
+						<reference key="source" ref="771522425"/>
+						<reference key="destination" ref="604849764"/>
+					</object>
+					<int key="connectionID">864</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1485,7 +1461,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">863</int>
+			<int key="maxID">864</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1582,6 +1558,7 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>accessoryView</string>
+							<string>allXspfController</string>
 							<string>appDelegate</string>
 							<string>controller</string>
 							<string>detailView</string>
@@ -1597,6 +1574,7 @@
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>NSView</string>
+							<string>NSArrayController</string>
 							<string>id</string>
 							<string>NSArrayController</string>
 							<string>NSView</string>

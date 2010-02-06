@@ -102,20 +102,23 @@ static id previewPanel = nil;
 		[self setCurrentListViewType:typeTableView];
 	}
 	
+	
+	[listController bind:NSManagedObjectContextBinding
+				toObject:appDelegate
+			 withKeyPath:@"managedObjectContext"
+				 options:nil];
+	
+	[allXspfController bind:NSManagedObjectContextBinding
+				   toObject:appDelegate
+				withKeyPath:@"managedObjectContext"
+					options:nil];
+	
 	[controller addObserver:self forKeyPath:@"selectionIndex" options:0 context:NULL];
 	
 	[self showWindow:nil];
 	[self recalculateKeyViewLoop];
 }
 #pragma mark#### KVC ####
-- (NSManagedObjectContext *)managedObjectContext
-{
-	return [appDelegate managedObjectContext];
-}
-- (NSArrayController *)arrayController
-{
-	return controller;
-}
 
 - (XspfMViewType)currentListViewType
 {
