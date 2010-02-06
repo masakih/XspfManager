@@ -549,6 +549,7 @@
 							<reference key="NSSuperview" ref="72950107"/>
 							<bool key="NSIsVertical">YES</bool>
 							<int key="NSDividerStyle">2</int>
+							<string key="NSAutosaveName">LibrarySplit</string>
 						</object>
 					</object>
 					<string key="NSFrameSize">{830, 632}</string>
@@ -557,6 +558,7 @@
 				<string key="NSScreenRect">{{0, 0}, {1280, 832}}</string>
 				<string key="NSMinSize">{749, 504}</string>
 				<string key="NSMaxSize">{1.79769e+308, 1.79769e+308}</string>
+				<string key="NSFrameAutosaveName">MainWindow</string>
 			</object>
 			<object class="NSWindowTemplate" id="222316790">
 				<int key="NSWindowStyleMask">23</int>
