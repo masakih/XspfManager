@@ -18,6 +18,13 @@
 - (NSRange)columnCountRange;
 @end
 
+
+@interface XspfMCollectionViewController (XspfMPrivate)
+- (void)setCollectionItem:(XspfMCollectionViewItem *)newItem;
+@end
+
+static NSString *const XspfMCollectionItemSizeKey = @"Collection Item Size";
+
 @implementation XspfMCollectionViewController
 
 - (id)init
@@ -29,19 +36,23 @@
 
 - (void)awakeFromNib
 {
-	NSView *view = [collectionViewItem view];
-	
-	[scrollView setVerticalLineScroll:[view frame].size.height];
+	NSInteger type = [[NSUserDefaults standardUserDefaults] integerForKey:XspfMCollectionItemSizeKey];
+	[self setCollectionItem:type == 0 ? regularItem : smallItem];
 }
 
 - (void)setCollectionItem:(XspfMCollectionViewItem *)newItem
 {
+	if(collectionViewItem == newItem) return;
+	
 	[collectionView setItemPrototype:newItem];
 	NSSize viewSize = [[newItem view] frame].size;
 	[collectionView setMinItemSize:viewSize];
 	[collectionView setMaxItemSize:viewSize];
 	[scrollView setVerticalLineScroll:viewSize.height];
 	collectionViewItem = newItem;
+	
+	
+	[[NSUserDefaults standardUserDefaults] setInteger:collectionViewItem == regularItem ? 0 : 1 forKey:XspfMCollectionItemSizeKey];
 }
 
 - (IBAction)changeLabel:(id)sender

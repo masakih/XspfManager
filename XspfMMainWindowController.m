@@ -98,9 +98,8 @@ static id previewPanel = nil;
 	[self setupXspfLists];
 	[self setupDetailView];
 	[self setupAccessorylView];
-	if(currentListViewType == typeNotSelected) {
-		[self setCurrentListViewType:typeTableView];
-	}
+	
+	[self setCurrentListViewType:[[NSUserDefaults standardUserDefaults] integerForKey:@"viewType"]];
 	
 	
 	[listController bind:NSManagedObjectContextBinding
@@ -127,6 +126,8 @@ static id previewPanel = nil;
 - (void)setCurrentListViewType:(XspfMViewType)newType
 {
 	if(currentListViewType == newType) return;
+	
+	[[NSUserDefaults standardUserDefaults] setInteger:newType forKey:@"viewType"];
 	
 	[self changeViewType:newType];
 }
@@ -513,8 +514,6 @@ static id previewPanel = nil;
 }
 - (void)beginPreviewPanelControl:(id /*QLPreviewPanel* */)panel
 {
-	// This document is now responsible of the preview panel
-	// It is allowed to set the delegate, data source and refresh panel.
 	previewPanel = [panel retain];
 	[panel setDelegate:self];
 	[panel setDataSource:self];
@@ -522,9 +521,6 @@ static id previewPanel = nil;
 }
 - (void)endPreviewPanelControl:(id /*QLPreviewPanel* */)panel
 {
-	// This document loses its responsisibility on the preview panel
-	// Until the next call to -beginPreviewPanelControl: it must not
-	// change the panel's delegate, data source or refresh it.
 	[previewPanel release];
 	previewPanel = nil;
 }
@@ -542,7 +538,6 @@ static id previewPanel = nil;
 #pragma mark---- QLPreviewPanelDelegate ----
 - (BOOL)previewPanel:(id /*QLPreviewPanel* */)panel handleEvent:(NSEvent *)event
 {
-	// redirect all key down events to the table view
 	if ([event type] == NSKeyDown) {
 		NSResponder *target = nil;
 		target = [listViewController initialFirstResponder];
@@ -564,7 +559,6 @@ static id previewPanel = nil;
 	return [listViewController selectionItemRect];
 }
 
-// This delegate method provides a transition image between the table view and the preview panel
 - (id)previewPanel:(id /*QLPreviewPanel* */)panel transitionImageForPreviewItem:(id /*<QLPreviewItem>*/)item contentRect:(NSRect *)contentRect
 {
 	XspfMXspfObject *obj = item;
