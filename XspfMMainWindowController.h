@@ -23,6 +23,7 @@ typedef enum {
 
 @interface XspfMMainWindowController : NSWindowController
 {
+	IBOutlet NSArrayController *allXspfController;
 	IBOutlet NSArrayController *controller;
 	IBOutlet id	appDelegate;
 	
@@ -75,13 +76,6 @@ typedef enum {
 
 
 - (IBAction)togglePreviewPanel:(id)panel;
-
-
-- (IBAction)test01:(id)sender;
-- (IBAction)test02:(id)sender;
-- (IBAction)test03:(id)sender;
-
-- (NSArrayController *)arrayController;
 
 @end
 
