@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="1"/>
+			<integer value="4"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -65,6 +65,7 @@
 						</object>
 						<string key="NSFrameSize">{747, 479}</string>
 						<reference key="NSSuperview" ref="161288705"/>
+						<string key="NSAutosaveName">CoverFlowSplit</string>
 					</object>
 				</object>
 				<string key="NSFrameSize">{747, 479}</string>
