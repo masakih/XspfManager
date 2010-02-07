@@ -36,7 +36,12 @@ static NSString *XspfMREDPredicateRowsKey = @"predicateRows";
 		key = @"AbDate";
 	} else if([keypath isEqualToString:@"label"]) {
 		key = @"Label";
-	}
+	} else if([keypath isEqualToString:@"information.voiceActorsList"]) {
+		key = @"VoiceActors";
+	} else if([keypath isEqualToString:@"information.productsList"]) {
+		key = @"Products";
+	}	
+	
 	if(key) {
 		id row = [rowTemplate valueForKey:key];
 		id c = [[[row childAtIndex:0] copy] autorelease];
@@ -63,6 +68,8 @@ static NSString *XspfMREDPredicateRowsKey = @"predicateRows";
 					   @"lastPlayDate", @"modificationDate", @"creationDate",
 					   @"rating",
 					   @"label",
+					   @"information.voiceActorsList",
+					   @"information.productsList",
 					   nil]) {
 		id c = [self criteriaWithKeyPath:keyPath];
 		if(c) [newRows addObjectsFromArray:c];

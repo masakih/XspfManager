@@ -16,6 +16,10 @@
 "%[label]@ %[is]@ %@" = "%[Label]@ %[is]@ %@";
 "%[label]@ %[is not]@ %@" = "%[Label]@ %[is not]@ %@";
 
+"%[information.voiceActorsList]@ %[contains]@ %@" = "%[information.voiceActorsList]@ %[contains]@ %@";
+
+"%[information.productsList]@ %[contains]@ %@" = "%[information.productsList]@ %[contains]@ %@";
+
 "%[lastPlayDate]@ %[is the date]@ %@" = "%[Last Play Date]@ %[is the date]@ %@";
 "%[lastPlayDate]@ %[is after the date]@ %@" = "%[Last Play Date]@ %[is after the date]@ %@";
 "%[lastPlayDate]@ %[is before the date]@ %@" = "%[Last Play Date]@ %[is before the date]@ %@";
