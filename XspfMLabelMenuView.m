@@ -347,7 +347,7 @@ static const CGFloat labelSize = 19;
 	[self setNeedsDisplayInRect:[self labelNameRect]];
 	
 	NSInteger labelIndex = [cellIndex integerValue];
-	if(labelIndex == 0 || [self integerValue] != labelIndex) {
+	if([self integerValue] != labelIndex) {
 		[[labelCells objectAtIndex:labelIndex] setState:NSOffState];
 		[self setNeedsDisplayInRect:NSInsetRect([self labelRectForIndex:labelIndex], -1,-1)];
 	}
