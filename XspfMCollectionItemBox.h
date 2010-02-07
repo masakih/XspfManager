@@ -8,17 +8,18 @@
 
 #import <Cocoa/Cocoa.h>
 
+#import "XspfMImageView.h"
 
 @interface XspfMCollectionItemBox : NSBox
 {
 	IBOutlet NSCollectionViewItem *viewItem;
 	
-	IBOutlet NSImageView *thumbnail;
+	IBOutlet XspfMImageView *thumbnail;
 	IBOutlet NSTextField *titleField;
 	IBOutlet NSTextField *ratingLabel;
 	IBOutlet NSLevelIndicator *rating;
 }
-@property (readonly) NSImageView *thumbnail;
+@property (readonly) XspfMImageView *thumbnail;
 @property (readonly) NSTextField *titleField;
 @property (readonly) NSTextField *ratingLabel;
 @property (readonly) NSLevelIndicator *rating;
