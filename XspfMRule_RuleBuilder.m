@@ -335,14 +335,18 @@ static NSString *const XspfMREDSubrowsKey = @"subrows";
 		key = @"AbDate";
 	} else if([keypath isEqualToString:@"label"]) {
 		key = @"Label";
+	} else if([keypath isEqualToString:@"information.voiceActorsList"]) {
+		key = @"VoiceActors";
+	} else if([keypath isEqualToString:@"information.productsList"]) {
+		key = @"Products";
 	}
+	
 	if(key) {
 		id row = [rowTemplate valueForKey:key];
 		id c = [[[row childAtIndex:0] copy] autorelease];
 		[c setValue:keypath];
 		return [NSArray arrayWithObject:c];
 	}
-	
 	return nil;
 }
 - (id)buildRowsFromPredicate:(id)predicate withRowTemplate:(id)rowTemplate
@@ -400,6 +404,10 @@ static NSString *const XspfMREDSubrowsKey = @"subrows";
 			disp = [self dateDisplayValuesWithPredicate:predicate];
 		} else if([leftKeyPath isEqualToString:@"label"]) {
 			disp = [self labelDisplayValuesWithPredicate:predicate];
+		} else if([leftKeyPath isEqualToString:@"information.voiceActorsList"]) {
+			disp = [self displayValuesWithPredicate:predicate];
+		} else if([leftKeyPath isEqualToString:@"information.productsList"]) {
+			disp = [self displayValuesWithPredicate:predicate];
 		}
 		
 		if(disp) {
@@ -410,6 +418,7 @@ static NSString *const XspfMREDSubrowsKey = @"subrows";
 											  disp, XspfMREDDisplayValuesKey,
 											  [NSNumber numberWithInt:NSRuleEditorRowTypeSimple], XspfMREDRowTypeKey,
 											  nil];
+			HMLog(HMLogLevelDebug, @"check it! %@\n\n%@\n\n%@", row, disp, c);
 			return criterion;
 		}
 		
