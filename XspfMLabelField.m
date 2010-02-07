@@ -51,6 +51,7 @@ static const CGFloat yMargin = 6;
 	}
 	[self setCell:[cells objectAtIndex:0]];
 	[self setIntegerValue:0];
+	[[cells objectAtIndex:0] setState:NSOnState];
 	
 	labelCells = [[NSArray arrayWithArray:cells] retain];
 }
@@ -99,14 +100,13 @@ static const CGFloat yMargin = 6;
 }
 - (void)setIntegerValue:(NSInteger)aValue
 {
+	if(aValue < 0 || aValue > labelCount) return;
 	if(value == aValue) return;
 	
 	for(id cell in labelCells) {
 		[cell setState:NSOffState];
 	}
-	if(aValue >= 0 && aValue < labelCount) {
-		[[labelCells objectAtIndex:aValue] setState:NSOnState];
-	}
+	[[labelCells objectAtIndex:aValue] setState:NSOnState];
 	
 	value = aValue;
 	[self setNeedsDisplay];
@@ -166,7 +166,7 @@ static const CGFloat yMargin = 6;
 	if(![cellIndex isKindOfClass:[NSNumber class]]) return;
 		
 	NSInteger labelIndex = [cellIndex integerValue];
-	if(labelIndex == 0 || [self integerValue] != labelIndex) {
+	if([self integerValue] != labelIndex) {
 		[[labelCells objectAtIndex:labelIndex] setState:NSOffState];
 		[self setNeedsDisplayInRect:NSInsetRect([self labelRectForIndex:labelIndex], -1,-1)];
 	}
