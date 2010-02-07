@@ -549,6 +549,21 @@
 							</dict>
 						</array>
 					</dict>
+					<dict>
+						<key>NSRuleEditorPredicateOperatorType</key>
+						<integer>5</integer>
+						<key>value</key>
+						<string>is not</string>
+						<key>criteria</key>
+						<array>
+							<dict>
+								<key>NSRuleEditorPredicateRightExpression</key>
+								<string>objectValue</string>
+								<key>value</key>
+								<string>labelField</string>
+							</dict>
+						</array>
+					</dict>
 				</array>
 			</dict>
 		</array>
