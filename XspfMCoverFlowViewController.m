@@ -20,6 +20,10 @@
 - (void)setInlinePreviewEnabled:(BOOL)flag;
 - (void)setSelectedIndex:(NSUInteger)index;
 - (NSRect)selectedImageFrame;
+- (id)cacheManager;
+
+
+- (void)IKCleanTimedOutCache;
 @end
 
 @implementation XspfMCoverFlowViewController
@@ -112,6 +116,24 @@ finish:
 	[super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 }
 
+
+- (IBAction)clearCoverFlowCache:(id)sender
+{
+	if(![coverFlow respondsToSelector:@selector(cacheManager)]) {
+		NSBeep();
+		return;
+	}
+	id cacheManager = [coverFlow cacheManager];
+	if(![cacheManager respondsToSelector:@selector(IKCleanTimedOutCache)]) {
+		NSBeep();
+		return;
+	}
+	[cacheManager IKCleanTimedOutCache];
+}
+- (IBAction)test01:(id)sender
+{
+	[self clearCoverFlowCache:sender];
+}
 
 - (NSUInteger)numberOfItemsInImageFlow:(id)imageFlowView
 {
