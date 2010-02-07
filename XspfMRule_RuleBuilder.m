@@ -106,6 +106,9 @@ static NSString *const XspfMREDSubrowsKey = @"subrows";
 		case NSEqualToPredicateOperatorType:
 			value02 = @"is";
 			break;
+		case NSNotEqualToPredicateOperatorType:
+			value02 = @"is not";
+			break;
 		default:
 			[NSException raise:@"XspfMUnknownPredicateType" format:@"XpsfM: unknown predicate type."];
 			break;
