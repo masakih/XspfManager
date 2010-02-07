@@ -21,4 +21,6 @@
 	XspfMListViewController *listViewController;
 }
 
+- (IBAction)clearCoverFlowCache:(id)sender;
+
 @end
