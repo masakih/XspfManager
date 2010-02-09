@@ -11,6 +11,7 @@
 #import "XspfManager.h"
 
 @implementation XspfMCollectionView
+@synthesize delegate;
 
 - (void)awakeFromNib
 {

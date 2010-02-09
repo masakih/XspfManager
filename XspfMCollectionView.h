@@ -16,6 +16,7 @@
 	
 	BOOL draggingHilight;
 }
+@property (assign) IBOutlet id<XspfMCollectionView_Delegate> delegate;
 
 @end
 
