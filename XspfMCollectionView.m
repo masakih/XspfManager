@@ -30,7 +30,7 @@
 	}
 }
 
-#pragma mark#### NSDoragging ####
+#pragma mark#### NSDragging ####
 - (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender
 {
 	id pb = [sender draggingPasteboard];
