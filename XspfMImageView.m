@@ -14,13 +14,18 @@
 @end
 
 @implementation XspfMImageView
+static inline NSRect enabledImageFrame(NSRect original)
+{
+	original = NSInsetRect(original, 5, 5);
+	return NSOffsetRect(original, -1, 2);
+}
 - (NSRect)imageFrame
 {
 	NSImageCell *cell = [self cell];
 	NSRect cellFrame = [self frame];
 	cellFrame.origin = NSZeroPoint;
 	if(![self isEnabled]) {		
-		cellFrame = NSInsetRect(cellFrame, 5, 5);
+		cellFrame = enabledImageFrame(cellFrame);
 	}
 	
 	NSRect frame = [cell _imageRectForDrawing:[cell image] inFrame:cellFrame inView:self];
@@ -39,7 +44,7 @@
 	if(![self isEnabled]) {		
 		[NSGraphicsContext saveGraphicsState];
 		
-		cellFrame = NSInsetRect(cellFrame, 5, 5);
+		cellFrame = enabledImageFrame(cellFrame);
 		
 		NSShadow *shadow = [[[NSShadow alloc] init] autorelease];
 		[shadow setShadowOffset:NSMakeSize(2.8, -2.8)];
