@@ -44,9 +44,15 @@ static IMP originalKeyDown = NULL;
 - (void)hackKeyDown:(NSEvent *)theEvent
 {
 	if([theEvent isARepeat]) goto finish;
-		
+	
+#define kRETURN_KEY	36
+#define kENTER_KEY	52
 	unsigned short code = [theEvent keyCode];
 	switch(code) {
+		case kRETURN_KEY:
+		case kENTER_KEY:
+			[NSApp sendAction:@selector(openXspf:) to:nil from:nil];
+			return;
 		case 49:
 			[NSApp sendAction:@selector(togglePreviewPanel:) to:nil from:nil];
 			return;
@@ -90,7 +96,7 @@ finish:
 {
 	id oldRep = [self representedObject];
 	if([oldRep isEqual:representedObject]) return;
-		
+	
 	if(representedObject) {
 		[representedObject addObserver:self forKeyPath:@"arrangedObjects" options:0 context:NULL];
 		[representedObject addObserver:self forKeyPath:@"selectionIndex" options:0 context:NULL];
@@ -100,6 +106,13 @@ finish:
 	[super setRepresentedObject:representedObject];
 	[listViewController setRepresentedObject:representedObject];
 	[coverFlow reloadData];
+}
+- (void)recalculateKeyViewLoop
+{
+	[coverFlow setNextKeyView:[listViewController firstKeyView]];
+	
+	// TODO: change key view loop if list view is not visible.
+	lastKeyView = [listViewController lastKeyView];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
