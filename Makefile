@@ -18,7 +18,9 @@ VERSION=$(shell $(VER_CMD))
 
 LocalizeFiles=XspfMLabelMenuView.m \
 			  XspfMMainWindowController.m \
-			  XspfMLibraryViewController.m
+			  XspfMLibraryViewController.m \
+			  XspfMXspfListObject.m \
+			  XspfMCoverFlowViewController.m
 
 all:
 	@echo do  nothig.
