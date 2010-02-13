@@ -72,6 +72,7 @@
 		F4A6F90B10C1666600345D77 /* XspfMRuleEditorDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A6F90A10C1666600345D77 /* XspfMRuleEditorDelegate.m */; };
 		F4A6FAE610C2442E00345D77 /* XspfMRuleEditorRow.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A6FAE510C2442E00345D77 /* XspfMRuleEditorRow.m */; };
 		F4BB59BB10BC0C3700EE50B7 /* LibraryPredicate.strings in Resources */ = {isa = PBXBuildFile; fileRef = F4BB59BA10BC0C3700EE50B7 /* LibraryPredicate.strings */; };
+		F4CD0D261126FF4A007E31BC /* XspfMPreviewPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CD0D251126FF4A007E31BC /* XspfMPreviewPanelController.m */; };
 		F4CE4CD310A6A13E004AC4FA /* LibraryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CE4CD110A6A13E004AC4FA /* LibraryView.xib */; };
 		F4CE4D0510A6A7A9004AC4FA /* XspfMLibraryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CE4D0410A6A7A9004AC4FA /* XspfMLibraryViewController.m */; };
 		F4CE4E8010A706A8004AC4FA /* DetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CE4E7E10A706A8004AC4FA /* DetailView.xib */; };
@@ -229,6 +230,8 @@
 		F4A6FAE510C2442E00345D77 /* XspfMRuleEditorRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMRuleEditorRow.m; sourceTree = "<group>"; };
 		F4BB59B610BC0C2C00EE50B7 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/LibraryPredicate.strings; sourceTree = "<group>"; };
 		F4BB5A1510BC2C5800EE50B7 /* Japanese */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Japanese; path = Japanese.lproj/LibraryPredicate.strings; sourceTree = "<group>"; };
+		F4CD0D241126FF4A007E31BC /* XspfMPreviewPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMPreviewPanelController.h; sourceTree = "<group>"; };
+		F4CD0D251126FF4A007E31BC /* XspfMPreviewPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMPreviewPanelController.m; sourceTree = "<group>"; };
 		F4CE4CD210A6A13E004AC4FA /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/LibraryView.xib; sourceTree = "<group>"; };
 		F4CE4D0310A6A7A9004AC4FA /* XspfMLibraryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMLibraryViewController.h; sourceTree = "<group>"; };
 		F4CE4D0410A6A7A9004AC4FA /* XspfMLibraryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMLibraryViewController.m; sourceTree = "<group>"; };
@@ -272,6 +275,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				F4CD0D241126FF4A007E31BC /* XspfMPreviewPanelController.h */,
+				F4CD0D251126FF4A007E31BC /* XspfMPreviewPanelController.m */,
 				77C8280B06725ACE000B614F /* XspfManager.h */,
 				77C8280C06725ACE000B614F /* XspfManager.m */,
 				F47C00B5109D479100F5991C /* XspfMMainWindowController.h */,
@@ -659,6 +664,7 @@
 				F4D2F69B110754ED007681F4 /* XspfMMainModel.xcdatamodeld in Sources */,
 				F4D2F69E11075545007681F4 /* XspfMMainModel1To2.xcmappingmodel in Sources */,
 				F4D2F71A11087748007681F4 /* XspfMCoverFlowViewController.m in Sources */,
+				F4CD0D261126FF4A007E31BC /* XspfMPreviewPanelController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

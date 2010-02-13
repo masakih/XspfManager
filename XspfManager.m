@@ -10,6 +10,7 @@
 
 #import "XspfMChannelManager.h"
 #import "XspfMMainWindowController.h"
+#import "XspfMPreviewPanelController.h"
 
 #import "XspfMThreadSpleepRequest.h"
 #import "XspfMCheckFileModifiedRequest.h"
@@ -319,6 +320,8 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 	[[self channel] putRequest:request];
 	
 	[self performSelector:@selector(registerToUKKQueue) withObject:nil afterDelay:0.0];
+	
+	pController = [[XspfMPreviewPanelController alloc] init];
 }
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender
 {
@@ -452,7 +455,10 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 	XspfMXspfObject *object = [sender representedObject];
 	object.label = [sender objectValue];
 }
-
+- (IBAction)togglePreviewPanel:(id)panel
+{
+	[pController togglePreviewPanel:panel];
+}
 #pragma mark#### UKKQUEUE ####
 - (void)registerToUKKQueue
 {

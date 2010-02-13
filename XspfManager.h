@@ -11,6 +11,7 @@
 #import "HMWorkerProtocols.h"
 
 @class XspfMXspfObject;
+@class XspfMPreviewPanelController;
 @protocol UKFileWatcher;
 
 @interface XspfManager : NSObject 
@@ -22,6 +23,8 @@
 	id<HMChannel> channel;
 	
 	IBOutlet NSMenu *objectMenu;
+	
+	XspfMPreviewPanelController *pController;
 }
 
 - (NSString *)applicationSupportFolder;
