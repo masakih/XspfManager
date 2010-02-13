@@ -74,8 +74,5 @@ typedef enum {
 //
 - (IBAction)newPredicate:(id)sender;
 
-
-- (IBAction)togglePreviewPanel:(id)panel;
-
 @end
 
