@@ -15,8 +15,6 @@
 
 @interface XspfManager : NSObject 
 {
-    IBOutlet NSWindow *window;
-    
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
     NSManagedObjectModel *managedObjectModel;
     NSManagedObjectContext *managedObjectContext;
