@@ -138,11 +138,11 @@
 		return;
 	}
 	
-	[menu insertItem:[NSMenuItem separatorItem] atIndex:0];
-	for(count--;count >= 0; count--) {
-		id item = [itemArray objectAtIndex:count];
+	[menu addItem:[NSMenuItem separatorItem]];
+	for(NSInteger i = 0; i < count; i++) {
+		id item = [itemArray objectAtIndex:i];
 		[objMenu removeItem:item];
-		[menu insertItem:item atIndex:0];
+		[menu addItem:item];
 	}
 	[objMenu release];
 }
