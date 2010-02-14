@@ -320,27 +320,9 @@ static NSString *const XspfMREDSubrowsKey = @"subrows";
 	
 	return result;
 }
-- (BOOL)isDateKeyPath:(NSString *)keyPath
-{
-	return [[NSArray arrayWithObjects:@"lastPlayDate", @"modificationDate", @"creationDate", nil] containsObject:keyPath];
-}
 - (id)criteriaWithKeyPath:(NSString *)keypath withRowTemplate:(id)rowTemplate
 {
-	NSString *key = nil;
-	if([keypath isEqualToString:@"title"]) {
-		key = @"String";
-	} else if([keypath isEqualToString:@"rating"]) {
-		key = @"Rate";
-	} else if([self isDateKeyPath:keypath]) {
-		key = @"AbDate";
-	} else if([keypath isEqualToString:@"label"]) {
-		key = @"Label";
-	} else if([keypath isEqualToString:@"information.voiceActorsList"]) {
-		key = @"VoiceActors";
-	} else if([keypath isEqualToString:@"information.productsList"]) {
-		key = @"Products";
-	}
-	
+	NSString *key = [self templateKeyForLeftKeyPath:keypath];
 	if(key) {
 		id row = [rowTemplate valueForKey:key];
 		id c = [[[row childAtIndex:0] copy] autorelease];
@@ -396,18 +378,14 @@ static NSString *const XspfMREDSubrowsKey = @"subrows";
 		if(!leftKeyPath) return [NSArray array];
 		
 		NSArray *disp = nil;
-		if([leftKeyPath isEqualToString:@"title"]) {		
+		if([self isStringKeyPath:leftKeyPath]) {		
 			disp = [self displayValuesWithPredicate:predicate];
-		} else if([leftKeyPath isEqualToString:@"rating"]) {		
+		} else if([self isRateKeyPath:leftKeyPath]) {		
 			disp = [self ratingDisplayValuesWithPredicate:predicate];
 		} else if([self isDateKeyPath:leftKeyPath]) {		
 			disp = [self dateDisplayValuesWithPredicate:predicate];
-		} else if([leftKeyPath isEqualToString:@"label"]) {
+		} else if([self isLabelKeyPath:leftKeyPath]) {
 			disp = [self labelDisplayValuesWithPredicate:predicate];
-		} else if([leftKeyPath isEqualToString:@"information.voiceActorsList"]) {
-			disp = [self displayValuesWithPredicate:predicate];
-		} else if([leftKeyPath isEqualToString:@"information.productsList"]) {
-			disp = [self displayValuesWithPredicate:predicate];
 		}
 		
 		if(disp) {

@@ -27,21 +27,7 @@ static NSString *XspfMREDPredicateRowsKey = @"predicateRows";
 }
 - (id)criteriaWithKeyPath:(NSString *)keypath
 {
-	NSString *key = nil;
-	if([keypath isEqualToString:@"title"]) {
-		key = @"String";
-	} else if([keypath isEqualToString:@"rating"]) {
-		key = @"Rate";
-	} else if([[NSArray arrayWithObjects:@"lastPlayDate", @"modificationDate", @"creationDate", nil] containsObject:keypath]) {
-		key = @"AbDate";
-	} else if([keypath isEqualToString:@"label"]) {
-		key = @"Label";
-	} else if([keypath isEqualToString:@"information.voiceActorsList"]) {
-		key = @"VoiceActors";
-	} else if([keypath isEqualToString:@"information.productsList"]) {
-		key = @"Products";
-	}	
-	
+	NSString *key = [XspfMRule templateKeyForLeftKeyPath:keypath];
 	if(key) {
 		id row = [rowTemplate valueForKey:key];
 		id c = [[[row childAtIndex:0] copy] autorelease];
@@ -64,13 +50,7 @@ static NSString *XspfMREDPredicateRowsKey = @"predicateRows";
 		
 	NSMutableArray *newRows = [NSMutableArray array];
 	
-	for(id keyPath in [NSArray arrayWithObjects:@"title",
-					   @"lastPlayDate", @"modificationDate", @"creationDate",
-					   @"rating",
-					   @"label",
-					   @"information.voiceActorsList",
-					   @"information.productsList",
-					   nil]) {
+	for(id keyPath in [XspfMRule leftKeys]) {
 		id c = [self criteriaWithKeyPath:keyPath];
 		if(c) [newRows addObjectsFromArray:c];
 	}

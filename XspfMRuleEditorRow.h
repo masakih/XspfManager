@@ -25,6 +25,14 @@
 - (NSDictionary *)predicatePartsWithDisplayValue:(id)value forRuleEditor:(NSRuleEditor *)ruleEditor inRow:(NSInteger)row;
 
 - (id)displayValue;
+
+- (BOOL)isDateKeyPath:(NSString *)keyPath;
+- (BOOL)isStringKeyPath:(NSString *)keyPath;
+- (BOOL)isRateKeyPath:(NSString *)keyPath;
+- (BOOL)isLabelKeyPath:(NSString *)keyPath;
++ (NSArray *)leftKeys;
++ (NSString *)templateKeyForLeftKeyPath:(NSString *)leftKeypath;
+- (NSString *)templateKeyForLeftKeyPath:(NSString *)leftKeypath;
 @end
 
 
