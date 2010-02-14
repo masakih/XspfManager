@@ -25,7 +25,7 @@
 {
 	XspfMCollectionViewItem *result = [super copyWithZone:zone];
 	
-	[result setMenu:[menu copy]];
+	[result setMenu:[[menu copy] autorelease]];
 	[result performSelector:@selector(setupBinding:) withObject:nil afterDelay:0.0];
 	
 	return result;
@@ -148,7 +148,9 @@
 }
 - (void)setMenu:(NSMenu *)aMenu
 {
-	menu = aMenu;
+	if(menu == aMenu) return;
+	[menu autorelease];
+	menu = [aMenu retain];
 }
 
 - (BOOL)isFirstResponder
