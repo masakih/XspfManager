@@ -170,6 +170,82 @@
 
 - (id)displayValue { return _value; }
 
+
+#pragma mark#### Variables for add/change criteria of Library. ####
++ (NSArray *)leftKeys
+{
+	static NSArray *leftKeys = nil;
+	if(!leftKeys) {
+		leftKeys = [[NSArray arrayWithObjects:@"title",
+					 @"lastPlayDate", @"modificationDate", @"creationDate",
+					 @"rating",
+					 @"label",
+					 @"information.voiceActorsList",
+					 @"information.productsList",
+					 nil] retain];
+	}
+	return leftKeys;
+}
+static inline NSArray *dateKeys()
+{
+	static NSArray *dateKeys = nil;
+	if(!dateKeys) {
+		dateKeys = [[NSArray arrayWithObjects:@"lastPlayDate", @"modificationDate", @"creationDate", nil] retain];
+	}
+	return dateKeys;
+}
+static inline BOOL isDateKeyPath(NSString *keyPath)
+{
+	return [dateKeys() containsObject:keyPath];
+}
+- (BOOL)isDateKeyPath:(NSString *)keyPath
+{
+	return isDateKeyPath(keyPath);
+}
+- (BOOL)isStringKeyPath:(NSString *)keyPath
+{
+	static NSArray *stringExpressionLeftKeys = nil;
+	if(!stringExpressionLeftKeys) {
+		stringExpressionLeftKeys = [[NSArray arrayWithObjects:
+									 @"title",
+									 @"information.voiceActorsList",
+									 @"information.productsList",
+									 nil] retain];
+	}
+	return [stringExpressionLeftKeys containsObject:keyPath];
+}
+- (BOOL)isRateKeyPath:(NSString *)keyPath
+{
+	return [keyPath isEqualToString:@"rating"];
+}
+- (BOOL)isLabelKeyPath:(NSString *)keyPath
+{
+	return [keyPath isEqualToString:@"label"];
+}
++ (NSString *)templateKeyForLeftKeyPath:(NSString *)leftKeypath
+{
+	NSString *key = nil;
+	if([leftKeypath isEqualToString:@"title"]) {
+		key = @"String";
+	} else if([leftKeypath isEqualToString:@"rating"]) {
+		key = @"Rate";
+	} else if(isDateKeyPath(leftKeypath)) {
+		key = @"AbDate";
+	} else if([leftKeypath isEqualToString:@"label"]) {
+		key = @"Label";
+	} else if([leftKeypath isEqualToString:@"information.voiceActorsList"]) {
+		key = @"VoiceActors";
+	} else if([leftKeypath isEqualToString:@"information.productsList"]) {
+		key = @"Products";
+	}
+	
+	return key;
+}
+- (NSString *)templateKeyForLeftKeyPath:(NSString *)leftKeypath
+{
+	return [[self class] templateKeyForLeftKeyPath:leftKeypath];
+}
+
 #pragma mark == NSCopying Protocol ==
 - (id)copyWithZone:(NSZone *)zone
 {
