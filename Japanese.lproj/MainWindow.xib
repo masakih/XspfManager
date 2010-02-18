@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="870"/>
+			<integer value="2"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -130,6 +130,7 @@
 									<int key="NSvFlags">268</int>
 									<string key="NSFrame">{{22, 14}, {41, 25}}</string>
 									<reference key="NSSuperview"/>
+									<reference key="NSWindow"/>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSButtonCell" key="NSCell" id="1014604499">
 										<int key="NSCellFlags">-2080244224</int>
@@ -176,6 +177,7 @@
 									<int key="NSvFlags">268</int>
 									<string key="NSFrame">{{0, 14}, {430, 22}}</string>
 									<reference key="NSSuperview"/>
+									<reference key="NSWindow"/>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSSearchFieldCell" key="NSCell" id="145072559">
 										<int key="NSCellFlags">343014976</int>
@@ -271,6 +273,7 @@
 									<int key="NSvFlags">268</int>
 									<string key="NSFrame">{{0, 14}, {86, 25}}</string>
 									<reference key="NSSuperview"/>
+									<reference key="NSWindow"/>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSSegmentedCell" key="NSCell" id="743774296">
 										<int key="NSCellFlags">67239424</int>
@@ -321,7 +324,7 @@
 								<nil key="NSToolbarItemImage"/>
 								<nil key="NSToolbarItemTarget"/>
 								<nil key="NSToolbarItemAction"/>
-								<string key="NSToolbarItemMinSize">{61, 25}</string>
+								<string key="NSToolbarItemMinSize">{88, 25}</string>
 								<string key="NSToolbarItemMaxSize">{88, 25}</string>
 								<bool key="NSToolbarItemEnabled">YES</bool>
 								<bool key="NSToolbarItemAutovalidates">YES</bool>
@@ -1512,7 +1515,7 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{119, 562}, {616, 227}}</string>
+					<string>{{119, 789}, {616, 0}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1608,11 +1611,9 @@
 							<string>switchListView:</string>
 							<string>switchRegularIconView:</string>
 							<string>switchSmallIconView:</string>
-							<string>togglePreviewPanel:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -1681,7 +1682,7 @@
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">XspfMPreviewPanelController</string>
-					<string key="superclassName">NSWindowController</string>
+					<string key="superclassName">NSResponder</string>
 					<object class="NSMutableDictionary" key="actions">
 						<string key="NS.key.0">togglePreviewPanel:</string>
 						<string key="NS.object.0">id</string>

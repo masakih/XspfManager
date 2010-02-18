@@ -12,7 +12,6 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="870"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -130,6 +129,7 @@
 									<int key="NSvFlags">268</int>
 									<string key="NSFrame">{{13, 14}, {41, 25}}</string>
 									<reference key="NSSuperview"/>
+									<reference key="NSWindow"/>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSButtonCell" key="NSCell" id="1014604499">
 										<int key="NSCellFlags">-2080244224</int>
@@ -176,6 +176,7 @@
 									<int key="NSvFlags">268</int>
 									<string key="NSFrame">{{0, 14}, {430, 22}}</string>
 									<reference key="NSSuperview"/>
+									<reference key="NSWindow"/>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSSearchFieldCell" key="NSCell" id="145072559">
 										<int key="NSCellFlags">343014976</int>
@@ -271,9 +272,10 @@
 									<int key="NSvFlags">268</int>
 									<string key="NSFrame">{{0, 14}, {86, 25}}</string>
 									<reference key="NSSuperview"/>
+									<reference key="NSWindow"/>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSSegmentedCell" key="NSCell" id="743774296">
-										<int key="NSCellFlags">67239424</int>
+										<int key="NSCellFlags">-2080244224</int>
 										<int key="NSCellFlags2">0</int>
 										<object class="NSFont" key="NSSupport">
 											<string key="NSName">LucidaGrande</string>
@@ -291,6 +293,7 @@
 												</object>
 												<string key="NSSegmentItemLabel"/>
 												<int key="NSSegmentItemTag">1</int>
+												<bool key="NSSegmentItemSelected">YES</bool>
 												<int key="NSSegmentItemImageScaling">0</int>
 											</object>
 											<object class="NSSegmentItem">
@@ -301,7 +304,6 @@
 												</object>
 												<string key="NSSegmentItemLabel"/>
 												<int key="NSSegmentItemTag">2</int>
-												<bool key="NSSegmentItemSelected">YES</bool>
 												<int key="NSSegmentItemImageScaling">0</int>
 											</object>
 											<object class="NSSegmentItem">
@@ -314,14 +316,13 @@
 												<int key="NSSegmentItemImageScaling">0</int>
 											</object>
 										</object>
-										<int key="NSSelectedSegment">1</int>
 										<int key="NSSegmentStyle">2</int>
 									</object>
 								</object>
 								<nil key="NSToolbarItemImage"/>
 								<nil key="NSToolbarItemTarget"/>
 								<nil key="NSToolbarItemAction"/>
-								<string key="NSToolbarItemMinSize">{61, 25}</string>
+								<string key="NSToolbarItemMinSize">{88, 25}</string>
 								<string key="NSToolbarItemMaxSize">{88, 25}</string>
 								<bool key="NSToolbarItemEnabled">YES</bool>
 								<bool key="NSToolbarItemAutovalidates">YES</bool>
@@ -452,6 +453,7 @@
 							<int key="NSvFlags">258</int>
 							<string key="NSFrame">{{20, 42}, {790, 136}}</string>
 							<reference key="NSSuperview" ref="72950107"/>
+							<reference key="NSWindow"/>
 							<string key="NSClassName">NSView</string>
 						</object>
 						<object class="NSBox" id="819220797">
@@ -459,6 +461,7 @@
 							<int key="NSvFlags">34</int>
 							<string key="NSFrame">{{0, 184}, {830, 5}}</string>
 							<reference key="NSSuperview" ref="72950107"/>
+							<reference key="NSWindow"/>
 							<string key="NSOffsets">{0, 0}</string>
 							<object class="NSTextFieldCell" key="NSTitleCell">
 								<int key="NSCellFlags">67239424</int>
@@ -481,6 +484,7 @@
 							<int key="NSvFlags">289</int>
 							<string key="NSFrame">{{648, 6}, {162, 21}}</string>
 							<reference key="NSSuperview" ref="72950107"/>
+							<reference key="NSWindow"/>
 							<string key="NSClassName">NSView</string>
 						</object>
 						<object class="NSPathControl" id="457532622">
@@ -496,6 +500,7 @@
 							</object>
 							<string key="NSFrame">{{20, 8}, {621, 17}}</string>
 							<reference key="NSSuperview" ref="72950107"/>
+							<reference key="NSWindow"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSPathCell" key="NSCell" id="447586155">
 								<int key="NSCellFlags">606207489</int>
@@ -522,6 +527,7 @@
 									<int key="NSvFlags">272</int>
 									<string key="NSFrameSize">{142, 438}</string>
 									<reference key="NSSuperview" ref="593733723"/>
+									<reference key="NSWindow"/>
 									<string key="NSClassName">NSView</string>
 								</object>
 								<object class="NSCustomView" id="11418218">
@@ -534,6 +540,7 @@
 											<int key="NSvFlags">274</int>
 											<string key="NSFrame">{{0, 20}, {687, 418}}</string>
 											<reference key="NSSuperview" ref="11418218"/>
+											<reference key="NSWindow"/>
 											<string key="NSClassName">NSView</string>
 										</object>
 										<object class="NSButton" id="444268717">
@@ -541,6 +548,7 @@
 											<int key="NSvFlags">292</int>
 											<string key="NSFrame">{{0, -1}, {23, 23}}</string>
 											<reference key="NSSuperview" ref="11418218"/>
+											<reference key="NSWindow"/>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSButtonCell" key="NSCell" id="468207364">
 												<int key="NSCellFlags">-2080244224</int>
@@ -565,6 +573,7 @@
 											<int key="NSvFlags">292</int>
 											<string key="NSFrame">{{22, -1}, {23, 23}}</string>
 											<reference key="NSSuperview" ref="11418218"/>
+											<reference key="NSWindow"/>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSButtonCell" key="NSCell" id="254708072">
 												<int key="NSCellFlags">67239424</int>
@@ -587,11 +596,13 @@
 									</object>
 									<string key="NSFrame">{{143, 0}, {687, 438}}</string>
 									<reference key="NSSuperview" ref="593733723"/>
+									<reference key="NSWindow"/>
 									<string key="NSClassName">NSView</string>
 								</object>
 							</object>
 							<string key="NSFrame">{{0, 195}, {830, 438}}</string>
 							<reference key="NSSuperview" ref="72950107"/>
+							<reference key="NSWindow"/>
 							<bool key="NSIsVertical">YES</bool>
 							<int key="NSDividerStyle">2</int>
 							<string key="NSAutosaveName">LibrarySplit</string>
@@ -599,6 +610,7 @@
 					</object>
 					<string key="NSFrameSize">{830, 632}</string>
 					<reference key="NSSuperview"/>
+					<reference key="NSWindow"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1280, 832}}</string>
 				<string key="NSMinSize">{749, 504}</string>
@@ -1431,6 +1443,8 @@
 					<string>790.IBPluginDependency</string>
 					<string>791.IBPluginDependency</string>
 					<string>792.IBPluginDependency</string>
+					<string>792.IBSegmentedControlTracker.RoundRobinState</string>
+					<string>792.IBSegmentedControlTracker.WasGrowing</string>
 					<string>793.IBPluginDependency</string>
 					<string>793.IBSegmentedControlInspectorSelectedSegmentMetadataKey</string>
 					<string>794.IBPluginDependency</string>
@@ -1512,12 +1526,14 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{119, 562}, {616, 227}}</string>
+					<string>{{119, 789}, {616, 0}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<integer value="0"/>
+					<integer value="0"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="2"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1608,11 +1624,9 @@
 							<string>switchListView:</string>
 							<string>switchRegularIconView:</string>
 							<string>switchSmallIconView:</string>
-							<string>togglePreviewPanel:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -1681,7 +1695,7 @@
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">XspfMPreviewPanelController</string>
-					<string key="superclassName">NSWindowController</string>
+					<string key="superclassName">NSResponder</string>
 					<object class="NSMutableDictionary" key="actions">
 						<string key="NS.key.0">togglePreviewPanel:</string>
 						<string key="NS.object.0">id</string>
