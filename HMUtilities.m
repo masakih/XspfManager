@@ -20,6 +20,8 @@ void HMLog(NSInteger level, NSString *format, ...)
 }
 void HMLogv(NSInteger level, NSString *format, va_list args)
 {
+	if(level == HMLogLevelError) goto logging;
+	
 	[[NSUserDefaults standardUserDefaults] synchronize];
 	[NSUserDefaults resetStandardUserDefaults];
 	BOOL enabled = [[NSUserDefaults standardUserDefaults] boolForKey:HMLogEnable];
@@ -28,5 +30,6 @@ void HMLogv(NSInteger level, NSString *format, va_list args)
 	NSInteger logLevel = [[NSUserDefaults standardUserDefaults] integerForKey:HMLogLevel];
 	if(level > logLevel) return;
 	
+logging:
 	NSLogv(format, args);
 }
