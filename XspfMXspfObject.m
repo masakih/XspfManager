@@ -14,8 +14,8 @@
 #import "XspfMMovieLoadRequest.h"
 #import "XspfLoadThumbnailRequest.h"
 
-#import "NSPathUtilities-XspfQT-Extensions.h"
-#import "NSURL-XspfQT-Extensions.h"
+#import "NSPathUtilities-HMExtensions.h"
+#import "NSURL-HMExtensions.h"
 
 @interface XspfMXspfObject(HMPrivate)
 - (NSURL *)url;

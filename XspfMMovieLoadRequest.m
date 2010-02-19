@@ -9,7 +9,7 @@
 #import "XspfMMovieLoadRequest.h"
 
 #import <QTKit/QTKit.h>
-#import "XspfQTComponent.h"
+#import "HMXSPFComponent.h"
 #import "XspfQTValueTransformers.h"
 
 
@@ -57,7 +57,7 @@ static QTMovie *loadFromMovieURL(NSURL *url)
 	return result;
 }
 
-static XspfQTComponent *componentForURL(NSURL *url)
+static HMXSPFComponent *componentForURL(NSURL *url)
 {
 	NSError *theErr = nil;
 	
@@ -72,7 +72,7 @@ static XspfQTComponent *componentForURL(NSURL *url)
 		return nil;
 	}
 	NSXMLElement *root = [d rootElement];
-	XspfQTComponent *pl = [XspfQTComponent xspfComponemtWithXMLElement:root];
+	HMXSPFComponent *pl = [HMXSPFComponent xspfComponemtWithXMLElement:root];
 	if(!pl) {
 		HMLog(HMLogLevelError, @"Can not create XspfQTComponent.");
 		return nil;
@@ -126,7 +126,7 @@ static QTTime calcDefaultThumbnailQTTime(QTMovie *movie)
 	
 	return [pTimeValue QTTimeValue];
 }
-static NSImage *thumbnailForTrackTime(XspfQTComponent *track, NSTimeInterval time, CGSize size)
+static NSImage *thumbnailForTrackTime(HMXSPFComponent *track, NSTimeInterval time, CGSize size)
 {
 	NSError *theErr = nil;
 	QTMovie *movie = loadFromMovieURL([track movieLocation]);
@@ -159,14 +159,14 @@ static NSImage *thumbnailForTrackTime(XspfQTComponent *track, NSTimeInterval tim
 	return theImage;
 }
 
-static NSImage *thumbnailWithComponent(XspfQTComponent *component)
+static NSImage *thumbnailWithComponent(HMXSPFComponent *component)
 {
-	XspfQTComponent *track = [component thumbnailTrack];
+	HMXSPFComponent *track = [component thumbnailTrack];
 	NSTimeInterval interval = [component thumbnailTimeInterval];
 	CGSize size = { 200, 200 };
 	
 	if(!track) {
-		XspfQTComponent *trackList = [component childAtIndex:0];
+		HMXSPFComponent *trackList = [component childAtIndex:0];
 		[trackList setSelectionIndex:0];
 		track = [trackList currentTrack	];
 	}

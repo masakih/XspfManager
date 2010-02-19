@@ -20,8 +20,8 @@
 #import "XspfMXspfObject.h"
 #import "XspfMLabelMenuItem.h"
 
-#import "NSPathUtilities-XspfQT-Extensions.h"
-#import "NSWorkspace-Extensions.h"
+#import "NSPathUtilities-HMExtensions.h"
+#import "NSWorkspace-HMExtensions.h"
 
 @implementation XspfManager
 NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXspfObjectsNotification";
