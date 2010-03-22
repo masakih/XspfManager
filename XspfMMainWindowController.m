@@ -120,7 +120,7 @@
 		return;
 	} else if(result == NSAlertAlternateReturn) {
 		//
-#warning shuld implement.
+#warning should implement.
 	}
 	
 }

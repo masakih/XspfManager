@@ -36,9 +36,9 @@ static IMP originalKeyDown = NULL;
 		isFirst = NO;
 		
 		Method originalMethod = class_getInstanceMethod(NSClassFromString(@"IKImageFlowView"), @selector(keyDown:));
-        Method replacedMethod = class_getInstanceMethod(self, @selector(hackKeyDown:));
+		Method replacedMethod = class_getInstanceMethod(self, @selector(hackKeyDown:));
 		IMP replacedIMP = method_getImplementation(replacedMethod);
-        originalKeyDown = method_setImplementation(originalMethod, replacedIMP);
+		originalKeyDown = method_setImplementation(originalMethod, replacedIMP);
 	}
 }
 - (void)hackKeyDown:(NSEvent *)theEvent
@@ -167,15 +167,15 @@ finish:
 }
 - (void)imageFlow:(id)imageFlowView startResizingWithEvent:(NSEvent *)theEvent
 {
-    NSPoint offset = [imageFlowView convertPoint:[theEvent locationInWindow] fromView:nil];
-    
+	NSPoint offset = [imageFlowView convertPoint:[theEvent locationInWindow] fromView:nil];
+	
 	NSWindow *window = [imageFlowView window];
-    while (theEvent = [window nextEventMatchingMask:NSLeftMouseDraggedMask | NSLeftMouseUpMask]) {
-        if(NSEventMaskFromType([theEvent type]) == NSLeftMouseUpMask) break;
-        
-        NSPoint p = [splitView convertPoint:[theEvent locationInWindow] fromView:nil];
-        [splitView setPosition:p.y+offset.y ofDividerAtIndex:0];
-    }
+	while (theEvent = [window nextEventMatchingMask:NSLeftMouseDraggedMask | NSLeftMouseUpMask]) {
+		if(NSEventMaskFromType([theEvent type]) == NSLeftMouseUpMask) break;
+		
+		NSPoint p = [splitView convertPoint:[theEvent locationInWindow] fromView:nil];
+		[splitView setPosition:p.y+offset.y ofDividerAtIndex:0];
+	}
 }
 
 
