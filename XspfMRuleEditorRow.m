@@ -442,9 +442,21 @@ static NSString *const XspfMRuleValueKey = @"XspfMRuleValueKey";
 	[rate setMaxValue:5];
 	[cell setLevelIndicatorStyle:NSRatingLevelIndicatorStyle];
 	[cell setEditable:YES];
+	[cell setHighlighted:YES];
 	[rate sizeToFit];
 	
+	[rate setAction:@selector(continuousHighlighted:)];
+	[rate setTarget:self];
+	
 	return rate;
+}
+- (void)setHighlightRate:(id)rate
+{
+	[[rate cell] setHighlighted:YES];
+}
+- (IBAction)continuousHighlighted:(id)sender
+{
+	[self performSelector:@selector(setHighlightRate:) withObject:sender afterDelay:0.0];
 }
 - (NSView *)numberField
 {
