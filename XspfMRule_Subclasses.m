@@ -6,7 +6,7 @@
 //  Copyright 2009 masakih. All rights reserved.
 //
 
-#import "XspfMRuleEditorRow.h"
+#import "XspfMRule.h"
 #import "XspfMRule_private.h"
 
 #import "XspfMLabelField.h"
@@ -195,11 +195,12 @@ static NSString *const XspfMRuleTypeKey = @"XspfMRuleTypeKey";
 {
 	id result = nil;
 	
+	// find same type field in row.
 	id displayValues = [ruleEditor displayValuesForRow:row];
 	Class fieldCalss = [self fieldClass];
-	for(id v in displayValues) {
-		if([v isKindOfClass:fieldCalss] && [v tag] == tag) {
-			result = v;
+	for(id field in displayValues) {
+		if([field isKindOfClass:fieldCalss] && [field tag] == tag) {
+			result = field;
 			break;
 		}
 	}
@@ -207,10 +208,5 @@ static NSString *const XspfMRuleTypeKey = @"XspfMRuleTypeKey";
 	
 	return result;
 }
-//- (NSDictionary *)predicatePartsWithDisplayValue:(id)value forRuleEditor:(NSRuleEditor *)ruleEditor inRow:(NSInteger)row
-//{
-//#warning MUST IMPLEMENT
-//	return nil;
-//}
 @end
 

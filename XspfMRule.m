@@ -1,12 +1,12 @@
 //
-//  XspfMRuleEditorRow.m
+//  XspfMRule.m
 //  XspfManager
 //
 //  Created by Hori,Masaki on 09/11/29.
 //  Copyright 2009 masakih. All rights reserved.
 //
 
-#import "XspfMRuleEditorRow.h"
+#import "XspfMRule.h"
 #import "XspfMRule_private.h"
 
 #import "XspfMLabelField.h"
@@ -109,25 +109,22 @@
 		SEL selector = NSSelectorFromString(customRightExp);
 		id arg01 = [predicateHints valueForKey:@"XspfMRightExpressionArg01"];
 		id arg02 = [predicateHints valueForKey:@"XspfMRightExpressionArg02"];
+		if([arg01 isEqual:@"displayValues"]) {
+			arg01 = [ruleEditor displayValuesForRow:row];
+		}
+		if([arg02 isEqual:@"displayValues"]) {
+			arg02 = [ruleEditor displayValuesForRow:row];
+		}
 		
-		
+		id rhs = nil;
 		if(arg02 && arg01) {
-			if([arg01 isEqual:@"displayValues"]) {
-				arg01 = [ruleEditor displayValuesForRow:row];
-			}
-			if([arg02 isEqual:@"displayValues"]) {
-				arg02 = [ruleEditor displayValuesForRow:row];
-			}
-			id rhs = [self performSelector:selector withObject:arg01 withObject:arg02];
-			[result setValue:rhs forKey:NSRuleEditorPredicateRightExpression];
+			rhs = [self performSelector:selector withObject:arg01 withObject:arg02];
 		} else if(arg01) {
-			if([arg01 isEqual:@"displayValues"]) {
-				arg01 = [ruleEditor displayValuesForRow:row];
-			}
-			id rhs = [self performSelector:selector withObject:arg01];
-			[result setValue:rhs forKey:NSRuleEditorPredicateRightExpression];
+			rhs = [self performSelector:selector withObject:arg01];
 		} else {
-			id rhs = [self performSelector:selector];
+			rhs = [self performSelector:selector];
+		}
+		if(rhs) {
 			[result setValue:rhs forKey:NSRuleEditorPredicateRightExpression];
 		}
 	}
@@ -158,7 +155,7 @@
 			args = [NSArray arrayWithObjects:[NSExpression expressionForConstantValue:arg01], nil];
 		}
 		
-		id target = [NSExpression expressionForConstantValue:[[[[self class] alloc] init] autorelease]];
+		id target = [NSExpression expressionForConstantValue:[[self class] functionHost]];
 		id rhs = [NSExpression expressionForFunction:target selectorName:selName arguments:args];
 		[result setValue:rhs forKey:NSRuleEditorPredicateRightExpression];
 	}
@@ -172,78 +169,125 @@
 
 
 #pragma mark#### Variables for add/change criteria of Library. ####
+static NSArray *leftKeys = nil;
+static NSArray *stringKeys = nil;
+static NSArray *dateKeys = nil;
+static NSArray *numberKeys = nil;
+static BOOL useRating = NO;
+static BOOL useLabel = NO;
+
++ (void)registerStringTypeKeyPaths:(NSArray *)keyPaths
+{
+	if(stringKeys) {
+		[stringKeys release];
+		[leftKeys release];
+		leftKeys = nil;
+	}
+	stringKeys = [[NSArray arrayWithArray:keyPaths] retain];
+}
++ (void)registerDateTypeKeyPaths:(NSArray *)keyPaths
+{
+	if(dateKeys) {
+		[dateKeys release];
+		[leftKeys release];
+		leftKeys = nil;
+	}
+	dateKeys = [[NSArray arrayWithArray:keyPaths] retain];
+}
++ (void)registerNumberTypeKeyPaths:(NSArray *)keyPaths
+{
+	if(numberKeys) {
+		[numberKeys release];
+		[leftKeys release];
+		leftKeys = nil;
+	}
+	numberKeys = [[NSArray arrayWithArray:keyPaths] retain];
+}
++ (void)setUseRating:(BOOL)flag
+{
+	if(flag && useRating || !flag && !useRating) {
+		[leftKeys release];
+		leftKeys = nil;
+	}
+	useRating = flag;
+}
++ (void)setUseLablel:(BOOL)flag
+{
+	if(flag && useLabel || !flag && !useLabel) {
+		[leftKeys release];
+		leftKeys = nil;
+	}
+	useLabel = flag;
+}
 + (NSArray *)leftKeys
 {
-	static NSArray *leftKeys = nil;
 	if(!leftKeys) {
-		leftKeys = [[NSArray arrayWithObjects:@"title",
-					 @"lastPlayDate", @"modificationDate", @"creationDate",
-					 @"rating",
-					 @"label",
-					 @"information.voiceActorsList",
-					 @"information.productsList",
-					 nil] retain];
+		
+		id temp = [NSMutableArray array];
+		[temp addObjectsFromArray:stringKeys];
+		[temp addObjectsFromArray:dateKeys];
+		[temp addObjectsFromArray:numberKeys];
+		if(useRating) {
+			[temp addObject:@"rating"];
+		}
+		if(useLabel) {
+			[temp addObject:@"label"];
+		}
+		leftKeys = [[NSArray arrayWithArray:temp] retain];
 	}
 	return leftKeys;
 }
-static inline NSArray *dateKeys()
-{
-	static NSArray *dateKeys = nil;
-	if(!dateKeys) {
-		dateKeys = [[NSArray arrayWithObjects:@"lastPlayDate", @"modificationDate", @"creationDate", nil] retain];
-	}
-	return dateKeys;
-}
 static inline BOOL isDateKeyPath(NSString *keyPath)
 {
-	return [dateKeys() containsObject:keyPath];
+	return [dateKeys containsObject:keyPath];
+}
++ (BOOL)isDateKeyPath:(NSString *)keyPath
+{
+	return isDateKeyPath(keyPath);
 }
 - (BOOL)isDateKeyPath:(NSString *)keyPath
 {
 	return isDateKeyPath(keyPath);
 }
+static inline BOOL isStringKeyPath(NSString *keyPath)
+{
+	return [stringKeys containsObject:keyPath];
+}
++ (BOOL)isStringKeyPath:(NSString *)keyPath
+{
+	return isStringKeyPath(keyPath);
+}
 - (BOOL)isStringKeyPath:(NSString *)keyPath
 {
-	static NSArray *stringExpressionLeftKeys = nil;
-	if(!stringExpressionLeftKeys) {
-		stringExpressionLeftKeys = [[NSArray arrayWithObjects:
-									 @"title",
-									 @"information.voiceActorsList",
-									 @"information.productsList",
-									 nil] retain];
-	}
-	return [stringExpressionLeftKeys containsObject:keyPath];
+	return isStringKeyPath(keyPath);
+}
+static inline BOOL isNumberKeyPath(NSString *keyPath)
+{
+	return [numberKeys containsObject:keyPath];
+}
++ (BOOL)isNumberKeyPath:(NSString *)keyPath
+{
+	return isNumberKeyPath(keyPath);
+}
+- (BOOL)isNumberKeyPath:(NSString *)keyPath
+{
+	return isNumberKeyPath(keyPath);
+}
++ (BOOL)isRateKeyPath:(NSString *)keyPath
+{
+	return [keyPath isEqualToString:@"rating"];
 }
 - (BOOL)isRateKeyPath:(NSString *)keyPath
 {
 	return [keyPath isEqualToString:@"rating"];
 }
-- (BOOL)isLabelKeyPath:(NSString *)keyPath
++ (BOOL)isLabelKeyPath:(NSString *)keyPath
 {
 	return [keyPath isEqualToString:@"label"];
 }
-+ (NSString *)templateKeyForLeftKeyPath:(NSString *)leftKeypath
+- (BOOL)isLabelKeyPath:(NSString *)keyPath
 {
-	NSString *key = nil;
-	if([leftKeypath isEqualToString:@"title"]) {
-		key = @"String";
-	} else if([leftKeypath isEqualToString:@"rating"]) {
-		key = @"Rate";
-	} else if(isDateKeyPath(leftKeypath)) {
-		key = @"AbDate";
-	} else if([leftKeypath isEqualToString:@"label"]) {
-		key = @"Label";
-	} else if([leftKeypath isEqualToString:@"information.voiceActorsList"]) {
-		key = @"VoiceActors";
-	} else if([leftKeypath isEqualToString:@"information.productsList"]) {
-		key = @"Products";
-	}
-	
-	return key;
-}
-- (NSString *)templateKeyForLeftKeyPath:(NSString *)leftKeypath
-{
-	return [[self class] templateKeyForLeftKeyPath:leftKeypath];
+	return [keyPath isEqualToString:@"label"];
 }
 
 #pragma mark == NSCopying Protocol ==
@@ -415,7 +459,6 @@ static NSString *const XspfMRuleValueKey = @"XspfMRuleValueKey";
 	[text setStringValue:@"1234567890"];
 	[text sizeToFit];
 	[text setStringValue:@""];
-	[text setDelegate:self];
 	
 	return text;
 }
@@ -428,7 +471,6 @@ static NSString *const XspfMRuleValueKey = @"XspfMRuleValueKey";
 	[date setDrawsBackground:YES];
 	[date setDateValue:[NSDate dateWithTimeIntervalSinceNow:0.0]];
 	[date sizeToFit];
-	[date setDelegate:self];
 	
 	return date;
 }
@@ -446,7 +488,7 @@ static NSString *const XspfMRuleValueKey = @"XspfMRuleValueKey";
 	[rate sizeToFit];
 	
 	[rate setAction:@selector(continuousHighlighted:)];
-	[rate setTarget:self];
+	[rate setTarget:[[self class] functionHost]];
 	
 	return rate;
 }
@@ -463,20 +505,19 @@ static NSString *const XspfMRuleValueKey = @"XspfMRuleValueKey";
 	id text = [[[NSTextField alloc] initWithFrame:NSMakeRect(0,0,100,19)] autorelease];
 	[[text cell] setControlSize:NSSmallControlSize];
 	[text setFont:[NSFont controlContentFontOfSize:[NSFont systemFontSizeForControlSize:NSSmallControlSize]]];
-	[text setStringValue:@"123"];
+	[text setStringValue:@"1234"];
 	NSNumberFormatter *formatter = [[[NSNumberFormatter alloc] init] autorelease];
 	[formatter setNumberStyle:NSNumberFormatterDecimalStyle];
 	[formatter setMinimum:[NSNumber numberWithInt:0]];
 	[text setFormatter:formatter];
 	[text sizeToFit];
 	[text setStringValue:@"1"];
-	[text setDelegate:self];
 	
 	return text;
 }
 - (NSView *)labelField
 {
-	HMLog(HMLogLevelDebug, @"Enter -> %@", NSStringFromSelector(_cmd));
+//	HMLog(HMLogLevelDebug, @"Enter -> %@", NSStringFromSelector(_cmd));
 	id label = [[[XspfMLabelField alloc] initWithFrame:NSMakeRect(0,0,100,19)] autorelease];
 	[label sizeToFit];
 	[label setLabelStyle:XspfMSquareStyle];
@@ -486,6 +527,17 @@ static NSString *const XspfMRuleValueKey = @"XspfMRuleValueKey";
 }
 @end
 @implementation XspfMRule (XspfMExpressionBuilder)
++ (id)functionHost
+{
+	static id host = nil;
+	if(host) return host;
+	@synchronized(self) {
+		if(!host) {
+			host = [[self alloc] init];
+		}
+	}
+	return host;
+}
 - (NSArray *)twoNumberAndUnitArgs:(NSArray *)displayValues
 {
 	id value03 = [displayValues objectAtIndex:2];
@@ -496,7 +548,9 @@ static NSString *const XspfMRuleValueKey = @"XspfMRuleValueKey";
 	
 	id value06 = [displayValues objectAtIndex:5];
 	id arg03 = nil;
-	if([value06 isEqualToString:@"Days"]) {
+	if([value06 isEqualToString:@"Hours"]) {
+		arg03 = [NSNumber numberWithInt:XspfMHoursUnitType];
+	} else if([value06 isEqualToString:@"Days"]) {
 		arg03 = [NSNumber numberWithInt:XspfMDaysUnitType];
 	} else if([value06 isEqualToString:@"Weeks"]) {
 		arg03 = [NSNumber numberWithInt:XpsfMWeeksUnitType];
@@ -524,7 +578,9 @@ static NSString *const XspfMRuleValueKey = @"XspfMRuleValueKey";
 	
 	id value04 = [displayValues objectAtIndex:3];
 	id arg02 = nil;
-	if([value04 isEqualToString:@"Days"]) {
+	if([value04 isEqualToString:@"Hours"]) {
+		arg02 = [NSNumber numberWithInt:XspfMHoursUnitType];
+	} else if([value04 isEqualToString:@"Days"]) {
 		arg02 = [NSNumber numberWithInt:XspfMDaysUnitType];
 	} else if([value04 isEqualToString:@"Weeks"]) {
 		arg02 = [NSNumber numberWithInt:XpsfMWeeksUnitType];
@@ -566,6 +622,38 @@ static NSString *const XspfMRuleValueKey = @"XspfMRuleValueKey";
 	id expression01, expression02;
 	expression01 = [NSExpression expressionForConstantValue:value01];
 	expression02 = [NSExpression expressionForConstantValue:value02];
+	
+	return [NSExpression expressionForAggregate:[NSArray arrayWithObjects:expression01, expression02, nil]];
+}
+- (NSExpression *)rangeNumberFromDisplayValues:(NSArray *)displayValues
+{
+	id field01 = nil;
+	id field02 = nil;
+	
+	Class numberFieldClass = [NSTextField class];
+	for(id v in displayValues) {
+		if([v isKindOfClass:numberFieldClass]) {
+			if([v tag] == XspfMPrimaryNumberFieldTag) {
+				field01 = v;
+			} else {
+				field02 = v;
+			}
+		}
+	}
+	
+	if(!field01 || !field02) return nil;
+	
+	NSInteger value01, value02;
+	value01 = [field01 integerValue]; value02 = [field02 integerValue];
+	if(value01 > value02) {
+		NSInteger t = value02;
+		value02 = value01;
+		value01 = t;
+	}
+	
+	id expression01, expression02;
+	expression01 = [NSExpression expressionForConstantValue:[NSNumber numberWithInteger:value01]];
+	expression02 = [NSExpression expressionForConstantValue:[NSNumber numberWithInteger:value02]];
 	
 	return [NSExpression expressionForAggregate:[NSArray arrayWithObjects:expression01, expression02, nil]];
 }

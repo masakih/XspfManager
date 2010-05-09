@@ -30,6 +30,9 @@
 		F43E62BD10A0710E00BF88DA /* XspfMImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E62BC10A0710E00BF88DA /* XspfMImageView.m */; };
 		F43E652E10A315D000BF88DA /* CollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F43E652C10A315D000BF88DA /* CollectionView.xib */; };
 		F43E653410A3167700BF88DA /* XspfMCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E653310A3167700BF88DA /* XspfMCollectionViewController.m */; };
+		F44A23A61196443600C60F2D /* XspfMRuleRowsBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = F44A23A31196443600C60F2D /* XspfMRuleRowsBuilder.m */; };
+		F44A23A71196443600C60F2D /* XspfMRuleRowTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = F44A23A51196443600C60F2D /* XspfMRuleRowTemplate.m */; };
+		F44A23BC119644D800C60F2D /* XspfMRuleConcreteRowsBuilders.m in Sources */ = {isa = PBXBuildFile; fileRef = F44A23BB119644D800C60F2D /* XspfMRuleConcreteRowsBuilders.m */; };
 		F45AB02310EE3675005BE9C1 /* HMUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = F45AB02210EE3675005BE9C1 /* HMUtilities.m */; };
 		F468493211188CDB00F3396B /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F468493111188CDB00F3396B /* QuickLook.framework */; };
 		F4684A931119D0A300F3396B /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4684A921119D0A300F3396B /* Quartz.framework */; };
@@ -64,13 +67,12 @@
 		F499881910DDAD3800AAC6D6 /* XspfMRule_NSExpressionFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = F499881810DDAD3800AAC6D6 /* XspfMRule_NSExpressionFunctions.m */; };
 		F499886B10DDFB3E00AAC6D6 /* XspfMThreadSpleepRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F499886A10DDFB3E00AAC6D6 /* XspfMThreadSpleepRequest.m */; };
 		F4998DA110E6C7CB00AAC6D6 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4998DA010E6C7CB00AAC6D6 /* MainWindow.xib */; };
-		F499CBCE10DA73620053923E /* XspfMRule_RuleBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = F499CBCD10DA73620053923E /* XspfMRule_RuleBuilder.m */; };
 		F49BCF9510A45178007136CE /* XspfMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BCF9410A45178007136CE /* XspfMViewController.m */; };
 		F49BD01010A47781007136CE /* ListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F49BD00E10A47780007136CE /* ListView.xib */; };
 		F49BD01310A477BF007136CE /* XspfMListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BD01210A477BF007136CE /* XspfMListViewController.m */; };
 		F49BD36910A66EC6007136CE /* XspfMXspfListObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BD36810A66EC6007136CE /* XspfMXspfListObject.m */; };
 		F4A6F90B10C1666600345D77 /* XspfMRuleEditorDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A6F90A10C1666600345D77 /* XspfMRuleEditorDelegate.m */; };
-		F4A6FAE610C2442E00345D77 /* XspfMRuleEditorRow.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A6FAE510C2442E00345D77 /* XspfMRuleEditorRow.m */; };
+		F4A6FAE610C2442E00345D77 /* XspfMRule.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A6FAE510C2442E00345D77 /* XspfMRule.m */; };
 		F4BB59BB10BC0C3700EE50B7 /* LibraryPredicate.strings in Resources */ = {isa = PBXBuildFile; fileRef = F4BB59BA10BC0C3700EE50B7 /* LibraryPredicate.strings */; };
 		F4CD0D261126FF4A007E31BC /* XspfMPreviewPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CD0D251126FF4A007E31BC /* XspfMPreviewPanelController.m */; };
 		F4CE4CD310A6A13E004AC4FA /* LibraryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CE4CD110A6A13E004AC4FA /* LibraryView.xib */; };
@@ -154,6 +156,12 @@
 		F43E652D10A315D000BF88DA /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/CollectionView.xib; sourceTree = "<group>"; };
 		F43E653210A3167700BF88DA /* XspfMCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMCollectionViewController.h; sourceTree = "<group>"; };
 		F43E653310A3167700BF88DA /* XspfMCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMCollectionViewController.m; sourceTree = "<group>"; };
+		F44A23A11196443600C60F2D /* XspfMRuleRowsBuilder_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMRuleRowsBuilder_private.h; sourceTree = "<group>"; };
+		F44A23A21196443600C60F2D /* XspfMRuleRowsBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMRuleRowsBuilder.h; sourceTree = "<group>"; };
+		F44A23A31196443600C60F2D /* XspfMRuleRowsBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMRuleRowsBuilder.m; sourceTree = "<group>"; };
+		F44A23A41196443600C60F2D /* XspfMRuleRowTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMRuleRowTemplate.h; sourceTree = "<group>"; };
+		F44A23A51196443600C60F2D /* XspfMRuleRowTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMRuleRowTemplate.m; sourceTree = "<group>"; };
+		F44A23BB119644D800C60F2D /* XspfMRuleConcreteRowsBuilders.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMRuleConcreteRowsBuilders.m; sourceTree = "<group>"; };
 		F45AB02110EE3675005BE9C1 /* HMUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMUtilities.h; sourceTree = "<group>"; };
 		F45AB02210EE3675005BE9C1 /* HMUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMUtilities.m; sourceTree = "<group>"; };
 		F468493111188CDB00F3396B /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
@@ -215,7 +223,6 @@
 		F499881810DDAD3800AAC6D6 /* XspfMRule_NSExpressionFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMRule_NSExpressionFunctions.m; sourceTree = "<group>"; };
 		F499886910DDFB3E00AAC6D6 /* XspfMThreadSpleepRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMThreadSpleepRequest.h; sourceTree = "<group>"; };
 		F499886A10DDFB3E00AAC6D6 /* XspfMThreadSpleepRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMThreadSpleepRequest.m; sourceTree = "<group>"; };
-		F499CBCD10DA73620053923E /* XspfMRule_RuleBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMRule_RuleBuilder.m; sourceTree = "<group>"; };
 		F499CBE710DA7A960053923E /* XspfMRule_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMRule_private.h; sourceTree = "<group>"; };
 		F49BCF9310A45175007136CE /* XspfMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMViewController.h; sourceTree = "<group>"; };
 		F49BCF9410A45178007136CE /* XspfMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMViewController.m; sourceTree = "<group>"; };
@@ -226,8 +233,8 @@
 		F49BD36810A66EC6007136CE /* XspfMXspfListObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMXspfListObject.m; sourceTree = "<group>"; };
 		F4A6F90910C1666600345D77 /* XspfMRuleEditorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMRuleEditorDelegate.h; sourceTree = "<group>"; };
 		F4A6F90A10C1666600345D77 /* XspfMRuleEditorDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMRuleEditorDelegate.m; sourceTree = "<group>"; };
-		F4A6FAE410C2442E00345D77 /* XspfMRuleEditorRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMRuleEditorRow.h; sourceTree = "<group>"; };
-		F4A6FAE510C2442E00345D77 /* XspfMRuleEditorRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMRuleEditorRow.m; sourceTree = "<group>"; };
+		F4A6FAE410C2442E00345D77 /* XspfMRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMRule.h; sourceTree = "<group>"; };
+		F4A6FAE510C2442E00345D77 /* XspfMRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMRule.m; sourceTree = "<group>"; };
 		F4BB59B610BC0C2C00EE50B7 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/LibraryPredicate.strings; sourceTree = "<group>"; };
 		F4BB5A1510BC2C5800EE50B7 /* Japanese */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Japanese; path = Japanese.lproj/LibraryPredicate.strings; sourceTree = "<group>"; };
 		F4CD0D241126FF4A007E31BC /* XspfMPreviewPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMPreviewPanelController.h; sourceTree = "<group>"; };
@@ -297,12 +304,17 @@
 				F4CE51B110A99E4E004AC4FA /* XspfMCollectionViewItem.m */,
 				F4A6F90910C1666600345D77 /* XspfMRuleEditorDelegate.h */,
 				F4A6F90A10C1666600345D77 /* XspfMRuleEditorDelegate.m */,
-				F4A6FAE410C2442E00345D77 /* XspfMRuleEditorRow.h */,
-				F4A6FAE510C2442E00345D77 /* XspfMRuleEditorRow.m */,
+				F4A6FAE410C2442E00345D77 /* XspfMRule.h */,
+				F4A6FAE510C2442E00345D77 /* XspfMRule.m */,
 				F478A95910DD1F0F000A75B4 /* XspfMRule_Subclasses.m */,
-				F499CBCD10DA73620053923E /* XspfMRule_RuleBuilder.m */,
 				F499881810DDAD3800AAC6D6 /* XspfMRule_NSExpressionFunctions.m */,
 				F499CBE710DA7A960053923E /* XspfMRule_private.h */,
+				F44A23A11196443600C60F2D /* XspfMRuleRowsBuilder_private.h */,
+				F44A23A21196443600C60F2D /* XspfMRuleRowsBuilder.h */,
+				F44A23A31196443600C60F2D /* XspfMRuleRowsBuilder.m */,
+				F44A23BB119644D800C60F2D /* XspfMRuleConcreteRowsBuilders.m */,
+				F44A23A41196443600C60F2D /* XspfMRuleRowTemplate.h */,
+				F44A23A51196443600C60F2D /* XspfMRuleRowTemplate.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -636,8 +648,7 @@
 				F40B342810B6BE9B00896716 /* UKFileWatcher.m in Sources */,
 				F40B342F10B6C09700896716 /* UKMainThreadProxy.m in Sources */,
 				F4A6F90B10C1666600345D77 /* XspfMRuleEditorDelegate.m in Sources */,
-				F4A6FAE610C2442E00345D77 /* XspfMRuleEditorRow.m in Sources */,
-				F499CBCE10DA73620053923E /* XspfMRule_RuleBuilder.m in Sources */,
+				F4A6FAE610C2442E00345D77 /* XspfMRule.m in Sources */,
 				F478A95A10DD1F0F000A75B4 /* XspfMRule_Subclasses.m in Sources */,
 				F499881910DDAD3800AAC6D6 /* XspfMRule_NSExpressionFunctions.m in Sources */,
 				F499886B10DDFB3E00AAC6D6 /* XspfMThreadSpleepRequest.m in Sources */,
@@ -665,6 +676,9 @@
 				F48B3607112EDAF900D1DE39 /* HMXSPFPlaylist.m in Sources */,
 				F48B3608112EDAF900D1DE39 /* HMXSPFTrack.m in Sources */,
 				F48B3609112EDAF900D1DE39 /* HMXSPFTrackList.m in Sources */,
+				F44A23A61196443600C60F2D /* XspfMRuleRowsBuilder.m in Sources */,
+				F44A23A71196443600C60F2D /* XspfMRuleRowTemplate.m in Sources */,
+				F44A23BC119644D800C60F2D /* XspfMRuleConcreteRowsBuilders.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -791,11 +805,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../HMExtensions/build/Release\"",
-					"\"$(SRCROOT)/../HMXSPFcomponent/build/Release\"",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -816,11 +826,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../HMExtensions/build/Release\"",
-					"\"$(SRCROOT)/../HMXSPFcomponent/build/Release\"",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_MODEL_TUNING = G4;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

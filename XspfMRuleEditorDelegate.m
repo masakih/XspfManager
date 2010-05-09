@@ -8,62 +8,135 @@
 
 #import "XspfMRuleEditorDelegate.h"
 
-#import "XspfMRuleEditorRow.h"
+#import "XspfMRule.h"
+#import "XspfMRuleRowsBuilder.h"
+#import "XspfMRuleRowTemplate.h"
 
 @implementation XspfMRuleEditorDelegate
 
 static NSString *XspfMREDPredicateRowsKey = @"predicateRows";
 
-- (NSDictionary *)buildRows:(NSArray *)template
++ (void)initialize
 {
-	NSMutableDictionary *result = [NSMutableDictionary dictionary];
-	for(id row in template) {
-		id name = [row valueForKey:@"name"];
-		id rule = [XspfMRule ruleWithPlist:row];
-		[result setObject:rule forKey:name];
+	static BOOL isFirst = YES;
+	if(isFirst) {
+		isFirst = NO;
+		[XspfMRule registerStringTypeKeyPaths:[NSArray arrayWithObjects:@"title", @"information.voiceActorsList", @"information.productsList", nil]];
+		[XspfMRule registerDateTypeKeyPaths:[NSArray arrayWithObjects:@"lastPlayDate", @"modificationDate", @"creationDate", nil]];
+		[XspfMRule setUseRating:YES];
+		[XspfMRule setUseLablel:YES];
 	}
-	rowTemplate = [result retain];
-	return result;
 }
-- (id)criteriaWithKeyPath:(NSString *)keypath
-{
-	NSString *key = [XspfMRule templateKeyForLeftKeyPath:keypath];
-	if(key) {
-		id row = [rowTemplate valueForKey:key];
-		id c = [[[row childAtIndex:0] copy] autorelease];
-		[c setValue:keypath];
-		return [NSArray arrayWithObject:c];
-	}
 	
-	return nil;
-}
 - (void)awakeFromNib
 {
-	NSBundle *m = [NSBundle mainBundle];
-	NSString *path = [m pathForResource:@"LibraryRowTemplate" ofType:@"plist"];
-	NSArray *rowsTemplate = [NSArray arrayWithContentsOfFile:path];
-	if(!rowsTemplate) {
-		exit(12345);
-	}
+	NSBundle *mainBundle = [NSBundle mainBundle];
+	NSString *templatePath = [mainBundle pathForResource:@"LibraryRowTemplate" ofType:@"plist"];
+	rowTemplate = [[XspfMRuleRowTemplate rowTemplateWithPath:templatePath] retain];
 	
-	[self buildRows:rowsTemplate];
-		
 	NSMutableArray *newRows = [NSMutableArray array];
-	
 	for(id keyPath in [XspfMRule leftKeys]) {
-		id c = [self criteriaWithKeyPath:keyPath];
+		id c = [rowTemplate criteriaForKeyPath:keyPath];
 		if(c) [newRows addObjectsFromArray:c];
 	}
 		
 	simples = [newRows retain];
-	
 	compounds = [[XspfMRule compoundRule] retain];
 		
-	////
 	predicateRows = [[NSMutableArray alloc] init];
 	[ruleEditor bind:@"rows" toObject:self withKeyPath:XspfMREDPredicateRowsKey options:nil];
 }
+- (void)dealloc
+{
+	[ruleEditor unbind:@"rows"];
+	[simples release];
+	[compounds release];
+	[predicateRows release];
+	[rowTemplate release];
+	
+	[super dealloc];
+}
 
+- (void)setPredicateRows:(id)p
+{
+	if([predicateRows isEqual:p]) return;
+	
+	[predicateRows release];
+	predicateRows = [p retain];
+}
+- (void)setPredicate:(id)predicate
+{
+	XspfMRuleRowsBuilder *builder = [XspfMRuleRowsBuilder builderWithPredicate:predicate];
+	builder.rowTemplate = rowTemplate;
+	[builder build];
+	id new = [builder rows];
+	
+	[self setPredicateRows:new];
+}
+
+#pragma mark#### NSRleEditor Delegate ####
+
+- (NSInteger)ruleEditor:(NSRuleEditor *)editor
+numberOfChildrenForCriterion:(id)criterion
+			withRowType:(NSRuleEditorRowType)rowType
+{
+	NSInteger result = 0;
+	
+	if(!criterion) {
+		if(rowType == NSRuleEditorRowTypeCompound) {
+			result = [compounds count];
+		} else {
+			result = [simples count];
+		}
+	} else {
+		result = [criterion numberOfChildren];
+	}
+	
+	return result;
+}
+
+- (id)ruleEditor:(NSRuleEditor *)editor
+		   child:(NSInteger)index
+	forCriterion:(id)criterion
+	 withRowType:(NSRuleEditorRowType)rowType
+{
+	id result = nil;
+	
+	if(!criterion) {
+		if(rowType == NSRuleEditorRowTypeCompound) {
+			result = [compounds objectAtIndex:index];
+		} else {
+			result = [simples objectAtIndex:index];
+		}
+	} else {
+		result = [criterion childAtIndex:index];
+	}
+		
+	return result;
+}
+- (id)ruleEditor:(NSRuleEditor *)editor
+displayValueForCriterion:(id)criterion
+		   inRow:(NSInteger)row
+{
+	id result = [criterion displayValueForRuleEditor:editor inRow:row];
+	
+	return result;
+}
+- (NSDictionary *)ruleEditor:(NSRuleEditor *)editor
+  predicatePartsForCriterion:(id)criterion
+			withDisplayValue:(id)displayValue
+					   inRow:(NSInteger)row
+{
+	id result = [criterion predicatePartsWithDisplayValue:displayValue forRuleEditor:editor inRow:row];
+	
+	return result;
+}
+- (void)ruleEditorRowsDidChange:(NSNotification *)notification
+{
+	//
+}
+
+#pragma mark---- Debugging ----
 - (void)resolveExpression:(id)exp
 {
 	NSString *message = nil;
@@ -118,104 +191,5 @@ static NSString *XspfMREDPredicateRowsKey = @"predicateRows";
 		[self resolveExpression:right];
 		fprintf(stderr, "end resolve.\n");
 	}
-}
-
-- (void)setPredicate:(id)predicate
-{
-	HMLog(HMLogLevelDebug, @"predicate -> (%@) %@", NSStringFromClass([predicate class]), predicate);
-//	[self resolvePredicate:predicate];
-	
-	id new = [XspfMRule ruleEditorRowsFromPredicate:predicate withRowTemplate:rowTemplate];
-	
-	[self willChangeValueForKey:XspfMREDPredicateRowsKey];
-	[predicateRows release];
-	predicateRows = [new retain];
-	[self didChangeValueForKey:XspfMREDPredicateRowsKey];
-//	[ruleEditor reloadCriteria];
-}
-- (void)setPredicateRows:(id)p
-{
-//	HMLog(HMLogLevelDebug, @"new -> %@", p);
-	[predicateRows release];
-	predicateRows = [p retain];
-}
-
-#pragma mark#### NSRleEditor Delegate ####
-
-- (NSInteger)ruleEditor:(NSRuleEditor *)editor
-numberOfChildrenForCriterion:(id)criterion
-			withRowType:(NSRuleEditorRowType)rowType
-{
-	NSInteger result = 0;
-	
-	if(!criterion) {
-		if(rowType == NSRuleEditorRowTypeCompound) {
-			result = [compounds count];
-		} else {
-			result = [simples count];
-		}
-	} else {
-		result = [criterion numberOfChildren];
-	}
-	
-	//	HMLog(HMLogLevelDebug, @"numner\tcriterion -> %@, type -> %d, result -> %d", criterion, rowType, result);
-	
-	return result;
-}
-
-- (id)ruleEditor:(NSRuleEditor *)editor
-		   child:(NSInteger)index
-	forCriterion:(id)criterion
-	 withRowType:(NSRuleEditorRowType)rowType
-{
-	id result = nil;
-	
-	if(!criterion) {
-		if(rowType == NSRuleEditorRowTypeCompound) {
-			result = [compounds objectAtIndex:index];
-		} else {
-			result = [simples objectAtIndex:index];
-		}
-	} else {
-		result = [criterion childAtIndex:index];
-	}
-	
-	//	HMLog(HMLogLevelDebug, @"child\tindex -> %d, criterion -> %@, type -> %d, result -> %@", index, criterion, rowType, result);
-	
-	return result;
-}
-- (id)ruleEditor:(NSRuleEditor *)editor
-displayValueForCriterion:(id)criterion
-		   inRow:(NSInteger)row
-{
-	id result = nil;
-	
-	if(!criterion) {
-		//
-	} else {
-		result = [criterion displayValueForRuleEditor:editor inRow:row];
-	}
-		
-	//	HMLog(HMLogLevelDebug, @"display\tcriterion -> %@, row -> %d, result -> %@", criterion, row, result);
-	
-	return result;
-}
-- (NSDictionary *)ruleEditor:(NSRuleEditor *)editor
-  predicatePartsForCriterion:(id)criterion
-			withDisplayValue:(id)displayValue
-					   inRow:(NSInteger)row
-{
-	id result = nil;
-	
-	result = [criterion predicatePartsWithDisplayValue:displayValue forRuleEditor:editor inRow:row];
-//	HMLog(HMLogLevelDebug, @"predicate\tresult -> %@", result);
-	
-	//	HMLog(HMLogLevelDebug, @"predicate\tcriterion -> %@, value -> %@, row -> %d, result -> %@", criterion, displayValue, row, result);
-	
-	return result;
-}
-- (void)ruleEditorRowsDidChange:(NSNotification *)notification
-{
-	//
 }
 @end

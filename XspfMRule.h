@@ -1,5 +1,5 @@
 //
-//  XspfMRuleEditorRow.h
+//  XspfMRule.h
 //  XspfManager
 //
 //  Created by Hori,Masaki on 09/11/29.
@@ -26,13 +26,24 @@
 
 - (id)displayValue;
 
-- (BOOL)isDateKeyPath:(NSString *)keyPath;
-- (BOOL)isStringKeyPath:(NSString *)keyPath;
-- (BOOL)isRateKeyPath:(NSString *)keyPath;
-- (BOOL)isLabelKeyPath:(NSString *)keyPath;
-+ (NSArray *)leftKeys;
-+ (NSString *)templateKeyForLeftKeyPath:(NSString *)leftKeypath;
-- (NSString *)templateKeyForLeftKeyPath:(NSString *)leftKeypath;
+
++ (BOOL)isDateKeyPath:(NSString *)keyPath;
++ (BOOL)isStringKeyPath:(NSString *)keyPath;
++ (BOOL)isNumberKeyPath:(NSString *)keyPath;
++ (BOOL)isRateKeyPath:(NSString *)keyPath;
++ (BOOL)isLabelKeyPath:(NSString *)keyPath;
+//- (BOOL)isDateKeyPath:(NSString *)keyPath;
+//- (BOOL)isStringKeyPath:(NSString *)keyPath;
+//- (BOOL)isNumberKeyPath:(NSString *)keyPath;
+//- (BOOL)isRateKeyPath:(NSString *)keyPath;
+//- (BOOL)isLabelKeyPath:(NSString *)keyPath;
+//+ (NSArray *)leftKeys;
+
++ (void)registerStringTypeKeyPaths:(NSArray *)keyPaths;
++ (void)registerDateTypeKeyPaths:(NSArray *)keyPaths;
++ (void)registerNumberTypeKeyPaths:(NSArray *)keyPaths;
++ (void)setUseRating:(BOOL)flag;
++ (void)setUseLablel:(BOOL)flag;
 @end
 
 
@@ -44,10 +55,6 @@
 - (id)initWithPlist:(id)plist;
 
 + (NSArray *)compoundRule;
-@end
-@interface XspfMRule (XspfMRuleBuilder)
-+ (NSArray *)ruleEditorRowsFromPredicate:(NSPredicate *)predicate withRowTemplate:(id)rowTemplate;
-- (NSArray *)ruleEditorRowsFromPredicate:(NSPredicate *)predicate withRowTemplate:(id)rowTemplate;
 @end
 
 
@@ -80,6 +87,9 @@ enum XspfMUnitType {
 	XpsfMWeeksUnitType,
 	XspfMMonthsUnitType,
 	XspfMYearsUnitType,
+	
+	// add by masakih 2010-04-19
+	XspfMHoursUnitType = -1,
 };
 
 @interface XspfMFieldRule : XspfMRule

@@ -6,7 +6,7 @@
 //  Copyright 2009 masakih. All rights reserved.
 //
 
-#import "XspfMRuleEditorRow.h"
+#import "XspfMRule.h"
 
 @implementation XspfMRule (XspfMNSExpressionFunctions)
 
@@ -81,6 +81,11 @@
 	NSDateComponents *comp02 = [[[NSDateComponents alloc] init] autorelease];
 	NSUInteger unitFlag = 0;
 	switch(unit) {
+		case XspfMHoursUnitType:
+			unitFlag = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit;
+			[comp01 setHour:-number];
+			[comp02 setHour:-number+1];
+			break;
 		case XspfMDaysUnitType:
 			unitFlag = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
 			[comp01 setDay:-number];
@@ -124,6 +129,10 @@
 	NSDateComponents *comp = [[[NSDateComponents alloc] init] autorelease];
 	NSUInteger unitFlag = 0;
 	switch(unit) {
+		case XspfMHoursUnitType:
+			unitFlag = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit;
+			[comp setHour:-number];
+			break;
 		case XspfMDaysUnitType:
 			unitFlag = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
 			[comp setDay:-number];
@@ -163,6 +172,11 @@
 	NSDateComponents *comp02 = [[[NSDateComponents alloc] init] autorelease];
 	NSUInteger unitFlag = 0;
 	switch(unit) {
+		case XspfMHoursUnitType:
+			unitFlag = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit;
+			[comp01 setHour:-number];
+			[comp02 setHour:-number02];
+			break;
 		case XspfMDaysUnitType:
 			unitFlag = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
 			[comp01 setDay:-number];
@@ -203,7 +217,7 @@
 }
 - (NSArray *)dateRangeFromVariable:(NSString *)date
 {
-	HMLog(HMLogLevelDebug, @"In function argument is %@", date);
+//	HMLog(HMLogLevelDebug, @"In function argument is %@", date);
 	
 	NSCalendar *aCalendar = [NSCalendar currentCalendar];
 	NSDate *now = [NSDate dateWithTimeIntervalSinceNow:0.0];
@@ -211,20 +225,20 @@
 											 fromDate:now];
 	NSDate *startOfToday = [aCalendar dateFromComponents:nowComp];
 	
-	NSDateComponents *comp = [[[NSDateComponents alloc] init] autorelease];
-	[comp setDay:-1];
-	NSDate *startOfYesterday = [aCalendar dateByAddingComponents:comp toDate:startOfToday options:0];
+//	NSDateComponents *comp = [[[NSDateComponents alloc] init] autorelease];
+//	[comp setDay:-1];
+//	NSDate *startOfYesterday = [aCalendar dateByAddingComponents:comp toDate:startOfToday options:0];
 	
-	[comp setDay:0];
-	[comp setWeekday:-[nowComp weekday]+1];
-	NSDate *startOfThisWeek = [aCalendar dateByAddingComponents:comp toDate:startOfToday options:0];
+//	[comp setDay:0];
+//	[comp setWeekday:-[nowComp weekday]+1];
+//	NSDate *startOfThisWeek = [aCalendar dateByAddingComponents:comp toDate:startOfToday options:0];
 	
-	[comp setWeekday:-[nowComp weekday]+1];
-	[comp setWeek:-1];
-	NSDate *startOfLastWeek = [aCalendar dateByAddingComponents:comp toDate:startOfToday options:0];
+//	[comp setWeekday:-[nowComp weekday]+1];
+//	[comp setWeek:-1];
+//	NSDate *startOfLastWeek = [aCalendar dateByAddingComponents:comp toDate:startOfToday options:0];
 	
-	HMLog(HMLogLevelDebug, @"now -> %@\ntoday -> %@\nyesterday -> %@\nthisweek -> %@\nlastweek -> %@",
-		  now, startOfToday, startOfYesterday, startOfThisWeek, startOfLastWeek);
+//	HMLog(HMLogLevelDebug, @"now -> %@\ntoday -> %@\nyesterday -> %@\nthisweek -> %@\nlastweek -> %@",
+//		  now, startOfToday, startOfYesterday, startOfThisWeek, startOfLastWeek);
 	
 	id result = [NSArray arrayWithObjects:now, startOfToday, nil];
 	return result;

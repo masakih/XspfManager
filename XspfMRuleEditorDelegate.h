@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 
+@class XspfMRuleRowTemplate;
 @interface XspfMRuleEditorDelegate : NSObject
 {
 	NSArray *compounds;
@@ -16,7 +17,7 @@
 	
 	IBOutlet NSRuleEditor *ruleEditor;
 	NSArray *rows;
-	NSArray *rowTemplate;
+	XspfMRuleRowTemplate *rowTemplate;
 	NSArray *predicateRows;
 }
 

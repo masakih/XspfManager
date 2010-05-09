@@ -6,7 +6,7 @@
 //  Copyright 2009 masakih. All rights reserved.
 //
 
-#import "XspfMRuleEditorRow.h"
+#import "XspfMRule.h"
 
 @interface XspfMRule (XspfMAccessor)
 - (void)setChildren:(NSArray *)newChildren;
@@ -17,6 +17,7 @@
 @end
 
 @interface XspfMRule (XspfMExpressionBuilder)
++ (id)functionHost;
 @end
 
 @interface XspfMRule (XspfMPrivate)
