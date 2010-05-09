@@ -119,7 +119,6 @@ static id previewPanel = nil;
 	if([keyPath isEqualToString:@"selectionIndex"]) {
 		if(osVersion == 105) {
 			id qlPanel = [self previewPanel];
-//			[qlPanel setURLs:[[controller selectedObjects] mutableArrayValueForKey:@"url"]];
 			[qlPanel setURLs:[[controller selectedObjects] valueForKey:@"url"]];
 		} else {
 			[previewPanel reloadData];
@@ -146,7 +145,6 @@ static id previewPanel = nil;
 	
 	if(osVersion == 105) {
 		[qlPanel setDelegate:self];
-//		[qlPanel setURLs:[[controller selectedObjects] mutableArrayValueForKey:@"url"]];
 		[qlPanel setURLs:[[controller selectedObjects] valueForKey:@"url"]];
 		[qlPanel makeKeyAndOrderFrontWithEffect:2];
 	} else if(osVersion >= 106) {
