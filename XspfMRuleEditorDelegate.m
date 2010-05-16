@@ -59,7 +59,7 @@ static NSString *XspfMREDPredicateRowsKey = @"predicateRows";
 		id c = [rowTemplate criteriaForKeyPath:keyPath];
 		if(c) [newRows addObjectsFromArray:c];
 	}
-		
+	
 	simples = [newRows retain];
 	compounds = [[XspfMRule compoundRule] retain];
 		
@@ -89,7 +89,7 @@ static NSString *XspfMREDPredicateRowsKey = @"predicateRows";
 	XspfMRuleRowsBuilder *builder = [XspfMRuleRowsBuilder builderWithPredicate:predicate];
 	builder.rowTemplate = rowTemplate;
 	[builder build];
-	id new = [builder rows];
+	id new = [NSMutableArray arrayWithObject:[builder row]];
 	
 	[self setPredicateRows:new];
 }
