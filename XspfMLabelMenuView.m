@@ -76,7 +76,7 @@ static const CGFloat labelSize = 19;
 	CGFloat height = 0;
 	
 	NSSize size = [[title stringValue] sizeWithAttributes:[self titleAttribute]];
-	HMLog(HMLogLevelDebug, @"title size is %@", NSStringFromSize(size));
+//	HMLog(HMLogLevelDebug, @"title size is %@", NSStringFromSize(size));
 	width = MAX(width, size.width + leftMargin);
 	height += size.height;
 	
@@ -205,6 +205,14 @@ static const CGFloat labelSize = 19;
 {
 	return [NSNumber numberWithInteger:_value];
 }
+- (void)setValue:(id)value
+{
+	[self setObjectValue:value];
+}
+- (id)value
+{
+	return [self objectValue];
+}
 - (void)setIntegerValue:(NSInteger)value
 {
 	for(id cell in labelCells) {
@@ -327,7 +335,7 @@ static const CGFloat labelSize = 19;
 			label = NSLocalizedString(@"Gray", @"LabelNameGray");
 			break;
 		default:
-			HMLog(HMLogLevelError, @"Unknown label number (%@).", cellIndex);
+//			HMLog(HMLogLevelError, @"Unknown label number (%@).", cellIndex);
 			return;
 	}
 	
