@@ -26,6 +26,7 @@
  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+
 #import "XspfMRule.h"
 #import "XspfMRule_private.h"
 
@@ -193,6 +194,8 @@ static NSArray *leftKeys = nil;
 static NSArray *stringKeys = nil;
 static NSArray *dateKeys = nil;
 static NSArray *numberKeys = nil;
+static NSString *rateingKeyPath = @"rate";
+static NSString *labelKeyPath = @"label";
 static BOOL useRating = NO;
 static BOOL useLabel = NO;
 
@@ -239,6 +242,12 @@ static BOOL useLabel = NO;
 	}
 	useLabel = flag;
 }
++ (void)setLabelKeyPath:(NSString *)keyPath
+{
+	[labelKeyPath release];
+	labelKeyPath = [keyPath copy];
+}
+
 + (NSArray *)leftKeys
 {
 	if(!leftKeys) {
@@ -248,10 +257,10 @@ static BOOL useLabel = NO;
 		[temp addObjectsFromArray:dateKeys];
 		[temp addObjectsFromArray:numberKeys];
 		if(useRating) {
-			[temp addObject:@"rating"];
+			[temp addObject:rateingKeyPath];
 		}
 		if(useLabel) {
-			[temp addObject:@"label"];
+			[temp addObject:labelKeyPath];
 		}
 		leftKeys = [[NSArray arrayWithArray:temp] retain];
 	}
@@ -295,19 +304,19 @@ static inline BOOL isNumberKeyPath(NSString *keyPath)
 }
 + (BOOL)isRateKeyPath:(NSString *)keyPath
 {
-	return [keyPath isEqualToString:@"rating"];
+	return [keyPath isEqualToString:rateingKeyPath];
 }
 - (BOOL)isRateKeyPath:(NSString *)keyPath
 {
-	return [keyPath isEqualToString:@"rating"];
+	return [keyPath isEqualToString:rateingKeyPath];
 }
 + (BOOL)isLabelKeyPath:(NSString *)keyPath
 {
-	return [keyPath isEqualToString:@"label"];
+	return [keyPath isEqualToString:labelKeyPath];
 }
 - (BOOL)isLabelKeyPath:(NSString *)keyPath
 {
-	return [keyPath isEqualToString:@"label"];
+	return [keyPath isEqualToString:labelKeyPath];
 }
 
 #pragma mark == NSCopying Protocol ==
@@ -421,7 +430,7 @@ static NSString *const XspfMRuleValueKey = @"XspfMRuleValueKey";
 	id any = [self ruleWithValue:@"Any"
 						children:[NSArray arrayWithObject:comp]
 				  predicateHints:[NSDictionary dictionaryWithObject:anyExp forKey:NSRuleEditorPredicateCompoundType]];
-	
+		
 	return [NSArray arrayWithObjects:all, any, nil];
 }
 
