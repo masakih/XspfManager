@@ -94,5 +94,7 @@ typedef enum {
 //
 - (IBAction)newPredicate:(id)sender;
 
+- (IBAction)showHideDetail:(id)sender;
+
 @end
 

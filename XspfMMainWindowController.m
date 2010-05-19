@@ -82,7 +82,7 @@
 }
 - (void)windowDidLoad
 {
-	[[self window] setContentBorderThickness:32 forEdge:NSMinYEdge];
+	[[self window] setContentBorderThickness:27 forEdge:NSMinYEdge];
 	
 	[splitView setDelegate:self];
 	[self setupXspfLists];
@@ -270,6 +270,29 @@
 	[libraryViewController newPredicate:sender];
 }
 
+- (IBAction)showHideDetail:(id)sender
+{
+	BOOL flag = YES;
+	
+	NSPoint origin = [detailView frame].origin;
+	NSSize size = NSZeroSize;
+	CGFloat windowRightEdge = [[detailView window] frame].size.width;
+	flag = (origin.x == windowRightEdge);
+	
+	CGFloat detailWidth = [detailView frame].size.width;
+	if(flag){ // show
+		origin.x -= detailWidth;
+		size = [splitView frame].size;
+		size.width -= detailWidth;
+	} else { // hide
+		origin.x += detailWidth;
+		size = [splitView frame].size;
+		size.width += detailWidth;
+	}
+	[[detailView animator] setFrameOrigin:origin];
+	[[splitView animator] setFrameSize:size];
+}
+
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
 	BOOL enabled = YES;
@@ -365,7 +388,10 @@
 	[[listViewController view] removeFromSuperview];
 	listViewController = targetContorller;
 	[listView addSubview:[listViewController view]];
-	[[listViewController view] setFrame:[listView bounds]];
+	NSRect rect = [listView bounds];
+	rect.size.height += 1;
+	rect.origin.y -= 1;
+	[[listViewController view] setFrame:rect];
 //	[[self window] recalculateKeyViewLoop];
 	[self recalculateKeyViewLoop];
 }
@@ -381,6 +407,8 @@
 	NSRect rect = [libraryView bounds];
 	rect.size.width += 2;
 	rect.origin.x -= 1;
+	rect.size.height += 1;
+	rect.origin.y -= 1;
 	[[libraryViewController view] setFrame:rect];
 	[libraryViewController recalculateKeyViewLoop];
 	[[libraryViewController dragControl] setDelegate:self];
@@ -465,15 +493,9 @@
 #pragma mark#### Test ####
 - (IBAction)test01:(id)sender
 {
-	XspfMXspfObject *obj = [controller valueForKeyPath:@"selection.self"];
-	srandom([[NSDate date] timeIntervalSince1970]);
-	obj.label = [NSNumber numberWithInteger:random() % 8];
-	HMLog(HMLogLevelDebug, @"HMLogLevelDebug -> %@", obj);
-	
-	NSButtonCell *cell = [sender cell];
-	HMLog(HMLogLevelDebug, @"boardered -> %@\nbezeled -> %@\ngradientType -> %d\n bezelStyle -> %d",
-		  [cell isBordered] ? @"YES" : @"NO", [cell isBezeled] ? @"YES" : @"NO",
-		  [cell gradientType], [cell bezelStyle]);
+	NSPoint origin = [detailView frame].origin;
+	origin.x = [[detailView window] frame].size.width;
+	[detailView setFrameOrigin:origin];
 }
 - (IBAction)test02:(id)sender
 {
@@ -485,15 +507,15 @@
 }
 - (IBAction)test03:(id)sender
 {
-	id keyView = [[self window] firstResponder];
-	NSView *firstKeyView = keyView;
-	while(keyView) {
-		HMLog(HMLogLevelDebug, @"Keyview -> %@", keyView);
-		keyView = [keyView nextKeyView];
-		if(keyView == firstKeyView) break;
-	}
+	id anime = [detailView animator];
+	NSPoint origin = [detailView frame].origin;
+	origin.x = [[detailView window] frame].size.width;
+	[anime setFrameOrigin:origin];
 	
-	HMLog(HMLogLevelDebug, @"Valid next view -> %@", [firstKeyView nextValidKeyView]);
+	anime = [splitView animator];
+	NSSize size = [splitView frame].size;
+	size.width += [detailView frame].size.width;
+	[anime setFrameSize:size];
 }
 @end
 
