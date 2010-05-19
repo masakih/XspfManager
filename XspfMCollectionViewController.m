@@ -64,6 +64,10 @@ static NSString *const XspfMCollectionItemSizeKey = @"Collection Item Size";
 {
 	if(collectionViewItem == newItem) return;
 	
+	
+	// editing text field resign from first responder.
+	[[[self view] window] makeFirstResponder:self];
+	
 	[collectionView setItemPrototype:newItem];
 	NSSize viewSize = [[newItem view] frame].size;
 	[collectionView setMinItemSize:viewSize];

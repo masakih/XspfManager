@@ -2,20 +2,20 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1050</int>
-		<string key="IBDocument.SystemVersion">10C540</string>
-		<string key="IBDocument.InterfaceBuilderVersion">740</string>
-		<string key="IBDocument.AppKitVersion">1038.25</string>
-		<string key="IBDocument.HIToolboxVersion">458.00</string>
+		<string key="IBDocument.SystemVersion">10D573</string>
+		<string key="IBDocument.InterfaceBuilderVersion">762</string>
+		<string key="IBDocument.AppKitVersion">1038.29</string>
+		<string key="IBDocument.HIToolboxVersion">460.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">740</string>
+			<string key="NS.object.0">762</string>
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="720"/>
-			<integer value="733"/>
 			<integer value="705"/>
 			<integer value="421"/>
+			<integer value="720"/>
+			<integer value="733"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -163,7 +163,7 @@
 										<object class="NSTextFieldCell" key="NSCell" id="457258457">
 											<int key="NSCellFlags">67239424</int>
 											<int key="NSCellFlags2">272629760</int>
-											<string key="NSContents">Multiline Label</string>
+											<string key="NSContents">Label</string>
 											<object class="NSFont" key="NSSupport" id="1004600684">
 												<string key="NSName">LucidaGrande</string>
 												<double key="NSSize">13</double>
@@ -258,7 +258,7 @@
 										<int key="NSTag">1001</int>
 										<bool key="NSEnabled">YES</bool>
 										<object class="NSTextFieldCell" key="NSCell" id="1014411703">
-											<int key="NSCellFlags">67239424</int>
+											<int key="NSCellFlags">338296320</int>
 											<int key="NSCellFlags2">272629760</int>
 											<string key="NSContents">Multiline Label Multiline Label Multiline Label</string>
 											<reference key="NSSupport" ref="1004600684"/>
@@ -346,7 +346,7 @@
 										<object class="NSTextFieldCell" key="NSCell" id="100211019">
 											<int key="NSCellFlags">67239424</int>
 											<int key="NSCellFlags2">272629760</int>
-											<string key="NSContents">Multiline Label</string>
+											<string key="NSContents">Label</string>
 											<reference key="NSSupport" ref="1004600684"/>
 											<reference key="NSControlView" ref="10229778"/>
 											<reference key="NSBackgroundColor" ref="944783703"/>
@@ -427,7 +427,7 @@
 										<int key="NSTag">1001</int>
 										<bool key="NSEnabled">YES</bool>
 										<object class="NSTextFieldCell" key="NSCell" id="281562946">
-											<int key="NSCellFlags">67239424</int>
+											<int key="NSCellFlags">337772032</int>
 											<int key="NSCellFlags2">272760832</int>
 											<string key="NSContents">Multiline Label Multiline Label Multiline Label Mu</string>
 											<reference key="NSSupport" ref="26"/>
@@ -1631,7 +1631,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>NSLevelIndicator</string>
 							<string>NSTextField</string>
-							<string>NSImageView</string>
+							<string>XspfMImageView</string>
 							<string>NSTextField</string>
 							<string>NSCollectionViewItem</string>
 						</object>
@@ -1754,6 +1754,7 @@
 							<string>newPredicate:</string>
 							<string>openXspf:</string>
 							<string>remove:</string>
+							<string>showHideDetail:</string>
 							<string>sortByCreationDate:</string>
 							<string>sortByLabel:</string>
 							<string>sortByLastPlayDate:</string>
@@ -1766,7 +1767,6 @@
 							<string>switchListView:</string>
 							<string>switchRegularIconView:</string>
 							<string>switchSmallIconView:</string>
-							<string>togglePreviewPanel:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -2545,6 +2545,7 @@
 			</object>
 		</object>
 		<int key="IBDocument.localizationMode">0</int>
+		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencies">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.macosx</string>
 			<integer value="1050" key="NS.object.0"/>
@@ -2560,5 +2561,18 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<string key="IBDocument.LastKnownRelativeProjectPath">../XspfManager.xcodeproj</string>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
+		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<bool key="EncodedWithXMLCoder">YES</bool>
+			<object class="NSArray" key="dict.sortedKeys">
+				<bool key="EncodedWithXMLCoder">YES</bool>
+				<string>NSMenuCheckmark</string>
+				<string>NSMenuMixedState</string>
+			</object>
+			<object class="NSMutableArray" key="dict.values">
+				<bool key="EncodedWithXMLCoder">YES</bool>
+				<string>{9, 8}</string>
+				<string>{7, 2}</string>
+			</object>
+		</object>
 	</data>
 </archive>
