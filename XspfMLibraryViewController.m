@@ -224,7 +224,7 @@ enum {
 	
 	return YES;
 }
-		
+
 - (void)didEndEditPredicate:(id)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
 {
 	if(returnCode == NSCancelButton) return;

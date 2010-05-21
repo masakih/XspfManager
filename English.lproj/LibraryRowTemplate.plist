@@ -67,6 +67,25 @@
 					</dict>
 					<dict>
 						<key>NSRuleEditorPredicateOperatorType</key>
+						<integer>6</integer>
+						<key>NSRuleEditorPredicateOptions</key>
+						<integer>3</integer>
+						<key>value</key>
+						<string>not contains</string>
+						<key>criteria</key>
+						<array>
+							<dict>
+								<key>XspfMPredicateRightExpression</key>
+								<string>notContainsRegularExpression:</string>
+								<key>XspfMRightExpressionArg01</key>
+								<string>displayValues</string>
+								<key>value</key>
+								<string>textField</string>
+							</dict>
+						</array>
+					</dict>
+					<dict>
+						<key>NSRuleEditorPredicateOperatorType</key>
 						<integer>8</integer>
 						<key>NSRuleEditorPredicateOptions</key>
 						<integer>3</integer>

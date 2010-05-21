@@ -47,7 +47,7 @@ static NSString *XspfMREDPredicateRowsKey = @"predicateRows";
 		[XspfMRule setUseLablel:YES];
 	}
 }
-	
+
 - (void)awakeFromNib
 {
 	NSBundle *mainBundle = [NSBundle mainBundle];
@@ -62,7 +62,7 @@ static NSString *XspfMREDPredicateRowsKey = @"predicateRows";
 	
 	simples = [newRows retain];
 	compounds = [[XspfMRule compoundRule] retain];
-		
+	
 	predicateRows = [[NSMutableArray alloc] init];
 	[ruleEditor bind:@"rows" toObject:self withKeyPath:XspfMREDPredicateRowsKey options:nil];
 }
