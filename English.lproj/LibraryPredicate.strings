@@ -2,10 +2,25 @@
 "%[Any]@ of the following are true" = "%[Any]@ of the following are true";
 
 "%[title]@ %[contains]@ %@" = "%[Title]@ %[contains]@ %@";
+"%[title]@ %[not contains]@ %@" = "%[Title]@ %[not contains]@ %@";
 "%[title]@ %[begins with]@ %@" = "%[Title]@ %[begins with]@ %@";
 "%[title]@ %[ends with]@ %@" = "%[Title]@ %[ends with]@ %@";
 "%[title]@ %[is]@ %@" = "%[Title]@ %[is]@ %@";
 "%[title]@ %[is not]@ %@" = "%[Title]@ %[is not]@ %@";
+
+"%[information.voiceActorsList]@ %[contains]@ %@" = "%[Voice Actors]@ %[contains]@ %@";
+"%[information.voiceActorsList]@ %[not contains]@ %@" = "%[Voice Actors]@ %[not contains]@ %@";
+"%[information.voiceActorsList]@ %[begins with]@ %@" = "%[Voice Actors]@ %[begins with]@ %@";
+"%[information.voiceActorsList]@ %[ends with]@ %@" = "%[Voice Actors]@ %[ends with]@ %@";
+"%[information.voiceActorsList]@ %[is]@ %@" = "%[Voice Actors]@ %[is]@ %@";
+"%[information.voiceActorsList]@ %[is not]@ %@" = "%[Voice Actors]@ %[is not]@ %@";
+
+"%[information.productsList]@ %[contains]@ %@" = "%[Products]@ %[contains]@ %@";
+"%[information.productsList]@ %[not contains]@ %@" = "%[Products]@ %[not contains]@ %@";
+"%[information.productsList]@ %[begins with]@ %@" = "%[Products]@ %[begins with]@ %@";
+"%[information.productsList]@ %[ends with]@ %@" = "%[Products]@ %[ends with]@ %@";
+"%[information.productsList]@ %[is]@ %@" = "%[Products]@ %[is]@ %@";
+"%[information.productsList]@ %[is not]@ %@" = "%[Products]@ %[is not]@ %@";
 
 "%[rating]@ %[is]@ %@" = "%[Rating]@ %[is]@ %@";
 "%[rating]@ %[is greater than or equal to]@ %@" = "%[Rating]@ %[is greater than or equal to]@ %@";
@@ -15,10 +30,6 @@
 
 "%[label]@ %[is]@ %@" = "%[Label]@ %[is]@ %@";
 "%[label]@ %[is not]@ %@" = "%[Label]@ %[is not]@ %@";
-
-"%[information.voiceActorsList]@ %[contains]@ %@" = "%[information.voiceActorsList]@ %[contains]@ %@";
-
-"%[information.productsList]@ %[contains]@ %@" = "%[information.productsList]@ %[contains]@ %@";
 
 "%[lastPlayDate]@ %[is the date]@ %@" = "%[Last Play Date]@ %[is the date]@ %@";
 "%[lastPlayDate]@ %[is after the date]@ %@" = "%[Last Play Date]@ %[is after the date]@ %@";
