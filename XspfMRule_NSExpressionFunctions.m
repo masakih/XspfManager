@@ -34,7 +34,7 @@
 
 - (NSString *)notContainsRegularExpression:(NSArray *)displayValues
 {
-	NSString *reg = [NSString stringWithFormat:@"'(?:(?!.*%@).)*'", [[displayValues objectAtIndex:2] stringValue]];
+	NSString *reg = [NSString stringWithFormat:@"(?:(?!.*%@).)*", [[displayValues objectAtIndex:2] stringValue]];
 	id result = [NSExpression expressionForConstantValue:reg];
 	return result;
 }

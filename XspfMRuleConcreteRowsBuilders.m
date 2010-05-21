@@ -301,8 +301,8 @@
 	id value03 = [self field];
 	
 	if([predicate predicateOperatorType] == NSMatchesPredicateOperatorType) {
-		NSString *notContainREGPrefix = @"'(?:(?!.*";
-		NSString *notContainREGSuffix = @").)*'";
+		NSString *notContainREGPrefix = @"(?:(?!.*";
+		NSString *notContainREGSuffix = @").)*";
 		if([rightConstant isKindOfClass:[NSString class]] && [rightConstant hasPrefix:notContainREGPrefix] && [rightConstant hasSuffix:notContainREGSuffix]) {
 			NSScanner *scanner = [NSScanner scannerWithString:rightConstant];
 			[scanner setScanLocation:[notContainREGPrefix length]];
