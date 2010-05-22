@@ -63,10 +63,13 @@
 
 #import "XspfMXspfListObject.h"
 
+#import "XspfMRuleEditorDelegate.h"
+
 
 @interface XspfMLibraryViewController (HMPrivate)
 - (NSArray *)sortDescriptors;
 - (void)setupXspfList;
+- (void)setupRules;
 @end
 
 enum {
@@ -82,6 +85,7 @@ enum {
 	[super initWithNibName:@"LibraryView" bundle:nil];
 	
 	[self setupXspfList];
+	[self setupRules];
 	
 	return self;
 }
@@ -131,6 +135,14 @@ enum {
 	[self addSmartLibrary:@"Favorites"
 				predicate:predicate
 					order:kFavoritesOrder];
+}
+
+- (void)setupRules
+{
+	[XspfMRuleEditorDelegate registerStringTypeKeyPaths:[NSArray arrayWithObjects:@"title", @"information.voiceActorsList", @"information.productsList", nil]];
+	[XspfMRuleEditorDelegate registerDateTypeKeyPaths:[NSArray arrayWithObjects:@"lastPlayDate", @"modificationDate", @"creationDate", nil]];
+	[XspfMRuleEditorDelegate setUseRating:YES];
+	[XspfMRuleEditorDelegate setUseLablel:YES];
 }
 
 - (BOOL)mouseInTableView

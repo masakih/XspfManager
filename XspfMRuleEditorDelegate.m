@@ -69,16 +69,29 @@
 
 static NSString *XspfMREDPredicateRowsKey = @"predicateRows";
 
-+ (void)initialize
++ (void)registerStringTypeKeyPaths:(NSArray *)keyPaths
 {
-	static BOOL isFirst = YES;
-	if(isFirst) {
-		isFirst = NO;
-		[XspfMRule registerStringTypeKeyPaths:[NSArray arrayWithObjects:@"title", @"information.voiceActorsList", @"information.productsList", nil]];
-		[XspfMRule registerDateTypeKeyPaths:[NSArray arrayWithObjects:@"lastPlayDate", @"modificationDate", @"creationDate", nil]];
-		[XspfMRule setUseRating:YES];
-		[XspfMRule setUseLablel:YES];
-	}
+	[XspfMRule registerStringTypeKeyPaths:keyPaths];
+}
++ (void)registerDateTypeKeyPaths:(NSArray *)keyPaths
+{
+	[XspfMRule registerDateTypeKeyPaths:keyPaths];
+}
++ (void)registerNumberTypeKeyPaths:(NSArray *)keyPaths
+{
+	[XspfMRule registerNumberTypeKeyPaths:keyPaths];
+}
++ (void)setUseRating:(BOOL)flag
+{
+	[XspfMRule setUseRating:flag];
+}
++ (void)setUseLablel:(BOOL)flag
+{
+	[XspfMRule setUseLablel:flag];
+}
++ (void)setLabelKeyPath:(NSString *)keyPath
+{
+	[XspfMRule setLabelKeyPath:keyPath];
 }
 
 - (void)awakeFromNib
@@ -86,14 +99,6 @@ static NSString *XspfMREDPredicateRowsKey = @"predicateRows";
 	NSBundle *mainBundle = [NSBundle mainBundle];
 	NSString *templatePath = [mainBundle pathForResource:@"LibraryRowTemplate" ofType:@"plist"];
 	rowTemplate = [[XspfMRuleRowTemplate rowTemplateWithPath:templatePath] retain];
-	
-	NSMutableArray *newRows = [NSMutableArray array];
-	for(id keyPath in [XspfMRule leftKeys]) {
-		id c = [rowTemplate criteriaForKeyPath:keyPath];
-		if(c) [newRows addObjectsFromArray:c];
-	}
-	
-	simples = [newRows retain];
 	compounds = [[XspfMRule compoundRule] retain];
 	
 	predicateRows = [[NSMutableArray alloc] init];
@@ -110,6 +115,20 @@ static NSString *XspfMREDPredicateRowsKey = @"predicateRows";
 	[super dealloc];
 }
 
+- (NSArray *)simples
+{
+	if(simples) return simples;
+	
+	NSMutableArray *newRows = [NSMutableArray array];
+	for(id keyPath in [XspfMRule leftKeys]) {
+		id c = [rowTemplate criteriaForKeyPath:keyPath];
+		if(c) [newRows addObjectsFromArray:c];
+	}
+	
+	simples = [[NSArray alloc] initWithArray:newRows];
+	
+	return simples;
+}
 - (void)setPredicateRows:(id)p
 {
 	if([predicateRows isEqual:p]) return;
@@ -139,7 +158,7 @@ numberOfChildrenForCriterion:(id)criterion
 		if(rowType == NSRuleEditorRowTypeCompound) {
 			result = [compounds count];
 		} else {
-			result = [simples count];
+			result = [[self simples] count];
 		}
 	} else {
 		result = [criterion numberOfChildren];
@@ -159,7 +178,7 @@ numberOfChildrenForCriterion:(id)criterion
 		if(rowType == NSRuleEditorRowTypeCompound) {
 			result = [compounds objectAtIndex:index];
 		} else {
-			result = [simples objectAtIndex:index];
+			result = [[self simples] objectAtIndex:index];
 		}
 	} else {
 		result = [criterion childAtIndex:index];

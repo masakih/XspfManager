@@ -74,5 +74,10 @@
 	XspfMRuleRowTemplate *rowTemplate;
 	NSArray *predicateRows;
 }
-
++ (void)registerStringTypeKeyPaths:(NSArray *)keyPaths;
++ (void)registerDateTypeKeyPaths:(NSArray *)keyPaths;
++ (void)registerNumberTypeKeyPaths:(NSArray *)keyPaths;
++ (void)setUseRating:(BOOL)flag;
++ (void)setUseLablel:(BOOL)flag;
++ (void)setLabelKeyPath:(NSString *)keyPath;
 @end
