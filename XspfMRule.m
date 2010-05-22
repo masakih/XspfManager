@@ -267,6 +267,11 @@ static BOOL useLabel = NO;
 	}
 	useRating = flag;
 }
++ (void)setRatingKeyPath:(NSString *)keyPath
+{
+	[rateingKeyPath release];
+	rateingKeyPath = [keyPath copy];
+}
 + (void)setUseLablel:(BOOL)flag
 {
 	if(flag && useLabel || !flag && !useLabel) {

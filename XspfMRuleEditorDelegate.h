@@ -78,6 +78,7 @@
 + (void)registerDateTypeKeyPaths:(NSArray *)keyPaths;
 + (void)registerNumberTypeKeyPaths:(NSArray *)keyPaths;
 + (void)setUseRating:(BOOL)flag;
++ (void)setRatingKeyPath:(NSString *)keyPath;	// default key is @"rating".
 + (void)setUseLablel:(BOOL)flag;
-+ (void)setLabelKeyPath:(NSString *)keyPath;
++ (void)setLabelKeyPath:(NSString *)keyPath;	// default key is @"label".
 @end

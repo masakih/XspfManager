@@ -85,6 +85,10 @@ static NSString *XspfMREDPredicateRowsKey = @"predicateRows";
 {
 	[XspfMRule setUseRating:flag];
 }
++ (void)setRatingKeyPath:(NSString *)keyPath
+{
+	[XspfMRule setRatingKeyPath:keyPath];
+}
 + (void)setUseLablel:(BOOL)flag
 {
 	[XspfMRule setUseLablel:flag];
