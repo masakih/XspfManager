@@ -81,4 +81,8 @@
 + (void)setRatingKeyPath:(NSString *)keyPath;	// default key is @"rating".
 + (void)setUseLablel:(BOOL)flag;
 + (void)setLabelKeyPath:(NSString *)keyPath;	// default key is @"label".
+
+
+- (void)setPredicate:(NSPredicate *)predicate;
+
 @end
