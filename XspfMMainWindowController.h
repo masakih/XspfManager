@@ -103,6 +103,8 @@ typedef enum {
 	IBOutlet NSArrayController *listController;
 	
 	IBOutlet NSSearchField *searchField;
+	
+	IBOutlet NSButton *detailViewButton;
 }
 
 - (IBAction)openXspf:(id)sender;

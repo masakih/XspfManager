@@ -449,7 +449,7 @@
 						<object class="NSCustomView" id="750366851">
 							<reference key="NSNextResponder" ref="72950107"/>
 							<int key="NSvFlags">289</int>
-							<string key="NSFrame">{{604, 3}, {162, 21}}</string>
+							<string key="NSFrame">{{614, 3}, {162, 21}}</string>
 							<reference key="NSSuperview" ref="72950107"/>
 							<int key="NSViewLayerContentsRedrawPolicy">2</int>
 							<string key="NSClassName">NSView</string>
@@ -494,7 +494,7 @@
 						<object class="NSButton" id="158085433">
 							<reference key="NSNextResponder" ref="72950107"/>
 							<int key="NSvFlags">289</int>
-							<string key="NSFrame">{{774, 4}, {36, 18}}</string>
+							<string key="NSFrame">{{784, 4}, {26, 18}}</string>
 							<reference key="NSSuperview" ref="72950107"/>
 							<int key="NSViewLayerContentsRedrawPolicy">2</int>
 							<bool key="NSEnabled">YES</bool>
@@ -556,7 +556,7 @@
 									<string>NSFilenamesPboardType</string>
 								</object>
 							</object>
-							<string key="NSFrame">{{64, 3}, {532, 20}}</string>
+							<string key="NSFrame">{{64, 3}, {542, 20}}</string>
 							<reference key="NSSuperview" ref="72950107"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSPathCell" key="NSCell" id="988323527">
@@ -1034,6 +1034,14 @@
 					</object>
 					<int key="connectionID">892</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">detailViewButton</string>
+						<reference key="source" ref="771522425"/>
+						<reference key="destination" ref="158085433"/>
+					</object>
+					<int key="connectionID">893</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -1482,7 +1490,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">892</int>
+			<int key="maxID">893</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1577,6 +1585,7 @@
 							<string>appDelegate</string>
 							<string>controller</string>
 							<string>detailView</string>
+							<string>detailViewButton</string>
 							<string>libraryView</string>
 							<string>listController</string>
 							<string>listView</string>
@@ -1593,6 +1602,7 @@
 							<string>id</string>
 							<string>NSArrayController</string>
 							<string>NSView</string>
+							<string>NSButton</string>
 							<string>NSView</string>
 							<string>NSArrayController</string>
 							<string>NSView</string>

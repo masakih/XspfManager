@@ -84,6 +84,7 @@
 - (void)removeSelectedItem;
 
 - (BOOL)isOpenDetailView;
+- (BOOL)validateControl:(id)anItem;
 @end
 
 
@@ -125,16 +126,15 @@
 	
 	XspfMPreferences *pref = [XspfMPreferences sharedPreference];
 	if(!pref.isOpenDetailView) {
-		NSLog(@"Close Detail View");
 		[self showHideDetail:self];
 		if(pref.splitViewLeftWidth != 0) {
 			[splitView setPosition:pref.splitViewLeftWidth ofDividerAtIndex:0];
 		}
-	} else {
-		NSLog(@"Still Open Detail View");
 	}
 	
 	[self setCurrentListViewType:[[NSUserDefaults standardUserDefaults] integerForKey:@"viewType"]];
+	
+	[self validateControl:detailViewButton];
 	
 	
 	[listController bind:NSManagedObjectContextBinding
@@ -147,10 +147,8 @@
 				withKeyPath:@"managedObjectContext"
 					options:nil];
 	
-//	[self showWindow:nil];
 	[self recalculateKeyViewLoop];
-//	[self showWindow:nil];
-	[[self window] display];
+	
 	[self performSelector:@selector(showWindow:) withObject:self afterDelay:0.1];
 }
 #pragma mark#### KVC ####
@@ -347,6 +345,8 @@
 	}
 	[[detailView animator] setFrameOrigin:origin];
 	[[splitView animator] setFrameSize:size];
+	
+	[self validateControl:detailViewButton];
 }
 
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem
@@ -384,7 +384,17 @@
 	
 	return enabled;
 }
-
+- (BOOL)validateControl:(id)anItem
+{
+	if([detailViewButton isEqual:anItem]) {
+		if([self isOpenDetailView]) {
+			[detailViewButton setImage:[NSImage imageNamed:@"NSRightFacingTriangleTemplate"]];
+		} else {
+			[detailViewButton setImage:[NSImage imageNamed:@"NSLeftFacingTriangleTemplate"]];
+		}
+	}
+	return YES;
+}
 #pragma mark#### Other methods ####
 - (void)removeSelectedItem
 {
