@@ -71,7 +71,8 @@
 #import "XspfMCoverFlowViewController.h"
 
 
-#import "XspfMDragControl.h"
+//#import "XspfMDragControl.h"
+#import "XspfMPreferences.h"
 
 
 @interface XspfMMainWindowController(HMPrivate)
@@ -83,6 +84,8 @@
 - (void)recalculateKeyViewLoop;
 
 - (void)removeSelectedItem;
+
+- (BOOL)isOpenDetailView;
 @end
 
 
@@ -122,6 +125,17 @@
 	[self setupDetailView];
 	[self setupAccessorylView];
 	
+	XspfMPreferences *pref = [XspfMPreferences sharedPreference];
+	if(!pref.isOpenDetailView) {
+		NSLog(@"Close Detail View");
+		[self showHideDetail:self];
+		if(pref.splitViewLeftWidth != 0) {
+			[splitView setPosition:pref.splitViewLeftWidth ofDividerAtIndex:0];
+		}
+	} else {
+		NSLog(@"Still Open Detail View");
+	}
+	
 	[self setCurrentListViewType:[[NSUserDefaults standardUserDefaults] integerForKey:@"viewType"]];
 	
 	
@@ -134,9 +148,12 @@
 				   toObject:appDelegate
 				withKeyPath:@"managedObjectContext"
 					options:nil];
-		
-	[self showWindow:nil];
+	
+//	[self showWindow:nil];
 	[self recalculateKeyViewLoop];
+//	[self showWindow:nil];
+	[[self window] display];
+	[self performSelector:@selector(showWindow:) withObject:self afterDelay:0.1];
 }
 #pragma mark#### KVC ####
 
@@ -303,24 +320,32 @@
 	[libraryViewController newPredicate:sender];
 }
 
+- (BOOL)isOpenDetailView
+{
+	NSPoint origin = [detailView frame].origin;
+	CGFloat windowRightEdge = [[detailView window] frame].size.width;
+	return (origin.x == windowRightEdge);
+}
 - (IBAction)showHideDetail:(id)sender
 {
-	BOOL flag = YES;
+	XspfMPreferences *pref = [XspfMPreferences sharedPreference];
 	
 	NSPoint origin = [detailView frame].origin;
 	NSSize size = NSZeroSize;
-	CGFloat windowRightEdge = [[detailView window] frame].size.width;
-	flag = (origin.x == windowRightEdge);
 	
 	CGFloat detailWidth = [detailView frame].size.width;
-	if(flag){ // show
+	if([self isOpenDetailView]){ // show
 		origin.x -= detailWidth;
 		size = [splitView frame].size;
 		size.width -= detailWidth;
+		
+		pref.openDetailView = YES;
 	} else { // hide
 		origin.x += detailWidth;
 		size = [splitView frame].size;
 		size.width += detailWidth;
+		
+		pref.openDetailView = NO;
 	}
 	[[detailView animator] setFrameOrigin:origin];
 	[[splitView animator] setFrameSize:size];
@@ -474,6 +499,12 @@
 
 - (NSUndoManager *)windowWillReturnUndoManager:(NSWindow *)window {
     return [[appDelegate managedObjectContext] undoManager];
+}
+
+- (void)windowWillClose:(NSNotification *)notification
+{
+	XspfMPreferences *pref = [XspfMPreferences sharedPreference];
+	pref.splitViewLeftWidth = [libraryView frame].size.width;
 }
 
 #pragma mark#### NSOpenPanel Delegate ####
