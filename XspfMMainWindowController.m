@@ -70,8 +70,6 @@
 #import "XspfMDetailViewController.h"
 #import "XspfMCoverFlowViewController.h"
 
-
-//#import "XspfMDragControl.h"
 #import "XspfMPreferences.h"
 
 
@@ -534,13 +532,6 @@
 	
 	[libraryView setFrame:libFrame];
 	[rightView setFrame:listFrame];
-}
-#pragma mark#### XspfMDragControl Delegate ####
-- (void)dragControl:(XspfMDragControl *)control dragDelta:(NSSize)delta
-{
-	HMLog(HMLogLevelDebug, @"Enter %@", NSStringFromSelector(_cmd));
-	CGFloat libWidth = [libraryView frame].size.width;
-	[splitView setPosition:libWidth + delta.width ofDividerAtIndex:0];
 }
 
 #pragma mark#### XspfManager Notifications ####
