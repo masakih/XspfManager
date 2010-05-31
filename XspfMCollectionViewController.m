@@ -65,6 +65,8 @@
 #import "XspfMCollectionViewItem.h"
 #import "XspfMXspfObject.h"
 
+#import "XspfMPreferences.h"
+
 @interface NSCollectionView(CocoaPrivatemethods)
 - (void)_getRow:(NSUInteger *)fp8 column:(NSUInteger *)fp12 forPoint:(NSPoint)fp16;
 - (NSRect)_frameRectForIndexInGrid:(NSUInteger)fp8 gridSize:(NSSize)fp12;
@@ -89,7 +91,7 @@ static NSString *const XspfMCollectionItemSizeKey = @"Collection Item Size";
 
 - (void)awakeFromNib
 {
-	NSInteger type = [[NSUserDefaults standardUserDefaults] integerForKey:XspfMCollectionItemSizeKey];
+	NSInteger type = [XspfMPreferences sharedPreference].collectionItemSize;
 	[self setCollectionItem:type == 0 ? regularItem : smallItem];
 }
 
@@ -109,7 +111,7 @@ static NSString *const XspfMCollectionItemSizeKey = @"Collection Item Size";
 	collectionViewItem = newItem;
 	
 	
-	[[NSUserDefaults standardUserDefaults] setInteger:collectionViewItem == regularItem ? 0 : 1 forKey:XspfMCollectionItemSizeKey];
+	[XspfMPreferences sharedPreference].collectionItemSize = collectionViewItem == regularItem ? 0 : 1;
 }
 
 - (IBAction)changeLabel:(id)sender

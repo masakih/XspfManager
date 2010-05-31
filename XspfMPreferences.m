@@ -105,6 +105,22 @@ static XspfMPreferences *sharedInstance = nil;
 
 
 #pragma mark#### Properties ####
+- (NSInteger)viewType
+{
+	return [[NSUserDefaults standardUserDefaults] integerForKey:@"viewType"];
+}
+- (void)setViewType:(NSInteger)newValue
+{
+	[[NSUserDefaults standardUserDefaults] setInteger:newValue forKey:@"viewType"];
+}
+- (NSInteger)collectionItemSize
+{
+	return [[NSUserDefaults standardUserDefaults] integerForKey:@"Collection Item Size"];
+}
+- (void)setCollectionItemSize:(NSInteger)newValue
+{
+	[[NSUserDefaults standardUserDefaults] setInteger:newValue forKey:@"Collection Item Size"];
+}
 - (BOOL)isOpenDetailView
 {
 	return [[NSUserDefaults standardUserDefaults] boolForKey:@"isOpenDetailView"];

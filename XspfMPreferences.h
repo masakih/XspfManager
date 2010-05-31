@@ -63,12 +63,11 @@
 
 
 @interface XspfMPreferences : NSObject
-{
-	
-}
 
 + (XspfMPreferences *)sharedPreference;
 
+@property NSInteger viewType;
+@property NSInteger collectionItemSize;
 @property (getter=isOpenDetailView) BOOL openDetailView;
 @property CGFloat splitViewLeftWidth;
 

@@ -132,7 +132,7 @@
 		}
 	}
 	
-	[self setCurrentListViewType:[[NSUserDefaults standardUserDefaults] integerForKey:@"viewType"]];
+	[self setCurrentListViewType:pref.viewType];
 	
 	[self validateControl:detailViewButton];
 	
@@ -161,7 +161,7 @@
 {
 	if(currentListViewType == newType) return;
 	
-	[[NSUserDefaults standardUserDefaults] setInteger:newType forKey:@"viewType"];
+	[XspfMPreferences sharedPreference].viewType = newType;
 	
 	[self changeViewType:newType];
 }
