@@ -467,7 +467,6 @@
 	rect.origin.y -= 1;
 	[[libraryViewController view] setFrame:rect];
 	[libraryViewController recalculateKeyViewLoop];
-	[[libraryViewController dragControl] setDelegate:self];
 }
 - (void)setupDetailView
 {

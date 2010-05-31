@@ -51,7 +51,6 @@
 		F480CEE510AFDAB400AC365B /* NSApplicationIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = F480CEE410AFDAB300AC365B /* NSApplicationIcon.icns */; };
 		F480CF9F10B03A0D00AC365B /* AccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F480CF9D10B03A0D00AC365B /* AccessoryView.xib */; };
 		F481B3F910F08DE200B7EA4F /* XspfMSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = F481B3F810F08DE200B7EA4F /* XspfMSplitView.m */; };
-		F481B42510F09A6E00B7EA4F /* XspfMDragControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F481B42410F09A6E00B7EA4F /* XspfMDragControl.m */; };
 		F481B70A10F0F80700B7EA4F /* XspfMLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F481B70910F0F80700B7EA4F /* XspfMLabelCell.m */; };
 		F481B82E10F1754600B7EA4F /* XspfMLabelMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = F481B82D10F1754600B7EA4F /* XspfMLabelMenuView.m */; };
 		F48B35F3112EDAC500D1DE39 /* NSAppleEventDescriptor-HMExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = F48B35EC112EDAC500D1DE39 /* NSAppleEventDescriptor-HMExtensions.m */; };
@@ -675,7 +674,6 @@
 				F499886B10DDFB3E00AAC6D6 /* XspfMThreadSpleepRequest.m in Sources */,
 				F45AB02310EE3675005BE9C1 /* HMUtilities.m in Sources */,
 				F481B3F910F08DE200B7EA4F /* XspfMSplitView.m in Sources */,
-				F481B42510F09A6E00B7EA4F /* XspfMDragControl.m in Sources */,
 				F481B70A10F0F80700B7EA4F /* XspfMLabelCell.m in Sources */,
 				F481B82E10F1754600B7EA4F /* XspfMLabelMenuView.m in Sources */,
 				F42BF7B710F1C59F00D8F8C1 /* XspfMLabelMenuItem.m in Sources */,

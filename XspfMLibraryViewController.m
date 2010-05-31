@@ -99,10 +99,6 @@ enum {
 	id desc = [[NSSortDescriptor alloc] initWithKey:@"order" ascending:YES];
 	return [NSArray arrayWithObject:[desc autorelease]];
 }
-- (XspfMDragControl *)dragControl
-{
-	return dragControl;
-}
 
 - (void)addSmartLibrary:(NSString *)name predicate:(NSPredicate *)predicate order:(NSInteger)order
 {
