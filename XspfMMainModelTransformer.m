@@ -76,4 +76,20 @@
 	return title;
 }
 
+#pragma mark-
+#pragma mark#### XspfMMainModel 2 to 3 ####
+
++ (NSNumber *)steppingOrder:(NSNumber *)order
+{
+	static NSInteger newOrder = 0;
+	if([order shortValue] != 2) return order;
+	
+	newOrder += 10000;
+	return [NSNumber numberWithInteger:newOrder];
+}
++ (NSPredicate *)predicateFromPredicateData:(NSData *)predicateData
+{
+	return [NSKeyedUnarchiver unarchiveObjectWithData:predicateData];
+}
+
 @end
