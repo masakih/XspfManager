@@ -20,7 +20,8 @@ LocalizeFiles=XspfMLabelMenuView.m \
 			  XspfMMainWindowController.m \
 			  XspfMLibraryViewController.m \
 			  XspfMXspfListObject.m \
-			  XspfMCoverFlowViewController.m
+			  XspfMCoverFlowViewController.m \
+			  XspfManager.m
 
 all:
 	@echo do  nothig.
