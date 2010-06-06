@@ -131,11 +131,9 @@
 			[splitView setPosition:pref.splitViewLeftWidth ofDividerAtIndex:0];
 		}
 	}
-	
-	[self setCurrentListViewType:pref.viewType];
-	
 	[self validateControl:detailViewButton];
 	
+	[self setCurrentListViewType:pref.viewType];
 	
 	[listController bind:NSManagedObjectContextBinding
 				toObject:appDelegate
@@ -149,13 +147,11 @@
 	
 	[self recalculateKeyViewLoop];
 	
-//	[self performSelector:@selector(showWindow:) withObject:self afterDelay:0.1];
 	[self performSelector:@selector(delayExcute:) withObject:self afterDelay:0.1];
 }
 - (void)delayExcute:(id)dummy
 {
 	[self showWindow:self];
-	
 	
 	// load時にこれを行うと循環的にRearrangeが実行されてしまう。
 	[listController setAutomaticallyRearrangesObjects:YES];
@@ -328,9 +324,9 @@
 
 - (BOOL)isOpenDetailView
 {
-	NSPoint origin = [detailView frame].origin;
-	CGFloat windowRightEdge = [[detailView window] frame].size.width;
-	return (origin.x == windowRightEdge);
+	NSView *view = [detailViewController view];
+	NSRect visRect = [view visibleRect];
+	return !(NSEqualRects(visRect, NSZeroRect));
 }
 - (IBAction)showHideDetail:(id)sender
 {
@@ -340,7 +336,7 @@
 	NSSize size = NSZeroSize;
 	
 	CGFloat detailWidth = [detailView frame].size.width;
-	if([self isOpenDetailView]){ // show
+	if(![self isOpenDetailView]){ // show
 		origin.x -= detailWidth;
 		size = [splitView frame].size;
 		size.width -= detailWidth;
@@ -356,7 +352,10 @@
 	[[detailView animator] setFrameOrigin:origin];
 	[[splitView animator] setFrameSize:size];
 	
-	[self validateControl:detailViewButton];
+	// アニメーションが終わってから確認する。
+	id context = [NSAnimationContext currentContext];
+	NSTimeInterval duration = [context duration];
+	[self performSelector:@selector(validateControl:) withObject:detailViewButton afterDelay:duration + 0.1];
 }
 
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem
