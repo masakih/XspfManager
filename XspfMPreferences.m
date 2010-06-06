@@ -103,7 +103,6 @@ static XspfMPreferences *sharedInstance = nil;
     return self;
 }
 
-
 #pragma mark#### Properties ####
 - (NSInteger)viewType
 {
@@ -136,5 +135,15 @@ static XspfMPreferences *sharedInstance = nil;
 - (void)setSplitViewLeftWidth:(CGFloat)newValue
 {
 	[[NSUserDefaults standardUserDefaults] setDouble:newValue forKey:@"SplitViewLeftWidth"];
+}
+
+- (NSInteger)libraryLastSelectedIndexSet
+{
+	
+	return [[NSUserDefaults standardUserDefaults] integerForKey:@"libraryLastSelectedIndexSet"];
+}
+- (void)setLibraryLastSelectedIndexSet:(NSInteger)newValue
+{
+	[[NSUserDefaults standardUserDefaults] setInteger:newValue forKey:@"libraryLastSelectedIndexSet"];
 }
 @end

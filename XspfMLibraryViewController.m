@@ -65,6 +65,8 @@
 
 #import "XspfMRuleEditorDelegate.h"
 
+#import "XspfMPreferences.h"
+
 
 @interface XspfMLibraryViewController (HMPrivate)
 - (NSArray *)sortDescriptors;
@@ -99,13 +101,36 @@ static NSString *const XspfMLibItemPbardType = @"XspfMLibItemPbardType";
 	return self;
 }
 
+- (void)dealloc
+{
+	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+	[nc removeObserver:self];
+	
+	[super dealloc];
+}
+
 - (void)awakeFromNib
 {
 	[[self representedObject] setSortDescriptors:[self sortDescriptors]];
 	
 	[tableView registerForDraggedTypes:[NSArray arrayWithObject:XspfMLibItemPbardType]];
 	[tableView setDraggingSourceOperationMask:NSDragOperationMove forLocal:YES];
+	
+	
+	[self performSelector:@selector(delayExcute:) withObject:self afterDelay:0.02];
 }
+- (void)delayExcute:(id)dummy
+{
+	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+	[nc addObserver:self
+		   selector:@selector(windowWillClose:)
+			   name:NSWindowWillCloseNotification
+			 object:[self.view window]];
+	
+	XspfMPreferences *pref = [XspfMPreferences sharedPreference];
+	[xspfListController setSelectionIndex:pref.libraryLastSelectedIndexSet];
+}
+
 - (NSArray *)sortDescriptors
 {
 	id desc = [[NSSortDescriptor alloc] initWithKey:@"order" ascending:YES];
@@ -468,6 +493,15 @@ static NSString *const XspfMLibItemPbardType = @"XspfMLibItemPbardType";
 	}
 	
 	[self packOrder];
+}
+
+#pragma mark#### NSWindow Delegate ####
+- (void)windowWillClose:(NSNotification *)notification
+{
+	if(self.view.window != notification.object) return;
+	
+	XspfMPreferences *pref = [XspfMPreferences sharedPreference];
+	pref.libraryLastSelectedIndexSet = xspfListController.selectionIndex;
 }
 
 #pragma mark-

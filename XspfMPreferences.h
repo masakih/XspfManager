@@ -71,4 +71,7 @@
 @property (getter=isOpenDetailView) BOOL openDetailView;
 @property CGFloat splitViewLeftWidth;
 
+
+@property NSInteger libraryLastSelectedIndexSet;
+
 @end
