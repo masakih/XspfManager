@@ -288,13 +288,24 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 		} else {
 			[menuItem setTitle:@"Enable log"];
 		}
-	} else if(action == @selector(changeLogLevel:)) {
+		return YES;
+	}
+	
+	if(action == @selector(changeLogLevel:)) {
 		NSInteger level = [ud integerForKey:@"HMLogLevel"];
 		if(level == tag) {
 			[menuItem setState:NSOnState];
 		} else {
 			[menuItem setState:NSOffState];
 		}
+		return YES;
+	}
+	
+	if(action == @selector(launchXspfQT:)) {
+		NSString *launchAppMenuLabelFormat = NSLocalizedString(@"Launch %@", @"Launch application menu label.");
+		NSString *launchAppMenuLabel = [NSString stringWithFormat:launchAppMenuLabelFormat, [XspfMPreferences sharedPreference].playerName];
+		[menuItem setTitle:launchAppMenuLabel];
+		return YES;
 	}
 	
 	return YES;
