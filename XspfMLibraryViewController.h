@@ -72,6 +72,8 @@
 	IBOutlet NSTextField *nameField;
 	
 	IBOutlet id ruleEditorDelegate;
+	
+	IBOutlet NSArrayController *xspfListController;
 }
 
 - (IBAction)newPredicate:(id)sender;

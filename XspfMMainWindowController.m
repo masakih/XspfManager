@@ -149,7 +149,16 @@
 	
 	[self recalculateKeyViewLoop];
 	
-	[self performSelector:@selector(showWindow:) withObject:self afterDelay:0.1];
+//	[self performSelector:@selector(showWindow:) withObject:self afterDelay:0.1];
+	[self performSelector:@selector(delayExcute:) withObject:self afterDelay:0.1];
+}
+- (void)delayExcute:(id)dummy
+{
+	[self showWindow:self];
+	
+	
+	// load時にこれを行うと循環的にReaarngeが実行されてしまう。
+	[listController setAutomaticallyRearrangesObjects:YES];
 }
 #pragma mark#### KVC ####
 
@@ -571,15 +580,8 @@
 }
 - (IBAction)test03:(id)sender
 {
-	id anime = [detailView animator];
-	NSPoint origin = [detailView frame].origin;
-	origin.x = [[detailView window] frame].size.width;
-	[anime setFrameOrigin:origin];
-	
-	anime = [splitView animator];
-	NSSize size = [splitView frame].size;
-	size.width += [detailView frame].size.width;
-	[anime setFrameSize:size];
+	[listController setAutomaticallyRearrangesObjects:YES];
+
 }
 @end
 

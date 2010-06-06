@@ -70,6 +70,10 @@
 - (NSArray *)sortDescriptors;
 - (void)setupXspfList;
 - (void)setupRules;
+
+- (NSNumber *)orderForNewItem;
+
+- (void)moveItemOfIndexSet:(NSIndexSet *)indexSet afterIndex:(NSInteger)afterIndex;
 @end
 
 enum {
@@ -77,6 +81,11 @@ enum {
 	kFavoritesOrder,
 	kSmartLibraryOrder,
 };
+
+const NSInteger initialOrder = 10000;
+const NSInteger orderStep = 10000;
+
+static NSString *const XspfMLibItemPbardType = @"XspfMLibItemPbardType";
 
 @implementation XspfMLibraryViewController
 
@@ -93,6 +102,9 @@ enum {
 - (void)awakeFromNib
 {
 	[[self representedObject] setSortDescriptors:[self sortDescriptors]];
+	
+	[tableView registerForDraggedTypes:[NSArray arrayWithObject:XspfMLibItemPbardType]];
+	[tableView setDraggingSourceOperationMask:NSDragOperationMove forLocal:YES];
 }
 - (NSArray *)sortDescriptors
 {
@@ -106,7 +118,7 @@ enum {
 										   inManagedObjectContext:[self managedObjectContext]];
 	[obj setValue:predicate forKey:@"predicate"];
 	[obj setValue:name forKey:@"name"];
-	[obj setValue:[NSNumber numberWithInt:order] forKey:@"order"];
+	[obj setValue:[self orderForNewItem] forKey:@"order"];
 }
 - (void)setupXspfList
 {
@@ -281,7 +293,7 @@ enum {
 	if(![predicate isKindOfClass:[NSCompoundPredicate class]]) {
 		predicate = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObject:predicate]];
 	}
-		
+	
 	NSString *name = [nameField stringValue];
 	if([name length] == 0) {
 		NSBeep();
@@ -313,6 +325,152 @@ enum {
 	
 	[[self managedObjectContext] deleteObject:contextInfo];
 }
+
+#pragma mark#### NSTableView Data Source ####
+- (BOOL)tableView:(NSTableView *)tableView writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard*)pboard
+{
+	if([rowIndexes containsIndex:0] || [rowIndexes containsIndex:1]) return NO;
+	
+	[pboard declareTypes:[NSArray arrayWithObject:XspfMLibItemPbardType] owner:self];
+	
+	return [pboard setData:[NSKeyedArchiver archivedDataWithRootObject:rowIndexes] forType:XspfMLibItemPbardType];
+}
+
+- (NSDragOperation)tableView:(NSTableView*)aTableView validateDrop:(id <NSDraggingInfo>)info proposedRow:(NSInteger)row proposedDropOperation:(NSTableViewDropOperation)dropOperation
+{
+	if(row == 0 || row == 1) return NSDragOperationNone;
+	
+	if(dropOperation == NSTableViewDropOn) {
+		[aTableView setDropRow:row
+				dropOperation:NSTableViewDropAbove];
+	}
+	
+	return NSDragOperationMove;
+}
+
+- (BOOL)tableView:(NSTableView*)aTableView acceptDrop:(id <NSDraggingInfo>)info row:(NSInteger)row dropOperation:(NSTableViewDropOperation)dropOperation
+{
+	NSPasteboard *pboard = [info draggingPasteboard];
+	NSIndexSet *indexSet = [NSKeyedUnarchiver unarchiveObjectWithData:[pboard dataForType:XspfMLibItemPbardType]];
+	
+	NSLog(@"row -> %ld", (long)row);
+//	[self willChangeValueForKey:@"representedObject.arrangedObjects"];
+//	[self willChangeValueForKey:@"representedObject.selectionIndexes"];
+	[self moveItemOfIndexSet:indexSet afterIndex:row - 1];
+//	[self didChangeValueForKey:@"representedObject.selectionIndexes"];
+//	[self didChangeValueForKey:@"representedObject.arrangedObjects"];
+	
+//	[aTableView reloadData];
+	[xspfListController rearrangeObjects];
+		
+	return YES;
+}
+
+
+#pragma mark-
+- (void)packOrder
+{
+	NSManagedObjectContext *moc = [self managedObjectContext];
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"order <> %@ AND order <> %@",
+							  [NSNumber numberWithInt:kLibraryOrder], [NSNumber numberWithInt:kFavoritesOrder]];
+	NSEntityDescription *entry = [NSEntityDescription entityForName:@"XspfList"
+											 inManagedObjectContext:moc];
+	NSFetchRequest *fetch = [[[NSFetchRequest alloc] init] autorelease];
+	[fetch setEntity:entry];
+	[fetch setPredicate:predicate];
+	[fetch setSortDescriptors:[self sortDescriptors]];
+	
+	NSError *error = nil;
+	NSArray *objects = [moc executeFetchRequest:fetch error:&error];
+	if(!objects) {
+		if(error) {
+			HMLog(HMLogLevelError, @"fail fetch reason -> %@", error);
+		}
+	}
+	
+	NSInteger newOrder = initialOrder;
+	for(XspfMXspfListObject *obj in objects) {
+		obj.order = newOrder;
+		newOrder += orderStep;
+	}
+}
+
+- (NSNumber *)orderForNewItem
+{
+	NSManagedObjectContext *moc = [self managedObjectContext];
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"order <> %@ AND order <> %@",
+							  [NSNumber numberWithInt:kLibraryOrder], [NSNumber numberWithInt:kFavoritesOrder]];
+	NSEntityDescription *entry = [NSEntityDescription entityForName:@"XspfList"
+											 inManagedObjectContext:moc];
+	NSFetchRequest *fetch = [[[NSFetchRequest alloc] init] autorelease];
+	[fetch setEntity:entry];
+	[fetch setPredicate:predicate];
+	[fetch setSortDescriptors:[NSArray arrayWithObject:[[[NSSortDescriptor alloc] initWithKey:@"order" ascending:NO] autorelease]]];
+	[fetch setFetchLimit:1];
+	
+	NSError *error = nil;
+	NSArray *objects = [moc executeFetchRequest:fetch error:&error];
+	if(!objects) {
+		if(error) {
+			HMLog(HMLogLevelError, @"fail fetch reason -> %@", error);
+		}
+	}
+	HMLog(HMLogLevelDebug, @"objects -> %@", objects);
+	
+	if(!objects && [objects count] == 0) return [NSNumber numberWithInteger:initialOrder];
+	XspfMXspfListObject *last = [objects lastObject];
+	
+	return [NSNumber numberWithInteger:last.order + orderStep];
+}
+
+- (void)moveToLastFromIndexSet:(NSIndexSet *)indexSet
+{
+	id array = [[self representedObject] arrangedObjects];
+	XspfMXspfListObject *afterItem = [array lastObject];
+	NSInteger insertPoint = afterItem.order + orderStep;
+	NSUInteger targetIndex = [indexSet firstIndex];
+	while(targetIndex != NSNotFound) {
+		XspfMXspfListObject *targetItem = [array objectAtIndex:targetIndex];
+		targetItem.order = insertPoint;
+		insertPoint += orderStep;
+		
+		targetIndex = [indexSet indexGreaterThanIndex:targetIndex];
+	}
+}
+- (void)moveItemOfIndexSet:(NSIndexSet *)indexSet afterIndex:(NSInteger)afterIndex
+{
+	id array = [[self representedObject] arrangedObjects];
+	
+	if([array count] <= afterIndex + 1) {
+		[self moveToLastFromIndexSet:indexSet];
+		return;
+	}
+	
+	XspfMXspfListObject *afterItem = [array objectAtIndex:afterIndex];
+	XspfMXspfListObject *beforeItem = [array objectAtIndex:afterIndex + 1];
+	
+	NSInteger diff = beforeItem.order - afterItem.order;
+	if(diff - 1 < [indexSet count]) {
+		[self packOrder];
+		[self moveItemOfIndexSet:indexSet afterIndex:afterIndex];
+		return;
+	}
+	
+	NSInteger step = diff / ([indexSet count] + 1);
+	NSInteger insertPoint = afterItem.order + step;
+	NSUInteger targetIndex = [indexSet firstIndex];
+	while(targetIndex != NSNotFound) {
+		XspfMXspfListObject *targetItem = [array objectAtIndex:targetIndex];
+		targetItem.order = insertPoint;
+		insertPoint += step;
+		
+		targetIndex = [indexSet indexGreaterThanIndex:targetIndex];
+	}
+	
+	[self packOrder];
+}
+
+#pragma mark-
 
 - (IBAction)test01:(id)sender
 {
