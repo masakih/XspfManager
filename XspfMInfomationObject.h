@@ -67,10 +67,8 @@
 {
 }
 
-//@property (retain) NSArray *products;
-//@property (retain) NSArray *voiceActors;
-@property (retain) NSString * productsList;
-@property (retain) NSString * voiceActorsList;
+@property (retain) NSArray *products;
+@property (retain) NSArray *voiceActors;
 @property (retain) XspfMXspfObject * xspf;
 
 @end
