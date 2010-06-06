@@ -64,11 +64,12 @@
 
 @interface XspfMXspfListObject :  NSManagedObject  
 {
-	NSInteger order;
+	short order;
 }
 
 @property (retain) NSString * name;
+@property (retain) NSData * predicateData;
 @property (retain) NSPredicate *predicate;
-@property NSInteger order;
+@property short order;
 
 @end

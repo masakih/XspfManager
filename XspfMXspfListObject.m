@@ -65,7 +65,7 @@
 @implementation XspfMXspfListObject 
 
 @dynamic name;
-@dynamic predicate;
+@dynamic predicateData;
 @dynamic order;
 
 - (NSString *)name
@@ -77,26 +77,46 @@
 	
 	return NSLocalizedString(value, @"vaule");
 }
+- (NSPredicate *)predicate
+{
+	[self willAccessValueForKey:@"predicate"];
+	NSPredicate *predicate = [self primitiveValueForKey:@"predicate"];
+	[self didAccessValueForKey:@"predicate"];
+	if(predicate == nil) {
+		NSData *predicateData = [self valueForKey:@"predicateData"];
+		if(predicateData != nil) {
+			predicate = [NSKeyedUnarchiver unarchiveObjectWithData:predicateData];
+			[self setPrimitiveValue:predicate forKey:@"predicate"];
+		}
+	}
+	return predicate;
+}
+- (void)setPredicate:(NSPredicate *)aPredicate
+{
+	[self willChangeValueForKey:@"predicate"];
+	[self setPrimitiveValue:aPredicate forKey:@"predicate"];
+	[self didChangeValueForKey:@"predicate"];
+	[self setValue:[NSKeyedArchiver archivedDataWithRootObject:aPredicate] forKey:@"predicateData"];
+}
 
-
-- (NSInteger)primitiveOrder
+- (short)primitiveOrder
 {
 	return order;
 }
-- (void)setPrimitiveOrder:(NSInteger)newOrder
+- (void)setPrimitiveOrder:(short)newOrder
 {
 	order = newOrder;
 }
-- (NSInteger)order
+- (short)order
 {
-	NSInteger value;
+	short value;
 	[self willAccessValueForKey:@"order"];
 	value = order;
 	[self didAccessValueForKey:@"order"];
 	
 	return value;
 }
-- (void)setOrder:(NSInteger)newOrder
+- (void)setOrder:(short)newOrder
 {
 	[self willChangeValueForKey:@"order"];
 	order = newOrder;

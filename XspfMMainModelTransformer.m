@@ -66,8 +66,7 @@
 
 @implementation XspfMMainModelTransformer
 
-#pragma mark#### transformer 2 from 1 ####
-#pragma mark==== XspfMXspfObject ====
+
 + (NSString *)titleFromURLString:(NSString *)urlString
 {
 	NSString *title = [urlString lastPathComponent];
@@ -75,49 +74,6 @@
 	title = [title stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 		
 	return title;
-}
-
-
-#pragma mark-
-#pragma mark#### transformer 3 from 2 ####
-#pragma mark==== XspfMXspfObject ====
-+ (NSURL *)urlFromURLString:(NSString *)urlString
-{
-	if(!urlString) {
-		NSLog(@"Missing urlString");
-		return [NSURL fileURLWithPath:NSHomeDirectory()];
-	}
-	return [NSURL URLWithString:urlString];
-}
-
-#pragma mark==== XspfMInformationObject ====
-static NSString *const VoiceActorsDelimiter = @":::";
-+ (NSArray *)productsFromProductsList:(NSString *)productsList
-{
-	return [productsList componentsSeparatedByString:VoiceActorsDelimiter];
-}
-
-+ (NSArray *)voiceActorsFromVoiceActorsList:(NSString *)voiceActorsList
-{
-	return [voiceActorsList componentsSeparatedByString:VoiceActorsDelimiter];
-}
-
-#pragma mark==== XspfMXspfListObject ====
-+ (NSPredicate *)predicateFromPredicateData:(NSData *)predicateData
-{
-	return [NSKeyedUnarchiver unarchiveObjectWithData:predicateData];
-}
-
-+ (NSNumber *)steppingOrder:(NSNumber *)order
-{
-	static NSInteger newOrder = 0;
-	
-	if([order shortValue] != 2) {
-		return order;
-	}
-	
-	newOrder += 10000;
-	return [NSNumber numberWithInteger:newOrder];
 }
 
 @end
