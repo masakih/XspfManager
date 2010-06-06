@@ -66,6 +66,8 @@
 
 + (XspfMPreferences *)sharedPreference;
 
+@property (nonatomic, assign) NSString *playerName;
+
 @property NSInteger viewType;
 @property NSInteger collectionItemSize;
 @property (getter=isOpenDetailView) BOOL openDetailView;

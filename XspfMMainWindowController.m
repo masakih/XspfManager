@@ -157,7 +157,7 @@
 	[self showWindow:self];
 	
 	
-	// load時にこれを行うと循環的にReaarngeが実行されてしまう。
+	// load時にこれを行うと循環的にRearrangeが実行されてしまう。
 	[listController setAutomaticallyRearrangesObjects:YES];
 }
 #pragma mark#### KVC ####
@@ -182,7 +182,8 @@
 	if(!isSelected) return;
 	
 	XspfMXspfObject *rep = [controller valueForKeyPath:@"selection.self"];
-	BOOL didOpen = [[NSWorkspace sharedWorkspace] openFile:rep.filePath withApplication:@"XspfQT"];
+	BOOL didOpen = [[NSWorkspace sharedWorkspace] openFile:rep.filePath
+										   withApplication:[XspfMPreferences sharedPreference].playerName];
 	if(didOpen) {
 		rep.lastPlayDate = [NSDate dateWithTimeIntervalSinceNow:0.0];
 		return;

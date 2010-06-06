@@ -61,6 +61,8 @@
 
 #import "XspfManager.h"
 
+#import "XspfMPreferences.h"
+
 #import "XspfMChannelManager.h"
 #import "XspfMMainWindowController.h"
 #import "XspfMPreviewPanelController.h"
@@ -258,7 +260,7 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 
 - (IBAction)launchXspfQT:(id)sender
 {
-	[[NSWorkspace sharedWorkspace] launchApplication:@"XspfQT"];
+	[[NSWorkspace sharedWorkspace] launchApplication:[XspfMPreferences sharedPreference].playerName];
 }
 
 

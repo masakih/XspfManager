@@ -62,6 +62,11 @@
 #import "XspfMPreferences.h"
 
 
+@interface XspfMPreferences (XspfMPrivate)
+@property (nonatomic, assign, readonly) NSUserDefaults *userdefaults;
+@end
+
+
 @implementation XspfMPreferences
 static XspfMPreferences *sharedInstance = nil;
 
@@ -104,46 +109,62 @@ static XspfMPreferences *sharedInstance = nil;
 }
 
 #pragma mark#### Properties ####
+- (NSUserDefaults *)userdefaults
+{
+	return [NSUserDefaults standardUserDefaults];
+}
+
+- (NSString *)playerName
+{
+	NSString *result = [self.userdefaults objectForKey:@"playerName"];
+	if(!result) {
+		result = @"XspfQT";
+	}
+	return result;
+}
+- (void)setPlayerName:(NSString *)newValue
+{
+	[self.userdefaults setObject:newValue forKey:@"playerName"];
+}
 - (NSInteger)viewType
 {
-	return [[NSUserDefaults standardUserDefaults] integerForKey:@"viewType"];
+	return [self.userdefaults integerForKey:@"viewType"];
 }
 - (void)setViewType:(NSInteger)newValue
 {
-	[[NSUserDefaults standardUserDefaults] setInteger:newValue forKey:@"viewType"];
+	[self.userdefaults setInteger:newValue forKey:@"viewType"];
 }
 - (NSInteger)collectionItemSize
 {
-	return [[NSUserDefaults standardUserDefaults] integerForKey:@"Collection Item Size"];
+	return [self.userdefaults integerForKey:@"Collection Item Size"];
 }
 - (void)setCollectionItemSize:(NSInteger)newValue
 {
-	[[NSUserDefaults standardUserDefaults] setInteger:newValue forKey:@"Collection Item Size"];
+	[self.userdefaults setInteger:newValue forKey:@"Collection Item Size"];
 }
 - (BOOL)isOpenDetailView
 {
-	return [[NSUserDefaults standardUserDefaults] boolForKey:@"isOpenDetailView"];
+	return [self.userdefaults boolForKey:@"isOpenDetailView"];
 }
 - (void)setOpenDetailView:(BOOL)flag
 {
-	[[NSUserDefaults standardUserDefaults] setBool:flag forKey:@"isOpenDetailView"];
+	[self.userdefaults setBool:flag forKey:@"isOpenDetailView"];
 }
 - (CGFloat)splitViewLeftWidth
 {
-	return [[NSUserDefaults standardUserDefaults] doubleForKey:@"SplitViewLeftWidth"];
+	return [self.userdefaults doubleForKey:@"SplitViewLeftWidth"];
 }
 - (void)setSplitViewLeftWidth:(CGFloat)newValue
 {
-	[[NSUserDefaults standardUserDefaults] setDouble:newValue forKey:@"SplitViewLeftWidth"];
+	[self.userdefaults setDouble:newValue forKey:@"SplitViewLeftWidth"];
 }
 
 - (NSInteger)libraryLastSelectedIndexSet
 {
-	
-	return [[NSUserDefaults standardUserDefaults] integerForKey:@"libraryLastSelectedIndexSet"];
+	return [self.userdefaults integerForKey:@"libraryLastSelectedIndexSet"];
 }
 - (void)setLibraryLastSelectedIndexSet:(NSInteger)newValue
 {
-	[[NSUserDefaults standardUserDefaults] setInteger:newValue forKey:@"libraryLastSelectedIndexSet"];
+	[self.userdefaults setInteger:newValue forKey:@"libraryLastSelectedIndexSet"];
 }
 @end
