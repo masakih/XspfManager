@@ -312,6 +312,10 @@
 	
 	[appDelegate registerURLs:URLs];
 }
+- (IBAction)delete:(id)sender
+{
+	[self remove:sender];
+}
 - (IBAction)remove:(id)sender
 {
 	[self removeSelectedItem];
@@ -319,7 +323,7 @@
 
 - (IBAction)newPredicate:(id)sender
 {
-	[libraryViewController newPredicate:sender];
+	[libraryViewController createPredicate:sender];
 }
 
 - (BOOL)isOpenDetailView
@@ -390,6 +394,19 @@
 			[menuItem setState:NSOffState];
 		}
 	}
+	
+	if(action == @selector(remove:) || action == @selector(delete:)) {
+		if([controller selectionIndex] == NSNotFound) return NO;
+		
+		NSView *listView_ = [listViewController view];
+		id responder = [[self window] firstResponder];
+		while(responder) {
+			if(listView_ == responder) return YES;
+			responder = [responder nextResponder];
+		}
+		enabled = NO;
+	}
+		
 	
 	return enabled;
 }

@@ -222,7 +222,7 @@ static NSString *const XspfMLibItemPbardType = @"XspfMLibItemPbardType";
 	
 	return num == 0;
 }
-- (NSString *)newSmartLibraryName
+- (NSString *)usableSmartLibraryName
 {
 	NSString *template = NSLocalizedString(@"Untitled Library", @"Untitled Library");
 	
@@ -236,13 +236,13 @@ static NSString *const XspfMLibItemPbardType = @"XspfMLibItemPbardType";
 	
 	return @"hoge";
 }
-- (IBAction)newPredicate:(id)sender
+- (IBAction)createPredicate:(id)sender
 {
 	if([editor numberOfRows] == 0) {
 		[editor addRow:self];
 	}
 		
-	[nameField setStringValue:[self newSmartLibraryName]];
+	[nameField setStringValue:[self usableSmartLibraryName]];
 	[nameField selectText:self];
 	
 	[NSApp beginSheet:predicatePanel
@@ -339,7 +339,7 @@ static NSString *const XspfMLibItemPbardType = @"XspfMLibItemPbardType";
 - (void)retryEditPredicate:(NSWindow *)sheet :(NSInteger)returnCode :(void *)contextInfo
 {
 	if([(id)contextInfo isKindOfClass:[NSString class]]) {
-		[self performSelector:@selector(newPredicate:) withObject:nil afterDelay:0.0];
+		[self performSelector:@selector(createPredicate:) withObject:nil afterDelay:0.0];
 	} else {
 		[self performSelector:@selector(editPredicate:) withObject:nil afterDelay:0.0];
 	}

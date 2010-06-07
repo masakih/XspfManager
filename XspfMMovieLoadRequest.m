@@ -125,7 +125,7 @@ static HMXSPFComponent *componentForURL(NSURL *url)
 		return nil;
 	}
 	NSXMLElement *root = [d rootElement];
-	HMXSPFComponent *pl = [HMXSPFComponent xspfComponemtWithXMLElement:root];
+	HMXSPFComponent *pl = [HMXSPFComponent xspfComponentWithXMLElement:root];
 	if(!pl) {
 		HMLog(HMLogLevelError, @"Can not create XspfQTComponent.");
 		return nil;

@@ -76,7 +76,7 @@
 	IBOutlet NSArrayController *xspfListController;
 }
 
-- (IBAction)newPredicate:(id)sender;
+- (IBAction)createPredicate:(id)sender;
 - (IBAction)editPredicate:(id)sender;
 - (IBAction)deletePredicate:(id)sender;
 - (IBAction)didEndEditPredicate:(id)sender;

@@ -247,6 +247,7 @@
 		aTitle = [aTitle stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 		if(aTitle) {
 			[self setPrimitiveValue:aTitle forKey:@"title"];
+			title = aTitle;
 		}
 	}
 	
