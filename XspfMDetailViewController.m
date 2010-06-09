@@ -62,6 +62,7 @@
 #import "XspfMDetailViewController.h"
 
 #import "XspfManager.h"
+#import "XspfMLabelControl.h"
 
 @interface XspfMDetailViewController(HMPrivate)
 - (void)buildFamilyNameFromFile;
@@ -76,6 +77,20 @@
 	[self buildFamilyNameFromFile];
 	
 	return self;
+}
+
+- (void)awakeFromNib
+{
+	[label setDrawX:YES];
+	[label bind:@"value"
+	   toObject:controller
+	withKeyPath:@"selection.label"
+		options:nil];
+}
+- (void)dealloc
+{
+	[label unbind:@"value"];
+	[super dealloc];
 }
 
 #pragma mark#### NSTokenField Delegate ####

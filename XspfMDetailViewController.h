@@ -63,9 +63,11 @@
 
 #import "XspfMViewController.h"
 
+@class XspfMLabelField;
 @interface XspfMDetailViewController : XspfMViewController
 {
-
+	IBOutlet XspfMLabelField *label;
+	IBOutlet NSArrayController *controller;
 }
 
 @end
