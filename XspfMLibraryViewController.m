@@ -378,14 +378,7 @@ static NSString *const XspfMLibItemPbardType = @"XspfMLibItemPbardType";
 	NSPasteboard *pboard = [info draggingPasteboard];
 	NSIndexSet *indexSet = [NSKeyedUnarchiver unarchiveObjectWithData:[pboard dataForType:XspfMLibItemPbardType]];
 	
-	NSLog(@"row -> %ld", (long)row);
-//	[self willChangeValueForKey:@"representedObject.arrangedObjects"];
-//	[self willChangeValueForKey:@"representedObject.selectionIndexes"];
 	[self moveItemOfIndexSet:indexSet afterIndex:row - 1];
-//	[self didChangeValueForKey:@"representedObject.selectionIndexes"];
-//	[self didChangeValueForKey:@"representedObject.arrangedObjects"];
-	
-//	[aTableView reloadData];
 	[xspfListController rearrangeObjects];
 		
 	return YES;
