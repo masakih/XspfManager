@@ -62,6 +62,7 @@
 #import "XspfMLabelMenuView.h"
 
 #import "XspfMLabelCell.h"
+#import "XspfMLabelMenuItem.h"
 
 @interface XspfMLabelMenuView(XspfMPrivate)
 - (NSFont *)titleFont;
@@ -301,7 +302,8 @@ static const CGFloat labelSize = 19;
 	}
 	[[labelCells objectAtIndex:_value] setState:NSOnState];
 	
-	[[self enclosingMenuItem] setLabelValue:_value];
+	id menuItem = [self enclosingMenuItem];
+	[menuItem setLabelValue:_value];
 }
 - (NSInteger)integerValue
 {
