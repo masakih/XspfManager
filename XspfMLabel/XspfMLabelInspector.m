@@ -8,6 +8,8 @@
 
 #import "XspfMLabelInspector.h"
 
+#import <XspfMLabel/XspfMLabelField.h>
+
 @implementation XspfMLabelInspector
 
 - (void)awakeFromNib
