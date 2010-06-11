@@ -71,5 +71,6 @@
 - (id)objectValue;
 - (void)setIntegerValue:(NSInteger)value;
 - (NSInteger)integerValue;
-
+- (NSInteger)labelValue;
+- (void)setLabelValue:(NSInteger)value;
 @end

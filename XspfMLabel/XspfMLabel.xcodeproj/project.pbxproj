@@ -42,6 +42,9 @@
 		F4D24C3E11C27D0800232358 /* XspfMLabelMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D24C3711C27D0800232358 /* XspfMLabelMenuItem.m */; };
 		F4D24C3F11C27D0800232358 /* XspfMLabelMenuView.h in Headers */ = {isa = PBXBuildFile; fileRef = F4D24C3811C27D0800232358 /* XspfMLabelMenuView.h */; };
 		F4D24C4011C27D0800232358 /* XspfMLabelMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D24C3911C27D0800232358 /* XspfMLabelMenuView.m */; };
+		F4D24CB111C283D500232358 /* XspfMLabelField.png in Resources */ = {isa = PBXBuildFile; fileRef = F4D24CB011C283D500232358 /* XspfMLabelField.png */; };
+		F4D24CB311C2891B00232358 /* XspfMLabelCell.png in Resources */ = {isa = PBXBuildFile; fileRef = F4D24CB211C2891B00232358 /* XspfMLabelCell.png */; };
+		F4D24CB511C28B4000232358 /* XspfMLabelMenuItem.png in Resources */ = {isa = PBXBuildFile; fileRef = F4D24CB411C28B4000232358 /* XspfMLabelMenuItem.png */; };
 		F4F36D0F11BFCEA70008E7F3 /* XspfMLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F36D0E11BFCEA70008E7F3 /* XspfMLabel.m */; };
 		F4F36F5811C11BF30008E7F3 /* XspfMLabelMenuItem.classdescription in Resources */ = {isa = PBXBuildFile; fileRef = F4F36F5711C11BF30008E7F3 /* XspfMLabelMenuItem.classdescription */; };
 		F4F36F5A11C11C410008E7F3 /* XspfMLabelCell.classdescription in Resources */ = {isa = PBXBuildFile; fileRef = F4F36F5911C11C410008E7F3 /* XspfMLabelCell.classdescription */; };
@@ -100,6 +103,9 @@
 		F4D24C3711C27D0800232358 /* XspfMLabelMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XspfMLabelMenuItem.m; path = ../XspfMLabelMenuItem.m; sourceTree = "<group>"; };
 		F4D24C3811C27D0800232358 /* XspfMLabelMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XspfMLabelMenuView.h; path = ../XspfMLabelMenuView.h; sourceTree = "<group>"; };
 		F4D24C3911C27D0800232358 /* XspfMLabelMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XspfMLabelMenuView.m; path = ../XspfMLabelMenuView.m; sourceTree = "<group>"; };
+		F4D24CB011C283D500232358 /* XspfMLabelField.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = XspfMLabelField.png; sourceTree = "<group>"; };
+		F4D24CB211C2891B00232358 /* XspfMLabelCell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = XspfMLabelCell.png; sourceTree = "<group>"; };
+		F4D24CB411C28B4000232358 /* XspfMLabelMenuItem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = XspfMLabelMenuItem.png; sourceTree = "<group>"; };
 		F4F36D0D11BFCEA70008E7F3 /* XspfMLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMLabel.h; sourceTree = "<group>"; };
 		F4F36D0E11BFCEA70008E7F3 /* XspfMLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMLabel.m; sourceTree = "<group>"; };
 		F4F36F5711C11BF30008E7F3 /* XspfMLabelMenuItem.classdescription */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.ibClassDescription; path = XspfMLabelMenuItem.classdescription; sourceTree = "<group>"; };
@@ -154,6 +160,9 @@
 		131E8FE8067F80F40006E0CE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F4D24CB411C28B4000232358 /* XspfMLabelMenuItem.png */,
+				F4D24CB211C2891B00232358 /* XspfMLabelCell.png */,
+				F4D24CB011C283D500232358 /* XspfMLabelField.png */,
 				D1AEDE460A6C289C0010C343 /* XspfMLabelLibrary.nib */,
 				C05B20D80A48CB530099B9E5 /* XspfMLabelInspector.xib */,
 			);
@@ -357,6 +366,9 @@
 				F4F36F5811C11BF30008E7F3 /* XspfMLabelMenuItem.classdescription in Resources */,
 				F4F36F5A11C11C410008E7F3 /* XspfMLabelCell.classdescription in Resources */,
 				F4F36F5C11C11C930008E7F3 /* XspfMLabelControl.classdescription in Resources */,
+				F4D24CB111C283D500232358 /* XspfMLabelField.png in Resources */,
+				F4D24CB311C2891B00232358 /* XspfMLabelCell.png in Resources */,
+				F4D24CB511C28B4000232358 /* XspfMLabelMenuItem.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
