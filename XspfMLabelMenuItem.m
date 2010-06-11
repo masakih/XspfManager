@@ -66,6 +66,28 @@
 
 
 @implementation XspfMLabelMenuItem
++ (void)initialize
+{
+	static BOOL isFirst = YES;
+	if(isFirst) {
+		isFirst = NO;
+		[self exposeBinding:@"labelValue"];
+	}
+}
+- (NSArray *)exposedBindings
+{
+	NSMutableArray *result = [NSMutableArray arrayWithArray:[super exposedBindings]];
+	[result addObject:@"labelValue"];
+	return result;
+}
+- (Class)valueClassForBinding:(NSString *)binding
+{
+	if([binding isEqualToString:@"labelValue"]) {
+		return [NSNumber class];
+	}
+	
+	return [super valueClassForBinding:binding];
+}
 
 - (void)setupView
 {
@@ -129,5 +151,21 @@
 	return [[self labelView] integerValue];
 }
 
+- (NSInteger)labelValue
+{
+	return [self integerValue];
+}
+- (void)setLabelValue:(NSInteger)value
+{
+	[self setIntegerValue:value];
+	
+	id info = [self infoForBinding:@"labelValue"];
+	if(info) {
+		id object = [info valueForKey:NSObservedObjectKey];
+		NSString *keypath = [info valueForKey:NSObservedKeyPathKey];
+		[object setValue:[NSNumber numberWithInteger:value]
+			  forKeyPath:keypath];
+	}
+}
 
 @end
