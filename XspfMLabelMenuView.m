@@ -123,6 +123,28 @@ static const CGFloat labelSize = 19;
 	
 	[super dealloc];
 }
+- (NSSize)minimumSize
+{
+	CGFloat width = 200;
+	CGFloat height = 0;
+	
+	NSSize size = [[title stringValue] sizeWithAttributes:[self titleAttribute]];
+	//	HMLog(HMLogLevelDebug, @"title size is %@", NSStringFromSize(size));
+	width = MAX(width, size.width + leftMargin);
+	height += size.height;
+	
+	NSRect rect = [self labelNameRect];
+	height += rect.size.height;
+	
+	rect = [self labelRectForIndex:labelCount - 1];
+	width = MAX(width, NSMaxX(rect));
+	height += rect.size.height;
+	
+	width += rightMargin;
+	height += 6 + 6;
+	
+	return NSMakeSize(width, height);
+}
 - (void)sizeToFit
 {
 	CGFloat width = 200;
@@ -268,14 +290,18 @@ static const CGFloat labelSize = 19;
 }
 - (void)setIntegerValue:(NSInteger)value
 {
-	for(id cell in labelCells) {
-		[cell setState:NSOffState];
-	}
-	if(value >= 0 && value < labelCount) {
-		[[labelCells objectAtIndex:value] setState:NSOnState];
+	if(_value == value) return;
+	if(value < 0 || value >= labelCount) {
+		return;
 	}
 	
 	_value = value;
+	for(id cell in labelCells) {
+		[cell setState:NSOffState];
+	}
+	[[labelCells objectAtIndex:_value] setState:NSOnState];
+	
+	[[self enclosingMenuItem] setLabelValue:_value];
 }
 - (NSInteger)integerValue
 {
