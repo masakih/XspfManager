@@ -63,6 +63,7 @@
 
 #import "XspfMLabelCell.h"
 
+
 @interface XspfMLabelField (XspfMPrivate)
 - (NSRect)labelRectForIndex:(NSInteger)index;
 @end
@@ -73,13 +74,19 @@ static const CGFloat leftMargin = 6;
 static const CGFloat rightMargin = 6;
 static const CGFloat labelMargin = 1;
 static const CGFloat labelSize = 19;
-static const CGFloat yMargin = 6;
+static const CGFloat yMargin = 2;
 
 @implementation XspfMLabelField
 
++ (Class)cellClass
+{
+	return [XspfMLabelCell class];
+}
+
 - (void)drawRect:(NSRect)dirtyRect {
     // Drawing code here.
-	for(NSInteger i = 0; i < labelCount; i++) {
+	NSInteger i;
+	for(i = 0; i < labelCount; i++) {
 		NSCell *cell = [labelCells objectAtIndex:i];
 		[cell drawWithFrame:[self labelRectForIndex:i] inView:self];
 	}
@@ -94,8 +101,17 @@ static const CGFloat yMargin = 6;
 - (void)setup
 {
 	NSMutableArray *cells = [NSMutableArray arrayWithCapacity:labelCount];
-	for(NSInteger i = 0; i < labelCount; i++) {
-		XspfMLabelCell *cell = [[[XspfMLabelCell alloc] initTextCell:@""] autorelease];
+	NSInteger i;
+	
+	Class cellClass = [[self class] cellClass];
+	BOOL isImageCell = [cellClass isSubclassOfClass:[NSImageCell class]] ? YES : NO;
+	for(i = 0; i < labelCount; i++) {
+		NSImageCell *cell;
+		if(isImageCell) {
+			cell = [[[cellClass alloc] initImageCell:nil] autorelease];
+		} else {
+			cell = [[[cellClass alloc] initTextCell:@""] autorelease];
+		}
 		[cell setIntegerValue:i];
 		[cell setEnabled:YES];
 		[cell setBordered:YES];
@@ -121,14 +137,24 @@ static const CGFloat yMargin = 6;
 	if(self) {
 		[self setup];
 	}
+	[self setLabelStyle:[decoder decodeIntegerForKey:@"XspfMLabelLabelKey"]];
+	[self setDrawX:[decoder decodeBoolForKey:@"XspfMLabelIsDrawXKey"]];
+	
 	return self;
+}
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+	[super encodeWithCoder:aCoder];
+	[aCoder encodeInteger:[self labelStyle] forKey:@"XspfMLabelLabelKey"];
+	[aCoder encodeBool:[self isDrawX] forKey:@"XspfMLabelIsDrawXKey"];
 }
 - (void)dealloc
 {
 	[labelCells release];
 	[super dealloc];
 }
-- (void)sizeToFit
+
+- (NSSize)minimumSize
 {
 	NSRect newRect = [self labelRectForIndex:labelCount - 1];
 	NSSize newSize;
@@ -136,8 +162,20 @@ static const CGFloat yMargin = 6;
 	newSize.width += rightMargin;
 	newSize.height = yMargin + labelSize + yMargin;
 	
-	[self setFrameSize:newSize];
+	return newSize;
+}
+- (void)sizeToFit
+{
+	[self setFrameSize:[self minimumSize]];
 	[self setNeedsDisplay];
+}
+- (void)setValue:(id)aValue
+{
+	[self setObjectValue:aValue];
+}
+- (id)value
+{
+	return [self objectValue];
 }
 - (void)setObjectValue:(id)aValue
 {
@@ -176,6 +214,8 @@ static const CGFloat yMargin = 6;
 }
 - (NSInteger)labelStyle
 {
+	if(![self cell]) return XspfMCircleStyle;
+	
 	return [[self cell] labelStyle];
 }
 - (void)setDrawX:(BOOL)flag
@@ -184,6 +224,7 @@ static const CGFloat yMargin = 6;
 }
 - (BOOL)isDrawX
 {
+	if(![self cell]) return NO;
 	return [[self cell] isDrawX];
 }
 
@@ -192,7 +233,8 @@ static const CGFloat yMargin = 6;
 	BOOL inLabelCell = NO;
 	NSInteger labelIndex = NSNotFound;
 	NSPoint mouse = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-	for(NSInteger i = 0; i < labelCount; i++) {
+	NSInteger i;
+	for(i = 0; i < labelCount; i++) {
 		if([self mouse:mouse inRect:[self labelRectForIndex:i]]) {
 			inLabelCell = YES;
 			labelIndex = i;
@@ -217,7 +259,7 @@ static const CGFloat yMargin = 6;
 {
 	id cellIndex = [theEvent userData];
 	if(![cellIndex isKindOfClass:[NSNumber class]]) return;
-		
+	
 	NSInteger labelIndex = [cellIndex integerValue];
 	if([self integerValue] != labelIndex) {
 		[[labelCells objectAtIndex:labelIndex] setState:NSOffState];
