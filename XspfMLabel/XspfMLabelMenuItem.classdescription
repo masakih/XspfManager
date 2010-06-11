@@ -1,0 +1,6 @@
+{
+	ClassName = XspfMLabelMenuItem;
+	SuperClass = NSMenuItem;
+	Actions = {};
+	Outlets = {};
+}

@@ -1,0 +1,6 @@
+{
+	ClassName = XspfMLabelCell;
+	SuperClass = NSActionCell;
+	Actions = {};
+	Outlets = {};
+}
