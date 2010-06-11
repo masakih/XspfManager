@@ -85,9 +85,25 @@
 	if(self) {
 		[self setup];
 	}
+	[self setLabelStyle:[decoder decodeIntegerForKey:@"XspfMLabelLabelKey"]];
+	[self setDrawX:[decoder decodeBoolForKey:@"XspfMLabelIsDrawXKey"]];
+	
 	return self;
 }
-
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+	[super encodeWithCoder:aCoder];
+	[aCoder encodeInteger:[self labelStyle] forKey:@"XspfMLabelLabelKey"];
+	[aCoder encodeBool:[self isDrawX] forKey:@"XspfMLabelIsDrawXKey"];
+}
+- (void)setValue:(id)value
+{
+	[self setObjectValue:value];
+}
+- (id)value
+{
+	return [self objectValue];
+}
 - (void)setLabelStyle:(NSInteger)style
 {
 	[[self cell] setLabelStyle:style];
