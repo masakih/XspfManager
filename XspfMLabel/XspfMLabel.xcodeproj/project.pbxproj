@@ -32,16 +32,16 @@
 		C0A47C500A523B730004BDC3 /* XspfMLabelInspector.xib in Resources */ = {isa = PBXBuildFile; fileRef = C05B20D80A48CB530099B9E5 /* XspfMLabelInspector.xib */; };
 		C0D069560A49DF9100C95564 /* InterfaceBuilderKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0D069550A49DF9100C95564 /* InterfaceBuilderKit.framework */; };
 		D1AEDE470A6C289C0010C343 /* XspfMLabelLibrary.nib in Resources */ = {isa = PBXBuildFile; fileRef = D1AEDE460A6C289C0010C343 /* XspfMLabelLibrary.nib */; };
-		F4F36C5A11BFCC330008E7F3 /* XspfMLabelCell.h in Headers */ = {isa = PBXBuildFile; fileRef = F4F36C5011BFCC330008E7F3 /* XspfMLabelCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F4F36C5B11BFCC330008E7F3 /* XspfMLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F36C5111BFCC330008E7F3 /* XspfMLabelCell.m */; };
-		F4F36C5C11BFCC330008E7F3 /* XspfMLabelControl.h in Headers */ = {isa = PBXBuildFile; fileRef = F4F36C5211BFCC330008E7F3 /* XspfMLabelControl.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F4F36C5D11BFCC330008E7F3 /* XspfMLabelControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F36C5311BFCC330008E7F3 /* XspfMLabelControl.m */; };
-		F4F36C5E11BFCC330008E7F3 /* XspfMLabelField.h in Headers */ = {isa = PBXBuildFile; fileRef = F4F36C5411BFCC330008E7F3 /* XspfMLabelField.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F4F36C5F11BFCC330008E7F3 /* XspfMLabelField.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F36C5511BFCC330008E7F3 /* XspfMLabelField.m */; };
-		F4F36C6011BFCC330008E7F3 /* XspfMLabelMenuItem.h in Headers */ = {isa = PBXBuildFile; fileRef = F4F36C5611BFCC330008E7F3 /* XspfMLabelMenuItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F4F36C6111BFCC330008E7F3 /* XspfMLabelMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F36C5711BFCC330008E7F3 /* XspfMLabelMenuItem.m */; };
-		F4F36C6211BFCC330008E7F3 /* XspfMLabelMenuView.h in Headers */ = {isa = PBXBuildFile; fileRef = F4F36C5811BFCC330008E7F3 /* XspfMLabelMenuView.h */; };
-		F4F36C6311BFCC330008E7F3 /* XspfMLabelMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F36C5911BFCC330008E7F3 /* XspfMLabelMenuView.m */; };
+		F4D24C3011C27CFC00232358 /* XspfMLabelCell.h in Headers */ = {isa = PBXBuildFile; fileRef = F4D24C2D11C27CFC00232358 /* XspfMLabelCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F4D24C3111C27CFC00232358 /* XspfMLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D24C2E11C27CFC00232358 /* XspfMLabelCell.m */; };
+		F4D24C3211C27CFC00232358 /* XspfMLabelControl.h in Headers */ = {isa = PBXBuildFile; fileRef = F4D24C2F11C27CFC00232358 /* XspfMLabelControl.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F4D24C3A11C27D0800232358 /* XspfMLabelControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D24C3311C27D0800232358 /* XspfMLabelControl.m */; };
+		F4D24C3B11C27D0800232358 /* XspfMLabelField.h in Headers */ = {isa = PBXBuildFile; fileRef = F4D24C3411C27D0800232358 /* XspfMLabelField.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F4D24C3C11C27D0800232358 /* XspfMLabelField.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D24C3511C27D0800232358 /* XspfMLabelField.m */; };
+		F4D24C3D11C27D0800232358 /* XspfMLabelMenuItem.h in Headers */ = {isa = PBXBuildFile; fileRef = F4D24C3611C27D0800232358 /* XspfMLabelMenuItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F4D24C3E11C27D0800232358 /* XspfMLabelMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D24C3711C27D0800232358 /* XspfMLabelMenuItem.m */; };
+		F4D24C3F11C27D0800232358 /* XspfMLabelMenuView.h in Headers */ = {isa = PBXBuildFile; fileRef = F4D24C3811C27D0800232358 /* XspfMLabelMenuView.h */; };
+		F4D24C4011C27D0800232358 /* XspfMLabelMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D24C3911C27D0800232358 /* XspfMLabelMenuView.m */; };
 		F4F36D0F11BFCEA70008E7F3 /* XspfMLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F36D0E11BFCEA70008E7F3 /* XspfMLabel.m */; };
 		F4F36F5811C11BF30008E7F3 /* XspfMLabelMenuItem.classdescription in Resources */ = {isa = PBXBuildFile; fileRef = F4F36F5711C11BF30008E7F3 /* XspfMLabelMenuItem.classdescription */; };
 		F4F36F5A11C11C410008E7F3 /* XspfMLabelCell.classdescription in Resources */ = {isa = PBXBuildFile; fileRef = F4F36F5911C11C410008E7F3 /* XspfMLabelCell.classdescription */; };
@@ -90,16 +90,16 @@
 		C0D069550A49DF9100C95564 /* InterfaceBuilderKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InterfaceBuilderKit.framework; path = /Developer/Library/Frameworks/InterfaceBuilderKit.framework; sourceTree = "<absolute>"; };
 		D1AEDE460A6C289C0010C343 /* XspfMLabelLibrary.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = XspfMLabelLibrary.nib; path = English.lproj/XspfMLabelLibrary.nib; sourceTree = "<group>"; };
 		DD92D38A0106425D02CA0E72 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
-		F4F36C5011BFCC330008E7F3 /* XspfMLabelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMLabelCell.h; sourceTree = "<group>"; };
-		F4F36C5111BFCC330008E7F3 /* XspfMLabelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMLabelCell.m; sourceTree = "<group>"; };
-		F4F36C5211BFCC330008E7F3 /* XspfMLabelControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMLabelControl.h; sourceTree = "<group>"; };
-		F4F36C5311BFCC330008E7F3 /* XspfMLabelControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMLabelControl.m; sourceTree = "<group>"; };
-		F4F36C5411BFCC330008E7F3 /* XspfMLabelField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMLabelField.h; sourceTree = "<group>"; };
-		F4F36C5511BFCC330008E7F3 /* XspfMLabelField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMLabelField.m; sourceTree = "<group>"; };
-		F4F36C5611BFCC330008E7F3 /* XspfMLabelMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMLabelMenuItem.h; sourceTree = "<group>"; };
-		F4F36C5711BFCC330008E7F3 /* XspfMLabelMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMLabelMenuItem.m; sourceTree = "<group>"; };
-		F4F36C5811BFCC330008E7F3 /* XspfMLabelMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMLabelMenuView.h; sourceTree = "<group>"; };
-		F4F36C5911BFCC330008E7F3 /* XspfMLabelMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMLabelMenuView.m; sourceTree = "<group>"; };
+		F4D24C2D11C27CFC00232358 /* XspfMLabelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XspfMLabelCell.h; path = ../XspfMLabelCell.h; sourceTree = "<group>"; };
+		F4D24C2E11C27CFC00232358 /* XspfMLabelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XspfMLabelCell.m; path = ../XspfMLabelCell.m; sourceTree = "<group>"; };
+		F4D24C2F11C27CFC00232358 /* XspfMLabelControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XspfMLabelControl.h; path = ../XspfMLabelControl.h; sourceTree = "<group>"; };
+		F4D24C3311C27D0800232358 /* XspfMLabelControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XspfMLabelControl.m; path = ../XspfMLabelControl.m; sourceTree = "<group>"; };
+		F4D24C3411C27D0800232358 /* XspfMLabelField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XspfMLabelField.h; path = ../XspfMLabelField.h; sourceTree = "<group>"; };
+		F4D24C3511C27D0800232358 /* XspfMLabelField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XspfMLabelField.m; path = ../XspfMLabelField.m; sourceTree = "<group>"; };
+		F4D24C3611C27D0800232358 /* XspfMLabelMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XspfMLabelMenuItem.h; path = ../XspfMLabelMenuItem.h; sourceTree = "<group>"; };
+		F4D24C3711C27D0800232358 /* XspfMLabelMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XspfMLabelMenuItem.m; path = ../XspfMLabelMenuItem.m; sourceTree = "<group>"; };
+		F4D24C3811C27D0800232358 /* XspfMLabelMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XspfMLabelMenuView.h; path = ../XspfMLabelMenuView.h; sourceTree = "<group>"; };
+		F4D24C3911C27D0800232358 /* XspfMLabelMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XspfMLabelMenuView.m; path = ../XspfMLabelMenuView.m; sourceTree = "<group>"; };
 		F4F36D0D11BFCEA70008E7F3 /* XspfMLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMLabel.h; sourceTree = "<group>"; };
 		F4F36D0E11BFCEA70008E7F3 /* XspfMLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMLabel.m; sourceTree = "<group>"; };
 		F4F36F5711C11BF30008E7F3 /* XspfMLabelMenuItem.classdescription */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.ibClassDescription; path = XspfMLabelMenuItem.classdescription; sourceTree = "<group>"; };
@@ -250,16 +250,16 @@
 		C0894DA40C32F4C100401507 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				F4F36C5011BFCC330008E7F3 /* XspfMLabelCell.h */,
-				F4F36C5111BFCC330008E7F3 /* XspfMLabelCell.m */,
-				F4F36C5211BFCC330008E7F3 /* XspfMLabelControl.h */,
-				F4F36C5311BFCC330008E7F3 /* XspfMLabelControl.m */,
-				F4F36C5411BFCC330008E7F3 /* XspfMLabelField.h */,
-				F4F36C5511BFCC330008E7F3 /* XspfMLabelField.m */,
-				F4F36C5611BFCC330008E7F3 /* XspfMLabelMenuItem.h */,
-				F4F36C5711BFCC330008E7F3 /* XspfMLabelMenuItem.m */,
-				F4F36C5811BFCC330008E7F3 /* XspfMLabelMenuView.h */,
-				F4F36C5911BFCC330008E7F3 /* XspfMLabelMenuView.m */,
+				F4D24C2D11C27CFC00232358 /* XspfMLabelCell.h */,
+				F4D24C2E11C27CFC00232358 /* XspfMLabelCell.m */,
+				F4D24C2F11C27CFC00232358 /* XspfMLabelControl.h */,
+				F4D24C3311C27D0800232358 /* XspfMLabelControl.m */,
+				F4D24C3411C27D0800232358 /* XspfMLabelField.h */,
+				F4D24C3511C27D0800232358 /* XspfMLabelField.m */,
+				F4D24C3611C27D0800232358 /* XspfMLabelMenuItem.h */,
+				F4D24C3711C27D0800232358 /* XspfMLabelMenuItem.m */,
+				F4D24C3811C27D0800232358 /* XspfMLabelMenuView.h */,
+				F4D24C3911C27D0800232358 /* XspfMLabelMenuView.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -271,11 +271,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4F36C5A11BFCC330008E7F3 /* XspfMLabelCell.h in Headers */,
-				F4F36C5C11BFCC330008E7F3 /* XspfMLabelControl.h in Headers */,
-				F4F36C5E11BFCC330008E7F3 /* XspfMLabelField.h in Headers */,
-				F4F36C6011BFCC330008E7F3 /* XspfMLabelMenuItem.h in Headers */,
-				F4F36C6211BFCC330008E7F3 /* XspfMLabelMenuView.h in Headers */,
+				F4D24C3011C27CFC00232358 /* XspfMLabelCell.h in Headers */,
+				F4D24C3211C27CFC00232358 /* XspfMLabelControl.h in Headers */,
+				F4D24C3B11C27D0800232358 /* XspfMLabelField.h in Headers */,
+				F4D24C3D11C27D0800232358 /* XspfMLabelMenuItem.h in Headers */,
+				F4D24C3F11C27D0800232358 /* XspfMLabelMenuView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,7 +329,7 @@
 			hasScannedForEncodings = 1;
 			mainGroup = 0259C574FE90428111CA0C5A /* XspfMLabel */;
 			projectDirPath = "";
-			projectRoot = "";
+			projectRoot = ../;
 			targets = (
 				53DF6901067E5B8E0090B5B0 /* All */,
 				8D1AC9600486D14A00FE50C9 /* XspfMLabel */,
@@ -367,11 +367,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4F36C5B11BFCC330008E7F3 /* XspfMLabelCell.m in Sources */,
-				F4F36C5D11BFCC330008E7F3 /* XspfMLabelControl.m in Sources */,
-				F4F36C5F11BFCC330008E7F3 /* XspfMLabelField.m in Sources */,
-				F4F36C6111BFCC330008E7F3 /* XspfMLabelMenuItem.m in Sources */,
-				F4F36C6311BFCC330008E7F3 /* XspfMLabelMenuView.m in Sources */,
+				F4D24C3111C27CFC00232358 /* XspfMLabelCell.m in Sources */,
+				F4D24C3A11C27D0800232358 /* XspfMLabelControl.m in Sources */,
+				F4D24C3C11C27D0800232358 /* XspfMLabelField.m in Sources */,
+				F4D24C3E11C27D0800232358 /* XspfMLabelMenuItem.m in Sources */,
+				F4D24C4011C27D0800232358 /* XspfMLabelMenuView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
