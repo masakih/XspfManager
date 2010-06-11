@@ -64,6 +64,14 @@
 
 @implementation XspfMLabelCell
 
+- (void)setValue:(id)value
+{
+	[self setObjectValue:value];
+}
+- (id)value
+{
+	return [self objectValue];
+}
 - (void)setIntegerValue:(NSInteger)integer
 {
 	if(integer == [self integerValue]) return;
