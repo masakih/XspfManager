@@ -7,8 +7,17 @@
 		<string key="IBDocument.AppKitVersion">1038.29</string>
 		<string key="IBDocument.HIToolboxVersion">460.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
-			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">762</string>
+			<bool key="EncodedWithXMLCoder">YES</bool>
+			<object class="NSArray" key="dict.sortedKeys">
+				<bool key="EncodedWithXMLCoder">YES</bool>
+				<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string>com.yourcompany.XspfMLabel</string>
+			</object>
+			<object class="NSMutableArray" key="dict.values">
+				<bool key="EncodedWithXMLCoder">YES</bool>
+				<string>762</string>
+				<string>1</string>
+			</object>
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -16,6 +25,7 @@
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
+			<string>com.yourcompany.XspfMLabel</string>
 			<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 		</object>
 		<object class="NSMutableDictionary" key="IBDocument.Metadata">
@@ -49,6 +59,7 @@
 					<string>informaion.voiceActors</string>
 					<string>title</string>
 					<string>rating</string>
+					<string>label</string>
 				</object>
 				<bool key="NSEditable">YES</bool>
 				<bool key="NSAutomaticallyPreparesContent">YES</bool>
@@ -66,12 +77,25 @@
 				<int key="NSvFlags">274</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<object class="NSCustomView" id="70087820">
+					<object class="XspfMLabelField" id="418522857">
 						<reference key="NSNextResponder" ref="1005"/>
-						<int key="NSvFlags">265</int>
-						<string key="NSFrame">{{8, 239}, {204, 25}}</string>
+						<int key="NSvFlags">268</int>
+						<string key="NSFrame">{{2, 241}, {171, 23}}</string>
 						<reference key="NSSuperview" ref="1005"/>
-						<string key="NSClassName">XspfMLabelField</string>
+						<bool key="NSEnabled">YES</bool>
+						<object class="XspfMLabelCell" key="NSCell">
+							<int key="NSCellFlags">-2071855616</int>
+							<int key="NSCellFlags2">0</int>
+							<string key="NSContents"/>
+							<object class="NSFont" key="NSSupport">
+								<string key="NSName">LucidaGrande</string>
+								<double key="NSSize">12</double>
+								<int key="NSfFlags">4883</int>
+							</object>
+							<reference key="NSControlView" ref="418522857"/>
+						</object>
+						<int key="XspfMLabelLabelKey">0</int>
+						<bool key="XspfMLabelIsDrawXKey">YES</bool>
 					</object>
 					<object class="NSLevelIndicator" id="893806648">
 						<reference key="NSNextResponder" ref="1005"/>
@@ -492,19 +516,27 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">label</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="70087820"/>
-					</object>
-					<int key="connectionID">60</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
 						<string key="label">controller</string>
 						<reference key="source" ref="1001"/>
 						<reference key="destination" ref="347815893"/>
 					</object>
 					<int key="connectionID">61</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: selection.label</string>
+						<reference key="source" ref="418522857"/>
+						<reference key="destination" ref="347815893"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="418522857"/>
+							<reference key="NSDestination" ref="347815893"/>
+							<string key="NSLabel">value: selection.label</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">selection.label</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">64</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -545,10 +577,10 @@
 							<reference ref="506209414"/>
 							<reference ref="893806648"/>
 							<reference ref="495405566"/>
-							<reference ref="70087820"/>
 							<reference ref="231591387"/>
 							<reference ref="76143894"/>
 							<reference ref="384625259"/>
+							<reference ref="418522857"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -684,9 +716,23 @@
 						<reference key="parent" ref="893806648"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">59</int>
-						<reference key="object" ref="70087820"/>
+						<int key="objectID">62</int>
+						<reference key="object" ref="418522857"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="XspfMLabelCell" id="712830621">
+								<int key="NSCellFlags">-2071855616</int>
+								<int key="NSCellFlags2">0</int>
+								<string key="NSContents"/>
+								<reference key="NSSupport" ref="411024111"/>
+							</object>
+						</object>
 						<reference key="parent" ref="1005"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">63</int>
+						<reference key="object" ref="712830621"/>
+						<reference key="parent" ref="418522857"/>
 					</object>
 				</object>
 			</object>
@@ -717,8 +763,9 @@
 					<string>53.IBPluginDependency</string>
 					<string>56.IBPluginDependency</string>
 					<string>57.IBPluginDependency</string>
-					<string>59.IBPluginDependency</string>
 					<string>6.IBPluginDependency</string>
+					<string>62.IBPluginDependency</string>
+					<string>63.IBPluginDependency</string>
 					<string>7.IBPluginDependency</string>
 					<string>8.IBPluginDependency</string>
 					<string>9.IBPluginDependency</string>
@@ -728,7 +775,7 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{296, 322}, {220, 491}}</string>
+					<string>{{363, 306}, {220, 491}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
 					<string>{628, 654}</string>
@@ -749,7 +796,8 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.yourcompany.XspfMLabel</string>
+					<string>com.yourcompany.XspfMLabel</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -771,7 +819,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">61</int>
+			<int key="maxID">64</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -830,6 +878,14 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">XspfMDetailViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">XspfMLabelCell</string>
+					<string key="superclassName">NSActionCell</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">XspfMLabelCell.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
