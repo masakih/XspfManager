@@ -69,7 +69,6 @@
 - (void)setup
 {
 	id cell = [[[XspfMLabelCell alloc] initTextCell:@""] autorelease];
-	[cell setLabelStyle:XspfMSquareStyle];
 	[self setCell:cell];
 }
 - (id)initWithFrame:(NSRect)frame {
@@ -85,7 +84,7 @@
 	if(self) {
 		[self setup];
 	}
-	[self setLabelStyle:[decoder decodeIntegerForKey:@"XspfMLabelLabelKey"]];
+	[self setLabelStyle:[decoder decodeIntegerForKey:@"XspfMLabelLabelStyleKey"]];
 	[self setDrawX:[decoder decodeBoolForKey:@"XspfMLabelIsDrawXKey"]];
 	
 	return self;
@@ -93,7 +92,7 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
 	[super encodeWithCoder:aCoder];
-	[aCoder encodeInteger:[self labelStyle] forKey:@"XspfMLabelLabelKey"];
+	[aCoder encodeInteger:[self labelStyle] forKey:@"XspfMLabelLabelStyleKey"];
 	[aCoder encodeBool:[self isDrawX] forKey:@"XspfMLabelIsDrawXKey"];
 }
 - (void)setValue:(id)value

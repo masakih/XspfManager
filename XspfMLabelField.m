@@ -137,7 +137,7 @@ static const CGFloat yMargin = 2;
 	if(self) {
 		[self setup];
 	}
-	[self setLabelStyle:[decoder decodeIntegerForKey:@"XspfMLabelLabelKey"]];
+	[self setLabelStyle:[decoder decodeIntegerForKey:@"XspfMLabelLabelStyleKey"]];
 	[self setDrawX:[decoder decodeBoolForKey:@"XspfMLabelIsDrawXKey"]];
 	
 	return self;
@@ -145,7 +145,7 @@ static const CGFloat yMargin = 2;
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
 	[super encodeWithCoder:aCoder];
-	[aCoder encodeInteger:[self labelStyle] forKey:@"XspfMLabelLabelKey"];
+	[aCoder encodeInteger:[self labelStyle] forKey:@"XspfMLabelLabelStyleKey"];
 	[aCoder encodeBool:[self isDrawX] forKey:@"XspfMLabelIsDrawXKey"];
 }
 - (void)dealloc
