@@ -70,8 +70,8 @@
 
 static const NSInteger labelCount = 8;
 
-static const CGFloat leftMargin = 6;
-static const CGFloat rightMargin = 6;
+static const CGFloat leftMargin = 2;
+static const CGFloat rightMargin = 2;
 static const CGFloat labelMargin = 1;
 static const CGFloat labelSize = 19;
 static const CGFloat yMargin = 2;
@@ -139,6 +139,7 @@ static const CGFloat yMargin = 2;
 	}
 	[self setLabelStyle:[decoder decodeIntegerForKey:@"XspfMLabelLabelStyleKey"]];
 	[self setDrawX:[decoder decodeBoolForKey:@"XspfMLabelIsDrawXKey"]];
+	[self setValue:[decoder decodeObjectForKey:@"XspfMLabelValueKey"]];
 	
 	return self;
 }
@@ -147,6 +148,7 @@ static const CGFloat yMargin = 2;
 	[super encodeWithCoder:aCoder];
 	[aCoder encodeInteger:[self labelStyle] forKey:@"XspfMLabelLabelStyleKey"];
 	[aCoder encodeBool:[self isDrawX] forKey:@"XspfMLabelIsDrawXKey"];
+	[aCoder encodeObject:[self value] forKey:@"XspfMLabelValueKey"];
 }
 - (void)dealloc
 {
