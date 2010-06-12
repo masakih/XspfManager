@@ -17,4 +17,11 @@
     return [NSArray arrayWithObjects:[NSBundle bundleWithIdentifier:@"com.masakih.XspfMLabel"], nil];
 }
 
+//- (void)didLoad
+- (void)awakeFromNib
+{
+	[labelControlTemplate setValue:[NSNumber numberWithInteger:1]];
+	[labelCellTemplate setValue:[NSNumber numberWithInteger:1]];
+}
+
 @end

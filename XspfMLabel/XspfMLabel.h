@@ -8,8 +8,10 @@
 
 #import <InterfaceBuilderKit/InterfaceBuilderKit.h>
 
-@interface XspfMLabel : IBPlugin {
-
+@interface XspfMLabel : IBPlugin
+{
+	IBOutlet id labelControlTemplate;
+	IBOutlet id labelCellTemplate;
 }
 
 @end

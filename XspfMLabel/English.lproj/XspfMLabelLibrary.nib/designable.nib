@@ -43,7 +43,7 @@
 		<object class="NSMutableArray" key="IBDocument.RootObjects" id="1012">
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<object class="NSCustomObject" id="1013">
-				<string key="NSClassName">NSObject</string>
+				<string key="NSClassName">XspfMLabel</string>
 			</object>
 			<object class="NSCustomObject" id="1015">
 				<string key="NSClassName">FirstResponder</string>
@@ -409,7 +409,7 @@
 				<int key="NSvFlags">268</int>
 				<string key="NSFrameSize">{57, 30}</string>
 				<bool key="NSEnabled">YES</bool>
-				<object class="XspfMLabelCell" key="NSCell" id="729528500">
+				<object class="XspfMLabelCell" key="NSCell" id="475065727">
 					<int key="NSCellFlags">67239424</int>
 					<int key="NSCellFlags2">0</int>
 					<string key="NSContents"/>
@@ -420,7 +420,7 @@
 					</object>
 					<reference key="NSControlView" ref="868341643"/>
 				</object>
-				<int key="XspfMLabelLabelKey">0</int>
+				<int key="XspfMLabelLabelStyleKey">0</int>
 				<bool key="XspfMLabelIsDrawXKey">NO</bool>
 			</object>
 			<object class="XspfMLabelField" id="121969420">
@@ -428,14 +428,14 @@
 				<int key="NSvFlags">268</int>
 				<string key="NSFrameSize">{171, 23}</string>
 				<bool key="NSEnabled">YES</bool>
-				<object class="XspfMLabelCell" key="NSCell">
+				<object class="XspfMLabelCell" key="NSCell" id="55993992">
 					<int key="NSCellFlags">-2071855616</int>
 					<int key="NSCellFlags2">0</int>
 					<string key="NSContents"/>
 					<reference key="NSSupport" ref="28"/>
 					<reference key="NSControlView" ref="121969420"/>
 				</object>
-				<int key="XspfMLabelLabelKey">0</int>
+				<int key="XspfMLabelLabelStyleKey">0</int>
 				<bool key="XspfMLabelIsDrawXKey">NO</bool>
 			</object>
 		</object>
@@ -473,6 +473,14 @@
 						<reference key="destination" ref="121969420"/>
 					</object>
 					<int key="connectionID">78</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">labelControlTemplate</string>
+						<reference key="source" ref="1013"/>
+						<reference key="destination" ref="868341643"/>
+					</object>
+					<int key="connectionID">81</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -687,7 +695,13 @@
 								<string key="NSContents"/>
 								<reference key="NSSupport" ref="825699839"/>
 							</object>
-							<reference ref="729528500"/>
+							<object class="XspfMLabelCell" id="729528500">
+								<int key="NSCellFlags">67239424</int>
+								<int key="NSCellFlags2">0</int>
+								<string key="NSContents"/>
+								<reference key="NSSupport" ref="825699839"/>
+							</object>
+							<reference ref="475065727"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -736,12 +750,23 @@
 								<string key="NSContents"/>
 								<reference key="NSSupport" ref="825699839"/>
 							</object>
+							<reference ref="55993992"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">77</int>
 						<reference key="object" ref="246825037"/>
+						<reference key="parent" ref="121969420"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">79</int>
+						<reference key="object" ref="475065727"/>
+						<reference key="parent" ref="868341643"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">80</int>
+						<reference key="object" ref="55993992"/>
 						<reference key="parent" ref="121969420"/>
 					</object>
 				</object>
@@ -871,11 +896,23 @@ cyBvdXRsZXRzIGFyZSBvcHRpb25hbC4</string>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">78</int>
+			<int key="maxID">81</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<bool key="EncodedWithXMLCoder">YES</bool>
+				<object class="IBPartialClassDescription">
+					<string key="className">XspfMLabel</string>
+					<string key="superclassName">IBPlugin</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">labelControlTemplate</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">XspfMLabel.h</string>
+					</object>
+				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">XspfMLabelCell</string>
 					<string key="superclassName">NSActionCell</string>
@@ -911,6 +948,18 @@ cyBvdXRsZXRzIGFyZSBvcHRpb25hbC4</string>
 			</object>
 			<object class="NSMutableArray" key="referencedPartialClassDescriptionsV3.2+">
 				<bool key="EncodedWithXMLCoder">YES</bool>
+				<object class="IBPartialClassDescription">
+					<string key="className">IBPlugin</string>
+					<string key="superclassName">NSObject</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">preferencesView</string>
+						<string key="NS.object.0">NSView</string>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">InterfaceBuilderKit.framework/Headers/IBPlugin.h</string>
+					</object>
+				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">NSActionCell</string>
 					<string key="superclassName">NSCell</string>
