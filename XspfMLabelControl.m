@@ -86,6 +86,7 @@
 	}
 	[self setLabelStyle:[decoder decodeIntegerForKey:@"XspfMLabelLabelStyleKey"]];
 	[self setDrawX:[decoder decodeBoolForKey:@"XspfMLabelIsDrawXKey"]];
+	[self setValue:[decoder decodeObjectForKey:@"XspfMLabelValueKey"]];
 	
 	return self;
 }
@@ -94,6 +95,7 @@
 	[super encodeWithCoder:aCoder];
 	[aCoder encodeInteger:[self labelStyle] forKey:@"XspfMLabelLabelStyleKey"];
 	[aCoder encodeBool:[self isDrawX] forKey:@"XspfMLabelIsDrawXKey"];
+	[aCoder encodeObject:[self value] forKey:@"XspfMLabelValueKey"];
 }
 - (void)setValue:(id)value
 {
