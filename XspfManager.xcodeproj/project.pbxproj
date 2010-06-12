@@ -48,7 +48,6 @@
 		F47C0719109F1DDD00F5991C /* XspfMInfomationObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C0718109F1DDD00F5991C /* XspfMInfomationObject.m */; };
 		F47C0750109FAFB000F5991C /* FamilyName.txt in Resources */ = {isa = PBXBuildFile; fileRef = F47C074F109FAFB000F5991C /* FamilyName.txt */; };
 		F480CD6710AF8A4300AC365B /* XspfMTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F480CD6610AF8A4300AC365B /* XspfMTableView.m */; };
-		F480CEE510AFDAB400AC365B /* NSApplicationIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = F480CEE410AFDAB300AC365B /* NSApplicationIcon.icns */; };
 		F480CF9F10B03A0D00AC365B /* AccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F480CF9D10B03A0D00AC365B /* AccessoryView.xib */; };
 		F481B3F910F08DE200B7EA4F /* XspfMSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = F481B3F810F08DE200B7EA4F /* XspfMSplitView.m */; };
 		F481B70A10F0F80700B7EA4F /* XspfMLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F481B70910F0F80700B7EA4F /* XspfMLabelCell.m */; };
@@ -82,6 +81,7 @@
 		F4CE51B210A99E4E004AC4FA /* XspfMCollectionViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CE51B110A99E4E004AC4FA /* XspfMCollectionViewItem.m */; };
 		F4CE525510AAEBE8004AC4FA /* XspfMCollectionItemBox.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CE525410AAEBE8004AC4FA /* XspfMCollectionItemBox.m */; };
 		F4D0E98710C5484000B642D0 /* LibraryRowTemplate.plist in Resources */ = {isa = PBXBuildFile; fileRef = F4D0E98510C5484000B642D0 /* LibraryRowTemplate.plist */; };
+		F4D24E6B11C3D41700232358 /* XspfManager.icns in Resources */ = {isa = PBXBuildFile; fileRef = F4D24E6A11C3D41700232358 /* XspfManager.icns */; };
 		F4D2F69B110754ED007681F4 /* XspfMMainModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F4D2F69A110754ED007681F4 /* XspfMMainModel.xcdatamodeld */; };
 		F4D2F69E11075545007681F4 /* XspfMMainModel1To2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = F4D2F69D11075545007681F4 /* XspfMMainModel1To2.xcmappingmodel */; };
 		F4D2F71A11087748007681F4 /* XspfMCoverFlowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D2F71911087748007681F4 /* XspfMCoverFlowViewController.m */; };
@@ -189,7 +189,6 @@
 		F47C096510A049DD00F5991C /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		F480CD6510AF8A4300AC365B /* XspfMTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMTableView.h; sourceTree = "<group>"; };
 		F480CD6610AF8A4300AC365B /* XspfMTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMTableView.m; sourceTree = "<group>"; };
-		F480CEE410AFDAB300AC365B /* NSApplicationIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = NSApplicationIcon.icns; sourceTree = "<group>"; };
 		F480CF9E10B03A0D00AC365B /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/AccessoryView.xib; sourceTree = "<group>"; };
 		F481B3F710F08DE200B7EA4F /* XspfMSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMSplitView.h; sourceTree = "<group>"; };
 		F481B3F810F08DE200B7EA4F /* XspfMSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMSplitView.m; sourceTree = "<group>"; };
@@ -251,6 +250,7 @@
 		F4CE525310AAEBE8004AC4FA /* XspfMCollectionItemBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMCollectionItemBox.h; sourceTree = "<group>"; };
 		F4CE525410AAEBE8004AC4FA /* XspfMCollectionItemBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMCollectionItemBox.m; sourceTree = "<group>"; };
 		F4D0E98610C5484000B642D0 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = English; path = English.lproj/LibraryRowTemplate.plist; sourceTree = "<group>"; };
+		F4D24E6A11C3D41700232358 /* XspfManager.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = XspfManager.icns; sourceTree = "<group>"; };
 		F4D2F6821107545C007681F4 /* XspfMMainModel.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = XspfMMainModel.xcdatamodel; sourceTree = "<group>"; };
 		F4D2F69C110754ED007681F4 /* XspfMMainModel 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "XspfMMainModel 2.xcdatamodel"; sourceTree = "<group>"; };
 		F4D2F69D11075545007681F4 /* XspfMMainModel1To2.xcmappingmodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcmappingmodel; path = XspfMMainModel1To2.xcmappingmodel; sourceTree = "<group>"; };
@@ -350,9 +350,9 @@
 		29B97314FDCFA39411CA2CEA /* XspfManager */ = {
 			isa = PBXGroup;
 			children = (
+				F4D24E6A11C3D41700232358 /* XspfManager.icns */,
 				F45AB02110EE3675005BE9C1 /* HMUtilities.h */,
 				F45AB02210EE3675005BE9C1 /* HMUtilities.m */,
-				F480CEE410AFDAB300AC365B /* NSApplicationIcon.icns */,
 				F40B341D10B6BDEE00896716 /* UKKQueue */,
 				F4343DE610AD76F70090F57B /* HMXSPFcomponent */,
 				F47C06D7109F027500F5991C /* HMXSPFcomponent */,
@@ -628,7 +628,6 @@
 				F49BD01010A47781007136CE /* ListView.xib in Resources */,
 				F4CE4CD310A6A13E004AC4FA /* LibraryView.xib in Resources */,
 				F4CE4E8010A706A8004AC4FA /* DetailView.xib in Resources */,
-				F480CEE510AFDAB400AC365B /* NSApplicationIcon.icns in Resources */,
 				F480CF9F10B03A0D00AC365B /* AccessoryView.xib in Resources */,
 				F40B342110B6BE2000896716 /* UKKQueue Readme.txt in Resources */,
 				F4BB59BB10BC0C3700EE50B7 /* LibraryPredicate.strings in Resources */,
@@ -637,6 +636,7 @@
 				F43E0E5711027E1900D0428E /* Credits.rtf in Resources */,
 				F4D2F71E110877DC007681F4 /* XspfMCoverFlowView.xib in Resources */,
 				F4DAF67611BBC1230047BEDA /* Localizable.strings.sed in Resources */,
+				F4D24E6B11C3D41700232358 /* XspfManager.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
