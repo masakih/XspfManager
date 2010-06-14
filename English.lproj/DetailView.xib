@@ -11,7 +11,7 @@
 			<object class="NSArray" key="dict.sortedKeys">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string>com.yourcompany.XspfMLabel</string>
+				<string>com.masakih.XspfMLabel</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
@@ -21,12 +21,11 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="1"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<string>com.yourcompany.XspfMLabel</string>
 			<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+			<string>com.masakih.XspfMLabel</string>
 		</object>
 		<object class="NSMutableDictionary" key="IBDocument.Metadata">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -73,17 +72,17 @@
 				<bool key="NSClearsFilterPredicateOnInsertion">YES</bool>
 			</object>
 			<object class="NSCustomView" id="1005">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<object class="XspfMLabelField" id="1046545347">
+					<object class="XspfMLabelField" id="418522857">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{2, 241}, {171, 23}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<bool key="NSEnabled">YES</bool>
-						<object class="XspfMLabelCell" key="NSCell" id="420480599">
+						<object class="XspfMLabelCell" key="NSCell" id="885222012">
 							<int key="NSCellFlags">-2071855616</int>
 							<int key="NSCellFlags2">0</int>
 							<string key="NSContents"/>
@@ -92,7 +91,7 @@
 								<double key="NSSize">12</double>
 								<int key="NSfFlags">4883</int>
 							</object>
-							<reference key="NSControlView" ref="1046545347"/>
+							<reference key="NSControlView" ref="418522857"/>
 						</object>
 						<int key="XspfMLabelLabelStyleKey">0</int>
 						<bool key="XspfMLabelIsDrawXKey">YES</bool>
@@ -331,7 +330,6 @@
 					</object>
 				</object>
 				<string key="NSFrameSize">{220, 491}</string>
-				<reference key="NSSuperview"/>
 				<string key="NSClassName">NSView</string>
 			</object>
 		</object>
@@ -525,10 +523,10 @@
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">value: selection.label</string>
-						<reference key="source" ref="1046545347"/>
+						<reference key="source" ref="418522857"/>
 						<reference key="destination" ref="347815893"/>
 						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="1046545347"/>
+							<reference key="NSSource" ref="418522857"/>
 							<reference key="NSDestination" ref="347815893"/>
 							<string key="NSLabel">value: selection.label</string>
 							<string key="NSBinding">value</string>
@@ -580,7 +578,7 @@
 							<reference ref="231591387"/>
 							<reference ref="76143894"/>
 							<reference ref="384625259"/>
-							<reference ref="1046545347"/>
+							<reference ref="418522857"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -717,28 +715,39 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">62</int>
-						<reference key="object" ref="1046545347"/>
+						<reference key="object" ref="418522857"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="XspfMLabelCell" id="241869664">
+							<object class="XspfMLabelCell" id="712830621">
 								<int key="NSCellFlags">-2071855616</int>
 								<int key="NSCellFlags2">0</int>
 								<string key="NSContents"/>
 								<reference key="NSSupport" ref="411024111"/>
 							</object>
-							<reference ref="420480599"/>
+							<object class="XspfMLabelCell" id="331509985">
+								<int key="NSCellFlags">-2071855616</int>
+								<int key="NSCellFlags2">0</int>
+								<string key="NSContents"/>
+								<reference key="NSSupport" ref="411024111"/>
+							</object>
+							<reference ref="885222012"/>
 						</object>
 						<reference key="parent" ref="1005"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">63</int>
-						<reference key="object" ref="241869664"/>
-						<reference key="parent" ref="1046545347"/>
+						<reference key="object" ref="712830621"/>
+						<reference key="parent" ref="418522857"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">65</int>
-						<reference key="object" ref="420480599"/>
-						<reference key="parent" ref="1046545347"/>
+						<reference key="object" ref="331509985"/>
+						<reference key="parent" ref="418522857"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">66</int>
+						<reference key="object" ref="885222012"/>
+						<reference key="parent" ref="418522857"/>
 					</object>
 				</object>
 			</object>
@@ -781,7 +790,7 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{123, 291}, {220, 491}}</string>
+					<string>{{363, 306}, {220, 491}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
 					<string>{628, 654}</string>
@@ -802,8 +811,8 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.yourcompany.XspfMLabel</string>
-					<string>com.yourcompany.XspfMLabel</string>
+					<string>com.masakih.XspfMLabel</string>
+					<string>com.masakih.XspfMLabel</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -825,7 +834,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">65</int>
+			<int key="maxID">66</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

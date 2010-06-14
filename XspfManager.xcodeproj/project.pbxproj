@@ -80,8 +80,8 @@
 		F4CE500210A85401004AC4FA /* XspfMCheckFileModifiedRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CE500110A85401004AC4FA /* XspfMCheckFileModifiedRequest.m */; };
 		F4CE51B210A99E4E004AC4FA /* XspfMCollectionViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CE51B110A99E4E004AC4FA /* XspfMCollectionViewItem.m */; };
 		F4CE525510AAEBE8004AC4FA /* XspfMCollectionItemBox.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CE525410AAEBE8004AC4FA /* XspfMCollectionItemBox.m */; };
-		F4D0E98710C5484000B642D0 /* LibraryRowTemplate.plist in Resources */ = {isa = PBXBuildFile; fileRef = F4D0E98510C5484000B642D0 /* LibraryRowTemplate.plist */; };
 		F4D24E6B11C3D41700232358 /* XspfManager.icns in Resources */ = {isa = PBXBuildFile; fileRef = F4D24E6A11C3D41700232358 /* XspfManager.icns */; };
+		F4D2521011C4C51A00232358 /* LibraryRowTemplate.plist in Resources */ = {isa = PBXBuildFile; fileRef = F4D0E98610C5484000B642D0 /* LibraryRowTemplate.plist */; };
 		F4D2F69B110754ED007681F4 /* XspfMMainModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F4D2F69A110754ED007681F4 /* XspfMMainModel.xcdatamodeld */; };
 		F4D2F69E11075545007681F4 /* XspfMMainModel1To2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = F4D2F69D11075545007681F4 /* XspfMMainModel1To2.xcmappingmodel */; };
 		F4D2F71A11087748007681F4 /* XspfMCoverFlowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D2F71911087748007681F4 /* XspfMCoverFlowViewController.m */; };
@@ -249,8 +249,9 @@
 		F4CE51B110A99E4E004AC4FA /* XspfMCollectionViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMCollectionViewItem.m; sourceTree = "<group>"; };
 		F4CE525310AAEBE8004AC4FA /* XspfMCollectionItemBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMCollectionItemBox.h; sourceTree = "<group>"; };
 		F4CE525410AAEBE8004AC4FA /* XspfMCollectionItemBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMCollectionItemBox.m; sourceTree = "<group>"; };
-		F4D0E98610C5484000B642D0 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = English; path = English.lproj/LibraryRowTemplate.plist; sourceTree = "<group>"; };
+		F4D0E98610C5484000B642D0 /* LibraryRowTemplate.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LibraryRowTemplate.plist; sourceTree = "<group>"; };
 		F4D24E6A11C3D41700232358 /* XspfManager.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = XspfManager.icns; sourceTree = "<group>"; };
+		F4D2521111C4C55500232358 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Japanese; path = Japanese.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F4D2F6821107545C007681F4 /* XspfMMainModel.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = XspfMMainModel.xcdatamodel; sourceTree = "<group>"; };
 		F4D2F69C110754ED007681F4 /* XspfMMainModel 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "XspfMMainModel 2.xcdatamodel"; sourceTree = "<group>"; };
 		F4D2F69D11075545007681F4 /* XspfMMainModel1To2.xcmappingmodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcmappingmodel; path = XspfMMainModel1To2.xcmappingmodel; sourceTree = "<group>"; };
@@ -384,7 +385,7 @@
 				F4DAF67411BBC1230047BEDA /* Localizable.strings.sed */,
 				F43E0E5611027E1900D0428E /* Credits.rtf */,
 				F43E0DD311021E0200D0428E /* Localizable.strings */,
-				F4D0E98510C5484000B642D0 /* LibraryRowTemplate.plist */,
+				F4D0E98610C5484000B642D0 /* LibraryRowTemplate.plist */,
 				F4BB59BA10BC0C3700EE50B7 /* LibraryPredicate.strings */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
@@ -631,7 +632,7 @@
 				F480CF9F10B03A0D00AC365B /* AccessoryView.xib in Resources */,
 				F40B342110B6BE2000896716 /* UKKQueue Readme.txt in Resources */,
 				F4BB59BB10BC0C3700EE50B7 /* LibraryPredicate.strings in Resources */,
-				F4D0E98710C5484000B642D0 /* LibraryRowTemplate.plist in Resources */,
+				F4D2521011C4C51A00232358 /* LibraryRowTemplate.plist in Resources */,
 				F43E0DD511021E0200D0428E /* Localizable.strings in Resources */,
 				F43E0E5711027E1900D0428E /* Credits.rtf in Resources */,
 				F4D2F71E110877DC007681F4 /* XspfMCoverFlowView.xib in Resources */,
@@ -719,6 +720,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				089C165DFE840E0CC02AAC07 /* English */,
+				F4D2521111C4C55500232358 /* Japanese */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -810,14 +812,6 @@
 				F4D3636B11A2CA83009FE842 /* Japanese */,
 			);
 			name = DetailView.xib;
-			sourceTree = "<group>";
-		};
-		F4D0E98510C5484000B642D0 /* LibraryRowTemplate.plist */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F4D0E98610C5484000B642D0 /* English */,
-			);
-			name = LibraryRowTemplate.plist;
 			sourceTree = "<group>";
 		};
 		F4D2F71D110877DC007681F4 /* XspfMCoverFlowView.xib */ = {
