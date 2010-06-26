@@ -166,6 +166,7 @@
 		F468493111188CDB00F3396B /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
 		F4684A921119D0A300F3396B /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		F478A95910DD1F0F000A75B4 /* XspfMRule_Subclasses.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMRule_Subclasses.m; sourceTree = "<group>"; };
+		F479A7A211D6913700006B58 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = Japanese.lproj/XspfMCoverFlowView.xib; sourceTree = "<group>"; };
 		F47C00B5109D479100F5991C /* XspfMMainWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMMainWindowController.h; sourceTree = "<group>"; };
 		F47C00B6109D479100F5991C /* XspfMMainWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMMainWindowController.m; sourceTree = "<group>"; };
 		F47C00FD109D51CC00F5991C /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = /System/Library/Frameworks/QTKit.framework; sourceTree = "<absolute>"; };
@@ -818,6 +819,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				F4D2F71B110877C4007681F4 /* English */,
+				F479A7A211D6913700006B58 /* Japanese */,
 			);
 			name = XspfMCoverFlowView.xib;
 			sourceTree = "<group>";
