@@ -131,8 +131,6 @@ finish:
 	}
 	[coverFlow setDataSource:self];
 	[coverFlow setDelegate:self];
-//	NSDictionary *attr = [NSDictionary dictionaryWithObject:[NSColor darkGrayColor]  forKey:NSForegroundColorAttributeName];
-//	[coverFlow setValue:attr forKey:IKImageBrowserCellsSubtitleAttributesKey];
 	
 	listViewController = [[XspfMListViewController alloc] init];
 	[listViewController view];
@@ -162,10 +160,13 @@ finish:
 }
 - (void)recalculateKeyViewLoop
 {
-	[coverFlow setNextKeyView:[listViewController firstKeyView]];
+//	[coverFlow setNextKeyView:[listViewController firstKeyView]];
 	
 	// TODO: change key view loop if list view is not visible.
-	lastKeyView = [listViewController lastKeyView];
+//	lastKeyView = [listViewController lastKeyView];
+	
+	firstKeyView = [listViewController firstKeyView];
+	initialFirstResponder = [listViewController firstKeyView];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -176,12 +177,26 @@ finish:
 	}
 	if([keyPath isEqualToString:@"selectionIndex"]) {
 		[coverFlow setSelectedIndex:[[self representedObject] selectionIndex]];
+		[listViewController scrollToSelection:self];
 		return;
 	}
 	
 	[super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 }
 
+- (void)keyDown:(NSEvent *)theEvent
+{
+	unsigned short code = [theEvent keyCode];
+#define kLEFT_ARROW_KEY 123
+#define kRIGHT_ARROW_KEY 124
+	switch(code) {
+		case kLEFT_ARROW_KEY:
+		case kRIGHT_ARROW_KEY:
+			return [coverFlow keyDown:theEvent];
+			break;
+	}
+	NSBeep();
+}
 
 - (IBAction)clearCoverFlowCache:(id)sender
 {
@@ -210,9 +225,18 @@ finish:
 	return [[[self representedObject] arrangedObjects] objectAtIndex:index];
 }
 
+- (void)setRepSelectedIndex:(NSNumber *)indexValue
+{
+	[[self representedObject] setSelectionIndex:[indexValue unsignedIntegerValue]];
+}
 - (void)imageFlow:(id)imageFlowView didSelectItemAtIndex:(NSUInteger)index
 {
-	[[self representedObject] setSelectionIndex:index];
+//	[[self representedObject] setSelectionIndex:index];
+	
+	[NSObject cancelPreviousPerformRequestsWithTarget:self];
+	[self performSelector:@selector(setRepSelectedIndex:)
+			   withObject:[NSNumber numberWithUnsignedInteger:index]
+			   afterDelay:0.5];
 }
 - (void)imageFlow:(id)imageFlowView cellWasDoubleClickedAtIndex:(NSUInteger)index
 {
