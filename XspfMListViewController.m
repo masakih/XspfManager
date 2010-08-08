@@ -140,6 +140,14 @@
 	return YES;
 }
 
+- (IBAction)scrollToSelection:(id)sender
+{
+	NSInteger col = [tableView columnWithIdentifier:@"title"];
+	NSInteger row = [tableView selectedRow];
+	NSRect rect = [tableView frameOfCellAtColumn:col row:row];
+	
+	[tableView scrollRectToVisible:rect];
+}
 
 // QLPreviewPanel support
 - (NSRect)selectionItemRect

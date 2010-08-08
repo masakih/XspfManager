@@ -486,6 +486,11 @@
 	[[listViewController view] setFrame:rect];
 //	[[self window] recalculateKeyViewLoop];
 	[self recalculateKeyViewLoop];
+	
+	/* TODO 
+	 環境設定で変更可能にする
+	 */
+	[listViewController performSelector:@selector(scrollToSelection:) withObject:self afterDelay:0.0];
 }
 
 

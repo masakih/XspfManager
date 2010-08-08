@@ -121,6 +121,11 @@
 	[[self lastKeyView] setNextKeyView:view];
 }
 
+- (IBAction)scrollToSelection:(id)sender
+{
+	NSBeep();
+}
+
 // QLPreviewPanel support
 - (NSRect)selectionItemRect
 {

@@ -231,6 +231,10 @@ finish:
 	}
 }
 
+- (IBAction)scrollToSelection:(id)sender
+{
+	[listViewController scrollToSelection:sender];
+}
 
 // QLPreviewPanel support
 - (NSRect)selectionItemRect

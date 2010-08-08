@@ -78,6 +78,8 @@
 - (NSView *)lastKeyView;
 - (void)setNextKeyView:(NSView *)view;
 
+- (IBAction)scrollToSelection:(id)sender;
+
 // QLPreviewPanel support
 - (NSRect)selectionItemRect;
 

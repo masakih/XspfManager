@@ -129,6 +129,23 @@ static NSString *const XspfMCollectionItemSizeKey = @"Collection Item Size";
 	[self setCollectionItem:smallItem];
 }
 
+- (IBAction)scrollToSelection:(id)sender
+{
+	
+	id item = nil;
+	@try {
+		item = [collectionView itemAtIndex:[[self representedObject] selectionIndex]];
+	}
+	@catch (id ex) {
+		NSLog(@"Exception -> %@", ex);
+	}
+	if(!item) return;
+	
+	NSRect rect = [[item view] frame];
+//	NSLog(@"selected rect -> %@", NSStringFromRect(rect));
+	[collectionView scrollRectToVisible:rect];
+}
+
 - (XspfMCollectionItemType)collectionItemType
 {
 	if(collectionViewItem == regularItem) return typeXspfMRegularItem;
@@ -186,7 +203,16 @@ static NSString *const XspfMCollectionItemSizeKey = @"Collection Item Size";
 	if(![collectionView respondsToSelector:@selector(itemAtIndex:)]) {
 		return [self selectionItemRectForLeopard];
 	}
-	id item = [collectionView itemAtIndex:[[self representedObject] selectionIndex]];
+	
+	id item = nil;
+	@try {
+		item = [collectionView itemAtIndex:[[self representedObject] selectionIndex]];
+	}
+	@catch (id ex) {
+		NSLog(@"Exception -> %@", ex);
+		return NSZeroRect;
+	}
+	
 	NSRect rect = [item thumbnailFrameCoordinateBase];
 	return rect;
 }
