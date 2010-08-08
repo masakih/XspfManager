@@ -81,6 +81,10 @@ static NSString *XspfMREDPredicateRowsKey = @"predicateRows";
 {
 	[XspfMRule registerNumberTypeKeyPaths:keyPaths];
 }
++ (void)registerBooleanTypeKeyPaths:(NSArray *)keyPaths
+{
+	[XspfMRule registerBooleanTypeKeyPaths:keyPaths];
+}
 + (void)setUseRating:(BOOL)flag
 {
 	[XspfMRule setUseRating:flag];

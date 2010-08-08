@@ -141,30 +141,25 @@
 	
 	NSDateComponents *comp01 = [[[NSDateComponents alloc] init] autorelease];
 	NSDateComponents *comp02 = [[[NSDateComponents alloc] init] autorelease];
-	NSUInteger unitFlag = 0;
+	NSUInteger unitFlag = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | kCFCalendarUnitSecond;
 	switch(unit) {
 		case XspfMHoursUnitType:
-			unitFlag = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit;
 			[comp01 setHour:-number];
 			[comp02 setHour:-number+1];
 			break;
 		case XspfMDaysUnitType:
-			unitFlag = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
 			[comp01 setDay:-number];
 			[comp02 setDay:-number+1];
 			break;
 		case XpsfMWeeksUnitType:
-			unitFlag = NSYearCalendarUnit | NSMonthCalendarUnit | NSWeekCalendarUnit;
 			[comp01 setWeek:-number];
 			[comp02 setDay:-1];
 			break;
 		case XspfMMonthsUnitType:
-			unitFlag = NSYearCalendarUnit | NSMonthCalendarUnit;
 			[comp01 setMonth:-number];
 			[comp02 setDay:-1];
 			break;
 		case XspfMYearsUnitType:
-			unitFlag = NSYearCalendarUnit;
 			[comp01 setYear:-number];
 			[comp02 setDay:-1];
 			break;
@@ -189,26 +184,21 @@
 	NSInteger unit = [unitValue integerValue];
 	
 	NSDateComponents *comp = [[[NSDateComponents alloc] init] autorelease];
-	NSUInteger unitFlag = 0;
+	NSUInteger unitFlag = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | kCFCalendarUnitSecond;
 	switch(unit) {
 		case XspfMHoursUnitType:
-			unitFlag = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit;
 			[comp setHour:-number];
 			break;
 		case XspfMDaysUnitType:
-			unitFlag = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
 			[comp setDay:-number];
 			break;
 		case XpsfMWeeksUnitType:
-			unitFlag = NSYearCalendarUnit | NSMonthCalendarUnit | NSWeekCalendarUnit;
 			[comp setWeek:-number];
 			break;
 		case XspfMMonthsUnitType:
-			unitFlag = NSYearCalendarUnit | NSMonthCalendarUnit;
 			[comp setMonth:-number];
 			break;
 		case XspfMYearsUnitType:
-			unitFlag = NSYearCalendarUnit;
 			[comp setYear:-number];
 			break;
 		default:
@@ -232,7 +222,7 @@
 	
 	NSDateComponents *comp01 = [[[NSDateComponents alloc] init] autorelease];
 	NSDateComponents *comp02 = [[[NSDateComponents alloc] init] autorelease];
-	NSUInteger unitFlag = 0;
+	NSUInteger unitFlag = 0;//NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | kCFCalendarUnitSecond;
 	switch(unit) {
 		case XspfMHoursUnitType:
 			unitFlag = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit;
@@ -245,7 +235,7 @@
 			[comp02 setDay:-number02];
 			break;
 		case XpsfMWeeksUnitType:
-			unitFlag = NSYearCalendarUnit | NSMonthCalendarUnit | NSWeekCalendarUnit;
+			unitFlag = NSYearCalendarUnit | NSMonthCalendarUnit;
 			[comp01 setWeek:-number+1];
 			[comp01 setDay:-1];
 			[comp02 setWeek:-number02];
@@ -274,7 +264,7 @@
 	NSDate *pastDay01 = [aCalendar dateByAddingComponents:comp01 toDate:aDay options:0];
 	NSDate *pastDay02 = [aCalendar dateByAddingComponents:comp02 toDate:aDay options:0];
 	
-	id result = [NSArray arrayWithObjects:pastDay01, pastDay02, nil];
+	id result = [NSArray arrayWithObjects:pastDay02, pastDay01, nil];
 	return result;
 }
 - (NSArray *)dateRangeFromVariable:(NSString *)date

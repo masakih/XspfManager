@@ -86,6 +86,9 @@
 + (BOOL)isNumberKeyPath:(NSString *)keyPath;
 + (BOOL)isRateKeyPath:(NSString *)keyPath;
 + (BOOL)isLabelKeyPath:(NSString *)keyPath;
+// from BathyScaphe
++ (BOOL)isBooleanKeyPath:(NSString *)keyPath;
+
 //- (BOOL)isDateKeyPath:(NSString *)keyPath;
 //- (BOOL)isStringKeyPath:(NSString *)keyPath;
 //- (BOOL)isNumberKeyPath:(NSString *)keyPath;
@@ -96,6 +99,9 @@
 + (void)registerStringTypeKeyPaths:(NSArray *)keyPaths;
 + (void)registerDateTypeKeyPaths:(NSArray *)keyPaths;
 + (void)registerNumberTypeKeyPaths:(NSArray *)keyPaths;
+// from BathyScaphe
++ (void)registerBooleanTypeKeyPaths:(NSArray *)keyPaths;
+
 + (void)setUseRating:(BOOL)flag;
 + (void)setRatingKeyPath:(NSString *)keyPath;	// default key is @"rating".
 + (void)setUseLablel:(BOOL)flag;

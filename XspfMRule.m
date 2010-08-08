@@ -227,6 +227,7 @@ static NSArray *leftKeys = nil;
 static NSArray *stringKeys = nil;
 static NSArray *dateKeys = nil;
 static NSArray *numberKeys = nil;
+static NSArray *booleanKeys = nil;
 static NSString *rateingKeyPath = @"rating";
 static NSString *labelKeyPath = @"label";
 static BOOL useRating = NO;
@@ -258,6 +259,15 @@ static BOOL useLabel = NO;
 		leftKeys = nil;
 	}
 	numberKeys = [[NSArray arrayWithArray:keyPaths] retain];
+}
++ (void)registerBooleanTypeKeyPaths:(NSArray *)keyPaths
+{
+	if(booleanKeys) {
+		[booleanKeys release];
+		[leftKeys release];
+		leftKeys = nil;
+	}
+	booleanKeys = [[NSArray arrayWithArray:keyPaths] retain];
 }
 + (void)setUseRating:(BOOL)flag
 {
@@ -294,6 +304,7 @@ static BOOL useLabel = NO;
 		[temp addObjectsFromArray:stringKeys];
 		[temp addObjectsFromArray:dateKeys];
 		[temp addObjectsFromArray:numberKeys];
+		[temp addObjectsFromArray:booleanKeys];
 		if(useRating) {
 			[temp addObject:rateingKeyPath];
 		}
@@ -339,6 +350,18 @@ static inline BOOL isNumberKeyPath(NSString *keyPath)
 - (BOOL)isNumberKeyPath:(NSString *)keyPath
 {
 	return isNumberKeyPath(keyPath);
+}
+static inline BOOL isBooleanKeyPath(NSString *keyPath)
+{
+	return [booleanKeys containsObject:keyPath];
+}
++ (BOOL)isBooleanKeyPath:(NSString *)keyPath
+{
+	return isBooleanKeyPath(keyPath);
+}
+- (BOOL)isBooleanKeyPath:(NSString *)keyPath
+{
+	return isBooleanKeyPath(keyPath);
 }
 + (BOOL)isRateKeyPath:(NSString *)keyPath
 {
@@ -723,6 +746,11 @@ static NSString *const XspfMRuleValueKey = @"XspfMRuleValueKey";
 	expression02 = [NSExpression expressionForConstantValue:[NSNumber numberWithInteger:value02]];
 	
 	return [NSExpression expressionForAggregate:[NSArray arrayWithObjects:expression01, expression02, nil]];
+}
+
+- (NSExpression *)falseExpression
+{
+	return [NSExpression expressionForConstantValue:[NSNumber numberWithBool:NO]];
 }
 @end
 

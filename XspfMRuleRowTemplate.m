@@ -104,6 +104,8 @@
 		key = @"Rate";
 	} else if([XspfMRule isLabelKeyPath:leftKeypath]) {
 		key = @"Label";
+	} else if([XspfMRule isBooleanKeyPath:leftKeypath]) {
+		key = @"Boolean";
 	}
 	
 	return key;
