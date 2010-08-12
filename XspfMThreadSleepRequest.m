@@ -59,10 +59,10 @@
  POSSIBILITY OF SUCH DAMAGE.
 */
 
-#import "XspfMThreadSpleepRequest.h"
+#import "XspfMThreadSleepRequest.h"
 
 
-@implementation XspfMThreadSpleepRequest
+@implementation XspfMThreadSleepRequest
 + (id)requestWithSleepTime:(NSTimeInterval)time
 {
 	return [[[self alloc] initWithSleepTime:time] autorelease];

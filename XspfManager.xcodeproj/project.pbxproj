@@ -63,7 +63,7 @@
 		F48B3608112EDAF900D1DE39 /* HMXSPFTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = F48B3601112EDAF900D1DE39 /* HMXSPFTrack.m */; };
 		F48B3609112EDAF900D1DE39 /* HMXSPFTrackList.m in Sources */ = {isa = PBXBuildFile; fileRef = F48B3603112EDAF900D1DE39 /* HMXSPFTrackList.m */; };
 		F499881910DDAD3800AAC6D6 /* XspfMRule_NSExpressionFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = F499881810DDAD3800AAC6D6 /* XspfMRule_NSExpressionFunctions.m */; };
-		F499886B10DDFB3E00AAC6D6 /* XspfMThreadSpleepRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F499886A10DDFB3E00AAC6D6 /* XspfMThreadSpleepRequest.m */; };
+		F499886B10DDFB3E00AAC6D6 /* XspfMThreadSleepRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F499886A10DDFB3E00AAC6D6 /* XspfMThreadSleepRequest.m */; };
 		F4998DA110E6C7CB00AAC6D6 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4998DA010E6C7CB00AAC6D6 /* MainWindow.xib */; };
 		F49BCF9510A45178007136CE /* XspfMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BCF9410A45178007136CE /* XspfMViewController.m */; };
 		F49BD01010A47781007136CE /* ListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F49BD00E10A47780007136CE /* ListView.xib */; };
@@ -221,8 +221,8 @@
 		F48B3602112EDAF900D1DE39 /* HMXSPFTrackList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMXSPFTrackList.h; sourceTree = "<group>"; };
 		F48B3603112EDAF900D1DE39 /* HMXSPFTrackList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMXSPFTrackList.m; sourceTree = "<group>"; };
 		F499881810DDAD3800AAC6D6 /* XspfMRule_NSExpressionFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMRule_NSExpressionFunctions.m; sourceTree = "<group>"; };
-		F499886910DDFB3E00AAC6D6 /* XspfMThreadSpleepRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMThreadSpleepRequest.h; sourceTree = "<group>"; };
-		F499886A10DDFB3E00AAC6D6 /* XspfMThreadSpleepRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMThreadSpleepRequest.m; sourceTree = "<group>"; };
+		F499886910DDFB3E00AAC6D6 /* XspfMThreadSleepRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMThreadSleepRequest.h; sourceTree = "<group>"; };
+		F499886A10DDFB3E00AAC6D6 /* XspfMThreadSleepRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMThreadSleepRequest.m; sourceTree = "<group>"; };
 		F499CBE710DA7A960053923E /* XspfMRule_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMRule_private.h; sourceTree = "<group>"; };
 		F49BCF9310A45175007136CE /* XspfMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMViewController.h; sourceTree = "<group>"; };
 		F49BCF9410A45178007136CE /* XspfMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMViewController.m; sourceTree = "<group>"; };
@@ -494,8 +494,8 @@
 				F47C04F9109DC19C00F5991C /* HMWorker.h */,
 				F47C04FA109DC19C00F5991C /* HMWorker.m */,
 				F47C04FB109DC19C00F5991C /* HMWorkerProtocols.h */,
-				F499886910DDFB3E00AAC6D6 /* XspfMThreadSpleepRequest.h */,
-				F499886A10DDFB3E00AAC6D6 /* XspfMThreadSpleepRequest.m */,
+				F499886910DDFB3E00AAC6D6 /* XspfMThreadSleepRequest.h */,
+				F499886A10DDFB3E00AAC6D6 /* XspfMThreadSleepRequest.m */,
 			);
 			name = WorkerThread;
 			sourceTree = "<group>";
@@ -683,7 +683,7 @@
 				F4A6FAE610C2442E00345D77 /* XspfMRule.m in Sources */,
 				F478A95A10DD1F0F000A75B4 /* XspfMRule_Subclasses.m in Sources */,
 				F499881910DDAD3800AAC6D6 /* XspfMRule_NSExpressionFunctions.m in Sources */,
-				F499886B10DDFB3E00AAC6D6 /* XspfMThreadSpleepRequest.m in Sources */,
+				F499886B10DDFB3E00AAC6D6 /* XspfMThreadSleepRequest.m in Sources */,
 				F45AB02310EE3675005BE9C1 /* HMUtilities.m in Sources */,
 				F481B3F910F08DE200B7EA4F /* XspfMSplitView.m in Sources */,
 				F481B70A10F0F80700B7EA4F /* XspfMLabelCell.m in Sources */,

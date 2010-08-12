@@ -61,7 +61,7 @@
 
 #import "XspfMMainThreadRequest.h"
 
-@interface XspfMThreadSpleepRequest : XspfMMainThreadRequest
+@interface XspfMThreadSleepRequest : XspfMMainThreadRequest
 {
 	NSTimeInterval sleepTime;
 }

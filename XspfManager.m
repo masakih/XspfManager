@@ -67,7 +67,7 @@
 #import "XspfMMainWindowController.h"
 #import "XspfMPreviewPanelController.h"
 
-#import "XspfMThreadSpleepRequest.h"
+#import "XspfMThreadSleepRequest.h"
 #import "XspfMCheckFileModifiedRequest.h"
 #import "XspfMMovieLoadRequest.h"
 
@@ -382,7 +382,7 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 	UKKQueue *queue = [UKKQueue sharedFileWatcher];
 	[queue setDelegate:self];
 	
-	XspfMThreadSpleepRequest *request = [XspfMThreadSpleepRequest requestWithSleepTime:0.5];
+	XspfMThreadSleepRequest *request = [XspfMThreadSleepRequest requestWithSleepTime:0.5];
 	[[self channel] putRequest:request];
 	
 	[self performSelector:@selector(registerToUKKQueue) withObject:nil afterDelay:0.0];
