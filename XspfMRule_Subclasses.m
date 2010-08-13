@@ -130,7 +130,7 @@
 		if([value isEqualToString:@"dateField"]) {
 			aTag = XspfMPrimaryDateFieldTag;
 		} else {
-			aTag = XspfMSeconraryDateFieldTag;
+			aTag = XspfMSecondaryDateFieldTag;
 		}
 	} else if([value hasPrefix:@"rateField"]) {
 		aType = XspfMRateFieldType;

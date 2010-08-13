@@ -217,7 +217,7 @@
 				tag = XspfMPrimaryDateFieldTag;
 			} else if([value isEqualToString:@"dateField02"]) {
 				fieldClass = [NSDatePicker class];
-				tag = XspfMSeconraryDateFieldTag;
+				tag = XspfMSecondaryDateFieldTag;
 			} else if([value isEqualToString:@"rateField"]) {
 				fieldClass = [NSLevelIndicator class];
 			} else if([value isEqualToString:@"numberField"]) {
@@ -547,7 +547,7 @@
 {
 	id value05 = [self field];
 	[value05 setObjectValue:[[[[predicate rightExpression] collection] objectAtIndex:1] constantValue]];
-	[value05 setTag:XspfMSeconraryDateFieldTag];
+	[value05 setTag:XspfMSecondaryDateFieldTag];
 	
 	return value05;
 }

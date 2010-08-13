@@ -138,7 +138,7 @@ enum XspfMFieldTag {
 	XspfMDefaultTag = 0,
 	
 	XspfMPrimaryDateFieldTag = 1000,
-	XspfMSeconraryDateFieldTag = 1100,
+	XspfMSecondaryDateFieldTag = 1100,
 	
 	XspfMPrimaryNumberFieldTag = 2000,
 	XspfMSecondaryNumberFieldTag = 2100,

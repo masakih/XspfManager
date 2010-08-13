@@ -228,7 +228,7 @@ static NSArray *stringKeys = nil;
 static NSArray *dateKeys = nil;
 static NSArray *numberKeys = nil;
 static NSArray *booleanKeys = nil;
-static NSString *rateingKeyPath = @"rating";
+static NSString *ratingKeyPath = @"rating";
 static NSString *labelKeyPath = @"label";
 static BOOL useRating = NO;
 static BOOL useLabel = NO;
@@ -279,8 +279,8 @@ static BOOL useLabel = NO;
 }
 + (void)setRatingKeyPath:(NSString *)keyPath
 {
-	[rateingKeyPath release];
-	rateingKeyPath = [keyPath copy];
+	[ratingKeyPath release];
+	ratingKeyPath = [keyPath copy];
 }
 + (void)setUseLablel:(BOOL)flag
 {
@@ -306,7 +306,7 @@ static BOOL useLabel = NO;
 		[temp addObjectsFromArray:numberKeys];
 		[temp addObjectsFromArray:booleanKeys];
 		if(useRating) {
-			[temp addObject:rateingKeyPath];
+			[temp addObject:ratingKeyPath];
 		}
 		if(useLabel) {
 			[temp addObject:labelKeyPath];
@@ -365,11 +365,11 @@ static inline BOOL isBooleanKeyPath(NSString *keyPath)
 }
 + (BOOL)isRateKeyPath:(NSString *)keyPath
 {
-	return [keyPath isEqualToString:rateingKeyPath];
+	return [keyPath isEqualToString:ratingKeyPath];
 }
 - (BOOL)isRateKeyPath:(NSString *)keyPath
 {
-	return [keyPath isEqualToString:rateingKeyPath];
+	return [keyPath isEqualToString:ratingKeyPath];
 }
 + (BOOL)isLabelKeyPath:(NSString *)keyPath
 {
