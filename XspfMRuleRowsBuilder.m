@@ -86,13 +86,13 @@
 		Nil,
 	};
 	
-	NSInteger i = 0;
-	while(subclasses[i]) {
-		if([subclasses[i] canBuildPredicate:aPredicate]) {
-			id obj = [[subclasses[i] alloc] initWithPredicate:aPredicate];
+	Class *classesP = subclasses;
+	Class subclass = Nil;
+	while(subclass = *classesP++) {
+		if([subclass canBuildPredicate:aPredicate]) {
+			id obj = [[subclass alloc] initWithPredicate:aPredicate];
 			return obj;
 		}
-		i++;
 	}
 	
 	NSLog(@"Could not find corresponded concrete class.");
