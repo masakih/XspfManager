@@ -143,6 +143,11 @@ finish:
 	[splitView setDelegate:self];
 }
 
+- (void)setupLate
+{
+	[[NSApp mainWindow] addObserver:self forKeyPath:@"firstResponder" options:0 context:NULL];
+}
+
 - (void)setRepresentedObject:(id)representedObject
 {
 	id oldRep = [self representedObject];
@@ -157,6 +162,8 @@ finish:
 	[super setRepresentedObject:representedObject];
 	[listViewController setRepresentedObject:representedObject];
 	[coverFlow reloadData];
+	
+	[self performSelector:@selector(setupLate) withObject:nil afterDelay:0.5];
 }
 - (void)recalculateKeyViewLoop
 {
@@ -178,6 +185,13 @@ finish:
 	if([keyPath isEqualToString:@"selectionIndex"]) {
 		[coverFlow setSelectedIndex:[[self representedObject] selectionIndex]];
 		[listViewController scrollToSelection:self];
+		return;
+	}
+	if([keyPath isEqualToString:@"firstResponder"]) {
+		id firstResponder = [[splitView window] firstResponder];
+		if(firstResponder == coverFlow) {
+			[[splitView window] makeFirstResponder:[listViewController view]];
+		}
 		return;
 	}
 	
