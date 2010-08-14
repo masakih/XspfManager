@@ -99,11 +99,11 @@ static id previewPanel = nil;
 	if(isFirst) {
 		isFirst = NO;
 		if([[NSBundle bundleWithPath:@"/System/Library/PrivateFrameworks/QuickLookUI.framework"] load]) {
-			NSLog(@"Quick Look for 10.5 loaded!");
+			HMLog(HMLogLevelNotice, @"Quick Look for 10.5 loaded!");
 			osVersion = 105;
 		}
 		if([[NSBundle bundleWithPath:@"/System/Library/Frameworks/Quartz.framework/Frameworks/QuickLookUI.framework"] load]) {
-			NSLog(@"Quick Look for 10.6 loaded!");
+			HMLog(HMLogLevelNotice, @"Quick Look for 10.6 loaded!");
 			osVersion = 106;
 		}
 	}
