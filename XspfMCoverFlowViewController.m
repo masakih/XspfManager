@@ -288,6 +288,30 @@ finish:
 {
 	return 130;
 }
+- (void)splitView:(NSSplitView *)aSplitView resizeSubviewsWithOldSize:(NSSize)oldSize
+{
+	NSView *rightView = [[splitView subviews] objectAtIndex:1];
+	NSRect newsplitViewFrame = [splitView frame];
+	NSRect coverFlowFrame = [coverFlow frame];
+	NSRect listFrame = [rightView frame];
+	CGFloat dividerThickness = [splitView dividerThickness];
+	
+	coverFlowFrame.size.width = newsplitViewFrame.size.width;
+	listFrame.size.width = newsplitViewFrame.size.width;
+	
+	coverFlowFrame.size.height = newsplitViewFrame.size.height - listFrame.size.height - dividerThickness;
+	
+	if(listFrame.size.height < 0) {
+		listFrame.size.height = 0;
+		coverFlowFrame.size = newsplitViewFrame.size;
+	}
+	
+	coverFlowFrame.origin.y = 0;
+	listFrame.origin.y = NSMaxY(coverFlowFrame) + dividerThickness;
+	
+	[coverFlow setFrame:coverFlowFrame];
+	[rightView setFrame:listFrame];
+}
 
 @end
 
