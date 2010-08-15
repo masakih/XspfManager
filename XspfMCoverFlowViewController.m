@@ -81,39 +81,6 @@
 
 @implementation XspfMCoverFlowViewController
 
-static IMP originalKeyDown = NULL;
-+ (void)initialize
-{
-	static BOOL isFirst = YES;
-	if(isFirst) {
-		isFirst = NO;
-		
-		Method originalMethod = class_getInstanceMethod(NSClassFromString(@"IKImageFlowView"), @selector(keyDown:));
-		Method replacedMethod = class_getInstanceMethod(self, @selector(hackKeyDown:));
-		IMP replacedIMP = method_getImplementation(replacedMethod);
-		originalKeyDown = method_setImplementation(originalMethod, replacedIMP);
-	}
-}
-- (void)hackKeyDown:(NSEvent *)theEvent
-{
-	if([theEvent isARepeat]) goto finish;
-	
-#define kRETURN_KEY	36
-#define kENTER_KEY	52
-	unsigned short code = [theEvent keyCode];
-	switch(code) {
-		case kRETURN_KEY:
-		case kENTER_KEY:
-			[NSApp sendAction:@selector(openXspf:) to:nil from:nil];
-			return;
-		case 49:
-			[NSApp sendAction:@selector(togglePreviewPanel:) to:nil from:nil];
-			return;
-	}
-finish:
-	originalKeyDown(self, _cmd, theEvent);
-}
-
 - (id)init
 {
 	self = [super initWithNibName:@"XspfMCoverFlowView" bundle:nil];
