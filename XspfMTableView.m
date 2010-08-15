@@ -169,6 +169,7 @@
 			break;
 		case 49:
 			[NSApp sendAction:@selector(togglePreviewPanel:) to:nil from:nil];
+			return;
 			break;
 	}
 	
