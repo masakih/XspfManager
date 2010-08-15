@@ -108,11 +108,21 @@
 	[self recalculateKeyViewLoop];
 	
 	[splitView setDelegate:self];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(windowDidUpdate:)
+												 name:NSWindowDidUpdateNotification
+											   object:nil];
 }
 
-- (void)setupLate
+- (void)windowDidUpdate:(id)notification
 {
-	[[NSApp mainWindow] addObserver:self forKeyPath:@"firstResponder" options:0 context:NULL];
+	NSWindow *window = [notification object];
+	
+	if(window == [[self view] window]) {
+		[[NSApp mainWindow] addObserver:self forKeyPath:@"firstResponder" options:0 context:NULL];
+		[[NSNotificationCenter defaultCenter] removeObserver:self name:[notification name] object:nil];
+	}
 }
 
 - (void)setRepresentedObject:(id)representedObject
@@ -129,8 +139,6 @@
 	[super setRepresentedObject:representedObject];
 	[listViewController setRepresentedObject:representedObject];
 	[coverFlow reloadData];
-	
-	[self performSelector:@selector(setupLate) withObject:nil afterDelay:0.5];
 }
 - (void)recalculateKeyViewLoop
 {
