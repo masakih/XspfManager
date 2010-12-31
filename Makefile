@@ -21,7 +21,10 @@ LocalizeFiles=XspfMLabelMenuView.m \
 			  XspfMLibraryViewController.m \
 			  XspfMXspfListObject.m \
 			  XspfMCoverFlowViewController.m \
-			  XspfManager.m
+			  XspfManager.m \
+			  XspfQTComponents/XspfQTMovieViewController.m \
+			  XspfQTComponents/XspfQTDocument.m \
+			  XspfQTComponents/XspfQTMovieWindowController.m
 
 all:
 	@echo do  nothig.
@@ -54,7 +57,7 @@ package: release
 updateRevision: update_svn
 	if [ ! -f $(INFO_PLIST).bak ] ; then cp $(INFO_PLIST) $(INFO_PLIST).bak ; fi ;	\
 	REV=`LC_ALL=C svn info | awk '/Last Changed Rev/ {print $$4}'` ;	\
-	sed -e "s/%%%%REVISION%%%%/$${REV}-beta/" $(INFO_PLIST) > $(INFO_PLIST).r ;	\
+	sed -e "s/%%%%REVISION%%%%/$${REV}/" $(INFO_PLIST) > $(INFO_PLIST).r ;	\
 	mv -f $(INFO_PLIST).r $(INFO_PLIST) ;	\
 
 restorInfoPlist:

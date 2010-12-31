@@ -65,7 +65,14 @@
 
 @class XspfMXspfObject;
 @class XspfMPreviewPanelController;
+@class XspfMAppleRemoteSupport;
 @protocol UKFileWatcher;
+
+typedef enum {
+	modeList = 0,
+	modeMovie = 1,
+} XspfMViwMode;
+
 
 @interface XspfManager : NSObject 
 {
@@ -77,8 +84,17 @@
 	
 	IBOutlet NSMenu *objectMenu;
 	
+	XspfMViwMode mode_;
+	NSMenuItem *viewMenuItem;
+	NSMenuItem *movieControlMenuItem;
+	
 	XspfMPreviewPanelController *pController;
+	
+	XspfMAppleRemoteSupport *appleRemoteSupprt;
 }
+@property XspfMViwMode mode;
+@property (nonatomic, retain) IBOutlet NSMenuItem *viewMenuItem;
+@property (nonatomic, retain) IBOutlet NSMenuItem *movieControlMenuItem;
 
 - (NSString *)applicationSupportFolder;
 

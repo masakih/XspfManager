@@ -78,8 +78,27 @@
 #import "NSPathUtilities-HMExtensions.h"
 #import "NSWorkspace-HMExtensions.h"
 
+#import "XspfMAppleRemoteSupport.h"
+
+@interface XspfManager(Debugging)
+- (void)setupDebugMenu;
+@end
+
+
 @implementation XspfManager
 NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXspfObjectsNotification";
+
+@synthesize mode = mode_;
+@synthesize viewMenuItem, movieControlMenuItem;
+
+
+- (id)init
+{
+	[super init];
+	appleRemoteSupprt = [[XspfMAppleRemoteSupport alloc] init];
+	
+	return self;
+}
 
 /**
     Returns the support folder for the application, used to store the Core Data
@@ -244,7 +263,10 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 	
 	return reply;
 }
-
+- (BOOL)applicationShouldOpenUntitledFile:(NSApplication *)sender
+{
+	return NO;
+}
 
 /**
     Implementation of dealloc, to release the retained variables.
@@ -255,25 +277,21 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 	[managedObjectContext release], managedObjectContext = nil;
 	[persistentStoreCoordinator release], persistentStoreCoordinator = nil;
 	[managedObjectModel release], managedObjectModel = nil;
+	
+	[appleRemoteSupprt release];
+	
 	[super dealloc];
+}
+
+- (void)awakeFromNib
+{
+//	[movieControlMenuItem retain];
+	[[movieControlMenuItem menu] removeItem:movieControlMenuItem];
 }
 
 - (IBAction)launchXspfQT:(id)sender
 {
 	[[NSWorkspace sharedWorkspace] launchApplication:[XspfMPreferences sharedPreference].playerName];
-}
-
-
--(IBAction)toggleEnableLog:(id)sender
-{
-	NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-	[ud setBool:![ud boolForKey:@"HMLogEnable"] forKey:@"HMLogEnable"];
-}
-- (IBAction)changeLogLevel:(id)sender
-{
-	NSInteger level = [sender tag];
-	NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-	[ud setInteger:level forKey:@"HMLogLevel"];
 }
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
@@ -310,69 +328,23 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 	
 	return YES;
 }
-- (void)setupDebugMenu
+
+#pragma mark#### KVC & KVO ####
+- (void)setMode:(XspfMViwMode)mode
 {
-	NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-	if(![ud boolForKey:@"HMEnableDebugMenu"]) return;
+	if(mode != modeList & mode != modeMovie) return;
 	
-	NSMenu *debugMenu = [[[NSMenu alloc] initWithTitle:@"Debug"] autorelease];
-	NSMenuItem *enableLogItem = [[[NSMenuItem alloc] initWithTitle:@"Enable log"
-															action:@selector(toggleEnableLog:)
-													 keyEquivalent:@""] autorelease];
-	[debugMenu addItem:enableLogItem];
-	
-	[debugMenu addItem:[NSMenuItem separatorItem]];
-	
-	NSMenuItem *logLevelItem = [[[NSMenuItem alloc] initWithTitle:@"Debug level"
-														   action:@selector(changeLogLevel:)
-													keyEquivalent:@""] autorelease];
-	[logLevelItem setTag:HMLogLevelDebug];
-	[debugMenu addItem:logLevelItem];
-	
-	logLevelItem = [[[NSMenuItem alloc] initWithTitle:@"Notice level"
-											   action:@selector(changeLogLevel:)
-										keyEquivalent:@""] autorelease];
-	[logLevelItem setTag:HMLogLevelNotice];
-	[debugMenu addItem:logLevelItem];
-	
-	logLevelItem = [[[NSMenuItem alloc] initWithTitle:@"Caution level"
-											   action:@selector(changeLogLevel:)
-										keyEquivalent:@""] autorelease];
-	[logLevelItem setTag:HMLogLevelCaution];
-	[debugMenu addItem:logLevelItem];
-	
-	logLevelItem = [[[NSMenuItem alloc] initWithTitle:@"Alert level"
-											   action:@selector(changeLogLevel:)
-										keyEquivalent:@""] autorelease];
-	[logLevelItem setTag:HMLogLevelAlert];
-	[debugMenu addItem:logLevelItem];
-	
-	[debugMenu addItem:[NSMenuItem separatorItem]];
-	
-	NSMenuItem *testItem;
-	
-	testItem = [[[NSMenuItem alloc] initWithTitle:@"test01"
-										   action:@selector(test01:)
-									keyEquivalent:@""] autorelease];
-	[debugMenu addItem:testItem];
-	
-	testItem = [[[NSMenuItem alloc] initWithTitle:@"test02"
-										   action:@selector(test02:)
-									keyEquivalent:@""] autorelease];
-	[debugMenu addItem:testItem];
-	
-	testItem = [[[NSMenuItem alloc] initWithTitle:@"test03"
-										   action:@selector(test03:)
-									keyEquivalent:@""] autorelease];
-	[debugMenu addItem:testItem];
-	
-	NSMenu *menubar = [NSApp mainMenu];
-	NSUInteger itemCount = [[menubar itemArray] count];
-	NSMenuItem *debugMenuItem = [menubar insertItemWithTitle:@"Debug"
-													  action:Nil
-											   keyEquivalent:@""
-													 atIndex:itemCount - 1];
-	[debugMenuItem setSubmenu:debugMenu];
+	mode_ = mode;
+	switch(mode) {
+		case modeList:
+			[[NSApp mainMenu] removeItem:movieControlMenuItem];
+			[[NSApp mainMenu] insertItem:viewMenuItem atIndex:3];
+			break;
+		case modeMovie:
+			[[NSApp mainMenu] removeItem:viewMenuItem];
+			[[NSApp mainMenu] insertItem:movieControlMenuItem atIndex:3];
+			break;
+	}
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification
@@ -554,7 +526,7 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 	}
 }
 
--(void) watcher:(id<UKFileWatcher>)kq receivedNotification:(NSString*)notificationName forPath: (NSString*)filePath
+- (void)watcher:(id<UKFileWatcher>)kq receivedNotification:(NSString*)notificationName forPath: (NSString*)filePath
 {
 	HMLog(HMLogLevelDebug, @"UKKQueue notification. %@", notificationName);
 	if(![NSThread isMainThread]) {

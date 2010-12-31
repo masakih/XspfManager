@@ -72,6 +72,17 @@
 
 #import "XspfMPreferences.h"
 
+#import "XspfQTMovieWindowController.h"
+#import "XspfMPlayListViewController.h"
+
+#import "NSControl_Validation.h"
+
+
+@interface XspfMMainWindowController()
+@property (retain) XspfMPlayListViewController *playListViewController;
+@property (retain) XspfQTMovieViewController *movieViewController;
+@end
+
 
 @interface XspfMMainWindowController(HMPrivate)
 - (void)setupXspfLists;
@@ -85,17 +96,21 @@
 
 - (BOOL)isOpenDetailView;
 - (BOOL)validateControl:(id)anItem;
+- (void)autoControlValidate;
 @end
 
 
 @implementation XspfMMainWindowController
+@synthesize movieViewController, playListViewController;
+@synthesize spin;
+
 - (id)init
 {
 	self = [super initWithWindowNibName:@"MainWindow"];
 	if(self) {
-		viewControllers = [[NSMutableDictionary alloc] init];
+		listViewControllers = [[NSMutableDictionary alloc] init];
 	}
-		
+	
 	return self;
 }
 - (void)awakeFromNib
@@ -110,9 +125,8 @@
 			   selector:@selector(managerDidAddObjects:)
 				   name:XspfManagerDidAddXspfObjectsNotification
 				 object:appDelegate];
-				
-		[self window];
 		
+		[self window];
 	}
 }
 - (void)windowDidLoad
@@ -131,11 +145,12 @@
 			[splitView setPosition:pref.splitViewLeftWidth ofDividerAtIndex:0];
 		}
 	}
-	[self validateControl:detailViewButton];
+//	[self validateControl:detailViewButton];
+	[self autoControlValidate];
 	
 	[self setCurrentListViewType:pref.viewType];
 	
-	[listController bind:NSManagedObjectContextBinding
+	[libraryController bind:NSManagedObjectContextBinding
 				toObject:appDelegate
 			 withKeyPath:@"managedObjectContext"
 				 options:nil];
@@ -154,7 +169,7 @@
 	[self showWindow:self];
 	
 	// load時にこれを行うと循環的にRearrangeが実行されてしまう。
-	[listController setAutomaticallyRearrangesObjects:YES];
+	[libraryController setAutomaticallyRearrangesObjects:YES];
 }
 #pragma mark#### KVC ####
 
@@ -169,22 +184,185 @@
 	[XspfMPreferences sharedPreference].viewType = newType;
 	
 	[self changeViewType:newType];
+	[self autoControlValidate];
+}
+
+- (XspfMViwMode)mode
+{
+	return appDelegate.mode;
+}
+- (void)setMode:(XspfMViwMode)newMode
+{
+	appDelegate.mode = newMode;
+	[self performSelector:@selector(autoControlValidate) withObject:nil afterDelay:0.0];
+}
+- (void)relocateSpin
+{
+	NSRect spinRect = spin.frame;
+	NSRect contentViewFrame = listPlaceholderView.frame;
+	spinRect.origin.x = (NSWidth(contentViewFrame) - NSWidth(spinRect)) / 2;
+	spinRect.origin.y = (NSHeight(contentViewFrame) - NSHeight(spinRect)) / 2;
+	spin.frame = spinRect;
+}
+- (NSProgressIndicator *)spin
+{
+	if(spin) {
+		[self relocateSpin];
+		return spin;
+	}
+	
+	NSRect spinRect = { {0,0}, {200,200} };
+	spin = [[[NSProgressIndicator alloc] initWithFrame:spinRect] autorelease];
+	spin.usesThreadedAnimation = YES;
+	spin.style = NSProgressIndicatorSpinningStyle;
+	[spin setDisplayedWhenStopped:YES];
+	[spin sizeToFit];
+	[self relocateSpin];
+	[listPlaceholderView addSubview:spin];
+	return spin;
 }
 
 #pragma mark#### Actions ####
+
+- (void)removePlayerView:(NSView *)playerView
+{
+	[playerView setHidden:YES];
+	[playerView removeFromSuperview];
+	
+	// List view
+	NSView *playListView = playListViewController.view;
+	[playListView removeFromSuperview];
+	self.playListViewController = nil;
+	
+	NSDocument *doc = movieViewController.representedObject;
+	[doc close];
+	self.movieViewController = nil;
+	
+	[self.window makeFirstResponder:listViewController.initialFirstResponder];
+}
+- (void)wipeOut:(NSView *)playerView
+{
+	NSTimeInterval duration = 0.3;
+	[[NSAnimationContext currentContext] setDuration:duration];
+	
+	NSRect listViewFrame = listPlaceholderView.frame;
+	NSView *listViewContentView = listViewController.view;
+	NSRect listViewContentViewFrame = listViewContentView.frame;
+	listViewContentViewFrame.origin.x = 0;
+	listViewContentViewFrame.size = listViewFrame.size;
+	[[listViewContentView animator] setFrame:listViewContentViewFrame];
+	
+	NSRect playerViewFrame = playerView.frame;
+	playerViewFrame.origin.x = NSWidth(listViewFrame);
+	[[playerView animator] setFrame:playerViewFrame];
+	
+	// List view
+	NSView *playListView = playListViewController.view;
+	NSRect playListViewFrame = playListView.frame;
+	playListViewFrame.origin.y = -NSHeight(libraryPlaceholderView.frame);
+	[[playListView animator] setFrame:playListViewFrame];
+	
+	[self performSelector:@selector(removePlayerView:) withObject:playerView afterDelay:duration + 0.01];
+}
+- (IBAction)returnToList:(id)sender
+{
+	movieViewController.fullScreenMode = NO;
+	
+	NSView *playerView = movieViewController.view;
+	[listPlaceholderView addSubview:listViewController.view positioned:NSWindowBelow relativeTo:playerView];
+	
+	[movieViewController pause];
+	
+	[self performSelector:@selector(wipeOut:) withObject:playerView afterDelay:0.0];
+	self.mode = modeList;
+}
+
+- (void)hideListContentView
+{
+	[listViewController.view removeFromSuperview];
+	[spin stopAnimation:self];
+	
+	[movieViewController play];
+}
+- (void)wipeIn
+{
+	NSTimeInterval duration = 0.3;
+	[[NSAnimationContext currentContext] setDuration:duration];
+	
+	NSView *playerView = movieViewController.view;
+	NSView *listViewContentView = listViewController.view;
+	NSRect listViewContentViewFrame = listViewContentView.frame;
+	listViewContentViewFrame.origin.x -= NSWidth(listPlaceholderView.frame);
+	[[listViewContentView animator] setFrame:listViewContentViewFrame];
+	
+	NSRect playerViewFrame = playerView.frame;
+	playerViewFrame.origin.x = 0;
+	[[playerView animator] setFrame:playerViewFrame];
+	
+	
+	// List view
+	NSView *playListView = playListViewController.view;
+	NSRect playListViewFrame = playListView.frame;
+	playListViewFrame.origin.y = -1;
+	[[playListView animator] setFrame:playListViewFrame];
+	
+	[self performSelector:@selector(hideListContentView) withObject:nil afterDelay:duration + 0.01];
+}
+- (void)prepareWipeIn
+{
+	[self.spin startAnimation:self];
+	XspfMXspfObject *rep = [controller valueForKeyPath:@"selection.self"];
+	
+	NSError *error = nil;
+	NSDocumentController *dc = [NSDocumentController sharedDocumentController];
+	NSDocument *doc = [dc openDocumentWithContentsOfURL:rep.url
+												display:NO
+												  error:&error];
+	if(doc) {
+		rep.lastPlayDate = [NSDate dateWithTimeIntervalSinceNow:0.0];
+	}
+	
+	[doc makeWindowControllers];
+	
+	NSArray *windowControllers = [doc windowControllers];
+	[windowControllers makeObjectsPerformSelector:@selector(window)];
+	XspfQTMovieWindowController *windowController = [windowControllers objectAtIndex:0];
+	self.movieViewController = windowController.contentViewController;
+	NSView *playerView = movieViewController.view;
+	NSRect playerViewFrame = playerView.frame;
+	NSRect listViewFrame = listPlaceholderView.frame;
+	playerViewFrame.origin.x = NSWidth(listViewFrame);
+	playerViewFrame.origin.y = 0;
+	playerViewFrame.size = listViewFrame.size;
+	playerView.frame = playerViewFrame;
+	[listPlaceholderView addSubview:playerView];
+	
+	
+	self.playListViewController = [[[XspfMPlayListViewController alloc] init] autorelease];
+	playListViewController.representedObject = doc;
+	NSView *playListView = [playListViewController view];
+	NSRect playListViewFrame = playListView.frame;
+	NSRect libViewFrame = libraryPlaceholderView.frame;
+	playListViewFrame.origin.x = -1;
+	playListViewFrame.origin.y = -NSHeight(libViewFrame) - 1;
+	playListViewFrame.size = libViewFrame.size;
+	playListViewFrame.size.height += 1;
+	playListViewFrame.size.width += 1;
+	playListView.frame = playListViewFrame;
+	[libraryPlaceholderView addSubview:playListView];
+}
 - (IBAction)openXspf:(id)sender
 {
 	BOOL isSelected = [[controller valueForKeyPath:@"selectedObjects.@count"] boolValue];
 	if(!isSelected) return;
 	
-	XspfMXspfObject *rep = [controller valueForKeyPath:@"selection.self"];
-	BOOL didOpen = [[NSWorkspace sharedWorkspace] openFile:rep.filePath
-										   withApplication:[XspfMPreferences sharedPreference].playerName];
-	if(didOpen) {
-		rep.lastPlayDate = [NSDate dateWithTimeIntervalSinceNow:0.0];
-		return;
-	}
+	[self prepareWipeIn];
 	
+	[self performSelector:@selector(wipeIn) withObject:nil afterDelay:0.0];
+	self.mode = modeMovie;
+	return;
+	
+	XspfMXspfObject *rep = [controller valueForKeyPath:@"selection.self"];
 	NSInteger result = NSRunCriticalAlertPanel(NSLocalizedString(@"Xspf is not found", @"Xspf is not found"),
 											   NSLocalizedString(@"\"%@\" is not found.",  @"\"%@\" is not found."),
 											   nil, nil/*@"Search Original"*/, nil, rep.title);
@@ -194,7 +372,6 @@
 		//
 #warning should implement.
 	}
-	
 }
 - (IBAction)switchListView:(id)sender
 {
@@ -214,7 +391,21 @@
 {
 	[self setCurrentListViewType:typeCoverFlowView];
 }
-
+- (IBAction)rotateViewType:(id)sender
+{
+	NSInteger newType = currentListViewType + 1;
+	if(newType > 3) newType = 1;
+	[self setCurrentListViewType:newType];
+}
+- (IBAction)switchActiveView:(id)sender
+{
+	id firstResponder = self.window.firstResponder;
+	if(firstResponder == listViewController.initialFirstResponder) {
+		[self.window makeFirstResponder:libraryViewController.initialFirstResponder];
+	} else {
+		[self.window makeFirstResponder:listViewController.initialFirstResponder];
+	}
+}
 - (void)sortByKey:(NSString *)key
 {
 	NSMutableArray *sortDescs = [[[controller sortDescriptors] mutableCopy] autorelease];
@@ -336,10 +527,10 @@
 {
 	XspfMPreferences *pref = [XspfMPreferences sharedPreference];
 	
-	NSPoint origin = [detailView frame].origin;
+	NSPoint origin = [detailPlaceholderView frame].origin;
 	NSSize size = NSZeroSize;
 	
-	CGFloat detailWidth = [detailView frame].size.width;
+	CGFloat detailWidth = [detailPlaceholderView frame].size.width;
 	if(![self isOpenDetailView]){ // show
 		origin.x -= detailWidth;
 		size = [splitView frame].size;
@@ -353,16 +544,15 @@
 		
 		pref.openDetailView = NO;
 	}
-	[[detailView animator] setFrameOrigin:origin];
+	[[detailPlaceholderView animator] setFrameOrigin:origin];
 	[[splitView animator] setFrameSize:size];
 	
 	// アニメーションが終わってから確認する。
-	id context = [NSAnimationContext currentContext];
+	NSAnimationContext *context = [NSAnimationContext currentContext];
 	NSTimeInterval duration = [context duration];
 	[self performSelector:@selector(validateControl:) withObject:detailViewButton afterDelay:duration + 0.1];
 }
-
-- (BOOL)validateMenuItem:(NSMenuItem *)menuItem
+- (BOOL)validateMenuItemForListMode:(NSMenuItem *)menuItem
 {
 	BOOL enabled = YES;
 	SEL action = [menuItem action];
@@ -410,13 +600,43 @@
 	
 	return enabled;
 }
-- (BOOL)validateControl:(id)anItem
+- (BOOL)validateMenuItemForMovieMode:(NSMenuItem *)menuItem
+{
+	if([self.movieViewController respondsToSelector:[menuItem action]]) {
+		return [self.movieViewController validateMenuItem:menuItem];
+	}
+	
+	return YES;
+}
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem
+{
+	switch(appDelegate.mode) {
+		case modeList:
+			return [self validateMenuItemForListMode:menuItem];
+			break;
+		case modeMovie:
+			return [self validateMenuItemForMovieMode:menuItem];
+			break;
+	}
+	
+	return NO;
+}
+
+- (BOOL)validateControl:(NSControl *)anItem
 {
 	if([detailViewButton isEqual:anItem]) {
 		if([self isOpenDetailView]) {
 			[detailViewButton setImage:[NSImage imageNamed:@"NSRightFacingTriangleTemplate"]];
 		} else {
 			[detailViewButton setImage:[NSImage imageNamed:@"NSLeftFacingTriangleTemplate"]];
+		}
+		return YES;
+	}
+	
+	SEL action = [anItem action];
+	if(action == @selector(newPredicate:)) {
+		if(self.mode == modeMovie) {
+			return NO;
 		}
 	}
 	return YES;
@@ -464,13 +684,13 @@
 	}
 	if(!className) return;
 	
-	XspfMViewController *targetContorller = [viewControllers objectForKey:className];
+	XspfMViewController *targetContorller = [listViewControllers objectForKey:className];
 	if(!targetContorller) {
 		targetContorller = [[[NSClassFromString(className) alloc] init] autorelease];
 		if(!targetContorller) return;
 		
 		id selectionIndexes = [controller selectionIndexes];
-		[viewControllers setObject:targetContorller forKey:className];
+		[listViewControllers setObject:targetContorller forKey:className];
 		[targetContorller view];
 		[targetContorller setRepresentedObject:controller];
 		[targetContorller recalculateKeyViewLoop];
@@ -479,8 +699,8 @@
 	
 	[[listViewController view] removeFromSuperview];
 	listViewController = targetContorller;
-	[listView addSubview:[listViewController view]];
-	NSRect rect = [listView bounds];
+	[listPlaceholderView addSubview:[listViewController view]];
+	NSRect rect = [listPlaceholderView bounds];
 	rect.size.height += 1;
 	rect.origin.y -= 1;
 	[[listViewController view] setFrame:rect];
@@ -499,9 +719,9 @@
 	if(libraryViewController) return;
 	
 	libraryViewController = [[XspfMLibraryViewController alloc] init];
-	[libraryViewController setRepresentedObject:listController];
-	[libraryView addSubview:[libraryViewController view]];
-	NSRect rect = [libraryView bounds];
+	[libraryViewController setRepresentedObject:libraryController];
+	[libraryPlaceholderView addSubview:[libraryViewController view]];
+	NSRect rect = [libraryPlaceholderView bounds];
 	rect.size.width += 2;
 	rect.origin.x -= 1;
 	rect.size.height += 1;
@@ -515,8 +735,8 @@
 	
 	detailViewController = [[XspfMDetailViewController alloc] init];
 	[detailViewController setRepresentedObject:controller];
-	[detailView addSubview:[detailViewController view]];
-	[[detailViewController view] setFrame:[detailView bounds]];
+	[detailPlaceholderView addSubview:[detailViewController view]];
+	[[detailViewController view] setFrame:[detailPlaceholderView bounds]];
 	[detailViewController recalculateKeyViewLoop];
 }
 - (void)setupAccessorylView
@@ -525,8 +745,8 @@
 	
 	accessoryViewController = [[NSViewController alloc] initWithNibName:@"AccessoryView" bundle:nil];
 	[accessoryViewController setRepresentedObject:[appDelegate channel]];
-	[accessoryView addSubview:[accessoryViewController view]];
-	[[accessoryViewController view] setFrame:[accessoryView bounds]];
+	[accessoryPlaceholderView addSubview:[accessoryViewController view]];
+	[[accessoryViewController view] setFrame:[accessoryPlaceholderView bounds]];
 //	[accessoryViewController recalculateKeyViewLoop];
 }
 #pragma mark#### NSWidnow Delegate ####
@@ -542,7 +762,7 @@
 - (void)windowWillClose:(NSNotification *)notification
 {
 	XspfMPreferences *pref = [XspfMPreferences sharedPreference];
-	pref.splitViewLeftWidth = [libraryView frame].size.width;
+	pref.splitViewLeftWidth = [libraryPlaceholderView frame].size.width;
 }
 
 #pragma mark#### NSOpenPanel Delegate ####
@@ -559,7 +779,7 @@
 {
 	NSView *rightView = [[splitView subviews] objectAtIndex:1];
 	NSRect newFrame = [splitView frame];
-	NSRect libFrame = [libraryView frame];
+	NSRect libFrame = [libraryPlaceholderView frame];
 	NSRect listFrame = [rightView frame];
 	CGFloat dividerThickness = [splitView dividerThickness];
 	
@@ -570,7 +790,7 @@
 	
 	if(listFrame.size.width < 0) listFrame.size.width = 0;
 	
-	[libraryView setFrame:libFrame];
+	[libraryPlaceholderView setFrame:libFrame];
 	[rightView setFrame:listFrame];
 }
 
@@ -588,9 +808,9 @@
 #pragma mark#### Test ####
 - (IBAction)test01:(id)sender
 {
-	NSPoint origin = [detailView frame].origin;
-	origin.x = [[detailView window] frame].size.width;
-	[detailView setFrameOrigin:origin];
+	NSPoint origin = [detailPlaceholderView frame].origin;
+	origin.x = [[detailPlaceholderView window] frame].size.width;
+	[detailPlaceholderView setFrameOrigin:origin];
 }
 - (IBAction)test02:(id)sender
 {
@@ -600,10 +820,35 @@
 		responder = [responder nextResponder];
 	}
 }
-- (IBAction)test03:(id)sender
-{
-	[listController setAutomaticallyRearrangesObjects:YES];
-
-}
+//- (IBAction)test03:(id)sender
+//{
+//	[listController setAutomaticallyRearrangesObjects:YES];
+//
+//}
 @end
 
+@implementation XspfMMainWindowController (MessageForwarding)
+- (BOOL)respondsToSelector:(SEL)aSelector
+{
+	if([super respondsToSelector:aSelector]) return YES;
+	if([self.movieViewController respondsToSelector:aSelector]) return YES;
+	
+	return NO;
+}
+- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector
+{
+	if([self.movieViewController respondsToSelector:aSelector]) {
+		return [self.movieViewController methodSignatureForSelector:aSelector];
+	}
+	return [super methodSignatureForSelector:aSelector];
+}
+- (void)forwardInvocation:(NSInvocation *)anInvocation
+{
+	SEL selector = [anInvocation selector];
+	if([self.movieViewController respondsToSelector:selector]) {
+		[anInvocation invokeWithTarget:self.movieViewController];
+		return;
+	}
+}
+
+@end

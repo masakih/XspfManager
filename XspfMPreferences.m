@@ -166,5 +166,6 @@ static XspfMPreferences *sharedInstance = nil;
 - (void)setLibraryLastSelectedIndexSet:(NSInteger)newValue
 {
 	[self.userdefaults setInteger:newValue forKey:@"libraryLastSelectedIndexSet"];
+	[self.userdefaults synchronize];
 }
 @end

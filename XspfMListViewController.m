@@ -148,6 +148,23 @@
 	
 	[tableView scrollRectToVisible:rect];
 }
+- (void)moveUp:(id)sender
+{
+	NSUInteger row = [tableView selectedRow];
+	if(row == 0) return;
+	
+	NSIndexSet *newSelection = [NSIndexSet indexSetWithIndex:row - 1];
+	[tableView selectRowIndexes:newSelection byExtendingSelection:NO];
+}
+- (void)moveDown:(id)sender
+{
+	NSUInteger row = [tableView selectedRow];
+	if(row == [tableView numberOfRows] - 1) return;
+	
+	NSIndexSet *newSelection = [NSIndexSet indexSetWithIndex:row + 1];
+	[tableView selectRowIndexes:newSelection byExtendingSelection:NO];
+}
+
 
 // QLPreviewPanel support
 - (NSRect)selectionItemRect

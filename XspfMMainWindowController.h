@@ -73,46 +73,62 @@ typedef enum {
 
 @class XspfMViewController;
 @class XspfMLibraryViewController, XspfMDetailViewController;
+@class XspfMPlayListViewController, XspfQTMovieViewController;
 
 @interface XspfMMainWindowController : NSWindowController
 {
 	IBOutlet NSArrayController *allXspfController;
 	IBOutlet NSArrayController *controller;
-	IBOutlet id	appDelegate;
-	
+	IBOutlet XspfManager *appDelegate;
+		
 	IBOutlet NSWindow *progressPanel;
 	IBOutlet NSTextField *progressMessage;
 	IBOutlet NSProgressIndicator *progressBar;
 	
 	IBOutlet NSSplitView *splitView;
 	
-	IBOutlet NSView *listView;
+	NSProgressIndicator *spin;
+	
+	// List mode
+	IBOutlet NSView *listPlaceholderView;
 	XspfMViewController *listViewController;
 	XspfMViewType currentListViewType;
-	NSMutableDictionary *viewControllers;
+	NSMutableDictionary *listViewControllers;
 	
-	IBOutlet NSView *libraryView;
+	IBOutlet NSArrayController *libraryController;
+	IBOutlet NSView *libraryPlaceholderView;
 	XspfMLibraryViewController *libraryViewController;
 	
-	IBOutlet NSView *detailView;
+	IBOutlet NSView *detailPlaceholderView;
 	XspfMDetailViewController *detailViewController;
 	
-	IBOutlet NSView *accessoryView;
+	IBOutlet NSView *accessoryPlaceholderView;
 	NSViewController *accessoryViewController;
 	
-	IBOutlet NSArrayController *listController;
-	
 	IBOutlet NSSearchField *searchField;
-	
 	IBOutlet NSButton *detailViewButton;
+	
+	// Movie mode
+	XspfMPlayListViewController *playListViewController;
+	XspfQTMovieViewController *movieViewController;
 }
 
+@property XspfMViwMode mode;
+
+@property (retain, readonly) XspfMPlayListViewController *playListViewController;
+@property (retain, readonly) XspfQTMovieViewController *movieViewController;
+@property (retain, readonly) NSProgressIndicator *spin;
+
 - (IBAction)openXspf:(id)sender;
+- (IBAction)returnToList:(id)sender;
 
 - (IBAction)switchListView:(id)sender;
 - (IBAction)switchRegularIconView:(id)sender;
 - (IBAction)switchSmallIconView:(id)sender;
 - (IBAction)switchCoverFlowView:(id)sender;
+- (IBAction)rotateViewType:(id)sender;
+
+- (IBAction)switchActiveView:(id)sender;
 
 - (IBAction)sortByTitle:(id)sender;
 - (IBAction)sortByLastPlayDate:(id)sender;

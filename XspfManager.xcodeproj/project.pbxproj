@@ -62,6 +62,9 @@
 		F48B3607112EDAF900D1DE39 /* HMXSPFPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = F48B35FF112EDAF900D1DE39 /* HMXSPFPlaylist.m */; };
 		F48B3608112EDAF900D1DE39 /* HMXSPFTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = F48B3601112EDAF900D1DE39 /* HMXSPFTrack.m */; };
 		F48B3609112EDAF900D1DE39 /* HMXSPFTrackList.m in Sources */ = {isa = PBXBuildFile; fileRef = F48B3603112EDAF900D1DE39 /* HMXSPFTrackList.m */; };
+		F493106312C2EA8300981CAA /* XspfQTMovieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F493106212C2EA8300981CAA /* XspfQTMovieViewController.m */; };
+		F493114812C3294B00981CAA /* XspfQTPlayList.xib in Resources */ = {isa = PBXBuildFile; fileRef = F493114612C3294B00981CAA /* XspfQTPlayList.xib */; };
+		F493124E12C371B100981CAA /* XspfQTMovieView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F493124D12C371B100981CAA /* XspfQTMovieView.xib */; };
 		F499881910DDAD3800AAC6D6 /* XspfMRule_NSExpressionFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = F499881810DDAD3800AAC6D6 /* XspfMRule_NSExpressionFunctions.m */; };
 		F499886B10DDFB3E00AAC6D6 /* XspfMThreadSleepRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F499886A10DDFB3E00AAC6D6 /* XspfMThreadSleepRequest.m */; };
 		F4998DA110E6C7CB00AAC6D6 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4998DA010E6C7CB00AAC6D6 /* MainWindow.xib */; };
@@ -71,7 +74,31 @@
 		F49BD36910A66EC6007136CE /* XspfMXspfListObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BD36810A66EC6007136CE /* XspfMXspfListObject.m */; };
 		F4A6F90B10C1666600345D77 /* XspfMRuleEditorDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A6F90A10C1666600345D77 /* XspfMRuleEditorDelegate.m */; };
 		F4A6FAE610C2442E00345D77 /* XspfMRule.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A6FAE510C2442E00345D77 /* XspfMRule.m */; };
+		F4AB5F5912BCFF7600157355 /* XspfQTMovieTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AB5F4012BCFF7500157355 /* XspfQTMovieTimer.m */; };
+		F4AB5F5A12BCFF7600157355 /* XspfQTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AB5F4212BCFF7500157355 /* XspfQTAppDelegate.m */; };
+		F4AB5F5B12BCFF7600157355 /* XspfQTPreference.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AB5F4412BCFF7500157355 /* XspfQTPreference.m */; };
+		F4AB5F5C12BCFF7600157355 /* XspfQTDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AB5F4612BCFF7600157355 /* XspfQTDocument.m */; };
+		F4AB5F5D12BCFF7600157355 /* XspfQTMovieWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AB5F4812BCFF7600157355 /* XspfQTMovieWindowController.m */; };
+		F4AB5F5E12BCFF7600157355 /* XspfMPlayListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AB5F4A12BCFF7600157355 /* XspfMPlayListViewController.m */; };
+		F4AB5F5F12BCFF7600157355 /* XspfQTInformationWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AB5F4C12BCFF7600157355 /* XspfQTInformationWindowController.m */; };
+		F4AB5F6012BCFF7600157355 /* XspfQTPreferenceWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AB5F4E12BCFF7600157355 /* XspfQTPreferenceWindowController.m */; };
+		F4AB5F6212BCFF7600157355 /* XspfQTFullScreenWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AB5F5212BCFF7600157355 /* XspfQTFullScreenWindow.m */; };
+		F4AB5F6312BCFF7600157355 /* XspfQTMovieWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AB5F5412BCFF7600157355 /* XspfQTMovieWindow.m */; };
+		F4AB5F6412BCFF7600157355 /* XspfQTMovieView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AB5F5612BCFF7600157355 /* XspfQTMovieView.m */; };
+		F4AB5F6512BCFF7600157355 /* XspfQTMovieLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AB5F5812BCFF7600157355 /* XspfQTMovieLoader.m */; };
+		F4AB5F6912BCFFCD00157355 /* XspfQTDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4AB5F6712BCFFCD00157355 /* XspfQTDocument.xib */; };
+		F4AB5F8112BD00FF00157355 /* AppleRemote.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AB5F7912BD00FF00157355 /* AppleRemote.m */; };
+		F4AB5F8212BD00FF00157355 /* HIDRemoteControlDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AB5F7B12BD00FF00157355 /* HIDRemoteControlDevice.m */; };
+		F4AB5F8312BD00FF00157355 /* license.txt in Resources */ = {isa = PBXBuildFile; fileRef = F4AB5F7C12BD00FF00157355 /* license.txt */; };
+		F4AB5F8412BD00FF00157355 /* MultiClickRemoteBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AB5F7E12BD00FF00157355 /* MultiClickRemoteBehavior.m */; };
+		F4AB5F8512BD00FF00157355 /* RemoteControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AB5F8012BD00FF00157355 /* RemoteControl.m */; };
+		F4AB5F8B12BD017500157355 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4AB5F8A12BD017500157355 /* IOKit.framework */; };
+		F4AB5F9112BD01F000157355 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4AB5F9012BD01F000157355 /* Carbon.framework */; };
+		F4AB605612BD022D00157355 /* BSSUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AB605512BD022D00157355 /* BSSUtil.m */; };
 		F4BB59BB10BC0C3700EE50B7 /* LibraryPredicate.strings in Resources */ = {isa = PBXBuildFile; fileRef = F4BB59BA10BC0C3700EE50B7 /* LibraryPredicate.strings */; };
+		F4C5436112CB734D00214C74 /* XspfMAppleRemoteSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C5436012CB734D00214C74 /* XspfMAppleRemoteSupport.m */; };
+		F4C545B012CCF75600214C74 /* NSControl_Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C545AF12CCF75600214C74 /* NSControl_Validation.m */; };
+		F4CA77B212C72C6200DA456D /* XspfManager_Debugging.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CA77B112C72C6200DA456D /* XspfManager_Debugging.m */; };
 		F4CD0D261126FF4A007E31BC /* XspfMPreviewPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CD0D251126FF4A007E31BC /* XspfMPreviewPanelController.m */; };
 		F4CE4CD310A6A13E004AC4FA /* LibraryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CE4CD110A6A13E004AC4FA /* LibraryView.xib */; };
 		F4CE4D0510A6A7A9004AC4FA /* XspfMLibraryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CE4D0410A6A7A9004AC4FA /* XspfMLibraryViewController.m */; };
@@ -220,6 +247,11 @@
 		F48B3601112EDAF900D1DE39 /* HMXSPFTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMXSPFTrack.m; sourceTree = "<group>"; };
 		F48B3602112EDAF900D1DE39 /* HMXSPFTrackList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMXSPFTrackList.h; sourceTree = "<group>"; };
 		F48B3603112EDAF900D1DE39 /* HMXSPFTrackList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMXSPFTrackList.m; sourceTree = "<group>"; };
+		F493106112C2EA8300981CAA /* XspfQTMovieViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfQTMovieViewController.h; sourceTree = "<group>"; };
+		F493106212C2EA8300981CAA /* XspfQTMovieViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfQTMovieViewController.m; sourceTree = "<group>"; };
+		F493108D12C2EE5500981CAA /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/XspfQTMovieView.xib; sourceTree = "<group>"; };
+		F493114712C3294B00981CAA /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = Japanese.lproj/XspfQTPlayList.xib; sourceTree = "<group>"; };
+		F493124F12C371C300981CAA /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = Japanese.lproj/XspfQTMovieView.xib; sourceTree = "<group>"; };
 		F499881810DDAD3800AAC6D6 /* XspfMRule_NSExpressionFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMRule_NSExpressionFunctions.m; sourceTree = "<group>"; };
 		F499886910DDFB3E00AAC6D6 /* XspfMThreadSleepRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMThreadSleepRequest.h; sourceTree = "<group>"; };
 		F499886A10DDFB3E00AAC6D6 /* XspfMThreadSleepRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMThreadSleepRequest.m; sourceTree = "<group>"; };
@@ -235,8 +267,55 @@
 		F4A6F90A10C1666600345D77 /* XspfMRuleEditorDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMRuleEditorDelegate.m; sourceTree = "<group>"; };
 		F4A6FAE410C2442E00345D77 /* XspfMRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMRule.h; sourceTree = "<group>"; };
 		F4A6FAE510C2442E00345D77 /* XspfMRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMRule.m; sourceTree = "<group>"; };
+		F4AB5F3F12BCFF7500157355 /* XspfQTMovieTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfQTMovieTimer.h; sourceTree = "<group>"; };
+		F4AB5F4012BCFF7500157355 /* XspfQTMovieTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfQTMovieTimer.m; sourceTree = "<group>"; };
+		F4AB5F4112BCFF7500157355 /* XspfQTAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfQTAppDelegate.h; sourceTree = "<group>"; };
+		F4AB5F4212BCFF7500157355 /* XspfQTAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfQTAppDelegate.m; sourceTree = "<group>"; };
+		F4AB5F4312BCFF7500157355 /* XspfQTPreference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfQTPreference.h; sourceTree = "<group>"; };
+		F4AB5F4412BCFF7500157355 /* XspfQTPreference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfQTPreference.m; sourceTree = "<group>"; };
+		F4AB5F4512BCFF7500157355 /* XspfQTDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfQTDocument.h; sourceTree = "<group>"; };
+		F4AB5F4612BCFF7600157355 /* XspfQTDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfQTDocument.m; sourceTree = "<group>"; };
+		F4AB5F4712BCFF7600157355 /* XspfQTMovieWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfQTMovieWindowController.h; sourceTree = "<group>"; };
+		F4AB5F4812BCFF7600157355 /* XspfQTMovieWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfQTMovieWindowController.m; sourceTree = "<group>"; };
+		F4AB5F4912BCFF7600157355 /* XspfMPlayListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMPlayListViewController.h; sourceTree = "<group>"; };
+		F4AB5F4A12BCFF7600157355 /* XspfMPlayListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMPlayListViewController.m; sourceTree = "<group>"; };
+		F4AB5F4B12BCFF7600157355 /* XspfQTInformationWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfQTInformationWindowController.h; sourceTree = "<group>"; };
+		F4AB5F4C12BCFF7600157355 /* XspfQTInformationWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfQTInformationWindowController.m; sourceTree = "<group>"; };
+		F4AB5F4D12BCFF7600157355 /* XspfQTPreferenceWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfQTPreferenceWindowController.h; sourceTree = "<group>"; };
+		F4AB5F4E12BCFF7600157355 /* XspfQTPreferenceWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfQTPreferenceWindowController.m; sourceTree = "<group>"; };
+		F4AB5F4F12BCFF7600157355 /* XspfQTValueTransformers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfQTValueTransformers.h; sourceTree = "<group>"; };
+		F4AB5F5012BCFF7600157355 /* XspfQTValueTransformers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfQTValueTransformers.m; sourceTree = "<group>"; };
+		F4AB5F5112BCFF7600157355 /* XspfQTFullScreenWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfQTFullScreenWindow.h; sourceTree = "<group>"; };
+		F4AB5F5212BCFF7600157355 /* XspfQTFullScreenWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfQTFullScreenWindow.m; sourceTree = "<group>"; };
+		F4AB5F5312BCFF7600157355 /* XspfQTMovieWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfQTMovieWindow.h; sourceTree = "<group>"; };
+		F4AB5F5412BCFF7600157355 /* XspfQTMovieWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfQTMovieWindow.m; sourceTree = "<group>"; };
+		F4AB5F5512BCFF7600157355 /* XspfQTMovieView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfQTMovieView.h; sourceTree = "<group>"; };
+		F4AB5F5612BCFF7600157355 /* XspfQTMovieView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfQTMovieView.m; sourceTree = "<group>"; };
+		F4AB5F5712BCFF7600157355 /* XspfQTMovieLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfQTMovieLoader.h; sourceTree = "<group>"; };
+		F4AB5F5812BCFF7600157355 /* XspfQTMovieLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfQTMovieLoader.m; sourceTree = "<group>"; };
+		F4AB5F6812BCFFCD00157355 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/XspfQTDocument.xib; sourceTree = "<group>"; };
+		F4AB5F6D12BCFFFE00157355 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = Japanese.lproj/XspfQTDocument.xib; sourceTree = "<group>"; };
+		F4AB5F7812BD00FF00157355 /* AppleRemote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppleRemote.h; sourceTree = "<group>"; };
+		F4AB5F7912BD00FF00157355 /* AppleRemote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppleRemote.m; sourceTree = "<group>"; };
+		F4AB5F7A12BD00FF00157355 /* HIDRemoteControlDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HIDRemoteControlDevice.h; sourceTree = "<group>"; };
+		F4AB5F7B12BD00FF00157355 /* HIDRemoteControlDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HIDRemoteControlDevice.m; sourceTree = "<group>"; };
+		F4AB5F7C12BD00FF00157355 /* license.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = license.txt; sourceTree = "<group>"; };
+		F4AB5F7D12BD00FF00157355 /* MultiClickRemoteBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiClickRemoteBehavior.h; sourceTree = "<group>"; };
+		F4AB5F7E12BD00FF00157355 /* MultiClickRemoteBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiClickRemoteBehavior.m; sourceTree = "<group>"; };
+		F4AB5F7F12BD00FF00157355 /* RemoteControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteControl.h; sourceTree = "<group>"; };
+		F4AB5F8012BD00FF00157355 /* RemoteControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteControl.m; sourceTree = "<group>"; };
+		F4AB5F8A12BD017500157355 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		F4AB5F9012BD01F000157355 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
+		F4AB605412BD022D00157355 /* BSSUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSSUtil.h; sourceTree = "<group>"; };
+		F4AB605512BD022D00157355 /* BSSUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSSUtil.m; sourceTree = "<group>"; };
 		F4BB59B610BC0C2C00EE50B7 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/LibraryPredicate.strings; sourceTree = "<group>"; };
 		F4BB5A1510BC2C5800EE50B7 /* Japanese */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Japanese; path = Japanese.lproj/LibraryPredicate.strings; sourceTree = "<group>"; };
+		F4C5435F12CB734D00214C74 /* XspfMAppleRemoteSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMAppleRemoteSupport.h; sourceTree = "<group>"; };
+		F4C5436012CB734D00214C74 /* XspfMAppleRemoteSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMAppleRemoteSupport.m; sourceTree = "<group>"; };
+		F4C544FF12CCC60E00214C74 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/XspfQTPlayList.xib; sourceTree = "<group>"; };
+		F4C545AE12CCF75600214C74 /* NSControl_Validation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSControl_Validation.h; sourceTree = "<group>"; };
+		F4C545AF12CCF75600214C74 /* NSControl_Validation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSControl_Validation.m; sourceTree = "<group>"; };
+		F4CA77B112C72C6200DA456D /* XspfManager_Debugging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfManager_Debugging.m; sourceTree = "<group>"; };
 		F4CD0D241126FF4A007E31BC /* XspfMPreviewPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMPreviewPanelController.h; sourceTree = "<group>"; };
 		F4CD0D251126FF4A007E31BC /* XspfMPreviewPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMPreviewPanelController.m; sourceTree = "<group>"; };
 		F4CE4CD210A6A13E004AC4FA /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/LibraryView.xib; sourceTree = "<group>"; };
@@ -284,6 +363,8 @@
 				F4D2F72E110879F0007681F4 /* QuartzCore.framework in Frameworks */,
 				F468493211188CDB00F3396B /* QuickLook.framework in Frameworks */,
 				F4684A931119D0A300F3396B /* Quartz.framework in Frameworks */,
+				F4AB5F8B12BD017500157355 /* IOKit.framework in Frameworks */,
+				F4AB5F9112BD01F000157355 /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,10 +374,15 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				F4C545AE12CCF75600214C74 /* NSControl_Validation.h */,
+				F4C545AF12CCF75600214C74 /* NSControl_Validation.m */,
 				F4CD0D241126FF4A007E31BC /* XspfMPreviewPanelController.h */,
 				F4CD0D251126FF4A007E31BC /* XspfMPreviewPanelController.m */,
 				77C8280B06725ACE000B614F /* XspfManager.h */,
 				77C8280C06725ACE000B614F /* XspfManager.m */,
+				F4CA77B112C72C6200DA456D /* XspfManager_Debugging.m */,
+				F4C5435F12CB734D00214C74 /* XspfMAppleRemoteSupport.h */,
+				F4C5436012CB734D00214C74 /* XspfMAppleRemoteSupport.m */,
 				F47C00B5109D479100F5991C /* XspfMMainWindowController.h */,
 				F47C00B6109D479100F5991C /* XspfMMainWindowController.m */,
 				F49BCF9310A45175007136CE /* XspfMViewController.h */,
@@ -331,6 +417,7 @@
 		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F4AB5F9012BD01F000157355 /* Carbon.framework */,
 				F4D2F72D110879F0007681F4 /* QuartzCore.framework */,
 				F47C00FD109D51CC00F5991C /* QTKit.framework */,
 				77C82804067257F0000B614F /* CoreData.framework */,
@@ -338,6 +425,7 @@
 				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
 				F468493111188CDB00F3396B /* QuickLook.framework */,
 				F4684A921119D0A300F3396B /* Quartz.framework */,
+				F4AB5F8A12BD017500157355 /* IOKit.framework */,
 			);
 			name = "Other Frameworks";
 			sourceTree = "<group>";
@@ -353,6 +441,8 @@
 		29B97314FDCFA39411CA2CEA /* XspfManager */ = {
 			isa = PBXGroup;
 			children = (
+				F4AB5F7712BD00D400157355 /* AppleRemoteControlWrapper */,
+				F4AB5F3012BCFF1100157355 /* XspfQTComponents */,
 				F4D24E6A11C3D41700232358 /* XspfManager.icns */,
 				F45AB02110EE3675005BE9C1 /* HMUtilities.h */,
 				F45AB02210EE3675005BE9C1 /* HMUtilities.m */,
@@ -542,6 +632,62 @@
 			name = "Views&Cells";
 			sourceTree = "<group>";
 		};
+		F4AB5F3012BCFF1100157355 /* XspfQTComponents */ = {
+			isa = PBXGroup;
+			children = (
+				F493106112C2EA8300981CAA /* XspfQTMovieViewController.h */,
+				F493106212C2EA8300981CAA /* XspfQTMovieViewController.m */,
+				F4AB605412BD022D00157355 /* BSSUtil.h */,
+				F4AB605512BD022D00157355 /* BSSUtil.m */,
+				F4AB5F6712BCFFCD00157355 /* XspfQTDocument.xib */,
+				F493114612C3294B00981CAA /* XspfQTPlayList.xib */,
+				F493124D12C371B100981CAA /* XspfQTMovieView.xib */,
+				F4AB5F3F12BCFF7500157355 /* XspfQTMovieTimer.h */,
+				F4AB5F4012BCFF7500157355 /* XspfQTMovieTimer.m */,
+				F4AB5F4112BCFF7500157355 /* XspfQTAppDelegate.h */,
+				F4AB5F4212BCFF7500157355 /* XspfQTAppDelegate.m */,
+				F4AB5F4312BCFF7500157355 /* XspfQTPreference.h */,
+				F4AB5F4412BCFF7500157355 /* XspfQTPreference.m */,
+				F4AB5F4512BCFF7500157355 /* XspfQTDocument.h */,
+				F4AB5F4612BCFF7600157355 /* XspfQTDocument.m */,
+				F4AB5F4712BCFF7600157355 /* XspfQTMovieWindowController.h */,
+				F4AB5F4812BCFF7600157355 /* XspfQTMovieWindowController.m */,
+				F4AB5F4912BCFF7600157355 /* XspfMPlayListViewController.h */,
+				F4AB5F4A12BCFF7600157355 /* XspfMPlayListViewController.m */,
+				F4AB5F4B12BCFF7600157355 /* XspfQTInformationWindowController.h */,
+				F4AB5F4C12BCFF7600157355 /* XspfQTInformationWindowController.m */,
+				F4AB5F4D12BCFF7600157355 /* XspfQTPreferenceWindowController.h */,
+				F4AB5F4E12BCFF7600157355 /* XspfQTPreferenceWindowController.m */,
+				F4AB5F4F12BCFF7600157355 /* XspfQTValueTransformers.h */,
+				F4AB5F5012BCFF7600157355 /* XspfQTValueTransformers.m */,
+				F4AB5F5112BCFF7600157355 /* XspfQTFullScreenWindow.h */,
+				F4AB5F5212BCFF7600157355 /* XspfQTFullScreenWindow.m */,
+				F4AB5F5312BCFF7600157355 /* XspfQTMovieWindow.h */,
+				F4AB5F5412BCFF7600157355 /* XspfQTMovieWindow.m */,
+				F4AB5F5512BCFF7600157355 /* XspfQTMovieView.h */,
+				F4AB5F5612BCFF7600157355 /* XspfQTMovieView.m */,
+				F4AB5F5712BCFF7600157355 /* XspfQTMovieLoader.h */,
+				F4AB5F5812BCFF7600157355 /* XspfQTMovieLoader.m */,
+			);
+			path = XspfQTComponents;
+			sourceTree = "<group>";
+		};
+		F4AB5F7712BD00D400157355 /* AppleRemoteControlWrapper */ = {
+			isa = PBXGroup;
+			children = (
+				F4AB5F7812BD00FF00157355 /* AppleRemote.h */,
+				F4AB5F7912BD00FF00157355 /* AppleRemote.m */,
+				F4AB5F7A12BD00FF00157355 /* HIDRemoteControlDevice.h */,
+				F4AB5F7B12BD00FF00157355 /* HIDRemoteControlDevice.m */,
+				F4AB5F7C12BD00FF00157355 /* license.txt */,
+				F4AB5F7D12BD00FF00157355 /* MultiClickRemoteBehavior.h */,
+				F4AB5F7E12BD00FF00157355 /* MultiClickRemoteBehavior.m */,
+				F4AB5F7F12BD00FF00157355 /* RemoteControl.h */,
+				F4AB5F8012BD00FF00157355 /* RemoteControl.m */,
+			);
+			path = AppleRemoteControlWrapper;
+			sourceTree = "<group>";
+		};
 		F4D3631211A2BC9A009FE842 /* XspfMRules */ = {
 			isa = PBXGroup;
 			children = (
@@ -608,7 +754,14 @@
 			isa = PBXProject;
 			buildConfigurationList = 26FC0A880875C7B200E6366F /* Build configuration list for PBXProject "XspfManager" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* XspfManager */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -640,6 +793,10 @@
 				F4D2F71E110877DC007681F4 /* XspfMCoverFlowView.xib in Resources */,
 				F4DAF67611BBC1230047BEDA /* Localizable.strings.sed in Resources */,
 				F4D24E6B11C3D41700232358 /* XspfManager.icns in Resources */,
+				F4AB5F6912BCFFCD00157355 /* XspfQTDocument.xib in Resources */,
+				F4AB5F8312BD00FF00157355 /* license.txt in Resources */,
+				F493124E12C371B100981CAA /* XspfQTMovieView.xib in Resources */,
+				F493114812C3294B00981CAA /* XspfQTPlayList.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -712,6 +869,27 @@
 				F44A23BC119644D800C60F2D /* XspfMRuleConcreteRowsBuilders.m in Sources */,
 				F4DAE7E011B3F6C90047BEDA /* XspfMPreferences.m in Sources */,
 				F4DAF38711BB6B700047BEDA /* XspfMMainModel2To3.xcmappingmodel in Sources */,
+				F4AB5F5912BCFF7600157355 /* XspfQTMovieTimer.m in Sources */,
+				F4AB5F5A12BCFF7600157355 /* XspfQTAppDelegate.m in Sources */,
+				F4AB5F5B12BCFF7600157355 /* XspfQTPreference.m in Sources */,
+				F4AB5F5C12BCFF7600157355 /* XspfQTDocument.m in Sources */,
+				F4AB5F5D12BCFF7600157355 /* XspfQTMovieWindowController.m in Sources */,
+				F4AB5F5E12BCFF7600157355 /* XspfMPlayListViewController.m in Sources */,
+				F4AB5F5F12BCFF7600157355 /* XspfQTInformationWindowController.m in Sources */,
+				F4AB5F6012BCFF7600157355 /* XspfQTPreferenceWindowController.m in Sources */,
+				F4AB5F6212BCFF7600157355 /* XspfQTFullScreenWindow.m in Sources */,
+				F4AB5F6312BCFF7600157355 /* XspfQTMovieWindow.m in Sources */,
+				F4AB5F6412BCFF7600157355 /* XspfQTMovieView.m in Sources */,
+				F4AB5F6512BCFF7600157355 /* XspfQTMovieLoader.m in Sources */,
+				F4AB5F8112BD00FF00157355 /* AppleRemote.m in Sources */,
+				F4AB5F8212BD00FF00157355 /* HIDRemoteControlDevice.m in Sources */,
+				F4AB5F8412BD00FF00157355 /* MultiClickRemoteBehavior.m in Sources */,
+				F4AB5F8512BD00FF00157355 /* RemoteControl.m in Sources */,
+				F4AB605612BD022D00157355 /* BSSUtil.m in Sources */,
+				F493106312C2EA8300981CAA /* XspfQTMovieViewController.m in Sources */,
+				F4CA77B212C72C6200DA456D /* XspfManager_Debugging.m in Sources */,
+				F4C5436112CB734D00214C74 /* XspfMAppleRemoteSupport.m in Sources */,
+				F4C545B012CCF75600214C74 /* NSControl_Validation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -772,6 +950,24 @@
 			name = AccessoryView.xib;
 			sourceTree = "<group>";
 		};
+		F493114612C3294B00981CAA /* XspfQTPlayList.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F493114712C3294B00981CAA /* Japanese */,
+				F4C544FF12CCC60E00214C74 /* English */,
+			);
+			name = XspfQTPlayList.xib;
+			sourceTree = "<group>";
+		};
+		F493124D12C371B100981CAA /* XspfQTMovieView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F493108D12C2EE5500981CAA /* English */,
+				F493124F12C371C300981CAA /* Japanese */,
+			);
+			name = XspfQTMovieView.xib;
+			sourceTree = "<group>";
+		};
 		F4998DA010E6C7CB00AAC6D6 /* MainWindow.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -788,6 +984,15 @@
 				F43E0D8811020DEE00D0428E /* Japanese */,
 			);
 			name = ListView.xib;
+			sourceTree = "<group>";
+		};
+		F4AB5F6712BCFFCD00157355 /* XspfQTDocument.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F4AB5F6812BCFFCD00157355 /* English */,
+				F4AB5F6D12BCFFFE00157355 /* Japanese */,
+			);
+			name = XspfQTDocument.xib;
 			sourceTree = "<group>";
 		};
 		F4BB59BA10BC0C3700EE50B7 /* LibraryPredicate.strings */ = {

@@ -236,6 +236,8 @@ static NSString *const XspfMLibItemPbardType = @"XspfMLibItemPbardType";
 	
 	return @"hoge";
 }
+
+#pragma mark #### Actions ####
 - (IBAction)createPredicate:(id)sender
 {
 	if([editor numberOfRows] == 0) {
@@ -287,6 +289,22 @@ static NSString *const XspfMLibItemPbardType = @"XspfMLibItemPbardType";
 {
 	[predicatePanel orderOut:self];
 	[NSApp endSheet:predicatePanel returnCode:[sender tag]];
+}
+- (void)moveUp:(id)sender
+{
+	NSUInteger row = [tableView selectedRow];
+	if(row == 0) return;
+	
+	NSIndexSet *newSelection = [NSIndexSet indexSetWithIndex:row - 1];
+	[tableView selectRowIndexes:newSelection byExtendingSelection:NO];
+}
+- (void)moveDown:(id)sender
+{
+	NSUInteger row = [tableView selectedRow];
+	if(row == [tableView numberOfRows] - 1) return;
+	
+	NSIndexSet *newSelection = [NSIndexSet indexSetWithIndex:row + 1];
+	[tableView selectRowIndexes:newSelection byExtendingSelection:NO];
 }
 
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem

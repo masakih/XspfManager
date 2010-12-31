@@ -75,6 +75,9 @@
 - (NSRect)selectedImageFrame;
 - (id)cacheManager;
 
+- (NSUInteger)selectedIndex;
+
+- (NSUInteger)numberOfItemsInImageFlow:(id)imageFlowView;
 
 - (void)IKCleanTimedOutCache;
 @end
@@ -200,6 +203,22 @@
 	}
 	[cacheManager IKCleanTimedOutCache];
 }
+- (IBAction)moveLeft:(id)sender
+{
+	NSUInteger selection = [coverFlow selectedIndex];
+	if(selection == 0) return;
+	
+	[coverFlow setSelectedIndex:selection - 1];
+}
+- (IBAction)moveRight:(id)sender
+{
+	NSUInteger selection = [coverFlow selectedIndex];
+	if(selection == [self numberOfItemsInImageFlow:coverFlow] - 1) return;
+	
+	[coverFlow setSelectedIndex:selection + 1];
+}
+
+
 - (IBAction)test01:(id)sender
 {
 	[self clearCoverFlowCache:sender];
