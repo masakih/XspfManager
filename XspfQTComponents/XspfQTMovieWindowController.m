@@ -178,7 +178,7 @@ static NSString *const kQTMovieKeyPath = @"playingMovie";
 }
 - (IBAction)showWindow:(id)sender
 {
-	if(!fullScreenMode) {
+	if(!contentViewController.fullScreenMode) {
 		[super showWindow:sender];
 		return;
 	}
@@ -425,12 +425,12 @@ static NSString *const kQTMovieKeyPath = @"playingMovie";
 
 //- (IBAction)toggleFullScreenMode:(id)sender
 //{
-//	if(fullScreenMode) {
+//	if(contentViewController.fullScreenMode) {
 //		[self exitFullScreen];
-//		fullScreenMode = NO;
+//		contentViewController.fullScreenMode = NO;
 //	} else {
 //		[self enterFullScreen];
-//		fullScreenMode = YES;
+//		contentViewController.fullScreenMode = YES;
 //	}
 //}
 
@@ -481,7 +481,7 @@ static NSString *const kQTMovieKeyPath = @"playingMovie";
 
 - (IBAction)normalSize:(id)sender
 {
-	if(fullScreenMode) return;
+	if(contentViewController.fullScreenMode) return;
 	
 	QTMovie *curMovie = [self qtMovie];
 	if(!curMovie) return;
@@ -493,7 +493,7 @@ static NSString *const kQTMovieKeyPath = @"playingMovie";
 }
 - (IBAction)halfSize:(id)sender
 {
-	if(fullScreenMode) return;
+	if(contentViewController.fullScreenMode) return;
 	
 	QTMovie *curMovie = [self qtMovie];
 	if(!curMovie) return;
@@ -508,7 +508,7 @@ static NSString *const kQTMovieKeyPath = @"playingMovie";
 }
 - (IBAction)doubleSize:(id)sender
 {
-	if(fullScreenMode) return;
+	if(contentViewController.fullScreenMode) return;
 	
 	QTMovie *curMovie = [self qtMovie];
 	if(!curMovie) return;
@@ -523,7 +523,7 @@ static NSString *const kQTMovieKeyPath = @"playingMovie";
 }
 - (IBAction)screenSize:(id)sender
 {
-	if(fullScreenMode) return;
+	if(contentViewController.fullScreenMode) return;
 	
 	NSSize screenSize = [[NSScreen mainScreen] visibleFrame].size;
 	NSSize windowDecorationSize = [self windowSizeWithoutQTView];
@@ -570,7 +570,7 @@ static NSString *const kQTMovieKeyPath = @"playingMovie";
 		prevMouse = mouse;
 		[prevMouseMovedDate autorelease];
 		prevMouseMovedDate = [[NSDate dateWithTimeIntervalSinceNow:0.0] retain];
-	} else if(fullScreenMode && [prevMouseMovedDate timeIntervalSinceNow] < -3.0 ) {
+	} else if(contentViewController.fullScreenMode && [prevMouseMovedDate timeIntervalSinceNow] < -3.0 ) {
 		[NSCursor setHiddenUntilMouseMoves:YES];
 		//
 		// hide controller.
@@ -580,7 +580,7 @@ static NSString *const kQTMovieKeyPath = @"playingMovie";
 #pragma mark ### NSResponder ###
 - (void)cancelOperation:(id)sender
 {
-//	if(fullScreenMode) {
+//	if(contentViewController.fullScreenMode) {
 //		[self toggleFullScreenMode:self];
 //	}
 }
@@ -590,7 +590,7 @@ static NSString *const kQTMovieKeyPath = @"playingMovie";
 {
 	SEL action = [menuItem action];
 	if(action == @selector(toggleFullScreenMode:)) {
-		if(fullScreenMode) {
+		if(contentViewController.fullScreenMode) {
 			[menuItem setTitle:NSLocalizedString(@"Exit Full Screen", @"Exit Full Screen")];
 		} else {
 			[menuItem setTitle:NSLocalizedString(@"Full Screen", @"Full Screen")];
@@ -606,7 +606,7 @@ static NSString *const kQTMovieKeyPath = @"playingMovie";
 	   || action == @selector(halfSize:)
 	   || action == @selector(doubleSize:)
 	   || action == @selector(screenSize:)) {
-		if(fullScreenMode) {
+		if(contentViewController.fullScreenMode) {
 			return NO;
 		} else {
 			return YES;
@@ -621,7 +621,7 @@ static NSString *const kQTMovieKeyPath = @"playingMovie";
 {
 	id doc = [notification object];
 	
-//	if(fullScreenMode) {
+//	if(contentViewController.fullScreenMode) {
 //		[self toggleFullScreenMode:self];
 //	}
 	
