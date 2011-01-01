@@ -67,6 +67,8 @@
 {
 	AppleRemote *remoteControl;
 	MultiClickRemoteBehavior *remoteBehavior;
+	
+	NSUInteger prevHoldEvent;
 }
 
 @property (nonatomic, retain, readonly) AppleRemote *remoteControl;

@@ -80,7 +80,7 @@
 	[remoteBehavior setDelegate:self];
 	self.remoteControl = [[[AppleRemote alloc] initWithDelegate:remoteBehavior] autorelease];
 	[remoteBehavior setClickCountingEnabled:NO];
-//	[remoteBehavior setSimulateHoldEvent:YES];
+	[remoteBehavior setSimulateHoldEvent:YES];
 	
 	
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
@@ -133,8 +133,10 @@
 		XspfMViwMode mode = appDelegate.mode;
 		if(mode == modeList) {
 			[remoteBehavior setClickCountingEnabled:NO];
+			[remoteBehavior setSimulateHoldEvent:YES];
 		} else if(mode == modeMovie) {
 			[remoteBehavior setClickCountEnabledButtons:kRemoteButtonLeft | kRemoteButtonRight];
+			[remoteBehavior setSimulateHoldEvent:NO];
 		}
 		return;
 	}
@@ -176,10 +178,10 @@ static NSInteger XSPFQTmoveValue= 10;
 			action = @selector(moveLeft:);
 			break;			
 		case kRemoteButtonPlus_Hold:
-//			action = @selector(moveUp:);;
+			action = @selector(moveUp:);;
 			break;				
 		case kRemoteButtonMinus_Hold:
-//			action = @selector(moveDown:);
+			action = @selector(moveDown:);
 			break;				
 		case kRemoteButtonPlay_Hold:
 			action = NULL;
@@ -264,14 +266,44 @@ static NSInteger XSPFQTmoveValue= 10;
 		[self remoteButtonDownOnMovieMode:identifier clickCount:clickCount];
 	}
 }
+- (void)remoteButtonUp:(RemoteControlEventIdentifier)identifier clickCount:(unsigned int)clickCount {}
 - (NSInteger)tag
 {
 	return XSPFQTmoveValue;
+}
+BOOL acceptSendingPeriodicEvent(RemoteControlEventIdentifier identifier)
+{
+	if(identifier == kRemoteButtonRight_Hold) return YES;
+	if(identifier == kRemoteButtonLeft_Hold) return YES;
+	if(identifier == kRemoteButtonPlus_Hold) return YES;
+	if(identifier == kRemoteButtonMinus_Hold) return YES;
+	
+	return NO;
+}
+- (void)sendPeriodicEvent:(id)timer
+{
+	if(prevHoldEvent == 0) {
+		[timer invalidate];
+		return;
+	}
+	[self remoteButtonDown:prevHoldEvent clickCount:1];
 }
 - (void)remoteButton:(RemoteControlEventIdentifier)identifier pressedDown:(BOOL)pressedDown clickCount:(unsigned int)clickCount
 {
 	if(pressedDown) {
 		[self remoteButtonDown:identifier clickCount:clickCount];
+		
+		if(acceptSendingPeriodicEvent(identifier)) {
+			prevHoldEvent = identifier;
+			[NSTimer scheduledTimerWithTimeInterval:0.1
+											 target:self
+										   selector:@selector(sendPeriodicEvent:)
+										   userInfo:nil
+											repeats:YES];
+		}
+	} else {
+		[self remoteButtonUp:identifier clickCount:clickCount];
+		prevHoldEvent = 0;
 	}
 }
 
