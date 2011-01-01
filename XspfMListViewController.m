@@ -155,6 +155,7 @@
 	
 	NSIndexSet *newSelection = [NSIndexSet indexSetWithIndex:row - 1];
 	[tableView selectRowIndexes:newSelection byExtendingSelection:NO];
+	[self scrollToSelection:nil];
 }
 - (void)moveDown:(id)sender
 {
@@ -163,6 +164,7 @@
 	
 	NSIndexSet *newSelection = [NSIndexSet indexSetWithIndex:row + 1];
 	[tableView selectRowIndexes:newSelection byExtendingSelection:NO];
+	[self scrollToSelection:nil];
 }
 
 
