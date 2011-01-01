@@ -136,6 +136,7 @@
 		} else if(mode == modeMovie) {
 			[remoteBehavior setClickCountEnabledButtons:kRemoteButtonLeft | kRemoteButtonRight];
 		}
+		return;
 	}
 	
 	[super observeValueForKeyPath:keyPath ofObject:object change:change context:context];

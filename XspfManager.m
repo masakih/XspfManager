@@ -92,14 +92,6 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 @synthesize viewMenuItem, movieControlMenuItem;
 
 
-- (id)init
-{
-	[super init];
-	appleRemoteSupprt = [[XspfMAppleRemoteSupport alloc] init];
-	
-	return self;
-}
-
 /**
     Returns the support folder for the application, used to store the Core Data
     store file.  This code uses a folder named "XspfManager" for
@@ -285,8 +277,8 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 
 - (void)awakeFromNib
 {
-//	[movieControlMenuItem retain];
 	[[movieControlMenuItem menu] removeItem:movieControlMenuItem];
+	appleRemoteSupprt = [[XspfMAppleRemoteSupport alloc] init];
 }
 
 - (IBAction)launchXspfQT:(id)sender
@@ -332,6 +324,7 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 #pragma mark#### KVC & KVO ####
 - (void)setMode:(XspfMViwMode)mode
 {
+	[self willChangeValueForKey:@"mode"];
 	if(mode != modeList & mode != modeMovie) return;
 	
 	mode_ = mode;
@@ -345,6 +338,7 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 			[[NSApp mainMenu] insertItem:movieControlMenuItem atIndex:3];
 			break;
 	}
+	[self didChangeValueForKey:@"mode"];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification
