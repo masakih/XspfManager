@@ -63,7 +63,7 @@
 
 @interface NSObject(XspfQTMovieTimerSupport)
 - (void)checkPreload:(id)timer;
-- (void) updateTimeIfNeeded:(id)timer;
+- (void)updateTimeIfNeeded:(id)timer;
 @end
 @implementation XspfQTMovieTimer
 

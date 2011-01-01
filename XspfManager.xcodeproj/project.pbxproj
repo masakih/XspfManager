@@ -75,13 +75,10 @@
 		F4A6F90B10C1666600345D77 /* XspfMRuleEditorDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A6F90A10C1666600345D77 /* XspfMRuleEditorDelegate.m */; };
 		F4A6FAE610C2442E00345D77 /* XspfMRule.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A6FAE510C2442E00345D77 /* XspfMRule.m */; };
 		F4AB5F5912BCFF7600157355 /* XspfQTMovieTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AB5F4012BCFF7500157355 /* XspfQTMovieTimer.m */; };
-		F4AB5F5A12BCFF7600157355 /* XspfQTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AB5F4212BCFF7500157355 /* XspfQTAppDelegate.m */; };
 		F4AB5F5B12BCFF7600157355 /* XspfQTPreference.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AB5F4412BCFF7500157355 /* XspfQTPreference.m */; };
 		F4AB5F5C12BCFF7600157355 /* XspfQTDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AB5F4612BCFF7600157355 /* XspfQTDocument.m */; };
 		F4AB5F5D12BCFF7600157355 /* XspfQTMovieWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AB5F4812BCFF7600157355 /* XspfQTMovieWindowController.m */; };
 		F4AB5F5E12BCFF7600157355 /* XspfMPlayListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AB5F4A12BCFF7600157355 /* XspfMPlayListViewController.m */; };
-		F4AB5F5F12BCFF7600157355 /* XspfQTInformationWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AB5F4C12BCFF7600157355 /* XspfQTInformationWindowController.m */; };
-		F4AB5F6012BCFF7600157355 /* XspfQTPreferenceWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AB5F4E12BCFF7600157355 /* XspfQTPreferenceWindowController.m */; };
 		F4AB5F6212BCFF7600157355 /* XspfQTFullScreenWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AB5F5212BCFF7600157355 /* XspfQTFullScreenWindow.m */; };
 		F4AB5F6312BCFF7600157355 /* XspfQTMovieWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AB5F5412BCFF7600157355 /* XspfQTMovieWindow.m */; };
 		F4AB5F6412BCFF7600157355 /* XspfQTMovieView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AB5F5612BCFF7600157355 /* XspfQTMovieView.m */; };
@@ -555,6 +552,21 @@
 			path = extFiles/HMXSPFcomponent;
 			sourceTree = "<group>";
 		};
+		F4588D5412CEB9B400A718CA /* Unused */ = {
+			isa = PBXGroup;
+			children = (
+				F4AB5F4112BCFF7500157355 /* XspfQTAppDelegate.h */,
+				F4AB5F4212BCFF7500157355 /* XspfQTAppDelegate.m */,
+				F4AB5F4F12BCFF7600157355 /* XspfQTValueTransformers.h */,
+				F4AB5F5012BCFF7600157355 /* XspfQTValueTransformers.m */,
+				F4AB5F4B12BCFF7600157355 /* XspfQTInformationWindowController.h */,
+				F4AB5F4C12BCFF7600157355 /* XspfQTInformationWindowController.m */,
+				F4AB5F4D12BCFF7600157355 /* XspfQTPreferenceWindowController.h */,
+				F4AB5F4E12BCFF7600157355 /* XspfQTPreferenceWindowController.m */,
+			);
+			name = Unused;
+			sourceTree = "<group>";
+		};
 		F47C02CC109D6BA200F5991C /* ValueTransformers */ = {
 			isa = PBXGroup;
 			children = (
@@ -635,31 +647,21 @@
 		F4AB5F3012BCFF1100157355 /* XspfQTComponents */ = {
 			isa = PBXGroup;
 			children = (
-				F493106112C2EA8300981CAA /* XspfQTMovieViewController.h */,
-				F493106212C2EA8300981CAA /* XspfQTMovieViewController.m */,
+				F4588D5412CEB9B400A718CA /* Unused */,
 				F4AB605412BD022D00157355 /* BSSUtil.h */,
 				F4AB605512BD022D00157355 /* BSSUtil.m */,
-				F4AB5F6712BCFFCD00157355 /* XspfQTDocument.xib */,
-				F493114612C3294B00981CAA /* XspfQTPlayList.xib */,
-				F493124D12C371B100981CAA /* XspfQTMovieView.xib */,
 				F4AB5F3F12BCFF7500157355 /* XspfQTMovieTimer.h */,
 				F4AB5F4012BCFF7500157355 /* XspfQTMovieTimer.m */,
-				F4AB5F4112BCFF7500157355 /* XspfQTAppDelegate.h */,
-				F4AB5F4212BCFF7500157355 /* XspfQTAppDelegate.m */,
 				F4AB5F4312BCFF7500157355 /* XspfQTPreference.h */,
 				F4AB5F4412BCFF7500157355 /* XspfQTPreference.m */,
 				F4AB5F4512BCFF7500157355 /* XspfQTDocument.h */,
 				F4AB5F4612BCFF7600157355 /* XspfQTDocument.m */,
 				F4AB5F4712BCFF7600157355 /* XspfQTMovieWindowController.h */,
 				F4AB5F4812BCFF7600157355 /* XspfQTMovieWindowController.m */,
+				F493106112C2EA8300981CAA /* XspfQTMovieViewController.h */,
+				F493106212C2EA8300981CAA /* XspfQTMovieViewController.m */,
 				F4AB5F4912BCFF7600157355 /* XspfMPlayListViewController.h */,
 				F4AB5F4A12BCFF7600157355 /* XspfMPlayListViewController.m */,
-				F4AB5F4B12BCFF7600157355 /* XspfQTInformationWindowController.h */,
-				F4AB5F4C12BCFF7600157355 /* XspfQTInformationWindowController.m */,
-				F4AB5F4D12BCFF7600157355 /* XspfQTPreferenceWindowController.h */,
-				F4AB5F4E12BCFF7600157355 /* XspfQTPreferenceWindowController.m */,
-				F4AB5F4F12BCFF7600157355 /* XspfQTValueTransformers.h */,
-				F4AB5F5012BCFF7600157355 /* XspfQTValueTransformers.m */,
 				F4AB5F5112BCFF7600157355 /* XspfQTFullScreenWindow.h */,
 				F4AB5F5212BCFF7600157355 /* XspfQTFullScreenWindow.m */,
 				F4AB5F5312BCFF7600157355 /* XspfQTMovieWindow.h */,
@@ -668,6 +670,9 @@
 				F4AB5F5612BCFF7600157355 /* XspfQTMovieView.m */,
 				F4AB5F5712BCFF7600157355 /* XspfQTMovieLoader.h */,
 				F4AB5F5812BCFF7600157355 /* XspfQTMovieLoader.m */,
+				F4AB5F6712BCFFCD00157355 /* XspfQTDocument.xib */,
+				F493114612C3294B00981CAA /* XspfQTPlayList.xib */,
+				F493124D12C371B100981CAA /* XspfQTMovieView.xib */,
 			);
 			path = XspfQTComponents;
 			sourceTree = "<group>";
@@ -870,13 +875,10 @@
 				F4DAE7E011B3F6C90047BEDA /* XspfMPreferences.m in Sources */,
 				F4DAF38711BB6B700047BEDA /* XspfMMainModel2To3.xcmappingmodel in Sources */,
 				F4AB5F5912BCFF7600157355 /* XspfQTMovieTimer.m in Sources */,
-				F4AB5F5A12BCFF7600157355 /* XspfQTAppDelegate.m in Sources */,
 				F4AB5F5B12BCFF7600157355 /* XspfQTPreference.m in Sources */,
 				F4AB5F5C12BCFF7600157355 /* XspfQTDocument.m in Sources */,
 				F4AB5F5D12BCFF7600157355 /* XspfQTMovieWindowController.m in Sources */,
 				F4AB5F5E12BCFF7600157355 /* XspfMPlayListViewController.m in Sources */,
-				F4AB5F5F12BCFF7600157355 /* XspfQTInformationWindowController.m in Sources */,
-				F4AB5F6012BCFF7600157355 /* XspfQTPreferenceWindowController.m in Sources */,
 				F4AB5F6212BCFF7600157355 /* XspfQTFullScreenWindow.m in Sources */,
 				F4AB5F6312BCFF7600157355 /* XspfQTMovieWindow.m in Sources */,
 				F4AB5F6412BCFF7600157355 /* XspfQTMovieView.m in Sources */,
