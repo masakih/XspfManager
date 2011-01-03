@@ -224,8 +224,9 @@
 
 #pragma mark#### Actions ####
 
-- (void)removePlayerView:(NSView *)playerView
+- (void)removePlayerView
 {
+	NSView *playerView = movieViewController.view;
 	[playerView setHidden:YES];
 	[playerView removeFromSuperview];
 	
@@ -240,11 +241,12 @@
 	
 	[self.window makeFirstResponder:listViewController.initialFirstResponder];
 }
-- (void)wipeOut:(NSView *)playerView
+- (void)wipeOut
 {
 	NSTimeInterval duration = 0.3;
 	[[NSAnimationContext currentContext] setDuration:duration];
 	
+	NSView *playerView = movieViewController.view;
 	NSRect listViewFrame = listPlaceholderView.frame;
 	NSView *listViewContentView = listViewController.view;
 	NSRect listViewContentViewFrame = listViewContentView.frame;
@@ -262,7 +264,7 @@
 	playListViewFrame.origin.y = -NSHeight(libraryPlaceholderView.frame);
 	[[playListView animator] setFrame:playListViewFrame];
 	
-	[self performSelector:@selector(removePlayerView:) withObject:playerView afterDelay:duration + 0.01];
+	[self performSelector:@selector(removePlayerView) withObject:nil afterDelay:duration + 0.01];
 }
 - (IBAction)returnToList:(id)sender
 {
@@ -273,7 +275,7 @@
 	
 	[movieViewController pause];
 	
-	[self performSelector:@selector(wipeOut:) withObject:playerView afterDelay:0.0];
+	[self performSelector:@selector(wipeOut) withObject:nil afterDelay:0.0];
 	self.mode = modeList;
 }
 
