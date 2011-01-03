@@ -97,6 +97,8 @@
 - (BOOL)isOpenDetailView;
 - (BOOL)validateControl:(id)anItem;
 - (void)autoControlValidate;
+
+- (void)overlayView:(NSView *)view on:(NSView *)original offset:(NSPoint)offset extend:(NSSize)extend;
 @end
 
 
@@ -330,28 +332,17 @@
 	[windowControllers makeObjectsPerformSelector:@selector(window)];
 	XspfQTMovieWindowController *windowController = [windowControllers objectAtIndex:0];
 	self.movieViewController = windowController.contentViewController;
-	NSView *playerView = movieViewController.view;
-	NSRect playerViewFrame = playerView.frame;
-	NSRect listViewFrame = listPlaceholderView.frame;
-	playerViewFrame.origin.x = NSWidth(listViewFrame);
-	playerViewFrame.origin.y = 0;
-	playerViewFrame.size = listViewFrame.size;
-	playerView.frame = playerViewFrame;
-	[listPlaceholderView addSubview:playerView];
-	
+	[self overlayView:movieViewController.view
+				   on:listPlaceholderView
+			   offset:NSMakePoint(NSWidth(listPlaceholderView.frame), 0)
+			   extend:NSZeroSize];
 	
 	self.playListViewController = [[[XspfMPlayListViewController alloc] init] autorelease];
 	playListViewController.representedObject = doc;
-	NSView *playListView = [playListViewController view];
-	NSRect playListViewFrame = playListView.frame;
-	NSRect libViewFrame = libraryPlaceholderView.frame;
-	playListViewFrame.origin.x = -1;
-	playListViewFrame.origin.y = -NSHeight(libViewFrame) - 1;
-	playListViewFrame.size = libViewFrame.size;
-	playListViewFrame.size.height += 1;
-	playListViewFrame.size.width += 1;
-	playListView.frame = playListViewFrame;
-	[libraryPlaceholderView addSubview:playListView];
+	[self overlayView:playListViewController.view
+				   on:libraryPlaceholderView
+			   offset:NSMakePoint(-1, -NSHeight(libraryPlaceholderView.frame) - 1)
+			   extend:NSMakeSize(1, 1)];
 }
 - (IBAction)openXspf:(id)sender
 {
@@ -667,6 +658,15 @@
 	[listViewController setNextKeyView:[detailViewController firstKeyView]];
 	[detailViewController setNextKeyView:searchField];
 }
+- (void)overlayView:(NSView *)view on:(NSView *)original offset:(NSPoint)offset extend:(NSSize)extend
+{
+	NSRect frame = original.frame;
+	frame.origin = offset;
+	frame.size.width += extend.width;
+	frame.size.height += extend.height;
+	view.frame = frame;
+	[original addSubview:view];
+}
 - (void)changeViewType:(XspfMViewType)viewType
 {
 	if(currentListViewType == viewType) return;
@@ -701,11 +701,10 @@
 	
 	[[listViewController view] removeFromSuperview];
 	listViewController = targetContorller;
-	[listPlaceholderView addSubview:[listViewController view]];
-	NSRect rect = [listPlaceholderView bounds];
-	rect.size.height += 1;
-	rect.origin.y -= 1;
-	[[listViewController view] setFrame:rect];
+	[self overlayView:listViewController.view
+				   on:listPlaceholderView
+			   offset:NSMakePoint(0, -1)
+			   extend:NSMakeSize(0, 1)];
 //	[[self window] recalculateKeyViewLoop];
 	[self recalculateKeyViewLoop];
 	
@@ -722,13 +721,10 @@
 	
 	libraryViewController = [[XspfMLibraryViewController alloc] init];
 	[libraryViewController setRepresentedObject:libraryController];
-	[libraryPlaceholderView addSubview:[libraryViewController view]];
-	NSRect rect = [libraryPlaceholderView bounds];
-	rect.size.width += 2;
-	rect.origin.x -= 1;
-	rect.size.height += 1;
-	rect.origin.y -= 1;
-	[[libraryViewController view] setFrame:rect];
+	[self overlayView:libraryViewController.view
+				   on:libraryPlaceholderView
+			   offset:NSMakePoint(-1, -1)
+			   extend:NSMakeSize(2, 1)];
 	[libraryViewController recalculateKeyViewLoop];
 }
 - (void)setupDetailView
@@ -737,8 +733,10 @@
 	
 	detailViewController = [[XspfMDetailViewController alloc] init];
 	[detailViewController setRepresentedObject:controller];
-	[detailPlaceholderView addSubview:[detailViewController view]];
-	[[detailViewController view] setFrame:[detailPlaceholderView bounds]];
+	[self overlayView:detailViewController.view
+				   on:detailPlaceholderView
+			   offset:NSZeroPoint
+			   extend:NSZeroSize];
 	[detailViewController recalculateKeyViewLoop];
 }
 - (void)setupAccessorylView
@@ -747,8 +745,10 @@
 	
 	accessoryViewController = [[NSViewController alloc] initWithNibName:@"AccessoryView" bundle:nil];
 	[accessoryViewController setRepresentedObject:[appDelegate channel]];
-	[accessoryPlaceholderView addSubview:[accessoryViewController view]];
-	[[accessoryViewController view] setFrame:[accessoryPlaceholderView bounds]];
+	[self overlayView:accessoryViewController.view
+				   on:accessoryPlaceholderView
+			   offset:NSZeroPoint
+			   extend:NSZeroSize];
 //	[accessoryViewController recalculateKeyViewLoop];
 }
 #pragma mark#### NSWidnow Delegate ####
