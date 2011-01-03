@@ -72,6 +72,7 @@
 		F49BD01010A47781007136CE /* ListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F49BD00E10A47780007136CE /* ListView.xib */; };
 		F49BD01310A477BF007136CE /* XspfMListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BD01210A477BF007136CE /* XspfMListViewController.m */; };
 		F49BD36910A66EC6007136CE /* XspfMXspfListObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BD36810A66EC6007136CE /* XspfMXspfListObject.m */; };
+		F4A1D1FA12D198F3008AFDD9 /* XspfMListController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A1D1F912D198F3008AFDD9 /* XspfMListController.m */; };
 		F4A6F90B10C1666600345D77 /* XspfMRuleEditorDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A6F90A10C1666600345D77 /* XspfMRuleEditorDelegate.m */; };
 		F4A6FAE610C2442E00345D77 /* XspfMRule.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A6FAE510C2442E00345D77 /* XspfMRule.m */; };
 		F4AB5F5912BCFF7600157355 /* XspfQTMovieTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AB5F4012BCFF7500157355 /* XspfQTMovieTimer.m */; };
@@ -260,6 +261,8 @@
 		F49BD01210A477BF007136CE /* XspfMListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMListViewController.m; sourceTree = "<group>"; };
 		F49BD36710A66EC6007136CE /* XspfMXspfListObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMXspfListObject.h; sourceTree = "<group>"; };
 		F49BD36810A66EC6007136CE /* XspfMXspfListObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMXspfListObject.m; sourceTree = "<group>"; };
+		F4A1D1F812D198F3008AFDD9 /* XspfMListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMListController.h; sourceTree = "<group>"; };
+		F4A1D1F912D198F3008AFDD9 /* XspfMListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMListController.m; sourceTree = "<group>"; };
 		F4A6F90910C1666600345D77 /* XspfMRuleEditorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMRuleEditorDelegate.h; sourceTree = "<group>"; };
 		F4A6F90A10C1666600345D77 /* XspfMRuleEditorDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMRuleEditorDelegate.m; sourceTree = "<group>"; };
 		F4A6FAE410C2442E00345D77 /* XspfMRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMRule.h; sourceTree = "<group>"; };
@@ -373,6 +376,8 @@
 			children = (
 				F4C545AE12CCF75600214C74 /* NSControl_Validation.h */,
 				F4C545AF12CCF75600214C74 /* NSControl_Validation.m */,
+				F4A1D1F812D198F3008AFDD9 /* XspfMListController.h */,
+				F4A1D1F912D198F3008AFDD9 /* XspfMListController.m */,
 				F4CD0D241126FF4A007E31BC /* XspfMPreviewPanelController.h */,
 				F4CD0D251126FF4A007E31BC /* XspfMPreviewPanelController.m */,
 				77C8280B06725ACE000B614F /* XspfManager.h */,
@@ -892,6 +897,7 @@
 				F4CA77B212C72C6200DA456D /* XspfManager_Debugging.m in Sources */,
 				F4C5436112CB734D00214C74 /* XspfMAppleRemoteSupport.m in Sources */,
 				F4C545B012CCF75600214C74 /* NSControl_Validation.m in Sources */,
+				F4A1D1FA12D198F3008AFDD9 /* XspfMListController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

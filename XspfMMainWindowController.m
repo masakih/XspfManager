@@ -399,75 +399,7 @@
 		[self.window makeFirstResponder:listViewController.initialFirstResponder];
 	}
 }
-- (void)sortByKey:(NSString *)key
-{
-	NSMutableArray *sortDescs = [[[controller sortDescriptors] mutableCopy] autorelease];
-	NSSortDescriptor *sortDesc = nil;
-	
-	// key is descs first key.
-	if([sortDescs count] > 1) {
-		NSSortDescriptor *firstDesc = [sortDescs objectAtIndex:0];
-		if([key isEqualToString:[firstDesc key]]) {
-			sortDesc = [[[NSSortDescriptor alloc] initWithKey:key ascending:![firstDesc ascending]] autorelease];
-			[sortDescs removeObject:firstDesc];
-		}
-	}
-	// remove same key.
-	if(!sortDesc) {
-		BOOL newAscending = NO;
-		NSSortDescriptor *foundDesc = nil;
-		for(id desc in sortDescs) {
-			if([key isEqualToString:[desc key]]) {
-				foundDesc = desc;
-				break;
-			}
-		}
-		if(foundDesc) {
-			newAscending = [foundDesc ascending];
-			[sortDescs removeObject:foundDesc];
-		}
-		
-		sortDesc = [[[NSSortDescriptor alloc] initWithKey:key ascending:newAscending] autorelease];
-	}
-	
-	[sortDescs insertObject:sortDesc atIndex:0];
-	
-	NSArray *selectedObjects = [controller selectedObjects];
-	[controller setSortDescriptors:sortDescs];
-	[controller setSelectedObjects:selectedObjects];
-}
-- (IBAction)sortByTitle:(id)sender
-{
-	[self sortByKey:@"title"];
-}
-- (IBAction)sortByLastPlayDate:(id)sender
-{
-	[self sortByKey:@"lastPlayDate"];
-}
-- (IBAction)sortByModificationDate:(id)sender
-{
-	[self sortByKey:@"modificationDate"];
-}
-- (IBAction)sortByCreationDate:(id)sender
-{
-	[self sortByKey:@"creationDate"];
-}
-- (IBAction)sortByRegisterDate:(id)sender
-{
-	[self sortByKey:@"registerDate"];
-}
-- (IBAction)sortByRate:(id)sender
-{
-	[self sortByKey:@"rating"];
-}
-- (IBAction)sortByMovieNumber:(id)sender
-{
-	[self sortByKey:@"movieNum"];
-}
-- (IBAction)sortByLabel:(id)sender
-{
-	[self sortByKey:@"label"];
-}
+
 
 - (IBAction)add:(id)sender
 {
@@ -834,6 +766,7 @@
 {
 	if([super respondsToSelector:aSelector]) return YES;
 	if([self.movieViewController respondsToSelector:aSelector]) return YES;
+	if([controller respondsToSelector:aSelector]) return YES;
 	
 	return NO;
 }
@@ -842,6 +775,9 @@
 	if([self.movieViewController respondsToSelector:aSelector]) {
 		return [self.movieViewController methodSignatureForSelector:aSelector];
 	}
+	if([controller respondsToSelector:aSelector]) {
+		return [controller methodSignatureForSelector:aSelector];
+	}
 	return [super methodSignatureForSelector:aSelector];
 }
 - (void)forwardInvocation:(NSInvocation *)anInvocation
@@ -849,6 +785,10 @@
 	SEL selector = [anInvocation selector];
 	if([self.movieViewController respondsToSelector:selector]) {
 		[anInvocation invokeWithTarget:self.movieViewController];
+		return;
+	}
+	if([controller respondsToSelector:selector]) {
+		[anInvocation invokeWithTarget:controller];
 		return;
 	}
 }
