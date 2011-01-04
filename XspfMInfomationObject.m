@@ -87,6 +87,8 @@ static NSString *const VoiceActorsDelimiter = @":::";
 }
 - (void)setVoiceActors:(NSArray *)actors
 {
+	if([actors count] == 0) actors = nil;
+	
 	[self willChangeValueForKey:@"voiceActors"];
 	[self setPrimitiveValue:actors forKey:@"voiceActors"];
 	[self didChangeValueForKey:@"voiceActors"];
@@ -106,12 +108,14 @@ static NSString *const VoiceActorsDelimiter = @":::";
 	}
 	return products;
 }
-- (void)setProducts:(NSArray *)actors
+- (void)setProducts:(NSArray *)products
 {
+	if([products count] == 0) products = nil;
+	
 	[self willChangeValueForKey:@"products"];
-	[self setPrimitiveValue:actors forKey:@"products"];
+	[self setPrimitiveValue:products forKey:@"products"];
 	[self didChangeValueForKey:@"products"];
-	[self setValue:[actors componentsJoinedByString:VoiceActorsDelimiter] forKey:@"productsList"];
+	[self setValue:[products componentsJoinedByString:VoiceActorsDelimiter] forKey:@"productsList"];
 }
 
 @end
