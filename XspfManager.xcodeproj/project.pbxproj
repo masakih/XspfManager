@@ -22,7 +22,6 @@
 		F40B342F10B6C09700896716 /* UKMainThreadProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = F40B342D10B6C09700896716 /* UKMainThreadProxy.m */; };
 		F42BF7B710F1C59F00D8F8C1 /* XspfMLabelMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F42BF7B610F1C59F00D8F8C1 /* XspfMLabelMenuItem.m */; };
 		F436E40011060096004BA387 /* XspfMMainModelTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = F436E3FF11060096004BA387 /* XspfMMainModelTransformer.m */; };
-		F43E046B10F9B2D200D0428E /* XspfMPopUpButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E046A10F9B2D200D0428E /* XspfMPopUpButton.m */; };
 		F43E077F10FAA6B800D0428E /* XspfMLabelField.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E077E10FAA6B800D0428E /* XspfMLabelField.m */; };
 		F43E0DD511021E0200D0428E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F43E0DD311021E0200D0428E /* Localizable.strings */; };
 		F43E0E5711027E1900D0428E /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = F43E0E5611027E1900D0428E /* Credits.rtf */; };
@@ -857,7 +856,6 @@
 				F481B82E10F1754600B7EA4F /* XspfMLabelMenuView.m in Sources */,
 				F42BF7B710F1C59F00D8F8C1 /* XspfMLabelMenuItem.m in Sources */,
 				F4FE861710F475740076B366 /* XspfMLabelControl.m in Sources */,
-				F43E046B10F9B2D200D0428E /* XspfMPopUpButton.m in Sources */,
 				F43E077F10FAA6B800D0428E /* XspfMLabelField.m in Sources */,
 				F436E40011060096004BA387 /* XspfMMainModelTransformer.m in Sources */,
 				F4D2F69B110754ED007681F4 /* XspfMMainModel.xcdatamodeld in Sources */,
