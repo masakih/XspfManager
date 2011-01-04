@@ -527,9 +527,9 @@
 }
 - (BOOL)validateMenuItemForMovieMode:(NSMenuItem *)menuItem
 {
-//	if([self.movieViewController respondsToSelector:[menuItem action]]) {
-//		return [self.movieViewController validateMenuItem:menuItem];
-//	}
+	if([self.movieViewController respondsToSelector:[menuItem action]]) {
+		return [self.movieViewController validateMenuItem:menuItem];
+	}
 	
 	return YES;
 }

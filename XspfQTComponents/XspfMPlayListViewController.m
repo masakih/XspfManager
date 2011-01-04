@@ -160,7 +160,7 @@ static NSString *const XspfQTTitleKey = @"title";
 	
 	unsigned short code = [theEvent keyCode];
 	if(code == 49 /* space bar */) {
-		[[self document] togglePlayAndPause:self];
+		[NSApp sendAction:@selector(togglePlayAndPause:) to:nil from:nil];
 	}
 	if(code == 51 /* delete key */) {
 		[self delete:self];
@@ -443,15 +443,4 @@ static NSString *const XspfQTTitleKey = @"title";
 	return YES;
 }
 
-@end
-
-@implementation XspfQTPlaylistOutlineView
-- (void)keyDown:(NSEvent *)theEvent
-{
-	if(_delegate && [_delegate respondsToSelector:@selector(keyDown:)]) {
-		[_delegate keyDown:theEvent];
-	}
-	
-	[super keyDown:theEvent];
-}
 @end

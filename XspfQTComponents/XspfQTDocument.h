@@ -83,7 +83,7 @@
 	BOOL didPreloading;
 }
 
-- (IBAction)togglePlayAndPause:(id)sender;
+//- (IBAction)togglePlayAndPause:(id)sender;
 //- (IBAction)showPlayList:(id)sender;
 
 - (IBAction)setThumbnailFrame:(id)sender;
