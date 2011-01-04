@@ -365,7 +365,7 @@ static NSString *const kVolumeKeyPath = @"qtMovie.volume";
 #pragma mark ### Actions ###
 - (IBAction)togglePlayAndPause:(id)sender
 {
-	if([[self valueForKeyPath:@"representedObject.trackList.isPlayed"] boolValue]) {
+	if([[self valueForKeyPath:@"document.trackList.isPlayed"] boolValue]) {
 		[self pause];
 	} else {
 		[self play];
@@ -420,12 +420,12 @@ static NSString *const kVolumeKeyPath = @"qtMovie.volume";
 - (IBAction)nextTrack:(id)sender
 {
 	[qtView pause:sender];
-	[[[self representedObject] trackList] next];
+	[[[self document] trackList] next];
 }
 - (IBAction)previousTrack:(id)sender
 {
 	[qtView pause:sender];
-	[[[self representedObject] trackList] previous];
+	[[[self document] trackList] previous];
 }
 - (IBAction)setThumbnailFrame:(id)sender
 {
@@ -437,7 +437,7 @@ static NSString *const kVolumeKeyPath = @"qtMovie.volume";
 }
 - (IBAction)gotoThumbnailFrame:(id)sender
 {
-	HMXSPFComponent *trackList = [[self representedObject] trackList];
+	HMXSPFComponent *trackList = [[self document] trackList];
 	HMXSPFComponent *thumbnailTrack = [trackList thumbnailTrack];
 	NSTimeInterval time = [trackList thumbnailTimeInterval];
 	
@@ -459,7 +459,7 @@ static NSString *const kVolumeKeyPath = @"qtMovie.volume";
 #pragma mark ### Notification & Timer ###
 - (void)movieDidEndNotification:(id)notification
 {
-	[[[self representedObject] trackList] next];
+	[[[self document] trackList] next];
 }
 
 // call from XspfQTMovieTimer.
@@ -479,7 +479,7 @@ static NSString *const kVolumeKeyPath = @"qtMovie.volume";
 	SEL action = [menuItem action];
 	
 	if(action == @selector(gotoThumbnailFrame:)) {
-		if(![[[self representedObject] trackList] thumbnailTrack]) return NO;
+		if(![[[self document] trackList] thumbnailTrack]) return NO;
 	}
 	
 	if(action == @selector(togglePlayAndPause:)) {
@@ -498,7 +498,7 @@ static NSString *const kVolumeKeyPath = @"qtMovie.volume";
 		}
 	}
 	
-	if([[self document] respondsToSelector:action]) {
+	if(action == @selector(removeThumbnail:)) {
 		return [[self document] validateMenuItem:menuItem];
 	}
 	

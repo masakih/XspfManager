@@ -244,18 +244,6 @@ static XspfQTMovieTimer* timer = nil;
 }
 
 #pragma mark### Actions ###
-- (IBAction)togglePlayAndPause:(id)sender
-{
-	[movieWindowController togglePlayAndPause:sender];
-}
-//- (IBAction)showPlayList:(id)sender
-//{
-//	[playListWindowController showWindow:self];
-//}
-//- (IBAction)showHidePlayList:(id)sender
-//{
-//	[playListWindowController showHideWindow:self];
-//}
 - (IBAction)setThumbnailFrame:(id)sender
 {
 	HMXSPFComponent *currentTrack = [[self trackList] currentTrack];
