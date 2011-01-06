@@ -65,6 +65,15 @@
 
 @implementation XspfMListController
 
+- (BOOL)isSelected
+{
+	return [self selectionIndex] != NSNotFound;
+}
+- (XspfMXspfObject *)selectedItem
+{
+	return [self valueForKeyPath:@"selection.self"];
+}
+
 - (void)sortByKey:(NSString *)key
 {
 	NSMutableArray *sortDescs = [[[self sortDescriptors] mutableCopy] autorelease];

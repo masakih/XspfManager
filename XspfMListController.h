@@ -61,8 +61,12 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class XspfMXspfObject;
 
 @interface XspfMListController : NSArrayController
+
+@property (readonly) BOOL isSelected;
+@property (readonly) XspfMXspfObject *selectedItem;
 
 - (IBAction)sortByTitle:(id)sender;
 - (IBAction)sortByLastPlayDate:(id)sender;

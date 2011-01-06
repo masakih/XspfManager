@@ -62,6 +62,7 @@
 #import "XspfMMainWindowController.h"
 
 #import "XspfMXspfObject.h"
+#import "XspfMListController.h"
 
 #import "XspfMViewController.h"
 #import "XspfMLibraryViewController.h"
@@ -315,7 +316,7 @@
 - (void)prepareWipeIn
 {
 	[self.spin startAnimation:self];
-	XspfMXspfObject *rep = [controller valueForKeyPath:@"selection.self"];
+	XspfMXspfObject *rep = controller.selectedItem;
 	
 	NSError *error = nil;
 	NSDocumentController *dc = [NSDocumentController sharedDocumentController];
@@ -346,7 +347,7 @@
 }
 - (IBAction)openXspf:(id)sender
 {
-	BOOL isSelected = [[controller valueForKeyPath:@"selectedObjects.@count"] boolValue];
+	BOOL isSelected = controller.isSelected;
 	if(!isSelected) return;
 	
 	[self prepareWipeIn];
@@ -355,7 +356,7 @@
 	self.mode = modeMovie;
 	return;
 	
-	XspfMXspfObject *rep = [controller valueForKeyPath:@"selection.self"];
+	XspfMXspfObject *rep = controller.selectedItem;
 	NSInteger result = NSRunCriticalAlertPanel(NSLocalizedString(@"Xspf is not found", @"Xspf is not found"),
 											   NSLocalizedString(@"\"%@\" is not found.",  @"\"%@\" is not found."),
 											   nil, nil/*@"Search Original"*/, nil, rep.title);
@@ -511,7 +512,7 @@
 	}
 	
 	if(action == @selector(remove:) || action == @selector(delete:)) {
-		if([controller selectionIndex] == NSNotFound) return NO;
+		if(!controller.isSelected) return NO;
 		
 		NSView *listView_ = [listViewController view];
 		id responder = [[self window] firstResponder];
@@ -569,7 +570,7 @@
 #pragma mark#### Other methods ####
 - (void)removeSelectedItem
 {
-	XspfMXspfObject *obj = [controller valueForKeyPath:@"selection.self"];
+	XspfMXspfObject *obj = controller.selectedItem;
 	
 	NSBeginInformationalAlertSheet(nil, nil, @"Cancel", nil, [self window],
 								   self, @selector(didEndAskDelete:::), Nil, obj,

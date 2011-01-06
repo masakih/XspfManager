@@ -75,10 +75,12 @@ typedef enum {
 @class XspfMLibraryViewController, XspfMDetailViewController;
 @class XspfMPlayListViewController, XspfQTMovieViewController;
 
+@class XspfMListController;
+
 @interface XspfMMainWindowController : NSWindowController
 {
 	IBOutlet NSArrayController *allXspfController;
-	IBOutlet NSArrayController *controller;
+	IBOutlet XspfMListController *controller;
 	IBOutlet XspfManager *appDelegate;
 		
 	IBOutlet NSWindow *progressPanel;
