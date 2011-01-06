@@ -155,8 +155,11 @@
 	if([theEvent isARepeat]) return [super keyDown:theEvent];
 	
 #define kRETURN_KEY	36
+#define kSPACE_BAR 49
+#define kDELETE_KEY 51
 #define kENTER_KEY	52
 	
+	BOOL interrapted = NO;
 	unsigned short code = [theEvent keyCode];
 	//	HMLog(HMLogLevelDebug, @"code -> %d", code);
 	switch(code) {
@@ -164,14 +167,19 @@
 		case kENTER_KEY:
 			if([self doubleAction]) {
 				[self sendAction:[self doubleAction] to:[self target]];
-				return;
+				interrapted = YES;
 			}
 			break;
-		case 49:
+		case kSPACE_BAR:
 			[NSApp sendAction:@selector(togglePreviewPanel:) to:nil from:nil];
-			return;
+			interrapted = YES;
+			break;
+		case kDELETE_KEY:
+			[self doCommandBySelector:@selector(delete:)];
+			interrapted = YES;
 			break;
 	}
+	if(interrapted) return;
 	
 	[super keyDown:theEvent];
 }
