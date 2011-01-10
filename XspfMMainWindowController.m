@@ -164,6 +164,7 @@
 					options:nil];
 	
 	[self recalculateKeyViewLoop];
+	[self.window update];
 	
 	[self performSelector:@selector(delayExcute:) withObject:self afterDelay:0.1];
 }
