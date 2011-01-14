@@ -402,6 +402,42 @@
 	}
 }
 
+- (void)selectAndScrollTo:(XspfMXspfObject *)object
+{
+	[controller setSelectedObjects:[NSArray arrayWithObject:object]];
+	[listViewController scrollToSelection:nil];
+}
+- (void)createPlayList:(id)sender
+{
+	NSString *path = [[NSApp delegate] xspfManagerMovieFoler];
+	
+	NSDocumentController *dc = [NSDocumentController sharedDocumentController];
+	NSError *error = nil;
+	NSDocument *doc = [dc makeUntitledDocumentOfType:@"com.masakih.xspf"
+											   error:&error];
+	if(!doc) {
+		NSString *errorString;
+		if(error) {
+			errorString = [NSString stringWithFormat:@"%@", [error localizedDescription]];
+		} else {
+			errorString = [NSString stringWithFormat:@"Could not create new documnet."];
+		}
+		NSLog(@"%@", errorString);
+		NSBeep();
+		return;
+	}
+	NSString *newDocumentName = [path stringByAppendingPathComponent:@"New XSPF Play List"];
+	newDocumentName = [newDocumentName stringByAppendingPathExtension:@"xspf"];
+	NSURL *newDocumentURL = [NSURL fileURLWithPath:newDocumentName];
+	[doc setFileURL:newDocumentURL];
+	[doc saveDocument:nil];
+	
+	XspfMXspfObject *object = [appDelegate registerWithURL:newDocumentURL];
+	[self performSelector:@selector(selectAndScrollTo:)
+			   withObject:object
+			   afterDelay:0.0];
+	[doc close];
+}
 
 - (IBAction)add:(id)sender
 {

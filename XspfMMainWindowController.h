@@ -132,6 +132,7 @@ typedef enum {
 
 - (IBAction)switchActiveView:(id)sender;
 
+- (void)createPlayList:(id)sender;
 - (IBAction)add:(id)sender;
 - (IBAction)remove:(id)sender;
 

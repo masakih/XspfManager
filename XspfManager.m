@@ -105,7 +105,34 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 	NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : NSTemporaryDirectory();
 	return [basePath stringByAppendingPathComponent:@"XspfManager"];
 }
-
+- (NSString *)xspfManagerMovieFoler
+{
+	NSString *basePath = [NSHomeDirectory() stringByAppendingPathComponent:@"Movies"];
+	basePath = [basePath stringByAppendingPathComponent:@"XspfManager"];
+	
+	NSFileManager *fm = [NSFileManager defaultManager];
+	BOOL isDir = NO;
+	if(![fm fileExistsAtPath:basePath isDirectory:&isDir]) {
+		NSError *error = nil;
+		BOOL created = [fm createDirectoryAtPath:basePath
+					 withIntermediateDirectories:NO
+									  attributes:nil
+										   error:&error];
+		if(!created) {
+			NSString *errorString;
+			if(error) {
+				errorString = [NSString stringWithFormat:@"%s", [error localizedDescription]];
+			} else {
+				errorString = [NSString stringWithFormat:@"Could not create directory %@", basePath];
+			}
+			NSLog(@"%@", errorString);
+			[NSApp terminate:nil];
+		}
+	}
+	
+	return basePath;
+}
+		
 
 /**
     Creates, retains, and returns the managed object model for the application 

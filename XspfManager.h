@@ -97,6 +97,7 @@ typedef enum {
 @property (nonatomic, retain) IBOutlet NSMenuItem *movieControlMenuItem;
 
 - (NSString *)applicationSupportFolder;
+- (NSString *)xspfManagerMovieFoler;
 
 - (NSURL *)storeURL;
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator;
