@@ -518,6 +518,28 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 {
 	[pController togglePreviewPanel:panel];
 }
+
+
+- (NSURL *)availableFileURL
+{
+	NSString *path = [self xspfManagerMovieFoler];
+	NSString *newDocumentName = [path stringByAppendingPathComponent:@"New XSPF Play List"];
+	NSString *filePath = [newDocumentName stringByAppendingPathExtension:@"xspf"];
+	NSFileManager *fm = [NSFileManager defaultManager];
+	
+	NSInteger i = 0;
+	do {
+		BOOL isDir = NO;
+		if([fm fileExistsAtPath:filePath isDirectory:&isDir]) {
+			filePath = [NSString stringWithFormat:@"%@ %04d", newDocumentName, ++i];
+			filePath = [filePath stringByAppendingPathExtension:@"xspf"];
+		} else {
+			break;
+		}
+	} while(YES);
+	
+	return [NSURL fileURLWithPath:filePath];
+}
 #pragma mark#### UKKQUEUE ####
 - (void)registerToUKKQueue
 {

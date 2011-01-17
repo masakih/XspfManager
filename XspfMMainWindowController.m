@@ -409,8 +409,6 @@
 }
 - (void)createPlayList:(id)sender
 {
-	NSString *path = [[NSApp delegate] xspfManagerMovieFoler];
-	
 	NSDocumentController *dc = [NSDocumentController sharedDocumentController];
 	NSError *error = nil;
 	NSDocument *doc = [dc makeUntitledDocumentOfType:@"com.masakih.xspf"
@@ -426,9 +424,7 @@
 		NSBeep();
 		return;
 	}
-	NSString *newDocumentName = [path stringByAppendingPathComponent:@"New XSPF Play List"];
-	newDocumentName = [newDocumentName stringByAppendingPathExtension:@"xspf"];
-	NSURL *newDocumentURL = [NSURL fileURLWithPath:newDocumentName];
+	NSURL *newDocumentURL = [appDelegate availableFileURL];
 	[doc setFileURL:newDocumentURL];
 	[doc saveDocument:nil];
 	

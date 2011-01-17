@@ -123,6 +123,8 @@ typedef enum {
 - (void)registerURLs:(NSArray *)URLs;
 - (void)removeObject:(XspfMXspfObject *)object;
 
+- (NSURL *)availableFileURL;
+
 - (void)registerToUKKQueue;
 - (void)watcher:(id<UKFileWatcher>)kq receivedNotification:(NSString*)notificationName forPath:(NSString*)filePath;
 
