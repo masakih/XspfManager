@@ -240,6 +240,9 @@
 	self.playListViewController = nil;
 	
 	NSDocument *doc = movieViewController.representedObject;
+	if([doc hasUnautosavedChanges]) {
+		[doc saveDocument:nil];
+	}
 	[doc close];
 	self.movieViewController = nil;
 	
