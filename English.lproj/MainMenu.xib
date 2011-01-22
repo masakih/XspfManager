@@ -189,17 +189,18 @@
 							<string key="NSTitle">File</string>
 							<object class="NSMutableArray" key="NSMenuItems">
 								<bool key="EncodedWithXMLCoder">YES</bool>
-								<object class="NSMenuItem" id="936467405">
+								<object class="NSMenuItem" id="546856955">
 									<reference key="NSMenu" ref="960517776"/>
-									<string key="NSTitle">New Smart Library...</string>
-									<string key="NSKeyEquiv"/>
+									<string key="NSTitle">New Play List</string>
+									<string key="NSKeyEquiv">n</string>
+									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="893455832"/>
 									<reference key="NSMixedImage" ref="424226900"/>
 								</object>
-								<object class="NSMenuItem" id="546856955">
+								<object class="NSMenuItem" id="936467405">
 									<reference key="NSMenu" ref="960517776"/>
-									<string key="NSTitle">New Play List</string>
+									<string key="NSTitle">New Smart Library...</string>
 									<string key="NSKeyEquiv"/>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="893455832"/>
@@ -1950,10 +1951,10 @@
 							<reference ref="620705007"/>
 							<reference ref="51940822"/>
 							<reference ref="164931032"/>
-							<reference ref="936467405"/>
 							<reference ref="104718980"/>
 							<reference ref="273786822"/>
 							<reference ref="546856955"/>
+							<reference ref="936467405"/>
 						</object>
 						<reference key="parent" ref="842783111"/>
 					</object>
