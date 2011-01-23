@@ -136,7 +136,7 @@
 			[remoteBehavior setSimulateHoldEvent:YES];
 		} else if(mode == modeMovie) {
 			[remoteBehavior setClickCountEnabledButtons:kRemoteButtonLeft | kRemoteButtonRight];
-			[remoteBehavior setSimulateHoldEvent:NO];
+			[remoteBehavior setSimulateHoldEvent:YES];
 		}
 		return;
 	}
@@ -233,10 +233,10 @@ static NSInteger XSPFQTmoveValue= 10;
 			action = @selector(previousTrack:);
 			break;			
 		case kRemoteButtonPlus_Hold:
-			action = NULL;
+			action = @selector(turnUpVolume:);
 			break;				
 		case kRemoteButtonMinus_Hold:
-			action = NULL;
+			action = @selector(turnDownVolume:);
 			break;				
 		case kRemoteButtonPlay_Hold:
 			action = NULL;
@@ -273,6 +273,12 @@ static NSInteger XSPFQTmoveValue= 10;
 }
 BOOL acceptSendingPeriodicEvent(RemoteControlEventIdentifier identifier)
 {
+	XspfManager *appDelegate = [NSApp delegate];
+	if(appDelegate.mode == modeMovie) {
+		if(identifier == kRemoteButtonPlus_Hold) return YES;
+		if(identifier == kRemoteButtonMinus_Hold) return YES;
+		return NO;
+	}
 	if(identifier == kRemoteButtonRight_Hold) return YES;
 	if(identifier == kRemoteButtonLeft_Hold) return YES;
 	if(identifier == kRemoteButtonPlus_Hold) return YES;
