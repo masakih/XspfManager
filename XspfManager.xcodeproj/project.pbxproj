@@ -29,6 +29,7 @@
 		F43E62BD10A0710E00BF88DA /* XspfMImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E62BC10A0710E00BF88DA /* XspfMImageView.m */; };
 		F43E652E10A315D000BF88DA /* CollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F43E652C10A315D000BF88DA /* CollectionView.xib */; };
 		F43E653410A3167700BF88DA /* XspfMCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E653310A3167700BF88DA /* XspfMCollectionViewController.m */; };
+		F448F52412EDCD0200E96490 /* XspfMCollectionItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F448F52312EDCD0200E96490 /* XspfMCollectionItemView.m */; };
 		F44A23A61196443600C60F2D /* XspfMRuleRowsBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = F44A23A31196443600C60F2D /* XspfMRuleRowsBuilder.m */; };
 		F44A23A71196443600C60F2D /* XspfMRuleRowTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = F44A23A51196443600C60F2D /* XspfMRuleRowTemplate.m */; };
 		F44A23BC119644D800C60F2D /* XspfMRuleConcreteRowsBuilders.m in Sources */ = {isa = PBXBuildFile; fileRef = F44A23BB119644D800C60F2D /* XspfMRuleConcreteRowsBuilders.m */; };
@@ -179,6 +180,8 @@
 		F43E652D10A315D000BF88DA /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/CollectionView.xib; sourceTree = "<group>"; };
 		F43E653210A3167700BF88DA /* XspfMCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMCollectionViewController.h; sourceTree = "<group>"; };
 		F43E653310A3167700BF88DA /* XspfMCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMCollectionViewController.m; sourceTree = "<group>"; };
+		F448F52212EDCD0200E96490 /* XspfMCollectionItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMCollectionItemView.h; sourceTree = "<group>"; };
+		F448F52312EDCD0200E96490 /* XspfMCollectionItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMCollectionItemView.m; sourceTree = "<group>"; };
 		F44A23A11196443600C60F2D /* XspfMRuleRowsBuilder_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMRuleRowsBuilder_private.h; sourceTree = "<group>"; };
 		F44A23A21196443600C60F2D /* XspfMRuleRowsBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMRuleRowsBuilder.h; sourceTree = "<group>"; };
 		F44A23A31196443600C60F2D /* XspfMRuleRowsBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMRuleRowsBuilder.m; sourceTree = "<group>"; };
@@ -644,6 +647,8 @@
 				F43E046910F9B2D200D0428E /* XspfMPopUpButton.h */,
 				F43E046A10F9B2D200D0428E /* XspfMPopUpButton.m */,
 				F4D3631311A2BCC3009FE842 /* XspfMLabels */,
+				F448F52212EDCD0200E96490 /* XspfMCollectionItemView.h */,
+				F448F52312EDCD0200E96490 /* XspfMCollectionItemView.m */,
 			);
 			name = "Views&Cells";
 			sourceTree = "<group>";
@@ -896,6 +901,7 @@
 				F4C5436112CB734D00214C74 /* XspfMAppleRemoteSupport.m in Sources */,
 				F4C545B012CCF75600214C74 /* NSControl_Validation.m in Sources */,
 				F4A1D1FA12D198F3008AFDD9 /* XspfMListController.m in Sources */,
+				F448F52412EDCD0200E96490 /* XspfMCollectionItemView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

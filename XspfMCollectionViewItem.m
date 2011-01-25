@@ -251,10 +251,10 @@
 }
 - (void)highlightRateIfNeeded
 {
-	BOOL flag = [self isSelected] && [self isFirstResponder] && [NSApp isActive];
-	NSLevelIndicatorCell *cell = [_box.rating cell];
-	[cell setHighlighted:flag];
-	[cell setBackgroundStyle:flag ? NSBackgroundStyleDark : NSBackgroundStyleLight];
+//	BOOL flag = [self isSelected] && [self isFirstResponder] && [NSApp isActive];
+//	NSLevelIndicatorCell *cell = _box.rating;//[_box.rating cell];
+//	[cell setHighlighted:flag];
+//	[cell setBackgroundStyle:flag ? NSBackgroundStyleDark : NSBackgroundStyleLight];
 }
 - (void)coodinateColors
 {
