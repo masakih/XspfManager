@@ -9,6 +9,7 @@
 #import "XspfMCollectionItemView.h"
 
 #import "XspfMLabelCell.h"
+#import "XspfMShadowImageCell.h"
 
 @implementation XspfMCollectionItemView
 
@@ -21,7 +22,7 @@
 												  blue:211/255.0
 												 alpha:1.0] retain];
 	
-	thumbnailCell = [[NSImageCell alloc] initImageCell:nil];
+	thumbnailCell = [[XspfMShadowImageCell alloc] initImageCell:nil];
 	
 	titleCell = [[NSTextFieldCell alloc] initTextCell:@""];
 	[titleCell setFont:[NSFont controlContentFontOfSize:13]];
