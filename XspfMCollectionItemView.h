@@ -25,6 +25,6 @@
 	BOOL selected;
 }
 
-@property (nonatomic, readonly) NSLevelIndicatorCell* rating;
+//@property (nonatomic, readonly) NSLevelIndicatorCell* rating;
 
 @end

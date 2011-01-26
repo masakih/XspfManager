@@ -12,7 +12,7 @@
 
 @implementation XspfMCollectionItemView
 
-@synthesize rating=rateCell;
+//@synthesize rating=rateCell;
 
 - (void)setup
 {
@@ -25,8 +25,14 @@
 	
 	titleCell = [[NSTextFieldCell alloc] initTextCell:@""];
 	[titleCell setFont:[NSFont controlContentFontOfSize:13]];
+	[titleCell setEditable:YES];
+	[titleCell setSelectable:YES];
+	[titleCell setEnabled:YES];
 	
 	rateCell = [[NSLevelIndicatorCell alloc] initWithLevelIndicatorStyle:NSRatingLevelIndicatorStyle];
+	[rateCell setEditable:YES];
+	[rateCell setEnabled:YES];
+	[rateCell setHighlighted:YES];
 	
 	rateTitleCell = [[NSTextFieldCell alloc] initTextCell:NSLocalizedString(@"Rate:", @"Rate:")];
 	[rateTitleCell setAlignment:NSRightTextAlignment];
@@ -68,7 +74,6 @@
 {
 	if(rep == representedObject) return;
 	
-//	[representedObject removeObserver:self forKeyPath:@"representedObject"];
 	[representedObject removeObserver:self forKeyPath:@"representedObject.thumbnail"];
 	[representedObject autorelease];
 	representedObject = [rep retain];
@@ -91,10 +96,6 @@
 		  toObject:representedObject
 	   withKeyPath:@"representedObject.rating"
 		   options:nil];
-//	[rateTitleCell bind:NSTextColorBinding
-//			   toObject:representedObject
-//			withKeyPath:@"textColor"
-//				options:nil];
 	
 	[labelCell bind:NSValueBinding
 		   toObject:representedObject
@@ -114,18 +115,11 @@
    withKeyPath:@"selected"
 	   options:nil];
 	
-//	[representedObject addObserver:self
-//						forKeyPath:@"representedObject"
-//						   options:0
-//						   context:NULL];
+	
 	[representedObject addObserver:self
-					forKeyPath:@"representedObject.thumbnail"
-					   options:0
-					   context:NULL];
-//	[representedObject addObserver:self
-//						forKeyPath:@"selected"
-//						   options:0
-//						   context:NULL];
+						forKeyPath:@"representedObject.thumbnail"
+						   options:0
+						   context:NULL];
 }
 
 - (NSInteger)tag
@@ -153,17 +147,8 @@
 		[self setNeedsDisplay];
 		return;
 	}
-//	if([keyPath isEqualToString:@"representedObject"]) {
-//		[self setNeedsDisplay];
-//		return;
-//	}
 	
 	[super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-}
-
-- (BOOL)enabled
-{
-	return YES;
 }
 
 
@@ -198,14 +183,13 @@
 	}
 	if(selected) {
 		NSRect frame = [self imageFrame];
-		frame = NSInsetRect(frame, -6, -6);
-		const CGFloat radius = 5;
+		frame = NSInsetRect(frame, -10, -10);
+		const CGFloat radius = 8;
 		NSBezierPath *bezier = [NSBezierPath bezierPathWithRoundedRect:frame xRadius:radius yRadius:radius];
-		[[NSColor lightGrayColor] set];
+		[[NSColor gridColor] set];
 		[bezier fill];
 	}
 	NSRect frame = [self labelFrame];
-//	frame.origin = NSZeroPoint;
 	const CGFloat radius = 5;
 	NSBezierPath *bezier = [NSBezierPath bezierPathWithRoundedRect:frame xRadius:radius yRadius:radius];
 	[backgroundColor set];
@@ -220,4 +204,46 @@
 	
 	
 }
+
+
+- (void)mouseDown:(NSEvent *)event
+{
+	[self.window endEditingFor:self];
+	
+	NSPoint mouse = [self convertPoint:[event locationInWindow] fromView:nil];
+	
+	if([self mouse:mouse inRect:[self rateFrame]]) {
+		[rateCell trackMouse:event inRect:[self rateFrame] ofView:self untilMouseUp:YES];
+		[self setNeedsDisplay];
+		return;
+	}
+	
+	if([event clickCount] == 2 && [self mouse:mouse inRect:[self titleFrame]]) {
+		NSText *fieldEditor = [self.window fieldEditor:YES forObject:self];
+		[titleCell setTextColor:[NSColor textColor]];
+		[titleCell setBezeled:YES];
+		[titleCell editWithFrame:[self titleFrame]
+						  inView:self
+						  editor:fieldEditor
+						delegate:self
+						   event:event];
+		[fieldEditor selectAll:nil];
+		return;
+	}
+	
+	return [super mouseDown:event];
+}
+- (void)textDidEndEditing:(NSNotification *)notification
+{
+	NSText *fieldEditor =[notification object];
+	[titleCell setStringValue:[[fieldEditor string] copy]];
+	[titleCell setBezeled:NO];
+	[titleCell setDrawsBackground:NO];
+	[titleCell endEditing:fieldEditor];
+	
+	[representedObject setValue:[titleCell stringValue] forKeyPath:@"representedObject.title"];
+	
+	[self setNeedsDisplay];
+}
+
 @end
