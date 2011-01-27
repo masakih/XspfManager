@@ -149,9 +149,6 @@
 - (NSRect)thumbnailFrameCoordinateBase
 {
 	id thumbnailView = _box;
-	if([thumbnailView respondsToSelector:@selector(thumbnail)]) {
-		thumbnailView = _box.thumbnail;
-	}
 	NSRect frame = [thumbnailView imageFrame];
 	
 	if(!NSIntersectsRect([_box visibleRect], frame)) {
@@ -164,9 +161,46 @@
 }
 - (void)setBox:(XspfMCollectionItemBox *)box
 {
+	[_box unbind:@"thumbnail"];
+	[_box unbind:@"title"];
+	[_box unbind:@"rating"];
+	[_box unbind:@"label"];
+	[_box unbind:@"titleColor"];
+	[_box unbind:@"backgroundColor"];
+	[_box unbind:@"selected"];	
+	
 	[_box autorelease];
 	_box = [box retain];
-	[_box setCollectionViewItem:self];
+	
+	[_box bind:@"thumbnail"
+	  toObject:self
+   withKeyPath:@"representedObject.thumbnail"
+	   options:nil];
+	[_box bind:@"title"
+	  toObject:self
+   withKeyPath:@"representedObject.title"
+	   options:nil];
+	[_box bind:@"rating"
+	  toObject:self
+   withKeyPath:@"representedObject.rating"
+	   options:nil];
+	[_box bind:@"label"
+	  toObject:self
+   withKeyPath:@"representedObject.label"
+	   options:nil];	
+	[_box bind:@"titleColor"
+	  toObject:self
+   withKeyPath:@"labelTextColor"
+	   options:nil];
+	[_box bind:@"backgroundColor"
+	  toObject:self
+   withKeyPath:@"backgroundColor"
+	   options:nil];
+	[_box bind:@"selected"
+	  toObject:self
+   withKeyPath:@"selected"
+	   options:nil];
+	
 	
 	[_box setMenu:menu];
 }
@@ -248,17 +282,6 @@
 	}
 	return [NSColor blackColor];
 }
-- (IBAction)changeRate:(id)sender
-{
-	[self performSelector:@selector(highlightRateIfNeeded) withObject:nil afterDelay:0.0];
-}
-- (void)highlightRateIfNeeded
-{
-//	BOOL flag = [self isSelected] && [self isFirstResponder] && [NSApp isActive];
-//	NSLevelIndicatorCell *cell = _box.rating;//[_box.rating cell];
-//	[cell setHighlighted:flag];
-//	[cell setBackgroundStyle:flag ? NSBackgroundStyleDark : NSBackgroundStyleLight];
-}
 - (void)coodinateColors
 {
 	[self willChangeValueForKey:@"backgroundColor"];
@@ -269,8 +292,6 @@
 	
 	[self willChangeValueForKey:@"labelTextColor"];
 	[self didChangeValueForKey:@"labelTextColor"];
-	
-	[self highlightRateIfNeeded];
 }
 - (void)applicationDidBecomeOrResignActive:(id)notification
 {

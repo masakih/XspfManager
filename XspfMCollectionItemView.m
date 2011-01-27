@@ -207,6 +207,43 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 	
 	[super bind:binding toObject:observable withKeyPath:keyPath options:options];
 }
+- (void)unbind:(NSString *)binding
+{
+	if([binding isEqualToString:XspfMCollectionItemThumbnail]) {
+		[thumbnailCell unbind:NSValueBinding];
+		
+		if(thumbnailBinder) {
+			[thumbnailBinder removeObserver:self forKeyPath:thumbnailBindKey];
+		}
+		
+		thumbnailBinder = nil;
+		[thumbnailBindKey release];
+		thumbnailBindKey = nil;
+		return;
+	}
+	if([binding isEqualToString:XspfMCollectionItemTitle]) {
+		[titleCell unbind:NSValueBinding];
+		
+		titleBinder = nil;
+		[titleBindKey release];
+		thumbnailBindKey = nil;
+		return;
+	}
+	if([binding isEqualToString:XspfMCollectionItemTitleColor]) {
+		[titleCell unbind:NSTextColorBinding];
+		return;
+	}
+	if([binding isEqualToString:XspfMCollectionItemRating]) {
+		[rateCell unbind:NSValueBinding];
+		return;
+	}
+	if([binding isEqualToString:XspfMCollectionItemLabel]) {
+		[labelCell unbind:NSValueBinding];
+		return;
+	}
+	
+	[super unbind:binding];
+}
 
 - (NSInteger)tag
 {
