@@ -78,7 +78,7 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 	[labelCell setLabelStyle:XspfMSquareStyle];
 	[labelCell setDrawX:NO];
 	
-	if([self frame].size.height == 185) {
+	if([self frame].size.height < 200) {
 		[self setControlSize:NSSmallControlSize];
 	}
 }
@@ -110,48 +110,6 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 	[titleBindKey release];
 	
 	[super dealloc];
-}
-
-- (void)setRepresentedObject:(id)rep
-{
-	if(rep == representedObject) return;
-	
-	[representedObject autorelease];
-	representedObject = [rep retain];
-	if(!representedObject) return;
-	
-	[self bind:XspfMCollectionItemThumbnail
-	  toObject:representedObject
-   withKeyPath:@"representedObject.thumbnail"
-	   options:nil];
-	[self bind:XspfMCollectionItemTitle
-	  toObject:representedObject
-   withKeyPath:@"representedObject.title"
-	   options:nil];
-	[self bind:XspfMCollectionItemTitleColor
-	  toObject:representedObject
-   withKeyPath:@"labelTextColor"
-	   options:nil];
-	
-	[self bind:XspfMCollectionItemRating
-	  toObject:representedObject
-   withKeyPath:@"representedObject.rating"
-	   options:nil];
-	
-	[self bind:XspfMCollectionItemLabel
-	  toObject:representedObject
-   withKeyPath:@"representedObject.label"
-	   options:nil];
-	
-	[self bind:@"backgroundColor"
-	  toObject:representedObject
-   withKeyPath:@"backgroundColor"
-	   options:nil];
-	[self bind:@"selected"
-	  toObject:representedObject
-   withKeyPath:@"selected"
-	   options:nil];
-	
 }
 
 - (void)bind:(NSString *)binding toObject:(id)observable withKeyPath:(NSString *)keyPath options:(NSDictionary *)options
@@ -250,10 +208,6 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 	return 1100;
 }
 
-- (void)setCollectionViewItem:(id)item
-{
-	[self setRepresentedObject:item];
-}
 - (void)setSelected:(BOOL)flag
 {
 	if(selected && flag) return;
@@ -427,7 +381,7 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 	[titleCell setBezeled:NO];
 	[titleCell setDrawsBackground:NO];
 	[titleCell endEditing:fieldEditor];
-	[self.window makeFirstResponder:self.superview.superview];
+	[self.window makeFirstResponder:self.superview];
 	
 	[titleBinder setValue:[titleCell stringValue] forKeyPath:titleBindKey];
 	

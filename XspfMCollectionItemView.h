@@ -13,16 +13,13 @@
 @interface XspfMCollectionItemView : NSControl
 {
 	NSColor *backgroundColor;
+	BOOL selected;
 	
 	NSImageCell *thumbnailCell;
 	NSTextFieldCell *titleCell;
 	NSLevelIndicatorCell *rateCell;
 	NSTextFieldCell *rateTitleCell;
 	XspfMLabelCell *labelCell;
-		
-	IBOutlet id representedObject;
-	
-	BOOL selected;
 	
 	NSControlSize controlSize;
 	
