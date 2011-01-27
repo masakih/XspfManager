@@ -21,6 +21,38 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 
 @implementation XspfMCollectionItemView
 
+- (NSArray *)exposedBindings
+{
+	NSMutableArray *bindings = [[[super exposedBindings] mutableCopy] autorelease];
+	[bindings addObject:XspfMCollectionItemThumbnail];
+	[bindings addObject:XspfMCollectionItemTitle];
+	[bindings addObject:XspfMCollectionItemTitleColor];
+	[bindings addObject:XspfMCollectionItemRating];
+	[bindings addObject:XspfMCollectionItemLabel];
+	
+	return bindings;
+}
+- (Class)valueClassForBinding:(NSString *)binding
+{
+	if([binding isEqualToString:XspfMCollectionItemThumbnail]) {
+		return [NSImage class];
+	}
+	if([binding isEqualToString:XspfMCollectionItemTitle]) {
+		return [NSString class];
+	}
+	if([binding isEqualToString:XspfMCollectionItemTitleColor]) {
+		return [NSColor class];
+	}
+	if([binding isEqualToString:XspfMCollectionItemRating]) {
+		return [NSValue class];
+	}
+	if([binding isEqualToString:XspfMCollectionItemLabel]) {
+		return [NSValue class];
+	}
+	
+	return [super valueClassForBinding:binding];
+}
+
 - (void)setup
 {
 	controlSize = NSRegularControlSize;
@@ -45,6 +77,10 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 	labelCell = [[XspfMLabelCell alloc] initTextCell:@""];
 	[labelCell setLabelStyle:XspfMSquareStyle];
 	[labelCell setDrawX:NO];
+	
+	if([self frame].size.height == 185) {
+		[self setControlSize:NSSmallControlSize];
+	}
 }
 - (id)initWithCoder:(NSCoder *)decoder
 {
@@ -212,12 +248,17 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 			titleFont = [NSFont controlContentFontOfSize:13];
 			break;
 		case NSSmallControlSize:
-			titleFont = [NSFont controlContentFontOfSize:10]; /// CHECK ME!
+			titleFont = [NSFont controlContentFontOfSize:11];
 			break;
 	}
 	
 	[titleCell setFont:titleFont];
 	[rateTitleCell setFont:titleFont];
+	
+	[titleCell setControlSize:size];
+	[thumbnailCell setControlSize:size];
+	[rateCell setControlSize:size];
+	[rateTitleCell setControlSize:size];
 }
 
 - (NSControlSize)controlSize
@@ -229,6 +270,8 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 {
 	if(controlSize == NSRegularControlSize) {
 		return NSMakeRect(20, 83, 182, 137);
+	} else if(controlSize == NSSmallControlSize) {
+		return NSMakeRect(16, 73, 129, 95);
 	}
 	return NSZeroRect;
 }
@@ -236,6 +279,8 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 {
 	if(controlSize == NSRegularControlSize) {
 		return NSMakeRect(20, 35, 180, 34);
+	} else if(controlSize == NSSmallControlSize) {
+		return NSMakeRect(16, 41, 129, 28);
 	}
 	return NSZeroRect;
 }
@@ -243,6 +288,8 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 {
 	if(controlSize == NSRegularControlSize) {
 		return NSMakeRect(77, 12, 65, 13);
+	} else if(controlSize == NSSmallControlSize) {
+		return NSMakeRect(63, 19, 65, 13);
 	}
 	return NSZeroRect;
 }
@@ -250,6 +297,8 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 {
 	if(controlSize == NSRegularControlSize) {
 		return NSMakeRect(21, 12, 56, 17);
+	} else if(controlSize == NSSmallControlSize) {
+		return NSMakeRect(16, 19, 48, 14);
 	}
 	return NSZeroRect;
 }
@@ -257,6 +306,8 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 {
 	if(controlSize == NSRegularControlSize) {
 		return NSMakeRect(16, 33, 188, 38);
+	} else if(controlSize == NSSmallControlSize) {
+		return NSMakeRect(14, 40, 134, 31);
 	}
 	return NSZeroRect;
 }
@@ -270,9 +321,15 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 		[NSBezierPath fillRect:frame];
 	}
 	if(selected) {
+		CGFloat radius = 8;
 		NSRect frame = [self thumbnailFrame];
-		frame = NSInsetRect(frame, -10, -10);
-		const CGFloat radius = 8;
+		if([self controlSize] == NSRegularControlSize) {
+			frame = NSInsetRect(frame, -10, -10);
+		} else {
+			frame = NSInsetRect(frame, -5, 0);
+			radius = 5;
+		}
+		
 		NSBezierPath *bezier = [NSBezierPath bezierPathWithRoundedRect:frame xRadius:radius yRadius:radius];
 		[[NSColor gridColor] set];
 		[bezier fill];
