@@ -23,6 +23,17 @@
 	IBOutlet id representedObject;
 	
 	BOOL selected;
+	
+	NSControlSize controlSize;
+	
+	id titleBinder;
+	NSString *titleBindKey;
+	
+	id thumbnailBinder;
+	NSString *thumbnailBindKey;
 }
+
+- (void)setControlSize:(NSControlSize)size;
+- (NSControlSize)controlSize;
 
 @end

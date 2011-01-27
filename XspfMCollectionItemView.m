@@ -11,10 +11,20 @@
 #import "XspfMLabelCell.h"
 #import "XspfMShadowImageCell.h"
 
+
+static NSString *const XspfMCollectionItemThumbnail = @"thumbnail";
+static NSString *const XspfMCollectionItemTitle = @"title";
+static NSString *const XspfMCollectionItemTitleColor = @"titleColor";
+static NSString *const XspfMCollectionItemRating = @"rating";
+static NSString *const XspfMCollectionItemLabel = @"label";
+
+
 @implementation XspfMCollectionItemView
 
 - (void)setup
 {
+	controlSize = NSRegularControlSize;
+	
 	thumbnailCell = [[XspfMShadowImageCell alloc] initImageCell:nil];
 	
 	titleCell = [[NSTextFieldCell alloc] initTextCell:@""];
@@ -61,6 +71,8 @@
 	[rateTitleCell release];
 	[labelCell release];
 	
+	[titleBindKey release];
+	
 	[super dealloc];
 }
 
@@ -68,37 +80,32 @@
 {
 	if(rep == representedObject) return;
 	
-	[representedObject removeObserver:self forKeyPath:@"representedObject.thumbnail"];
 	[representedObject autorelease];
 	representedObject = [rep retain];
 	if(!representedObject) return;
 	
-	[thumbnailCell bind:NSValueBinding
-			   toObject:representedObject
-			withKeyPath:@"representedObject.thumbnail"
-				options:nil];
-	[titleCell bind:NSValueBinding
-		   toObject:representedObject
-		withKeyPath:@"representedObject.title"
-			options:nil];
-	[titleCell bind:NSTextColorBinding
-		   toObject:representedObject
-		withKeyPath:@"labelTextColor"
-			options:nil];
+	[self bind:XspfMCollectionItemThumbnail
+	  toObject:representedObject
+   withKeyPath:@"representedObject.thumbnail"
+	   options:nil];
+	[self bind:XspfMCollectionItemTitle
+	  toObject:representedObject
+   withKeyPath:@"representedObject.title"
+	   options:nil];
+	[self bind:XspfMCollectionItemTitleColor
+	  toObject:representedObject
+   withKeyPath:@"labelTextColor"
+	   options:nil];
 	
-	[rateCell bind:NSValueBinding
-		  toObject:representedObject
-	   withKeyPath:@"representedObject.rating"
-		   options:nil];
+	[self bind:XspfMCollectionItemRating
+	  toObject:representedObject
+   withKeyPath:@"representedObject.rating"
+	   options:nil];
 	
-	[labelCell bind:NSValueBinding
-		   toObject:representedObject
-		withKeyPath:@"representedObject.label"
-			options:nil];
-	[labelCell bind:NSEnabledBinding
-		   toObject:representedObject
-		withKeyPath:@"selected"
-			options:nil];
+	[self bind:XspfMCollectionItemLabel
+	  toObject:representedObject
+   withKeyPath:@"representedObject.label"
+	   options:nil];
 	
 	[self bind:@"backgroundColor"
 	  toObject:representedObject
@@ -109,11 +116,60 @@
    withKeyPath:@"selected"
 	   options:nil];
 	
+}
+
+- (void)bind:(NSString *)binding toObject:(id)observable withKeyPath:(NSString *)keyPath options:(NSDictionary *)options
+{
+	if([binding isEqualToString:XspfMCollectionItemThumbnail]) {
+		[thumbnailCell bind:NSValueBinding
+				   toObject:observable
+				withKeyPath:keyPath
+					options:options];
+		
+		if(thumbnailBinder) {
+			[thumbnailBinder removeObserver:self forKeyPath:thumbnailBindKey];
+		}
+		
+		thumbnailBinder = observable;
+		thumbnailBindKey = [keyPath copy];
+		[thumbnailBinder addObserver:self
+						  forKeyPath:thumbnailBindKey
+							 options:0
+							 context:NULL];
+		return;
+	}
+	if([binding isEqualToString:XspfMCollectionItemTitle]) {
+		[titleCell bind:NSValueBinding
+			   toObject:observable
+			withKeyPath:keyPath
+				options:options];
+		titleBinder = observable;
+		titleBindKey = [keyPath copy];
+		return;
+	}
+	if([binding isEqualToString:XspfMCollectionItemTitleColor]) {
+		[titleCell bind:NSTextColorBinding
+			   toObject:observable
+			withKeyPath:keyPath
+				options:options];
+		return;
+	}
+	if([binding isEqualToString:XspfMCollectionItemRating]) {
+		[rateCell bind:NSValueBinding
+			  toObject:observable
+		   withKeyPath:keyPath
+			   options:options];
+		return;
+	}
+	if([binding isEqualToString:XspfMCollectionItemLabel]) {
+		[labelCell bind:NSValueBinding
+			   toObject:observable
+			withKeyPath:keyPath
+				options:options];
+		return;
+	}
 	
-	[representedObject addObserver:self
-						forKeyPath:@"representedObject.thumbnail"
-						   options:0
-						   context:NULL];
+	[super bind:binding toObject:observable withKeyPath:keyPath options:options];
 }
 
 - (NSInteger)tag
@@ -137,7 +193,7 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-	if([keyPath isEqualToString:@"representedObject.thumbnail"]) {
+	if([keyPath isEqualToString:thumbnailBindKey]) {
 		[self setNeedsDisplay];
 		return;
 	}
@@ -145,26 +201,64 @@
 	[super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 }
 
+- (void)setControlSize:(NSControlSize)size
+{
+	if(size == controlSize) return;
+	controlSize = size;
+	
+	NSFont *titleFont = nil;
+	switch(controlSize) {
+		case NSRegularControlSize:
+			titleFont = [NSFont controlContentFontOfSize:13];
+			break;
+		case NSSmallControlSize:
+			titleFont = [NSFont controlContentFontOfSize:10]; /// CHECK ME!
+			break;
+	}
+	
+	[titleCell setFont:titleFont];
+	[rateTitleCell setFont:titleFont];
+}
+
+- (NSControlSize)controlSize
+{
+	return controlSize;
+}
 
 - (NSRect)thumbnailFrame
 {
-	return NSMakeRect(20, 83, 182, 137);
+	if(controlSize == NSRegularControlSize) {
+		return NSMakeRect(20, 83, 182, 137);
+	}
+	return NSZeroRect;
 }
 - (NSRect)titleFrame
 {
-	return NSMakeRect(20, 35, 180, 34);
+	if(controlSize == NSRegularControlSize) {
+		return NSMakeRect(20, 35, 180, 34);
+	}
+	return NSZeroRect;
 }
 - (NSRect)rateFrame
 {
-	return NSMakeRect(77, 12, 65, 13);
+	if(controlSize == NSRegularControlSize) {
+		return NSMakeRect(77, 12, 65, 13);
+	}
+	return NSZeroRect;
 }
 - (NSRect)rateTitleFrame
 {
-	return NSMakeRect(21, 12, 56, 17);
+	if(controlSize == NSRegularControlSize) {
+		return NSMakeRect(21, 12, 56, 17);
+	}
+	return NSZeroRect;
 }
 - (NSRect)labelFrame
 {
-	return NSMakeRect(16, 33, 188, 38);
+	if(controlSize == NSRegularControlSize) {
+		return NSMakeRect(16, 33, 188, 38);
+	}
+	return NSZeroRect;
 }
 
 - (void)drawRect:(NSRect)dirtyFrame
@@ -241,7 +335,7 @@
 	[titleCell endEditing:fieldEditor];
 	[self.window makeFirstResponder:self.superview.superview];
 	
-	[representedObject setValue:[titleCell stringValue] forKeyPath:@"representedObject.title"];
+	[titleBinder setValue:[titleCell stringValue] forKeyPath:titleBindKey];
 	
 	[self setNeedsDisplay];
 }
