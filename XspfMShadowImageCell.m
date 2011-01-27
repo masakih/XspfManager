@@ -42,6 +42,14 @@ static inline NSRect enabledImageFrame(NSRect original)
 	return NSOffsetRect(original, -1, 2);
 }
 
+- (NSRect)imageRectForBounds:(NSRect)cellFrame inView:(NSView *)controlView
+{
+	cellFrame = enabledImageFrame(cellFrame);
+	
+	NSRect frame = [self _imageRectForDrawing:[self image] inFrame:cellFrame inView:controlView];
+	return frame;
+}
+
 - (void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView;
 {
 	[NSGraphicsContext saveGraphicsState];

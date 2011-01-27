@@ -13,8 +13,6 @@
 
 @implementation XspfMCollectionItemView
 
-//@synthesize rating=rateCell;
-
 - (void)setup
 {
 	backgroundColor = [[NSColor colorWithCalibratedRed:65/255.0
@@ -153,7 +151,7 @@
 }
 
 
-- (NSRect)imageFrame
+- (NSRect)thumbnailFrame
 {
 	return NSMakeRect(12, 75, 182, 137);
 }
@@ -183,7 +181,7 @@
 		[NSBezierPath fillRect:frame];
 	}
 	if(selected) {
-		NSRect frame = [self imageFrame];
+		NSRect frame = [self thumbnailFrame];
 		frame = NSInsetRect(frame, -10, -10);
 		const CGFloat radius = 8;
 		NSBezierPath *bezier = [NSBezierPath bezierPathWithRoundedRect:frame xRadius:radius yRadius:radius];
@@ -197,13 +195,18 @@
 	[bezier fill];
 	
 	
-	[thumbnailCell drawWithFrame:[self imageFrame] inView:self];
+	[thumbnailCell drawWithFrame:[self thumbnailFrame] inView:self];
 	[labelCell drawWithFrame:[self labelFrame] inView:self];
 	[titleCell drawWithFrame:[self titleFrame] inView:self];
 	[rateCell drawWithFrame:[self rateFrame] inView:self];
 	[rateTitleCell drawWithFrame:[self rateTitleFrame] inView:self];
 	
 	
+}
+
+- (NSRect)imageFrame
+{
+	return [(XspfMShadowImageCell *)thumbnailCell imageRectForBounds:[self thumbnailFrame] inView:self];
 }
 
 
@@ -241,6 +244,7 @@
 	[titleCell setBezeled:NO];
 	[titleCell setDrawsBackground:NO];
 	[titleCell endEditing:fieldEditor];
+	[self.window makeFirstResponder:self.superview.superview];
 	
 	[representedObject setValue:[titleCell stringValue] forKeyPath:@"representedObject.title"];
 	

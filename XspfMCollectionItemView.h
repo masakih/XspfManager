@@ -25,6 +25,4 @@
 	BOOL selected;
 }
 
-//@property (nonatomic, readonly) NSLevelIndicatorCell* rating;
-
 @end

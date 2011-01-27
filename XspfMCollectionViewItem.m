@@ -148,8 +148,11 @@
 }
 - (NSRect)thumbnailFrameCoordinateBase
 {
-//	NSRect frame = [_box.thumbnail frame];
-	NSRect frame= [_box.thumbnail imageFrame];
+	id thumbnailView = _box;
+	if([thumbnailView respondsToSelector:@selector(thumbnail)]) {
+		thumbnailView = _box.thumbnail;
+	}
+	NSRect frame = [thumbnailView imageFrame];
 	
 	if(!NSIntersectsRect([_box visibleRect], frame)) {
 		return NSZeroRect;

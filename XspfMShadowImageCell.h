@@ -10,4 +10,5 @@
 
 
 @interface XspfMShadowImageCell : NSImageCell
+- (NSRect)imageRectForBounds:(NSRect)cellFrame inView:(NSView *)controlView;
 @end
