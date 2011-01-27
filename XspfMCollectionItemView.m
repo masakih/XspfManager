@@ -15,11 +15,6 @@
 
 - (void)setup
 {
-	backgroundColor = [[NSColor colorWithCalibratedRed:65/255.0
-												 green:120/255.0
-												  blue:211/255.0
-												 alpha:1.0] retain];
-	
 	thumbnailCell = [[XspfMShadowImageCell alloc] initImageCell:nil];
 	
 	titleCell = [[NSTextFieldCell alloc] initTextCell:@""];
@@ -153,23 +148,23 @@
 
 - (NSRect)thumbnailFrame
 {
-	return NSMakeRect(12, 75, 182, 137);
+	return NSMakeRect(20, 83, 182, 137);
 }
 - (NSRect)titleFrame
 {
-	return NSMakeRect(12, 27, 180, 34);
+	return NSMakeRect(20, 35, 180, 34);
 }
 - (NSRect)rateFrame
 {
-	return NSMakeRect(69, 4, 65, 13);
+	return NSMakeRect(77, 12, 65, 13);
 }
 - (NSRect)rateTitleFrame
 {
-	return NSMakeRect(13, 4, 56, 17);
+	return NSMakeRect(21, 12, 56, 17);
 }
 - (NSRect)labelFrame
 {
-	return NSMakeRect(8, 25, 188, 38);
+	return NSMakeRect(16, 33, 188, 38);
 }
 
 - (void)drawRect:(NSRect)dirtyFrame
