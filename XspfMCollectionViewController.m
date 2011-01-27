@@ -101,7 +101,7 @@ static NSString *const XspfMCollectionItemSizeKey = @"Collection Item Size";
 	
 	
 	// editing text field resign from first responder.
-	[[[self view] window] makeFirstResponder:self];
+	[[[self view] window] endEditingFor:nil];
 	
 	[collectionView setItemPrototype:newItem];
 	NSSize viewSize = [[newItem view] frame].size;
@@ -109,6 +109,8 @@ static NSString *const XspfMCollectionItemSizeKey = @"Collection Item Size";
 	[collectionView setMaxItemSize:viewSize];
 	[scrollView setVerticalLineScroll:viewSize.height];
 	collectionViewItem = newItem;
+	
+	[[[self view] window] makeFirstResponder:[self view]];
 	
 	
 	[XspfMPreferences sharedPreference].collectionItemSize = collectionViewItem == regularItem ? 0 : 1;
