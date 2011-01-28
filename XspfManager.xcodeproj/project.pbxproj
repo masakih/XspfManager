@@ -185,6 +185,7 @@
 		F448F52312EDCD0200E96490 /* XspfMCollectionItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMCollectionItemView.m; sourceTree = "<group>"; };
 		F448F99412F0542000E96490 /* XspfMShadowImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMShadowImageCell.h; sourceTree = "<group>"; };
 		F448F99512F0542000E96490 /* XspfMShadowImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMShadowImageCell.m; sourceTree = "<group>"; };
+		F448FCFB12F2FE6300E96490 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		F44A23A11196443600C60F2D /* XspfMRuleRowsBuilder_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMRuleRowsBuilder_private.h; sourceTree = "<group>"; };
 		F44A23A21196443600C60F2D /* XspfMRuleRowsBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMRuleRowsBuilder.h; sourceTree = "<group>"; };
 		F44A23A31196443600C60F2D /* XspfMRuleRowsBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMRuleRowsBuilder.m; sourceTree = "<group>"; };
@@ -481,6 +482,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F448FCFB12F2FE6300E96490 /* Makefile */,
 				F4DAF67411BBC1230047BEDA /* Localizable.strings.sed */,
 				F43E0E5611027E1900D0428E /* Credits.rtf */,
 				F43E0DD311021E0200D0428E /* Localizable.strings */,

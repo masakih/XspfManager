@@ -31,6 +31,8 @@ s/"Remove Thumbnail frame";/"サムネイルを削除";/
 s/"Play";/"再生";/
 s/"Pause";/"一時停止";/
 
+s/"Rate:";/"レート：";/
+
 $a\
 /* Favorites */\
 "Favorites" = "お気に入り";\

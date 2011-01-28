@@ -123,7 +123,7 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 	[rateCell setEnabled:YES];
 	[rateCell setHighlighted:YES];
 	
-	rateTitleCell = [[NSTextFieldCell alloc] initTextCell:NSLocalizedString(@"Rate:", @"Rate:")];
+	rateTitleCell = [[NSTextFieldCell alloc] initTextCell:NSLocalizedString(@"Rate:", @"Icon view Rate label.")];
 	[rateTitleCell setAlignment:NSRightTextAlignment];
 	[rateTitleCell setFont:[NSFont controlContentFontOfSize:13]];
 	

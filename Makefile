@@ -24,7 +24,8 @@ LocalizeFiles=XspfMLabelMenuView.m \
 			  XspfManager.m \
 			  XspfQTComponents/XspfQTMovieViewController.m \
 			  XspfQTComponents/XspfQTDocument.m \
-			  XspfQTComponents/XspfQTMovieWindowController.m
+			  XspfQTComponents/XspfQTMovieWindowController.m \
+			  XspfMCollectionItemView.m
 
 all:
 	@echo do  nothig.
