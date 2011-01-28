@@ -307,80 +307,130 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 
 - (NSRect)thumbnailFrame
 {
-	if(controlSize == NSRegularControlSize) {
-		return NSMakeRect(20, 83, 182, 137);
-	} else if(controlSize == NSSmallControlSize) {
-		return NSMakeRect(16, 78, 129, 95);
+	NSRect rect = NSZeroRect;
+	switch(controlSize) {
+		case NSRegularControlSize:
+			rect = NSMakeRect(20, 83, 182, 137);
+			break;
+		case NSSmallControlSize:
+			rect = NSMakeRect(16, 78, 129, 95);
+			break;
 	}
-	return NSZeroRect;
+	return rect;
 }
 - (NSRect)titleFrame
 {
-	if(controlSize == NSRegularControlSize) {
-		return NSMakeRect(20, 35, 180, 34);
-	} else if(controlSize == NSSmallControlSize) {
-		return NSMakeRect(16, 41, 129, 28);
+	NSRect rect = NSZeroRect;
+	switch(controlSize) {
+		case NSRegularControlSize:
+			rect = NSMakeRect(20, 35, 180, 34);
+			break;
+		case NSSmallControlSize:
+			rect = NSMakeRect(16, 41, 129, 28);
+			break;
 	}
-	return NSZeroRect;
+	return rect;
 }
 - (NSRect)rateFrame
 {
-	if(controlSize == NSRegularControlSize) {
-		return NSMakeRect(77, 12, 65, 13);
-	} else if(controlSize == NSSmallControlSize) {
-		return NSMakeRect(63, 19, 65, 13);
+	NSRect rect = NSZeroRect;
+	switch(controlSize) {
+		case NSRegularControlSize:
+			rect = NSMakeRect(77, 12, 65, 13);
+			break;
+		case NSSmallControlSize:
+			rect = NSMakeRect(63, 19, 65, 13);
+			break;
 	}
-	return NSZeroRect;
+	return rect;
 }
 - (NSRect)rateTitleFrame
 {
-	if(controlSize == NSRegularControlSize) {
-		return NSMakeRect(21, 12, 56, 17);
-	} else if(controlSize == NSSmallControlSize) {
-		return NSMakeRect(16, 19, 48, 14);
+	NSRect rect = NSZeroRect;
+	switch(controlSize) {
+		case NSRegularControlSize:
+			rect = NSMakeRect(21, 12, 56, 17);
+			break;
+		case NSSmallControlSize:
+			rect = NSMakeRect(16, 19, 48, 14);
+			break;
 	}
-	return NSZeroRect;
+	return rect;
 }
 - (NSRect)labelFrame
 {
-	if(controlSize == NSRegularControlSize) {
-		return NSMakeRect(16, 33, 188, 38);
-	} else if(controlSize == NSSmallControlSize) {
-		return NSMakeRect(14, 40, 134, 31);
+	NSRect rect = NSZeroRect;
+	switch(controlSize) {
+		case NSRegularControlSize:
+			rect = NSMakeRect(16, 33, 188, 38);
+			break;
+		case NSSmallControlSize:
+			rect = NSMakeRect(14, 40, 134, 31);
+			break;
 	}
-	return NSZeroRect;
+	return rect;
+}
+- (CGFloat)selectRectRadius
+{
+	CGFloat radius = 0.0;
+	switch(controlSize) {
+		case NSRegularControlSize:
+			radius = 8;
+			break;
+		case NSSmallControlSize:
+			radius = 5;
+			break;
+	}
+	return radius;
+}
+- (NSRect)selectRect
+{
+	NSRect rect = NSZeroRect;
+	switch(controlSize) {
+		case NSRegularControlSize:
+			rect = NSInsetRect([self thumbnailFrame], -10, -10);
+			break;
+		case NSSmallControlSize:
+			rect = NSInsetRect([self thumbnailFrame], -5, -5);
+			break;
+	}
+	return rect;
+}
+- (CGFloat)selectedTitleRectRadius
+{
+	CGFloat radius = 0.0;
+	switch(controlSize) {
+		case NSRegularControlSize:
+			radius = 5;
+			break;
+		case NSSmallControlSize:
+			radius = 3;
+			break;
+	}
+	return radius;
 }
 
 - (void)drawRect:(NSRect)dirtyFrame
 {
 	if(selected) {
-		CGFloat radius = 8;
-		NSRect frame = [self thumbnailFrame];
-		if([self controlSize] == NSRegularControlSize) {
-			frame = NSInsetRect(frame, -10, -10);
-		} else {
-			frame = NSInsetRect(frame, -5, -5);
-			radius = 5;
-		}
-		
+		CGFloat radius = [self selectRectRadius];
+		NSRect frame = [self selectRect];
 		NSBezierPath *bezier = [NSBezierPath bezierPathWithRoundedRect:frame xRadius:radius yRadius:radius];
 		[[NSColor gridColor] set];
 		[bezier fill];
 	}
+	
 	NSRect frame = [self labelFrame];
-	const CGFloat radius = 5;
+	CGFloat radius = [self selectedTitleRectRadius];
 	NSBezierPath *bezier = [NSBezierPath bezierPathWithRoundedRect:frame xRadius:radius yRadius:radius];
 	[backgroundColor set];
 	[bezier fill];
-	
 	
 	[thumbnailCell drawWithFrame:[self thumbnailFrame] inView:self];
 	[labelCell drawWithFrame:[self labelFrame] inView:self];
 	[titleCell drawWithFrame:[self titleFrame] inView:self];
 	[rateCell drawWithFrame:[self rateFrame] inView:self];
 	[rateTitleCell drawWithFrame:[self rateTitleFrame] inView:self];
-	
-	
 }
 
 - (NSRect)imageFrame
