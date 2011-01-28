@@ -256,11 +256,6 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 	[super unbind:binding];
 }
 
-- (NSInteger)tag
-{
-	return 1100;
-}
-
 - (void)setSelected:(BOOL)flag
 {
 	if(selected && flag) return;
@@ -315,7 +310,7 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 	if(controlSize == NSRegularControlSize) {
 		return NSMakeRect(20, 83, 182, 137);
 	} else if(controlSize == NSSmallControlSize) {
-		return NSMakeRect(16, 73, 129, 95);
+		return NSMakeRect(16, 78, 129, 95);
 	}
 	return NSZeroRect;
 }
@@ -358,19 +353,13 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 
 - (void)drawRect:(NSRect)dirtyFrame
 {
-	if(0) {
-		NSRect frame = self.frame;
-		frame.origin = NSZeroPoint;
-		[[NSColor redColor] set];
-		[NSBezierPath fillRect:frame];
-	}
 	if(selected) {
 		CGFloat radius = 8;
 		NSRect frame = [self thumbnailFrame];
 		if([self controlSize] == NSRegularControlSize) {
 			frame = NSInsetRect(frame, -10, -10);
 		} else {
-			frame = NSInsetRect(frame, -5, 0);
+			frame = NSInsetRect(frame, -5, -5);
 			radius = 5;
 		}
 		
