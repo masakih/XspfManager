@@ -33,4 +33,6 @@
 - (void)setControlSize:(NSControlSize)size;
 - (NSControlSize)controlSize;
 
+- (NSRect)imageFrame;
+
 @end

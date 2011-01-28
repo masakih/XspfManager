@@ -61,7 +61,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@class XspfMCollectionItemBox;
 
 @interface XspfMCollectionViewItem : NSCollectionViewItem
 {
@@ -70,11 +69,10 @@
 	// because [self conllectionView] is already nil at [self dealloc].
 	NSCollectionView *collectionViewHolder;	// not retained.
 	
-	XspfMCollectionItemBox *_box;
+	NSView *_box;
 }
 
-- (IBAction)changeRate:(id)sender;
-- (void)setBox:(XspfMCollectionItemBox *)box;
+- (void)setBox:(NSView *)box;
 
 - (NSRect)thumbnailFrameCoordinateBase;
 

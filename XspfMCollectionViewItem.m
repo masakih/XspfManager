@@ -63,7 +63,7 @@
 
 #import "XspfManager.h"
 
-#import "XspfMCollectionItemBox.h"
+#import "XspfMCollectionItemView.h"
 #import "XspfMLabelCell.h"
 #import "XspfMXspfObject.h"
 
@@ -109,10 +109,6 @@
 	[self coodinateColors];
 }
 
-- (void)findAndSetBox
-{
-	[self setBox:[[self view] viewWithTag:1100]];
-}
 - (void)setupBinding:(id)obj
 {
 	collectionViewHolder = [self collectionView];
@@ -131,7 +127,7 @@
 	
 	[self setupMenu];
 	[[self view] setMenu:menu];
-	[self findAndSetBox];
+	[self setBox:[self view]];
 	
 	[self coodinateColors];
 }
@@ -148,18 +144,18 @@
 }
 - (NSRect)thumbnailFrameCoordinateBase
 {
-	id thumbnailView = _box;
+	id thumbnailView = [self view];
 	NSRect frame = [thumbnailView imageFrame];
 	
-	if(!NSIntersectsRect([_box visibleRect], frame)) {
+	if(!NSIntersectsRect([thumbnailView visibleRect], frame)) {
 		return NSZeroRect;
 	}
 	
-	frame = [_box convertRectToBase:frame];
-	frame.origin = [[_box window] convertBaseToScreen:frame.origin];
+	frame = [thumbnailView convertRectToBase:frame];
+	frame.origin = [[thumbnailView window] convertBaseToScreen:frame.origin];
 	return frame;
 }
-- (void)setBox:(XspfMCollectionItemBox *)box
+- (void)setBox:(NSView *)box
 {
 	[_box unbind:@"thumbnail"];
 	[_box unbind:@"title"];
@@ -171,6 +167,8 @@
 	
 	[_box autorelease];
 	_box = [box retain];
+	
+	if(!_box) return;
 	
 	[_box bind:@"thumbnail"
 	  toObject:self
@@ -213,7 +211,7 @@
 	[self setupMenu];
 	[view setMenu:menu];
 	
-	[self findAndSetBox];
+	[self setBox:view];
 }
 - (void)setupMenu
 {
