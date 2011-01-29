@@ -60,11 +60,9 @@
 */
 
 #import "XspfQTDocument.h"
-#import "XspfQTAppDelegate.h"
 #import "XspfQTPreference.h"
 #import "HMXSPFComponent.h"
 #import "XspfQTMovieWindowController.h"
-#import "XspfQTPlayListWindowController.h"
 #import <QTKit/QTKit.h>
 
 #import "NSURL-HMExtensions.h"

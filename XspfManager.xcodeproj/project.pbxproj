@@ -26,11 +26,11 @@
 		F43E0DD511021E0200D0428E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F43E0DD311021E0200D0428E /* Localizable.strings */; };
 		F43E0E5711027E1900D0428E /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = F43E0E5611027E1900D0428E /* Credits.rtf */; };
 		F43E62A110A0692500BF88DA /* XspfMCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E62A010A0692500BF88DA /* XspfMCollectionView.m */; };
-		F43E62BD10A0710E00BF88DA /* XspfMImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E62BC10A0710E00BF88DA /* XspfMImageView.m */; };
 		F43E652E10A315D000BF88DA /* CollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F43E652C10A315D000BF88DA /* CollectionView.xib */; };
 		F43E653410A3167700BF88DA /* XspfMCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E653310A3167700BF88DA /* XspfMCollectionViewController.m */; };
-		F448F52412EDCD0200E96490 /* XspfMCollectionItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F448F52312EDCD0200E96490 /* XspfMCollectionItemView.m */; };
 		F448F99612F0542000E96490 /* XspfMShadowImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F448F99512F0542000E96490 /* XspfMShadowImageCell.m */; };
+		F448FDF212F43F3400E96490 /* XspfMCollectionItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F448F52312EDCD0200E96490 /* XspfMCollectionItemView.m */; };
+		F448FE1C12F4414B00E96490 /* XspfQTValueTransformers.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AB5F5012BCFF7600157355 /* XspfQTValueTransformers.m */; };
 		F44A23A61196443600C60F2D /* XspfMRuleRowsBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = F44A23A31196443600C60F2D /* XspfMRuleRowsBuilder.m */; };
 		F44A23A71196443600C60F2D /* XspfMRuleRowTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = F44A23A51196443600C60F2D /* XspfMRuleRowTemplate.m */; };
 		F44A23BC119644D800C60F2D /* XspfMRuleConcreteRowsBuilders.m in Sources */ = {isa = PBXBuildFile; fileRef = F44A23BB119644D800C60F2D /* XspfMRuleConcreteRowsBuilders.m */; };
@@ -41,7 +41,6 @@
 		F47C00B7109D479100F5991C /* XspfMMainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C00B6109D479100F5991C /* XspfMMainWindowController.m */; };
 		F47C00FE109D51CC00F5991C /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F47C00FD109D51CC00F5991C /* QTKit.framework */; };
 		F47C023A109D603D00F5991C /* XspfMXspfObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C0239109D603D00F5991C /* XspfMXspfObject.m */; };
-		F47C02CF109D6BB800F5991C /* XspfQTValueTransformers.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C02CE109D6BB800F5991C /* XspfQTValueTransformers.m */; };
 		F47C04FC109DC19C00F5991C /* HMChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C04F6109DC19C00F5991C /* HMChannel.m */; };
 		F47C04FD109DC19C00F5991C /* HMQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C04F8109DC19C00F5991C /* HMQueue.m */; };
 		F47C04FE109DC19C00F5991C /* HMWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C04FA109DC19C00F5991C /* HMWorker.m */; };
@@ -105,7 +104,6 @@
 		F4CE4F1310A71084004AC4FA /* XspfMDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CE4F1210A71084004AC4FA /* XspfMDetailViewController.m */; };
 		F4CE500210A85401004AC4FA /* XspfMCheckFileModifiedRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CE500110A85401004AC4FA /* XspfMCheckFileModifiedRequest.m */; };
 		F4CE51B210A99E4E004AC4FA /* XspfMCollectionViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CE51B110A99E4E004AC4FA /* XspfMCollectionViewItem.m */; };
-		F4CE525510AAEBE8004AC4FA /* XspfMCollectionItemBox.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CE525410AAEBE8004AC4FA /* XspfMCollectionItemBox.m */; };
 		F4D24E6B11C3D41700232358 /* XspfManager.icns in Resources */ = {isa = PBXBuildFile; fileRef = F4D24E6A11C3D41700232358 /* XspfManager.icns */; };
 		F4D2521011C4C51A00232358 /* LibraryRowTemplate.plist in Resources */ = {isa = PBXBuildFile; fileRef = F4D0E98610C5484000B642D0 /* LibraryRowTemplate.plist */; };
 		F4D2F69B110754ED007681F4 /* XspfMMainModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F4D2F69A110754ED007681F4 /* XspfMMainModel.xcdatamodeld */; };
@@ -163,8 +161,6 @@
 		F42BF7B610F1C59F00D8F8C1 /* XspfMLabelMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMLabelMenuItem.m; sourceTree = "<group>"; };
 		F436E3FE11060096004BA387 /* XspfMMainModelTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMMainModelTransformer.h; sourceTree = "<group>"; };
 		F436E3FF11060096004BA387 /* XspfMMainModelTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMMainModelTransformer.m; sourceTree = "<group>"; };
-		F43E046910F9B2D200D0428E /* XspfMPopUpButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMPopUpButton.h; sourceTree = "<group>"; };
-		F43E046A10F9B2D200D0428E /* XspfMPopUpButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMPopUpButton.m; sourceTree = "<group>"; };
 		F43E077D10FAA6B800D0428E /* XspfMLabelField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMLabelField.h; sourceTree = "<group>"; };
 		F43E077E10FAA6B800D0428E /* XspfMLabelField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMLabelField.m; sourceTree = "<group>"; };
 		F43E0D6911020A5800D0428E /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = Japanese.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -176,8 +172,6 @@
 		F43E0E2B11027B3B00D0428E /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
 		F43E629F10A0692500BF88DA /* XspfMCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMCollectionView.h; sourceTree = "<group>"; };
 		F43E62A010A0692500BF88DA /* XspfMCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMCollectionView.m; sourceTree = "<group>"; };
-		F43E62BB10A0710E00BF88DA /* XspfMImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMImageView.h; sourceTree = "<group>"; };
-		F43E62BC10A0710E00BF88DA /* XspfMImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMImageView.m; sourceTree = "<group>"; };
 		F43E652D10A315D000BF88DA /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/CollectionView.xib; sourceTree = "<group>"; };
 		F43E653210A3167700BF88DA /* XspfMCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMCollectionViewController.h; sourceTree = "<group>"; };
 		F43E653310A3167700BF88DA /* XspfMCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMCollectionViewController.m; sourceTree = "<group>"; };
@@ -204,8 +198,6 @@
 		F47C00FD109D51CC00F5991C /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = /System/Library/Frameworks/QTKit.framework; sourceTree = "<absolute>"; };
 		F47C0238109D603D00F5991C /* XspfMXspfObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMXspfObject.h; sourceTree = "<group>"; };
 		F47C0239109D603D00F5991C /* XspfMXspfObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMXspfObject.m; sourceTree = "<group>"; };
-		F47C02CD109D6BB800F5991C /* XspfQTValueTransformers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XspfQTValueTransformers.h; path = ../XspfQT/XspfQTValueTransformers.h; sourceTree = SOURCE_ROOT; };
-		F47C02CE109D6BB800F5991C /* XspfQTValueTransformers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XspfQTValueTransformers.m; path = ../XspfQT/XspfQTValueTransformers.m; sourceTree = SOURCE_ROOT; };
 		F47C04F5109DC19C00F5991C /* HMChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMChannel.h; sourceTree = "<group>"; };
 		F47C04F6109DC19C00F5991C /* HMChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMChannel.m; sourceTree = "<group>"; };
 		F47C04F7109DC19C00F5991C /* HMQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMQueue.h; sourceTree = "<group>"; };
@@ -225,8 +217,6 @@
 		F480CF9E10B03A0D00AC365B /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/AccessoryView.xib; sourceTree = "<group>"; };
 		F481B3F710F08DE200B7EA4F /* XspfMSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMSplitView.h; sourceTree = "<group>"; };
 		F481B3F810F08DE200B7EA4F /* XspfMSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMSplitView.m; sourceTree = "<group>"; };
-		F481B42310F09A6E00B7EA4F /* XspfMDragControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMDragControl.h; sourceTree = "<group>"; };
-		F481B42410F09A6E00B7EA4F /* XspfMDragControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMDragControl.m; sourceTree = "<group>"; };
 		F481B70810F0F80700B7EA4F /* XspfMLabelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMLabelCell.h; sourceTree = "<group>"; };
 		F481B70910F0F80700B7EA4F /* XspfMLabelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMLabelCell.m; sourceTree = "<group>"; };
 		F481B82C10F1754600B7EA4F /* XspfMLabelMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMLabelMenuView.h; sourceTree = "<group>"; };
@@ -275,8 +265,6 @@
 		F4A6FAE510C2442E00345D77 /* XspfMRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMRule.m; sourceTree = "<group>"; };
 		F4AB5F3F12BCFF7500157355 /* XspfQTMovieTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfQTMovieTimer.h; sourceTree = "<group>"; };
 		F4AB5F4012BCFF7500157355 /* XspfQTMovieTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfQTMovieTimer.m; sourceTree = "<group>"; };
-		F4AB5F4112BCFF7500157355 /* XspfQTAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfQTAppDelegate.h; sourceTree = "<group>"; };
-		F4AB5F4212BCFF7500157355 /* XspfQTAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfQTAppDelegate.m; sourceTree = "<group>"; };
 		F4AB5F4312BCFF7500157355 /* XspfQTPreference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfQTPreference.h; sourceTree = "<group>"; };
 		F4AB5F4412BCFF7500157355 /* XspfQTPreference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfQTPreference.m; sourceTree = "<group>"; };
 		F4AB5F4512BCFF7500157355 /* XspfQTDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfQTDocument.h; sourceTree = "<group>"; };
@@ -334,8 +322,6 @@
 		F4CE500110A85401004AC4FA /* XspfMCheckFileModifiedRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMCheckFileModifiedRequest.m; sourceTree = "<group>"; };
 		F4CE51B010A99E4E004AC4FA /* XspfMCollectionViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMCollectionViewItem.h; sourceTree = "<group>"; };
 		F4CE51B110A99E4E004AC4FA /* XspfMCollectionViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMCollectionViewItem.m; sourceTree = "<group>"; };
-		F4CE525310AAEBE8004AC4FA /* XspfMCollectionItemBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMCollectionItemBox.h; sourceTree = "<group>"; };
-		F4CE525410AAEBE8004AC4FA /* XspfMCollectionItemBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMCollectionItemBox.m; sourceTree = "<group>"; };
 		F4D0E98610C5484000B642D0 /* LibraryRowTemplate.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LibraryRowTemplate.plist; sourceTree = "<group>"; };
 		F4D24E6A11C3D41700232358 /* XspfManager.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = XspfManager.icns; sourceTree = "<group>"; };
 		F4D2521111C4C55500232358 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Japanese; path = Japanese.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -567,8 +553,6 @@
 		F4588D5412CEB9B400A718CA /* Unused */ = {
 			isa = PBXGroup;
 			children = (
-				F4AB5F4112BCFF7500157355 /* XspfQTAppDelegate.h */,
-				F4AB5F4212BCFF7500157355 /* XspfQTAppDelegate.m */,
 				F4AB5F4F12BCFF7600157355 /* XspfQTValueTransformers.h */,
 				F4AB5F5012BCFF7600157355 /* XspfQTValueTransformers.m */,
 				F4AB5F4B12BCFF7600157355 /* XspfQTInformationWindowController.h */,
@@ -582,8 +566,6 @@
 		F47C02CC109D6BA200F5991C /* ValueTransformers */ = {
 			isa = PBXGroup;
 			children = (
-				F47C02CD109D6BB800F5991C /* XspfQTValueTransformers.h */,
-				F47C02CE109D6BB800F5991C /* XspfQTValueTransformers.m */,
 			);
 			name = ValueTransformers;
 			sourceTree = "<group>";
@@ -637,20 +619,12 @@
 		F481B82910F1737700B7EA4F /* Views&Cells */ = {
 			isa = PBXGroup;
 			children = (
-				F43E62BB10A0710E00BF88DA /* XspfMImageView.h */,
-				F43E62BC10A0710E00BF88DA /* XspfMImageView.m */,
 				F480CD6510AF8A4300AC365B /* XspfMTableView.h */,
 				F480CD6610AF8A4300AC365B /* XspfMTableView.m */,
 				F43E629F10A0692500BF88DA /* XspfMCollectionView.h */,
 				F43E62A010A0692500BF88DA /* XspfMCollectionView.m */,
-				F4CE525310AAEBE8004AC4FA /* XspfMCollectionItemBox.h */,
-				F4CE525410AAEBE8004AC4FA /* XspfMCollectionItemBox.m */,
 				F481B3F710F08DE200B7EA4F /* XspfMSplitView.h */,
 				F481B3F810F08DE200B7EA4F /* XspfMSplitView.m */,
-				F481B42310F09A6E00B7EA4F /* XspfMDragControl.h */,
-				F481B42410F09A6E00B7EA4F /* XspfMDragControl.m */,
-				F43E046910F9B2D200D0428E /* XspfMPopUpButton.h */,
-				F43E046A10F9B2D200D0428E /* XspfMPopUpButton.m */,
 				F4D3631311A2BCC3009FE842 /* XspfMLabels */,
 				F448F52212EDCD0200E96490 /* XspfMCollectionItemView.h */,
 				F448F52312EDCD0200E96490 /* XspfMCollectionItemView.m */,
@@ -832,14 +806,12 @@
 				77C8280E06725ACE000B614F /* XspfManager.m in Sources */,
 				F47C00B7109D479100F5991C /* XspfMMainWindowController.m in Sources */,
 				F47C023A109D603D00F5991C /* XspfMXspfObject.m in Sources */,
-				F47C02CF109D6BB800F5991C /* XspfQTValueTransformers.m in Sources */,
 				F47C04FC109DC19C00F5991C /* HMChannel.m in Sources */,
 				F47C04FD109DC19C00F5991C /* HMQueue.m in Sources */,
 				F47C04FE109DC19C00F5991C /* HMWorker.m in Sources */,
 				F47C0508109DC29F00F5991C /* XspfMMovieLoadRequest.m in Sources */,
 				F47C0719109F1DDD00F5991C /* XspfMInfomationObject.m in Sources */,
 				F43E62A110A0692500BF88DA /* XspfMCollectionView.m in Sources */,
-				F43E62BD10A0710E00BF88DA /* XspfMImageView.m in Sources */,
 				F43E653410A3167700BF88DA /* XspfMCollectionViewController.m in Sources */,
 				F49BCF9510A45178007136CE /* XspfMViewController.m in Sources */,
 				F49BD01310A477BF007136CE /* XspfMListViewController.m in Sources */,
@@ -848,7 +820,6 @@
 				F4CE4F1310A71084004AC4FA /* XspfMDetailViewController.m in Sources */,
 				F4CE500210A85401004AC4FA /* XspfMCheckFileModifiedRequest.m in Sources */,
 				F4CE51B210A99E4E004AC4FA /* XspfMCollectionViewItem.m in Sources */,
-				F4CE525510AAEBE8004AC4FA /* XspfMCollectionItemBox.m in Sources */,
 				F480CD6710AF8A4300AC365B /* XspfMTableView.m in Sources */,
 				F40B31DD10B4398E00896716 /* XspfMChannelManager.m in Sources */,
 				F40B331810B43E9900896716 /* XspfMMainThreadRequest.m in Sources */,
@@ -908,8 +879,9 @@
 				F4C5436112CB734D00214C74 /* XspfMAppleRemoteSupport.m in Sources */,
 				F4C545B012CCF75600214C74 /* NSControl_Validation.m in Sources */,
 				F4A1D1FA12D198F3008AFDD9 /* XspfMListController.m in Sources */,
-				F448F52412EDCD0200E96490 /* XspfMCollectionItemView.m in Sources */,
 				F448F99612F0542000E96490 /* XspfMShadowImageCell.m in Sources */,
+				F448FDF212F43F3400E96490 /* XspfMCollectionItemView.m in Sources */,
+				F448FE1C12F4414B00E96490 /* XspfQTValueTransformers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
