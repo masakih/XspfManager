@@ -31,6 +31,7 @@
 		F448F99612F0542000E96490 /* XspfMShadowImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F448F99512F0542000E96490 /* XspfMShadowImageCell.m */; };
 		F448FDF212F43F3400E96490 /* XspfMCollectionItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F448F52312EDCD0200E96490 /* XspfMCollectionItemView.m */; };
 		F448FE1C12F4414B00E96490 /* XspfQTValueTransformers.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AB5F5012BCFF7600157355 /* XspfQTValueTransformers.m */; };
+		F448FEAC12F4685F00E96490 /* Icon-round-Question_mark.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F448FEAB12F4685F00E96490 /* Icon-round-Question_mark.jpg */; };
 		F44A23A61196443600C60F2D /* XspfMRuleRowsBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = F44A23A31196443600C60F2D /* XspfMRuleRowsBuilder.m */; };
 		F44A23A71196443600C60F2D /* XspfMRuleRowTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = F44A23A51196443600C60F2D /* XspfMRuleRowTemplate.m */; };
 		F44A23BC119644D800C60F2D /* XspfMRuleConcreteRowsBuilders.m in Sources */ = {isa = PBXBuildFile; fileRef = F44A23BB119644D800C60F2D /* XspfMRuleConcreteRowsBuilders.m */; };
@@ -180,6 +181,7 @@
 		F448F99412F0542000E96490 /* XspfMShadowImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMShadowImageCell.h; sourceTree = "<group>"; };
 		F448F99512F0542000E96490 /* XspfMShadowImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMShadowImageCell.m; sourceTree = "<group>"; };
 		F448FCFB12F2FE6300E96490 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		F448FEAB12F4685F00E96490 /* Icon-round-Question_mark.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Icon-round-Question_mark.jpg"; sourceTree = "<group>"; };
 		F44A23A11196443600C60F2D /* XspfMRuleRowsBuilder_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMRuleRowsBuilder_private.h; sourceTree = "<group>"; };
 		F44A23A21196443600C60F2D /* XspfMRuleRowsBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMRuleRowsBuilder.h; sourceTree = "<group>"; };
 		F44A23A31196443600C60F2D /* XspfMRuleRowsBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMRuleRowsBuilder.m; sourceTree = "<group>"; };
@@ -444,7 +446,6 @@
 				F4343DE610AD76F70090F57B /* HMXSPFcomponent */,
 				F47C06D7109F027500F5991C /* HMXSPFcomponent */,
 				F47C04F4109DC18C00F5991C /* WorkerThread */,
-				F47C02CC109D6BA200F5991C /* ValueTransformers */,
 				7756732906782D8800D1FEB8 /* Models */,
 				F481B82910F1737700B7EA4F /* Views&Cells */,
 				080E96DDFE201D6D7F000001 /* Classes */,
@@ -468,6 +469,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F448FEAB12F4685F00E96490 /* Icon-round-Question_mark.jpg */,
 				F448FCFB12F2FE6300E96490 /* Makefile */,
 				F4DAF67411BBC1230047BEDA /* Localizable.strings.sed */,
 				F43E0E5611027E1900D0428E /* Credits.rtf */,
@@ -553,21 +555,12 @@
 		F4588D5412CEB9B400A718CA /* Unused */ = {
 			isa = PBXGroup;
 			children = (
-				F4AB5F4F12BCFF7600157355 /* XspfQTValueTransformers.h */,
-				F4AB5F5012BCFF7600157355 /* XspfQTValueTransformers.m */,
 				F4AB5F4B12BCFF7600157355 /* XspfQTInformationWindowController.h */,
 				F4AB5F4C12BCFF7600157355 /* XspfQTInformationWindowController.m */,
 				F4AB5F4D12BCFF7600157355 /* XspfQTPreferenceWindowController.h */,
 				F4AB5F4E12BCFF7600157355 /* XspfQTPreferenceWindowController.m */,
 			);
 			name = Unused;
-			sourceTree = "<group>";
-		};
-		F47C02CC109D6BA200F5991C /* ValueTransformers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = ValueTransformers;
 			sourceTree = "<group>";
 		};
 		F47C04F4109DC18C00F5991C /* WorkerThread */ = {
@@ -638,6 +631,8 @@
 			isa = PBXGroup;
 			children = (
 				F4588D5412CEB9B400A718CA /* Unused */,
+				F4AB5F4F12BCFF7600157355 /* XspfQTValueTransformers.h */,
+				F4AB5F5012BCFF7600157355 /* XspfQTValueTransformers.m */,
 				F4AB605412BD022D00157355 /* BSSUtil.h */,
 				F4AB605512BD022D00157355 /* BSSUtil.m */,
 				F4AB5F3F12BCFF7500157355 /* XspfQTMovieTimer.h */,
@@ -792,6 +787,7 @@
 				F4AB5F8312BD00FF00157355 /* license.txt in Resources */,
 				F493124E12C371B100981CAA /* XspfQTMovieView.xib in Resources */,
 				F493114812C3294B00981CAA /* XspfQTPlayList.xib in Resources */,
+				F448FEAC12F4685F00E96490 /* Icon-round-Question_mark.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

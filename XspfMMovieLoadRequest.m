@@ -226,6 +226,10 @@ static NSImage *thumbnailWithComponent(HMXSPFComponent *component)
 	
 	NSImage *thumbnail = thumbnailForTrackTime(track, interval, size);
 	
+	if(!thumbnail) {
+		thumbnail = [NSImage imageNamed:@"Icon-round-Question_mark"];
+	}
+	
 	return thumbnail;
 }
 
