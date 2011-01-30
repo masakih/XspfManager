@@ -313,7 +313,7 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 			rect = NSMakeRect(20, 83, 182, 137);
 			break;
 		case NSSmallControlSize:
-			rect = NSMakeRect(16, 78, 129, 95);
+			rect = NSMakeRect(15, 67, 127, 95);
 			break;
 	}
 	return rect;
@@ -326,7 +326,7 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 			rect = NSMakeRect(20, 35, 180, 34);
 			break;
 		case NSSmallControlSize:
-			rect = NSMakeRect(16, 41, 129, 28);
+			rect = NSMakeRect(15, 30, 127, 28);
 			break;
 	}
 	return rect;
@@ -339,7 +339,7 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 			rect = NSMakeRect(77, 12, 65, 13);
 			break;
 		case NSSmallControlSize:
-			rect = NSMakeRect(63, 19, 65, 13);
+			rect = NSMakeRect(63, 8, 65, 13);
 			break;
 	}
 	return rect;
@@ -352,7 +352,7 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 			rect = NSMakeRect(21, 12, 56, 17);
 			break;
 		case NSSmallControlSize:
-			rect = NSMakeRect(16, 19, 48, 14);
+			rect = NSMakeRect(15, 8, 48, 14);
 			break;
 	}
 	return rect;
@@ -365,7 +365,7 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 			rect = NSMakeRect(16, 33, 188, 38);
 			break;
 		case NSSmallControlSize:
-			rect = NSMakeRect(14, 40, 134, 31);
+			rect = NSMakeRect(13, 29, 131, 31);
 			break;
 	}
 	return rect;
@@ -412,6 +412,10 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 
 - (void)drawRect:(NSRect)dirtyFrame
 {
+#if 0
+		[[NSColor redColor] set];
+		[NSBezierPath strokeRect:[self bounds]];
+#endif
 	if(selected) {
 		CGFloat radius = [self selectRectRadius];
 		NSRect frame = [self selectRect];
@@ -435,6 +439,13 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 
 - (NSRect)imageFrame
 {
+	NSLog(@"\nSelect -> %@\nThumb -> %@\nLabel -> %@\nTitle -> %@\nRate -> %@ %@", 
+		  NSStringFromRect([self selectRect]),
+		  NSStringFromRect([self thumbnailFrame]),
+		  NSStringFromRect([self labelFrame]),
+		  NSStringFromRect([self titleFrame]),
+		  NSStringFromRect([self rateTitleFrame]),
+		  NSStringFromRect([self rateFrame]));
 	return [(XspfMShadowImageCell *)thumbnailCell imageRectForBounds:[self thumbnailFrame] inView:self];
 }
 
@@ -455,12 +466,14 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 		NSText *fieldEditor = [self.window fieldEditor:YES forObject:self];
 		[titleCell setTextColor:[NSColor textColor]];
 		[titleCell setBezeled:YES];
+		[titleCell setShowsFirstResponder:YES];
 		[titleCell editWithFrame:[self titleFrame]
 						  inView:self
 						  editor:fieldEditor
 						delegate:self
 						   event:event];
 		[fieldEditor selectAll:nil];
+		
 		return;
 	}
 	
