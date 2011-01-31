@@ -112,12 +112,14 @@ static inline NSRect enabledImageFrame(NSRect original)
 	[[self shadow] set];
 	
 	NSRect imageRect = [self _imageRectForDrawing:[self image] inFrame:cellFrame inView:controlView];
-	[[NSColor whiteColor] set];
-	NSRectFill(imageRect);
+	NSImage *i = self.image;
+	NSSize size = i.size;
 	
+	[i drawInRect:imageRect
+		 fromRect:NSMakeRect(0, 0, size.width, size.height)
+		operation:NSCompositeCopy
+		 fraction:1.0];
 	[NSGraphicsContext restoreGraphicsState];
-	
-	[self drawInteriorWithFrame:cellFrame inView:controlView];
 }
 
 @end
