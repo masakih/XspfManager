@@ -108,12 +108,11 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 
 - (void)setup
 {
-	controlSize = NSRegularControlSize;
+	controlSize = -1;;
 	
 	thumbnailCell = [[XspfMShadowImageCell alloc] initImageCell:nil];
 	
 	titleCell = [[NSTextFieldCell alloc] initTextCell:@""];
-	[titleCell setFont:[NSFont controlContentFontOfSize:13]];
 	[titleCell setEditable:YES];
 	[titleCell setSelectable:YES];
 	[titleCell setEnabled:YES];
@@ -125,7 +124,6 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 	
 	rateTitleCell = [[NSTextFieldCell alloc] initTextCell:NSLocalizedString(@"Rate:", @"Icon view Rate label.")];
 	[rateTitleCell setAlignment:NSRightTextAlignment];
-	[rateTitleCell setFont:[NSFont controlContentFontOfSize:13]];
 	
 	labelCell = [[XspfMLabelCell alloc] initTextCell:@""];
 	[labelCell setLabelStyle:XspfMSquareStyle];
@@ -133,6 +131,8 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 	
 	if([self frame].size.height < 200) {
 		[self setControlSize:NSSmallControlSize];
+	} else {
+		[self setControlSize:NSRegularControlSize];
 	}
 }
 - (id)initWithCoder:(NSCoder *)decoder
@@ -439,13 +439,6 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 
 - (NSRect)imageFrame
 {
-	NSLog(@"\nSelect -> %@\nThumb -> %@\nLabel -> %@\nTitle -> %@\nRate -> %@ %@", 
-		  NSStringFromRect([self selectRect]),
-		  NSStringFromRect([self thumbnailFrame]),
-		  NSStringFromRect([self labelFrame]),
-		  NSStringFromRect([self titleFrame]),
-		  NSStringFromRect([self rateTitleFrame]),
-		  NSStringFromRect([self rateFrame]));
 	return [(XspfMShadowImageCell *)thumbnailCell imageRectForBounds:[self thumbnailFrame] inView:self];
 }
 
