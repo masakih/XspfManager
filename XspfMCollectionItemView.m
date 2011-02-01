@@ -333,7 +333,7 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 	CGFloat thumbnailWidth = NSWidth(myBounds) - 2 * (margin + padding);
 	CGFloat thumbnailHeight = ceil(thumbnailWidth * 3 / 4);
 	CGFloat titleHeight = ceil(fontHeight * 2 * 1.3);
-	CGFloat rateTitleWidth = ceil(thumbnailWidth * 0.35);
+	CGFloat rateTitleWidth = ceil(thumbnailWidth * 0.4);
 	
 	thumbnailBounds = NSMakeRect(margin + padding, NSHeight(myBounds) - margin - padding - thumbnailHeight,
 								 thumbnailWidth, thumbnailHeight);
@@ -423,7 +423,7 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 	
 #if 0
 	[[NSColor redColor] set];
-	[NSBezierPath strokeRect:[self thumbnailFrame]];
+	[NSBezierPath strokeRect:[self rateTitleFrame]];
 #endif
 }
 
