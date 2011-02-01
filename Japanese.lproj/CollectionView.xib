@@ -140,7 +140,7 @@
 			<object class="NSCustomView" id="808315116">
 				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">268</int>
-				<string key="NSFrameSize">{157, 174}</string>
+				<string key="NSFrameSize">{157, 178}</string>
 				<string key="NSClassName">XspfMCollectionItemView</string>
 			</object>
 			<object class="NSMenu" id="417305955">
@@ -571,7 +571,7 @@
 					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">AUGgAABDlQAAA</bytes>
 					</object>
-					<string>{{42, 625}, {157, 174}}</string>
+					<string>{{42, 621}, {157, 178}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">AUHgAABCmAAAA</bytes>
@@ -594,7 +594,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">900</int>
+			<int key="maxID">906</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

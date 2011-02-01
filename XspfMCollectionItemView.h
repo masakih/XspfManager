@@ -76,6 +76,13 @@
 	
 	NSControlSize controlSize;
 	
+	NSRect thumbnailBounds;
+	NSRect selectedBounds;
+	NSRect titleBounds;
+	NSRect labelBounds;
+	NSRect rateLabelBounds;
+	NSRect rateBounds;
+	
 	id titleBinder;
 	NSString *titleBindKey;
 	

@@ -134,6 +134,8 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 	} else {
 		[self setControlSize:NSRegularControlSize];
 	}
+	
+	[self calcSize];
 }
 - (id)initWithCoder:(NSCoder *)decoder
 {
@@ -304,71 +306,63 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 {
 	return controlSize;
 }
+- (void)setFrameSize:(NSSize)newSize
+{
+	[super setFrameSize:newSize];
+	[self calcSize];
+}
 
+- (void)calcSize
+{
+	if([self frame].size.height < 200) {
+		[self setControlSize:NSSmallControlSize];
+	} else {
+		[self setControlSize:NSRegularControlSize];
+	}
+	
+	CGFloat margin = 10;
+	CGFloat titleTopMargin = 3;
+	CGFloat padding = (controlSize == NSSmallControlSize) ? 5 : 10;
+	NSSize labelInsetSize = (controlSize == NSSmallControlSize) ? NSMakeSize(-2, -1) : NSMakeSize(-4, -2);
+	NSSize slectInsetSize = (controlSize == NSSmallControlSize) ? NSMakeSize(-5, -5) : NSMakeSize(-10, -10);
+	
+	NSRect myBounds = [self bounds];
+	CGFloat fontHeight = [[titleCell font] pointSize];
+	NSSize rateSize = NSMakeSize(65, 13);
+	
+	CGFloat thumbnailWidth = NSWidth(myBounds) - 2 * (margin + padding);
+	CGFloat thumbnailHeight = ceil(thumbnailWidth * 3 / 4);
+	CGFloat titleHeight = ceil(fontHeight * 2 * 1.3);
+	CGFloat rateTitleWidth = ceil(thumbnailWidth * 0.35);
+	
+	thumbnailBounds = NSMakeRect(margin + padding, NSHeight(myBounds) - margin - padding - thumbnailHeight,
+								 thumbnailWidth, thumbnailHeight);
+	titleBounds = NSMakeRect(NSMinX(thumbnailBounds), NSMinY(thumbnailBounds) - padding - titleTopMargin - titleHeight + labelInsetSize.height,
+							 thumbnailWidth, titleHeight);
+	rateLabelBounds = NSMakeRect(NSMinX(thumbnailBounds), margin, rateTitleWidth, fontHeight + 4);
+	rateBounds = NSMakeRect(NSMaxX(rateLabelBounds), margin, rateSize.width, rateSize.height);
+	labelBounds = NSInsetRect(titleBounds, labelInsetSize.width, labelInsetSize.height);
+	selectedBounds = NSInsetRect(thumbnailBounds, slectInsetSize.width, slectInsetSize.height);
+}
 - (NSRect)thumbnailFrame
 {
-	NSRect rect = NSZeroRect;
-	switch(controlSize) {
-		case NSRegularControlSize:
-			rect = NSMakeRect(20, 83, 182, 137);
-			break;
-		case NSSmallControlSize:
-			rect = NSMakeRect(15, 67, 127, 95);
-			break;
-	}
-	return rect;
+	return thumbnailBounds;
 }
 - (NSRect)titleFrame
 {
-	NSRect rect = NSZeroRect;
-	switch(controlSize) {
-		case NSRegularControlSize:
-			rect = NSMakeRect(20, 35, 180, 34);
-			break;
-		case NSSmallControlSize:
-			rect = NSMakeRect(15, 30, 127, 28);
-			break;
-	}
-	return rect;
+	return titleBounds;
 }
 - (NSRect)rateFrame
 {
-	NSRect rect = NSZeroRect;
-	switch(controlSize) {
-		case NSRegularControlSize:
-			rect = NSMakeRect(77, 12, 65, 13);
-			break;
-		case NSSmallControlSize:
-			rect = NSMakeRect(63, 8, 65, 13);
-			break;
-	}
-	return rect;
+	return rateBounds;
 }
 - (NSRect)rateTitleFrame
 {
-	NSRect rect = NSZeroRect;
-	switch(controlSize) {
-		case NSRegularControlSize:
-			rect = NSMakeRect(21, 12, 56, 17);
-			break;
-		case NSSmallControlSize:
-			rect = NSMakeRect(15, 8, 48, 14);
-			break;
-	}
-	return rect;
+	return rateLabelBounds;
 }
 - (NSRect)labelFrame
 {
-	NSRect rect = NSZeroRect;
-	switch(controlSize) {
-		case NSRegularControlSize:
-			rect = NSMakeRect(16, 33, 188, 38);
-			break;
-		case NSSmallControlSize:
-			rect = NSMakeRect(13, 29, 131, 31);
-			break;
-	}
-	return rect;
+	return labelBounds;
 }
 - (CGFloat)selectRectRadius
 {
@@ -385,16 +379,7 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 }
 - (NSRect)selectRect
 {
-	NSRect rect = NSZeroRect;
-	switch(controlSize) {
-		case NSRegularControlSize:
-			rect = NSInsetRect([self thumbnailFrame], -10, -10);
-			break;
-		case NSSmallControlSize:
-			rect = NSInsetRect([self thumbnailFrame], -5, -5);
-			break;
-	}
-	return rect;
+	return selectedBounds;
 }
 - (CGFloat)selectedTitleRectRadius
 {
@@ -435,6 +420,11 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 	[titleCell drawWithFrame:[self titleFrame] inView:self];
 	[rateCell drawWithFrame:[self rateFrame] inView:self];
 	[rateTitleCell drawWithFrame:[self rateTitleFrame] inView:self];
+	
+#if 0
+	[[NSColor redColor] set];
+	[NSBezierPath strokeRect:[self thumbnailFrame]];
+#endif
 }
 
 - (NSRect)imageFrame
