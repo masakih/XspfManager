@@ -127,7 +127,7 @@
 	
 	[self setupMenu];
 	[[self view] setMenu:menu];
-	[self setBox:[self view]];
+	[self setBox:(NSControl *)[self view]];
 	
 	[self coodinateColors];
 }
@@ -155,7 +155,7 @@
 	frame.origin = [[thumbnailView window] convertBaseToScreen:frame.origin];
 	return frame;
 }
-- (void)setBox:(NSView *)box
+- (void)setBox:(NSControl *)box
 {
 	[_box unbind:@"thumbnail"];
 	[_box unbind:@"title"];
@@ -201,6 +201,8 @@
 	
 	
 	[_box setMenu:menu];
+	
+	[_box setAction:@selector(openXspf:)];
 }
 - (void)setView:(NSView *)view
 {
@@ -211,7 +213,7 @@
 	[self setupMenu];
 	[view setMenu:menu];
 	
-	[self setBox:view];
+	[self setBox:(NSControl *)view];
 }
 - (void)setupMenu
 {

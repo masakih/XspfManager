@@ -88,6 +88,9 @@
 	
 	id thumbnailBinder;
 	NSString *thumbnailBindKey;
+	
+	id target;
+	SEL action;
 }
 
 - (void)setControlSize:(NSControlSize)size;

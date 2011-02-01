@@ -432,7 +432,14 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 	return [(XspfMShadowImageCell *)thumbnailCell imageRectForBounds:[self thumbnailFrame] inView:self];
 }
 
-
+- (void)setTarget:(id)newTarget
+{
+	target = newTarget;
+}
+- (void)setAction:(SEL)newAction
+{
+	action = newAction;
+}
 - (void)mouseDown:(NSEvent *)event
 {
 	[self.window endEditingFor:self];
@@ -456,6 +463,11 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 						delegate:self
 						   event:event];
 		[fieldEditor selectAll:nil];
+		
+		return;
+	}
+	if([event clickCount] == 2 && [self mouse:mouse inRect:[self thumbnailFrame]]) {
+		[self sendAction:action to:target];
 		
 		return;
 	}

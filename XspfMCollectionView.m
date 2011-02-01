@@ -142,14 +142,14 @@
 }
 
 #pragma mark#### NSResponder ####
-- (void)mouseDown:(NSEvent *)theEvent
-{
-	if([theEvent clickCount] != 2) return [super mouseDown:theEvent];
-	
-	if(delegate) {
-		[delegate enterAction:self];
-	}
-}
+//- (void)mouseDown:(NSEvent *)theEvent
+//{
+//	if([theEvent clickCount] != 2) return [super mouseDown:theEvent];
+//	
+//	if(delegate) {
+//		[delegate enterAction:self];
+//	}
+//}
 - (void)keyDown:(NSEvent *)theEvent
 {
 	if([theEvent isARepeat]) return [super keyDown:theEvent];

@@ -69,10 +69,10 @@
 	// because [self conllectionView] is already nil at [self dealloc].
 	NSCollectionView *collectionViewHolder;	// not retained.
 	
-	NSView *_box;
+	NSControl *_box;
 }
 
-- (void)setBox:(NSView *)box;
+- (void)setBox:(NSControl *)box;
 
 - (NSRect)thumbnailFrameCoordinateBase;
 
