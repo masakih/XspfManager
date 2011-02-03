@@ -180,6 +180,7 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 		}
 		
 		thumbnailBinder = observable;
+		[thumbnailBindKey release];
 		thumbnailBindKey = [keyPath copy];
 		[thumbnailBinder addObserver:self
 						  forKeyPath:thumbnailBindKey
@@ -193,6 +194,7 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 			withKeyPath:keyPath
 				options:options];
 		titleBinder = observable;
+		[titleBindKey release];
 		titleBindKey = [keyPath copy];
 		return;
 	}
@@ -477,7 +479,7 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 - (void)textDidEndEditing:(NSNotification *)notification
 {
 	NSText *fieldEditor =[notification object];
-	[titleCell setStringValue:[[fieldEditor string] copy]];
+	[titleCell setStringValue:[[[fieldEditor string] copy] autorelease]];
 	[titleCell setBezeled:NO];
 	[titleCell setDrawsBackground:NO];
 	[titleCell endEditing:fieldEditor];
