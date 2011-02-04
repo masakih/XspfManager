@@ -155,6 +155,15 @@
 	frame.origin = [[thumbnailView window] convertBaseToScreen:frame.origin];
 	return frame;
 }
+
+- (NSString *)xspfDescription
+{
+	id rep = [self representedObject];
+	return [NSString stringWithFormat:NSLocalizedString(@"%@\nMovie Num: %@", @"SXPF Description"),
+			[rep valueForKey:@"title"],
+			[rep valueForKey:@"movieNum"]];
+}
+
 - (void)setBox:(NSControl *)box
 {
 	[_box unbind:@"thumbnail"];
@@ -163,7 +172,8 @@
 	[_box unbind:@"label"];
 	[_box unbind:@"titleColor"];
 	[_box unbind:@"backgroundColor"];
-	[_box unbind:@"selected"];	
+	[_box unbind:@"selected"];
+	[_box unbind:NSToolTipBinding];
 	
 	[_box autorelease];
 	_box = [box retain];
@@ -197,6 +207,10 @@
 	[_box bind:@"selected"
 	  toObject:self
    withKeyPath:@"selected"
+	   options:nil];
+	[_box bind:NSToolTipBinding
+	  toObject:self
+   withKeyPath:@"xspfDescription"
 	   options:nil];
 	
 	

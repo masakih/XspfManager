@@ -589,8 +589,10 @@
 	if([detailViewButton isEqual:anItem]) {
 		if([self isOpenDetailView]) {
 			[detailViewButton setImage:[NSImage imageNamed:@"NSRightFacingTriangleTemplate"]];
+			[detailViewButton setToolTip:NSLocalizedString(@"Hide detail", @"Hide detail")];
 		} else {
 			[detailViewButton setImage:[NSImage imageNamed:@"NSLeftFacingTriangleTemplate"]];
+			[detailViewButton setToolTip:NSLocalizedString(@"Show detail", @"Show detail")];
 		}
 		return YES;
 	}
