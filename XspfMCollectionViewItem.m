@@ -166,11 +166,11 @@
 
 - (void)setBox:(NSControl *)box
 {
-	[_box unbind:@"thumbnail"];
-	[_box unbind:@"title"];
-	[_box unbind:@"rating"];
-	[_box unbind:@"label"];
-	[_box unbind:@"titleColor"];
+	[_box unbind:XspfMThumbnailBinding];
+	[_box unbind:NSTitleBinding];
+	[_box unbind:XspfMRatingBinding];
+	[_box unbind:NSLabelBinding];
+	[_box unbind:XspfMTitleColorBinding];
 	[_box unbind:@"backgroundColor"];
 	[_box unbind:@"selected"];
 	[_box unbind:NSToolTipBinding];
@@ -180,23 +180,23 @@
 	
 	if(!_box) return;
 	
-	[_box bind:@"thumbnail"
+	[_box bind:XspfMThumbnailBinding
 	  toObject:self
    withKeyPath:@"representedObject.thumbnail"
 	   options:nil];
-	[_box bind:@"title"
+	[_box bind:NSTitleBinding
 	  toObject:self
    withKeyPath:@"representedObject.title"
 	   options:nil];
-	[_box bind:@"rating"
+	[_box bind:XspfMRatingBinding
 	  toObject:self
    withKeyPath:@"representedObject.rating"
 	   options:nil];
-	[_box bind:@"label"
+	[_box bind:NSLabelBinding
 	  toObject:self
    withKeyPath:@"representedObject.label"
 	   options:nil];	
-	[_box bind:@"titleColor"
+	[_box bind:XspfMTitleColorBinding
 	  toObject:self
    withKeyPath:@"labelTextColor"
 	   options:nil];

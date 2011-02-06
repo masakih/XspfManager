@@ -93,3 +93,9 @@
 - (NSRect)imageFrame;
 
 @end
+
+
+extern NSString *const XspfMThumbnailBinding;
+extern NSString *const XspfMTitleColorBinding;
+extern NSString *const XspfMRatingBinding;
+

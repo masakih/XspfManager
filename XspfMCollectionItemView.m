@@ -65,11 +65,9 @@
 #import "XspfMShadowImageCell.h"
 
 
-static NSString *const XspfMCollectionItemThumbnail = @"thumbnail";
-static NSString *const XspfMCollectionItemTitle = @"title";
-static NSString *const XspfMCollectionItemTitleColor = @"titleColor";
-static NSString *const XspfMCollectionItemRating = @"rating";
-static NSString *const XspfMCollectionItemLabel = @"label";
+NSString *const XspfMThumbnailBinding = @"thumbnail";
+NSString *const XspfMTitleColorBinding = @"titleColor";
+NSString *const XspfMRatingBinding = @"rating";
 
 
 @implementation XspfMCollectionItemView
@@ -80,29 +78,29 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 	if(isFirst){
 		isFirst = NO;
 		
-		[self exposeBinding:XspfMCollectionItemThumbnail];
-		[self exposeBinding:XspfMCollectionItemTitle];
-		[self exposeBinding:XspfMCollectionItemTitleColor];
-		[self exposeBinding:XspfMCollectionItemRating];
-		[self exposeBinding:XspfMCollectionItemLabel];
+		[self exposeBinding:XspfMThumbnailBinding];
+		[self exposeBinding:NSTitleBinding];
+		[self exposeBinding:XspfMTitleColorBinding];
+		[self exposeBinding:XspfMRatingBinding];
+		[self exposeBinding:NSLabelBinding];
 	}
 }
 
 - (Class)valueClassForBinding:(NSString *)binding
 {
-	if([binding isEqualToString:XspfMCollectionItemThumbnail]) {
+	if([binding isEqualToString:XspfMThumbnailBinding]) {
 		return [NSImage class];
 	}
-	if([binding isEqualToString:XspfMCollectionItemTitle]) {
+	if([binding isEqualToString:NSTitleBinding]) {
 		return [NSString class];
 	}
-	if([binding isEqualToString:XspfMCollectionItemTitleColor]) {
+	if([binding isEqualToString:XspfMTitleColorBinding]) {
 		return [NSColor class];
 	}
-	if([binding isEqualToString:XspfMCollectionItemRating]) {
+	if([binding isEqualToString:XspfMRatingBinding]) {
 		return [NSValue class];
 	}
-	if([binding isEqualToString:XspfMCollectionItemLabel]) {
+	if([binding isEqualToString:NSLabelBinding]) {
 		return [NSValue class];
 	}
 	
@@ -170,26 +168,26 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 
 - (void)setValue:(id)value forKey:(NSString *)key
 {
-	if([key isEqualToString:XspfMCollectionItemThumbnail]) {
+	if([key isEqualToString:XspfMThumbnailBinding]) {
 		[thumbnailCell setImage:value];
 		[self setNeedsDisplayInRect:selectedBounds];
 		return;
 	}
-	if([key isEqualToString:XspfMCollectionItemTitle]) {
+	if([key isEqualToString:NSTitleBinding]) {
 		value = value ? value : @"";
 		[titleCell setStringValue:value];
 		return;
 	}
-	if([key isEqualToString:XspfMCollectionItemTitleColor]) {
+	if([key isEqualToString:XspfMTitleColorBinding]) {
 		[titleCell setTextColor:value];
 		[self setNeedsDisplayInRect:titleBounds];
 		return;
 	}
-	if([key isEqualToString:XspfMCollectionItemRating]) {
+	if([key isEqualToString:XspfMRatingBinding]) {
 		[rateCell setObjectValue:value];
 		return;
 	}
-	if([key isEqualToString:XspfMCollectionItemLabel]) {
+	if([key isEqualToString:NSLabelBinding]) {
 		[labelCell setObjectValue:value];
 		return;
 	}
@@ -198,19 +196,19 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 }
 - (id)valueForKey:(NSString *)key
 {
-	if([key isEqualToString:XspfMCollectionItemThumbnail]) {
+	if([key isEqualToString:XspfMThumbnailBinding]) {
 		return [thumbnailCell image];
 	}
-	if([key isEqualToString:XspfMCollectionItemTitle]) {
+	if([key isEqualToString:NSTitleBinding]) {
 		return [titleCell stringValue];
 	}
-	if([key isEqualToString:XspfMCollectionItemTitleColor]) {
+	if([key isEqualToString:XspfMTitleColorBinding]) {
 		return [titleCell textColor];
 	}
-	if([key isEqualToString:XspfMCollectionItemRating]) {
+	if([key isEqualToString:XspfMRatingBinding]) {
 		return [rateCell objectValue];
 	}
-	if([key isEqualToString:XspfMCollectionItemLabel]) {
+	if([key isEqualToString:NSLabelBinding]) {
 		return [labelCell objectValue];
 	}
 	
@@ -395,7 +393,7 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 	
 	if([self mouse:mouse inRect:rateBounds]) {
 		[rateCell trackMouse:event inRect:rateBounds ofView:self untilMouseUp:YES];
-		id dict = [self infoForBinding:XspfMCollectionItemRating];
+		id dict = [self infoForBinding:XspfMRatingBinding];
 		id obj = [dict objectForKey:NSObservedObjectKey];
 		id key = [dict objectForKey:NSObservedKeyPathKey];
 		[obj setValue:[rateCell objectValue] forKeyPath:key];
@@ -434,7 +432,7 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 	[titleCell endEditing:fieldEditor];
 	[self.window makeFirstResponder:self.superview];
 	
-	id dict = [self infoForBinding:XspfMCollectionItemTitle];
+	id dict = [self infoForBinding:NSTitleBinding];
 	id obj = [dict objectForKey:NSObservedObjectKey];
 	id key = [dict objectForKey:NSObservedKeyPathKey];
 	[obj setValue:[titleCell stringValue] forKeyPath:key];
