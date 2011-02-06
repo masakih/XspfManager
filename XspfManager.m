@@ -351,8 +351,10 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 #pragma mark#### KVC & KVO ####
 - (void)setMode:(XspfMViwMode)mode
 {
-	[self willChangeValueForKey:@"mode"];
+	if(mode == mode_) return;
 	if(mode != modeList & mode != modeMovie) return;
+	
+	[self willChangeValueForKey:@"mode"];
 	
 	mode_ = mode;
 	switch(mode) {
