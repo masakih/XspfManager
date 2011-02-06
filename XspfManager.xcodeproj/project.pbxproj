@@ -94,6 +94,7 @@
 		F4AB5F8B12BD017500157355 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4AB5F8A12BD017500157355 /* IOKit.framework */; };
 		F4AB5F9112BD01F000157355 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4AB5F9012BD01F000157355 /* Carbon.framework */; };
 		F4AB605612BD022D00157355 /* BSSUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AB605512BD022D00157355 /* BSSUtil.m */; };
+		F4B0008D12FE77D1001EABE6 /* AddXSPF.png in Resources */ = {isa = PBXBuildFile; fileRef = F4B0008C12FE77D1001EABE6 /* AddXSPF.png */; };
 		F4BB59BB10BC0C3700EE50B7 /* LibraryPredicate.strings in Resources */ = {isa = PBXBuildFile; fileRef = F4BB59BA10BC0C3700EE50B7 /* LibraryPredicate.strings */; };
 		F4C5436112CB734D00214C74 /* XspfMAppleRemoteSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C5436012CB734D00214C74 /* XspfMAppleRemoteSupport.m */; };
 		F4C545B012CCF75600214C74 /* NSControl_Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C545AF12CCF75600214C74 /* NSControl_Validation.m */; };
@@ -304,6 +305,7 @@
 		F4AB5F9012BD01F000157355 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		F4AB605412BD022D00157355 /* BSSUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSSUtil.h; sourceTree = "<group>"; };
 		F4AB605512BD022D00157355 /* BSSUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSSUtil.m; sourceTree = "<group>"; };
+		F4B0008C12FE77D1001EABE6 /* AddXSPF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AddXSPF.png; sourceTree = "<group>"; };
 		F4BB59B610BC0C2C00EE50B7 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/LibraryPredicate.strings; sourceTree = "<group>"; };
 		F4BB5A1510BC2C5800EE50B7 /* Japanese */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Japanese; path = Japanese.lproj/LibraryPredicate.strings; sourceTree = "<group>"; };
 		F4C5435F12CB734D00214C74 /* XspfMAppleRemoteSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMAppleRemoteSupport.h; sourceTree = "<group>"; };
@@ -469,6 +471,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F4B0008C12FE77D1001EABE6 /* AddXSPF.png */,
 				F448FEAB12F4685F00E96490 /* Icon-round-Question_mark.jpg */,
 				F448FCFB12F2FE6300E96490 /* Makefile */,
 				F4DAF67411BBC1230047BEDA /* Localizable.strings.sed */,
@@ -788,6 +791,7 @@
 				F493124E12C371B100981CAA /* XspfQTMovieView.xib in Resources */,
 				F493114812C3294B00981CAA /* XspfQTPlayList.xib in Resources */,
 				F448FEAC12F4685F00E96490 /* Icon-round-Question_mark.jpg in Resources */,
+				F4B0008D12FE77D1001EABE6 /* AddXSPF.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
