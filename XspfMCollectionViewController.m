@@ -219,11 +219,11 @@ static NSString *const XspfMCollectionItemSizeKey = @"Collection Item Size";
 	return rect;
 }
 
-#pragma mark#### Test ####
-- (void)test01:(id)sender
-{
-	HMLog(HMLogLevelError, @"hoge");
-}
+//#pragma mark#### Test ####
+//- (void)test01:(id)sender
+//{
+//	HMLog(HMLogLevelError, @"hoge");
+//}
 	
 
 @end

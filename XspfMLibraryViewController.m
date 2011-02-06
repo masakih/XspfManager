@@ -517,8 +517,8 @@ static NSString *const XspfMLibItemPbardType = @"XspfMLibItemPbardType";
 
 #pragma mark-
 
-- (IBAction)test01:(id)sender
-{
+//- (IBAction)test01:(id)sender
+//{
 //	NSArray *array = [editor rowTemplates];
 	
 //	for(id templ in array) {
@@ -532,6 +532,6 @@ static NSString *const XspfMLibItemPbardType = @"XspfMLibItemPbardType";
 //	for(id templ in array) {
 //		HMLog(HMLogLevelDebug, @"template -> %@", templ);
 //	}
-}
+//}
 
 @end
