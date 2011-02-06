@@ -378,6 +378,11 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 	
 	[thumbnailCell drawWithFrame:[self thumbnailFrame] inView:self];
 	[labelCell drawWithFrame:[self labelFrame] inView:self];
+	if(selected && [labelCell integerValue] != 0) {
+		frame = NSInsetRect(frame, 2, 2);
+		bezier = [NSBezierPath bezierPathWithRoundedRect:frame xRadius:radius yRadius:radius];
+		[bezier fill];
+	}
 	[titleCell drawWithFrame:[self titleFrame] inView:self];
 	[rateCell drawWithFrame:[self rateFrame] inView:self];
 	[rateTitleCell drawWithFrame:[self rateTitleFrame] inView:self];

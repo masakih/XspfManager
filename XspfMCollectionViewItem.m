@@ -282,9 +282,7 @@
 
 - (NSColor *)labelTextColor
 {
-	XspfMXspfObject *obj = [self representedObject];
-	
-	if([self isSelected] && [self isFirstResponder] && [NSApp isActive] && [obj.label integerValue] == XspfMLabelNone) {
+	if([self isSelected] && [self isFirstResponder] && [NSApp isActive]) {
 		return [NSColor whiteColor];
 	}
 	return [NSColor blackColor];
