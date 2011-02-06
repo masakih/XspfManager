@@ -164,7 +164,7 @@
 					options:nil];
 	
 	[self recalculateKeyViewLoop];
-	[self.window update];
+	[[self window] update];
 	
 	[self performSelector:@selector(delayExcute:) withObject:self afterDelay:0.1];
 }
@@ -239,14 +239,14 @@
 	[playListView removeFromSuperview];
 	self.playListViewController = nil;
 	
-	NSDocument *doc = movieViewController.representedObject;
+	NSDocument *doc = [movieViewController representedObject];
 	if([doc hasUnautosavedChanges]) {
 		[doc saveDocument:nil];
 	}
 	[doc close];
 	self.movieViewController = nil;
 	
-	[self.window makeFirstResponder:listViewController.initialFirstResponder];
+	[[self window] makeFirstResponder:[listViewController initialFirstResponder]];
 }
 - (void)wipeOut
 {
@@ -399,9 +399,9 @@
 {
 	id firstResponder = self.window.firstResponder;
 	if(firstResponder == listViewController.initialFirstResponder) {
-		[self.window makeFirstResponder:libraryViewController.initialFirstResponder];
+		[[self window] makeFirstResponder:[libraryViewController initialFirstResponder]];
 	} else {
-		[self.window makeFirstResponder:listViewController.initialFirstResponder];
+		[[self window] makeFirstResponder:[listViewController initialFirstResponder]];
 	}
 }
 
@@ -482,8 +482,22 @@
 - (BOOL)isOpenDetailView
 {
 	NSView *view = [detailViewController view];
+	if(![view superview]) return NO;
 	NSRect visRect = [view visibleRect];
 	return !(NSEqualRects(visRect, NSZeroRect));
+}
+- (void)setOnDetailView
+{
+	[self overlayView:detailViewController.view
+				   on:detailPlaceholderView
+			   offset:NSZeroPoint
+			   extend:NSZeroSize];
+}
+- (void)pullOutDetailView:(id)dummy
+{
+	if([self isOpenDetailView]) return;
+	[detailViewController.view removeFromSuperview];
+	HMLog(HMLogLevelDebug, @"PullOut");
 }
 - (IBAction)showHideDetail:(id)sender
 {
@@ -499,6 +513,7 @@
 		size.width -= detailWidth;
 		
 		pref.openDetailView = YES;
+		[self setOnDetailView];
 	} else { // hide
 		origin.x += detailWidth;
 		size = [splitView frame].size;
@@ -513,6 +528,7 @@
 	NSAnimationContext *context = [NSAnimationContext currentContext];
 	NSTimeInterval duration = [context duration];
 	[self performSelector:@selector(validateControl:) withObject:detailViewButton afterDelay:duration + 0.1];
+	[self performSelector:@selector(pullOutDetailView:) withObject:nil afterDelay:duration + 0.11];
 }
 - (BOOL)validateMenuItemForListMode:(NSMenuItem *)menuItem
 {
@@ -593,6 +609,11 @@
 		} else {
 			[detailViewButton setImage:[NSImage imageNamed:@"NSLeftFacingTriangleTemplate"]];
 			[detailViewButton setToolTip:NSLocalizedString(@"Show detail", @"Show detail")];
+			
+			id keyView = [[self window] firstResponder];
+			if(NSEqualSizes([keyView visibleRect].size, NSZeroSize)) {
+				[[self window] makeFirstResponder:[listViewController initialFirstResponder]];
+			}
 		}
 		return YES;
 	}
@@ -626,8 +647,12 @@
 {
 	[searchField setNextKeyView:[libraryViewController firstKeyView]];
 	[libraryViewController setNextKeyView:[listViewController firstKeyView]];
-	[listViewController setNextKeyView:[detailViewController firstKeyView]];
-	[detailViewController setNextKeyView:searchField];
+	if([self isOpenDetailView]) {
+		[listViewController setNextKeyView:[detailViewController firstKeyView]];
+		[detailViewController setNextKeyView:searchField];
+	} else {
+		[listViewController setNextKeyView:searchField];
+	}
 }
 - (void)overlayView:(NSView *)view on:(NSView *)original offset:(NSPoint)offset extend:(NSSize)extend
 {
@@ -781,9 +806,12 @@
 #pragma mark#### Test ####
 - (IBAction)test01:(id)sender
 {
-	NSPoint origin = [detailPlaceholderView frame].origin;
-	origin.x = [[detailPlaceholderView window] frame].size.width;
-	[detailPlaceholderView setFrameOrigin:origin];
+	id firstKeyView = [[self window] firstResponder];
+	NSView *view = firstKeyView;
+	do {
+		HMLog(HMLogLevelDebug, @"KeyView -> %@", view);
+		view = [view nextValidKeyView];
+	} while(view && view != firstKeyView);
 }
 - (IBAction)test02:(id)sender
 {
