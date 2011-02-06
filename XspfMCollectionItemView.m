@@ -71,16 +71,6 @@ static NSString *const XspfMCollectionItemTitleColor = @"titleColor";
 static NSString *const XspfMCollectionItemRating = @"rating";
 static NSString *const XspfMCollectionItemLabel = @"label";
 
-@interface XspfMCollectionItemView(Private)
-- (NSRect)thumbnailFrame;
-- (NSRect)titleFrame;
-- (NSRect)rateFrame;
-- (NSRect)rateTitleFrame;
-- (NSRect)labelFrame;
-- (CGFloat)selectRectRadius;
-- (NSRect)selectRect;
-- (CGFloat)selectedTitleRectRadius;
-@end
 
 @implementation XspfMCollectionItemView
 
@@ -193,7 +183,7 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 {
 	if([key isEqualToString:XspfMCollectionItemThumbnail]) {
 		[thumbnailCell setImage:value];
-		[self setNeedsDisplayInRect:[self selectRect]];
+		[self setNeedsDisplayInRect:selectedBounds];
 		return;
 	}
 	if([key isEqualToString:XspfMCollectionItemTitle]) {
@@ -203,7 +193,7 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 	}
 	if([key isEqualToString:XspfMCollectionItemTitleColor]) {
 		[titleCell setTextColor:value];
-		[self setNeedsDisplayInRect:[self titleFrame]];
+		[self setNeedsDisplayInRect:titleBounds];
 		return;
 	}
 	if([key isEqualToString:XspfMCollectionItemRating]) {
@@ -246,7 +236,7 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 	
 	selected = flag;
 	
-	[self setNeedsDisplayInRect:[self selectRect]];
+	[self setNeedsDisplayInRect:selectedBounds];
 }
 
 - (void)setControlSize:(NSControlSize)size
@@ -315,26 +305,7 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 	labelBounds = NSInsetRect(titleBounds, labelInsetSize.width, labelInsetSize.height);
 	selectedBounds = NSInsetRect(thumbnailBounds, slectInsetSize.width, slectInsetSize.height);
 }
-- (NSRect)thumbnailFrame
-{
-	return thumbnailBounds;
-}
-- (NSRect)titleFrame
-{
-	return titleBounds;
-}
-- (NSRect)rateFrame
-{
-	return rateBounds;
-}
-- (NSRect)rateTitleFrame
-{
-	return rateLabelBounds;
-}
-- (NSRect)labelFrame
-{
-	return labelBounds;
-}
+
 - (CGFloat)selectRectRadius
 {
 	CGFloat radius = 0.0;
@@ -347,10 +318,6 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 			break;
 	}
 	return radius;
-}
-- (NSRect)selectRect
-{
-	return selectedBounds;
 }
 - (CGFloat)selectedTitleRectRadius
 {
@@ -373,29 +340,29 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 		[NSBezierPath strokeRect:[self bounds]];
 #endif
 	
-	BOOL drawThumbnail = NSIntersectsRect([self selectRect], dirtyFrame);
-	BOOL drawLabel = NSIntersectsRect([self labelFrame], dirtyFrame);
+	BOOL drawThumbnail = NSIntersectsRect(selectedBounds, dirtyFrame);
+	BOOL drawLabel = NSIntersectsRect(labelBounds, dirtyFrame);
 	
 	if(selected && drawThumbnail) {
 		CGFloat radius = [self selectRectRadius];
-		NSRect frame = [self selectRect];
+		NSRect frame = selectedBounds;
 		NSBezierPath *bezier = [NSBezierPath bezierPathWithRoundedRect:frame xRadius:radius yRadius:radius];
 		[[NSColor gridColor] set];
 		[bezier fill];
 	}
 	
 	if(drawThumbnail) {
-		[thumbnailCell drawWithFrame:[self thumbnailFrame] inView:self];
+		[thumbnailCell drawWithFrame:thumbnailBounds inView:self];
 	}
 	
 	if(drawLabel) {
-		NSRect frame = [self labelFrame];
+		NSRect frame = labelBounds;
 		CGFloat radius = [self selectedTitleRectRadius];
 		NSBezierPath *bezier = [NSBezierPath bezierPathWithRoundedRect:frame xRadius:radius yRadius:radius];
 		[backgroundColor set];
 		[bezier fill];
 		
-		[labelCell drawWithFrame:[self labelFrame] inView:self];
+		[labelCell drawWithFrame:labelBounds inView:self];
 		
 		if(selected && [labelCell integerValue] != 0) {
 			frame = NSInsetRect(frame, 2, 2);
@@ -403,24 +370,24 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 			bezier = [NSBezierPath bezierPathWithRoundedRect:frame xRadius:radius yRadius:radius];
 			[bezier fill];
 		}
-		[titleCell drawWithFrame:[self titleFrame] inView:self];
+		[titleCell drawWithFrame:titleBounds inView:self];
 	}
-	if(NSIntersectsRect([self rateFrame], dirtyFrame)) {
-		[rateCell drawWithFrame:[self rateFrame] inView:self];
+	if(NSIntersectsRect(rateBounds, dirtyFrame)) {
+		[rateCell drawWithFrame:rateBounds inView:self];
 	}
-	if(NSIntersectsRect([self rateTitleFrame], dirtyFrame)) {
-		[rateTitleCell drawWithFrame:[self rateTitleFrame] inView:self];
+	if(NSIntersectsRect(rateLabelBounds, dirtyFrame)) {
+		[rateTitleCell drawWithFrame:rateLabelBounds inView:self];
 	}
 	
 #if 0
 	[[NSColor redColor] set];
-	[NSBezierPath strokeRect:[self rateTitleFrame]];
+	[NSBezierPath strokeRect:rateLabelBounds];
 #endif
 }
 
 - (NSRect)imageFrame
 {
-	return [(XspfMShadowImageCell *)thumbnailCell imageRectForBounds:[self thumbnailFrame] inView:self];
+	return [(XspfMShadowImageCell *)thumbnailCell imageRectForBounds:thumbnailBounds inView:self];
 }
 
 - (void)setTarget:(id)newTarget
@@ -437,22 +404,22 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 	
 	NSPoint mouse = [self convertPoint:[event locationInWindow] fromView:nil];
 	
-	if([self mouse:mouse inRect:[self rateFrame]]) {
-		[rateCell trackMouse:event inRect:[self rateFrame] ofView:self untilMouseUp:YES];
+	if([self mouse:mouse inRect:rateBounds]) {
+		[rateCell trackMouse:event inRect:rateBounds ofView:self untilMouseUp:YES];
 		id dict = [self infoForBinding:XspfMCollectionItemRating];
 		id obj = [dict objectForKey:NSObservedObjectKey];
 		id key = [dict objectForKey:NSObservedKeyPathKey];
 		[obj setValue:[rateCell objectValue] forKeyPath:key];
-		[self setNeedsDisplayInRect:[self rateFrame]];
+		[self setNeedsDisplayInRect:rateBounds];
 		return;
 	}
 	
-	if([event clickCount] == 2 && [self mouse:mouse inRect:[self titleFrame]]) {
+	if([event clickCount] == 2 && [self mouse:mouse inRect:titleBounds]) {
 		NSText *fieldEditor = [self.window fieldEditor:YES forObject:self];
 		[titleCell setTextColor:[NSColor textColor]];
 		[titleCell setBezeled:YES];
 		[titleCell setShowsFirstResponder:YES];
-		[titleCell editWithFrame:[self titleFrame]
+		[titleCell editWithFrame:titleBounds
 						  inView:self
 						  editor:fieldEditor
 						delegate:self
@@ -461,7 +428,7 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 		
 		return;
 	}
-	if([event clickCount] == 2 && [self mouse:mouse inRect:[self thumbnailFrame]]) {
+	if([event clickCount] == 2 && [self mouse:mouse inRect:thumbnailBounds]) {
 		[self sendAction:action to:target];
 		
 		return;
@@ -483,7 +450,7 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 	id key = [dict objectForKey:NSObservedKeyPathKey];
 	[obj setValue:[titleCell stringValue] forKeyPath:key];
 	
-	[self setNeedsDisplayInRect:[self labelFrame]];
+	[self setNeedsDisplayInRect:labelBounds];
 }
 
 @end
