@@ -88,17 +88,6 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 	}
 }
 
-- (NSArray *)exposedBindings
-{
-	NSMutableArray *bindings = [[[super exposedBindings] mutableCopy] autorelease];
-	[bindings addObject:XspfMCollectionItemThumbnail];
-	[bindings addObject:XspfMCollectionItemTitle];
-	[bindings addObject:XspfMCollectionItemTitleColor];
-	[bindings addObject:XspfMCollectionItemRating];
-	[bindings addObject:XspfMCollectionItemLabel];
-	
-	return bindings;
-}
 - (Class)valueClassForBinding:(NSString *)binding
 {
 	if([binding isEqualToString:XspfMCollectionItemThumbnail]) {
