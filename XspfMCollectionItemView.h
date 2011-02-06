@@ -83,12 +83,6 @@
 	NSRect rateLabelBounds;
 	NSRect rateBounds;
 	
-	id titleBinder;
-	NSString *titleBindKey;
-	
-	id thumbnailBinder;
-	NSString *thumbnailBindKey;
-	
 	id target;
 	SEL action;
 }

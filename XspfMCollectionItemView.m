@@ -74,6 +74,20 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 
 @implementation XspfMCollectionItemView
 
++ (void)initialize
+{
+	static BOOL isFirst = YES;
+	if(isFirst){
+		isFirst = NO;
+		
+		[self exposeBinding:XspfMCollectionItemThumbnail];
+		[self exposeBinding:XspfMCollectionItemTitle];
+		[self exposeBinding:XspfMCollectionItemTitleColor];
+		[self exposeBinding:XspfMCollectionItemRating];
+		[self exposeBinding:XspfMCollectionItemLabel];
+	}
+}
+
 - (NSArray *)exposedBindings
 {
 	NSMutableArray *bindings = [[[super exposedBindings] mutableCopy] autorelease];
@@ -161,104 +175,59 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 	[titleCell release];
 	[rateTitleCell release];
 	[labelCell release];
-	
-	[titleBindKey release];
-	
+		
 	[super dealloc];
 }
 
-- (void)bind:(NSString *)binding toObject:(id)observable withKeyPath:(NSString *)keyPath options:(NSDictionary *)options
+- (void)setValue:(id)value forKey:(NSString *)key
 {
-	if([binding isEqualToString:XspfMCollectionItemThumbnail]) {
-		[thumbnailCell bind:NSValueBinding
-				   toObject:observable
-				withKeyPath:keyPath
-					options:options];
-		
-		if(thumbnailBinder) {
-			[thumbnailBinder removeObserver:self forKeyPath:thumbnailBindKey];
-		}
-		
-		thumbnailBinder = observable;
-		[thumbnailBindKey release];
-		thumbnailBindKey = [keyPath copy];
-		[thumbnailBinder addObserver:self
-						  forKeyPath:thumbnailBindKey
-							 options:0
-							 context:NULL];
+	if([key isEqualToString:XspfMCollectionItemThumbnail]) {
+		[thumbnailCell setImage:value];
+		[self setNeedsDisplay];
 		return;
 	}
-	if([binding isEqualToString:XspfMCollectionItemTitle]) {
-		[titleCell bind:NSValueBinding
-			   toObject:observable
-			withKeyPath:keyPath
-				options:options];
-		titleBinder = observable;
-		[titleBindKey release];
-		titleBindKey = [keyPath copy];
+	if([key isEqualToString:XspfMCollectionItemTitle]) {
+		value = value ? value : @"";
+		[titleCell setStringValue:value];
 		return;
 	}
-	if([binding isEqualToString:XspfMCollectionItemTitleColor]) {
-		[titleCell bind:NSTextColorBinding
-			   toObject:observable
-			withKeyPath:keyPath
-				options:options];
+	if([key isEqualToString:XspfMCollectionItemTitleColor]) {
+		[titleCell setTextColor:value];
+		[self setNeedsDisplay];
 		return;
 	}
-	if([binding isEqualToString:XspfMCollectionItemRating]) {
-		[rateCell bind:NSValueBinding
-			  toObject:observable
-		   withKeyPath:keyPath
-			   options:options];
+	if([key isEqualToString:XspfMCollectionItemRating]) {
+		[rateCell setObjectValue:value];
 		return;
 	}
-	if([binding isEqualToString:XspfMCollectionItemLabel]) {
-		[labelCell bind:NSValueBinding
-			   toObject:observable
-			withKeyPath:keyPath
-				options:options];
+	if([key isEqualToString:XspfMCollectionItemLabel]) {
+		[labelCell setObjectValue:value];
 		return;
 	}
 	
-	[super bind:binding toObject:observable withKeyPath:keyPath options:options];
+	[super setValue:value forKey:key];
 }
-- (void)unbind:(NSString *)binding
+- (id)valueForKey:(NSString *)key
 {
-	if([binding isEqualToString:XspfMCollectionItemThumbnail]) {
-		[thumbnailCell unbind:NSValueBinding];
-		
-		if(thumbnailBinder) {
-			[thumbnailBinder removeObserver:self forKeyPath:thumbnailBindKey];
-		}
-		
-		thumbnailBinder = nil;
-		[thumbnailBindKey release];
-		thumbnailBindKey = nil;
-		return;
+	if([key isEqualToString:XspfMCollectionItemThumbnail]) {
+		return [thumbnailCell image];
 	}
-	if([binding isEqualToString:XspfMCollectionItemTitle]) {
-		[titleCell unbind:NSValueBinding];
-		
-		titleBinder = nil;
-		[titleBindKey release];
-		thumbnailBindKey = nil;
-		return;
+	if([key isEqualToString:XspfMCollectionItemTitle]) {
+		return [titleCell stringValue];
 	}
-	if([binding isEqualToString:XspfMCollectionItemTitleColor]) {
-		[titleCell unbind:NSTextColorBinding];
-		return;
+	if([key isEqualToString:XspfMCollectionItemTitleColor]) {
+		return [titleCell textColor];
 	}
-	if([binding isEqualToString:XspfMCollectionItemRating]) {
-		[rateCell unbind:NSValueBinding];
-		return;
+	if([key isEqualToString:XspfMCollectionItemRating]) {
+		return [rateCell objectValue];
 	}
-	if([binding isEqualToString:XspfMCollectionItemLabel]) {
-		[labelCell unbind:NSValueBinding];
-		return;
+	if([key isEqualToString:XspfMCollectionItemLabel]) {
+		return [labelCell objectValue];
 	}
 	
-	[super unbind:binding];
+	return [super valueForKey:key];
 }
+
 
 - (void)setSelected:(BOOL)flag
 {
@@ -268,16 +237,6 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 	selected = flag;
 	
 	[self setNeedsDisplay];
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-	if([keyPath isEqualToString:thumbnailBindKey]) {
-		[self setNeedsDisplay];
-		return;
-	}
-	
-	[super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 }
 
 - (void)setControlSize:(NSControlSize)size
@@ -450,6 +409,10 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 	
 	if([self mouse:mouse inRect:[self rateFrame]]) {
 		[rateCell trackMouse:event inRect:[self rateFrame] ofView:self untilMouseUp:YES];
+		id dict = [self infoForBinding:XspfMCollectionItemRating];
+		id obj = [dict objectForKey:NSObservedObjectKey];
+		id key = [dict objectForKey:NSObservedKeyPathKey];
+		[obj setValue:[rateCell objectValue] forKeyPath:key];
 		[self setNeedsDisplay];
 		return;
 	}
@@ -485,7 +448,10 @@ static NSString *const XspfMCollectionItemLabel = @"label";
 	[titleCell endEditing:fieldEditor];
 	[self.window makeFirstResponder:self.superview];
 	
-	[titleBinder setValue:[titleCell stringValue] forKeyPath:titleBindKey];
+	id dict = [self infoForBinding:XspfMCollectionItemTitle];
+	id obj = [dict objectForKey:NSObservedObjectKey];
+	id key = [dict objectForKey:NSObservedKeyPathKey];
+	[obj setValue:[titleCell stringValue] forKeyPath:key];
 	
 	[self setNeedsDisplay];
 }
