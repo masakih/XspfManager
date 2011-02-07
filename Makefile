@@ -19,7 +19,6 @@ VERSION=$(shell $(VER_CMD))
 LocalizeFiles=XspfMLabelMenuView.m \
 			  XspfMMainWindowController.m \
 			  XspfMLibraryViewController.m \
-			  XspfMXspfListObject.m \
 			  XspfMCoverFlowViewController.m \
 			  XspfManager.m \
 			  XspfQTComponents/XspfQTMovieViewController.m \

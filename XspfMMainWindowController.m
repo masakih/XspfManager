@@ -561,6 +561,12 @@
 		} else {
 			[menuItem setState:NSOffState];
 		}
+	} else if(action == @selector(showHideDetail:)) {
+		if([self isOpenDetailView]) {
+			[menuItem setTitle:NSLocalizedString(@"Hide Detail", @"Hide Detail")];
+		} else {
+			[menuItem setTitle:NSLocalizedString(@"Show Detail", @"Show Detail")];
+		}
 	}
 	
 	if(action == @selector(remove:) || action == @selector(delete:)) {
@@ -605,10 +611,10 @@
 	if([detailViewButton isEqual:anItem]) {
 		if([self isOpenDetailView]) {
 			[detailViewButton setImage:[NSImage imageNamed:@"NSRightFacingTriangleTemplate"]];
-			[detailViewButton setToolTip:NSLocalizedString(@"Hide detail", @"Hide detail")];
+			[detailViewButton setToolTip:NSLocalizedString(@"Hide Detail", @"Hide Detail")];
 		} else {
 			[detailViewButton setImage:[NSImage imageNamed:@"NSLeftFacingTriangleTemplate"]];
-			[detailViewButton setToolTip:NSLocalizedString(@"Show detail", @"Show detail")];
+			[detailViewButton setToolTip:NSLocalizedString(@"Show Detail", @"Show Detail")];
 			
 			id keyView = [[self window] firstResponder];
 			if(NSEqualSizes([keyView visibleRect].size, NSZeroSize)) {

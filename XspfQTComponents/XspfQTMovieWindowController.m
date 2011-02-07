@@ -591,9 +591,9 @@ static NSString *const kQTMovieKeyPath = @"playingMovie";
 	SEL action = [menuItem action];
 	if(action == @selector(toggleFullScreenMode:)) {
 		if(contentViewController.fullScreenMode) {
-			[menuItem setTitle:NSLocalizedString(@"Exit Full Screen", @"Exit Full Screen")];
+			[menuItem setTitle:NSLocalizedString(@"Exit Full Screen", @"Exit Full Screen menu title")];
 		} else {
-			[menuItem setTitle:NSLocalizedString(@"Full Screen", @"Full Screen")];
+			[menuItem setTitle:NSLocalizedString(@"Full Screen", @"Full Screen menu title")];
 		}
 		return YES;
 	}

@@ -34,8 +34,8 @@ s/"Pause";/"一時停止";/
 s/"Rate:";/"レート：";/
 
 s/"%1$@\\nMovie Num: %2$@";/"%1$@\\nムービーの数: %2$@";/
-s/"Show detail";/"詳細を表示";/
-s/"Hide detail";/"詳細を隠す";/
+s/"Show Detail";/"詳細を表示";/
+s/"Hide Detail";/"詳細を隠す";/
 
 
 $a\
