@@ -99,6 +99,9 @@
 - (BOOL)validateControl:(id)anItem;
 - (void)autoControlValidate;
 
+- (void)setOnDetailView;
+- (void)prepareWipeIn;
+
 - (void)overlayView:(NSView *)view on:(NSView *)original offset:(NSPoint)offset extend:(NSSize)extend;
 @end
 
@@ -226,53 +229,15 @@
 	return spin;
 }
 
-#pragma mark#### Actions ####
+- (BOOL)isOpenDetailView
+{
+	NSView *view = [detailViewController view];
+	if(![view superview]) return NO;
+	NSRect visRect = [view visibleRect];
+	return !(NSEqualRects(visRect, NSZeroRect));
+}
 
-- (void)removePlayerView
-{
-	NSView *playerView = movieViewController.view;
-	[playerView setHidden:YES];
-	[playerView removeFromSuperview];
-	
-	// List view
-	NSView *playListView = playListViewController.view;
-	[playListView removeFromSuperview];
-	self.playListViewController = nil;
-	
-	NSDocument *doc = [movieViewController representedObject];
-	if([doc hasUnautosavedChanges]) {
-		[doc saveDocument:nil];
-	}
-	[doc close];
-	self.movieViewController = nil;
-	
-	[[self window] makeFirstResponder:[listViewController initialFirstResponder]];
-}
-- (void)wipeOut
-{
-	NSTimeInterval duration = 0.3;
-	[[NSAnimationContext currentContext] setDuration:duration];
-	
-	NSView *playerView = movieViewController.view;
-	NSRect listViewFrame = listPlaceholderView.frame;
-	NSView *listViewContentView = listViewController.view;
-	NSRect listViewContentViewFrame = listViewContentView.frame;
-	listViewContentViewFrame.origin.x = 0;
-	listViewContentViewFrame.size = listViewFrame.size;
-	[[listViewContentView animator] setFrame:listViewContentViewFrame];
-	
-	NSRect playerViewFrame = playerView.frame;
-	playerViewFrame.origin.x = NSWidth(listViewFrame);
-	[[playerView animator] setFrame:playerViewFrame];
-	
-	// List view
-	NSView *playListView = playListViewController.view;
-	NSRect playListViewFrame = playListView.frame;
-	playListViewFrame.origin.y = -NSHeight(libraryPlaceholderView.frame);
-	[[playListView animator] setFrame:playListViewFrame];
-	
-	[self performSelector:@selector(removePlayerView) withObject:nil afterDelay:duration + 0.01];
-}
+#pragma mark#### Actions ####
 - (IBAction)returnToList:(id)sender
 {
 	movieViewController.fullScreenMode = NO;
@@ -286,69 +251,6 @@
 	self.mode = modeList;
 }
 
-- (void)hideListContentView
-{
-	[listViewController.view removeFromSuperview];
-	[spin stopAnimation:self];
-	
-	[movieViewController play];
-}
-- (void)wipeIn
-{
-	NSTimeInterval duration = 0.3;
-	[[NSAnimationContext currentContext] setDuration:duration];
-	
-	NSView *playerView = movieViewController.view;
-	NSView *listViewContentView = listViewController.view;
-	NSRect listViewContentViewFrame = listViewContentView.frame;
-	listViewContentViewFrame.origin.x -= NSWidth(listPlaceholderView.frame);
-	[[listViewContentView animator] setFrame:listViewContentViewFrame];
-	
-	NSRect playerViewFrame = playerView.frame;
-	playerViewFrame.origin.x = 0;
-	[[playerView animator] setFrame:playerViewFrame];
-	
-	
-	// List view
-	NSView *playListView = playListViewController.view;
-	NSRect playListViewFrame = playListView.frame;
-	playListViewFrame.origin.y = -1;
-	[[playListView animator] setFrame:playListViewFrame];
-	
-	[self performSelector:@selector(hideListContentView) withObject:nil afterDelay:duration + 0.01];
-}
-- (void)prepareWipeIn
-{
-	[self.spin startAnimation:self];
-	XspfMXspfObject *rep = controller.selectedItem;
-	
-	NSError *error = nil;
-	NSDocumentController *dc = [NSDocumentController sharedDocumentController];
-	NSDocument *doc = [dc openDocumentWithContentsOfURL:rep.url
-												display:NO
-												  error:&error];
-	if(doc) {
-		rep.lastPlayDate = [NSDate dateWithTimeIntervalSinceNow:0.0];
-	}
-	
-	[doc makeWindowControllers];
-	
-	NSArray *windowControllers = [doc windowControllers];
-	[windowControllers makeObjectsPerformSelector:@selector(window)];
-	XspfQTMovieWindowController *windowController = [windowControllers objectAtIndex:0];
-	self.movieViewController = windowController.contentViewController;
-	[self overlayView:movieViewController.view
-				   on:listPlaceholderView
-			   offset:NSMakePoint(NSWidth(listPlaceholderView.frame), 0)
-			   extend:NSZeroSize];
-	
-	self.playListViewController = [[[XspfMPlayListViewController alloc] init] autorelease];
-	playListViewController.representedObject = doc;
-	[self overlayView:playListViewController.view
-				   on:libraryPlaceholderView
-			   offset:NSMakePoint(-1, -NSHeight(libraryPlaceholderView.frame) - 1)
-			   extend:NSMakeSize(1, 1)];
-}
 - (IBAction)openXspf:(id)sender
 {
 	BOOL isSelected = controller.isSelected;
@@ -405,39 +307,6 @@
 	}
 }
 
-- (void)selectAndScrollTo:(XspfMXspfObject *)object
-{
-	[controller setSelectedObjects:[NSArray arrayWithObject:object]];
-	[listViewController scrollToSelection:nil];
-}
-- (void)createPlayList:(id)sender
-{
-	NSDocumentController *dc = [NSDocumentController sharedDocumentController];
-	NSError *error = nil;
-	NSDocument *doc = [dc makeUntitledDocumentOfType:@"com.masakih.xspf"
-											   error:&error];
-	if(!doc) {
-		NSString *errorString;
-		if(error) {
-			errorString = [NSString stringWithFormat:@"%@", [error localizedDescription]];
-		} else {
-			errorString = [NSString stringWithFormat:@"Could not create new documnet."];
-		}
-		NSLog(@"%@", errorString);
-		NSBeep();
-		return;
-	}
-	NSURL *newDocumentURL = [appDelegate availableFileURL];
-	[doc setFileURL:newDocumentURL];
-	[doc saveDocument:nil];
-	
-	XspfMXspfObject *object = [appDelegate registerWithURL:newDocumentURL];
-	[self performSelector:@selector(selectAndScrollTo:)
-			   withObject:object
-			   afterDelay:0.0];
-	[doc close];
-}
-
 - (IBAction)add:(id)sender
 {
 	NSOpenPanel *panel = [NSOpenPanel openPanel];
@@ -479,26 +348,6 @@
 	[libraryViewController createPredicate:sender];
 }
 
-- (BOOL)isOpenDetailView
-{
-	NSView *view = [detailViewController view];
-	if(![view superview]) return NO;
-	NSRect visRect = [view visibleRect];
-	return !(NSEqualRects(visRect, NSZeroRect));
-}
-- (void)setOnDetailView
-{
-	[self overlayView:detailViewController.view
-				   on:detailPlaceholderView
-			   offset:NSZeroPoint
-			   extend:NSZeroSize];
-}
-- (void)pullOutDetailView:(id)dummy
-{
-	if([self isOpenDetailView]) return;
-	[detailViewController.view removeFromSuperview];
-	HMLog(HMLogLevelDebug, @"PullOut");
-}
 - (IBAction)showHideDetail:(id)sender
 {
 	XspfMPreferences *pref = [XspfMPreferences sharedPreference];
@@ -719,7 +568,165 @@
 	[listViewController performSelector:@selector(scrollToSelection:) withObject:self afterDelay:0.0];
 }
 
+- (void)selectAndScrollTo:(XspfMXspfObject *)object
+{
+	[controller setSelectedObjects:[NSArray arrayWithObject:object]];
+	[listViewController scrollToSelection:nil];
+}
+- (void)createPlayList:(id)sender
+{
+	NSDocumentController *dc = [NSDocumentController sharedDocumentController];
+	NSError *error = nil;
+	NSDocument *doc = [dc makeUntitledDocumentOfType:@"com.masakih.xspf"
+											   error:&error];
+	if(!doc) {
+		NSString *errorString;
+		if(error) {
+			errorString = [NSString stringWithFormat:@"%@", [error localizedDescription]];
+		} else {
+			errorString = [NSString stringWithFormat:@"Could not create new documnet."];
+		}
+		NSLog(@"%@", errorString);
+		NSBeep();
+		return;
+	}
+	NSURL *newDocumentURL = [appDelegate availableFileURL];
+	[doc setFileURL:newDocumentURL];
+	[doc saveDocument:nil];
+	
+	XspfMXspfObject *object = [appDelegate registerWithURL:newDocumentURL];
+	[self performSelector:@selector(selectAndScrollTo:)
+			   withObject:object
+			   afterDelay:0.0];
+	[doc close];
+}
 
+- (void)setOnDetailView
+{
+	[self overlayView:detailViewController.view
+				   on:detailPlaceholderView
+			   offset:NSZeroPoint
+			   extend:NSZeroSize];
+}
+- (void)pullOutDetailView:(id)dummy
+{
+	if([self isOpenDetailView]) return;
+	[detailViewController.view removeFromSuperview];
+	HMLog(HMLogLevelDebug, @"PullOut");
+}
+
+- (void)removePlayerView
+{
+	NSView *playerView = movieViewController.view;
+	[playerView setHidden:YES];
+	[playerView removeFromSuperview];
+	
+	// List view
+	NSView *playListView = playListViewController.view;
+	[playListView removeFromSuperview];
+	self.playListViewController = nil;
+	
+	NSDocument *doc = [movieViewController representedObject];
+	if([doc hasUnautosavedChanges]) {
+		[doc saveDocument:nil];
+	}
+	[doc close];
+	self.movieViewController = nil;
+	
+	[[self window] makeFirstResponder:[listViewController initialFirstResponder]];
+}
+- (void)hideListContentView
+{
+	[listViewController.view removeFromSuperview];
+	[spin stopAnimation:self];
+	
+	[movieViewController play];
+}
+
+
+- (void)wipeOut
+{
+	NSTimeInterval duration = 0.3;
+	[[NSAnimationContext currentContext] setDuration:duration];
+	
+	NSView *playerView = movieViewController.view;
+	NSRect listViewFrame = listPlaceholderView.frame;
+	NSView *listViewContentView = listViewController.view;
+	NSRect listViewContentViewFrame = listViewContentView.frame;
+	listViewContentViewFrame.origin.x = 0;
+	listViewContentViewFrame.size = listViewFrame.size;
+	[[listViewContentView animator] setFrame:listViewContentViewFrame];
+	
+	NSRect playerViewFrame = playerView.frame;
+	playerViewFrame.origin.x = NSWidth(listViewFrame);
+	[[playerView animator] setFrame:playerViewFrame];
+	
+	// List view
+	NSView *playListView = playListViewController.view;
+	NSRect playListViewFrame = playListView.frame;
+	playListViewFrame.origin.y = -NSHeight(libraryPlaceholderView.frame);
+	[[playListView animator] setFrame:playListViewFrame];
+	
+	[self performSelector:@selector(removePlayerView) withObject:nil afterDelay:duration + 0.01];
+}
+- (void)wipeIn
+{
+	NSTimeInterval duration = 0.3;
+	[[NSAnimationContext currentContext] setDuration:duration];
+	
+	NSView *playerView = movieViewController.view;
+	NSView *listViewContentView = listViewController.view;
+	NSRect listViewContentViewFrame = listViewContentView.frame;
+	listViewContentViewFrame.origin.x -= NSWidth(listPlaceholderView.frame);
+	[[listViewContentView animator] setFrame:listViewContentViewFrame];
+	
+	NSRect playerViewFrame = playerView.frame;
+	playerViewFrame.origin.x = 0;
+	[[playerView animator] setFrame:playerViewFrame];
+	
+	
+	// List view
+	NSView *playListView = playListViewController.view;
+	NSRect playListViewFrame = playListView.frame;
+	playListViewFrame.origin.y = -1;
+	[[playListView animator] setFrame:playListViewFrame];
+	
+	[self performSelector:@selector(hideListContentView) withObject:nil afterDelay:duration + 0.01];
+}
+- (void)prepareWipeIn
+{
+	[self.spin startAnimation:self];
+	XspfMXspfObject *rep = controller.selectedItem;
+	
+	NSError *error = nil;
+	NSDocumentController *dc = [NSDocumentController sharedDocumentController];
+	NSDocument *doc = [dc openDocumentWithContentsOfURL:rep.url
+												display:NO
+												  error:&error];
+	if(doc) {
+		rep.lastPlayDate = [NSDate dateWithTimeIntervalSinceNow:0.0];
+	}
+	
+	[doc makeWindowControllers];
+	
+	NSArray *windowControllers = [doc windowControllers];
+	[windowControllers makeObjectsPerformSelector:@selector(window)];
+	XspfQTMovieWindowController *windowController = [windowControllers objectAtIndex:0];
+	self.movieViewController = windowController.contentViewController;
+	[self overlayView:movieViewController.view
+				   on:listPlaceholderView
+			   offset:NSMakePoint(NSWidth(listPlaceholderView.frame), 0)
+			   extend:NSZeroSize];
+	
+	self.playListViewController = [[[XspfMPlayListViewController alloc] init] autorelease];
+	playListViewController.representedObject = doc;
+	[self overlayView:playListViewController.view
+				   on:libraryPlaceholderView
+			   offset:NSMakePoint(-1, -NSHeight(libraryPlaceholderView.frame) - 1)
+			   extend:NSMakeSize(1, 1)];
+}
+
+#pragma mark#### Set up views ####
 - (void)setupXspfLists
 {
 	if(libraryViewController) return;

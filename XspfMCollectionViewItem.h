@@ -61,6 +61,7 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class XspfMCollectionItemView;
 
 @interface XspfMCollectionViewItem : NSCollectionViewItem
 {
@@ -69,12 +70,9 @@
 	// because [self conllectionView] is already nil at [self dealloc].
 	NSCollectionView *collectionViewHolder;	// not retained.
 	
-	NSControl *_box;
+	XspfMCollectionItemView *itemView;
 }
 
-- (void)setBox:(NSControl *)box;
-
 - (NSRect)thumbnailFrameCoordinateBase;
-
 - (void)coodinateColors;
 @end

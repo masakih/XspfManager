@@ -70,6 +70,7 @@
 @interface XspfMCollectionViewItem (XspfMPrivate)
 - (void)setMenu:(NSMenu *)menu;
 - (void)setupMenu;
+- (void)setBox:(XspfMCollectionItemView *)box;
 @end
 
 @implementation XspfMCollectionViewItem
@@ -127,7 +128,7 @@
 	
 	[self setupMenu];
 	[[self view] setMenu:menu];
-	[self setBox:(NSControl *)[self view]];
+	[self setBox:(XspfMCollectionItemView *)[self view]];
 	
 	[self coodinateColors];
 }
@@ -164,59 +165,58 @@
 			[rep valueForKey:@"movieNum"]];
 }
 
-- (void)setBox:(NSControl *)box
+- (void)setBox:(XspfMCollectionItemView *)newItemView
 {
-	[_box unbind:XspfMThumbnailBinding];
-	[_box unbind:NSTitleBinding];
-	[_box unbind:XspfMRatingBinding];
-	[_box unbind:NSLabelBinding];
-	[_box unbind:XspfMTitleColorBinding];
-	[_box unbind:@"backgroundColor"];
-	[_box unbind:@"selected"];
-	[_box unbind:NSToolTipBinding];
+	[itemView unbind:XspfMThumbnailBinding];
+	[itemView unbind:NSTitleBinding];
+	[itemView unbind:XspfMRatingBinding];
+	[itemView unbind:NSLabelBinding];
+	[itemView unbind:XspfMTitleColorBinding];
+	[itemView unbind:@"backgroundColor"];
+	[itemView unbind:@"selected"];
+	[itemView unbind:NSToolTipBinding];
 	
-	[_box autorelease];
-	_box = [box retain];
+	[itemView autorelease];
+	itemView = [newItemView retain];
 	
-	if(!_box) return;
+	if(!itemView) return;
 	
-	[_box bind:XspfMThumbnailBinding
-	  toObject:self
-   withKeyPath:@"representedObject.thumbnail"
-	   options:nil];
-	[_box bind:NSTitleBinding
-	  toObject:self
-   withKeyPath:@"representedObject.title"
-	   options:nil];
-	[_box bind:XspfMRatingBinding
-	  toObject:self
-   withKeyPath:@"representedObject.rating"
-	   options:nil];
-	[_box bind:NSLabelBinding
-	  toObject:self
-   withKeyPath:@"representedObject.label"
-	   options:nil];	
-	[_box bind:XspfMTitleColorBinding
-	  toObject:self
-   withKeyPath:@"labelTextColor"
-	   options:nil];
-	[_box bind:@"backgroundColor"
-	  toObject:self
-   withKeyPath:@"backgroundColor"
-	   options:nil];
-	[_box bind:@"selected"
-	  toObject:self
-   withKeyPath:@"selected"
-	   options:nil];
-	[_box bind:NSToolTipBinding
-	  toObject:self
-   withKeyPath:@"xspfDescription"
-	   options:nil];
+	[itemView bind:XspfMThumbnailBinding
+		  toObject:self
+	   withKeyPath:@"representedObject.thumbnail"
+		   options:nil];
+	[itemView bind:NSTitleBinding
+		  toObject:self
+	   withKeyPath:@"representedObject.title"
+		   options:nil];
+	[itemView bind:XspfMRatingBinding
+		  toObject:self
+	   withKeyPath:@"representedObject.rating"
+		   options:nil];
+	[itemView bind:NSLabelBinding
+		  toObject:self
+	   withKeyPath:@"representedObject.label"
+		   options:nil];	
+	[itemView bind:XspfMTitleColorBinding
+		  toObject:self
+	   withKeyPath:@"labelTextColor"
+		   options:nil];
+	[itemView bind:@"backgroundColor"
+		  toObject:self
+	   withKeyPath:@"backgroundColor"
+		   options:nil];
+	[itemView bind:@"selected"
+		  toObject:self
+	   withKeyPath:@"selected"
+		   options:nil];
+	[itemView bind:NSToolTipBinding
+		  toObject:self
+	   withKeyPath:@"xspfDescription"
+		   options:nil];
 	
 	
-	[_box setMenu:menu];
-	
-	[_box setAction:@selector(openXspf:)];
+	[itemView setMenu:menu];
+	[itemView setAction:@selector(openXspf:)];
 }
 - (void)setView:(NSView *)view
 {
@@ -227,7 +227,7 @@
 	[self setupMenu];
 	[view setMenu:menu];
 	
-	[self setBox:(NSControl *)view];
+	[self setBox:(XspfMCollectionItemView *)view];
 }
 - (void)setupMenu
 {

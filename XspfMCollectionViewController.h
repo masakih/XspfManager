@@ -85,7 +85,6 @@ typedef enum _XspfMCollectionItemType
 	IBOutlet XspfMCollectionViewItem *smallItem;
 }
 
-- (IBAction)changeLabel:(id)sender;
 - (IBAction)collectionViewItemViewRegular:(id)sender;
 - (IBAction)collectionViewItemViewSmall:(id)sender;
 

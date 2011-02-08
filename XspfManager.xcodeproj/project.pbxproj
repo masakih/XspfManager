@@ -621,11 +621,11 @@
 				F43E62A010A0692500BF88DA /* XspfMCollectionView.m */,
 				F481B3F710F08DE200B7EA4F /* XspfMSplitView.h */,
 				F481B3F810F08DE200B7EA4F /* XspfMSplitView.m */,
-				F4D3631311A2BCC3009FE842 /* XspfMLabels */,
 				F448F52212EDCD0200E96490 /* XspfMCollectionItemView.h */,
 				F448F52312EDCD0200E96490 /* XspfMCollectionItemView.m */,
 				F448F99412F0542000E96490 /* XspfMShadowImageCell.h */,
 				F448F99512F0542000E96490 /* XspfMShadowImageCell.m */,
+				F4D3631311A2BCC3009FE842 /* XspfMLabels */,
 			);
 			name = "Views&Cells";
 			sourceTree = "<group>";

@@ -116,12 +116,6 @@ static NSString *const XspfMCollectionItemSizeKey = @"Collection Item Size";
 	[XspfMPreferences sharedPreference].collectionItemSize = collectionViewItem == regularItem ? 0 : 1;
 }
 
-- (IBAction)changeLabel:(id)sender
-{
-	XspfMXspfObject *object = [sender representedObject];
-	object.label = [sender objectValue];
-}
-
 - (IBAction)collectionViewItemViewRegular:(id)sender
 {
 	[self setCollectionItem:regularItem];
