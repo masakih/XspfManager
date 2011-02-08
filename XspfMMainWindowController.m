@@ -621,6 +621,7 @@
 				[[self window] makeFirstResponder:[listViewController initialFirstResponder]];
 			}
 		}
+		[self recalculateKeyViewLoop];
 		return YES;
 	}
 	
@@ -656,8 +657,10 @@
 	if([self isOpenDetailView]) {
 		[listViewController setNextKeyView:[detailViewController firstKeyView]];
 		[detailViewController setNextKeyView:searchField];
+		HMLog(HMLogLevelDebug, @"Recalc with detail.");
 	} else {
 		[listViewController setNextKeyView:searchField];
+		HMLog(HMLogLevelDebug, @"Recalc without detail.");
 	}
 }
 - (void)overlayView:(NSView *)view on:(NSView *)original offset:(NSPoint)offset extend:(NSSize)extend

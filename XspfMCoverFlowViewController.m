@@ -123,7 +123,7 @@
 	NSWindow *window = [notification object];
 	
 	if(window == [[self view] window]) {
-		[[NSApp mainWindow] addObserver:self forKeyPath:@"firstResponder" options:0 context:NULL];
+		[window addObserver:self forKeyPath:@"firstResponder" options:0 context:NULL];
 		[[NSNotificationCenter defaultCenter] removeObserver:self name:[notification name] object:nil];
 	}
 }
@@ -219,10 +219,10 @@
 }
 
 
-- (IBAction)test01:(id)sender
-{
-	[self clearCoverFlowCache:sender];
-}
+//- (IBAction)test01:(id)sender
+//{
+//	[self clearCoverFlowCache:sender];
+//}
 
 - (NSUInteger)numberOfItemsInImageFlow:(id)imageFlowView
 {

@@ -368,11 +368,11 @@ completionsForSubstring:(NSString *)substring
 	[moc unlock];
 }
 
-#pragma mark#### Test ####
-- (IBAction)test01:(id)sender
-{
-	[self truncateFamilyName];
-	[self buildFamilyNameFromFile];
-}
+//#pragma mark#### Test ####
+//- (IBAction)test01:(id)sender
+//{
+//	[self truncateFamilyName];
+//	[self buildFamilyNameFromFile];
+//}
 
 @end
