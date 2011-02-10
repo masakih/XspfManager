@@ -243,8 +243,7 @@
 	}
 	
 	[menu addItem:[NSMenuItem separatorItem]];
-	for(NSInteger i = 0; i < count; i++) {
-		id item = [itemArray objectAtIndex:i];
+	for(id item in itemArray) {
 		[objMenu removeItem:item];
 		[menu addItem:item];
 	}
