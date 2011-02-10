@@ -115,7 +115,6 @@
 		F4D2F72E110879F0007681F4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4D2F72D110879F0007681F4 /* QuartzCore.framework */; };
 		F4DAE7E011B3F6C90047BEDA /* XspfMPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DAE7DF11B3F6C90047BEDA /* XspfMPreferences.m */; };
 		F4DAF38711BB6B700047BEDA /* XspfMMainModel2To3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = F4DAF38611BB6B700047BEDA /* XspfMMainModel2To3.xcmappingmodel */; };
-		F4DAF67611BBC1230047BEDA /* Localizable.strings.sed in Resources */ = {isa = PBXBuildFile; fileRef = F4DAF67411BBC1230047BEDA /* Localizable.strings.sed */; };
 		F4FE861710F475740076B366 /* XspfMLabelControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F4FE861610F475740076B366 /* XspfMLabelControl.m */; };
 /* End PBXBuildFile section */
 
@@ -784,7 +783,6 @@
 				F43E0DD511021E0200D0428E /* Localizable.strings in Resources */,
 				F43E0E5711027E1900D0428E /* Credits.rtf in Resources */,
 				F4D2F71E110877DC007681F4 /* XspfMCoverFlowView.xib in Resources */,
-				F4DAF67611BBC1230047BEDA /* Localizable.strings.sed in Resources */,
 				F4D24E6B11C3D41700232358 /* XspfManager.icns in Resources */,
 				F4AB5F6912BCFFCD00157355 /* XspfQTDocument.xib in Resources */,
 				F4AB5F8312BD00FF00157355 /* license.txt in Resources */,
