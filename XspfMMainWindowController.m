@@ -429,14 +429,17 @@
 		}
 		enabled = NO;
 	}
-		
+	
+	if([controller respondsToSelector:[menuItem action]]) {
+		return [controller validateMenuItem:menuItem];
+	}
 	
 	return enabled;
 }
 - (BOOL)validateMenuItemForMovieMode:(NSMenuItem *)menuItem
 {
-	if([self.movieViewController respondsToSelector:[menuItem action]]) {
-		return [self.movieViewController validateMenuItem:menuItem];
+	if([movieViewController respondsToSelector:[menuItem action]]) {
+		return [movieViewController validateMenuItem:menuItem];
 	}
 	
 	return YES;
@@ -848,15 +851,15 @@
 - (BOOL)respondsToSelector:(SEL)aSelector
 {
 	if([super respondsToSelector:aSelector]) return YES;
-	if([self.movieViewController respondsToSelector:aSelector]) return YES;
+	if([movieViewController respondsToSelector:aSelector]) return YES;
 	if([controller respondsToSelector:aSelector]) return YES;
 	
 	return NO;
 }
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector
 {
-	if([self.movieViewController respondsToSelector:aSelector]) {
-		return [self.movieViewController methodSignatureForSelector:aSelector];
+	if([movieViewController respondsToSelector:aSelector]) {
+		return [movieViewController methodSignatureForSelector:aSelector];
 	}
 	if([controller respondsToSelector:aSelector]) {
 		return [controller methodSignatureForSelector:aSelector];
@@ -866,8 +869,8 @@
 - (void)forwardInvocation:(NSInvocation *)anInvocation
 {
 	SEL selector = [anInvocation selector];
-	if([self.movieViewController respondsToSelector:selector]) {
-		[anInvocation invokeWithTarget:self.movieViewController];
+	if([movieViewController respondsToSelector:selector]) {
+		[anInvocation invokeWithTarget:movieViewController];
 		return;
 	}
 	if([controller respondsToSelector:selector]) {
