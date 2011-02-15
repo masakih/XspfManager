@@ -144,5 +144,35 @@
 	[self sortByKey:@"label"];
 }
 
+static inline void setUpSortMenuItemEnabled(NSMenuItem *menuItem, NSString *currentKey, NSString *key, SEL selector)
+{
+  if([menuItem action] == selector) {
+		if([key isEqualToString:currentKey]) {
+			[menuItem setState:NSOnState];
+		} else {
+			[menuItem setState:NSOffState];
+		}
+	}
+}
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem
+{
+	NSArray *sorts = [self sortDescriptors];
+	if(!sorts || [sorts count] == 0) return YES;
+	
+	NSSortDescriptor *firstSort = [sorts objectAtIndex:0];
+	NSString *key = [firstSort key];
+	
+	setUpSortMenuItemEnabled(menuItem, key, @"title", @selector(sortByTitle:));
+	setUpSortMenuItemEnabled(menuItem, key, @"lastPlayDate", @selector(sortByLastPlayDate:));
+	setUpSortMenuItemEnabled(menuItem, key, @"modificationDate", @selector(sortByModificationDate:));
+	setUpSortMenuItemEnabled(menuItem, key, @"creationDate", @selector(sortByCreationDate:));
+	setUpSortMenuItemEnabled(menuItem, key, @"registerDate", @selector(sortByRegisterDate:));
+	setUpSortMenuItemEnabled(menuItem, key, @"rating", @selector(sortByRate:));
+	setUpSortMenuItemEnabled(menuItem, key, @"movieNum", @selector(sortByMovieNumber:));
+	setUpSortMenuItemEnabled(menuItem, key, @"label", @selector(sortByLabel:));
+	
+	return YES;
+}
+
 
 @end
