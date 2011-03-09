@@ -65,14 +65,12 @@
 
 @interface XspfMXspfObject :  NSManagedObject
 {
-	NSString *filePath;
-	
 	BOOL didPutLoadRequest;
 }
 
 @property (retain) NSDate * registerDate;
 @property (retain) XspfMThumbnailData * thumbnailData;
-@property (retain) NSString * urlString;
+//@property (retain) NSString * urlString;
 @property (retain) NSDate * modificationDate;
 @property (retain) NSDate * lastPlayDate;
 @property (retain) NSNumber *movieNum;

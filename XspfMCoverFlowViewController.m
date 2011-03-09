@@ -318,7 +318,7 @@
  */
 - (NSString *)  imageUID
 {
-	return self.urlString;
+	return self.filePath;
 }
 
 /*! 
