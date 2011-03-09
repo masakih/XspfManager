@@ -100,7 +100,7 @@
 - (void)autoControlValidate;
 
 - (void)setOnDetailView;
-- (void)prepareWipeIn;
+- (BOOL)prepareWipeIn;
 
 - (void)overlayView:(NSView *)view on:(NSView *)original offset:(NSPoint)offset extend:(NSSize)extend;
 @end
@@ -256,22 +256,22 @@
 	BOOL isSelected = controller.isSelected;
 	if(!isSelected) return;
 	
-	[self prepareWipeIn];
+	if(![self prepareWipeIn]) {
+		XspfMXspfObject *rep = controller.selectedItem;
+		NSInteger result = NSRunCriticalAlertPanel(NSLocalizedString(@"Xspf is not found", @"Xspf is not found"),
+												   NSLocalizedString(@"\"%@\" is not found.",  @"\"%@\" is not found."),
+												   nil, nil/*@"Search Original"*/, nil, rep.title);
+		if(result == NSAlertDefaultReturn) {
+			return;
+		} else if(result == NSAlertAlternateReturn) {
+			//
+#warning should implement.
+		}
+		
+		return;
+	}
 	
 	[self performSelector:@selector(wipeIn) withObject:nil afterDelay:0.0];
-	self.mode = modeMovie;
-	return;
-	
-	XspfMXspfObject *rep = controller.selectedItem;
-	NSInteger result = NSRunCriticalAlertPanel(NSLocalizedString(@"Xspf is not found", @"Xspf is not found"),
-											   NSLocalizedString(@"\"%@\" is not found.",  @"\"%@\" is not found."),
-											   nil, nil/*@"Search Original"*/, nil, rep.title);
-	if(result == NSAlertDefaultReturn) {
-		return;
-	} else if(result == NSAlertAlternateReturn) {
-		//
-#warning should implement.
-	}
 }
 - (IBAction)switchListView:(id)sender
 {
@@ -696,7 +696,7 @@
 	
 	[self performSelector:@selector(hideListContentView) withObject:nil afterDelay:duration + 0.01];
 }
-- (void)prepareWipeIn
+- (BOOL)prepareWipeIn
 {
 	[self.spin startAnimation:self];
 	XspfMXspfObject *rep = controller.selectedItem;
@@ -708,8 +708,11 @@
 												  error:&error];
 	if(doc) {
 		rep.lastPlayDate = [NSDate dateWithTimeIntervalSinceNow:0.0];
+	} else {
+		[spin stopAnimation:self];
+		return NO;
 	}
-	
+	self.mode = modeMovie;
 	[doc makeWindowControllers];
 	
 	NSArray *windowControllers = [doc windowControllers];
@@ -727,6 +730,8 @@
 				   on:libraryPlaceholderView
 			   offset:NSMakePoint(-1, -NSHeight(libraryPlaceholderView.frame) - 1)
 			   extend:NSMakeSize(1, 1)];
+	
+	return YES;
 }
 
 #pragma mark#### Set up views ####
