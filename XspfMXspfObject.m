@@ -71,6 +71,9 @@
 #import "NSURL-HMExtensions.h"
 
 @interface XspfMXspfObject()
+@property (retain) NSString * urlString;
+
+
 @property (nonatomic, retain) NSData *primitiveAlias;
 @property (nonatomic, retain) NSString *primitiveTitle;
 @property (nonatomic, retain) NSDate *primitiveModificationDate;
@@ -82,7 +85,7 @@
 
 @dynamic registerDate;
 @dynamic thumbnailData;
-//@dynamic urlString;	use no longer.
+@dynamic urlString;
 @dynamic modificationDate;
 @dynamic lastPlayDate;
 @dynamic movieNum;
@@ -134,6 +137,7 @@
 	if(curURL && [curURL isEqualUsingLocalhost:aURL])  return;
 	
 	self.alias = [[aURL path] aliasData];
+	self.urlString = [aURL absoluteString];
 }
 
 - (BOOL)deleted
