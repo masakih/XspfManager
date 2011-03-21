@@ -344,6 +344,7 @@
 		F4DAF38611BB6B700047BEDA /* XspfMMainModel2To3.xcmappingmodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcmappingmodel; path = XspfMMainModel2To3.xcmappingmodel; sourceTree = "<group>"; };
 		F4DAF67511BBC1230047BEDA /* Japanese */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Japanese; path = Japanese.lproj/Localizable.strings.sed; sourceTree = "<group>"; };
 		F4DAF67711BBC1340047BEDA /* English */ = {isa = PBXFileReference; lastKnownFileType = text; name = English; path = English.lproj/Localizable.strings.sed; sourceTree = "<group>"; };
+		F4F946321336EA3B000A9980 /* FamilyNameTemp.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FamilyNameTemp.txt; sourceTree = "<group>"; };
 		F4FE861510F475740076B366 /* XspfMLabelControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMLabelControl.h; sourceTree = "<group>"; };
 		F4FE861610F475740076B366 /* XspfMLabelControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMLabelControl.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -504,6 +505,7 @@
 		7756732906782D8800D1FEB8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				F4F946321336EA3B000A9980 /* FamilyNameTemp.txt */,
 				F47C074F109FAFB000F5991C /* FamilyName.txt */,
 				F47C0752109FBE9B00F5991C /* fixFamilyNames.sh */,
 				F4D2F69D11075545007681F4 /* XspfMMainModel1To2.xcmappingmodel */,
