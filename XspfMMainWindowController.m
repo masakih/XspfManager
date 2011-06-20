@@ -575,6 +575,7 @@
 {
 	[controller setSelectedObjects:[NSArray arrayWithObject:object]];
 	[listViewController scrollToSelection:nil];
+	[libraryViewController selectLibrayItem:nil];
 }
 - (void)createPlayList:(id)sender
 {

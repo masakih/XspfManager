@@ -80,5 +80,6 @@
 - (IBAction)editPredicate:(id)sender;
 - (IBAction)deletePredicate:(id)sender;
 - (IBAction)didEndEditPredicate:(id)sender;
+- (IBAction)selectLibrayItem:(id)sender;
 
 @end

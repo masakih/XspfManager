@@ -307,6 +307,11 @@ static NSString *const XspfMLibItemPbardType = @"XspfMLibItemPbardType";
 	[tableView selectRowIndexes:newSelection byExtendingSelection:NO];
 }
 
+- (IBAction)selectLibrayItem:(id)sender
+{
+	[tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
+}
+
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
 	SEL action = [menuItem action];
