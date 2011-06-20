@@ -91,6 +91,8 @@
 - (IBAction)nextTrack:(id)sender;
 - (IBAction)previousTrack:(id)sender;
 
+- (IBAction)gotoBeginningOrPreviousTrack:(id)sender;
+
 - (IBAction)gotoThumbnailFrame:(id)sender;
 
 - (IBAction)toggleFullScreenMode:(id)sender;

@@ -373,7 +373,7 @@ static NSString *const kVolumeKeyPath = @"qtMovie.volume";
 }
 - (IBAction)gotoBeginning:(id)sender
 {
-	[qtView  gotoBeginning:sender];
+	[qtView gotoBeginning:sender];
 }
 
 - (IBAction)turnUpVolume:(id)sender
@@ -427,6 +427,23 @@ static NSString *const kVolumeKeyPath = @"qtMovie.volume";
 	[qtView pause:sender];
 	[[[self document] trackList] previous];
 }
+- (IBAction)gotoBeginningOrPreviousTrack:(id)sender
+{
+	QTTime current = [[self qtMovie] currentTime];
+	NSTimeInterval cur;
+	if(!QTGetTimeInterval(current, &cur)) return;
+	
+	QTTime duration = [[self qtMovie] duration];
+	NSTimeInterval dur;
+	if(!QTGetTimeInterval(duration, &dur)) return;
+	
+	if(cur > (dur * 0.01)) {
+		[self gotoBeginning:sender];
+	} else {
+		[self previousTrack:sender];
+	}
+}
+	
 - (IBAction)setThumbnailFrame:(id)sender
 {
 	[[self document] setThumbnailFrame:sender];
