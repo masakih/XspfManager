@@ -178,12 +178,13 @@
 
 - (void)keyDown:(NSEvent *)theEvent
 {
-	unsigned short code = [theEvent keyCode];
-#define kLEFT_ARROW_KEY 123
-#define kRIGHT_ARROW_KEY 124
-	switch(code) {
-		case kLEFT_ARROW_KEY:
-		case kRIGHT_ARROW_KEY:
+	NSString *charactor = [theEvent charactersIgnoringModifiers];
+	if([charactor length] == 0) return;
+	
+	unichar uc = [charactor characterAtIndex:0];
+	switch(uc) {
+		case NSLeftArrowFunctionKey:
+		case NSRightArrowFunctionKey:
 			return [coverFlow keyDown:theEvent];
 			break;
 	}

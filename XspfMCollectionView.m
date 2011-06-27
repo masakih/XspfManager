@@ -154,21 +154,21 @@
 {
 	if([theEvent isARepeat]) return [super keyDown:theEvent];
 	
-#define kRETURN_KEY	36
-#define kENTER_KEY	52
-#define kTAB_KEY	48
+	NSString *charactor = [theEvent charactersIgnoringModifiers];
+	if([charactor length] == 0) return [super keyDown:theEvent];
 	
-	unsigned short code = [theEvent keyCode];
-//	HMLog(HMLogLevelDebug, @"code -> %d", code);
-	switch(code) {
-		case kRETURN_KEY:
-		case kENTER_KEY:
+	unichar uc = [charactor characterAtIndex:0];
+	switch(uc) {
+		case NSEnterCharacter:
+		case NSNewlineCharacter:
+		case NSFormFeedCharacter:
+		case NSCarriageReturnCharacter:
 			if(delegate) {
 				[delegate enterAction:self];
 				return;
 			}
 			break;
-		case kTAB_KEY:
+		case NSTabCharacter:
 			if(([theEvent modifierFlags] | NSShiftKeyMask) == NSShiftKeyMask) {
 				[[self window] selectPreviousKeyView:nil];
 			} else {
@@ -176,7 +176,7 @@
 			}
 			return;
 			break;
-		case 49:
+		case ' ':
 			[NSApp sendAction:@selector(togglePreviewPanel:) to:nil from:nil];
 			return;
 			break;
