@@ -60,6 +60,7 @@
 */
 
 #import "XspfMCheckFileModifiedRequest.h"
+#import "HMUtilities.h"
 
 
 @implementation XspfMCheckFileModifiedRequest

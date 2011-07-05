@@ -64,6 +64,7 @@
 #import <QTKit/QTKit.h>
 #import "HMXSPFComponent.h"
 #import "XspfQTValueTransformers.h"
+#import "HMUtilities.h"
 
 
 @implementation XspfMMovieLoadRequest
