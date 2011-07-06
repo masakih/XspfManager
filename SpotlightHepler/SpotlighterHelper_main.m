@@ -31,6 +31,7 @@ int main(int argc, char *argv[])
 		[pool02 release];
 	}
 	
+	[con release];
 	[pool release];
 	return 0;
 }

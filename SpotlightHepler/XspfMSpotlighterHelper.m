@@ -9,31 +9,69 @@
 #import "XspfMSpotlighterHelper.h"
 
 
-#import "XspfMCoreDataConnector.h"
-
-
-
 @implementation XspfMSpotlighterHelper
 
+- (id)init
+{
+	self= [super init];
+	if(self) {
+		lock  = [[NSLock alloc] init];
+		
+		timer = [NSTimer scheduledTimerWithTimeInterval:30
+												 target:self
+											   selector:@selector(purge:)
+											   userInfo:nil
+												repeats:YES];
+	}
+	return self;
+}
+- (void)dealloc
+{
+	[timer invalidate];
+	[lock lock];
+	[connector release];
+	connector = nil;
+	[lock release];
+	
+	[super dealloc];
+}
+- (XspfMCoreDataConnector *)connector
+{
+	[lock lock];
+	if(connector) return connector;
+	
+	connector = [[XspfMCoreDataConnector alloc] init];
+	return connector;
+}
+- (void)purge:(NSTimer *)t
+{
+	if([lock tryLock]) {
+		[connector release];
+		connector = nil;
+		[lock unlock];
+	}
+}
+
+id valueOrNull(id value)
+{
+	return value ? value : (id)kCFNull;
+}
 - (NSDictionary *)dataFromURL:(NSURL *)url
 {
 	id pool = [[NSAutoreleasePool alloc] init];
 	
 	NSDictionary *result = nil;
 	@try {
-		NSArray *voiceActors = (id)[NSNull null];
-		NSArray *products = (id)[NSNull null];
-		
 		NSError *error = nil;
-		XspfMCoreDataConnector *con = [[XspfMCoreDataConnector alloc] init];
+		XspfMCoreDataConnector *con = [self connector];
 		if(!con) {
 			NSLog(@"Can not create XspfMCoreDataConnector.");
-			goto fail;
+			@throw self;
 		}
 		NSManagedObjectContext *moc = [con managedObjectContext];
 		if(!moc) {
 			NSLog(@"Can not get managedObjectContext.");
-			goto fail;
+			@throw self;
 		}
 		NSFetchRequest *req = [[NSFetchRequest alloc] init];
 		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"xspf.urlString = %@", [url absoluteString]];
@@ -48,35 +86,40 @@
 				errorString = [error localizedDescription];
 			}
 			NSLog(@"Can not excte request %@", errorString);
-			goto fail;
+			@throw self;
 		}
 		
 		if([infos count] == 0) {
 			NSLog(@"Not found data.");
-			goto fail;
+			@throw self;
 		}
-		
+				
 		id info = [infos objectAtIndex:0];
-		voiceActors = [info valueForKey:@"voiceActors"];
-		products = [info valueForKey:@"products"];
+		NSArray *voiceActors = [info valueForKey:@"voiceActors"];
+		NSArray *products = [info valueForKey:@"products"];
+		NSNumber *label = [info valueForKeyPath:@"xspf.label"];
+		NSNumber *rateing = [info valueForKeyPath:@"xspf.rating"];
 		
 		result = [[NSDictionary alloc] initWithObjectsAndKeys:
-				  voiceActors, @"com_masakih_xspf_voiceActor",
-				  products, @"com_masakih_xspf_products",
+				  valueOrNull(voiceActors), @"com_masakih_xspf_voiceActor",
+				  valueOrNull(products), @"com_masakih_xspf_products",
+				  valueOrNull(label), @"com_masakih_xspf_label",
+				  valueOrNull(rateing), kMDItemStarRating,
 				  nil];
 		
+	}
+	@catch(XspfMSpotlighterHelper *ex) {
+		result = [[NSDictionary alloc] init];
 	}
 	@catch(id ex) {
 		NSLog(@"Caught exception. %@", ex);
 	}
-	
-	[pool release];
-	
+	@finally {
+		[pool release];
+		[lock unlock];
+	}
+		
 	return [result autorelease];
-	
-fail:
-	[pool release];
-	return [NSDictionary dictionary];
 }
 
 @end
