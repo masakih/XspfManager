@@ -80,6 +80,7 @@ id valueOrNull(id value)
 		[req setEntity:entity];
 		
 		NSArray *infos = [moc executeFetchRequest:req error:&error];
+		[req release];
 		if(!infos) {
 			NSString *errorString = @"";
 			if(error) {

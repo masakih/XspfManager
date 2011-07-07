@@ -11,7 +11,14 @@
 
 @implementation XspfMCoreDataConnector
 
-
+- (void)dealloc
+{
+	[persistentStoreCoordinator release];
+	[managedObjectModel release];
+	[managedObjectContext release];
+	
+	[super dealloc];
+}
 
 /**
  Returns the support folder for the application, used to store the Core Data
