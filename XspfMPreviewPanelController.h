@@ -68,8 +68,8 @@
 	XspfMMainWindowController *mainWController;
 	NSArrayController *controller;
 }
-@property (assign) XspfMMainWindowController *mainWController;
-@property (assign) NSArrayController *controller;
+@property (nonatomic, assign) XspfMMainWindowController *mainWController;
+@property (nonatomic, assign) NSArrayController *controller;
 
 - (IBAction)togglePreviewPanel:(id)panel;
 @end

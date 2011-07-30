@@ -81,7 +81,7 @@
 	BOOL fullScreenMode;
 }
 
-@property (getter=isFullScreenMode) BOOL fullScreenMode;
+@property (nonatomic, getter=isFullScreenMode) BOOL fullScreenMode;
 
 - (IBAction)turnUpVolume:(id)sender;
 - (IBAction)turnDownVolume:(id)sender;

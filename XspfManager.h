@@ -92,7 +92,7 @@ typedef enum {
 	
 	XspfMAppleRemoteSupport *appleRemoteSupprt;
 }
-@property XspfMViwMode mode;
+@property (nonatomic) XspfMViwMode mode;
 @property (nonatomic, retain) IBOutlet NSMenuItem *viewMenuItem;
 @property (nonatomic, retain) IBOutlet NSMenuItem *movieControlMenuItem;
 

@@ -88,7 +88,7 @@
 	
 	Class *classesP = subclasses;
 	Class subclass = Nil;
-	while(subclass = *classesP++) {
+	while( (subclass = *classesP++) ) {
 		if([subclass canBuildPredicate:aPredicate]) {
 			id obj = [[subclass alloc] initWithPredicate:aPredicate];
 			return obj;

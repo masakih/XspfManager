@@ -256,7 +256,7 @@
 	NSPoint offset = [imageFlowView convertPoint:[theEvent locationInWindow] fromView:nil];
 	
 	NSWindow *window = [imageFlowView window];
-	while (theEvent = [window nextEventMatchingMask:NSLeftMouseDraggedMask | NSLeftMouseUpMask]) {
+	while( (theEvent = [window nextEventMatchingMask:NSLeftMouseDraggedMask | NSLeftMouseUpMask]) ) {
 		if(NSEventMaskFromType([theEvent type]) == NSLeftMouseUpMask) break;
 		
 		NSPoint p = [splitView convertPoint:[theEvent locationInWindow] fromView:nil];
