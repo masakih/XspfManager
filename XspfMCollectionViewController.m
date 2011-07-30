@@ -129,8 +129,10 @@ static NSString *const XspfMCollectionItemSizeKey = @"Collection Item Size";
 {
 	
 	id item = nil;
+	NSUInteger selectionIndex = [[self representedObject] selectionIndex];
+	if(selectionIndex == NSNotFound) return;
 	@try {
-		item = [collectionView itemAtIndex:[[self representedObject] selectionIndex]];
+		item = [collectionView itemAtIndex:selectionIndex];
 	}
 	@catch (id ex) {
 		NSLog(@"Exception -> %@", ex);
