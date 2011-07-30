@@ -151,7 +151,7 @@
 			[splitView setPosition:pref.splitViewLeftWidth ofDividerAtIndex:0];
 		}
 	}
-//	[self validateControl:detailViewButton];
+	[self validateControl:detailViewButton];
 	[self autoControlValidate];
 	
 	[self setCurrentListViewType:pref.viewType];
@@ -169,12 +169,12 @@
 	[self recalculateKeyViewLoop];
 	[[self window] update];
 	
-	[self performSelector:@selector(delayExcute:) withObject:self afterDelay:0.1];
+	[self showWindow:self];
+
+	[self performSelector:@selector(delayExcute:) withObject:self afterDelay:0.5];
 }
 - (void)delayExcute:(id)dummy
 {
-	[self showWindow:self];
-	
 	// load時にこれを行うと循環的にRearrangeが実行されてしまう。
 	[libraryController setAutomaticallyRearrangesObjects:YES];
 }
@@ -469,6 +469,7 @@
 			[detailViewButton setToolTip:NSLocalizedString(@"Show Detail", @"Show Detail")];
 			
 			id keyView = [[self window] firstResponder];
+			if(![keyView respondsToSelector:@selector(visibleRect)]) return NO;
 			if(NSEqualSizes([keyView visibleRect].size, NSZeroSize)) {
 				[[self window] makeFirstResponder:[listViewController initialFirstResponder]];
 			}
@@ -539,6 +540,9 @@
 			break;
 		case typeCoverFlowView:
 			className = @"XspfMCoverFlowViewController";
+			break;
+		case typeNotSelected:
+		default:
 			break;
 	}
 	if(!className) return;
