@@ -53,6 +53,8 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>%%%%REVISION%%%%</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.video</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
