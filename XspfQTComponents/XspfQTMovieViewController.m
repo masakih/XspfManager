@@ -84,28 +84,6 @@ NSString *XspfQTMovieDidPauseNotification = @"XspfQTMovieDidPauseNotification";
 - (void)exitFullScreen;
 @end
 
-#ifndef MAC_OS_X_VERSION_10_6
-@interface NSApplication (XspfQT)
-typedef NSUInteger NSApplicationPresentationOptions;
-- (NSApplicationPresentationOptions)presentationOptions;
-- (void)setPresentationOptions:(NSApplicationPresentationOptions)newOptions;
-enum {
-    NSApplicationPresentationDefault                    = 0,
-    NSApplicationPresentationAutoHideDock               = (1 <<  0),    // Dock appears when moused to
-    NSApplicationPresentationHideDock                   = (1 <<  1),    // Dock is entirely unavailable
-	
-    NSApplicationPresentationAutoHideMenuBar            = (1 <<  2),    // Menu Bar appears when moused to
-    NSApplicationPresentationHideMenuBar                = (1 <<  3),    // Menu Bar is entirely unavailable
-	
-    NSApplicationPresentationDisableAppleMenu           = (1 <<  4),    // all Apple menu items are disabled
-    NSApplicationPresentationDisableProcessSwitching    = (1 <<  5),    // Cmd+Tab UI is disabled
-    NSApplicationPresentationDisableForceQuit           = (1 <<  6),    // Cmd+Opt+Esc panel is disabled
-    NSApplicationPresentationDisableSessionTermination  = (1 <<  7),    // PowerKey panel and Restart/Shut Down/Log Out disabled
-    NSApplicationPresentationDisableHideApplication     = (1 <<  8),    // Application "Hide" menu item is disabled
-    NSApplicationPresentationDisableMenuBarTransparency = (1 <<  9)     // Menu Bar's transparent appearance is disabled
-};
-@end
-#endif
 
 @implementation XspfQTMovieViewController
 
@@ -316,7 +294,7 @@ static NSString *const kVolumeKeyPath = @"qtMovie.volume";
 	[NSApp setPresentationOptions:
 	 currentPresentation & ~(NSApplicationPresentationAutoHideDock | NSApplicationPresentationAutoHideMenuBar)];
 }
-- (void)enterFullScreen
+- (void)enterFullScreenWithFullscreenWindow
 {
 	NSWindow *fullscreen = [self fullscreenWindow];
 		
@@ -335,6 +313,22 @@ static NSString *const kVolumeKeyPath = @"qtMovie.volume";
 	NSTimeInterval duration = 0.3;
 	[[NSAnimationContext currentContext] setDuration:duration];
 	[[fullscreen animator] setFrame:newWFrame display:YES];
+	
+	[[[self view] window] orderOut:self];
+}
+- (void)exitFullScreenWithFullscreenWindow
+{
+	NSTimeInterval duration = 0.3;
+	[[NSAnimationContext currentContext] setDuration:duration];
+	
+	NSRect originalFrame = normalModeSavedFrame;
+	originalFrame.origin = [self.view.window convertBaseToScreen:[self.view convertPointToBase:originalFrame.origin]];
+	
+	[[fullscreenWindow animator] setFrame:originalFrame display:YES];
+	
+	[[[self view] window] orderWindow:NSWindowBelow relativeTo:[fullscreenWindow windowNumber]];
+	
+	[self performSelector:@selector(finishFullScreen) withObject:nil afterDelay:duration + 0.01];
 }
 - (void)finishFullScreen
 {
@@ -346,18 +340,52 @@ static NSString *const kVolumeKeyPath = @"qtMovie.volume";
 	
 	[self showMenuBar];
 }
+
+- (void)enterFullScreen
+{
+	if([[[self view] window] respondsToSelector:@selector(toggleFullScreen:)]) {
+		
+		NSApplicationPresentationOptions op = [NSApp currentSystemPresentationOptions];
+		if((op & NSApplicationPresentationFullScreen) != NSApplicationPresentationFullScreen) {
+			[[NSApp mainWindow] toggleFullScreen:self];	
+		}
+		
+		NSRect movieFrame = [qtView frame];
+		movieFrame.origin = [[self view] convertPoint:movieFrame.origin toView:nil];
+		[qtView setFrame:movieFrame];
+		[[[[self view] window] contentView] addSubview:qtView];
+		movieFrame.size = [[[self view] window] frame].size;
+		movieFrame.origin = NSZeroPoint;
+		[[qtView animator] setFrame:movieFrame];
+	} else {
+		[self enterFullScreenWithFullscreenWindow];
+	}
+}
 - (void)exitFullScreen
 {
-	NSTimeInterval duration = 0.3;
-	[[NSAnimationContext currentContext] setDuration:duration];
-	
-	NSRect originalFrame = normalModeSavedFrame;
-	originalFrame.origin = [self.view.window convertBaseToScreen:[self.view convertPointToBase:originalFrame.origin]];
-	
-	[[fullscreenWindow animator] setFrame:originalFrame display:YES];
-	
-	[self performSelector:@selector(finishFullScreen) withObject:nil afterDelay:duration + 0.01];
+	if([[[self view] window] respondsToSelector:@selector(toggleFullScreen:)]) {
+		NSRect movieFrame = [[self view] frame];
+				
+		movieFrame.origin.x = 0;
+		movieFrame.origin.y = [controllerView frame].size.height;
+		movieFrame.size.height -= [controllerView frame].size.height;
+		movieFrame.origin = [[self view] convertPoint:movieFrame.origin toView:nil];
+		
+		[NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
+			[[qtView animator] setFrame:movieFrame];
+		} completionHandler:^(void) {
+			NSRect movieFrame = [[self view] frame];
+			movieFrame.origin.x = 0;
+			movieFrame.origin.y = [controllerView frame].size.height;
+			movieFrame.size.height -= [controllerView frame].size.height;
+			[qtView setFrame:movieFrame];
+			[[self view] addSubview:qtView];
+		}];
+	} else {
+		[self exitFullScreenWithFullscreenWindow];
+	}
 }
+
 - (void)cancelOperation:(id)sender
 {
 	self.fullScreenMode = NO;

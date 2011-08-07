@@ -68,6 +68,7 @@
 {
 	IBOutlet QTMovieView *qtView;
 	IBOutlet NSButton *playButton;
+	IBOutlet NSView *controllerView;
 		
 	QTMovie *qtMovie;
 	

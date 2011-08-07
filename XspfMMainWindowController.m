@@ -138,6 +138,7 @@
 - (void)windowDidLoad
 {
 	[[self window] setContentBorderThickness:27 forEdge:NSMinYEdge];
+	[[self window] setCollectionBehavior:NSWindowCollectionBehaviorFullScreenPrimary];
 	
 	[splitView setDelegate:self];
 	[self setupXspfLists];
@@ -171,7 +172,7 @@
 	
 	[self showWindow:self];
 
-	[self performSelector:@selector(delayExcute:) withObject:self afterDelay:0.5];
+//	[self performSelector:@selector(delayExcute:) withObject:self afterDelay:5.0];
 }
 - (void)delayExcute:(id)dummy
 {
@@ -790,6 +791,11 @@
 {
 	XspfMPreferences *pref = [XspfMPreferences sharedPreference];
 	pref.splitViewLeftWidth = [libraryPlaceholderView frame].size.width;
+}
+
+- (NSApplicationPresentationOptions)window:(NSWindow *)window willUseFullScreenPresentationOptions:(NSApplicationPresentationOptions)proposedOptions
+{
+	return proposedOptions | NSApplicationPresentationAutoHideToolbar;
 }
 
 #pragma mark#### NSOpenPanel Delegate ####
