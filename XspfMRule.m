@@ -271,7 +271,7 @@ static BOOL useLabel = NO;
 }
 + (void)setUseRating:(BOOL)flag
 {
-	if(flag && useRating || !flag && !useRating) {
+	if((flag && useRating) || (!flag && !useRating)) {
 		[leftKeys release];
 		leftKeys = nil;
 	}
@@ -284,7 +284,7 @@ static BOOL useLabel = NO;
 }
 + (void)setUseLablel:(BOOL)flag
 {
-	if(flag && useLabel || !flag && !useLabel) {
+	if((flag && useLabel) || (!flag && !useLabel)) {
 		[leftKeys release];
 		leftKeys = nil;
 	}

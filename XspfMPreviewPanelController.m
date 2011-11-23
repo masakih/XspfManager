@@ -206,33 +206,33 @@ static id previewPanel = nil;
 }
 
 #pragma mark---- QLPreviewPanelController ----
-- (BOOL)acceptsPreviewPanelControl:(id /*QLPreviewPanel* */)panel
+- (BOOL)acceptsPreviewPanelControl:(QLPreviewPanel *)panel
 {
 	return YES;
 }
-- (void)beginPreviewPanelControl:(id /*QLPreviewPanel* */)panel
+- (void)beginPreviewPanelControl:(QLPreviewPanel *)panel
 {
 	previewPanel = [panel retain];
 	[panel setDelegate:self];
 	[panel setDataSource:self];
 }
-- (void)endPreviewPanelControl:(id /*QLPreviewPanel* */)panel
+- (void)endPreviewPanelControl:(QLPreviewPanel *)panel
 {
 	[previewPanel release];
 	previewPanel = nil;
 }
 
 #pragma mark---- QLPreviewPanelDataSource ----
-- (NSInteger)numberOfPreviewItemsInPreviewPanel:(id /*QLPreviewPanel* */)panel
+- (NSInteger)numberOfPreviewItemsInPreviewPanel:(QLPreviewPanel *)panel
 {
 	return [[controller selectedObjects] count];
 }
-- (id /*<QLPreviewItem>*/)previewPanel:(id)panel previewItemAtIndex:(NSInteger)index
+- (id <QLPreviewItem>)previewPanel:(id)panel previewItemAtIndex:(NSInteger)index
 {
 	return [[controller selectedObjects] objectAtIndex:index];
 }
 #pragma mark---- QLPreviewPanelDelegate ----
-- (BOOL)previewPanel:(id /*QLPreviewPanel* */)panel handleEvent:(NSEvent *)event
+- (BOOL)previewPanel:(QLPreviewPanel *)panel handleEvent:(NSEvent *)event
 {
 	if ([event type] == NSKeyDown) {
 		NSResponder *target = nil;
@@ -251,12 +251,12 @@ static id previewPanel = nil;
 	}
 	return NO;
 }
-- (NSRect)previewPanel:(id /*QLPreviewPanel* */)panel sourceFrameOnScreenForPreviewItem:(id /*<QLPreviewItem>*/)item
+- (NSRect)previewPanel:(QLPreviewPanel *)panel sourceFrameOnScreenForPreviewItem:(id <QLPreviewItem>)item
 {
 	return [[mainWController valueForKey:@"listViewController"] selectionItemRect];
 }
 
-- (id)previewPanel:(id /*QLPreviewPanel* */)panel transitionImageForPreviewItem:(id /*<QLPreviewItem>*/)item contentRect:(NSRect *)contentRect
+- (id)previewPanel:(QLPreviewPanel *)panel transitionImageForPreviewItem:(id <QLPreviewItem>)item contentRect:(NSRect *)contentRect
 {
 	XspfMXspfObject *obj = item;
 	return obj.thumbnail;

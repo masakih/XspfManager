@@ -72,4 +72,5 @@
     NSConditionLock* _requestLock;
 }
 
+-(id)initWithChannel:(HMChannel*)aChannel;
 @end

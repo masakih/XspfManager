@@ -60,10 +60,11 @@
 */
 
 #import <Cocoa/Cocoa.h>
+#import <Quartz/Quartz.h>
 
 
 @class XspfMMainWindowController;
-@interface XspfMPreviewPanelController : NSResponder
+@interface XspfMPreviewPanelController : NSResponder <QLPreviewPanelDelegate, QLPreviewPanelDataSource>
 {
 	XspfMMainWindowController *mainWController;
 	NSArrayController *controller;

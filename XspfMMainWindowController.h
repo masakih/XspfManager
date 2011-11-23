@@ -77,7 +77,7 @@ typedef enum {
 
 @class XspfMListController;
 
-@interface XspfMMainWindowController : NSWindowController
+@interface XspfMMainWindowController : NSWindowController <NSSplitViewDelegate, NSOpenSavePanelDelegate>
 {
 	IBOutlet NSArrayController *allXspfController;
 	IBOutlet XspfMListController *controller;

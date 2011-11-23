@@ -82,6 +82,9 @@
 - (void)IKCleanTimedOutCache;
 @end
 
+@interface XspfMCoverFlowViewController(XspfMSplitViewSUpport) <NSSplitViewDelegate>
+@end
+
 @implementation XspfMCoverFlowViewController
 
 - (id)init
@@ -118,7 +121,7 @@
 											   object:nil];
 }
 
-- (void)windowDidUpdate:(id)notification
+- (void)windowDidUpdate:(NSNotification *)notification
 {
 	NSWindow *window = [notification object];
 	

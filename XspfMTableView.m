@@ -61,6 +61,8 @@
 
 #import "XspfMTableView.h"
 
+@interface XspfMTableView (XspfMMenueSUpport) <NSMenuDelegate>
+@end
 
 @interface XspfMTableView (XspfM_CocoaPravateMethodHack)
 - (NSColor *)_highlightColorForCell:(NSCell *)cell;

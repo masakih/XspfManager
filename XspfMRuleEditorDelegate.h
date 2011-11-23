@@ -67,7 +67,7 @@
 @interface XspfMRuleEditorDelegate : NSObject
 {
 	NSArray *compounds;
-	NSMutableArray *simples;
+	NSArray *simples;
 	
 	IBOutlet NSRuleEditor *ruleEditor;
 	NSArray *rows;
