@@ -64,7 +64,7 @@
 #import "XspfMViewController.h"
 
 
-@interface XspfQTMovieViewController : XspfMViewController
+@interface XspfQTMovieViewController : XspfMViewController <NSWindowDelegate>
 {
 	IBOutlet QTMovieView *qtView;
 	IBOutlet NSButton *playButton;

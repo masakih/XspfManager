@@ -64,7 +64,7 @@
 
 #import "XspfQTMovieViewController.h"
 
-@interface XspfQTMovieWindowController : NSWindowController
+@interface XspfQTMovieWindowController : NSWindowController <NSWindowDelegate>
 {
 	NSWindow *fullscreenWindow;
 	NSRect normalModeSavedFrame;
