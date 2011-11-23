@@ -103,6 +103,7 @@ static NSString *XspfQTCurrentTrackKey = @"currentTrack";
 static XspfQTMovieTimer* timer = nil;
 + (void)initialize
 {
+	[XspfQTPreference sharedInstance];
 	timer = [[XspfQTMovieTimer movieTimer] retain];
 }
 
