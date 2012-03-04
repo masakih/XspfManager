@@ -626,7 +626,11 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 		}
 	}
 	
-	id attr = [fm fileAttributesAtPath:resolvedPath traverseLink:YES];
+	id attr = [fm attributesOfItemAtPath:resolvedPath error:NULL];
+	if([attr fileType] == NSFileTypeSymbolicLink) {
+		resolvedPath = [resolvedPath stringByResolvingSymlinksInPath];
+		attr = [fm attributesOfItemAtPath:resolvedPath error:NULL];
+	}
 	NSDate *newModDate = [attr fileModificationDate];
 	if(newModDate) {
 		obj.modificationDate = newModDate;
