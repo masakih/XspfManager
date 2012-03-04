@@ -316,13 +316,27 @@
 	[panel setAllowsMultipleSelection:YES];
 	[panel setDelegate:self];
 	
-	[panel beginSheetForDirectory:nil
-							 file:nil
-							types:[NSArray arrayWithObjects:@"xspf", @"com.masakih.xspf", nil]
-				   modalForWindow:[self window]
-					modalDelegate:self
-				   didEndSelector:@selector(endOpenPanel:::)
-					  contextInfo:NULL];
+	BOOL hasBlocks = NSClassFromString(@"NSBlock") ? YES : NO;
+	if(hasBlocks) {
+		[panel setAllowedFileTypes:[NSArray arrayWithObjects:@"xspf", @"com.masakih.xspf", nil]];
+		[panel beginSheetModalForWindow:[self window]
+					  completionHandler:^(NSInteger result) {
+						  if(result == NSCancelButton) return;
+						  NSArray *URLs = [panel URLs];
+						  if([URLs count] == 0) return;
+						  [appDelegate registerURLs:URLs];
+					  }];
+	} else {
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+		[panel beginSheetForDirectory:nil
+								 file:nil
+								types:[NSArray arrayWithObjects:@"xspf", @"com.masakih.xspf", nil]
+					   modalForWindow:[self window]
+						modalDelegate:self
+					   didEndSelector:@selector(endOpenPanel:::)
+						  contextInfo:NULL];
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+	}
 }
 - (void)endOpenPanel:(NSOpenPanel *)panel :(NSInteger)returnCode :(void *)context
 {
