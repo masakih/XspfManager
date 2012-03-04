@@ -7,7 +7,7 @@
 
 /*
  This source code is release under the New BSD License.
- Copyright (c) 2009-2010, masakih
+ Copyright (c) 2009-2010,2012, masakih
  All rights reserved.
  
  ソースコード形式かバイナリ形式か、変更するかしないかを問わず、以下の条件を満たす場合に
@@ -29,7 +29,7 @@
  されない）直接損害、間接損害、偶発的な損害、特別損害、懲罰的損害、または結果損害につい
  て、一切責任を負わないものとします。
  -------------------------------------------------------------------
- Copyright (c) 2009-2010, masakih
+ Copyright (c) 2009-2010,2012, masakih
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -69,6 +69,8 @@ static NSString *BeginningPreloadPercentKey = @"beginingPreloadPercent";
 static NSString *EnablePreloadingKey = @"EnablePreloading";
 
 @implementation XspfQTPreference
+@synthesize beginingPreloadPercent = _beginingPreloadPercent;
+
 static XspfQTPreference *sharedInstance = nil;
 
 + (XspfQTPreference *)sharedInstance
@@ -150,15 +152,15 @@ static XspfQTPreference *sharedInstance = nil;
 }
 - (CGFloat)beginingPreloadPercent
 {
-	if(beginingPreloadPercent == 0.0) {
+	if(_beginingPreloadPercent == 0.0) {
 		return beginingPreloadPercentPreset;
 	}
 	
-	return beginingPreloadPercent;
+	return _beginingPreloadPercent;
 }
 - (void)setBeginingPreloadPercent:(CGFloat)newPercent
 {
 	if(newPercent <= 0 || newPercent >= 1) return;
-	beginingPreloadPercent = newPercent;
+	_beginingPreloadPercent = newPercent;
 }
 @end

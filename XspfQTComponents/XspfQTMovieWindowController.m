@@ -7,7 +7,7 @@
 
 /*
  This source code is release under the New BSD License.
- Copyright (c) 2008-2010, masakih
+ Copyright (c) 2008-2010,2012, masakih
  All rights reserved.
  
  ソースコード形式かバイナリ形式か、変更するかしないかを問わず、以下の条件を満たす場合に
@@ -29,7 +29,7 @@
  されない）直接損害、間接損害、偶発的な損害、特別損害、懲罰的損害、または結果損害につい
  て、一切責任を負わないものとします。
  -------------------------------------------------------------------
- Copyright (c) 2008-2010, masakih
+ Copyright (c) 2008-2010,2012, masakih
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -69,6 +69,11 @@
 
 #import "XspfQTMovieViewController.h"
 
+@interface XspfQTMovieWindowController()
+@property BOOL fullScreenMode;
+
+@property (readonly) XspfQTDocument *qtDocument;
+@end
 
 @interface XspfQTMovieWindowController (Private)
 - (NSSize)windowSizeWithoutQTView;
@@ -104,6 +109,8 @@ enum {
 
 @implementation XspfQTMovieWindowController
 @synthesize contentViewController;
+@synthesize qtMovie = _qtMovie;
+@synthesize fullScreenMode = _fullScreenMode;
 
 #pragma mark ### Static variables ###
 //static const float sVolumeDelta = 0.1;
@@ -124,8 +131,8 @@ static NSString *const kQTMovieKeyPath = @"playingMovie";
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 	[nc removeObserver:self];
 	
-	[self setQtMovie:nil];
-	
+	self.qtMovie = nil;
+		
 	[fullscreenWindow release];
 	[contentViewController release];
 	[prevMouseMovedDate release];
@@ -143,7 +150,7 @@ static NSString *const kQTMovieKeyPath = @"playingMovie";
 	
 	prevMouseMovedDate = [[NSDate dateWithTimeIntervalSinceNow:0.0] retain];
 	
-	id doc = [self document];
+	XspfQTDocument *doc = self.qtDocument;
 	
 	[doc addObserver:self
 		  forKeyPath:kQTMovieKeyPath
@@ -157,7 +164,7 @@ static NSString *const kQTMovieKeyPath = @"playingMovie";
 			   name:XspfQTDocumentWillCloseNotification
 			 object:doc];
 	
-	[[doc trackList] setSelectionIndex:0];
+	doc.trackList.selectionIndex = 0;
 	[self sizeTofitWidnow];
 //	[self play];
 }
@@ -192,7 +199,7 @@ static NSString *const kQTMovieKeyPath = @"playingMovie";
 {
 	if([keyPath isEqualToString:kQTMovieKeyPath]) {
 		id new = [change objectForKey:NSKeyValueChangeNewKey];
-		[self setQtMovie:new];
+		self.qtMovie = new;
 		return;
 	}
 }
@@ -217,13 +224,17 @@ static NSString *const kQTMovieKeyPath = @"playingMovie";
 	
 	return contentViewController;
 }
+- (XspfQTDocument *)qtDocument
+{
+	return (XspfQTDocument *)self.document;
+}
 #pragma mark ### Other functions ###
 // Area size without QTMovieView.
 - (NSSize)windowSizeWithoutQTView
 {
 	if(windowSizeWithoutQTView.width == 0
 	   && windowSizeWithoutQTView.height == 0) {
-		QTMovie *curMovie = [self qtMovie];
+		QTMovie *curMovie = self.qtMovie;
 		if(!curMovie) return windowSizeWithoutQTView;
 		
 		
@@ -248,7 +259,7 @@ static NSString *const kQTMovieKeyPath = @"playingMovie";
 }
 - (NSSize)fitSizeToSize:(NSSize)toSize
 {
-	QTMovie *curMovie = [self qtMovie];
+	QTMovie *curMovie = self.qtMovie;
 	if(!curMovie) return toSize;
 	
 	NSSize delta = [self windowSizeWithoutQTView];
@@ -441,12 +452,12 @@ static NSString *const kQTMovieKeyPath = @"playingMovie";
 	int tag = [sender tag];
 	if(tag == 0) return;
 	
-	QTTime current = [[self qtMovie] currentTime];
+	QTTime current = [self.qtMovie currentTime];
 	NSTimeInterval cur;
 	if(!QTGetTimeInterval(current, &cur)) return;
 	
 	QTTime new = QTMakeTimeWithTimeInterval(cur + tag);
-	[[self qtMovie] setCurrentTime:new];
+	[self.qtMovie setCurrentTime:new];
 }
 - (IBAction)backwardTagValueSecends:(id)sender
 {
@@ -455,35 +466,35 @@ static NSString *const kQTMovieKeyPath = @"playingMovie";
 	int tag = [sender tag];
 	if(tag == 0) return;
 	
-	QTTime current = [[self qtMovie] currentTime];
+	QTTime current = [self.qtMovie currentTime];
 	NSTimeInterval cur;
 	if(!QTGetTimeInterval(current, &cur)) return;
 	
 	QTTime new = QTMakeTimeWithTimeInterval(cur - tag);
-	[[self qtMovie] setCurrentTime:new];
+	[self.qtMovie setCurrentTime:new];
 }
 
 
 - (IBAction)gotoThumbnailFrame:(id)sender
 {
-	HMXSPFComponent *trackList = [[self document] trackList];
-	HMXSPFComponent *thumbnailTrack = [trackList thumbnailTrack];
-	NSTimeInterval time = [trackList thumbnailTimeInterval];
+	HMXSPFComponent *trackList = self.qtDocument.trackList;
+	HMXSPFComponent *thumbnailTrack = trackList.thumbnailTrack;
+	NSTimeInterval time = trackList.thumbnailTimeInterval;
 	
 	NSUInteger num = [trackList indexOfChild:thumbnailTrack];
 	if(num == NSNotFound) return;
 	
-	[trackList setSelectionIndex:num];
+	trackList.selectionIndex = num;
 	
 	QTTime new = QTMakeTimeWithTimeInterval(time);
-	[[self qtMovie] setCurrentTime:new];
+	[self.qtMovie setCurrentTime:new];
 }
 
 - (IBAction)normalSize:(id)sender
 {
 	if(contentViewController.fullScreenMode) return;
 	
-	QTMovie *curMovie = [self qtMovie];
+	QTMovie *curMovie = self.qtMovie;
 	if(!curMovie) return;
 	
 	NSSize movieSize = [[curMovie attributeForKey:QTMovieNaturalSizeAttribute] sizeValue];
@@ -495,7 +506,7 @@ static NSString *const kQTMovieKeyPath = @"playingMovie";
 {
 	if(contentViewController.fullScreenMode) return;
 	
-	QTMovie *curMovie = [self qtMovie];
+	QTMovie *curMovie = self.qtMovie;
 	if(!curMovie) return;
 	
 	NSSize movieSize = [[curMovie attributeForKey:QTMovieNaturalSizeAttribute] sizeValue];
@@ -510,7 +521,7 @@ static NSString *const kQTMovieKeyPath = @"playingMovie";
 {
 	if(contentViewController.fullScreenMode) return;
 	
-	QTMovie *curMovie = [self qtMovie];
+	QTMovie *curMovie = self.qtMovie;
 	if(!curMovie) return;
 	
 	NSSize movieSize = [[curMovie attributeForKey:QTMovieNaturalSizeAttribute] sizeValue];
@@ -551,13 +562,13 @@ static NSString *const kQTMovieKeyPath = @"playingMovie";
 #pragma mark ### Notification & Timer ###
 - (void)movieDidEndNotification:(id)notification
 {
-	[[[self document] trackList] next];
+	[self.qtDocument.trackList next];
 }
 
 // call from XspfQTMovieTimer.
 - (void)updateTimeIfNeeded:(id)timer
 {
-	QTMovie *qt = [self qtMovie];
+	QTMovie *qt = self.qtMovie;
 	if(qt) {
 		// force update time indicator.
 		[qt willChangeValueForKey:@"currentTime"];
@@ -599,7 +610,7 @@ static NSString *const kQTMovieKeyPath = @"playingMovie";
 	}
 	
 	if(action == @selector(gotoThumbnailFrame:)) {
-		if(![[[self document] trackList] thumbnailTrack]) return NO;
+		if(!self.qtDocument.trackList.thumbnailTrack) return NO;
 	}
 	
 	if(action == @selector(normalSize:)
@@ -635,7 +646,7 @@ static NSString *const kQTMovieKeyPath = @"playingMovie";
 - (BOOL)windowShouldClose:(id)sender
 {
 //	[qtView pause:self];
-	[self setQtMovie:nil];
+	self.qtMovie = nil;
 		
 	return YES;
 }

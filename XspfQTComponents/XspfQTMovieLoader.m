@@ -7,7 +7,7 @@
 
 /*
  This source code is release under the New BSD License.
- Copyright (c) 2009-2010, masakih
+ Copyright (c) 2009-2010,2012, masakih
  All rights reserved.
  
  ソースコード形式かバイナリ形式か、変更するかしないかを問わず、以下の条件を満たす場合に
@@ -29,7 +29,7 @@
  されない）直接損害、間接損害、偶発的な損害、特別損害、懲罰的損害、または結果損害につい
  て、一切責任を負わないものとします。
  -------------------------------------------------------------------
- Copyright (c) 2009-2010, masakih
+ Copyright (c) 2009-2010,2012, masakih
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -63,24 +63,42 @@
 
 #import "NSURL-HMExtensions.h"
 
+@interface XspfQTMovieLoader()
+@property (readwrite, retain) QTMovie *qtMovie;
+@end;
+
 @implementation XspfQTMovieLoader
-+ (id)loaderWithMovieURL:(NSURL *)inMovieURL delegate:(id)inDelegate
+@synthesize movieURL = _movieURL;
+@synthesize qtMovie = _qtMovie;
+@synthesize delegate = _delegate;
+
+
++ (id)loaderWithMovieURL:(NSURL *)moviewURL
+{
+	return [[[self alloc] initWithMovieURL:moviewURL delegate:nil] autorelease];
+}
+- (id)initWithMovieURL:(NSURL *)moviewURL
+{
+	return [self initWithMovieURL:moviewURL delegate:nil];
+}
+
++ (id)loaderWithMovieURL:(NSURL *)inMovieURL delegate:(id<XspfQTMovieLoaderDelegate>)inDelegate
 {
 	return [[[[self class] alloc] initWithMovieURL:inMovieURL delegate:inDelegate] autorelease];
 }
-- (id)initWithMovieURL:(NSURL *)inMovieURL delegate:(id)inDelegate
+- (id)initWithMovieURL:(NSURL *)inMovieURL delegate:(id<XspfQTMovieLoaderDelegate>)inDelegate
 {
 	self = [super init];
 	if(self) {
 		
 		@try {
-			[self setDelegate:inDelegate];
+			self.delegate = inDelegate;
 		}
 		@catch (XspfQTMovieLoader *me) {
 			[self autorelease];
 			return nil;
 		}
-		[self setMovieURL:inMovieURL];
+		self.movieURL = inMovieURL;
 	}
 	
 	return self;
@@ -88,70 +106,42 @@
 
 - (void)dealloc
 {
-	[movieURL release];
-	[movie release];
+	self.movieURL = nil;
+	self.qtMovie = nil;
 	
 	[super dealloc];
 }
 
 - (void)setMovieURL:(NSURL *)url
 {
-	if([url isEqualUsingLocalhost:movieURL]) return;
+	if([url isEqualUsingLocalhost:_movieURL]) return;
 	
-	[self setQTMovie:nil];
-	[movieURL autorelease];
-	movieURL = [url retain];
+	self.qtMovie = nil;
+	[_movieURL autorelease];
+	_movieURL = [url retain];
 }
 - (NSURL *)movieURL
 {
-	return movieURL;
-}
-- (void)setQTMovie:(QTMovie *)newMovie
-{
-	[movie release];
-	movie = [newMovie retain];
-}
-- (QTMovie *)qtMovie
-{
-	return movie;
-}
-
-- (void)setDelegate:(id)inDelegate
-{
-	if(inDelegate && ![inDelegate respondsToSelector:@selector(setQTMovie:)]) {
-		NSLog(@"Delegate should be respond to selector setQTMovie:");
-		@throw self;
-	}
-	
-	delegate = inDelegate;
-}
-- (id)delegate
-{
-	return delegate;
+	return _movieURL;
 }
 
 - (void)load
 {
 	QTMovie *newMovie = nil;
 	
-	if(movie) return;
+	if(self.qtMovie) return;
 		
-	if(![QTMovie canInitWithURL:movieURL]) goto finish;
+	if(![QTMovie canInitWithURL:self.movieURL]) goto finish;
 	
 	NSError *error = nil;
-	//	NSDictionary *attrs = [NSDictionary dictionaryWithObjectsAndKeys:
-	//						   [self location], QTMovieURLAttribute,
-	//						   [NSNumber numberWithBool:NO], QTMovieOpenAsyncOKAttribute,
-	//						   nil];
-	//	movie = [[QTMovie alloc] initWithAttributes:attrs error:&error];
-	newMovie = [[QTMovie alloc] initWithURL:movieURL error:&error];
+	newMovie = [[QTMovie alloc] initWithURL:self.movieURL error:&error];
 	if(error) {
 		NSLog(@"%@", error);
 	}
 	
 finish:
-	[self setQTMovie:[newMovie autorelease]];
-	[delegate setQTMovie:movie];
+	self.qtMovie = [newMovie autorelease];
+	[self.delegate setQTMovie:self.qtMovie];
 }
 - (void)loadInBG
 {

@@ -61,10 +61,7 @@
 
 #import "XspfQTMovieTimer.h"
 
-@interface NSObject(XspfQTMovieTimerSupport)
-- (void)checkPreload:(id)timer;
-- (void)updateTimeIfNeeded:(id)timer;
-@end
+
 @implementation XspfQTMovieTimer
 
 - (id)init

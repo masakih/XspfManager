@@ -7,7 +7,7 @@
 
 /*
  This source code is release under the New BSD License.
- Copyright (c) 2009, masakih
+ Copyright (c) 2009,2012, masakih
  All rights reserved.
  
  ソースコード形式かバイナリ形式か、変更するかしないかを問わず、以下の条件を満たす場合に
@@ -29,7 +29,7 @@
  されない）直接損害、間接損害、偶発的な損害、特別損害、懲罰的損害、または結果損害につい
  て、一切責任を負わないものとします。
  -------------------------------------------------------------------
- Copyright (c) 2009, masakih
+ Copyright (c) 2009,2012, masakih
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -61,30 +61,33 @@
 
 #import <QTKit/QTKit.h>
 
+@protocol XspfQTMovieLoaderDelegate <NSObject>
+@required
+- (void)setQTMovie:(QTMovie *)movie;
+@end
 
 @interface XspfQTMovieLoader : NSObject
 {
-	id delegate;
-	NSURL *movieURL;
-	QTMovie *movie;
+#ifndef __LP64__
+	id _delegate;
+	NSURL *_movieURL;
+	QTMovie *_qtMovie;
+#endif
 }
+@property (retain) NSURL *movieURL;
+@property (readonly, retain) QTMovie *qtMovie;
 
-+ (id)loaderWithMovieURL:(NSURL *)movieURL delegate:(id)delegate;
-- (id)initWithMovieURL:(NSURL *)movieURL delegate:(id)delegate;
+@property (assign) id<XspfQTMovieLoaderDelegate> delegate;
 
-- (void)setMovieURL:(NSURL *)url;
-- (NSURL *)movieURL;
-- (QTMovie *)qtMovie;
++ (id)loaderWithMovieURL:(NSURL *)moviewURL;
+- (id)initWithMovieURL:(NSURL *)moviewURL;
 
-// throw self if delegate dose not respond setQTMovie:.
-- (void)setDelegate:(id)delegate;
-- (id)delegate;
+// designed initializer
++ (id)loaderWithMovieURL:(NSURL *)movieURL delegate:(id<XspfQTMovieLoaderDelegate>)delegate;
+- (id)initWithMovieURL:(NSURL *)movieURL delegate:(id<XspfQTMovieLoaderDelegate>)delegate;
 
 - (void)load;
 - (void)loadInBG;	// did finish load, it sends setQTMovie: to delegate.
 
 @end
 
-@interface NSObject (XspfQTMovieLoaderDelegate)
-- (void)setQTMovie:(QTMovie *)movie;
-@end
