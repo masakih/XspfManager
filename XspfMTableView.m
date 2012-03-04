@@ -129,7 +129,7 @@
 - (NSMenu *)menuForEvent:(NSEvent *)event
 {
 	if([[self dataSource] respondsToSelector:@selector(tableView:menuForEvent:)]) {
-		NSMenu *menu = [[self dataSource] tableView:self menuForEvent:event];
+		NSMenu *menu = [(id<XspfMTableViewDataSource>)[self dataSource] tableView:self menuForEvent:event];
 		if(menu) {
 			// draw select frame rectangle.
 			NSPoint mouse = [self convertPoint:[event locationInWindow] fromView:nil];
