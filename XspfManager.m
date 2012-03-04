@@ -159,7 +159,10 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 	fileManager = [NSFileManager defaultManager];
 	applicationSupportFolder = [self applicationSupportFolder];
 	if(![fileManager fileExistsAtPath:applicationSupportFolder isDirectory:NULL]) {
-		[fileManager createDirectoryAtPath:applicationSupportFolder attributes:nil];
+		[fileManager createDirectoryAtPath:applicationSupportFolder
+			   withIntermediateDirectories:YES
+								attributes:nil
+									 error:NULL];
 	}
 	
 	url = [NSURL fileURLWithPath: [applicationSupportFolder stringByAppendingPathComponent: @"XspfManager.qdb"]];
