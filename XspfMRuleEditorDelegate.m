@@ -254,18 +254,19 @@ displayValueForCriterion:(id)criterion
 			[self resolvePredicate:p];
 		}
 	} else if([predicate isKindOfClass:[NSComparisonPredicate class]]) {
-		id left = [predicate leftExpression];
-		id right = [predicate rightExpression];
+		NSComparisonPredicate *compPredicate = predicate;
+		id left = [compPredicate leftExpression];
+		id right = [compPredicate rightExpression];
 		SEL sel = Nil;
-		if([predicate predicateOperatorType] == NSCustomSelectorPredicateOperatorType) {
-			sel = [predicate customSelector];
+		if([compPredicate predicateOperatorType] == NSCustomSelectorPredicateOperatorType) {
+			sel = [compPredicate customSelector];
 		}
 		fprintf(stderr, "left ->\t");
 		[self resolveExpression:left];
 		if(sel) {
 			fprintf(stderr, "%s\n", [[NSString stringWithFormat:@"SEL -> %@", NSStringFromSelector(sel)] UTF8String]);
 		} else {
-			fprintf(stderr, "%s\n", [[NSString stringWithFormat:@"type -> %d, opt -> %d, mod -> %d", [predicate predicateOperatorType], [predicate options], [predicate comparisonPredicateModifier]] UTF8String]);
+			fprintf(stderr, "%s\n", [[NSString stringWithFormat:@"type -> %d, opt -> %d, mod -> %d", [compPredicate predicateOperatorType], [compPredicate options], [compPredicate comparisonPredicateModifier]] UTF8String]);
 		}
 		fprintf(stderr, "right ->\t");
 		[self resolveExpression:right];
