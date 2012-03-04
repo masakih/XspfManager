@@ -183,7 +183,7 @@ static QTTime calcDefaultThumbnailQTTime(QTMovie *movie)
 static NSImage *thumbnailForTrackTime(HMXSPFComponent *track, NSTimeInterval time, CGSize size)
 {
 	NSError *theErr = nil;
-	QTMovie *movie = loadFromMovieURL([track movieLocation]);
+	QTMovie *movie = loadFromMovieURL(track.movieLocation);
 	
 	NSValue *sizeValue = [movie attributeForKey:QTMovieNaturalSizeAttribute];
 	NSSize newMaxSize = maxSizeForFrame([sizeValue sizeValue], size);
@@ -215,14 +215,14 @@ static NSImage *thumbnailForTrackTime(HMXSPFComponent *track, NSTimeInterval tim
 
 static NSImage *thumbnailWithComponent(HMXSPFComponent *component)
 {
-	HMXSPFComponent *track = [component thumbnailTrack];
-	NSTimeInterval interval = [component thumbnailTimeInterval];
+	HMXSPFComponent *track = component.thumbnailTrack;
+	NSTimeInterval interval = component.thumbnailTimeInterval;
 	CGSize size = { 200, 200 };
 	
 	if(!track) {
 		HMXSPFComponent *trackList = [component childAtIndex:0];
-		[trackList setSelectionIndex:0];
-		track = [trackList currentTrack	];
+		trackList.selectionIndex = 0;
+		track = trackList.currentTrack;
 	}
 	
 	NSImage *thumbnail = thumbnailForTrackTime(track, interval, size);
@@ -237,12 +237,12 @@ static NSImage *thumbnailWithComponent(HMXSPFComponent *component)
 
 - (void)fire
 {
-	id item = componentForURL(self.object.url);
+	HMXSPFComponent *item = componentForURL(self.object.url);
 	if(!item) return;
-	if([item childrenCount] == 0) return;
+	if(item.childrenCount == 0) return;
 	
-	id trackList = [item childAtIndex:0];
-	self.object.movieNum = [NSNumber numberWithInt:[trackList childrenCount]];
+	HMXSPFComponent *trackList = [item childAtIndex:0];
+	self.object.movieNum = [NSNumber numberWithInt:trackList.childrenCount];
 	self.object.thumbnail = thumbnailWithComponent(item);
 }
 -(void)terminate
