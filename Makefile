@@ -19,8 +19,13 @@ VERSION=$(shell $(VER_CMD))
 LocalizeFiles=XspfMLabelMenuView.m \
 			  XspfMMainWindowController.m \
 			  XspfMLibraryViewController.m \
-			  XspfMXspfListObject.m \
-			  XspfMCoverFlowViewController.m
+			  XspfMCoverFlowViewController.m \
+			  XspfManager.m \
+			  XspfQTComponents/XspfQTMovieViewController.m \
+			  XspfQTComponents/XspfQTDocument.m \
+			  XspfQTComponents/XspfQTMovieWindowController.m \
+			  XspfMCollectionItemView.m \
+			  XspfMCollectionViewItem.m
 
 all:
 	@echo do  nothig.
@@ -29,7 +34,7 @@ all:
 tagging: update_svn
 	@echo "Tagging the $(VERSION) (x) release of XspfManager project."
 	@echo ""
-	@REV=`LC_ALL=C svn info | awk '/Last Changed Rev/ {print $$4}'` ;	\
+	@REV=`LC_ALL=C svnversion` ;	\
 	echo svn copy $(HEAD) $(TAGS_DIR)/release-$(VERSION).$${REV}
 
 Localizable: ${LocalizeFiles}
@@ -47,13 +52,13 @@ release: updateRevision
 	$(MAKE) restorInfoPlist
 
 package: release
-	REV=`LC_ALL=C svn info | awk '/Last Changed Rev/ {print $$4}'`;	\
+	REV=`LC_ALL=C svnversion`;	\
 	ditto -ck -rsrc --keepParent $(APP) $(APP_NAME)-$(VERSION)-$${REV}.zip
 
 updateRevision: update_svn
 	if [ ! -f $(INFO_PLIST).bak ] ; then cp $(INFO_PLIST) $(INFO_PLIST).bak ; fi ;	\
-	REV=`LC_ALL=C svn info | awk '/Last Changed Rev/ {print $$4}'` ;	\
-	sed -e "s/%%%%REVISION%%%%/$${REV}-beta/" $(INFO_PLIST) > $(INFO_PLIST).r ;	\
+	REV=`LC_ALL=C svnversion` ;	\
+	sed -e "s/%%%%REVISION%%%%/$${REV}/" $(INFO_PLIST) > $(INFO_PLIST).r ;	\
 	mv -f $(INFO_PLIST).r $(INFO_PLIST) ;	\
 
 restorInfoPlist:

@@ -1,4 +1,3 @@
-
 abe	安倍	あべ
 abe	阿部	あべ
 adachi	安達	あだち
@@ -25,7 +24,7 @@ anndou	安藤	あんどう
 aoba	青葉	あおば
 aoi	蒼井	あおい
 aoki	青木	あおき
-aoki	あおき	あおき
+aoki	あおき
 aono	青野	あおの
 aoyama	青山	あおやま
 asahina	朝比奈	あさひな
@@ -34,7 +33,6 @@ asano	浅野	あさの
 asou	麻生	あそう
 chiba	千葉	ちば
 chihara	茅原	ちはら
-chiji	辻	つじ
 eguchi	江口	えぐち
 eguti	江口	えぐち
 endou	遠藤	えんどう
@@ -187,15 +185,16 @@ tetsuka	手塚	てつか
 tetuka	手塚	てつか
 tiba	千葉	ちば
 tihara	茅原	ちはら
-tiji	辻	つじ
 toda	戸田	とだ
 tominaga	冨永	とみなが
 toudou	藤堂	とうどう
 toyosaki	豊崎	とよさき
 tsubaki	椿	つばき
 tsuda	津田	つだ
+tsuji	辻	つじ
 tubaki	椿	つばき
 tuda	津田	つだ
+tuji	辻	つじ
 uchida	内田	うちだ
 ueda	上田	うえだ
 ueda	植田	うえだ

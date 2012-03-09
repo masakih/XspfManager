@@ -3,16 +3,71 @@
 //  XspfManager
 //
 //  Created by Hori,Masaki on 09/11/01.
-//  Copyright masakih 2009 . All rights reserved.
 //
 
+/*
+ This source code is release under the New BSD License.
+ Copyright (c) 2009-2010, masakih
+ All rights reserved.
+ 
+ ソースコード形式かバイナリ形式か、変更するかしないかを問わず、以下の条件を満たす場合に
+ 限り、再頒布および使用が許可されます。
+ 
+ 1, ソースコードを再頒布する場合、上記の著作権表示、本条件一覧、および下記免責条項を含
+ めること。
+ 2, バイナリ形式で再頒布する場合、頒布物に付属のドキュメント等の資料に、上記の著作権表
+ 示、本条件一覧、および下記免責条項を含めること。
+ 3, 書面による特別の許可なしに、本ソフトウェアから派生した製品の宣伝または販売促進に、
+ コントリビューターの名前を使用してはならない。
+ 本ソフトウェアは、著作権者およびコントリビューターによって「現状のまま」提供されており、
+ 明示黙示を問わず、商業的な使用可能性、および特定の目的に対する適合性に関する暗黙の保証
+ も含め、またそれに限定されない、いかなる保証もありません。著作権者もコントリビューター
+ も、事由のいかんを問わず、 損害発生の原因いかんを問わず、かつ責任の根拠が契約であるか
+ 厳格責任であるか（過失その他の）不法行為であるかを問わず、仮にそのような損害が発生する
+ 可能性を知らされていたとしても、本ソフトウェアの使用によって発生した（代替品または代用
+ サービスの調達、使用の喪失、データの喪失、利益の喪失、業務の中断も含め、またそれに限定
+ されない）直接損害、間接損害、偶発的な損害、特別損害、懲罰的損害、または結果損害につい
+ て、一切責任を負わないものとします。
+ -------------------------------------------------------------------
+ Copyright (c) 2009-2010, masakih
+ All rights reserved.
+ 
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions
+ are met:
+ 
+ 1, Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+ 2, Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in
+    the documentation and/or other materials provided with the
+    distribution.
+ 3, The names of its contributors may be used to endorse or promote
+    products derived from this software without specific prior
+    written permission.
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+ FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+ COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ INCIDENTAL, SPECIAL,EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+ BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+ ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ POSSIBILITY OF SUCH DAMAGE.
+*/
+
 #import "XspfManager.h"
+
+#import "XspfMPreferences.h"
 
 #import "XspfMChannelManager.h"
 #import "XspfMMainWindowController.h"
 #import "XspfMPreviewPanelController.h"
 
-#import "XspfMThreadSpleepRequest.h"
+#import "XspfMThreadSleepRequest.h"
 #import "XspfMCheckFileModifiedRequest.h"
 #import "XspfMMovieLoadRequest.h"
 
@@ -20,11 +75,22 @@
 #import "XspfMXspfObject.h"
 #import "XspfMLabelMenuItem.h"
 
-#import "NSPathUtilities-XspfQT-Extensions.h"
-#import "NSWorkspace-Extensions.h"
+#import "NSPathUtilities-HMExtensions.h"
+#import "NSWorkspace-HMExtensions.h"
+
+#import "XspfMAppleRemoteSupport.h"
+
+@interface XspfManager(Debugging)
+- (void)setupDebugMenu;
+@end
+
 
 @implementation XspfManager
 NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXspfObjectsNotification";
+
+@synthesize mode = mode_;
+@synthesize viewMenuItem, movieControlMenuItem;
+
 
 /**
     Returns the support folder for the application, used to store the Core Data
@@ -39,7 +105,34 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 	NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : NSTemporaryDirectory();
 	return [basePath stringByAppendingPathComponent:@"XspfManager"];
 }
-
+- (NSString *)xspfManagerMovieFoler
+{
+	NSString *basePath = [NSHomeDirectory() stringByAppendingPathComponent:@"Movies"];
+	basePath = [basePath stringByAppendingPathComponent:@"XspfManager"];
+	
+	NSFileManager *fm = [NSFileManager defaultManager];
+	BOOL isDir = NO;
+	if(![fm fileExistsAtPath:basePath isDirectory:&isDir]) {
+		NSError *error = nil;
+		BOOL created = [fm createDirectoryAtPath:basePath
+					 withIntermediateDirectories:NO
+									  attributes:nil
+										   error:&error];
+		if(!created) {
+			NSString *errorString;
+			if(error) {
+				errorString = [NSString stringWithFormat:@"%s", [error localizedDescription]];
+			} else {
+				errorString = [NSString stringWithFormat:@"Could not create directory %@", basePath];
+			}
+			NSLog(@"%@", errorString);
+			[NSApp terminate:nil];
+		}
+	}
+	
+	return basePath;
+}
+		
 
 /**
     Creates, retains, and returns the managed object model for the application 
@@ -66,7 +159,10 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 	fileManager = [NSFileManager defaultManager];
 	applicationSupportFolder = [self applicationSupportFolder];
 	if(![fileManager fileExistsAtPath:applicationSupportFolder isDirectory:NULL]) {
-		[fileManager createDirectoryAtPath:applicationSupportFolder attributes:nil];
+		[fileManager createDirectoryAtPath:applicationSupportFolder
+			   withIntermediateDirectories:YES
+								attributes:nil
+									 error:NULL];
 	}
 	
 	url = [NSURL fileURLWithPath: [applicationSupportFolder stringByAppendingPathComponent: @"XspfManager.qdb"]];
@@ -189,7 +285,10 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 	
 	return reply;
 }
-
+- (BOOL)applicationShouldOpenUntitledFile:(NSApplication *)sender
+{
+	return NO;
+}
 
 /**
     Implementation of dealloc, to release the retained variables.
@@ -200,25 +299,21 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 	[managedObjectContext release], managedObjectContext = nil;
 	[persistentStoreCoordinator release], persistentStoreCoordinator = nil;
 	[managedObjectModel release], managedObjectModel = nil;
+	
+	[appleRemoteSupprt release];
+	
 	[super dealloc];
+}
+
+- (void)awakeFromNib
+{
+	[[movieControlMenuItem menu] removeItem:movieControlMenuItem];
+	appleRemoteSupprt = [[XspfMAppleRemoteSupport alloc] init];
 }
 
 - (IBAction)launchXspfQT:(id)sender
 {
-	[[NSWorkspace sharedWorkspace] launchApplication:@"XspfQT"];
-}
-
-
--(IBAction)toggleEnableLog:(id)sender
-{
-	NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-	[ud setBool:![ud boolForKey:@"HMLogEnable"] forKey:@"HMLogEnable"];
-}
-- (IBAction)changeLogLevel:(id)sender
-{
-	NSInteger level = [sender tag];
-	NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-	[ud setInteger:level forKey:@"HMLogLevel"];
+	[[NSWorkspace sharedWorkspace] launchApplication:[XspfMPreferences sharedPreference].playerName];
 }
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
@@ -233,80 +328,49 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 		} else {
 			[menuItem setTitle:@"Enable log"];
 		}
-	} else if(action == @selector(changeLogLevel:)) {
+		return YES;
+	}
+	
+	if(action == @selector(changeLogLevel:)) {
 		NSInteger level = [ud integerForKey:@"HMLogLevel"];
 		if(level == tag) {
 			[menuItem setState:NSOnState];
 		} else {
 			[menuItem setState:NSOffState];
 		}
+		return YES;
+	}
+	
+	if(action == @selector(launchXspfQT:)) {
+		NSString *launchAppMenuLabelFormat = NSLocalizedString(@"Launch %@", @"Launch application menu label.");
+		NSString *launchAppMenuLabel = [NSString stringWithFormat:launchAppMenuLabelFormat, [XspfMPreferences sharedPreference].playerName];
+		[menuItem setTitle:launchAppMenuLabel];
+		return YES;
 	}
 	
 	return YES;
 }
-- (void)setupDebugMenu
+
+#pragma mark#### KVC & KVO ####
+- (void)setMode:(XspfMViwMode)mode
 {
-	NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-	if(![ud boolForKey:@"HMEnableDebugMenu"]) return;
+	if(mode == mode_) return;
+	if(mode != modeList & mode != modeMovie) return;
 	
-	NSMenu *debugMenu = [[[NSMenu alloc] initWithTitle:@"Debug"] autorelease];
-	NSMenuItem *enableLogItem = [[[NSMenuItem alloc] initWithTitle:@"Enable log"
-															action:@selector(toggleEnableLog:)
-													 keyEquivalent:@""] autorelease];
-	[debugMenu addItem:enableLogItem];
+	[self willChangeValueForKey:@"mode"];
 	
-	[debugMenu addItem:[NSMenuItem separatorItem]];
-	
-	NSMenuItem *logLevelItem = [[[NSMenuItem alloc] initWithTitle:@"Debug level"
-														   action:@selector(changeLogLevel:)
-													keyEquivalent:@""] autorelease];
-	[logLevelItem setTag:HMLogLevelDebug];
-	[debugMenu addItem:logLevelItem];
-	
-	logLevelItem = [[[NSMenuItem alloc] initWithTitle:@"Notice level"
-											   action:@selector(changeLogLevel:)
-										keyEquivalent:@""] autorelease];
-	[logLevelItem setTag:HMLogLevelNotice];
-	[debugMenu addItem:logLevelItem];
-	
-	logLevelItem = [[[NSMenuItem alloc] initWithTitle:@"Caution level"
-											   action:@selector(changeLogLevel:)
-										keyEquivalent:@""] autorelease];
-	[logLevelItem setTag:HMLogLevelCaution];
-	[debugMenu addItem:logLevelItem];
-	
-	logLevelItem = [[[NSMenuItem alloc] initWithTitle:@"Alert level"
-											   action:@selector(changeLogLevel:)
-										keyEquivalent:@""] autorelease];
-	[logLevelItem setTag:HMLogLevelAlert];
-	[debugMenu addItem:logLevelItem];
-	
-	[debugMenu addItem:[NSMenuItem separatorItem]];
-	
-	NSMenuItem *testItem;
-	
-	testItem = [[[NSMenuItem alloc] initWithTitle:@"test01"
-										   action:@selector(test01:)
-									keyEquivalent:@""] autorelease];
-	[debugMenu addItem:testItem];
-	
-	testItem = [[[NSMenuItem alloc] initWithTitle:@"test02"
-										   action:@selector(test02:)
-									keyEquivalent:@""] autorelease];
-	[debugMenu addItem:testItem];
-	
-	testItem = [[[NSMenuItem alloc] initWithTitle:@"test03"
-										   action:@selector(test03:)
-									keyEquivalent:@""] autorelease];
-	[debugMenu addItem:testItem];
-	
-	NSMenu *menubar = [NSApp mainMenu];
-	NSUInteger itemCount = [[menubar itemArray] count];
-	NSMenuItem *debugMenuItem = [menubar insertItemWithTitle:@"Debug"
-													  action:Nil
-											   keyEquivalent:@""
-													 atIndex:itemCount - 1];
-	[debugMenuItem setSubmenu:debugMenu];
+	mode_ = mode;
+	switch(mode) {
+		case modeList:
+			[[NSApp mainMenu] removeItem:movieControlMenuItem];
+			[[NSApp mainMenu] insertItem:viewMenuItem atIndex:3];
+			break;
+		case modeMovie:
+			[[NSApp mainMenu] removeItem:viewMenuItem];
+			[[NSApp mainMenu] insertItem:movieControlMenuItem atIndex:3];
+			break;
+	}
+	[self didChangeValueForKey:@"mode"];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification
@@ -316,7 +380,7 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 	UKKQueue *queue = [UKKQueue sharedFileWatcher];
 	[queue setDelegate:self];
 	
-	XspfMThreadSpleepRequest *request = [XspfMThreadSpleepRequest requestWithSleepTime:0.5];
+	XspfMThreadSleepRequest *request = [XspfMThreadSleepRequest requestWithSleepTime:0.5];
 	[[self channel] putRequest:request];
 	
 	[self performSelector:@selector(registerToUKKQueue) withObject:nil afterDelay:0.0];
@@ -459,6 +523,28 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 {
 	[pController togglePreviewPanel:panel];
 }
+
+
+- (NSURL *)availableFileURL
+{
+	NSString *path = [self xspfManagerMovieFoler];
+	NSString *newDocumentName = [path stringByAppendingPathComponent:@"New XSPF Play List"];
+	NSString *filePath = [newDocumentName stringByAppendingPathExtension:@"xspf"];
+	NSFileManager *fm = [NSFileManager defaultManager];
+	
+	NSInteger i = 0;
+	do {
+		BOOL isDir = NO;
+		if([fm fileExistsAtPath:filePath isDirectory:&isDir]) {
+			filePath = [NSString stringWithFormat:@"%@ %04d", newDocumentName, ++i];
+			filePath = [filePath stringByAppendingPathExtension:@"xspf"];
+		} else {
+			break;
+		}
+	} while(YES);
+	
+	return [NSURL fileURLWithPath:filePath];
+}
 #pragma mark#### UKKQUEUE ####
 - (void)registerToUKKQueue
 {
@@ -488,7 +574,7 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 	}
 }
 
--(void) watcher:(id<UKFileWatcher>)kq receivedNotification:(NSString*)notificationName forPath: (NSString*)filePath
+- (void)watcher:(id<UKFileWatcher>)kq receivedNotification:(NSString*)notificationName forPath: (NSString*)filePath
 {
 	HMLog(HMLogLevelDebug, @"UKKQueue notification. %@", notificationName);
 	if(![NSThread isMainThread]) {
@@ -543,7 +629,11 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 		}
 	}
 	
-	id attr = [fm fileAttributesAtPath:resolvedPath traverseLink:YES];
+	id attr = [fm attributesOfItemAtPath:resolvedPath error:NULL];
+	if([attr fileType] == NSFileTypeSymbolicLink) {
+		resolvedPath = [resolvedPath stringByResolvingSymlinksInPath];
+		attr = [fm attributesOfItemAtPath:resolvedPath error:NULL];
+	}
 	NSDate *newModDate = [attr fileModificationDate];
 	if(newModDate) {
 		obj.modificationDate = newModDate;

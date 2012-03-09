@@ -2,10 +2,25 @@
 "%[Any]@ of the following are true" = "%[いずれか]@ の条件が一致したら";
 
 "%[title]@ %[contains]@ %@" = "%1$[タイトルが]@ %3$@ %2$[を含む]@";
+"%[title]@ %[not contains]@ %@" = "%1$[タイトルが]@ %3$@ %2$[を含まない]@";
 "%[title]@ %[begins with]@ %@" = "%1$[タイトルが]@ %3$@ %2$[で始まる]@ ";
 "%[title]@ %[ends with]@ %@" = "%1$[タイトルが]@ %3$@ %2$[で終わる]@ ";
 "%[title]@ %[is]@ %@" = "%1$[タイトルが]@ %3$@ %2$[である]@ ";
 "%[title]@ %[is not]@ %@" = "%1$[タイトルが]@ %3$@ %2$[でない]@ ";
+
+"%[information.voiceActorsList]@ %[contains]@ %@" = "%1$[声優が]@ %3$@ %2$[を含む]@ ";
+"%[information.voiceActorsList]@ %[not contains]@ %@" = "%1$[声優が]@ %3$@ %2$[を含まない]@";
+"%[information.voiceActorsList]@ %[begins with]@ %@" = "%1$[声優が]@ %3$@ %2$[で始まる]@ ";
+"%[information.voiceActorsList]@ %[ends with]@ %@" = "%1$[声優が]@ %3$@ %2$[で終わる]@ ";
+"%[information.voiceActorsList]@ %[is]@ %@" = "%1$[声優が]@ %3$@ %2$[である]@ ";
+"%[information.voiceActorsList]@ %[is not]@ %@" = "%1$[声優が]@ %3$@ %2$[でない]@ ";
+
+"%[information.productsList]@ %[contains]@ %@" = "%1$[製作／制作が]@ %3$@ %2$[を含む]@ ";
+"%[information.productsList]@ %[not contains]@ %@" = "%1$[製作／制作が]@ %3$@ %2$[を含まない]@";
+"%[information.productsList]@ %[begins with]@ %@" = "%1$[製作／制作が]@ %3$@ %2$[で始まる]@ ";
+"%[information.productsList]@ %[ends with]@ %@" = "%1$[製作／制作が]@ %3$@ %2$[で終わる]@ ";
+"%[information.productsList]@ %[is]@ %@" = "%1$[製作／制作が]@ %3$@ %2$[である]@ ";
+"%[information.productsList]@ %[is not]@ %@" = "%1$[製作／制作が]@ %3$@ %2$[でない]@ ";
 
 "%[rating]@ %[is]@ %@" = "%1$[レートが]@ %3$@ %2$[である]@ ";
 "%[rating]@ %[is greater than or equal to]@ %@" = "%1$[レートが]@ %3$@ %2$[以上]@ ";
@@ -15,10 +30,6 @@
 
 "%[label]@ %[is]@ %@" = "%1$[ラベルが]@ %3$@ %2$[である]@ ";
 "%[label]@ %[is not]@ %@" = "%1$[ラベルが]@ %3$@ %2$[でない]@ ";
-
-"%[information.voiceActorsList]@ %[contains]@ %@" = "%1$[声優が]@ %3$@ %2$[を含む]@ ";
-
-"%[information.productsList]@ %[contains]@ %@" = "%1$[製作／制作が]@ %3$@ %2$[を含む]@ ";
 
 "%[lastPlayDate]@ %[is the date]@ %@" = "%1$[最後の再生日時が]@ %3$@ %2$[である]@ ";
 "%[lastPlayDate]@ %[is after the date]@ %@" = "%1$[最後の再生日時が]@ %3$@ %2$[より新しい日付]@ ";

@@ -1,0 +1,6 @@
+{
+	ClassName = XspfMLabelControl;
+	SuperClass = NSControl;
+	Actions = {};
+	Outlets = {};
+}

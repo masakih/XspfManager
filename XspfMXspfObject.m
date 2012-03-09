@@ -3,8 +3,61 @@
 //  XspfManager
 //
 //  Created by Hori,Masaki on 09/11/01.
-//  Copyright 2009 masakih. All rights reserved.
 //
+
+/*
+ This source code is release under the New BSD License.
+ Copyright (c) 2009-2010, masakih
+ All rights reserved.
+ 
+ ソースコード形式かバイナリ形式か、変更するかしないかを問わず、以下の条件を満たす場合に
+ 限り、再頒布および使用が許可されます。
+ 
+ 1, ソースコードを再頒布する場合、上記の著作権表示、本条件一覧、および下記免責条項を含
+ めること。
+ 2, バイナリ形式で再頒布する場合、頒布物に付属のドキュメント等の資料に、上記の著作権表
+ 示、本条件一覧、および下記免責条項を含めること。
+ 3, 書面による特別の許可なしに、本ソフトウェアから派生した製品の宣伝または販売促進に、
+ コントリビューターの名前を使用してはならない。
+ 本ソフトウェアは、著作権者およびコントリビューターによって「現状のまま」提供されており、
+ 明示黙示を問わず、商業的な使用可能性、および特定の目的に対する適合性に関する暗黙の保証
+ も含め、またそれに限定されない、いかなる保証もありません。著作権者もコントリビューター
+ も、事由のいかんを問わず、 損害発生の原因いかんを問わず、かつ責任の根拠が契約であるか
+ 厳格責任であるか（過失その他の）不法行為であるかを問わず、仮にそのような損害が発生する
+ 可能性を知らされていたとしても、本ソフトウェアの使用によって発生した（代替品または代用
+ サービスの調達、使用の喪失、データの喪失、利益の喪失、業務の中断も含め、またそれに限定
+ されない）直接損害、間接損害、偶発的な損害、特別損害、懲罰的損害、または結果損害につい
+ て、一切責任を負わないものとします。
+ -------------------------------------------------------------------
+ Copyright (c) 2009-2010, masakih
+ All rights reserved.
+ 
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions
+ are met:
+ 
+ 1, Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+ 2, Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in
+    the documentation and/or other materials provided with the
+    distribution.
+ 3, The names of its contributors may be used to endorse or promote
+    products derived from this software without specific prior
+    written permission.
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+ FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+ COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ INCIDENTAL, SPECIAL,EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+ BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+ ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ POSSIBILITY OF SUCH DAMAGE.
+*/
 
 #import "XspfMXspfObject.h"
 #import "XspfMThumbnailData.h"
@@ -14,11 +67,18 @@
 #import "XspfMMovieLoadRequest.h"
 #import "XspfLoadThumbnailRequest.h"
 
-#import "NSPathUtilities-XspfQT-Extensions.h"
-#import "NSURL-XspfQT-Extensions.h"
+#import "NSPathUtilities-HMExtensions.h"
+#import "NSURL-HMExtensions.h"
 
-@interface XspfMXspfObject(HMPrivate)
-- (NSURL *)url;
+@interface XspfMXspfObject()
+@property (retain) NSString * urlString;
+
+
+@property (nonatomic, retain) NSData *primitiveAlias;
+@property (nonatomic, retain) NSString *primitiveTitle;
+@property (nonatomic, retain) NSDate *primitiveModificationDate;
+@property (nonatomic, retain) NSImage *primitiveThumbnail;
+@property (nonatomic, retain) NSNumber *primitiveDeleted;
 @end
 
 @implementation XspfMXspfObject 
@@ -34,17 +94,21 @@
 @dynamic label;
 @dynamic title;
 
+@dynamic primitiveAlias;
+@dynamic primitiveTitle;
+@dynamic primitiveModificationDate;
+@dynamic primitiveThumbnail;
+@dynamic primitiveDeleted;
+
+
++ (NSSet *)keyPathsForValuesAffectingAlias
+{
+	return [NSSet setWithObjects:@"url", @"filePath", nil];
+}
 
 - (void)awakeFromFetch
 {
 	[super awakeFromFetch];
-	
-	NSString *urlString = self.urlString;
-	if(urlString != nil) {
-		NSURL *url = [NSURL URLWithString:urlString];
-//		[self setPrimitiveValue:url forKey:@"url"];
-		self.url = url;
-	}
 	
 	id<HMChannel> channel = [[NSApp delegate] channel];
 	id<HMRequest> request = [XspfMCheckFileModifiedRequest requestWithObject:self];
@@ -61,84 +125,41 @@
 	[self setValue:thumbnailData forKey:@"thumbnailData"];
 }
 
-- (void)setUrlString:(NSString *)string
-{
-	if(self.urlString && [self.urlString isEqualToString:string]) return;
-	
-	[self willChangeValueForKey:@"urlString"];
-	[self setPrimitiveValue:string forKey:@"urlString"];
-	[self didChangeValueForKey:@"urlString"];
-	self.alias = [[self.url path] aliasData];
-}
-- (NSData *)alias
-{
-	[self willAccessValueForKey:@"alias"];
-	NSData *alias = [self primitiveValueForKey:@"alias"];
-	[self didAccessValueForKey:@"alias"];
-	
-	if(alias) return alias;
-	
-	alias = [[self.url path] aliasData];
-	if(alias) {
-		[self willChangeValueForKey:@"alias"];
-		[self setPrimitiveValue:alias forKey:@"alias"];
-		[self didChangeValueForKey:@"alias"];
-	}
-	
-	return alias;
-}
-- (void)setAlias:(NSData *)new
-{
-	if(self.alias && [self.alias isEqualToData:new]) return;
-	
-	[self willChangeValueForKey:@"alias"];
-	[self setPrimitiveValue:new forKey:@"alias"];
-	[self didChangeValueForKey:@"alias"];
-}
 - (NSURL *)url
 {
-	[self willAccessValueForKey:@"url"];
-	NSURL *url = [self primitiveValueForKey:@"url"];
-	[self didAccessValueForKey:@"url"];
-	return url;
+	NSString *path = self.filePath;
+	if(!path) return nil;
+	return [NSURL fileURLWithPath:path];
 } 
 - (void)setUrl:(NSURL *)aURL
 {
-	if(self.url && [self.url isEqualUsingLocalhost:aURL])  return;
+	NSURL *curURL = self.url;
+	if(curURL && [curURL isEqualUsingLocalhost:aURL])  return;
 	
-	[self willChangeValueForKey:@"url"];
-	[self setPrimitiveValue:aURL forKey:@"url"];
-	[self didChangeValueForKey:@"url"];
-	[self setValue:[aURL absoluteString] forKey:@"urlString"];
+	self.alias = [[aURL path] aliasData];
+	self.urlString = [aURL absoluteString];
 }
 
-- (BOOL)isDeleted
+- (BOOL)deleted
 {
 	[self willAccessValueForKey:@"deleted"];
-	NSNumber *deleted = [self primitiveValueForKey:@"deleted"];
+	NSNumber *deleted = self.primitiveDeleted;
 	[self didAccessValueForKey:@"deleted"];
 	
 	return [deleted boolValue];
 }
-- (BOOL)deleted
-{
-	return [self isDeleted];
-}
-- (void)setIsDeleted:(BOOL)flag
+- (void)setDeleted:(BOOL)flag
 {
 	NSNumber *deleted = [NSNumber numberWithBool:flag];
 	[self willChangeValueForKey:@"deleted"];
-	[self setPrimitiveValue:deleted forKey:@"deleted"];
+	self.primitiveDeleted = deleted;
 	[self didChangeValueForKey:@"deleted"];
 }
-- (void)setDeleted:(BOOL)flag
-{
-	[self setIsDeleted:flag];
-}
+
 - (NSImage *)thumbnail
 {
 	[self willAccessValueForKey:@"thumbnail"];
-	NSImage *thumbnail = [self primitiveValueForKey:@"thumbnail"];
+	NSImage *thumbnail = self.primitiveThumbnail;
 	[self didAccessValueForKey:@"thumbnail"];
 	
 	if(!thumbnail && !didPutLoadRequest) {
@@ -153,12 +174,12 @@
 - (void)setThumbnail:(NSImage *)aThumbnail
 {
 	[self willAccessValueForKey:@"thumbnail"];
-	NSImage *thumbnail = [self primitiveValueForKey:@"thumbnail"];
+	NSImage *thumbnail = self.primitiveThumbnail;
 	[self didAccessValueForKey:@"thumbnail"];
 	if([aThumbnail isEqual:thumbnail]) return;
 	
 	[self willChangeValueForKey:@"thumbnail"];
-	[self setPrimitiveValue:aThumbnail forKey:@"thumbnail"];
+	self.primitiveThumbnail = aThumbnail;
 	[self didChangeValueForKey:@"thumbnail"];
 	self.thumbnailData.data = [aThumbnail TIFFRepresentation];
 }
@@ -166,7 +187,7 @@
 - (void)setModificationDate:(NSDate *)newDate
 {
 	[self willAccessValueForKey:@"modificationDate"];
-	NSDate *oldDate = [self primitiveValueForKey:@"modificationDate"];
+	NSDate *oldDate = self.primitiveModificationDate;
 	[self didAccessValueForKey:@"modificationDate"];
 	
 	// 更新日時に変更があれば、ファイル内容を確認し直す。
@@ -177,23 +198,24 @@
 	}
 	
 	[self willChangeValueForKey:@"modificationDate"];
-	[self setPrimitiveValue:newDate forKey:@"modificationDate"];
+	self.primitiveModificationDate = newDate;
 	[self didChangeValueForKey:@"modificationDate"];
 }
 
 - (NSString *)title
 {
 	[self willAccessValueForKey:@"title"];
-	NSString *title = [self primitiveValueForKey:@"title"];
+	NSString *title = self.primitiveTitle;
 	[self didAccessValueForKey:@"title"];
 	
 	if(title == nil || [title isEqualToString:@""]) {
-		NSString *aTitle = self.urlString;
+		NSString *aTitle = self.filePath;
 		aTitle = [aTitle lastPathComponent];
 		aTitle = [aTitle stringByDeletingPathExtension];
 		aTitle = [aTitle stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 		if(aTitle) {
-			[self setPrimitiveValue:aTitle forKey:@"title"];
+			self.primitiveTitle = aTitle;
+			title = aTitle;
 		}
 	}
 	
@@ -201,14 +223,6 @@
 }
 - (NSString *)filePath
 {
-//	if(filePath == nil) {
-//		NSString *path = [self.alias resolvedPath];
-//		if(path) {
-//			[filePath release];
-//			filePath = [path copy];
-//		}
-//	}
-	
 	return [self.alias resolvedPath];
 }
 @end
