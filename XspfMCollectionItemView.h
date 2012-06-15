@@ -61,7 +61,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@class XspfMLabelCell;
+@class HMLabelCell;
 
 @interface XspfMCollectionItemView : NSControl
 {
@@ -72,7 +72,7 @@
 	NSTextFieldCell *titleCell;
 	NSLevelIndicatorCell *rateCell;
 	NSTextFieldCell *rateTitleCell;
-	XspfMLabelCell *labelCell;
+	HMLabelCell *labelCell;
 	
 	NSControlSize controlSize;
 	

@@ -1,5 +1,5 @@
 //
-//  XspfMLabelMenuItem.h
+//  HMLabelCell.h
 //  XspfManager
 //
 //  Created by Hori,Masaki on 10/01/04.
@@ -62,15 +62,36 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface XspfMLabelMenuItem : NSMenuItem
+enum _HMLabelColor {
+	HMLabelNone,
+	HMLabelRed,
+	HMLabelOrange,
+	HMLabelYellow,
+	HMLabelGreen,
+	HMLabelBlue,
+	HMLabelPurple,
+	HMLabelGray,
+};
+
+enum _HMLabelStyle {
+	HMCircleStyle,
+	HMSquareStyle,
+};
+
+
+
+@interface HMLabelCell : NSActionCell
 {
+	NSGradient *gradient;
+	
+	NSInteger labelStyle;
+	BOOL drawX;
 
 }
 
-- (void)setObjectValue:(id)value;
-- (id)objectValue;
-- (void)setIntegerValue:(NSInteger)value;
-- (NSInteger)integerValue;
-- (NSInteger)labelValue;
-- (void)setLabelValue:(NSInteger)value;
+- (void)setLabelStyle:(NSInteger)style;
+- (NSInteger)labelStyle;
+- (void)setDrawX:(BOOL)flag;
+- (BOOL)isDrawX;
+
 @end

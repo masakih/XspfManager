@@ -63,7 +63,7 @@
 
 #import "XspfMViewController.h"
 
-@class XspfMLabelMenuItem;
+@class HMLabelMenuItem;
 
 @interface XspfMListViewController : XspfMViewController
 {

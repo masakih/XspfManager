@@ -63,8 +63,8 @@
 #import "XspfMRule.h"
 #import "XspfMRule_private.h"
 
-#import "XspfMLabelField.h"
-#import "XspfMLabelCell.h"
+#import "HMLabelField.h"
+#import "HMLabelCell.h"
 
 
 @implementation XspfMRule (XspfMAccessor)
@@ -608,9 +608,9 @@ static NSString *const XspfMRuleValueKey = @"XspfMRuleValueKey";
 - (NSView *)labelField
 {
 //	HMLog(HMLogLevelDebug, @"Enter -> %@", NSStringFromSelector(_cmd));
-	id label = [[[XspfMLabelField alloc] initWithFrame:NSMakeRect(0,0,100,19)] autorelease];
+	id label = [[[HMLabelField alloc] initWithFrame:NSMakeRect(0,0,100,19)] autorelease];
 	[label sizeToFit];
-	[label setLabelStyle:XspfMSquareStyle];
+	[label setLabelStyle:HMSquareStyle];
 	[label setDrawX:YES];
 	
 	return label;

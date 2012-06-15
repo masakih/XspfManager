@@ -1,5 +1,5 @@
 {
-	ClassName = XspfMLabelControl;
+	ClassName = HMLabelControl;
 	SuperClass = NSControl;
 	Actions = {};
 	Outlets = {};

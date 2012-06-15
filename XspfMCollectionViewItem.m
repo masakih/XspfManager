@@ -64,7 +64,7 @@
 #import "XspfManager.h"
 
 #import "XspfMCollectionItemView.h"
-#import "XspfMLabelCell.h"
+#import "HMLabelCell.h"
 #import "XspfMXspfObject.h"
 
 @interface XspfMCollectionViewItem (XspfMPrivate)

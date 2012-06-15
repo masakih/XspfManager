@@ -1,16 +1,16 @@
 //
-//  XspfMLabelInspector.m
-//  XspfMLabel
+//  HMLabelInspector.m
+//  HMLabel
 //
 //  Created by Hori,Masaki on 10/06/09.
 //  Copyright 2010 masakih. All rights reserved.
 //
 
-#import "XspfMLabelInspector.h"
+#import "HMLabelInspector.h"
 
-#import <XspfMLabel/XspfMLabelField.h>
+#import <HMLabel/HMLabelField.h>
 
-@implementation XspfMLabelInspector
+@implementation HMLabelInspector
 
 - (void)awakeFromNib
 {
@@ -22,7 +22,7 @@
 }
 
 - (NSString *)viewNibName {
-	return @"XspfMLabelInspector";
+	return @"HMLabelInspector";
 }
 
 - (void)refresh {

@@ -62,7 +62,7 @@
 #import "XspfMDetailViewController.h"
 
 #import "XspfManager.h"
-#import "XspfMLabelControl.h"
+#import "HMLabelControl.h"
 
 @interface XspfMDetailViewController(HMPrivate)
 - (void)buildFamilyNameFromFile;

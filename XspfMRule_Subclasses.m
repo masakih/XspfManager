@@ -63,7 +63,7 @@
 #import "XspfMRule.h"
 #import "XspfMRule_private.h"
 
-#import "XspfMLabelField.h"
+#import "HMLabelField.h"
 
 
 @implementation XspfMSeparatorRule
@@ -211,7 +211,7 @@ static NSString *const XspfMRuleTypeKey = @"XspfMRuleTypeKey";
 			result = [NSLevelIndicator class];
 			break;
 		case XspfMLabelFieldType:
-			result = [XspfMLabelField class];
+			result = [HMLabelField class];
 			break;
 		default:
 			//

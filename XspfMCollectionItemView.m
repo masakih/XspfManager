@@ -61,7 +61,7 @@
 
 #import "XspfMCollectionItemView.h"
 
-#import "XspfMLabelCell.h"
+#import "HMLabelCell.h"
 #import "XspfMShadowImageCell.h"
 
 
@@ -126,8 +126,8 @@ NSString *const XspfMRatingBinding = @"rating";
 	rateTitleCell = [[NSTextFieldCell alloc] initTextCell:NSLocalizedString(@"Rate:", @"Icon view Rate label.")];
 	[rateTitleCell setAlignment:NSRightTextAlignment];
 	
-	labelCell = [[XspfMLabelCell alloc] initTextCell:@""];
-	[labelCell setLabelStyle:XspfMSquareStyle];
+	labelCell = [[HMLabelCell alloc] initTextCell:@""];
+	[labelCell setLabelStyle:HMSquareStyle];
 	[labelCell setDrawX:NO];
 	
 	if([self frame].size.height < 200) {

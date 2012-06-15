@@ -1,8 +1,8 @@
 //
-//  XspfMLabelControl.h
+//  HMLabelMenuItem.m
 //  XspfManager
 //
-//  Created by Hori,Masaki on 10/01/06.
+//  Created by Hori,Masaki on 10/01/04.
 //
 
 /*
@@ -59,13 +59,113 @@
  POSSIBILITY OF SUCH DAMAGE.
 */
 
-#import <Cocoa/Cocoa.h>
+#import "HMLabelMenuItem.h"
+
+#import "HMLabelMenuView.h"
 
 
-@interface XspfMLabelControl : NSControl
 
-- (void)setLabelStyle:(NSInteger)style;
-- (NSInteger)labelStyle;
-- (void)setDrawX:(BOOL)flag;
-- (BOOL)isDrawX;
+@implementation HMLabelMenuItem
++ (void)initialize
+{
+	static BOOL isFirst = YES;
+	if(isFirst) {
+		isFirst = NO;
+		[self exposeBinding:@"labelValue"];
+	}
+}
+- (NSArray *)exposedBindings
+{
+	NSMutableArray *result = [NSMutableArray arrayWithArray:[super exposedBindings]];
+	[result addObject:@"labelValue"];
+	return result;
+}
+- (Class)valueClassForBinding:(NSString *)binding
+{
+	if([binding isEqualToString:@"labelValue"]) {
+		return [NSNumber class];
+	}
+	
+	return [super valueClassForBinding:binding];
+}
+
+- (void)setupView
+{
+	NSRect viewFrame = NSMakeRect(0,0,200, 62);
+	HMLabelMenuView *view = [[[HMLabelMenuView alloc] initWithFrame:viewFrame] autorelease];
+	[view setAction:[self action]];
+	[view setTarget:[self target]];
+	[view setMenuLabel:[self title]];
+	[view sizeToFit];
+	[super setView:view];
+	[[self menu] update];
+}
+- (id)initWithTitle:(NSString *)aString action:(SEL)aSelector keyEquivalent:(NSString *)charCode
+{
+	self = [super initWithTitle:aString action:aSelector keyEquivalent:charCode];
+	if(self) {
+		[self setupView];
+	}
+	
+	return self;
+}
+- (id)initWithCoder:(id)decoder
+{
+	self = [super initWithCoder:decoder];
+	if(self) {
+		[self setupView];
+	}
+	return self;
+}
+- (id)copyWithZone:(NSZone *)zone
+{
+	id result = [super copyWithZone:zone];
+	[result setObjectValue:[self objectValue]];
+	
+	return result;
+}
+
+- (void)setView:(NSView *)view
+{
+	// ignore.
+}
+- (HMLabelMenuView *)labelView
+{
+	return (HMLabelMenuView *)[super view];
+}
+
+- (void)setObjectValue:(id)value
+{
+	[[self labelView] setObjectValue:value];
+}
+- (id)objectValue
+{
+	return [[self labelView] objectValue];
+}
+- (void)setIntegerValue:(NSInteger)value
+{
+	[[self labelView] setIntegerValue:value];
+}
+- (NSInteger)integerValue
+{
+	return [[self labelView] integerValue];
+}
+
+- (NSInteger)labelValue
+{
+	return [self integerValue];
+}
+- (void)setLabelValue:(NSInteger)value
+{
+	[self setIntegerValue:value];
+	
+	id info = [self infoForBinding:@"labelValue"];
+	if(info) {
+		id object = [info valueForKey:NSObservedObjectKey];
+		NSString *keypath = [info valueForKey:NSObservedKeyPathKey];
+		[object setValue:[NSNumber numberWithInteger:value]
+			  forKeyPath:keypath];
+	}
+}
+
 @end

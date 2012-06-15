@@ -73,7 +73,7 @@
 
 #import "UKKQueue.h"
 #import "XspfMXspfObject.h"
-#import "XspfMLabelMenuItem.h"
+#import "HMLabelMenuItem.h"
 
 #import "NSPathUtilities-HMExtensions.h"
 #import "NSWorkspace-HMExtensions.h"
@@ -492,7 +492,7 @@ NSString *const XspfManagerDidAddXspfObjectsNotification = @"XspfManagerDidAddXs
 	
 	for(id item in [result itemArray]) {
 		[item setRepresentedObject:object];
-		if([item isKindOfClass:[XspfMLabelMenuItem class]]) {
+		if([item isKindOfClass:[HMLabelMenuItem class]]) {
 			[item setObjectValue:object.label];
 		}
 	}

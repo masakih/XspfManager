@@ -1,20 +1,20 @@
 //
-//  XspfMLabel.m
-//  XspfMLabel
+//  HMLabel.m
+//  HMLabel
 //
 //  Created by Hori,Masaki on 10/06/09.
 //  Copyright 2010 masakih. All rights reserved.
 //
 
-#import "XspfMLabel.h"
+#import "HMLabel.h"
 
-@implementation XspfMLabel
+@implementation HMLabel
 - (NSArray *)libraryNibNames {
-    return [NSArray arrayWithObject:@"XspfMLabelLibrary"];
+    return [NSArray arrayWithObject:@"HMLabelLibrary"];
 }
 
 - (NSArray *)requiredFrameworks {
-    return [NSArray arrayWithObjects:[NSBundle bundleWithIdentifier:@"com.masakih.XspfMLabel"], nil];
+    return [NSArray arrayWithObjects:[NSBundle bundleWithIdentifier:@"com.masakih.HMLabel"], nil];
 }
 
 //- (void)didLoad

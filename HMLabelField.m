@@ -1,5 +1,5 @@
 //
-//  XspfMLabelField.m
+//  HMLabelField.m
 //  XspfManager
 //
 //  Created by Hori,Masaki on 10/01/11.
@@ -59,12 +59,12 @@
  POSSIBILITY OF SUCH DAMAGE.
 */
 
-#import "XspfMLabelField.h"
+#import "HMLabelField.h"
 
-#import "XspfMLabelCell.h"
+#import "HMLabelCell.h"
 
 
-@interface XspfMLabelField (XspfMPrivate)
+@interface HMLabelField (HMPrivate)
 - (NSRect)labelRectForIndex:(NSInteger)index;
 @end
 
@@ -76,11 +76,11 @@ static const CGFloat labelMargin = 1;
 static const CGFloat labelSize = 19;
 static const CGFloat yMargin = 2;
 
-@implementation XspfMLabelField
+@implementation HMLabelField
 
 + (Class)cellClass
 {
-	return [XspfMLabelCell class];
+	return [HMLabelCell class];
 }
 
 - (void)drawRect:(NSRect)dirtyRect {
@@ -137,18 +137,18 @@ static const CGFloat yMargin = 2;
 	if(self) {
 		[self setup];
 	}
-	[self setLabelStyle:[decoder decodeIntegerForKey:@"XspfMLabelLabelStyleKey"]];
-	[self setDrawX:[decoder decodeBoolForKey:@"XspfMLabelIsDrawXKey"]];
-	[self setValue:[decoder decodeObjectForKey:@"XspfMLabelValueKey"]];
+	[self setLabelStyle:[decoder decodeIntegerForKey:@"HMLabelLabelStyleKey"]];
+	[self setDrawX:[decoder decodeBoolForKey:@"HMLabelIsDrawXKey"]];
+	[self setValue:[decoder decodeObjectForKey:@"HMLabelValueKey"]];
 	
 	return self;
 }
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
 	[super encodeWithCoder:aCoder];
-	[aCoder encodeInteger:[self labelStyle] forKey:@"XspfMLabelLabelStyleKey"];
-	[aCoder encodeBool:[self isDrawX] forKey:@"XspfMLabelIsDrawXKey"];
-	[aCoder encodeObject:[self value] forKey:@"XspfMLabelValueKey"];
+	[aCoder encodeInteger:[self labelStyle] forKey:@"HMLabelLabelStyleKey"];
+	[aCoder encodeBool:[self isDrawX] forKey:@"HMLabelIsDrawXKey"];
+	[aCoder encodeObject:[self value] forKey:@"HMLabelValueKey"];
 }
 - (void)dealloc
 {
@@ -216,7 +216,7 @@ static const CGFloat yMargin = 2;
 }
 - (NSInteger)labelStyle
 {
-	if(![self cell]) return XspfMCircleStyle;
+	if(![self cell]) return HMCircleStyle;
 	
 	return [[self cell] labelStyle];
 }

@@ -1,5 +1,5 @@
 //
-//  XspfMLabelControl.m
+//  HMLabelControl.m
 //  XspfManager
 //
 //  Created by Hori,Masaki on 10/01/06.
@@ -59,16 +59,16 @@
  POSSIBILITY OF SUCH DAMAGE.
 */
 
-#import "XspfMLabelControl.h"
+#import "HMLabelControl.h"
 
-#import "XspfMLabelCell.h"
+#import "HMLabelCell.h"
 
 
-@implementation XspfMLabelControl
+@implementation HMLabelControl
 
 - (void)setup
 {
-	id cell = [[[XspfMLabelCell alloc] initTextCell:@""] autorelease];
+	id cell = [[[HMLabelCell alloc] initTextCell:@""] autorelease];
 	[self setCell:cell];
 }
 - (id)initWithFrame:(NSRect)frame {
@@ -84,18 +84,18 @@
 	if(self) {
 		[self setup];
 	}
-	[self setLabelStyle:[decoder decodeIntegerForKey:@"XspfMLabelLabelStyleKey"]];
-	[self setDrawX:[decoder decodeBoolForKey:@"XspfMLabelIsDrawXKey"]];
-	[self setValue:[decoder decodeObjectForKey:@"XspfMLabelValueKey"]];
+	[self setLabelStyle:[decoder decodeIntegerForKey:@"HMLabelLabelStyleKey"]];
+	[self setDrawX:[decoder decodeBoolForKey:@"HMLabelIsDrawXKey"]];
+	[self setValue:[decoder decodeObjectForKey:@"HMLabelValueKey"]];
 	
 	return self;
 }
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
 	[super encodeWithCoder:aCoder];
-	[aCoder encodeInteger:[self labelStyle] forKey:@"XspfMLabelLabelStyleKey"];
-	[aCoder encodeBool:[self isDrawX] forKey:@"XspfMLabelIsDrawXKey"];
-	[aCoder encodeObject:[self value] forKey:@"XspfMLabelValueKey"];
+	[aCoder encodeInteger:[self labelStyle] forKey:@"HMLabelLabelStyleKey"];
+	[aCoder encodeBool:[self isDrawX] forKey:@"HMLabelIsDrawXKey"];
+	[aCoder encodeObject:[self value] forKey:@"HMLabelValueKey"];
 }
 - (void)setValue:(id)value
 {

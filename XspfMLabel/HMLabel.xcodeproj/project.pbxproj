@@ -23,33 +23,33 @@
 
 /* Begin PBXBuildFile section */
 		13F8B89007B43554008AE28D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD92D38A0106425D02CA0E72 /* Cocoa.framework */; };
-		546DEAF3067F632A0098DCC4 /* XspfMLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53DF68FD067E5B5A0090B5B0 /* XspfMLabel.framework */; };
-		54D33B2906778E3300C9C163 /* XspfMLabelField.classdescription in Resources */ = {isa = PBXBuildFile; fileRef = 54D33B2806778E3300C9C163 /* XspfMLabelField.classdescription */; };
-		8D1AC96C0486D14A00FE50C9 /* XspfMLabelInspector.m in Sources */ = {isa = PBXBuildFile; fileRef = 0259C577FE90428111CA0C5A /* XspfMLabelInspector.m */; settings = {ATTRIBUTES = (); }; };
+		546DEAF3067F632A0098DCC4 /* HMLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53DF68FD067E5B5A0090B5B0 /* HMLabel.framework */; };
+		54D33B2906778E3300C9C163 /* HMLabelField.classdescription in Resources */ = {isa = PBXBuildFile; fileRef = 54D33B2806778E3300C9C163 /* HMLabelField.classdescription */; };
+		8D1AC96C0486D14A00FE50C9 /* HMLabelInspector.m in Sources */ = {isa = PBXBuildFile; fileRef = 0259C577FE90428111CA0C5A /* HMLabelInspector.m */; settings = {ATTRIBUTES = (); }; };
 		8D1AC9700486D14A00FE50C9 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD92D38A0106425D02CA0E72 /* Cocoa.framework */; };
 		8D1AC9800486D23B00FE50C9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D1AC97F0486D23B00FE50C9 /* InfoPlist.strings */; };
-		C044829F0C3328F4006E818F /* XspfMLabelFieldIntegration.m in Sources */ = {isa = PBXBuildFile; fileRef = C044829E0C3328F4006E818F /* XspfMLabelFieldIntegration.m */; };
-		C0A47C500A523B730004BDC3 /* XspfMLabelInspector.xib in Resources */ = {isa = PBXBuildFile; fileRef = C05B20D80A48CB530099B9E5 /* XspfMLabelInspector.xib */; };
+		C044829F0C3328F4006E818F /* HMLabelFieldIntegration.m in Sources */ = {isa = PBXBuildFile; fileRef = C044829E0C3328F4006E818F /* HMLabelFieldIntegration.m */; };
+		C0A47C500A523B730004BDC3 /* HMLabelInspector.xib in Resources */ = {isa = PBXBuildFile; fileRef = C05B20D80A48CB530099B9E5 /* HMLabelInspector.xib */; };
 		C0D069560A49DF9100C95564 /* InterfaceBuilderKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0D069550A49DF9100C95564 /* InterfaceBuilderKit.framework */; };
-		D1AEDE470A6C289C0010C343 /* XspfMLabelLibrary.nib in Resources */ = {isa = PBXBuildFile; fileRef = D1AEDE460A6C289C0010C343 /* XspfMLabelLibrary.nib */; };
-		F4D24C3011C27CFC00232358 /* XspfMLabelCell.h in Headers */ = {isa = PBXBuildFile; fileRef = F4D24C2D11C27CFC00232358 /* XspfMLabelCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F4D24C3111C27CFC00232358 /* XspfMLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D24C2E11C27CFC00232358 /* XspfMLabelCell.m */; };
-		F4D24C3211C27CFC00232358 /* XspfMLabelControl.h in Headers */ = {isa = PBXBuildFile; fileRef = F4D24C2F11C27CFC00232358 /* XspfMLabelControl.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F4D24C3A11C27D0800232358 /* XspfMLabelControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D24C3311C27D0800232358 /* XspfMLabelControl.m */; };
-		F4D24C3B11C27D0800232358 /* XspfMLabelField.h in Headers */ = {isa = PBXBuildFile; fileRef = F4D24C3411C27D0800232358 /* XspfMLabelField.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F4D24C3C11C27D0800232358 /* XspfMLabelField.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D24C3511C27D0800232358 /* XspfMLabelField.m */; };
-		F4D24C3D11C27D0800232358 /* XspfMLabelMenuItem.h in Headers */ = {isa = PBXBuildFile; fileRef = F4D24C3611C27D0800232358 /* XspfMLabelMenuItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F4D24C3E11C27D0800232358 /* XspfMLabelMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D24C3711C27D0800232358 /* XspfMLabelMenuItem.m */; };
-		F4D24C3F11C27D0800232358 /* XspfMLabelMenuView.h in Headers */ = {isa = PBXBuildFile; fileRef = F4D24C3811C27D0800232358 /* XspfMLabelMenuView.h */; };
-		F4D24C4011C27D0800232358 /* XspfMLabelMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D24C3911C27D0800232358 /* XspfMLabelMenuView.m */; };
-		F4D24CB111C283D500232358 /* XspfMLabelField.png in Resources */ = {isa = PBXBuildFile; fileRef = F4D24CB011C283D500232358 /* XspfMLabelField.png */; };
-		F4D24CB311C2891B00232358 /* XspfMLabelCell.png in Resources */ = {isa = PBXBuildFile; fileRef = F4D24CB211C2891B00232358 /* XspfMLabelCell.png */; };
-		F4D24CB511C28B4000232358 /* XspfMLabelMenuItem.png in Resources */ = {isa = PBXBuildFile; fileRef = F4D24CB411C28B4000232358 /* XspfMLabelMenuItem.png */; };
-		F4D24E4911C3C20F00232358 /* XspfMLabelControl.png in Resources */ = {isa = PBXBuildFile; fileRef = F4D24E4811C3C20F00232358 /* XspfMLabelControl.png */; };
-		F4F36D0F11BFCEA70008E7F3 /* XspfMLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F36D0E11BFCEA70008E7F3 /* XspfMLabel.m */; };
-		F4F36F5811C11BF30008E7F3 /* XspfMLabelMenuItem.classdescription in Resources */ = {isa = PBXBuildFile; fileRef = F4F36F5711C11BF30008E7F3 /* XspfMLabelMenuItem.classdescription */; };
-		F4F36F5A11C11C410008E7F3 /* XspfMLabelCell.classdescription in Resources */ = {isa = PBXBuildFile; fileRef = F4F36F5911C11C410008E7F3 /* XspfMLabelCell.classdescription */; };
-		F4F36F5C11C11C930008E7F3 /* XspfMLabelControl.classdescription in Resources */ = {isa = PBXBuildFile; fileRef = F4F36F5B11C11C930008E7F3 /* XspfMLabelControl.classdescription */; };
+		D1AEDE470A6C289C0010C343 /* HMLabelLibrary.nib in Resources */ = {isa = PBXBuildFile; fileRef = D1AEDE460A6C289C0010C343 /* HMLabelLibrary.nib */; };
+		F4D24C3011C27CFC00232358 /* HMLabelCell.h in Headers */ = {isa = PBXBuildFile; fileRef = F4D24C2D11C27CFC00232358 /* HMLabelCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F4D24C3111C27CFC00232358 /* HMLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D24C2E11C27CFC00232358 /* HMLabelCell.m */; };
+		F4D24C3211C27CFC00232358 /* HMLabelControl.h in Headers */ = {isa = PBXBuildFile; fileRef = F4D24C2F11C27CFC00232358 /* HMLabelControl.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F4D24C3A11C27D0800232358 /* HMLabelControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D24C3311C27D0800232358 /* HMLabelControl.m */; };
+		F4D24C3B11C27D0800232358 /* HMLabelField.h in Headers */ = {isa = PBXBuildFile; fileRef = F4D24C3411C27D0800232358 /* HMLabelField.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F4D24C3C11C27D0800232358 /* HMLabelField.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D24C3511C27D0800232358 /* HMLabelField.m */; };
+		F4D24C3D11C27D0800232358 /* HMLabelMenuItem.h in Headers */ = {isa = PBXBuildFile; fileRef = F4D24C3611C27D0800232358 /* HMLabelMenuItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F4D24C3E11C27D0800232358 /* HMLabelMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D24C3711C27D0800232358 /* HMLabelMenuItem.m */; };
+		F4D24C3F11C27D0800232358 /* HMLabelMenuView.h in Headers */ = {isa = PBXBuildFile; fileRef = F4D24C3811C27D0800232358 /* HMLabelMenuView.h */; };
+		F4D24C4011C27D0800232358 /* HMLabelMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D24C3911C27D0800232358 /* HMLabelMenuView.m */; };
+		F4D24CB111C283D500232358 /* HMLabelField.png in Resources */ = {isa = PBXBuildFile; fileRef = F4D24CB011C283D500232358 /* HMLabelField.png */; };
+		F4D24CB311C2891B00232358 /* HMLabelCell.png in Resources */ = {isa = PBXBuildFile; fileRef = F4D24CB211C2891B00232358 /* HMLabelCell.png */; };
+		F4D24CB511C28B4000232358 /* HMLabelMenuItem.png in Resources */ = {isa = PBXBuildFile; fileRef = F4D24CB411C28B4000232358 /* HMLabelMenuItem.png */; };
+		F4D24E4911C3C20F00232358 /* HMLabelControl.png in Resources */ = {isa = PBXBuildFile; fileRef = F4D24E4811C3C20F00232358 /* HMLabelControl.png */; };
+		F4F36D0F11BFCEA70008E7F3 /* HMLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F36D0E11BFCEA70008E7F3 /* HMLabel.m */; };
+		F4F36F5811C11BF30008E7F3 /* HMLabelMenuItem.classdescription in Resources */ = {isa = PBXBuildFile; fileRef = F4F36F5711C11BF30008E7F3 /* HMLabelMenuItem.classdescription */; };
+		F4F36F5A11C11C410008E7F3 /* HMLabelCell.classdescription in Resources */ = {isa = PBXBuildFile; fileRef = F4F36F5911C11C410008E7F3 /* HMLabelCell.classdescription */; };
+		F4F36F5C11C11C930008E7F3 /* HMLabelControl.classdescription in Resources */ = {isa = PBXBuildFile; fileRef = F4F36F5B11C11C930008E7F3 /* HMLabelControl.classdescription */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,42 +77,42 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0259C577FE90428111CA0C5A /* XspfMLabelInspector.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XspfMLabelInspector.m; sourceTree = "<group>"; };
-		0259C57BFE90428111CA0C5A /* XspfMLabelInspector.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XspfMLabelInspector.h; sourceTree = "<group>"; };
+		0259C577FE90428111CA0C5A /* HMLabelInspector.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = HMLabelInspector.m; sourceTree = "<group>"; };
+		0259C57BFE90428111CA0C5A /* HMLabelInspector.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = HMLabelInspector.h; sourceTree = "<group>"; };
 		13F8B88807B434F6008AE28D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		13F8B88907B434F6008AE28D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		13F8B88A07B434F6008AE28D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
-		32DBCF980370C29C00C91783 /* XspfMLabel_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMLabel_Prefix.pch; sourceTree = "<group>"; };
-		53DF68FD067E5B5A0090B5B0 /* XspfMLabel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XspfMLabel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		53DF68FE067E5B5A0090B5B0 /* XspfMLabel-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "XspfMLabel-Info.plist"; sourceTree = "<group>"; };
-		54D33B2806778E3300C9C163 /* XspfMLabelField.classdescription */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.ibClassDescription; path = XspfMLabelField.classdescription; sourceTree = "<group>"; };
+		32DBCF980370C29C00C91783 /* HMLabel_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMLabel_Prefix.pch; sourceTree = "<group>"; };
+		53DF68FD067E5B5A0090B5B0 /* HMLabel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HMLabel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		53DF68FE067E5B5A0090B5B0 /* HMLabel-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HMLabel-Info.plist"; sourceTree = "<group>"; };
+		54D33B2806778E3300C9C163 /* HMLabelField.classdescription */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.ibClassDescription; path = HMLabelField.classdescription; sourceTree = "<group>"; };
 		8D1AC9730486D14A00FE50C9 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		8D1AC9740486D14A00FE50C9 /* XspfMLabel.ibplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XspfMLabel.ibplugin; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D1AC9740486D14A00FE50C9 /* HMLabel.ibplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HMLabel.ibplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D1AC97B0486D23100FE50C9 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		C044829E0C3328F4006E818F /* XspfMLabelFieldIntegration.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XspfMLabelFieldIntegration.m; sourceTree = "<group>"; };
-		C05B20D80A48CB530099B9E5 /* XspfMLabelInspector.xib */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = file.xib; name = XspfMLabelInspector.xib; path = English.lproj/XspfMLabelInspector.xib; sourceTree = "<group>"; };
+		C044829E0C3328F4006E818F /* HMLabelFieldIntegration.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = HMLabelFieldIntegration.m; sourceTree = "<group>"; };
+		C05B20D80A48CB530099B9E5 /* HMLabelInspector.xib */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = file.xib; name = HMLabelInspector.xib; path = English.lproj/HMLabelInspector.xib; sourceTree = "<group>"; };
 		C0D069550A49DF9100C95564 /* InterfaceBuilderKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InterfaceBuilderKit.framework; path = /Developer/Library/Frameworks/InterfaceBuilderKit.framework; sourceTree = "<absolute>"; };
-		D1AEDE460A6C289C0010C343 /* XspfMLabelLibrary.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = XspfMLabelLibrary.nib; path = English.lproj/XspfMLabelLibrary.nib; sourceTree = "<group>"; };
+		D1AEDE460A6C289C0010C343 /* HMLabelLibrary.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = HMLabelLibrary.nib; path = English.lproj/HMLabelLibrary.nib; sourceTree = "<group>"; };
 		DD92D38A0106425D02CA0E72 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
-		F4D24C2D11C27CFC00232358 /* XspfMLabelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XspfMLabelCell.h; path = ../XspfMLabelCell.h; sourceTree = "<group>"; };
-		F4D24C2E11C27CFC00232358 /* XspfMLabelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XspfMLabelCell.m; path = ../XspfMLabelCell.m; sourceTree = "<group>"; };
-		F4D24C2F11C27CFC00232358 /* XspfMLabelControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XspfMLabelControl.h; path = ../XspfMLabelControl.h; sourceTree = "<group>"; };
-		F4D24C3311C27D0800232358 /* XspfMLabelControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XspfMLabelControl.m; path = ../XspfMLabelControl.m; sourceTree = "<group>"; };
-		F4D24C3411C27D0800232358 /* XspfMLabelField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XspfMLabelField.h; path = ../XspfMLabelField.h; sourceTree = "<group>"; };
-		F4D24C3511C27D0800232358 /* XspfMLabelField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XspfMLabelField.m; path = ../XspfMLabelField.m; sourceTree = "<group>"; };
-		F4D24C3611C27D0800232358 /* XspfMLabelMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XspfMLabelMenuItem.h; path = ../XspfMLabelMenuItem.h; sourceTree = "<group>"; };
-		F4D24C3711C27D0800232358 /* XspfMLabelMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XspfMLabelMenuItem.m; path = ../XspfMLabelMenuItem.m; sourceTree = "<group>"; };
-		F4D24C3811C27D0800232358 /* XspfMLabelMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XspfMLabelMenuView.h; path = ../XspfMLabelMenuView.h; sourceTree = "<group>"; };
-		F4D24C3911C27D0800232358 /* XspfMLabelMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XspfMLabelMenuView.m; path = ../XspfMLabelMenuView.m; sourceTree = "<group>"; };
-		F4D24CB011C283D500232358 /* XspfMLabelField.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = XspfMLabelField.png; sourceTree = "<group>"; };
-		F4D24CB211C2891B00232358 /* XspfMLabelCell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = XspfMLabelCell.png; sourceTree = "<group>"; };
-		F4D24CB411C28B4000232358 /* XspfMLabelMenuItem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = XspfMLabelMenuItem.png; sourceTree = "<group>"; };
-		F4D24E4811C3C20F00232358 /* XspfMLabelControl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = XspfMLabelControl.png; sourceTree = "<group>"; };
-		F4F36D0D11BFCEA70008E7F3 /* XspfMLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMLabel.h; sourceTree = "<group>"; };
-		F4F36D0E11BFCEA70008E7F3 /* XspfMLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMLabel.m; sourceTree = "<group>"; };
-		F4F36F5711C11BF30008E7F3 /* XspfMLabelMenuItem.classdescription */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.ibClassDescription; path = XspfMLabelMenuItem.classdescription; sourceTree = "<group>"; };
-		F4F36F5911C11C410008E7F3 /* XspfMLabelCell.classdescription */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.ibClassDescription; path = XspfMLabelCell.classdescription; sourceTree = "<group>"; };
-		F4F36F5B11C11C930008E7F3 /* XspfMLabelControl.classdescription */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.ibClassDescription; path = XspfMLabelControl.classdescription; sourceTree = "<group>"; };
+		F4D24C2D11C27CFC00232358 /* HMLabelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMLabelCell.h; path = ../HMLabelCell.h; sourceTree = "<group>"; };
+		F4D24C2E11C27CFC00232358 /* HMLabelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMLabelCell.m; path = ../HMLabelCell.m; sourceTree = "<group>"; };
+		F4D24C2F11C27CFC00232358 /* HMLabelControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMLabelControl.h; path = ../HMLabelControl.h; sourceTree = "<group>"; };
+		F4D24C3311C27D0800232358 /* HMLabelControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMLabelControl.m; path = ../HMLabelControl.m; sourceTree = "<group>"; };
+		F4D24C3411C27D0800232358 /* HMLabelField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMLabelField.h; path = ../HMLabelField.h; sourceTree = "<group>"; };
+		F4D24C3511C27D0800232358 /* HMLabelField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMLabelField.m; path = ../HMLabelField.m; sourceTree = "<group>"; };
+		F4D24C3611C27D0800232358 /* HMLabelMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMLabelMenuItem.h; path = ../HMLabelMenuItem.h; sourceTree = "<group>"; };
+		F4D24C3711C27D0800232358 /* HMLabelMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMLabelMenuItem.m; path = ../HMLabelMenuItem.m; sourceTree = "<group>"; };
+		F4D24C3811C27D0800232358 /* HMLabelMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMLabelMenuView.h; path = ../HMLabelMenuView.h; sourceTree = "<group>"; };
+		F4D24C3911C27D0800232358 /* HMLabelMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMLabelMenuView.m; path = ../HMLabelMenuView.m; sourceTree = "<group>"; };
+		F4D24CB011C283D500232358 /* HMLabelField.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HMLabelField.png; sourceTree = "<group>"; };
+		F4D24CB211C2891B00232358 /* HMLabelCell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HMLabelCell.png; sourceTree = "<group>"; };
+		F4D24CB411C28B4000232358 /* HMLabelMenuItem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HMLabelMenuItem.png; sourceTree = "<group>"; };
+		F4D24E4811C3C20F00232358 /* HMLabelControl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HMLabelControl.png; sourceTree = "<group>"; };
+		F4F36D0D11BFCEA70008E7F3 /* HMLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMLabel.h; sourceTree = "<group>"; };
+		F4F36D0E11BFCEA70008E7F3 /* HMLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMLabel.m; sourceTree = "<group>"; };
+		F4F36F5711C11BF30008E7F3 /* HMLabelMenuItem.classdescription */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.ibClassDescription; path = HMLabelMenuItem.classdescription; sourceTree = "<group>"; };
+		F4F36F5911C11C410008E7F3 /* HMLabelCell.classdescription */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.ibClassDescription; path = HMLabelCell.classdescription; sourceTree = "<group>"; };
+		F4F36F5B11C11C930008E7F3 /* HMLabelControl.classdescription */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.ibClassDescription; path = HMLabelControl.classdescription; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,7 +129,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D1AC9700486D14A00FE50C9 /* Cocoa.framework in Frameworks */,
-				546DEAF3067F632A0098DCC4 /* XspfMLabel.framework in Frameworks */,
+				546DEAF3067F632A0098DCC4 /* HMLabel.framework in Frameworks */,
 				C0D069560A49DF9100C95564 /* InterfaceBuilderKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -153,7 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				8D1AC9730486D14A00FE50C9 /* Info.plist */,
-				53DF68FE067E5B5A0090B5B0 /* XspfMLabel-Info.plist */,
+				53DF68FE067E5B5A0090B5B0 /* HMLabel-Info.plist */,
 				8D1AC97F0486D23B00FE50C9 /* InfoPlist.strings */,
 			);
 			name = Resources;
@@ -162,12 +162,12 @@
 		131E8FE8067F80F40006E0CE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				F4D24E4811C3C20F00232358 /* XspfMLabelControl.png */,
-				F4D24CB411C28B4000232358 /* XspfMLabelMenuItem.png */,
-				F4D24CB211C2891B00232358 /* XspfMLabelCell.png */,
-				F4D24CB011C283D500232358 /* XspfMLabelField.png */,
-				D1AEDE460A6C289C0010C343 /* XspfMLabelLibrary.nib */,
-				C05B20D80A48CB530099B9E5 /* XspfMLabelInspector.xib */,
+				F4D24E4811C3C20F00232358 /* HMLabelControl.png */,
+				F4D24CB411C28B4000232358 /* HMLabelMenuItem.png */,
+				F4D24CB211C2891B00232358 /* HMLabelCell.png */,
+				F4D24CB011C283D500232358 /* HMLabelField.png */,
+				D1AEDE460A6C289C0010C343 /* HMLabelLibrary.nib */,
+				C05B20D80A48CB530099B9E5 /* HMLabelInspector.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -194,8 +194,8 @@
 		1ED78706FE9D4A0611CA0C5A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8D1AC9740486D14A00FE50C9 /* XspfMLabel.ibplugin */,
-				53DF68FD067E5B5A0090B5B0 /* XspfMLabel.framework */,
+				8D1AC9740486D14A00FE50C9 /* HMLabel.ibplugin */,
+				53DF68FD067E5B5A0090B5B0 /* HMLabel.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -223,8 +223,8 @@
 		32DBCF9F0370C38200C91783 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				C044829E0C3328F4006E818F /* XspfMLabelFieldIntegration.m */,
-				32DBCF980370C29C00C91783 /* XspfMLabel_Prefix.pch */,
+				C044829E0C3328F4006E818F /* HMLabelFieldIntegration.m */,
+				32DBCF980370C29C00C91783 /* HMLabel_Prefix.pch */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -232,10 +232,10 @@
 		54D33B2406778DD400C9C163 /* Class Descriptions */ = {
 			isa = PBXGroup;
 			children = (
-				F4F36F5B11C11C930008E7F3 /* XspfMLabelControl.classdescription */,
-				F4F36F5911C11C410008E7F3 /* XspfMLabelCell.classdescription */,
-				54D33B2806778E3300C9C163 /* XspfMLabelField.classdescription */,
-				F4F36F5711C11BF30008E7F3 /* XspfMLabelMenuItem.classdescription */,
+				F4F36F5B11C11C930008E7F3 /* HMLabelControl.classdescription */,
+				F4F36F5911C11C410008E7F3 /* HMLabelCell.classdescription */,
+				54D33B2806778E3300C9C163 /* HMLabelField.classdescription */,
+				F4F36F5711C11BF30008E7F3 /* HMLabelMenuItem.classdescription */,
 			);
 			name = "Class Descriptions";
 			sourceTree = "<group>";
@@ -243,10 +243,10 @@
 		54D33B2506778DF000C9C163 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				F4F36D0D11BFCEA70008E7F3 /* XspfMLabel.h */,
-				F4F36D0E11BFCEA70008E7F3 /* XspfMLabel.m */,
-				0259C57BFE90428111CA0C5A /* XspfMLabelInspector.h */,
-				0259C577FE90428111CA0C5A /* XspfMLabelInspector.m */,
+				F4F36D0D11BFCEA70008E7F3 /* HMLabel.h */,
+				F4F36D0E11BFCEA70008E7F3 /* HMLabel.m */,
+				0259C57BFE90428111CA0C5A /* HMLabelInspector.h */,
+				0259C577FE90428111CA0C5A /* HMLabelInspector.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -262,16 +262,16 @@
 		C0894DA40C32F4C100401507 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				F4D24C2D11C27CFC00232358 /* XspfMLabelCell.h */,
-				F4D24C2E11C27CFC00232358 /* XspfMLabelCell.m */,
-				F4D24C2F11C27CFC00232358 /* XspfMLabelControl.h */,
-				F4D24C3311C27D0800232358 /* XspfMLabelControl.m */,
-				F4D24C3411C27D0800232358 /* XspfMLabelField.h */,
-				F4D24C3511C27D0800232358 /* XspfMLabelField.m */,
-				F4D24C3611C27D0800232358 /* XspfMLabelMenuItem.h */,
-				F4D24C3711C27D0800232358 /* XspfMLabelMenuItem.m */,
-				F4D24C3811C27D0800232358 /* XspfMLabelMenuView.h */,
-				F4D24C3911C27D0800232358 /* XspfMLabelMenuView.m */,
+				F4D24C2D11C27CFC00232358 /* HMLabelCell.h */,
+				F4D24C2E11C27CFC00232358 /* HMLabelCell.m */,
+				F4D24C2F11C27CFC00232358 /* HMLabelControl.h */,
+				F4D24C3311C27D0800232358 /* HMLabelControl.m */,
+				F4D24C3411C27D0800232358 /* HMLabelField.h */,
+				F4D24C3511C27D0800232358 /* HMLabelField.m */,
+				F4D24C3611C27D0800232358 /* HMLabelMenuItem.h */,
+				F4D24C3711C27D0800232358 /* HMLabelMenuItem.m */,
+				F4D24C3811C27D0800232358 /* HMLabelMenuView.h */,
+				F4D24C3911C27D0800232358 /* HMLabelMenuView.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -283,20 +283,20 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4D24C3011C27CFC00232358 /* XspfMLabelCell.h in Headers */,
-				F4D24C3211C27CFC00232358 /* XspfMLabelControl.h in Headers */,
-				F4D24C3B11C27D0800232358 /* XspfMLabelField.h in Headers */,
-				F4D24C3D11C27D0800232358 /* XspfMLabelMenuItem.h in Headers */,
-				F4D24C3F11C27D0800232358 /* XspfMLabelMenuView.h in Headers */,
+				F4D24C3011C27CFC00232358 /* HMLabelCell.h in Headers */,
+				F4D24C3211C27CFC00232358 /* HMLabelControl.h in Headers */,
+				F4D24C3B11C27D0800232358 /* HMLabelField.h in Headers */,
+				F4D24C3D11C27D0800232358 /* HMLabelMenuItem.h in Headers */,
+				F4D24C3F11C27D0800232358 /* HMLabelMenuView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		53DF68FC067E5B5A0090B5B0 /* XspfMLabelFramework */ = {
+		53DF68FC067E5B5A0090B5B0 /* HMLabelFramework */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C056397F08A954F8003078D8 /* Build configuration list for PBXNativeTarget "XspfMLabelFramework" */;
+			buildConfigurationList = C056397F08A954F8003078D8 /* Build configuration list for PBXNativeTarget "HMLabelFramework" */;
 			buildPhases = (
 				53DF68F8067E5B5A0090B5B0 /* Headers */,
 				53DF68F9067E5B5A0090B5B0 /* Resources */,
@@ -307,14 +307,14 @@
 			);
 			dependencies = (
 			);
-			name = XspfMLabelFramework;
+			name = HMLabelFramework;
 			productName = XspfMLabelFramework;
-			productReference = 53DF68FD067E5B5A0090B5B0 /* XspfMLabel.framework */;
+			productReference = 53DF68FD067E5B5A0090B5B0 /* HMLabel.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		8D1AC9600486D14A00FE50C9 /* XspfMLabel */ = {
+		8D1AC9600486D14A00FE50C9 /* HMLabel */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C056398308A954F8003078D8 /* Build configuration list for PBXNativeTarget "XspfMLabel" */;
+			buildConfigurationList = C056398308A954F8003078D8 /* Build configuration list for PBXNativeTarget "HMLabel" */;
 			buildPhases = (
 				8D1AC9660486D14A00FE50C9 /* Resources */,
 				8D1AC96A0486D14A00FE50C9 /* Sources */,
@@ -325,10 +325,10 @@
 			dependencies = (
 				546DEAF0067F62F70098DCC4 /* PBXTargetDependency */,
 			);
-			name = XspfMLabel;
+			name = HMLabel;
 			productInstallPath = "$(HOME)/Developer/Palettes";
 			productName = XspfMLabel;
-			productReference = 8D1AC9740486D14A00FE50C9 /* XspfMLabel.ibplugin */;
+			productReference = 8D1AC9740486D14A00FE50C9 /* HMLabel.ibplugin */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -336,7 +336,7 @@
 /* Begin PBXProject section */
 		0259C573FE90428111CA0C5A /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = C056398B08A954F8003078D8 /* Build configuration list for PBXProject "XspfMLabel" */;
+			buildConfigurationList = C056398B08A954F8003078D8 /* Build configuration list for PBXProject "HMLabel" */;
 			compatibilityVersion = "Xcode 3.1";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -351,8 +351,8 @@
 			projectRoot = ../;
 			targets = (
 				53DF6901067E5B8E0090B5B0 /* All */,
-				8D1AC9600486D14A00FE50C9 /* XspfMLabel */,
-				53DF68FC067E5B5A0090B5B0 /* XspfMLabelFramework */,
+				8D1AC9600486D14A00FE50C9 /* HMLabel */,
+				53DF68FC067E5B5A0090B5B0 /* HMLabelFramework */,
 			);
 		};
 /* End PBXProject section */
@@ -370,16 +370,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D1AC9800486D23B00FE50C9 /* InfoPlist.strings in Resources */,
-				54D33B2906778E3300C9C163 /* XspfMLabelField.classdescription in Resources */,
-				C0A47C500A523B730004BDC3 /* XspfMLabelInspector.xib in Resources */,
-				D1AEDE470A6C289C0010C343 /* XspfMLabelLibrary.nib in Resources */,
-				F4F36F5811C11BF30008E7F3 /* XspfMLabelMenuItem.classdescription in Resources */,
-				F4F36F5A11C11C410008E7F3 /* XspfMLabelCell.classdescription in Resources */,
-				F4F36F5C11C11C930008E7F3 /* XspfMLabelControl.classdescription in Resources */,
-				F4D24CB111C283D500232358 /* XspfMLabelField.png in Resources */,
-				F4D24CB311C2891B00232358 /* XspfMLabelCell.png in Resources */,
-				F4D24CB511C28B4000232358 /* XspfMLabelMenuItem.png in Resources */,
-				F4D24E4911C3C20F00232358 /* XspfMLabelControl.png in Resources */,
+				54D33B2906778E3300C9C163 /* HMLabelField.classdescription in Resources */,
+				C0A47C500A523B730004BDC3 /* HMLabelInspector.xib in Resources */,
+				D1AEDE470A6C289C0010C343 /* HMLabelLibrary.nib in Resources */,
+				F4F36F5811C11BF30008E7F3 /* HMLabelMenuItem.classdescription in Resources */,
+				F4F36F5A11C11C410008E7F3 /* HMLabelCell.classdescription in Resources */,
+				F4F36F5C11C11C930008E7F3 /* HMLabelControl.classdescription in Resources */,
+				F4D24CB111C283D500232358 /* HMLabelField.png in Resources */,
+				F4D24CB311C2891B00232358 /* HMLabelCell.png in Resources */,
+				F4D24CB511C28B4000232358 /* HMLabelMenuItem.png in Resources */,
+				F4D24E4911C3C20F00232358 /* HMLabelControl.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,11 +390,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4D24C3111C27CFC00232358 /* XspfMLabelCell.m in Sources */,
-				F4D24C3A11C27D0800232358 /* XspfMLabelControl.m in Sources */,
-				F4D24C3C11C27D0800232358 /* XspfMLabelField.m in Sources */,
-				F4D24C3E11C27D0800232358 /* XspfMLabelMenuItem.m in Sources */,
-				F4D24C4011C27D0800232358 /* XspfMLabelMenuView.m in Sources */,
+				F4D24C3111C27CFC00232358 /* HMLabelCell.m in Sources */,
+				F4D24C3A11C27D0800232358 /* HMLabelControl.m in Sources */,
+				F4D24C3C11C27D0800232358 /* HMLabelField.m in Sources */,
+				F4D24C3E11C27D0800232358 /* HMLabelMenuItem.m in Sources */,
+				F4D24C4011C27D0800232358 /* HMLabelMenuView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,9 +402,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D1AC96C0486D14A00FE50C9 /* XspfMLabelInspector.m in Sources */,
-				C044829F0C3328F4006E818F /* XspfMLabelFieldIntegration.m in Sources */,
-				F4F36D0F11BFCEA70008E7F3 /* XspfMLabel.m in Sources */,
+				8D1AC96C0486D14A00FE50C9 /* HMLabelInspector.m in Sources */,
+				C044829F0C3328F4006E818F /* HMLabelFieldIntegration.m in Sources */,
+				F4F36D0F11BFCEA70008E7F3 /* HMLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,17 +413,17 @@
 /* Begin PBXTargetDependency section */
 		53DF6903067E5B930090B5B0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8D1AC9600486D14A00FE50C9 /* XspfMLabel */;
+			target = 8D1AC9600486D14A00FE50C9 /* HMLabel */;
 			targetProxy = 53DF6902067E5B930090B5B0 /* PBXContainerItemProxy */;
 		};
 		53DF6905067E5B930090B5B0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 53DF68FC067E5B5A0090B5B0 /* XspfMLabelFramework */;
+			target = 53DF68FC067E5B5A0090B5B0 /* HMLabelFramework */;
 			targetProxy = 53DF6904067E5B930090B5B0 /* PBXContainerItemProxy */;
 		};
 		546DEAF0067F62F70098DCC4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 53DF68FC067E5B5A0090B5B0 /* XspfMLabelFramework */;
+			target = 53DF68FC067E5B5A0090B5B0 /* HMLabelFramework */;
 			targetProxy = 546DEAEF067F62F70098DCC4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -453,8 +453,8 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				INFOPLIST_FILE = "XspfMLabel-Info.plist";
-				PRODUCT_NAME = XspfMLabel;
+				INFOPLIST_FILE = "HMLabel-Info.plist";
+				PRODUCT_NAME = HMLabel;
 				SKIP_INSTALL = NO;
 			};
 			name = Debug;
@@ -469,9 +469,9 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				INFOPLIST_FILE = "XspfMLabel-Info.plist";
+				INFOPLIST_FILE = "HMLabel-Info.plist";
 				INSTALL_MODE_FLAG = "go-w,a+rX";
-				PRODUCT_NAME = XspfMLabel;
+				PRODUCT_NAME = HMLabel;
 				SKIP_INSTALL = NO;
 			};
 			name = Release;
@@ -490,10 +490,10 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = XspfMLabel_Prefix.pch;
+				GCC_PREFIX_HEADER = HMLabel_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks/XspfMLabel.framework/Resources";
-				PRODUCT_NAME = XspfMLabel;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks/HMLabel.framework/Resources";
+				PRODUCT_NAME = HMLabel;
 				WRAPPER_EXTENSION = ibplugin;
 			};
 			name = Debug;
@@ -510,10 +510,10 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(DEVELOPER_DIR)/Library/Frameworks\"";
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = XspfMLabel_Prefix.pch;
+				GCC_PREFIX_HEADER = HMLabel_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks/XspfMLabel.framework/Resources";
-				PRODUCT_NAME = XspfMLabel;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks/HMLabel.framework/Resources";
+				PRODUCT_NAME = HMLabel;
 				WRAPPER_EXTENSION = ibplugin;
 			};
 			name = Release;
@@ -579,7 +579,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C056397F08A954F8003078D8 /* Build configuration list for PBXNativeTarget "XspfMLabelFramework" */ = {
+		C056397F08A954F8003078D8 /* Build configuration list for PBXNativeTarget "HMLabelFramework" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C056398008A954F8003078D8 /* Debug */,
@@ -588,7 +588,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C056398308A954F8003078D8 /* Build configuration list for PBXNativeTarget "XspfMLabel" */ = {
+		C056398308A954F8003078D8 /* Build configuration list for PBXNativeTarget "HMLabel" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C056398408A954F8003078D8 /* Debug */,
@@ -606,7 +606,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C056398B08A954F8003078D8 /* Build configuration list for PBXProject "XspfMLabel" */ = {
+		C056398B08A954F8003078D8 /* Build configuration list for PBXProject "HMLabel" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C056398C08A954F8003078D8 /* Debug */,

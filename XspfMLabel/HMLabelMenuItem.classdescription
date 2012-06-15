@@ -1,5 +1,5 @@
 {
-	ClassName = XspfMLabelMenuItem;
+	ClassName = HMLabelMenuItem;
 	SuperClass = NSMenuItem;
 	Actions = {};
 	Outlets = {};

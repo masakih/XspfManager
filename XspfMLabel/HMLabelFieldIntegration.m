@@ -1,24 +1,24 @@
 //
-//  XspfMLabelField.m
-//  XspfMLabel
+//  HMLabelField.m
+//  HMLabel
 //
 //  Created by Hori,Masaki on 10/06/09.
 //  Copyright 2010 masakih. All rights reserved.
 //
 
 #import <InterfaceBuilderKit/InterfaceBuilderKit.h>
-#import <XspfMLabel/XspfMLabelField.h>
-#import <XspfMLabel/XspfMLabelControl.h>
-#import <XspfMLabel/XspfMLabelCell.h>
-#import <XspfMLabel/XspfMLabelMenuItem.h>
-#import "XspfMLabelInspector.h"
+#import <HMLabel/HMLabelField.h>
+#import <HMLabel/HMLabelControl.h>
+#import <HMLabel/HMLabelCell.h>
+#import <HMLabel/HMLabelMenuItem.h>
+#import "HMLabelInspector.h"
 
-@interface XspfMLabelField (XspfMIBPrivate)
+@interface HMLabelField (HMIBPrivate)
 - (NSSize)minimumSize;
 @end
 
 
-@implementation XspfMLabelField ( XspfMLabel )
+@implementation HMLabelField (HMLabel)
 
 - (void)ibPopulateKeyPaths:(NSMutableDictionary *)keyPaths {
     [super ibPopulateKeyPaths:keyPaths];
@@ -30,7 +30,7 @@
 
 - (void)ibPopulateAttributeInspectorClasses:(NSMutableArray *)classes {
     [super ibPopulateAttributeInspectorClasses:classes];
-    [classes addObject:[XspfMLabelInspector class]];
+    [classes addObject:[HMLabelInspector class]];
 }
 
 - (NSSize)ibMinimumSize
@@ -45,7 +45,7 @@
 }
 @end
 
-@implementation XspfMLabelControl ( XspfMLabel )
+@implementation HMLabelControl (HMLabel)
 
 - (void)ibPopulateKeyPaths:(NSMutableDictionary *)keyPaths {
     [super ibPopulateKeyPaths:keyPaths];
@@ -57,11 +57,11 @@
 
 - (void)ibPopulateAttributeInspectorClasses:(NSMutableArray *)classes {
     [super ibPopulateAttributeInspectorClasses:classes];
-    [classes addObject:[XspfMLabelInspector class]];
+    [classes addObject:[HMLabelInspector class]];
 }
 @end
 
-@implementation XspfMLabelCell ( XspfMLabel )
+@implementation HMLabelCell (HMLabel)
 
 - (void)ibPopulateKeyPaths:(NSMutableDictionary *)keyPaths {
     [super ibPopulateKeyPaths:keyPaths];
@@ -73,7 +73,7 @@
 
 - (void)ibPopulateAttributeInspectorClasses:(NSMutableArray *)classes {
     [super ibPopulateAttributeInspectorClasses:classes];
-    [classes addObject:[XspfMLabelInspector class]];
+    [classes addObject:[HMLabelInspector class]];
 }
 @end
 

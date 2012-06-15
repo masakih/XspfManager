@@ -1,8 +1,8 @@
 //
-//  XspfMLabelMenuView.h
+//  HMLabelControl.h
 //  XspfManager
 //
-//  Created by Hori,Masaki on 10/01/04.
+//  Created by Hori,Masaki on 10/01/06.
 //
 
 /*
@@ -62,26 +62,10 @@
 #import <Cocoa/Cocoa.h>
 
 
-@class XspfMLabelCell;
+@interface HMLabelControl : NSControl
 
-@interface XspfMLabelMenuView : NSControl
-{
-	NSInteger _value;
-	
-	NSTextFieldCell *title;
-	
-	NSArray *labelCells;
-	
-	NSTextFieldCell *labelName;
-	
-	
-	CGFloat titleHeight;
-	CGFloat labelNameHeight;
-	
-	BOOL blinkMode;
-	NSInteger blinkModeBlinkTime;
-}
-
-- (void)setMenuLabel:(NSString *)menuLabel;
-- (NSString *)menuLabel;
+- (void)setLabelStyle:(NSInteger)style;
+- (NSInteger)labelStyle;
+- (void)setDrawX:(BOOL)flag;
+- (BOOL)isDrawX;
 @end

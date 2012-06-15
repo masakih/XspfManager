@@ -1,5 +1,5 @@
 {
-	ClassName = XspfMLabelCell;
+	ClassName = HMLabelCell;
 	SuperClass = NSActionCell;
 	Actions = {};
 	Outlets = {};

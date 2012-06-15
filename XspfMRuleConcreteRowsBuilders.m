@@ -66,7 +66,7 @@
 #import "XspfMRule_private.h"
 #import "XspfMRuleRowTemplate.h"
 
-#import "XspfMLabelField.h"
+#import "HMLabelField.h"
 
 
 @implementation XspfMRuleCompoundPredicateRowsBuilder
@@ -227,7 +227,7 @@
 				fieldClass = [NSTextField class];
 				tag = XspfMSecondaryNumberFieldTag;
 			} else if([value hasPrefix:@"labelField"]) {
-				fieldClass = [XspfMLabelField class];
+				fieldClass = [HMLabelField class];
 			}
 			if(!fieldClass)  continue;
 			

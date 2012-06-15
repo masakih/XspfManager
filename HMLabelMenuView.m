@@ -1,5 +1,5 @@
 //
-//  XspfMLabelMenuView.m
+//  HMLabelMenuView.m
 //  XspfManager
 //
 //  Created by Hori,Masaki on 10/01/04.
@@ -59,12 +59,12 @@
  POSSIBILITY OF SUCH DAMAGE.
 */
 
-#import "XspfMLabelMenuView.h"
+#import "HMLabelMenuView.h"
 
-#import "XspfMLabelCell.h"
-#import "XspfMLabelMenuItem.h"
+#import "HMLabelCell.h"
+#import "HMLabelMenuItem.h"
 
-@interface XspfMLabelMenuView(XspfMPrivate)
+@interface HMLabelMenuView(HMPrivate)
 - (NSFont *)titleFont;
 - (NSDictionary *)titleAttribute;
 - (NSRect)titleRect;
@@ -73,7 +73,7 @@
 - (NSRect)labelRectForIndex:(NSInteger)index;
 @end
 
-@implementation XspfMLabelMenuView
+@implementation HMLabelMenuView
 
 static const NSInteger labelCount = 8;
 
@@ -97,13 +97,13 @@ static const CGFloat labelSize = 19;
 	
 	NSMutableArray *cells = [NSMutableArray arrayWithCapacity:labelCount];
 	for(NSInteger i = 0; i < labelCount; i++) {
-		XspfMLabelCell *cell = [[[XspfMLabelCell alloc] initTextCell:@""] autorelease];
+		HMLabelCell *cell = [[[HMLabelCell alloc] initTextCell:@""] autorelease];
 		[cells addObject:cell];
 		[self addTrackingRect:[self labelRectForIndex:i] owner:self userData:[NSNumber numberWithInteger:i] assumeInside:NO];
 		[cell setEnabled:YES];
 		[cell setBordered:YES];
 		[cell setIntegerValue:i];
-		[cell setLabelStyle:XspfMSquareStyle];
+		[cell setLabelStyle:HMSquareStyle];
 		[cell setDrawX:YES];
 	}
 	labelCells = [[NSArray alloc] initWithArray:cells];

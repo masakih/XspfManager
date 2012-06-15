@@ -20,9 +20,9 @@
 		F40B342210B6BE2000896716 /* UKKQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = F40B342010B6BE2000896716 /* UKKQueue.m */; };
 		F40B342810B6BE9B00896716 /* UKFileWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = F40B342710B6BE9B00896716 /* UKFileWatcher.m */; };
 		F40B342F10B6C09700896716 /* UKMainThreadProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = F40B342D10B6C09700896716 /* UKMainThreadProxy.m */; };
-		F42BF7B710F1C59F00D8F8C1 /* XspfMLabelMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F42BF7B610F1C59F00D8F8C1 /* XspfMLabelMenuItem.m */; };
+		F42BF7B710F1C59F00D8F8C1 /* HMLabelMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F42BF7B610F1C59F00D8F8C1 /* HMLabelMenuItem.m */; };
 		F436E40011060096004BA387 /* XspfMMainModelTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = F436E3FF11060096004BA387 /* XspfMMainModelTransformer.m */; };
-		F43E077F10FAA6B800D0428E /* XspfMLabelField.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E077E10FAA6B800D0428E /* XspfMLabelField.m */; };
+		F43E077F10FAA6B800D0428E /* HMLabelField.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E077E10FAA6B800D0428E /* HMLabelField.m */; };
 		F43E0DD511021E0200D0428E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F43E0DD311021E0200D0428E /* Localizable.strings */; };
 		F43E0E5711027E1900D0428E /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = F43E0E5611027E1900D0428E /* Credits.rtf */; };
 		F43E62A110A0692500BF88DA /* XspfMCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E62A010A0692500BF88DA /* XspfMCollectionView.m */; };
@@ -51,8 +51,8 @@
 		F480CD6710AF8A4300AC365B /* XspfMTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F480CD6610AF8A4300AC365B /* XspfMTableView.m */; };
 		F480CF9F10B03A0D00AC365B /* AccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F480CF9D10B03A0D00AC365B /* AccessoryView.xib */; };
 		F481B3F910F08DE200B7EA4F /* XspfMSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = F481B3F810F08DE200B7EA4F /* XspfMSplitView.m */; };
-		F481B70A10F0F80700B7EA4F /* XspfMLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F481B70910F0F80700B7EA4F /* XspfMLabelCell.m */; };
-		F481B82E10F1754600B7EA4F /* XspfMLabelMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = F481B82D10F1754600B7EA4F /* XspfMLabelMenuView.m */; };
+		F481B70A10F0F80700B7EA4F /* HMLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F481B70910F0F80700B7EA4F /* HMLabelCell.m */; };
+		F481B82E10F1754600B7EA4F /* HMLabelMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = F481B82D10F1754600B7EA4F /* HMLabelMenuView.m */; };
 		F48B35F3112EDAC500D1DE39 /* NSAppleEventDescriptor-HMExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = F48B35EC112EDAC500D1DE39 /* NSAppleEventDescriptor-HMExtensions.m */; };
 		F48B35F4112EDAC500D1DE39 /* NSPathUtilities-HMExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = F48B35EE112EDAC500D1DE39 /* NSPathUtilities-HMExtensions.m */; };
 		F48B35F5112EDAC500D1DE39 /* NSURL-HMExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = F48B35F0112EDAC500D1DE39 /* NSURL-HMExtensions.m */; };
@@ -136,7 +136,7 @@
 		F4D2F72E110879F0007681F4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4D2F72D110879F0007681F4 /* QuartzCore.framework */; };
 		F4DAE7E011B3F6C90047BEDA /* XspfMPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DAE7DF11B3F6C90047BEDA /* XspfMPreferences.m */; };
 		F4DAF38711BB6B700047BEDA /* XspfMMainModel2To3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = F4DAF38611BB6B700047BEDA /* XspfMMainModel2To3.xcmappingmodel */; };
-		F4FE861710F475740076B366 /* XspfMLabelControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F4FE861610F475740076B366 /* XspfMLabelControl.m */; };
+		F4FE861710F475740076B366 /* HMLabelControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F4FE861610F475740076B366 /* HMLabelControl.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -179,12 +179,12 @@
 		F40B342710B6BE9B00896716 /* UKFileWatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKFileWatcher.m; sourceTree = "<group>"; };
 		F40B342D10B6C09700896716 /* UKMainThreadProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKMainThreadProxy.m; sourceTree = "<group>"; };
 		F40B342E10B6C09700896716 /* UKMainThreadProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKMainThreadProxy.h; sourceTree = "<group>"; };
-		F42BF7B510F1C59F00D8F8C1 /* XspfMLabelMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMLabelMenuItem.h; sourceTree = "<group>"; };
-		F42BF7B610F1C59F00D8F8C1 /* XspfMLabelMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMLabelMenuItem.m; sourceTree = "<group>"; };
+		F42BF7B510F1C59F00D8F8C1 /* HMLabelMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; path = HMLabelMenuItem.h; sourceTree = "<group>"; };
+		F42BF7B610F1C59F00D8F8C1 /* HMLabelMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMLabelMenuItem.m; sourceTree = "<group>"; };
 		F436E3FE11060096004BA387 /* XspfMMainModelTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMMainModelTransformer.h; sourceTree = "<group>"; };
 		F436E3FF11060096004BA387 /* XspfMMainModelTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMMainModelTransformer.m; sourceTree = "<group>"; };
-		F43E077D10FAA6B800D0428E /* XspfMLabelField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMLabelField.h; sourceTree = "<group>"; };
-		F43E077E10FAA6B800D0428E /* XspfMLabelField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMLabelField.m; sourceTree = "<group>"; };
+		F43E077D10FAA6B800D0428E /* HMLabelField.h */ = {isa = PBXFileReference; fileEncoding = 4; path = HMLabelField.h; sourceTree = "<group>"; };
+		F43E077E10FAA6B800D0428E /* HMLabelField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMLabelField.m; sourceTree = "<group>"; };
 		F43E0D6911020A5800D0428E /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = Japanese.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		F43E0D8811020DEE00D0428E /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = Japanese.lproj/ListView.xib; sourceTree = "<group>"; };
 		F43E0DAA1102105E00D0428E /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = Japanese.lproj/CollectionView.xib; sourceTree = "<group>"; };
@@ -240,10 +240,10 @@
 		F480CF9E10B03A0D00AC365B /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/AccessoryView.xib; sourceTree = "<group>"; };
 		F481B3F710F08DE200B7EA4F /* XspfMSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMSplitView.h; sourceTree = "<group>"; };
 		F481B3F810F08DE200B7EA4F /* XspfMSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMSplitView.m; sourceTree = "<group>"; };
-		F481B70810F0F80700B7EA4F /* XspfMLabelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMLabelCell.h; sourceTree = "<group>"; };
-		F481B70910F0F80700B7EA4F /* XspfMLabelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMLabelCell.m; sourceTree = "<group>"; };
-		F481B82C10F1754600B7EA4F /* XspfMLabelMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMLabelMenuView.h; sourceTree = "<group>"; };
-		F481B82D10F1754600B7EA4F /* XspfMLabelMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMLabelMenuView.m; sourceTree = "<group>"; };
+		F481B70810F0F80700B7EA4F /* HMLabelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; path = HMLabelCell.h; sourceTree = "<group>"; };
+		F481B70910F0F80700B7EA4F /* HMLabelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMLabelCell.m; sourceTree = "<group>"; };
+		F481B82C10F1754600B7EA4F /* HMLabelMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; path = HMLabelMenuView.h; sourceTree = "<group>"; };
+		F481B82D10F1754600B7EA4F /* HMLabelMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMLabelMenuView.m; sourceTree = "<group>"; };
 		F48B35EB112EDAC500D1DE39 /* NSAppleEventDescriptor-HMExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSAppleEventDescriptor-HMExtensions.h"; path = "extFiles/HMXSPFcomponent/NSAppleEventDescriptor-HMExtensions.h"; sourceTree = SOURCE_ROOT; };
 		F48B35EC112EDAC500D1DE39 /* NSAppleEventDescriptor-HMExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSAppleEventDescriptor-HMExtensions.m"; path = "extFiles/HMXSPFcomponent/NSAppleEventDescriptor-HMExtensions.m"; sourceTree = SOURCE_ROOT; };
 		F48B35ED112EDAC500D1DE39 /* NSPathUtilities-HMExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSPathUtilities-HMExtensions.h"; path = "extFiles/HMXSPFcomponent/NSPathUtilities-HMExtensions.h"; sourceTree = SOURCE_ROOT; };
@@ -373,8 +373,8 @@
 		F4DAF67511BBC1230047BEDA /* Japanese */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Japanese; path = Japanese.lproj/Localizable.strings.sed; sourceTree = "<group>"; };
 		F4DAF67711BBC1340047BEDA /* English */ = {isa = PBXFileReference; lastKnownFileType = text; name = English; path = English.lproj/Localizable.strings.sed; sourceTree = "<group>"; };
 		F4F946321336EA3B000A9980 /* FamilyNameTemp.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FamilyNameTemp.txt; sourceTree = "<group>"; };
-		F4FE861510F475740076B366 /* XspfMLabelControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMLabelControl.h; sourceTree = "<group>"; };
-		F4FE861610F475740076B366 /* XspfMLabelControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMLabelControl.m; sourceTree = "<group>"; };
+		F4FE861510F475740076B366 /* HMLabelControl.h */ = {isa = PBXFileReference; fileEncoding = 4; path = HMLabelControl.h; sourceTree = "<group>"; };
+		F4FE861610F475740076B366 /* HMLabelControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMLabelControl.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -757,16 +757,16 @@
 		F4D3631311A2BCC3009FE842 /* XspfMLabels */ = {
 			isa = PBXGroup;
 			children = (
-				F481B70810F0F80700B7EA4F /* XspfMLabelCell.h */,
-				F481B70910F0F80700B7EA4F /* XspfMLabelCell.m */,
-				F481B82C10F1754600B7EA4F /* XspfMLabelMenuView.h */,
-				F481B82D10F1754600B7EA4F /* XspfMLabelMenuView.m */,
-				F42BF7B510F1C59F00D8F8C1 /* XspfMLabelMenuItem.h */,
-				F42BF7B610F1C59F00D8F8C1 /* XspfMLabelMenuItem.m */,
-				F4FE861510F475740076B366 /* XspfMLabelControl.h */,
-				F4FE861610F475740076B366 /* XspfMLabelControl.m */,
-				F43E077D10FAA6B800D0428E /* XspfMLabelField.h */,
-				F43E077E10FAA6B800D0428E /* XspfMLabelField.m */,
+				F481B70810F0F80700B7EA4F /* HMLabelCell.h */,
+				F481B70910F0F80700B7EA4F /* HMLabelCell.m */,
+				F481B82C10F1754600B7EA4F /* HMLabelMenuView.h */,
+				F481B82D10F1754600B7EA4F /* HMLabelMenuView.m */,
+				F42BF7B510F1C59F00D8F8C1 /* HMLabelMenuItem.h */,
+				F42BF7B610F1C59F00D8F8C1 /* HMLabelMenuItem.m */,
+				F4FE861510F475740076B366 /* HMLabelControl.h */,
+				F4FE861610F475740076B366 /* HMLabelControl.m */,
+				F43E077D10FAA6B800D0428E /* HMLabelField.h */,
+				F43E077E10FAA6B800D0428E /* HMLabelField.m */,
 			);
 			name = XspfMLabels;
 			sourceTree = "<group>";
@@ -915,11 +915,11 @@
 				F499886B10DDFB3E00AAC6D6 /* XspfMThreadSleepRequest.m in Sources */,
 				F45AB02310EE3675005BE9C1 /* HMUtilities.m in Sources */,
 				F481B3F910F08DE200B7EA4F /* XspfMSplitView.m in Sources */,
-				F481B70A10F0F80700B7EA4F /* XspfMLabelCell.m in Sources */,
-				F481B82E10F1754600B7EA4F /* XspfMLabelMenuView.m in Sources */,
-				F42BF7B710F1C59F00D8F8C1 /* XspfMLabelMenuItem.m in Sources */,
-				F4FE861710F475740076B366 /* XspfMLabelControl.m in Sources */,
-				F43E077F10FAA6B800D0428E /* XspfMLabelField.m in Sources */,
+				F481B70A10F0F80700B7EA4F /* HMLabelCell.m in Sources */,
+				F481B82E10F1754600B7EA4F /* HMLabelMenuView.m in Sources */,
+				F42BF7B710F1C59F00D8F8C1 /* HMLabelMenuItem.m in Sources */,
+				F4FE861710F475740076B366 /* HMLabelControl.m in Sources */,
+				F43E077F10FAA6B800D0428E /* HMLabelField.m in Sources */,
 				F436E40011060096004BA387 /* XspfMMainModelTransformer.m in Sources */,
 				F4D2F69B110754ED007681F4 /* XspfMMainModel.xcdatamodeld in Sources */,
 				F4D2F69E11075545007681F4 /* XspfMMainModel1To2.xcmappingmodel in Sources */,
