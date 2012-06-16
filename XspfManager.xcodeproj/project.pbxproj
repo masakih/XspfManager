@@ -769,7 +769,7 @@
 				F43E077E10FAA6B800D0428E /* HMLabelField.m */,
 			);
 			name = HMLabels;
-			path = XspfMLabel;
+			path = HMLabel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
