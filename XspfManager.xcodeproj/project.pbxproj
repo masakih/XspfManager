@@ -665,7 +665,7 @@
 				F448F52312EDCD0200E96490 /* XspfMCollectionItemView.m */,
 				F448F99412F0542000E96490 /* XspfMShadowImageCell.h */,
 				F448F99512F0542000E96490 /* XspfMShadowImageCell.m */,
-				F4D3631311A2BCC3009FE842 /* XspfMLabels */,
+				F4D3631311A2BCC3009FE842 /* HMLabels */,
 			);
 			name = "Views&Cells";
 			sourceTree = "<group>";
@@ -754,7 +754,7 @@
 			name = XspfMRules;
 			sourceTree = "<group>";
 		};
-		F4D3631311A2BCC3009FE842 /* XspfMLabels */ = {
+		F4D3631311A2BCC3009FE842 /* HMLabels */ = {
 			isa = PBXGroup;
 			children = (
 				F481B70810F0F80700B7EA4F /* HMLabelCell.h */,
@@ -768,7 +768,8 @@
 				F43E077D10FAA6B800D0428E /* HMLabelField.h */,
 				F43E077E10FAA6B800D0428E /* HMLabelField.m */,
 			);
-			name = XspfMLabels;
+			name = HMLabels;
+			path = XspfMLabel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
