@@ -14,7 +14,7 @@
 }
 
 - (NSArray *)requiredFrameworks {
-    return [NSArray arrayWithObjects:[NSBundle bundleWithIdentifier:@"com.masakih.HMLabel"], nil];
+    return [NSArray arrayWithObjects:[NSBundle bundleWithIdentifier:@"com.masakih.HMLabelFramework"], nil];
 }
 
 //- (void)didLoad

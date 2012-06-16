@@ -201,6 +201,7 @@ static id previewPanel = nil;
 		[qlPanel setURLs:[[controller selectedObjects] valueForKey:@"url"]];
 		[qlPanel makeKeyAndOrderFrontWithEffect:2];
 	} else if(osVersion >= 106) {
+		[qlPanel setDelegate:self];
 		[qlPanel makeKeyAndOrderFront:nil];
 	}
 }

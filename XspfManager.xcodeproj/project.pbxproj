@@ -179,11 +179,11 @@
 		F40B342710B6BE9B00896716 /* UKFileWatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKFileWatcher.m; sourceTree = "<group>"; };
 		F40B342D10B6C09700896716 /* UKMainThreadProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKMainThreadProxy.m; sourceTree = "<group>"; };
 		F40B342E10B6C09700896716 /* UKMainThreadProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKMainThreadProxy.h; sourceTree = "<group>"; };
-		F42BF7B510F1C59F00D8F8C1 /* HMLabelMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; path = HMLabelMenuItem.h; sourceTree = "<group>"; };
+		F42BF7B510F1C59F00D8F8C1 /* HMLabelMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMLabelMenuItem.h; sourceTree = "<group>"; };
 		F42BF7B610F1C59F00D8F8C1 /* HMLabelMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMLabelMenuItem.m; sourceTree = "<group>"; };
 		F436E3FE11060096004BA387 /* XspfMMainModelTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMMainModelTransformer.h; sourceTree = "<group>"; };
 		F436E3FF11060096004BA387 /* XspfMMainModelTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMMainModelTransformer.m; sourceTree = "<group>"; };
-		F43E077D10FAA6B800D0428E /* HMLabelField.h */ = {isa = PBXFileReference; fileEncoding = 4; path = HMLabelField.h; sourceTree = "<group>"; };
+		F43E077D10FAA6B800D0428E /* HMLabelField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMLabelField.h; sourceTree = "<group>"; };
 		F43E077E10FAA6B800D0428E /* HMLabelField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMLabelField.m; sourceTree = "<group>"; };
 		F43E0D6911020A5800D0428E /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = Japanese.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		F43E0D8811020DEE00D0428E /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = Japanese.lproj/ListView.xib; sourceTree = "<group>"; };
@@ -240,9 +240,9 @@
 		F480CF9E10B03A0D00AC365B /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/AccessoryView.xib; sourceTree = "<group>"; };
 		F481B3F710F08DE200B7EA4F /* XspfMSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XspfMSplitView.h; sourceTree = "<group>"; };
 		F481B3F810F08DE200B7EA4F /* XspfMSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XspfMSplitView.m; sourceTree = "<group>"; };
-		F481B70810F0F80700B7EA4F /* HMLabelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; path = HMLabelCell.h; sourceTree = "<group>"; };
+		F481B70810F0F80700B7EA4F /* HMLabelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMLabelCell.h; sourceTree = "<group>"; };
 		F481B70910F0F80700B7EA4F /* HMLabelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMLabelCell.m; sourceTree = "<group>"; };
-		F481B82C10F1754600B7EA4F /* HMLabelMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; path = HMLabelMenuView.h; sourceTree = "<group>"; };
+		F481B82C10F1754600B7EA4F /* HMLabelMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMLabelMenuView.h; sourceTree = "<group>"; };
 		F481B82D10F1754600B7EA4F /* HMLabelMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMLabelMenuView.m; sourceTree = "<group>"; };
 		F48B35EB112EDAC500D1DE39 /* NSAppleEventDescriptor-HMExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSAppleEventDescriptor-HMExtensions.h"; path = "extFiles/HMXSPFcomponent/NSAppleEventDescriptor-HMExtensions.h"; sourceTree = SOURCE_ROOT; };
 		F48B35EC112EDAC500D1DE39 /* NSAppleEventDescriptor-HMExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSAppleEventDescriptor-HMExtensions.m"; path = "extFiles/HMXSPFcomponent/NSAppleEventDescriptor-HMExtensions.m"; sourceTree = SOURCE_ROOT; };
@@ -373,7 +373,7 @@
 		F4DAF67511BBC1230047BEDA /* Japanese */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Japanese; path = Japanese.lproj/Localizable.strings.sed; sourceTree = "<group>"; };
 		F4DAF67711BBC1340047BEDA /* English */ = {isa = PBXFileReference; lastKnownFileType = text; name = English; path = English.lproj/Localizable.strings.sed; sourceTree = "<group>"; };
 		F4F946321336EA3B000A9980 /* FamilyNameTemp.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FamilyNameTemp.txt; sourceTree = "<group>"; };
-		F4FE861510F475740076B366 /* HMLabelControl.h */ = {isa = PBXFileReference; fileEncoding = 4; path = HMLabelControl.h; sourceTree = "<group>"; };
+		F4FE861510F475740076B366 /* HMLabelControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMLabelControl.h; sourceTree = "<group>"; };
 		F4FE861610F475740076B366 /* HMLabelControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMLabelControl.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 

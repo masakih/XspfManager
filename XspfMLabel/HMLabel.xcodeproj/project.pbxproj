@@ -24,7 +24,6 @@
 /* Begin PBXBuildFile section */
 		13F8B89007B43554008AE28D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD92D38A0106425D02CA0E72 /* Cocoa.framework */; };
 		546DEAF3067F632A0098DCC4 /* HMLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53DF68FD067E5B5A0090B5B0 /* HMLabel.framework */; };
-		54D33B2906778E3300C9C163 /* HMLabelField.classdescription in Resources */ = {isa = PBXBuildFile; fileRef = 54D33B2806778E3300C9C163 /* HMLabelField.classdescription */; };
 		8D1AC96C0486D14A00FE50C9 /* HMLabelInspector.m in Sources */ = {isa = PBXBuildFile; fileRef = 0259C577FE90428111CA0C5A /* HMLabelInspector.m */; settings = {ATTRIBUTES = (); }; };
 		8D1AC9700486D14A00FE50C9 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD92D38A0106425D02CA0E72 /* Cocoa.framework */; };
 		8D1AC9800486D23B00FE50C9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D1AC97F0486D23B00FE50C9 /* InfoPlist.strings */; };
@@ -32,6 +31,10 @@
 		C0A47C500A523B730004BDC3 /* HMLabelInspector.xib in Resources */ = {isa = PBXBuildFile; fileRef = C05B20D80A48CB530099B9E5 /* HMLabelInspector.xib */; };
 		C0D069560A49DF9100C95564 /* InterfaceBuilderKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0D069550A49DF9100C95564 /* InterfaceBuilderKit.framework */; };
 		D1AEDE470A6C289C0010C343 /* HMLabelLibrary.nib in Resources */ = {isa = PBXBuildFile; fileRef = D1AEDE460A6C289C0010C343 /* HMLabelLibrary.nib */; };
+		F4B1E025158B9786009B4079 /* HMLabelCell.classdescription in Resources */ = {isa = PBXBuildFile; fileRef = F4F36F5911C11C410008E7F3 /* HMLabelCell.classdescription */; };
+		F4B1E026158B9786009B4079 /* HMLabelControl.classdescription in Resources */ = {isa = PBXBuildFile; fileRef = F4F36F5B11C11C930008E7F3 /* HMLabelControl.classdescription */; };
+		F4B1E027158B9786009B4079 /* HMLabelField.classdescription in Resources */ = {isa = PBXBuildFile; fileRef = 54D33B2806778E3300C9C163 /* HMLabelField.classdescription */; };
+		F4B1E028158B9786009B4079 /* HMLabelMenuItem.classdescription in Resources */ = {isa = PBXBuildFile; fileRef = F4F36F5711C11BF30008E7F3 /* HMLabelMenuItem.classdescription */; };
 		F4D24C3011C27CFC00232358 /* HMLabelCell.h in Headers */ = {isa = PBXBuildFile; fileRef = F4D24C2D11C27CFC00232358 /* HMLabelCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F4D24C3111C27CFC00232358 /* HMLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D24C2E11C27CFC00232358 /* HMLabelCell.m */; };
 		F4D24C3211C27CFC00232358 /* HMLabelControl.h in Headers */ = {isa = PBXBuildFile; fileRef = F4D24C2F11C27CFC00232358 /* HMLabelControl.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -47,9 +50,6 @@
 		F4D24CB511C28B4000232358 /* HMLabelMenuItem.png in Resources */ = {isa = PBXBuildFile; fileRef = F4D24CB411C28B4000232358 /* HMLabelMenuItem.png */; };
 		F4D24E4911C3C20F00232358 /* HMLabelControl.png in Resources */ = {isa = PBXBuildFile; fileRef = F4D24E4811C3C20F00232358 /* HMLabelControl.png */; };
 		F4F36D0F11BFCEA70008E7F3 /* HMLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F36D0E11BFCEA70008E7F3 /* HMLabel.m */; };
-		F4F36F5811C11BF30008E7F3 /* HMLabelMenuItem.classdescription in Resources */ = {isa = PBXBuildFile; fileRef = F4F36F5711C11BF30008E7F3 /* HMLabelMenuItem.classdescription */; };
-		F4F36F5A11C11C410008E7F3 /* HMLabelCell.classdescription in Resources */ = {isa = PBXBuildFile; fileRef = F4F36F5911C11C410008E7F3 /* HMLabelCell.classdescription */; };
-		F4F36F5C11C11C930008E7F3 /* HMLabelControl.classdescription in Resources */ = {isa = PBXBuildFile; fileRef = F4F36F5B11C11C930008E7F3 /* HMLabelControl.classdescription */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -369,13 +369,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4B1E025158B9786009B4079 /* HMLabelCell.classdescription in Resources */,
+				F4B1E026158B9786009B4079 /* HMLabelControl.classdescription in Resources */,
+				F4B1E027158B9786009B4079 /* HMLabelField.classdescription in Resources */,
+				F4B1E028158B9786009B4079 /* HMLabelMenuItem.classdescription in Resources */,
 				8D1AC9800486D23B00FE50C9 /* InfoPlist.strings in Resources */,
-				54D33B2906778E3300C9C163 /* HMLabelField.classdescription in Resources */,
 				C0A47C500A523B730004BDC3 /* HMLabelInspector.xib in Resources */,
 				D1AEDE470A6C289C0010C343 /* HMLabelLibrary.nib in Resources */,
-				F4F36F5811C11BF30008E7F3 /* HMLabelMenuItem.classdescription in Resources */,
-				F4F36F5A11C11C410008E7F3 /* HMLabelCell.classdescription in Resources */,
-				F4F36F5C11C11C930008E7F3 /* HMLabelControl.classdescription in Resources */,
 				F4D24CB111C283D500232358 /* HMLabelField.png in Resources */,
 				F4D24CB311C2891B00232358 /* HMLabelCell.png in Resources */,
 				F4D24CB511C28B4000232358 /* HMLabelMenuItem.png in Resources */,
